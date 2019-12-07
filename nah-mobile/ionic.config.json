@@ -1,0 +1,7 @@
+{
+  "name": "nah-mobile",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
