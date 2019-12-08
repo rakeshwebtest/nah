@@ -26,3 +26,30 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @import "theme/svg-icons";
+ion-header{
+  --ion-toolbar-background: var(--ion-color-danger);
+}
+.font-32{
+    font-size: 32px;
+}
+.font-24{
+    font-size: 24px;
+}
+.pad-r{
+    padding-right: var(padding-end);
+}
+.avatar{
+    font-size: 32px;
+    color: var(--ion-color-danger);
+    border-radius: 50%;
+    box-shadow: 0px 0px 6px #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.align-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

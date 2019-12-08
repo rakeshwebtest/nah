@@ -75,3 +75,25 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 }
+
+/* font-size */
+$font-32: 32px;
+
+.ion-padding-10{
+  --padding-start: var(--ion-padding, 10px);
+  --padding-end: var(--ion-padding, 10px);
+  --padding-top: var(--ion-padding, 10px);
+  --padding-bottom: var(--ion-padding, 10px);
+  padding-left: var(--ion-padding, 10px);
+  padding-right: var(--ion-padding, 10px);
+  padding-top: var(--ion-padding, 10px);
+  padding-bottom: var(--ion-padding, 10px);
+}
+.ion-padding-r-10{
+  --padding-end: var(--ion-padding, 10px);
+  padding-right: var(--ion-padding, 10px);
+}
+.ion-padding-t-5{
+  --padding-top: var(--ion-padding, 5px);
+  padding-top: var(--ion-padding, 5px);
+}

@@ -2,34 +2,37 @@
   <ion-grid>
     <ion-row class="ion-align-items-center">
       <ion-col class="ion-text-center">
-        <ion-chip>
+        <ion-button color="light">
           <ion-label> Hey, Let us know about your Neor</ion-label>
-        </ion-chip>
+        </ion-button>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row justify-content-center>
       <ion-col class="ion-text-center">
         <ion-label>Select type of neor</ion-label>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col class="ion-text-center">
-        <ion-avatar>
-          <ion-icon class="custom-google"></ion-icon>
+      <ion-col class="ion-text-center align-center">
+        <ion-avatar class="avatar ion-align-items-center">
+          <!-- <ion-icon class="custom-google"></ion-icon> -->
+          <ion-icon name="people"></ion-icon>
         </ion-avatar>
-        <ion-label>Antie's</ion-label>
+        <ion-label class="ion-padding-t-5">Antie's</ion-label>
       </ion-col>
-      <ion-col class="ion-text-center">
-        <ion-avatar>
-          <ion-icon class="custom-google"></ion-icon>
+      <ion-col class="ion-text-center align-center">
+        <ion-avatar class="avatar ion-align-items-center">
+          <!-- <ion-icon class="custom-google"></ion-icon> -->
+          <ion-icon class="ion-align-items-center" name="people"></ion-icon>
         </ion-avatar>
-        <ion-label>Rejection</ion-label>
+        <ion-label class="ion-padding-t-5">Rejection</ion-label>
       </ion-col>
-      <ion-col class="ion-text-center">
-        <ion-avatar>
-          <ion-icon class="custom-google"></ion-icon>
+      <ion-col class="ion-text-center align-center">
+        <ion-avatar class="avatar">
+          <!-- <ion-icon class="custom-google"></ion-icon> -->
+          <ion-icon name="people"></ion-icon>
         </ion-avatar>
-        <ion-label>Hater</ion-label>
+        <ion-label class="ion-padding-t-5">Hater</ion-label>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -49,12 +52,12 @@
         </ion-select>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-button color="light" (click)="onCreateGroup()">
+    <ion-row justify-content-center>
+      <ion-button color="danger" (click)="onCreateGroup()">
         Choose your 'Say No To Group'
       </ion-button>
     </ion-row>
-    <ion-row>
+    <ion-row justify-content-center>
       <ion-button color="light" (click)="updateSignIn()">
         START EXPLORING
       </ion-button>
