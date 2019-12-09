@@ -3,6 +3,9 @@ import { BaseEntity } from './../shared/base.entity';
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
 
+    @PrimaryGeneratedColumn()
+    id: number;
+
     @Column({ length: 25, nullable: true })
     name: string;
 

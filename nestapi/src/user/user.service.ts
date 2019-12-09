@@ -30,7 +30,7 @@ export class UserService {
     }
 
     async updateUser(user: LoginUserDto) {
-        return await this.usersRepository.save(user);
+        return this.usersRepository.save(user);
     }
 
     async deleteUser(user: UserEntity) {

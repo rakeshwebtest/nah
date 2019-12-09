@@ -4,5 +4,5 @@ export class LoginUserDto {
 
   @IsNotEmpty()
   readonly email: string;
-  id: string;
+  id: number;
 }
