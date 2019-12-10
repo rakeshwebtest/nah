@@ -19,7 +19,6 @@
       "dom"
     ],
     "paths": {
-      "@theapp/utils": ["projects/utils/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

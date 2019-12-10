@@ -13,19 +13,19 @@ export class UserService {
     constructor(@InjectRepository(UserEntity) private usersRepository: Repository<UserEntity>) { }
 
     async getUsers(): Promise<UserEntity[]> {
-        return await this.usersRepository.find();
+        return this.usersRepository.find();
     }
 
     async getUser(_id: number): Promise<UserEntity[]> {
-        return await this.usersRepository.find({
-            select: ['name'],
-            where: [{ 'id': _id }]
+        return this.usersRepository.find({
+            select: ['displayName'],
+            where: [{ id: _id }]
         });
     }
     async checkUser(_email: string): Promise<UserEntity[]> {
-        return await this.usersRepository.find({
-            select: ['id', 'name'],
-            where: [{ 'email': _email }]
+        return this.usersRepository.find({
+            select: ['id', 'displayName'],
+            where: [{ email: _email }]
         });
     }
 
@@ -56,11 +56,10 @@ export class UserService {
 
     private buildUserRO(user: UserEntity) {
         const userRO = {
-            username: user.name,
+            displayName: user.displayName,
             email: user.email,
-            bio: user.name,
             token: this.generateJWT(user),
-            image: user.profile_pic
+            imageUrl: user.imageUrl
         };
 
         return { user: userRO };

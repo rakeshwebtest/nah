@@ -4,19 +4,13 @@ import { BaseEntity } from './../shared/base.entity';
 export class UserEntity extends BaseEntity {
 
     @Column({ length: 25, nullable: true })
-    name: string;
-
-    @Column({ length: 25, nullable: true })
-    firstName: string;
-
-    @Column({ length: 25, nullable: true })
-    lastName: string;
+    displayName: string;
 
     @Column({ length: 25 })
     email: string;
 
     @Column({ length: 250, nullable: true })
-    photoUrl: string;
+    imageUrl: string;
 
     @Column({ length: 25, nullable: true })
     provider: string;
@@ -24,8 +18,8 @@ export class UserEntity extends BaseEntity {
     @Column({ type: 'text', nullable: true })
     idToken: string;
 
-    @Column({ length: 25, default: '' })
-    profile_pic: string;
+    @Column({ length: 25, nullable: true })
+    type_of_noer: string;
 
     @Column({ length: 25, default: '' })
     country: string;

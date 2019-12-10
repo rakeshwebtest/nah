@@ -1,12 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { LoadingController, AlertController, Platform } from '@ionic/angular';
-import { AuthService } from "angularx-social-login";
-import { SocialUser } from "angularx-social-login";
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider
-} from "angularx-social-login";
-import { AppHttpClient } from '@theapp/utils';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { LoadingController, AlertController, Platform, IonRouterOutlet } from '@ionic/angular';
+import { AppHttpClient } from './../utils';
 import { Route, Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
@@ -17,14 +11,12 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  login = {};
   submitted = false;
-  user: SocialUser;
   slideOpts = {
 
   };
+  @ViewChild(IonRouterOutlet, null) routerOutlet: IonRouterOutlet;
   constructor(
-    private authService: AuthService,
     private http: AppHttpClient,
     private router: Router,
     private googlePlus: GooglePlus,
@@ -32,45 +24,12 @@ export class HomeComponent {
     public loadingController: LoadingController,
     private platform: Platform,
     public alertController: AlertController
-  ) { }
-
-  test(response) {
-    this.http.get('user').subscribe(res => {
-      console.log('res', res);
-    });
-    this.http.post('user', { test: "test", test2: "ts" }).subscribe(res => {
-      console.log('res', res);
-    });
-  }
-  // login callback
-  loginCallback(response) {
-
-    if (response.status === "PARTIALLY_AUTHENTICATED") {
-      var code = response.code;
-      var csrf = response.state;
-      this.http.post('user', response).subscribe(res => {
-        console.log('res', res);
-      });
-      // Send code to server to exchange for access token
-    } else if (response.status === "NOT_AUTHENTICATED") {
-      // handle authentication failure
-    } else if (response.status === "BAD_PARAMS") {
-      // handle bad parameters
-    }
+  ) {
   }
 
-
-
-  onLogin(form) {
-    this.submitted = true;
-
-    if (form.valid) {
-      // this.navCtrl.setRoot(TabsPage);
-    }
-  }
-
-  signInWithGoogle(): void {
-    this.router.navigate(['/sign-in']);
+  signInWithGoogleTest(): void {
+    const user = { email: 'rakesh.webtest@gmail.com' };
+    this.login(user);
     // this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((user) => {
     //   delete user.id;
     //   this.http.post('user/login', user).subscribe(res => {
@@ -81,43 +40,52 @@ export class HomeComponent {
     // });
   }
 
-  signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  }
 
   signOut(): void {
-    this.authService.signOut();
+    // this.authService.signOut();
   }
 
-  async doGoogleLogin() {
+  async signInWithGoogle() {
     const loading = await this.loadingController.create({
       message: 'Please wait...'
     });
     this.presentLoading(loading);
     this.googlePlus.login({
-      'scopes': '', // optional - space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
-      'offline': true, // Optional, but requires the webClientId - if set to true the plugin will also return a serverAuthCode, which can be used to grant offline access to a non-Google server
-    })
-      .then(user => {
-        //save user data on the native storage
-        this.nativeStorage.setItem('google_user', {
-          name: user.displayName,
-          email: user.email,
-          picture: user.imageUrl
-        })
-          .then(() => {
-            this.router.navigate(["/user"]);
-          }, (error) => {
-            console.log(error);
-          })
-        loading.dismiss();
-      }, err => {
-        console.log(err);
-        if (!this.platform.is('cordova')) {
-          this.presentAlert();
+      offline: true
+    }).then(user => {
+      this.login(user);
+      loading.dismiss();
+    }, err => {
+      console.log(err);
+      if (!this.platform.is('cordova')) {
+        this.presentAlert();
+      }
+      loading.dismiss();
+    });
+  }
+  async login(user) {
+    this.http.post('user/login', user).subscribe(res => {
+      const _resUser: any = res.data.user;
+      console.log('_resUser', _resUser);
+      // save user data on the native storage
+      this.nativeStorage.setItem('google_user', {
+        displayName: _resUser.displayName,
+        email: _resUser.email,
+        imageUrl: _resUser.imageUrl,
+        type_of_noer: _resUser.type_of_noer,
+        token: res.token
+      }).then(() => {
+        if (_resUser) {
+          if (_resUser.type_of_noer) {
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.router.navigate(['/sign-in']);
+          }
         }
-        loading.dismiss();
-      })
+      }, (error) => {
+        console.log(error);
+      });
+    });
   }
 
   async presentAlert() {

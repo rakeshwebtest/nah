@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
-
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
@@ -22,6 +22,7 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private statusBar: StatusBar,
+    private splashScreen: SplashScreen,
     private nativeStorage: NativeStorage,
     private router: Router
   ) {
@@ -29,21 +30,25 @@ export class AppComponent {
   }
 
   initializeApp() {
-    console.log('ionic serve check');
     this.platform.ready().then(() => {
       console.log('already');
-      //Here we will check if the user is already logged in
-      //because we don't want to ask users to log in each time they open the app
+      // Here we will check if the user is already logged in
+      // because we don't want to ask users to log in each time they open the app
       this.nativeStorage.getItem('google_user')
         .then(data => {
-          //user is previously logged and we have his data
-          //we will let him access the app
-          console.log('data', data);
-          this.router.navigate(["/home"]);
+          // user is previously logged and we have his data
+          // we will let him access the app
+          if (data.type_of_noer) {
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.router.navigate(['/sign-in']);
+          }
+          this.splashScreen.hide();
         }, err => {
-          console.log('data', err);
-          this.router.navigate(["/home"]);
-        })
+          // console.log('data', err);
+          this.router.navigate(['/home']);
+          this.splashScreen.hide();
+        });
       this.statusBar.styleDefault();
     });
   }

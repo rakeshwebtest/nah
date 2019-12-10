@@ -8,11 +8,14 @@
     </ion-title>
   </ion-toolbar>
 </ion-header> -->
-
 <ion-content class="ion-vertical-align-content">
   <ion-row class="ion-text-center ion-padding">
     <ion-col>
-      <ion-img class="ion-text-center" style="width: 80px; height: 80px;margin: 0 auto;" src="assets/images/logo.png"></ion-img>
+      <ion-img
+        class="ion-text-center"
+        style="width: 80px; height: 80px;margin: 0 auto;"
+        src="assets/images/logo.png"
+      ></ion-img>
     </ion-col>
   </ion-row>
   <ion-row>
@@ -33,20 +36,19 @@
       </ion-card-content>
     </ion-card>
   </ion-row>
-  <ion-row justify-content-center >
-      <h3 class="red-color font-24">A new way to hate...!</h3>
-    </ion-row>
-    <ion-row justify-content-center>
-          <ion-button color="light" (click)="signInWithGoogle()">
-            <!-- <ion-icon class="custom-google"></ion-icon> -->
-            <ion-img class="ion-padding-r-10" style="width:30px;" src="assets/images/google.png"></ion-img>
-            Continu with Google
-          </ion-button>
+  <ion-row justify-content-center>
+    <h3 class="red-color font-24">A new way to hate...!</h3>
   </ion-row>
-  <!-- <ion-row>
-    <ion-button color="light" (click)="doGoogleLogin()">
-      <ion-icon class="custom-google"></ion-icon>
-      Google Login 2
+  <ion-row justify-content-center>
+    <ion-button color="light" (click)="signInWithGoogle()">
+      <!-- <ion-icon class="custom-google"></ion-icon> -->
+      <ion-img class="ion-padding-r-10" style="width:30px;" src="assets/images/google.png"></ion-img>
+      Continu without Google
     </ion-button>
-  </ion-row> -->
+    <ion-button color="light" (click)="signInWithGoogleTest()">
+      <!-- <ion-icon class="custom-google"></ion-icon> -->
+      <ion-img class="ion-padding-r-10" style="width:30px;" src="assets/images/google.png"></ion-img>
+      Continu without Google Test
+    </ion-button>
+  </ion-row>
 </ion-content>

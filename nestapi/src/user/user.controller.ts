@@ -46,7 +46,7 @@ export class UsersController {
         }
         const data = await this.service.updateUser(user);
         const token = await this.service.generateJWT(data);
-        return { message: 'save susc', data: { user, token } };
+        return { message: 'Login Succussfully', data: { user, token } };
     }
 
     @Put()

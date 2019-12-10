@@ -1,9 +1,8 @@
 export interface UserData {
-  username: string;
+  displayName: string;
   email: string;
   token: string;
-  bio: string;
-  image?: string;
+  imageUrl?: string;
 }
 
 export interface UserRO {

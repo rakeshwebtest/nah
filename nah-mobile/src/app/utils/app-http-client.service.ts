@@ -19,12 +19,11 @@ export interface IRequestOptions {
 export class AppHttpClient {
 
     // private api = environment.apiUrl;
-    private api: any = 'http://localhost:3333/api/';
+    private api: any = 'http://192.168.0.39:3000/api/';
     _isLoader = true;
 
     // Extending the HttpClient through the Angular DI.
-    public constructor(public http: HttpClient,
-        public injector: Injector) {
+    public constructor(public http: HttpClient, public injector: Injector) {
         // If you don't want to use the extended versions in some cases you can access the public property and use the original one.
         // for ex. this.httpClient.http.get(...)
     }

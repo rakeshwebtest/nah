@@ -9,13 +9,13 @@ import {
 import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { map, filter, tap } from 'rxjs/operators';
-
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 @Injectable({
     providedIn: 'root'
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
-    constructor() { }
+    constructor(private nativeStorage: NativeStorage) { }
 
     /**
      *
@@ -29,24 +29,26 @@ export class HttpInterceptorService implements HttpInterceptor {
         // console.log('request', typeof request.headers, request.headers.get('client'));
         request = request.clone({
             setHeaders: {
-                 'Access-Control-Allow-Origin': '*',
-                "Content-Type": "application/json"
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
             },
             url: request.url
         });
-        //withCredentials: true
 
+        // withCredentials: true
         // if user logged in you need to pass token
-        // if (this.sessionService.checkSession()) {
-        //     request = request.clone({
-        //         setHeaders: {
-        //             // 'Access-Control-Allow-Origin': '*',
-        //             "Content-Type": "application/json"
-        //         },
-        //         withCredentials: false,
-        //         body: request.body
-        //     });
-        // }
+        const user = this.nativeStorage.getItem('google_user');
+        if (user) {
+            console.log('user', user);
+            request = request.clone({
+                setHeaders: {
+                    'Content-Type': 'application/json',
+                    'authorization': ''
+                },
+                withCredentials: false,
+                body: request.body
+            });
+        }
         // Working Code
         console.log('request', request);
 
@@ -57,7 +59,7 @@ export class HttpInterceptorService implements HttpInterceptor {
                 }
                 return event;
             }, error => {
-                console.error('NICE ERROR', error)
+                console.error('NICE ERROR', error);
             }));
 
 
