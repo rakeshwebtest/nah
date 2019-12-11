@@ -9,27 +9,11 @@
 <ion-content class="ion-vertical-align-content">
   <ion-searchbar></ion-searchbar>
 
-  <ion-grid>
-    <ion-col>
-      Say no to Nework city
-    </ion-col>
-    <ion-col>
-      Say no to Nework city
-    </ion-col>
-    <ion-col>
-      Say no to Nework city
-    </ion-col>
-    <ion-col>
-      Say no to Nework city
-    </ion-col>
-    <ion-col>
-      Say no to Nework city
-    </ion-col>
-    <ion-col>
-      ion-col
-    </ion-col>
-    <ion-col>
-      Say no to Nework city
+  <ion-grid class="group">
+
+    <ion-col class="item" *ngFor="let item of groupList">
+
+      <label class="group-item">{{item.name}}</label>
     </ion-col>
   </ion-grid>
 </ion-content>
