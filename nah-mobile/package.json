@@ -10,9 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "browser:dev":"ionic serve --cordova --platform browser --port 8100",
-    "android": "ionic cordova run android --device --livereload",
-    "browser": "ionic-app-scripts serve --appEntryPoint src/main.ts --sourceMap source-map --iscordovaserve --wwwDir platforms/browser/www/ --buildDir platforms/browser/www/build"
+    "browser":"ionic serve --cordova --platform browser --port 8100",
+    "android": "ionic cordova run android --device --livereload"
   },
   "private": true,
   "dependencies": {

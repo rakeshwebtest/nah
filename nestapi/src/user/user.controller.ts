@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserEntity } from './user.entity';
 import {
@@ -7,12 +7,11 @@ import {
     ApiOperation,
 } from '@nestjs/swagger';
 import { LoginUserDto } from './dto';
-import { AuthMiddleware } from './auth.middleware';
 
 @Controller('user')
 export class UsersController {
 
-    constructor(public service: UserService, public auth: AuthMiddleware) { }
+    constructor(public service: UserService) { }
 
     @Get()
     async getUser() {
@@ -22,6 +21,7 @@ export class UsersController {
 
     @Get(':id')
     get(@Param() params) {
+        console.log('@Param()', params);
         return this.service.getUser(params.id);
     }
 
@@ -49,7 +49,7 @@ export class UsersController {
         const token = await this.service.generateJWT(data);
         return { message: 'Login Succussfully', data: { user, token } };
     }
-
+    @UsePipes(new ValidationPipe())
     @Put()
     update(@Body() user: UserEntity) {
         return this.service.updateUser(user);

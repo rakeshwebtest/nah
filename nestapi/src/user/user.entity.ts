@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseEntity } from './../shared/base.entity';
+import { GroupEntity } from 'src/group/group.entity';
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
 
@@ -23,5 +24,8 @@ export class UserEntity extends BaseEntity {
 
     @Column({ length: 25, default: '' })
     country: string;
+
+    @OneToMany(type => GroupEntity, group => group.createBy)
+    groups: GroupEntity[];
 
 }
