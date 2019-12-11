@@ -60,7 +60,7 @@ const routes: Routes = [
       provide: AppHttpClient,
       useFactory: AppHttpClientCreator,
       deps: [HttpClient]
-    }, { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },],
+    }, { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpRequest, HttpHeaders, HttpParams, HttpEvent } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export interface IRequestOptions {
     headers?: HttpHeaders;
@@ -18,8 +19,8 @@ export interface IRequestOptions {
 })
 export class AppHttpClient {
 
-    // private api = environment.apiUrl;
-    private api: any = 'http://192.168.0.39:3000/api/';
+    private api = environment.apiUrl;
+    // private api: any = 'http://192.168.0.39:3000/api/';
     _isLoader = true;
 
     // Extending the HttpClient through the Angular DI.

@@ -10,7 +10,7 @@ export interface UserConfig {
     userId: string;
   };
   token: string;
-};
+}
 @Injectable({
   providedIn: 'root'
 })
