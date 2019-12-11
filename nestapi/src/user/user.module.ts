@@ -7,7 +7,7 @@ import { AuthMiddleware } from './auth.middleware';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
-  providers: [UserService],
+  providers: [UserService, AuthMiddleware],
   controllers: [UsersController]
 })
 export class UserModule {

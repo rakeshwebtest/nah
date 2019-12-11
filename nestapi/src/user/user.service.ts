@@ -37,6 +37,7 @@ export class UserService {
         this.usersRepository.delete(user);
     }
     async findById(id: number): Promise<UserRO> {
+        console.log('id', id);
         const user = await this.usersRepository.findOne(id);
 
         if (!user) {

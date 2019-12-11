@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserConfigService } from '../utils/user-config.service';
 
 @Component({
   selector: 'theapp-dashboard',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor() { }
+  googlePic: any;
+  constructor(private userConfigService: UserConfigService) { }
 
   ngOnInit() {
+    this.googlePic = this.userConfigService.user.user.imageUrl;
   }
 
 }

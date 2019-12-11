@@ -10,12 +10,13 @@ import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { map, filter, tap } from 'rxjs/operators';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { UserConfigService } from './user-config.service';
 @Injectable({
     providedIn: 'root'
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
-    constructor(private nativeStorage: NativeStorage) { }
+    constructor(private nativeStorage: NativeStorage, private userConfigService: UserConfigService) { }
 
     /**
      *
@@ -37,15 +38,20 @@ export class HttpInterceptorService implements HttpInterceptor {
 
         // withCredentials: true
         // if user logged in you need to pass token
-        const user = this.nativeStorage.getItem('google_user');
-        if (user) {
-            console.log('user', user);
+        // let user: any;
+        // await this.nativeStorage.getItem('google_user').then(res => {
+        //     console.log('local res', res);
+        //     user = res;
+        // });
+        // console.log('chache user', user);
+        if (this.userConfigService.user) {
+            console.log('user', this.userConfigService.user);
+            const _user = this.userConfigService.user;
             request = request.clone({
                 setHeaders: {
                     'Content-Type': 'application/json',
-                    'authorization': ''
+                    authorization: _user.token
                 },
-                withCredentials: false,
                 body: request.body
             });
         }

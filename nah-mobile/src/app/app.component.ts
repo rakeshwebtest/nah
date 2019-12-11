@@ -5,6 +5,8 @@ import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AppHttpClient } from './utils';
+import { UserConfigService } from './utils/user-config.service';
 
 @Component({
   selector: 'theapp-root',
@@ -24,7 +26,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     private nativeStorage: NativeStorage,
-    private router: Router
+    private router: Router,
+    private userConfigService: UserConfigService
   ) {
     this.initializeApp();
   }
@@ -36,9 +39,10 @@ export class AppComponent {
       // because we don't want to ask users to log in each time they open the app
       this.nativeStorage.getItem('google_user')
         .then(data => {
+          this.userConfigService.user = data;
           // user is previously logged and we have his data
           // we will let him access the app
-          if (data.type_of_noer) {
+          if (data.user.type_of_noer) {
             this.router.navigate(['/dashboard']);
           } else {
             this.router.navigate(['/sign-in']);

@@ -4,6 +4,7 @@ import { AppHttpClient } from './../utils';
 import { Route, Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { UserConfigService } from '../utils/user-config.service';
 
 @Component({
   selector: 'theapp-home',
@@ -23,7 +24,8 @@ export class HomeComponent {
     private nativeStorage: NativeStorage,
     public loadingController: LoadingController,
     private platform: Platform,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private userConfigService: UserConfigService
   ) {
   }
 
@@ -65,16 +67,11 @@ export class HomeComponent {
   }
   async login(user) {
     this.http.post('user/login', user).subscribe(res => {
-      const _resUser: any = res.data.user;
+      const _resUser: any = res.data;
+      this.userConfigService.user = _resUser;
       console.log('_resUser', _resUser);
       // save user data on the native storage
-      this.nativeStorage.setItem('google_user', {
-        displayName: _resUser.displayName,
-        email: _resUser.email,
-        imageUrl: _resUser.imageUrl,
-        type_of_noer: _resUser.type_of_noer,
-        token: res.token
-      }).then(() => {
+      this.nativeStorage.setItem('google_user', _resUser).then(() => {
         if (_resUser) {
           if (_resUser.type_of_noer) {
             this.router.navigate(['/dashboard']);

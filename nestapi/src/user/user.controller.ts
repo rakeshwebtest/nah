@@ -7,16 +7,17 @@ import {
     ApiOperation,
 } from '@nestjs/swagger';
 import { LoginUserDto } from './dto';
+import { AuthMiddleware } from './auth.middleware';
 
 @Controller('user')
 export class UsersController {
 
-    constructor(private service: UserService) { }
+    constructor(public service: UserService, public auth: AuthMiddleware) { }
 
     @Get()
     async getUser() {
         const data: any = await this.service.getUsers();
-        return { message: 'ok', data: data };
+        return { message: 'ok', data };
     }
 
     @Get(':id')
