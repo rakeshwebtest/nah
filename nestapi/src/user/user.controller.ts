@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserEntity } from './user.entity';
 import {
@@ -7,6 +7,8 @@ import {
     ApiOperation,
 } from '@nestjs/swagger';
 import { LoginUserDto } from './dto';
+import { ValidationPipe } from './../shared/pipes/validation.pipe';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('user')
 export class UsersController {
@@ -51,7 +53,7 @@ export class UsersController {
     }
     @UsePipes(new ValidationPipe())
     @Put()
-    update(@Body() user: UserEntity) {
+    update(@Body() user: CreateUserDto) {
         return this.service.updateUser(user);
     }
 
