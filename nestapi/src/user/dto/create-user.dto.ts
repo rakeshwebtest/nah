@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 export class CreateUserDto {
-    @IsNotEmpty()
+    @IsNotEmpty({ message: "Select Type of noer" })
     readonly type_of_noer: string;
     @IsNotEmpty()
     readonly email: string;
