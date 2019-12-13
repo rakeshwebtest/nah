@@ -54,12 +54,12 @@ export class ChooseUserGroupsComponent implements OnInit {
           this.nativeStorage.setItem('google_user', user);
         });
         this.loadingService.hide();
-        // this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard']);
       });
     }
   }
   itemClick(item) {
-    item.active =! item.active;
+    item.active = !item.active;
 
   }
   checkValidation() {
