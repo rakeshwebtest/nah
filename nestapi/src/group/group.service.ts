@@ -4,7 +4,7 @@ import { GroupFollowEntity } from './group-follows.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, getConnection } from 'typeorm';
 import { CreateGroupDto } from './dto/create-group.dto';
-import { GroupFollowDto } from './dto/group-follow.dto';SVGAnimatedNumber
+import { GroupFollowDto } from './dto/group-follow.dto';
 @Injectable()
 export class GroupService {
 
