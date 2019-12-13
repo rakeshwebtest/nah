@@ -65,6 +65,10 @@ export class UsersController {
             }
             this.groupService.updateGroup(group);
         }
+        if(user.followGroups){
+            this.groupService.updateFollowGroup(user.followGroups);
+        }
+
         return this.service.updateUser(user);
     }
 

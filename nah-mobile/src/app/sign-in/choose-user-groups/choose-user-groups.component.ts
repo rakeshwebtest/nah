@@ -14,15 +14,6 @@ import { SignInComponent } from '../sign-in.component';
 })
 export class ChooseUserGroupsComponent implements OnInit {
   groupList = [
-    { name: "Hate USA" },
-    { name: "Noea of Newyeark" },
-    { name: "Hte Modie" },
-    { name: "Testing Neo" },
-    { name: "Leon of the hearter" },
-    { name: "Chek chak aldn" },
-    { name: "fa sjlfsd fsajdf" },
-    { name: "laldfk asdflsdafsdafl" },
-
   ];
   profile: any;
   constructor(private router: Router, private loadingService: LoadingService,
@@ -42,9 +33,12 @@ export class ChooseUserGroupsComponent implements OnInit {
     });
   }
   async updateSignIn() {
+    const { email, id } = this.userConfigService.user.user;
+    this.profile.followGroups = this.groupList.filter(item => item.active).map(item => { return { userId: id, groupId: item.id } });
+
     if (this.checkValidation()) {
       await this.loadingService.show();
-      const { email, id } = this.userConfigService.user.user;
+
       this.profile.email = email;
       this.profile.id = id;
       this.http.put('user', this.profile).subscribe(res => {
@@ -60,7 +54,6 @@ export class ChooseUserGroupsComponent implements OnInit {
   }
   itemClick(item) {
     item.active = !item.active;
-
   }
   checkValidation() {
     if (!this.profile.typeOfNoer) {

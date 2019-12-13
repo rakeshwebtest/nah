@@ -1,4 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
+import { GroupFollowDto } from 'src/group/dto/group-follow.dto';
 export class CreateUserDto {
     @IsNotEmpty({ message: "Select Type of noer" })
     readonly typeOfNoer: string;
@@ -8,6 +9,6 @@ export class CreateUserDto {
     readonly id: number;
     @IsNotEmpty()
     readonly country: string;
-    readonly groups: any[];
+    readonly followGroups: GroupFollowDto[];
     readonly newGroupName:string;
 }
