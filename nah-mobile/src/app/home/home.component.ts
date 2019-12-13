@@ -73,7 +73,7 @@ export class HomeComponent {
       // save user data on the native storage
       this.nativeStorage.setItem('google_user', _resUser).then(() => {
         if (_resUser) {
-          if (_resUser.type_of_noer) {
+          if (_resUser.typeOfNoer) {
             this.router.navigate(['/dashboard']);
           } else {
             this.router.navigate(['/sign-in']);

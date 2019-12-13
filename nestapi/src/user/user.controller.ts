@@ -9,11 +9,13 @@ import {
 import { LoginUserDto } from './dto';
 import { ValidationPipe } from './../shared/pipes/validation.pipe';
 import { CreateUserDto } from './dto/create-user.dto';
+import { GroupService } from 'src/group/group.service';
+import { CreateGroupDto } from 'src/group/dto/create-group.dto';
 
 @Controller('user')
 export class UsersController {
 
-    constructor(public service: UserService) { }
+    constructor(public service: UserService, public groupService: GroupService) { }
 
     @Get()
     async getUser() {
@@ -47,6 +49,7 @@ export class UsersController {
         if (_user.length > 0) {
             user.id = _user[0].id;
         }
+
         const data = await this.service.updateUser(user);
         const token = await this.service.generateJWT(data);
         return { message: 'Login Succussfully', data: { user, token } };
@@ -54,6 +57,14 @@ export class UsersController {
     @UsePipes(new ValidationPipe())
     @Put()
     update(@Body() user: CreateUserDto) {
+        // create group if newGroupName there
+        if (user.newGroupName) {
+            const group: CreateGroupDto = {
+                name: user.newGroupName,
+                createBy: user.id
+            }
+            this.groupService.updateGroup(group);
+        }
         return this.service.updateUser(user);
     }
 

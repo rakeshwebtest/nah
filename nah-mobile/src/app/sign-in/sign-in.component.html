@@ -1,20 +1,20 @@
 <ion-content class="ion-padding">
   <ion-grid>
-    <ion-row class="ion-align-items-center">
+    <ion-row class="ion-align-items-center ion-margin">
       <ion-col class="ion-text-center">
         <ion-button color="light">
           <ion-label> Hey, Let us know about your Noer</ion-label>
         </ion-button>
       </ion-col>
     </ion-row>
-    <ion-row class="ion-justify-content-center">
+    <ion-row class="ion-justify-content-center ion-margin-top">
       <ion-col class="ion-text-center">
         <ion-label>Select type of Noer</ion-label>
       </ion-col>
     </ion-row>
-    <ion-row class="type-of-noer">
+    <ion-row class="type-of-noer ion-margin-bottom">
       <ion-col class="ion-text-center align-center ion-activatable" (click)="noerSelection('anties')">
-        <ion-avatar class="avatar ion-align-items-center" [ngClass]="{ active: profile.type_of_noer == 'anties' }">
+        <ion-avatar class="avatar ion-align-items-center" [ngClass]="{ active: profile.typeOfNoer == 'anties' }">
           <!-- <ion-icon class="custom-google"></ion-icon> -->
           <ion-icon name="people"></ion-icon>
         </ion-avatar>
@@ -22,7 +22,7 @@
         <ion-ripple-effect></ion-ripple-effect>
       </ion-col>
       <ion-col class="ion-text-center align-center ion-activatable" (click)="noerSelection('rejection')">
-        <ion-avatar class="avatar ion-align-items-center" [ngClass]="{ active: profile.type_of_noer == 'rejection' }">
+        <ion-avatar class="avatar ion-align-items-center" [ngClass]="{ active: profile.typeOfNoer == 'rejection' }">
           <!-- <ion-icon class="custom-google"></ion-icon> -->
           <ion-icon class="ion-align-items-center" name="people"></ion-icon>
         </ion-avatar>
@@ -30,7 +30,7 @@
         <ion-ripple-effect></ion-ripple-effect>
       </ion-col>
       <ion-col class="ion-text-center align-center ion-activatable" (click)="noerSelection('hater')">
-        <ion-avatar class="avatar ion-align-items-center" [ngClass]="{ active: profile.type_of_noer == 'hater' }">
+        <ion-avatar class="avatar ion-align-items-center" [ngClass]="{ active: profile.typeOfNoer == 'hater' }">
           <!-- <ion-icon class="custom-google"></ion-icon> -->
           <ion-icon name="people"></ion-icon>
         </ion-avatar>
@@ -38,28 +38,28 @@
         <ion-ripple-effect></ion-ripple-effect>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row class="ion-margin-top">
       <ion-col class="ion-text-center">
         <ion-label>Choose your City</ion-label>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col class="ion-text-center">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="6">
         <ion-select [(ngModel)]="profile.country" placeholder="Select Your City" okText="Okay" cancelText="Dismiss">
           <ion-select-option value="india">India</ion-select-option>
           <ion-select-option value="usa">USA</ion-select-option>
         </ion-select>
       </ion-col>
     </ion-row>
-    <ion-row class="ion-justify-content-center">
+    <ion-row class="ion-justify-content-center ion-margin-top">
       <ion-button color="danger" (click)="onCreateGroup()">
         Choose your 'Say No To Group'
       </ion-button>
     </ion-row>
-    <ion-row class="ion-justify-content-center">
+    <!-- <ion-row class="ion-justify-content-center">
       <ion-button color="light" (click)="updateSignIn()">
         START EXPLORING
       </ion-button>
-    </ion-row>
+    </ion-row> -->
   </ion-grid>
 </ion-content>

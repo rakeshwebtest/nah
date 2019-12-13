@@ -42,7 +42,7 @@ export class AppComponent {
           this.userConfigService.user = data;
           // user is previously logged and we have his data
           // we will let him access the app
-          if (data.user.type_of_noer) {
+          if (data.user.typeOfNoer) {
             this.router.navigate(['/dashboard']);
           } else {
             this.router.navigate(['/sign-in']);

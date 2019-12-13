@@ -20,7 +20,7 @@ export class UserEntity extends BaseEntity {
     idToken: string;
 
     @Column({ length: 25, nullable: true })
-    type_of_noer: string;
+    typeOfNoer: string;
 
     @Column({ length: 25, default: '' })
     country: string;

@@ -8,15 +8,15 @@ export abstract class BaseEntity {
     id: number;
 
     @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP" })
-    created: Date;
+    createdDate: Date;
 
     @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP" })
-    updated: Date;
+    updatedDate: Date;
 
     @BeforeUpdate()
     updateTimestamp() {
         // tslint:disable-next-line:new-parens
-        this.updated = new Date;
+        this.updatedDate = new Date;
     }
 
 }

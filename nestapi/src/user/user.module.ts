@@ -4,10 +4,12 @@ import { UsersController } from './user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './user.entity';
 import { AuthMiddleware } from './auth.middleware';
+import { GroupService } from 'src/group/group.service';
+import { GroupEntity } from 'src/group/group.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity])],
-  providers: [UserService, AuthMiddleware],
+  imports: [TypeOrmModule.forFeature([UserEntity, GroupEntity])],
+  providers: [UserService, AuthMiddleware, GroupService],
   controllers: [UsersController]
 })
 export class UserModule {

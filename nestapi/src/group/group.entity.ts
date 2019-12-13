@@ -4,12 +4,16 @@ import { UserEntity } from 'src/user/user.entity';
 @Entity({ name: 'group' })
 export class GroupEntity extends BaseEntity {
 
-    @Column({ length: 25, nullable: true })
+    @Column({ length: 100 })
     name: string;
 
     @Column({ length: 250, nullable: true })
     imageUrl: string;
 
-    @ManyToOne(type => UserEntity, user => user.groups)
-    createBy: UserEntity;
+    // @ManyToOne(type => UserEntity, user => user.groups)
+    // createBy: UserEntity;
+
+    @Column()
+    createBy: number;
+
 }
