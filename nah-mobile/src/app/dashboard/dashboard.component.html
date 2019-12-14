@@ -1,6 +1,14 @@
 <ion-header class="hearder">
-  <ion-toolbar>
-    <ion-icon class="custom-google"></ion-icon> Dashboard
+  <ion-toolbar class="space-between-center">
+    <!-- <ion-icon class="custom-google"></ion-icon>  -->
+    <!-- <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
+      <ion-img class="ion-padding-r-10 ion-margin-l-10" style="width:30px;float:left;" src="assets/images/logo.png"></ion-img>
+      Dashboard
+    </ion-text> -->
+    <ion-buttons slot="start" class="white-color">
+        <ion-img class="ion-padding-r-10 ion-margin-l-10" style="width:30px;display: inline-block;" src="assets/images/logo.png"></ion-img>
+        Dashboard
+      </ion-buttons>
     <ion-avatar class="image-avater">
       <img [src]="googlePic" />
     </ion-avatar>
@@ -35,17 +43,16 @@
       <ion-ripple-effect></ion-ripple-effect>
     </ion-col>
   </ion-row>
-  <ion-item-divider>
-
-  </ion-item-divider>
-  <ion-label class="padding">
+  <!-- <ion-item-divider>
+  </ion-item-divider> -->
+  <ion-label class="ion-padding-t-10 ion-padding-l-20 ion-margin-t-10 d-block border-top">
     Upcoming Meetings
   </ion-label>
   <ion-list class="meeting-list">
     <ion-item class="meeting-item">
       <ion-grid>
         <ion-row class="ion-nowrap">
-          <ion-col size="2">
+          <ion-col class="img-left">
             <ion-avatar class="avater">
               <img [src]="googlePic">
             </ion-avatar>
@@ -67,12 +74,15 @@
         <ion-row class="ion-nowrap">
           <ion-col size="1">
             <ion-avatar class="avater small">
-              <img [src]="googlePic">
+              <!-- <img [src]="googlePic"> -->
+              <label>L</label>
             </ion-avatar>
+            
           </ion-col>
           <ion-col size="1">
             <ion-avatar class="avater small">
-              <img [src]="googlePic">
+              <!-- <img [src]="googlePic"> -->
+              <label>M</label>
             </ion-avatar>
           </ion-col>
           <ion-col size="1">
@@ -80,7 +90,7 @@
               <label>1</label>
             </ion-avatar>
           </ion-col>
-          <ion-col>
+          <ion-col class="fallowing-members">
             Members are Following
           </ion-col>
         </ion-row>
@@ -90,7 +100,7 @@
     <ion-item class="meeting-item">
       <ion-grid>
         <ion-row class="ion-nowrap">
-          <ion-col size="2">
+          <ion-col  class="img-left">
             <ion-avatar class="avater">
               <img [src]="googlePic">
             </ion-avatar>
@@ -125,7 +135,7 @@
               <label>1</label>
             </ion-avatar>
           </ion-col>
-          <ion-col class="meeting-title">
+          <ion-col class="fallowing-members">
             Members are Following
           </ion-col>
         </ion-row>
@@ -135,7 +145,7 @@
     <ion-item class="meeting-item">
       <ion-grid>
         <ion-row class="ion-nowrap">
-          <ion-col size="2">
+          <ion-col  class="img-left">
             <ion-avatar class="avater">
               <img [src]="googlePic">
             </ion-avatar>
@@ -170,7 +180,7 @@
               <label>1</label>
             </ion-avatar>
           </ion-col>
-          <ion-col class="meeting-title">
+          <ion-col class="fallowing-members">
             Members are Following
           </ion-col>
         </ion-row>
