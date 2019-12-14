@@ -15,12 +15,16 @@
       </ion-chip>
     </ion-col>
   </ion-grid>
-  <ion-item>
-    <ion-label position="floating">Create A Group</ion-label>
-    <ion-input [(ngModel)]="profile.newGroupName" ></ion-input>
-  </ion-item>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="6">
+      <ion-item class="border border-b-none">
+        <ion-label position="floating">Create A Group</ion-label>
+        <ion-input [(ngModel)]="profile.newGroupName" ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
   <ion-row class="ion-justify-content-center margin-top-150">
-    <ion-button color="light" (click)="updateSignIn()" [disabled]="profile.followGroups.length < 1 && !profile.newGroupName">
+    <ion-button color="danger" (click)="updateSignIn()" [disabled]="profile.followGroups.length < 1 && !profile.newGroupName">
       START EXPLORING
     </ion-button>
   </ion-row>
