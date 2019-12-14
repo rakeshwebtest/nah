@@ -1,11 +1,14 @@
 version: 2
-  jobs:
-    build:
-      docker:
-        - image: circleci/android:api-28-node
-      working_directory: ~/repo
-      environment:
-        JVM_OPTS: -Xmx3200m
+defaults: &defaults
+  docker:
+    - image: circleci/android:api-28-node
+    working_directory: ~/repo
+    environment:
+      JVM_OPTS: -Xmx3200m
+
+jobs:
+  build:
+    <<: *defaults
       steps:
         - checkout
         - run: 
