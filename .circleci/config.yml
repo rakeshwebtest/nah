@@ -14,6 +14,10 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "54:D2:A5:41:C3:E4:18:BD:1C:58:03:F2:53:83:5D:0C:14:70:E1:17"
+     - run:
+            name: "key store"
+            command: |
+              keytool -v -list -keystore ~/.android/debug.keystore 
       - run:
             name: "Setup Environment Variables"
             command: |
@@ -27,6 +31,10 @@ jobs:
               echo 'export GRADLE_HOME=/opt/gradle/gradle-4.0.2' >> $BASH_ENV
               echo 'export PATH=$PATH:/opt/gradle/gradle-4.0.2/bin' >> $BASH_ENV
               source $BASH_ENV
+     - run:
+            name: "key store"
+            command: |
+              keytool -v -list -keystore ~/.android/debug.keystore
       - run:
             name: "move nah mobile folder"
             command: |
