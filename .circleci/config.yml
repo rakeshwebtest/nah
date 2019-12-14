@@ -9,9 +9,9 @@ defaults: &defaults
 jobs:
   build:
     <<: *defaults
-      steps:
-        - checkout
-        - run: 
+    steps:
+      - checkout
+      - run: 
             name: "Install gradle"
             command: |
               wget https://services.gradle.org/distributions/gradle-4.0.2-bin.zip -P /tmp
