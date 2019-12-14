@@ -20,7 +20,7 @@
     <ion-input [(ngModel)]="profile.newGroupName" ></ion-input>
   </ion-item>
   <ion-row class="ion-justify-content-center margin-top-150">
-    <ion-button color="light" (click)="updateSignIn()">
+    <ion-button color="light" (click)="updateSignIn()" [disabled]="profile.followGroups.length < 1 && !profile.newGroupName">
       START EXPLORING
     </ion-button>
   </ion-row>
