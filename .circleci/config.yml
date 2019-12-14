@@ -22,7 +22,7 @@ jobs:
       - run:
             name: "move nah mobile folder"
             command: |
-              cd nah-mobile
+              cd ~/repo/nah-mobile
       - run:
             name: "Install ionic and cordova"
             command: |
