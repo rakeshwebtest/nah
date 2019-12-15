@@ -47,6 +47,11 @@ jobs:
               cd nah-mobile && ionic cordova build android --verbose
               mkdir -p /tmp/apk
               cp -r platforms/android/app/build/outputs/apk/debug/app-debug.apk /tmp/apk
+      - run:
+            name: "Generate apk"
+            command: |
+               keytool -keystore path-to-debug-or-production-keystore -list -v
+           
       - store_artifacts:
             path: /tmp/apk
             destination: apks
