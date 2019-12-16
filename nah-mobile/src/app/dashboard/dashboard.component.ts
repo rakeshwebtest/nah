@@ -14,6 +14,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.googlePic = this.userConfigService.user.user.imageUrl;
   }
- 
+  groupClick(item){
+
+  }
 
 }

@@ -30,7 +30,6 @@ export class HttpInterceptorService implements HttpInterceptor {
         // console.log('request', typeof request.headers, request.headers.get('client'));
         request = request.clone({
             setHeaders: {
-                'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json'
             },
             url: request.url
