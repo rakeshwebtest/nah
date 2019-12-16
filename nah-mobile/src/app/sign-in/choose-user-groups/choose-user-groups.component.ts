@@ -24,6 +24,7 @@ export class ChooseUserGroupsComponent implements OnInit {
 
   ngOnInit() {
     this.profile = this.userConfigService.updateProfile;
+    this.profile.followGroups = [];
     this.getGroups();
   }
   getGroups() {
@@ -35,6 +36,7 @@ export class ChooseUserGroupsComponent implements OnInit {
   async updateSignIn() {
     const { email, id } = this.userConfigService.user.user;
     this.profile.followGroups = this.groupList.filter(item => item.active).map(item => { return { userId: id, groupId: item.id } });
+    console.log('this.profile.followGroups -->', this.profile.followGroups);
 
     if (this.checkValidation()) {
       await this.loadingService.show();
@@ -54,6 +56,8 @@ export class ChooseUserGroupsComponent implements OnInit {
   }
   itemClick(item) {
     item.active = !item.active;
+    const { email, id } = this.userConfigService.user.user;
+    this.profile.followGroups = this.groupList.filter(item => item.active).map(item => { return { userId: id, groupId: item.id } });
   }
   checkValidation() {
     if (!this.profile.typeOfNoer) {

@@ -28,6 +28,7 @@
 @import "theme/svg-icons";
 ion-header{
   --ion-toolbar-background: var(--ion-color-danger);
+  color: #ffffff;
 }
 .font-32{
     font-size: 32px;
@@ -52,4 +53,42 @@ ion-header{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+.white-color{
+    color: #ffffff;
+}
+.toolbar-content,
+.space-between-center{
+    .toolbar-container{
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+.d-block{
+    display: block;
+}
+.border-top{
+    border-top: 1px solid #ccc;
+}
+
+.item-native{
+    padding: 0 ;
+}
+.margin-top-150{
+    margin-top: 150px;
+}
+
+ion-select {
+    border: 1px solid #ccc;
+}
+.bg-ash{
+    background:#ccc;
+}
+.border{
+    border: 1px solid #ccc;
+}
+.border-b-none{
+    border-bottom: none;
 }
