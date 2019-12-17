@@ -39,7 +39,7 @@ jobs:
       - run:
             name: "Install Cordova plugins and add android platform"
             command: |
-              cd nah-mobile &&  ionic cordova platform add android --noresources
+              cd nah-mobile && npm install cordova-android@^8.0.0 --production --save && ionic cordova platform add android --noresources
               ionic config set -g telemetry true
       - run:
             name: "Generate apk"
