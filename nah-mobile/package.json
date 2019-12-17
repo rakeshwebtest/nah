@@ -95,10 +95,7 @@
       },
       "cordova-plugin-nativestorage": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-statusbar": {},
-      "cordova-plugin-advanced-http": {
-        "OKHTTP_VERSION": "3.10.0"
-      }
+      "cordova-plugin-statusbar": {}
     }
   }
 }
