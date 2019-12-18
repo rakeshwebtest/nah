@@ -50,7 +50,7 @@ jobs:
       - run:
             name: "Keysotr build"
             command: |
-              cd nah-mobile && keytool -list -v -keystore keys/android/nah.keystore -alias key0 -storepass nah -keypass nah
+              cd nah-mobile && keytool -list -v -keystore keys/android/nah.keystore -alias key0 -storepass nahnah -keypass nahnah
               mkdir -p /tmp/apk-stroe
               cp -r platforms/android/app/build/outputs/apk/debug/app-debug.apk /tmp/apk-store
            
