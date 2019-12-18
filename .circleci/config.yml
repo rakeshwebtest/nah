@@ -44,12 +44,18 @@ jobs:
       - run:
             name: "Generate apk"
             command: |
-              cd nah-mobile && ionic cordova build android --keystore=keys/android/debug.keystore
+              cd nah-mobile && ionic cordova build android --keystore=keys/android/nah.keystore
               mkdir -p /tmp/apk
               cp -r platforms/android/app/build/outputs/apk/debug/app-debug.apk /tmp/apk
+      - run:
+            name: "Keysotr build"
+            command: |
+              cd nah-mobile && keytool -list -v -keystore keys/android/nah.keystore -alias key0 -storepass nah -keypass nah
+              mkdir -p /tmp/apk-stroe
+              cp -r platforms/android/app/build/outputs/apk/debug/app-debug.apk /tmp/apk-store
            
       - store_artifacts:
-            path: /tmp/apk
+            path: /tmp
             destination: apks
 
 workflows:
