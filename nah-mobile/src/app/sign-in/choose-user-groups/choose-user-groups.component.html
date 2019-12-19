@@ -7,6 +7,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-vertical-align-content">
+  <ion-fab class="add-btn" vertical="end" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-searchbar></ion-searchbar>
   <ion-grid class="group">
     <ion-col class="group-item" *ngFor="let item of groupList">
