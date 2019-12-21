@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingService } from 'src/app/utils/loading.service';
 import { UserConfigService } from 'src/app/utils/user-config.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AppHttpClient } from 'src/app/utils';
 import { Router } from '@angular/router';
 import { SignInComponent } from '../sign-in.component';
+import { GroupCreateModalComponent } from 'src/app/group-create-modal/group-create-modal.component';
 
 @Component({
   selector: 'theapp-choose-user-groups',
@@ -20,6 +21,7 @@ export class ChooseUserGroupsComponent implements OnInit {
     private alertController: AlertController,
     private http: AppHttpClient,
     private nativeStorage: NativeStorage,
+    public modalController: ModalController,
     private userConfigService: UserConfigService) { }
 
   ngOnInit() {
@@ -82,5 +84,14 @@ export class ChooseUserGroupsComponent implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async presentModal() {
+    console.log('0k');
+    const modal = await this.modalController.create({
+      component: GroupCreateModalComponent,
+      cssClass:"group-create-modal"
+    });
+    return await modal.present();
   }
 }

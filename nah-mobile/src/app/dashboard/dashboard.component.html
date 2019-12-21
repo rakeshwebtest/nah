@@ -9,8 +9,9 @@
         <ion-img class="ion-padding-r-10 ion-margin-l-10" style="width:30px;display: inline-block;" src="assets/images/logo.png"></ion-img>
         Dashboard
       </ion-buttons>
-    <ion-avatar class="image-avater">
+    <ion-avatar class="image-avater ion-activatable" (click)="navProfile()">
       <img [src]="googlePic" />
+      <ion-ripple-effect></ion-ripple-effect>
     </ion-avatar>
   </ion-toolbar>
 </ion-header>

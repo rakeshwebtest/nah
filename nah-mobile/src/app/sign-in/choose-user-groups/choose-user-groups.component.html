@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" class="white-color">
+    <ion-buttons slot="start" class="white-color" >
       <ion-back-button></ion-back-button>
       Choose your Say No To Group
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-vertical-align-content">
-  <ion-fab class="add-btn" vertical="end" horizontal="end" slot="fixed">
+  <ion-fab class="add-btn" vertical="end" horizontal="end" slot="fixed" (click)="presentModal()">
     <ion-fab-button color="danger">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
@@ -22,7 +22,7 @@
   </ion-grid>
   <ion-row class="ion-justify-content-center">
     <ion-col size="6">
-      <ion-item class="border border-b-none">
+      <ion-item class="border border-b-none" >
         <ion-label position="floating">Create A Group</ion-label>
         <ion-input [(ngModel)]="profile.newGroupName" ></ion-input>
       </ion-item>

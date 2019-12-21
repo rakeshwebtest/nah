@@ -16,6 +16,8 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { GroupCreateModalComponent } from './group-create-modal/group-create-modal.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -37,11 +39,15 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent
+  },
+  {
+    path: 'user-profile',
+    component: UserProfileComponent
   }
 ];
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, SignInComponent, DashboardComponent, ChooseUserGroupsComponent],
+  declarations: [AppComponent, HomeComponent, SignInComponent, DashboardComponent, ChooseUserGroupsComponent, GroupCreateModalComponent, UserProfileComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -49,6 +55,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
     IonicModule.forRoot()
   ],
+  entryComponents: [GroupCreateModalComponent],
   providers: [
     StatusBar,
     NativeStorage,
