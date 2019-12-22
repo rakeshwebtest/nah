@@ -47,6 +47,41 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
-
-
+  <ion-list class="meeting-list">
+    <ion-item class="meeting-item" no-padding *ngFor="let item of groupList">
+      <ion-grid>
+        <ion-row class="ion-nowrap ion-align-items-center">
+          <ion-col>
+            <ion-label class="meeting-title">{{item.name}}</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-nowrap ion-align-items-center ion-justify-content-between">
+          <ion-col size="1">
+            <ion-avatar class="avater small">
+              <img [src]="googlePic">
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="1">
+            <ion-avatar class="avater small">
+              <img [src]="googlePic">
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="1">
+            <ion-avatar class="avater small">
+              <label>1</label>
+            </ion-avatar>
+          </ion-col>
+          <ion-col class="fallowing-members">
+            Members are Following
+          </ion-col>
+          <ion-col class="ion-text-end">
+            <ion-button color="medium" no-margin>
+              Unjoin
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+    </ion-item>
+  </ion-list>
 </ion-content>

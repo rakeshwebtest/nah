@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserConfigService } from '../utils/user-config.service';
 import { PopoverController } from '@ionic/angular';
+import { AppHttpClient } from '../utils';
 
 @Component({
   selector: 'app-user-profile',
@@ -10,11 +11,16 @@ import { PopoverController } from '@ionic/angular';
 export class UserProfileComponent implements OnInit {
   googlePic: String;
   userInfo:any;
-  constructor(private userConfigService: UserConfigService,private popoverController:PopoverController) { }
+  groupList = [];
+  constructor(private userConfigService: UserConfigService,
+    private popoverController:PopoverController,
+    private http: AppHttpClient) { }
 
   ngOnInit() {
     this.userInfo = this.userConfigService.user.user;
     this.googlePic = this.userConfigService.user.user.imageUrl;
+    console.log('this.userInfo', this.userInfo);
+    this.getGroups();
   }
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
@@ -30,5 +36,10 @@ export class UserProfileComponent implements OnInit {
   //     ev: myEvent
   //   });
   // }
-
+  getGroups() {
+    this.http.get('group/list').subscribe(res => {
+      console.log('list gro', res);
+      this.groupList = res.data || [];
+    });
+  }
 }
