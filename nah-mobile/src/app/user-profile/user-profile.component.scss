@@ -41,8 +41,10 @@
 
 }
 .group-tabs{
-    bottom: auto;
-    top: auto;
+    // bottom: auto;
+    // top: auto;
+    position: relative;
+    contain: inherit;
 }
 // .group-list{
 .meeting-item{
@@ -88,4 +90,17 @@
         display: flex;
         align-items: center;
     }
+}
+[_nghost-mev-c4] {
+    display: flex;
+    position: relative;
+    top: inherit;
+    left: inherit;
+    right: inherit;
+    bottom: 0;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    contain: inherit;
+    z-index: inherit;
 }
