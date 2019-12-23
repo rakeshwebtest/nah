@@ -41,7 +41,7 @@ export class UsersController {
     //     const user = { email, token, username, bio, image };
     //     return { user }
     // }
-
+    @UsePipes(new ValidationPipe())
     @Post('login')
     async create(@Body() user: LoginUserDto) {
         // check user
