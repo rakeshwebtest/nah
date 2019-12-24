@@ -3,8 +3,8 @@ import { LoadingController, AlertController, Platform, IonRouterOutlet } from '@
 import { AppHttpClient } from './../utils';
 import { Route, Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { UserConfigService } from '../utils/user-config.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'theapp-home',
@@ -21,7 +21,7 @@ export class HomeComponent {
     private http: AppHttpClient,
     private router: Router,
     private googlePlus: GooglePlus,
-    private nativeStorage: NativeStorage,
+    private authenticationService: AuthenticationService,
     public loadingController: LoadingController,
     private platform: Platform,
     public alertController: AlertController,
@@ -71,17 +71,18 @@ export class HomeComponent {
       this.userConfigService.user = _resUser;
       console.log('_resUser', _resUser);
       // save user data on the native storage
-      this.nativeStorage.setItem('google_user', _resUser).then(() => {
-        if (_resUser) {
-          if (_resUser.typeOfNoer) {
-            this.router.navigate(['/dashboard']);
-          } else {
-            this.router.navigate(['/sign-in']);
-          }
-        }
-      }, (error) => {
-        console.log(error);
-      });
+      this.authenticationService.login(_resUser);
+      // this.nativeStorage.setItem('google_user', _resUser).then(() => {
+      //   if (_resUser) {
+      //     if (_resUser.typeOfNoer) {
+      //       this.router.navigate(['/dashboard']);
+      //     } else {
+      //       this.router.navigate(['/sign-in']);
+      //     }
+      //   }
+      // }, (error) => {
+      //   console.log(error);
+      // });
     });
   }
 

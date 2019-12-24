@@ -9,14 +9,13 @@ import {
 import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { map, filter, tap } from 'rxjs/operators';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
-import { UserConfigService } from './user-config.service';
+import { AuthenticationService } from '../services/authentication.service';
 @Injectable({
     providedIn: 'root'
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
-    constructor(private nativeStorage: NativeStorage, private userConfigService: UserConfigService) { }
+    constructor(private authenticationService: AuthenticationService) { }
 
     /**
      *
@@ -43,9 +42,9 @@ export class HttpInterceptorService implements HttpInterceptor {
         //     user = res;
         // });
         // console.log('chache user', user);
-        if (this.userConfigService.user) {
-            console.log('user', this.userConfigService.user);
-            const _user = this.userConfigService.user;
+        if (this.authenticationService.isAuthenticated()) {
+            console.log('user', this.authenticationService.isAuthenticated());
+            const _user:any = this.authenticationService.isAuthenticated();
             request = request.clone({
                 setHeaders: {
                     'Content-Type': 'application/json',
