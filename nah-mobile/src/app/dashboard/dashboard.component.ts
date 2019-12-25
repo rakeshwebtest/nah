@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserConfigService } from '../utils/user-config.service';
 import { LoadingService } from '../utils/loading.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'theapp-dashboard',
@@ -10,12 +11,13 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   googlePic: any;
-  constructor(private userConfigService: UserConfigService,
+  constructor(private authService: AuthenticationService,
     private router: Router,
     private loading: LoadingService) { }
 
   ngOnInit() {
-    this.googlePic = this.userConfigService.user.user.imageUrl;
+    const userInfo:any = this.authService.isAuthenticated();
+    this.googlePic = userInfo.user.imageUrl;
   }
   groupClick(item) {
 

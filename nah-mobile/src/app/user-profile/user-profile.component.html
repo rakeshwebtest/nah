@@ -14,9 +14,10 @@
       <ion-back-button></ion-back-button>
       Profile
     </ion-buttons>
-    <button ion-button icon-only (click)="presentPopover($event)">
-      <ion-icon name="more"></ion-icon>
-    </button>
+    <ion-row class="profile-settings text-10">
+      <ion-icon name="cog" color="light" (click)="presentPopover($event)"></ion-icon>
+    </ion-row>
+  
   </ion-toolbar>
 </ion-header>
 

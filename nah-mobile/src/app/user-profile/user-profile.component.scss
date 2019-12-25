@@ -104,3 +104,10 @@
     contain: inherit;
     z-index: inherit;
 }
+.profile-settings{
+    justify-content: flex-end;
+    ion-icon{
+        font-size: 27px;
+        padding-right: 16px;
+    }
+}

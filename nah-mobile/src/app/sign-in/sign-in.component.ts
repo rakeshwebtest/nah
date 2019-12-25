@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppHttpClient } from '../utils';
 import { UserConfigService } from '../utils/user-config.service';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { LoadingService } from '../utils/loading.service';
 
@@ -21,9 +20,7 @@ export class SignInComponent implements OnInit {
   };
 
   constructor(private router: Router, private http: AppHttpClient,
-    private nativeStorage: NativeStorage,
     public loadingService: LoadingService,
-    private alertController: AlertController,
     private userConfigService: UserConfigService) { }
 
   ngOnInit() {

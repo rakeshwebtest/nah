@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingService } from 'src/app/utils/loading.service';
 import { UserConfigService } from 'src/app/utils/user-config.service';
 import { AlertController, ModalController } from '@ionic/angular';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AppHttpClient } from 'src/app/utils';
 import { Router } from '@angular/router';
-import { SignInComponent } from '../sign-in.component';
 import { GroupCreateModalComponent } from 'src/app/group-create-modal/group-create-modal.component';
-
+import { Storage } from '@ionic/storage';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 @Component({
   selector: 'theapp-choose-user-groups',
   templateUrl: './choose-user-groups.component.html',
@@ -17,14 +16,17 @@ export class ChooseUserGroupsComponent implements OnInit {
   groupList = [
   ];
   profile: any;
+  userInfo:any;
   constructor(private router: Router, private loadingService: LoadingService,
     private alertController: AlertController,
     private http: AppHttpClient,
-    private nativeStorage: NativeStorage,
+    private nativeStorage: Storage,
     public modalController: ModalController,
+    private authService:AuthenticationService,
     private userConfigService: UserConfigService) { }
 
   ngOnInit() {
+    this.userConfigService.user = <any>this.authService.isAuthenticated();
     this.profile = this.userConfigService.updateProfile;
     this.profile.followGroups = [];
     this.getGroups();
@@ -46,10 +48,10 @@ export class ChooseUserGroupsComponent implements OnInit {
       this.profile.email = email;
       this.profile.id = id;
       this.http.put('user', this.profile).subscribe(res => {
-        this.nativeStorage.getItem('google_user').then(user => {
+        this.nativeStorage.get('USER_INFO').then(user => {
           user.user.typeOfNoer = this.profile.typeOfNoer;
           user.user.country = this.profile.country;
-          this.nativeStorage.setItem('google_user', user);
+          this.nativeStorage.set('USER_INFO', user);
         });
         this.loadingService.hide();
         this.router.navigate(['/dashboard']);
