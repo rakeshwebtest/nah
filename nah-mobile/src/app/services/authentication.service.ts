@@ -3,7 +3,14 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { ToastController, Platform } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
-
+export interface UserInfo {
+  email: string;
+  id: number;
+  displayName: string;
+  imageUrl: string;
+  typeOfNoer: string;
+  country: string;
+};
 
 @Injectable(
   {
@@ -28,7 +35,7 @@ export class AuthenticationService {
   ifLoggedIn() {
     this.storage.get('USER_INFO').then((response) => {
       if (response) {
-        console.log('if log USER_INFO',response);
+        console.log('if log USER_INFO', response);
         this.authState.next(response);
         if (response.user.typeOfNoer) {
           this.router.navigate(['dashboard']);
@@ -38,8 +45,6 @@ export class AuthenticationService {
       }
     });
   }
-
-
   login(user) {
     this.storage.set('USER_INFO', user).then((response) => {
       if (response) {
@@ -63,6 +68,10 @@ export class AuthenticationService {
 
   isAuthenticated() {
     return this.authState.value;
+  }
+  getUserInfo() :UserInfo {
+    const userInfo: any = this.authState.value;
+    return userInfo.user;
   }
 
 

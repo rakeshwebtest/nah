@@ -20,11 +20,16 @@ export class GroupService {
     }
     async updateFollowGroup(groupFollows: GroupFollowDto[]) {
         // return this.groupRepository.save();
-      return  await getConnection()
+        return await getConnection()
             .createQueryBuilder()
             .insert()
             .into(GroupFollowEntity)
             .values(groupFollows)
             .execute();
+    }
+    async checkGroupName(group: CreateGroupDto): Promise<GroupEntity> {
+        return await this.groupRepository.findOne({
+            where: [{ name: group.name, createBy: group.createBy}],
+        });
     }
 }
