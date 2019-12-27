@@ -6,9 +6,10 @@ import { UserEntity } from './user.entity';
 import { AuthMiddleware } from './auth.middleware';
 import { GroupService } from 'src/group/group.service';
 import { GroupEntity } from 'src/group/group.entity';
+import { GroupFollowEntity } from 'src/group/group-follows.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity, GroupEntity])],
+  imports: [TypeOrmModule.forFeature([UserEntity, GroupEntity,GroupFollowEntity])],
   providers: [UserService, AuthMiddleware, GroupService],
   controllers: [UsersController]
 })
