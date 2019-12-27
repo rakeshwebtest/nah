@@ -9,7 +9,7 @@ import { GroupFollowDto } from './dto/group-follow.dto';
 export class GroupService {
 
     constructor(@InjectRepository(GroupEntity) private readonly groupRepository: Repository<GroupEntity>,
-        @InjectRepository(GroupEntity) private readonly groupFollowRepository: Repository<GroupFollowEntity>
+        @InjectRepository(GroupFollowEntity) private readonly groupFollowRepository: Repository<GroupFollowEntity>
     ) { }
 
     async getGroups(): Promise<GroupEntity[]> {
@@ -18,13 +18,31 @@ export class GroupService {
     async updateGroup(group: CreateGroupDto) {
         return this.groupRepository.save(group);
     }
+
+    async isFollower(groupFollow: GroupFollowDto): Promise<GroupFollowEntity> {
+        return  await this.groupFollowRepository.findOne({
+            where: [{ groupId: groupFollow.groupId, userId: groupFollow.userId}],
+        });
+    }
+    async follow(groupFollow: GroupFollowDto) {
+        return this.groupFollowRepository.save(groupFollow);
+    }
+    async unFollow(id:number) {
+        return this.groupFollowRepository.delete(id);
+    }
+    // bulk group followers insert
     async updateFollowGroup(groupFollows: GroupFollowDto[]) {
         // return this.groupRepository.save();
-      return  await getConnection()
+        return await getConnection()
             .createQueryBuilder()
             .insert()
             .into(GroupFollowEntity)
             .values(groupFollows)
             .execute();
+    }
+    async checkGroupName(group: CreateGroupDto): Promise<GroupEntity> {
+        return await this.groupRepository.findOne({
+            where: [{ name: group.name, createBy: group.createBy}],
+        });
     }
 }

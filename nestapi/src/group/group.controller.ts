@@ -1,23 +1,44 @@
-import { Controller, Get, UsePipes, Post, Body } from '@nestjs/common';
+import { Controller, Get, UsePipes, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { ValidationPipe } from 'src/shared/pipes/validation.pipe';
 import { CreateGroupDto } from './dto/create-group.dto';
+import { GroupFollowDto } from './dto/group-follow.dto';
 
 @Controller('group')
 export class GroupController {
     constructor(public service: GroupService) { }
 
     @Get('list')
-    async getUser() {
+    async getGroups() {
         const data: any = await this.service.getGroups();
         return { message: 'Fetch Groups', data };
     }
-
     @UsePipes(new ValidationPipe())
     @Post()
-    async update(@Body() group: CreateGroupDto) {
-        const data: any = await this.service.updateGroup(group);
-        return { message: 'Fetch Groups', data };
+    async createGroup(@Body() group: CreateGroupDto) {
+        //check groupname exist or not
+        const isGroup = await this.service.checkGroupName(group);
+        if (isGroup) {
+            throw new HttpException({ message: 'Already group exists', errors: 'Already group exists' }, HttpStatus.BAD_REQUEST);
+        } else {
+            const data: any = await this.service.updateGroup(group);
+            return { message: 'Successfully updated Group', data };
+        }
+    }
+
+    @UsePipes(new ValidationPipe())
+    @Post('follow')
+    async update(@Body() followMember: GroupFollowDto) {
+        const isFollower = await this.service.isFollower(followMember);
+        if (isFollower) {
+            const data: any = await this.service.unFollow(isFollower.id);
+            return { message: 'successfully Un Followed Group', data };
+            // throw new HttpException({ message: 'Already followed group', errors: 'Already followed group' }, HttpStatus.BAD_REQUEST);
+        } else {
+            const data: any = await this.service.follow(followMember);
+            return { message: 'successfully Followed Group', data };
+        }
+
     }
 
 }

@@ -11,4 +11,5 @@ export class CreateUserDto {
     readonly country: string;
     readonly followGroups: GroupFollowDto[];
     readonly newGroupName:string;
+    updatedDate:Date;
 }

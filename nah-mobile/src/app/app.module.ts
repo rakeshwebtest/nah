@@ -41,7 +41,7 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: 'user-profile', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) },
 ];
-
+//driverOrder: ['indexeddb', 'sqlite', 'websql']
 @NgModule({
   declarations: [AppComponent, SignInComponent, ChooseUserGroupsComponent, GroupCreateModalComponent],
   imports: [
@@ -50,7 +50,10 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
     IonicModule.forRoot(),
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: '__nah',
+      driverOrder: ['indexeddb', 'sqlite', 'websql']
+    }),
   ],
   entryComponents: [GroupCreateModalComponent],
   providers: [

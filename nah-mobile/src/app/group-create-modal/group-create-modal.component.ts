@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { AuthenticationService } from '../services/authentication.service';
+import { AppHttpClient } from '../utils';
 
 @Component({
   selector: 'app-group-create-modal',
@@ -8,10 +10,18 @@ import { ModalController } from '@ionic/angular';
 })
 export class GroupCreateModalComponent implements OnInit {
 
-  newGroupName:string;
-  constructor(private modalCtrl:ModalController) { }
+  newGroupName: string;
+  constructor(private modalCtrl: ModalController, private authService: AuthenticationService, private http: AppHttpClient) { }
 
   ngOnInit() {
+
+  }
+  updateSignIn() {
+    const user = this.authService.getUserInfo();
+
+    this.http.post('group', { name: this.newGroupName, createBy: user.id }).subscribe(res => {
+      this.dismiss();
+    });
 
   }
   dismiss() {

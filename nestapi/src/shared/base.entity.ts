@@ -8,17 +8,17 @@ export abstract class BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    // @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP" })
-    // createdDate: Date;
-
-    // @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP" })
-    // updatedDate: Date;
-
-    @Column({ type: 'timestamp' })
+    @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP" })
     createdDate: Date;
 
-    @Column({ type: 'timestamp' })
+    @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP" })
     updatedDate: Date;
+
+    // @Column({ type: 'timestamp' })
+    // createdDate: Date;
+
+    // @Column({ type: 'timestamp' })
+    // updatedDate: Date;
 
     // @BeforeUpdate()
     // updateTimestamp() {
@@ -26,10 +26,10 @@ export abstract class BaseEntity {
     //     this.updatedDate = new Date();
     // }
 
-    @BeforeInsert()
-    updateDateCreation() {
-        this.createdDate = new Date();
-    }
+    // @BeforeInsert()
+    // updateDateCreation() {
+    //     this.createdDate = new Date();
+    // }
 
     @BeforeUpdate()
     updateDateUpdate() {

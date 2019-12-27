@@ -45,14 +45,15 @@ export class UsersController {
     @Post('login')
     async create(@Body() user: LoginUserDto) {
         // check user
-        const _user: UserEntity[] = await this.service.checkUser(user.email);
-        if (_user.length > 0) {
-            user.id = _user[0].id;
+        const _user: UserEntity = await this.service.checkUser(user.email);
+        if (_user) {
+            user.id = _user.id;
+            user.updatedDate = new Date();
         }
 
         const data = await this.service.updateUser(user);
         const token = await this.service.generateJWT(data);
-        return { message: 'Login Succussfully', data: { user, token } };
+        return { message: 'Login Succussfully', data: { user:_user || user, token } };
     }
     @UsePipes(new ValidationPipe())
     @Put()

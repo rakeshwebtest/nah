@@ -6,4 +6,5 @@ export class LoginUserDto {
   @IsEmail()
   readonly email: string;
   id: number;
+  updatedDate: Date;
 }

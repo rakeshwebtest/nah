@@ -22,9 +22,10 @@ export class UserService {
             where: [{ id: _id }]
         });
     }
-    async checkUser(_email: string): Promise<UserEntity[]> {
-        return this.usersRepository.find({
-            select: ['id', 'displayName'],
+    async checkUser(_email: string): Promise<UserEntity> {
+        // select: ['id', 'displayName','typeOfNeor'],
+        return this.usersRepository.findOne({
+            select: ['id','email', 'displayName','typeOfNoer','imageUrl','country'],
             where: [{ email: _email }]
         });
     }
