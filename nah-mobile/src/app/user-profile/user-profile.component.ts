@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, ModalController } from '@ionic/angular';
 import { AppHttpClient } from '../utils';
 import { AuthenticationService } from '../services/authentication.service';
 import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
+import { GroupCreateModalComponent } from '../group-create-modal/group-create-modal.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,6 +16,7 @@ export class UserProfileComponent implements OnInit {
   groupList = [];
   constructor(private authService: AuthenticationService,
     private popoverController: PopoverController,
+    private modalController:ModalController,
     private http: AppHttpClient) { }
 
   ngOnInit() {
@@ -70,6 +72,17 @@ export class UserProfileComponent implements OnInit {
     this.http.post('group/follow', payload).subscribe(res => {
 
     });
+  }
+  async presentModal() {
+    console.log('0k');
+    const modal = await this.modalController.create({
+      component: GroupCreateModalComponent,
+      cssClass: "group-create-modal"
+    });
+    modal.onDidDismiss().then(arg=>{
+      this.getGroups();
+    });
+    return await modal.present();
   }
 
 }
