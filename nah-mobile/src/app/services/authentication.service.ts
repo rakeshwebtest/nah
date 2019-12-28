@@ -38,9 +38,9 @@ export class AuthenticationService {
         console.log('if log USER_INFO', response);
         this.authState.next(response);
         if (response.user.typeOfNoer) {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['/dashboard']);
         } else {
-          this.router.navigate(['sign-in']);
+          this.router.navigate(['/sign-in']);
         }
       }
     });

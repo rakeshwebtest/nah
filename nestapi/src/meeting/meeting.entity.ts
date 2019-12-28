@@ -10,6 +10,6 @@ export class MeetingEntity extends BaseEntity {
     @Column({ length: 250, nullable: true })
     imageUrl: string;
 
-    @ManyToOne(type => UserEntity, user => user.groups)
-    createBy: UserEntity;
+    // @ManyToOne(type => UserEntity, user => user.groups)
+    // createdBy: UserEntity;
 }

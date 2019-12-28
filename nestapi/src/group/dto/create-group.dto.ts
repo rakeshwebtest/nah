@@ -4,7 +4,7 @@ export class CreateGroupDto {
      name: string;
      @IsNumber()
      @IsNotEmpty({ message: "Required CreateBy" })
-     createBy: number;
+     createdBy: number;
     // @IsNotEmpty({ message: "Required Created By" })
     // readonly createBy: number;
 }

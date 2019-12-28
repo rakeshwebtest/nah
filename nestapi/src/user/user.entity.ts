@@ -26,8 +26,8 @@ export class UserEntity extends BaseEntity {
     @Column({ length: 25, default: '' })
     country: string;
 
-    @OneToMany(type => GroupEntity, group => group.createBy)
-    groups: GroupEntity[];
+    // @OneToMany(type => GroupEntity, group => group.createBy)
+    // groups: GroupEntity[];
 
     @OneToMany(type => GroupFollowEntity, gf => gf.user)
     following: GroupFollowEntity[];

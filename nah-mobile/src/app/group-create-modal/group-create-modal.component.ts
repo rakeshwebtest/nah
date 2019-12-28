@@ -19,7 +19,7 @@ export class GroupCreateModalComponent implements OnInit {
   updateSignIn() {
     const user = this.authService.getUserInfo();
 
-    this.http.post('group', { name: this.newGroupName, createBy: user.id }).subscribe(res => {
+    this.http.post('group', { name: this.newGroupName, createdBy: user.id }).subscribe(res => {
       this.dismiss();
     });
 

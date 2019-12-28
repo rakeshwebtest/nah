@@ -16,11 +16,11 @@ export class DashboardComponent implements OnInit {
     private loading: LoadingService) { }
 
   ngOnInit() {
-    const userInfo:any = this.authService.isAuthenticated();
+    const userInfo: any = this.authService.isAuthenticated();
     this.googlePic = userInfo.user.imageUrl;
   }
-  groupClick(item) {
-
+  meetingClick(meetingType) {
+    this.router.navigate(['/meetings/' + meetingType]);
   }
   navProfile() {
     console.log('log');

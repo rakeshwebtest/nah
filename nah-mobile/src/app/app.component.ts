@@ -50,7 +50,7 @@ export class AppComponent {
       //     this.router.navigate(['/home']);
       //   });
 
-      this.authenticationService.ifLoggedIn();
+      // this.authenticationService.ifLoggedIn();
       // this.authenticationService.authState.subscribe(state => {
       //   console.log('state', state);
 

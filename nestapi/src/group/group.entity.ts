@@ -19,6 +19,6 @@ export class GroupEntity extends BaseEntity {
 
 
     @Column()
-    createBy: number;
+    createdBy: number;
 
 }

@@ -1,54 +1,12 @@
-<ion-header class="hearder">
-  <ion-toolbar class="space-between-center">
-    <!-- <ion-icon class="custom-google"></ion-icon>  -->
-    <!-- <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
-      <ion-img class="ion-padding-r-10 ion-margin-l-10" style="width:30px;float:left;" src="assets/images/logo.png"></ion-img>
-      Dashboard
-    </ion-text> -->
+<ion-header>
+  <ion-toolbar>
     <ion-buttons slot="start" class="white-color">
-        <ion-img class="ion-padding-r-10 ion-margin-l-10" style="width:30px;display: inline-block;" src="assets/images/logo.png"></ion-img>
-        Dashboard
-      </ion-buttons>
-    <ion-avatar class="image-avater ion-activatable" (click)="navProfile()">
-      <img [src]="googlePic" />
-      <ion-ripple-effect></ion-ripple-effect>
-    </ion-avatar>
+      <ion-back-button></ion-back-button>
+      <ion-title>{{title}}</ion-title>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
-  <ion-fab class="add-btn" vertical="end" horizontal="end" slot="fixed">
-    <ion-fab-button color="danger">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  <ion-row>
-    <ion-col class="ion-text-center align-center ion-activatable" (click)="meetingClick('all')">
-      <ion-avatar class="avatar ion-align-items-center">
-        <ion-icon name="people"></ion-icon>
-      </ion-avatar>
-      <ion-label class="ion-padding-t-5">All Meetings</ion-label>
-      <ion-ripple-effect></ion-ripple-effect>
-    </ion-col>
-    <ion-col class="ion-text-center align-center ion-activatable" (click)="meetingClick('my-meeting')">
-      <ion-avatar class="avatar ion-align-items-center">
-        <ion-icon class="ion-align-items-center" name="people"></ion-icon>
-      </ion-avatar>
-      <ion-label class="ion-padding-t-5">Created by me</ion-label>
-      <ion-ripple-effect></ion-ripple-effect>
-    </ion-col>
-    <ion-col class="ion-text-center align-center ion-activatable" (click)="meetingClick('upcoming')">
-      <ion-avatar class="avatar ion-align-items-center">
-        <ion-icon name="people"></ion-icon>
-      </ion-avatar>
-      <ion-label class="ion-padding-t-5">Upcoming</ion-label>
-      <ion-ripple-effect></ion-ripple-effect>
-    </ion-col>
-  </ion-row>
-  <!-- <ion-item-divider>
-  </ion-item-divider> -->
-  <ion-label class="ion-padding-t-10 ion-padding-l-20 ion-margin-t-10 d-block border-top">
-    Upcoming Meetings
-  </ion-label>
+<ion-content>
   <ion-list class="meeting-list">
     <ion-item class="meeting-item">
       <ion-grid>
@@ -78,7 +36,7 @@
               <!-- <img [src]="googlePic"> -->
               <label>L</label>
             </ion-avatar>
-            
+
           </ion-col>
           <ion-col size="1">
             <ion-avatar class="avater small">
@@ -101,7 +59,7 @@
     <ion-item class="meeting-item">
       <ion-grid>
         <ion-row class="ion-nowrap">
-          <ion-col  class="img-left">
+          <ion-col class="img-left">
             <ion-avatar class="avater">
               <img [src]="googlePic">
             </ion-avatar>
@@ -146,7 +104,7 @@
     <ion-item class="meeting-item">
       <ion-grid>
         <ion-row class="ion-nowrap">
-          <ion-col  class="img-left">
+          <ion-col class="img-left">
             <ion-avatar class="avater">
               <img [src]="googlePic">
             </ion-avatar>

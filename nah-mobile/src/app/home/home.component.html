@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header> -->
 <ion-content class="ion-vertical-align-content">
-  <ion-row class="ion-text-center ion-padding">
+  <ion-row class="ion-text-center ion-padding margin-top-150">
     <ion-col>
       <ion-img
         class="ion-text-center"
@@ -18,12 +18,11 @@
       ></ion-img>
     </ion-col>
   </ion-row>
-  <ion-row>
+  <!-- <ion-row>
     <ion-card>
       <ion-card-content>
         <ion-slides pager="true" [options]="slideOpts">
           <ion-slide>
-            <!-- <img src="assets/images/home.png" alt="your image"> -->
             <ion-img src="assets/images/hate.png"></ion-img>
           </ion-slide>
           <ion-slide>
@@ -35,11 +34,15 @@
         </ion-slides>
       </ion-card-content>
     </ion-card>
-  </ion-row>
+  </ion-row> -->
+ 
+ 
+</ion-content>
+<ion-footer>
   <ion-row class="ion-justify-content-center">
     <h3 class="red-color font-24">A new way to hate...!</h3>
   </ion-row>
-  <ion-row  class="ion-justify-content-center">
+  <ion-row  class="ion-justify-content-center ion-margin-top ion-margin-bottom">
     <ion-button color="light" (click)="signInWithGoogle()">
       <!-- <ion-icon class="custom-google"></ion-icon> -->
       <ion-img class="ion-padding-r-10" style="width:30px;" src="assets/images/google.png"></ion-img>
@@ -50,4 +53,4 @@
       Continu without Google Test
     </ion-button> -->
   </ion-row>
-</ion-content>
+</ion-footer>

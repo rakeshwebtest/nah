@@ -16,17 +16,20 @@ export class ChooseUserGroupsComponent implements OnInit {
   groupList = [
   ];
   profile: any;
-  userInfo:any;
+  userInfo: any;
+  followingGroups:string[] = [];
+  createdGroups:string[] = [];
   constructor(private router: Router, private loadingService: LoadingService,
     private alertController: AlertController,
     private http: AppHttpClient,
     private nativeStorage: Storage,
     public modalController: ModalController,
-    private authService:AuthenticationService,
+    private authService: AuthenticationService,
     private userConfigService: UserConfigService) { }
 
   ngOnInit() {
     this.userConfigService.user = <any>this.authService.isAuthenticated();
+    this.userInfo = this.userConfigService.user.user;
     this.profile = this.userConfigService.updateProfile;
     this.profile.followGroups = [];
     this.getGroups();
@@ -35,6 +38,8 @@ export class ChooseUserGroupsComponent implements OnInit {
     this.http.get('group/list').subscribe(res => {
       console.log('list', res);
       this.groupList = res.data || [];
+      this.profile.followGroups = this.groupList.filter(g=>g.createdBy === this.userInfo.id);
+      console.log('this.profile.followGroups',this.profile.followGroups);
     });
   }
   async updateSignIn() {
@@ -61,7 +66,7 @@ export class ChooseUserGroupsComponent implements OnInit {
   itemClick(item) {
     item.active = !item.active;
     const { email, id } = this.userConfigService.user.user;
-    this.profile.followGroups = this.groupList.filter(item => item.active).map(item => { return { userId: id, groupId: item.id } });
+    this.profile.followGroups = this.groupList.filter(item => item.active || item.createdBy === this.userInfo.id).map(item => { return { userId: id, groupId: item.id } });
   }
   checkValidation() {
     if (!this.profile.typeOfNoer) {
@@ -92,7 +97,10 @@ export class ChooseUserGroupsComponent implements OnInit {
     console.log('0k');
     const modal = await this.modalController.create({
       component: GroupCreateModalComponent,
-      cssClass:"group-create-modal"
+      cssClass: "group-create-modal"
+    });
+    modal.onDidDismiss().then(arg=>{
+      this.getGroups();
     });
     return await modal.present();
   }

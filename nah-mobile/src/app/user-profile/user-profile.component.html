@@ -31,34 +31,18 @@
     <ion-card-content class="card-body ion-text-center">
       <h3 class="username">{{userInfo.displayName}}</h3>
       <h5 class="country">{{userInfo.country}}</h5>
-      <h6 class="followes">Followes: <ion-chip>
+      <h5 class="country">{{userInfo.typeOfNoer}}</h5>
+      <!-- <h6 class="followes">Followes: <ion-chip>
           <ion-label>2</ion-label>
         </ion-chip>
-      </h6>
+      </h6> -->
     </ion-card-content>
 
   </ion-card>
 
   <ion-grid class="">
-    <ion-row>
-      <ion-col size="12" class="ion-no-padding">
-
-        <ion-tabs class="group-tabs">
-          <ion-tab-bar slot="bottom">
-            <ion-tab-button tab="tab1">
-              <ion-label>Follow Group</ion-label>
-            </ion-tab-button>
-            <ion-tab-button tab="tab2">
-              <ion-label>My Groups</ion-label>
-            </ion-tab-button>
-          </ion-tab-bar>
-        </ion-tabs>
-      </ion-col>
-    </ion-row>
-
     <ion-row class="ion-no-padding">
       <ion-col class="ion-no-padding">
-      
         <ion-list class="meeting-list">
           <ion-item class="meeting-item ion-no-padding" *ngFor="let item of groupList">
             <ion-grid class="ion-no-padding">
@@ -68,27 +52,26 @@
                 </ion-col>
               </ion-row>
               <ion-row class="ion-nowrap ion-align-items-center ion-justify-content-between">
-                <ion-col size="1">
-                  <ion-avatar class="avater small">
-                    <img [src]="googlePic">
+                <ion-col size="1" *ngFor="let follower of item.followers">
+                  <ion-avatar class="avater small" *ngIf="follower.user">
+                    <img [src]="follower.user.imageUrl">
                   </ion-avatar>
                 </ion-col>
+              
                 <ion-col size="1">
-                  <ion-avatar class="avater small">
-                    <img [src]="googlePic">
+                  <ion-avatar class="avater small" *ngIf="item.followers.length > 0">
+                    <label>{{item.followers.length}}</label>
                   </ion-avatar>
                 </ion-col>
-                <ion-col size="1">
-                  <ion-avatar class="avater small">
-                    <label>1</label>
-                  </ion-avatar>
-                </ion-col>
-                <ion-col class="fallowing-members">
+                <ion-col class="fallowing-members" *ngIf="item.followers.length > 0">
                   Members are Following
                 </ion-col>
-                <ion-col class="ion-text-end">
-                  <ion-button color="medium" class="ion-no-margin">
-                    Unjoin
+                <ion-col class="ion-text-end" *ngIf="userInfo.id !== item.createdBy">
+                  <ion-button color="medium" class="ion-no-margin" (click)="follow(item)" *ngIf="item.isFollower">
+                    Un Follow
+                  </ion-button>
+                  <ion-button color="medium" class="ion-no-margin" (click)="follow(item)" *ngIf="!item.isFollower">
+                     Follow
                   </ion-button>
                 </ion-col>
               </ion-row>

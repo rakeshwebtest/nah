@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @Component({
   selector: 'app-popover-menu',
@@ -10,11 +11,14 @@ import { PopoverController } from '@ionic/angular';
 })
 export class PopoverMenuComponent implements OnInit {
 
-  constructor(private authService: AuthenticationService, private router: Router, private popoverController: PopoverController) { }
+  constructor(private authService: AuthenticationService, 
+    private googlePlus: GooglePlus,
+    private router: Router, private popoverController: PopoverController) { }
 
   ngOnInit() { }
   logout() {
     this.DismissClick();
+    this.googlePlus.logout();
     this.authService.logout();
   }
   about() {

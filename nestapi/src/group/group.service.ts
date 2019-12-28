@@ -100,7 +100,7 @@ export class GroupService {
     }
     async checkGroupName(group: CreateGroupDto): Promise<GroupEntity> {
         return await this.groupRepository.findOne({
-            where: [{ name: group.name, createBy: group.createBy }],
+            where: [{ name: group.name, createBy: group.createdBy }],
         });
     }
 }

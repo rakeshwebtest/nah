@@ -57,17 +57,21 @@ export class UsersController {
     }
     @UsePipes(new ValidationPipe())
     @Put()
-    update(@Body() user: CreateUserDto) {
+   async update(@Body() user: CreateUserDto) {
         // create group if newGroupName there
         if (user.newGroupName) {
             const group: CreateGroupDto = {
                 name: user.newGroupName,
-                createBy: user.id
+                createdBy: user.id
             }
             this.groupService.updateGroup(group);
         }
         if(user.followGroups){
-            this.groupService.updateFollowGroup(user.followGroups);
+            for (let index = 0; index < user.followGroups.length; index++) {
+                const follow = user.followGroups[index];
+                await this.groupService.follow(follow);
+            }
+            // this.groupService.updateFollowGroup(user.followGroups);
         }
 
         return this.service.updateUser(user);
