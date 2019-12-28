@@ -1,0 +1,11 @@
+.images-list{
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    li{
+        margin: 5px;
+        img{
+            width: 150px;
+        }
+    }
+}
