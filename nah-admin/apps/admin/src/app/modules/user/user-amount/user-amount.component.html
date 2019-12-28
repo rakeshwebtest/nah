@@ -1,0 +1,16 @@
+<div class="p-contain">
+    <div class="card card-50">
+      <div class="card-header">
+        Credit|Debit Amount
+      </div>
+      <div class="card-body horizontal">
+        <form [formGroup]="form" ngNativeValidate>
+          <formly-form [form]="form" [model]="model" [fields]="fields" [options]="options">
+            <button type="submit" class="btn btn-sm btn-primary mr-1" (click)="creditAmount()">Add Credit</button>
+            <button type="submit" class="btn btn-sm btn-primary" (click)="debitAmount()">Add Debit</button>
+          </formly-form>
+        </form>
+      </div>
+    </div>
+  </div>
+  
