@@ -28,16 +28,27 @@ export class GroupController {
 
     @UsePipes(new ValidationPipe())
     @Post('follow')
-    async update(@Body() followMember: GroupFollowDto) {
-        const isFollower = await this.service.isFollower(followMember);
-        if (isFollower) {
-            const data: any = await this.service.unFollow(isFollower.id);
-            return { message: 'successfully Un Followed Group', data };
-            // throw new HttpException({ message: 'Already followed group', errors: 'Already followed group' }, HttpStatus.BAD_REQUEST);
-        } else {
-            const data: any = await this.service.follow(followMember);
-            return { message: 'successfully Followed Group', data };
-        }
+    async follower(@Body() followMember: GroupFollowDto) {
+        return this.service.follow(followMember);
+        // const isFollower = await this.service.isFollower(followMember);
+        // if (isFollower) {
+        //     const data: any = await this.service.unFollow(isFollower.id);
+        //     if (data) {
+        //         const group: any = await this.service.getGroupById(followMember.groupId);
+        //         group.followersCount = group.followersCount - 1;
+        //         this.service.updateGroup(group);
+        //     }
+        //     return { message: 'successfully Un Followed Group', data };
+        //     // throw new HttpException({ message: 'Already followed group', errors: 'Already followed group' }, HttpStatus.BAD_REQUEST);
+        // } else {
+        //     const data: any = await this.service.follow(followMember);
+        //     if (data) {
+        //         const group: any = await this.service.getGroupById(followMember.groupId);
+        //         group.followersCount = group.followersCount + 1;
+        //         this.service.updateGroup(group);
+        //     }
+        //     return { message: 'successfully Followed Group', data };
+        // }
 
     }
 

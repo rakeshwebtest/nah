@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouteReuseStrategy } from '@angular/router';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
-import { RouterModule, Routes } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { AppHttpClient, AppHttpClientCreator, HttpInterceptorService } from './utils';
@@ -17,38 +16,17 @@ import { GroupCreateModalComponent } from './group-create-modal/group-create-mod
 import { IonicStorageModule } from '@ionic/storage';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthenticationService } from './services/authentication.service';
-import { IfLoginGuard } from './services/iflogin-guard.service';
+import { AppRoutingModule } from './app-routing.module';
 
-const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [IfLoginGuard] },
-  {
-    path: 'sign-in',
-    component: SignInComponent
-  },
-  {
-    path: 'choose-user-group',
-    component: ChooseUserGroupsComponent
-  },
-  {
-    path: 'about',
-    loadChildren: () => import('./about/about.module').then(m => m.AboutPageModule)
-  },
-  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
-  { path: 'user-profile', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) },
-];
+
 //driverOrder: ['indexeddb', 'sqlite', 'websql']
 @NgModule({
   declarations: [AppComponent, SignInComponent, ChooseUserGroupsComponent, GroupCreateModalComponent],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
     IonicModule.forRoot(),
     IonicStorageModule.forRoot({
       name: '__nah',
