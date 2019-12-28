@@ -18,6 +18,10 @@
 //     --background: #9dc912;
 //     --color: #fff;
 // }
+.icon-big{
+    font-size: 23px;
+    margin: 7px;
+}
 .image-center{
     margin:0 auto;
     }
@@ -60,6 +64,14 @@
         &.small{
             width: 20px;
             height: 20px;
+            background-color: #ccc;
+            text-align: center;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        };
+        &.text{
             background-color: #ccc;
             text-align: center;
             font-size: 12px;

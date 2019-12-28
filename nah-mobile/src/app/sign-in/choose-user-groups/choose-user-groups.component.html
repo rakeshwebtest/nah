@@ -16,10 +16,10 @@
   <ion-grid class="group">
     <ion-col class="group-item" *ngFor="let item of groupList">
       <ion-chip class="chip" *ngIf="item.createdBy !== userInfo.id" [ngClass]="{active:item.active}" (click)="itemClick(item)">
-        <ion-label>{{item.name}}</ion-label>
+        <ion-label><strong>Say No To</strong> {{item.name}}</ion-label>
       </ion-chip>
       <ion-chip class="chip active" *ngIf="item.createdBy === userInfo.id" >
-        <ion-label>{{item.name}}</ion-label>
+        <ion-label><strong>Say No To</strong> {{item.name}}</ion-label>
       </ion-chip>
     </ion-col>
   </ion-grid>
