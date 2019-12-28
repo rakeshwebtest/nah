@@ -1,0 +1,23 @@
+.form-login{
+    width: 280px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 7px;
+    box-shadow: 0px 0px 6px #999;
+    h1{
+        text-align: center;
+        margin-top: 0px;
+    }
+    .login-logo{
+        width: auto;
+        height: 50px;
+    }
+    .ui-g{
+        flex-direction: column;
+        margin-bottom: 20px;
+        label{
+            margin: 0;
+        }
+    }
+
+}

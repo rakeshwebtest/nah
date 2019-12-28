@@ -1,0 +1,75 @@
+<div class="p-contain">
+
+  <button type="button" (click)="getSports('all')"  class="btn btn-sm btn-primary" [ngClass]="{'active': activeEventType=='all'}">All</button>
+  <button type="button" (click)="getSports('inplay')" class="mr-2 ml-2 btn btn-sm btn-primary" [ngClass]="{'active': activeEventType=='inplay'}">Today</button>
+  <button type="button" (click)="getSports('upcoming')" class="btn btn-sm btn-primary" [ngClass]="{'active': activeEventType=='upcoming'}">Tomorrow</button>
+  <p-accordion>
+    <p-accordionTab
+      *ngFor="let sport of sportsList"
+      [header]="sport.name"
+      [selected]="true"
+    >
+      <p-accordion>
+        <p-accordionTab
+          *ngFor="let league of sport.leagues"
+          [header]="league.name"
+          [selected]="true"
+        >
+          <div class="events-list">
+            <ul>
+              <li *ngFor="let event of league.events">
+                <a (click)="onEvent(event)">
+                  <span class="">
+                    <i class="fa fa-star-o pr-1"></i>
+                    <span class="text-primary font-weight-bold">{{
+                      event.name
+                    }}</span>
+                  </span>
+                  <span class="text-success"> {{ event.mode }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+    </p-accordionTab>
+  </p-accordion>
+</div>
+
+<!-- <p-tabView (onChange)="onTabChange($event)" styleClass="custom-accord-tabs">
+        <p-tabPanel header="All" [selected]="true">
+          <p-accordion>
+            <p-accordionTab
+              *ngFor="let sport of sportsList"
+              [header]="sport.name"
+              [selected]="true"
+            >
+              <p-accordion>
+                <p-accordionTab
+                  *ngFor="let league of sport.leagues"
+                  [header]="league.name"
+                  [selected]="true"
+                >
+                  <div class="events-list">
+                    <ul>
+                      <li *ngFor="let event of league.events">
+                        <a (click)="onEvent()">
+                          <span class="">
+                            <i class="fa fa-star-o pr-1"></i>
+                            <span class="text-primary font-weight-bold">{{
+                              event.name
+                            }}</span>
+                          </span>
+                          <span class="text-success"> {{ event.mode }}</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </p-accordionTab>
+              </p-accordion>
+            </p-accordionTab>
+          </p-accordion>
+        </p-tabPanel>
+        <p-tabPanel header="Today"> </p-tabPanel>
+        <p-tabPanel header="Tomorrow"> </p-tabPanel>
+      </p-tabView> -->
