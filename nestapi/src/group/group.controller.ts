@@ -19,7 +19,7 @@ export class GroupController {
         //check groupname exist or not
         const isGroup = await this.service.checkGroupName(group);
         if (isGroup) {
-            throw new HttpException({ message: 'Already group exists', errors: 'Already group exists' }, HttpStatus.BAD_REQUEST);
+            throw new HttpException({ message: 'Already group name created', errors: 'Already group exists' }, HttpStatus.BAD_REQUEST);
         } else {
             const data: any = await this.service.updateGroup(group);
             return { message: 'Successfully updated Group', data };

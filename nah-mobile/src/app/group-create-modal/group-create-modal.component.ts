@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 import { AppHttpClient } from '../utils';
 
@@ -11,7 +11,9 @@ import { AppHttpClient } from '../utils';
 export class GroupCreateModalComponent implements OnInit {
 
   newGroupName: string;
-  constructor(private modalCtrl: ModalController, private authService: AuthenticationService, private http: AppHttpClient) { }
+  constructor(private modalCtrl: ModalController, private authService: AuthenticationService,
+    private alertController:AlertController,
+     private http: AppHttpClient) { }
 
   ngOnInit() {
 
@@ -21,6 +23,9 @@ export class GroupCreateModalComponent implements OnInit {
 
     this.http.post('group', { name: this.newGroupName, createdBy: user.id }).subscribe(res => {
       this.dismiss();
+    },err=>{
+       console.log('error',err.error.message);
+       this.presentAlert(err.error.message);
     });
 
   }
@@ -30,6 +35,14 @@ export class GroupCreateModalComponent implements OnInit {
     this.modalCtrl.dismiss({
       'dismissed': true
     });
+  }
+  async presentAlert(msg) {
+    const alert = await this.alertController.create({
+      message: msg,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
 }
