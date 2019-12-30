@@ -559,8 +559,8 @@ body .ui-accordion .ui-accordion-header a .ui-accordion-toggle-icon {
 .btn-primary:not(:disabled):not(.disabled).active, 
 .show > .btn-primary.dropdown-toggle {
   color: #000;
-  background-color: #ffc900;
-  border-color: #ffc900;
+  background-color: #9c070c;
+  border-color: #9c070c;
 }
 td{
   .dropdown{
@@ -660,6 +660,14 @@ th.actions{
 .btn-success ,
 .btn-danger {
   color: #fff !important;
+}
+.btn-primary {
+  background-color: #e01e26;
+  border-color: #e01e26;
+  &:hover{
+    background-color: #9c070c;
+    border-color: #9c070c;
+  } 
 }
 .btn-danger {
   background-color: #e01e26;

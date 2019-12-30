@@ -118,7 +118,7 @@ export class SideMenuComponent implements OnInit {
       {
         'label': 'Users',
         'code': 'user',
-        'icon': 'fa fa-user',
+        'icon': 'fa fa-users',
         'app': 'zc-core',
         'childs': [
           {
@@ -132,7 +132,7 @@ export class SideMenuComponent implements OnInit {
       {
         'label': 'Groups',
         'code': 'groups',
-        'icon': 'fa fa-user',
+        'icon': 'fa fa-object-group',
         'app': 'zc-core',
         'childs': [
           {
@@ -146,7 +146,7 @@ export class SideMenuComponent implements OnInit {
       {
         'label': 'Meetings',
         'code': 'meetings',
-        'icon': 'fa fa-user',
+        'icon': 'fa fa-handshake-o',
         'app': 'zc-core',
         'childs': [
           {
@@ -160,7 +160,7 @@ export class SideMenuComponent implements OnInit {
       {
         'label': 'City',
         'code': 'city',
-        'icon': 'fa fa-user',
+        'icon': 'fa fa-building',
         'app': 'zc-core',
         'childs': [
           {
