@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseEntity } from './../shared/base.entity';
 import { GroupEntity } from 'src/group/group.entity';
 import { GroupFollowEntity } from 'src/group/group-follows.entity';
+import { MeetingEntity } from 'src/meeting/meeting.entity';
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
 
@@ -31,5 +32,8 @@ export class UserEntity extends BaseEntity {
 
     @OneToMany(type => GroupFollowEntity, gf => gf.user)
     following: GroupFollowEntity[];
+
+    @OneToMany(type => MeetingEntity, meeting => meeting.user) // note: we will create author property in the Photo class below
+    meetings: MeetingEntity[];
 
 }
