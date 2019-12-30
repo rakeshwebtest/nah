@@ -62,8 +62,8 @@ export class UserProfileComponent implements OnInit {
       item.followers.splice(followerIndx, 1);
     } else {
       const followUser = {
-        "groupId": item.id,
-        "userId": this.userInfo.id,
+        'groupId': item.id,
+        'userId': this.userInfo.id,
         user: this.userInfo
       };
       item.followers.push(followUser);
@@ -77,12 +77,15 @@ export class UserProfileComponent implements OnInit {
     console.log('0k');
     const modal = await this.modalController.create({
       component: GroupCreateModalComponent,
-      cssClass: "group-create-modal"
+      cssClass: 'group-create-modal'
     });
-    modal.onDidDismiss().then(arg=>{
+    modal.onDidDismiss().then(arg => {
       this.getGroups();
     });
     return await modal.present();
   }
-
+  getRandomColor() {
+    const color = Math.floor(0x1000000 * Math.random()).toString(16);
+    return '#' + ('000000' + color).slice(-6);
+  }
 }

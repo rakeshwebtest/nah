@@ -32,8 +32,11 @@
     </ion-col>
   </ion-row> -->
   <ion-row class="ion-justify-content-center margin-top-150">
-    <ion-button color="danger" (click)="updateSignIn()"  [disabled]="profile.followGroups.length < 1 ">
-      START EXPLORING
-    </ion-button>
+    <ion-col size="10">
+      <ion-button style="width:100%;" color="danger" (click)="updateSignIn()"  [disabled]="profile.followGroups.length < 1 ">
+        START EXPLORING
+      </ion-button>
+
+    </ion-col>
   </ion-row>
 </ion-content>
