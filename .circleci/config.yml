@@ -44,7 +44,7 @@ jobs:
       - run:
             name: "Generate apk"
             command: |
-              cd nah-mobile && ionic cordova build android --verbose -- --keystore=keys/android/nah.keystore --storePassword=nahnah --alias=key0 --password=nahnah
+              cd nah-mobile && ionic cordova build android --release --verbose -- --keystore=keys/android/nah.keystore --storePassword=nahnah --alias=key0 --password=nahnah
               mkdir -p /tmp/apk
               cp -r platforms/android/app/build/outputs/apk/ /tmp/apk
       - run:
