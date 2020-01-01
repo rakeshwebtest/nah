@@ -12,8 +12,12 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <allow-intent href="localhost:8080" />
     <allow-navigation href="*" />
+     <allow-navigation href="localhost:8080" />
     <allow-navigation href="data:*" />
+     <allow-intent href="https://nah.theapp.in/*" />
+     <allow-navigation href="https://nah.theapp.in/*" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />
