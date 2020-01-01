@@ -19,10 +19,10 @@ jobs:
       - run: 
           name: "Install gradle"
           command: |
-              wget https://services.gradle.org/distributions/gradle-5.4.1-all.zip -P /tmp
+              wget https://services.gradle.org/distributions/gradle-5.4.1-bin.zip -P /tmp
               sudo unzip -d /opt/gradle /tmp/gradle-*.zip
-              echo 'export GRADLE_HOME=/opt/gradle/gradle-5.4.1-all' >> $BASH_ENV
-              echo 'export PATH=$PATH:/opt/gradle/gradle-5.4.1-all/bin' >> $BASH_ENV
+              echo 'export GRADLE_HOME=/opt/gradle/gradle-5.4.1' >> $BASH_ENV
+              echo 'export PATH=$PATH:/opt/gradle/gradle-5.4.1/bin' >> $BASH_ENV
               source $BASH_ENV
       - run:
             name: "move nah mobile folder"
@@ -44,7 +44,7 @@ jobs:
       - run:
             name: "Generate apk"
             command: |
-              cd nah-mobile && ionic cordova build android --verbose -- --keystore=keys/android/nah.keystore --storePassword=nahnah --alias=key0 --password=nahnah
+              cd nah-mobile && ionic cordova build android  --verbose -- --keystore=keys/android/nah.keystore --storePassword=nahnah --alias=key0 --password=nahnah
               mkdir -p /tmp/apk
               cp -r platforms/android/app/build/outputs/apk/ /tmp/apk
       - run:
