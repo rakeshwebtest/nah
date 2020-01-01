@@ -22,7 +22,7 @@ jobs:
               wget https://services.gradle.org/distributions/gradle-5.4.1-all.zip -P /tmp
               sudo unzip -d /opt/gradle /tmp/gradle-*.zip
               echo 'export GRADLE_HOME=/opt/gradle/gradle-5.4.1-all' >> $BASH_ENV
-              echo 'export PATH=$PATH:/opt/gradle/gradle-5.4.1-alls/bin' >> $BASH_ENV
+              echo 'export PATH=$PATH:/opt/gradle/gradle-5.4.1-all/bin' >> $BASH_ENV
               source $BASH_ENV
       - run:
             name: "move nah mobile folder"
