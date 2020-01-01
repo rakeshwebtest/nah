@@ -16,8 +16,8 @@
     <allow-navigation href="*" />
      <allow-navigation href="localhost:8080" />
     <allow-navigation href="data:*" />
-     <allow-intent href="https://nah.theapp.in/*" />
-     <allow-navigation href="https://nah.theapp.in/*" />
+     <allow-intent href="http://nah.theapp.in/*" />
+     <allow-navigation href="http://nah.theapp.in/*" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />
