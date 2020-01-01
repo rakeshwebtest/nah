@@ -29,6 +29,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         // console.log('request', typeof request.headers, request.headers.get('client'));
         request = request.clone({
             setHeaders: {
+                'Access-Control-Allow-Origin':'*',
                 'Content-Type': 'application/json'
             },
             url: request.url
@@ -47,6 +48,7 @@ export class HttpInterceptorService implements HttpInterceptor {
             const _user:any = this.authenticationService.isAuthenticated();
             request = request.clone({
                 setHeaders: {
+                    'Access-Control-Allow-Origin':'*',
                     'Content-Type': 'application/json',
                     authorization: _user.token
                 },
