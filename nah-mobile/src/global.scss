@@ -105,3 +105,39 @@ ion-select {
     display: block;
 }
 
+.label-full-width {
+    font-size: 14px;
+    color: #999;
+} 
+.value-full-width {
+    ion-input,ion-textarea,ion-datetime {
+        border:1px solid #ccc !important;
+        font-size: 15px;
+    }
+} 
+.select-placeholder{font-size: 15px !important;}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+.col-12{
+    flex: 0 0 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+}
+.col-6{
+    flex: 0 0 50%;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+}
+.btn-default {
+    padding: 10px;
+    border-radius: 5px;
+}
+vertical-field{
+    width: 100%;
+    margin-bottom: 15px;
+    ion-col{padding: 0;}
+}

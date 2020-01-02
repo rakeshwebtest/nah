@@ -17,6 +17,7 @@ export class MeetingCreateComponent implements OnInit {
     key: 'name',
     type: 'input',
     wrappers: ['vertical'],
+    className: 'col-12 ion-padding-t-10',
     templateOptions: {
       label: 'Meeting Title',
       placeholder: 'Enter Meeting Title',
@@ -27,6 +28,7 @@ export class MeetingCreateComponent implements OnInit {
     key: 'saynoto',
     type: 'select',
     wrappers: ['vertical'],
+    className: 'col-12',
     templateOptions: {
       label: 'Say No To',
       placeholder: 'Enter Say No To',
@@ -43,6 +45,7 @@ export class MeetingCreateComponent implements OnInit {
     key: 'agenda',
     type: 'textarea',
     wrappers: ['vertical'],
+    className: 'col-12',
     templateOptions: {
       label: 'Meeting Information',
       placeholder: 'Enter Meeting Information',
@@ -52,50 +55,60 @@ export class MeetingCreateComponent implements OnInit {
     key: 'image',
     type: 'file',
     wrappers: ['vertical'],
+    className: 'col-12',
     templateOptions: {
       label: 'Image',
       placeholder: 'Upload Image',
     }
   },
   {
-    key: 'startDate',
-    type: 'datetime',
-    wrappers: ['vertical'],
-    templateOptions: {
-      label: 'Start Date',
-      placeholder: 'Choose Date',
-    }
-  },
-  {
-    key: 'endDate',
-    type: 'datetime',
-    wrappers: ['vertical'],
-    templateOptions: {
-      label: 'End Date',
-      placeholder: 'Choose Date',
-    }
-  },
-  {
-    key: 'startTime',
-    type: 'datetime',
-    wrappers: ['vertical'],
-    templateOptions: {
-      label: 'Start Time',
-      placeholder: 'Choose Time',
-      displayFormat: 'hh mm A',
-      pickerFormat: 'hh mm A'
-    }
-  },
-  {
-    key: 'endTime',
-    type: 'datetime',
-    wrappers: ['vertical'],
-    templateOptions: {
-      label: 'End Time',
-      placeholder: 'Choose Time',
-      displayFormat: 'hh mm A',
-      pickerFormat: 'hh mm A'
-    }
+    fieldGroupClassName: 'row',
+    fieldGroup: [
+      {
+        key: 'startDate',
+        type: 'datetime',
+        wrappers: ['vertical'],
+        className: 'col-6',
+        templateOptions: {
+          label: 'Start Date',
+          placeholder: 'Choose Date',
+        }
+      },
+      {
+        key: 'endDate',
+        type: 'datetime',
+        wrappers: ['vertical'],
+        className: 'col-6',
+        templateOptions: {
+          label: 'End Date',
+          placeholder: 'Choose Date',
+        }
+      },
+      {
+        key: 'startTime',
+        type: 'datetime',
+        wrappers: ['vertical'],
+        className: 'col-6',
+        templateOptions: {
+          label: 'Start Time',
+          placeholder: 'Choose Time',
+          displayFormat: 'hh mm A',
+          pickerFormat: 'hh mm A'
+        }
+      },
+      {
+        key: 'endTime',
+        type: 'datetime',
+        wrappers: ['vertical'],
+        className: 'col-6',
+        templateOptions: {
+          label: 'End Time',
+          placeholder: 'Choose Time',
+          displayFormat: 'hh mm A',
+          pickerFormat: 'hh mm A'
+        }
+      }
+    ],
   }
   ];
   constructor(private http: AppHttpClient) { }
