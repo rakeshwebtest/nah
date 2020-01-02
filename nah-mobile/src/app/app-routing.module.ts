@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'meeting',
     loadChildren: () => import('./meetings/meetings.module').then( m => m.MeetingsPageModule)
-  },
+  }
 ];
 
 @NgModule({
