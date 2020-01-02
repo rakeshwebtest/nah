@@ -26,13 +26,13 @@ export class HttpInterceptorService implements HttpInterceptor {
      * @memberof HttpInterceptorService
      */
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        // console.log('request', typeof request.headers, request.headers.get('client'));
-        request = request.clone({
-            setHeaders: {
-                'Content-Type': 'application/json'
-            },
-            url: request.url
-        });
+        console.log('request', request.headers);
+        // request = request.clone({
+        //     setHeaders: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     url: request.url
+        // });
 
         // withCredentials: true
         // if user logged in you need to pass token
@@ -44,16 +44,17 @@ export class HttpInterceptorService implements HttpInterceptor {
         // console.log('chache user', user);
         if (this.authenticationService.isAuthenticated()) {
             console.log('user', this.authenticationService.isAuthenticated());
-            const _user:any = this.authenticationService.isAuthenticated();
+            const _user: any = this.authenticationService.isAuthenticated();
+            //  request.headers.append('authorization', _user.token);
             request = request.clone({
                 setHeaders: {
-                    'Content-Type': 'application/json',
                     authorization: _user.token
                 },
                 body: request.body
             });
         }
         // Working Code
+        // request.headers.append('Content-Type', 'application/json');
         console.log('request', request);
 
         return next.handle(request).pipe(
