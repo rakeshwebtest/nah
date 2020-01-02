@@ -1,20 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { MeetingsPageRoutingModule } from './meetings-routing.module';
 
 import { MeetingsPage } from './meetings.page';
+import { MeetingDetailsComponent } from './meeting-details/meeting-details.component';
+import { MeetingCreateComponent } from './meeting-create/meeting-create.component';
+import { NahFormlyModule } from '../utils/nah-formly/nah-formly.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MeetingsPageRoutingModule
+    MeetingsPageRoutingModule,
+    NahFormlyModule
   ],
-  declarations: [MeetingsPage]
+  declarations: [MeetingsPage, MeetingDetailsComponent, MeetingCreateComponent]
 })
-export class MeetingsPageModule {}
+export class MeetingsPageModule { }

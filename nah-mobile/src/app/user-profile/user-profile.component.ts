@@ -16,7 +16,7 @@ export class UserProfileComponent implements OnInit {
   groupList = [];
   constructor(private authService: AuthenticationService,
     private popoverController: PopoverController,
-    private modalController:ModalController,
+    private modalController: ModalController,
     private http: AppHttpClient) { }
 
   ngOnInit() {
@@ -41,8 +41,8 @@ export class UserProfileComponent implements OnInit {
       const _groupList = res.data || [];
       _groupList.map(item => {
         if (item.followers.length > 0) {
-          const isFollower = item.followers.find(f => f.user && f.user.id == this.userInfo.id);
-
+          const isFollower = item.followers.find(f => f.user && f.user.id === this.userInfo.id);
+          item.textColor = this.getRandomColor();
           if (isFollower) {
             item.isFollower = true;
           }
@@ -54,16 +54,16 @@ export class UserProfileComponent implements OnInit {
   follow(item) {
     item.isFollower = !item.isFollower;
     const payload = {
-      "groupId": item.id,
-      "userId": this.userInfo.id
+      groupId: item.id,
+      userId: this.userInfo.id
     };
     if (!item.isFollower) {
-      const followerIndx = item.followers.findIndex(f =>f.user && f.user.id == this.userInfo.id);
+      const followerIndx = item.followers.findIndex(f => f.user && f.user.id === this.userInfo.id);
       item.followers.splice(followerIndx, 1);
     } else {
       const followUser = {
-        'groupId': item.id,
-        'userId': this.userInfo.id,
+        groupId: item.id,
+        userId: this.userInfo.id,
         user: this.userInfo
       };
       item.followers.push(followUser);

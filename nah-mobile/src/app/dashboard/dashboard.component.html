@@ -6,9 +6,13 @@
       Dashboard
     </ion-text> -->
     <ion-buttons slot="start" class="white-color">
-        <ion-img class="ion-padding-r-10 ion-margin-l-10" style="width:30px;display: inline-block;" src="assets/images/logo.png"></ion-img>
-        Dashboard
-      </ion-buttons>
+      <ion-img
+        class="ion-padding-r-10 ion-margin-l-10"
+        style="width:30px;display: inline-block;"
+        src="assets/images/logo.png"
+      ></ion-img>
+      Dashboard
+    </ion-buttons>
     <ion-avatar class="image-avater ion-activatable" (click)="navProfile()">
       <img [src]="googlePic" />
       <ion-ripple-effect></ion-ripple-effect>
@@ -17,7 +21,7 @@
 </ion-header>
 <ion-content>
   <ion-fab class="add-btn" vertical="end" horizontal="end" slot="fixed">
-    <ion-fab-button color="danger">
+    <ion-fab-button color="danger" [routerLink]="['/meeting/create']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -55,7 +59,7 @@
         <ion-row class="ion-nowrap">
           <ion-col class="img-left">
             <ion-avatar class="avater">
-              <img [src]="googlePic">
+              <img [src]="googlePic" />
             </ion-avatar>
           </ion-col>
           <ion-col>
@@ -78,7 +82,6 @@
               <!-- <img [src]="googlePic"> -->
               <label>L</label>
             </ion-avatar>
-            
           </ion-col>
           <ion-col size="1">
             <ion-avatar class="avater small">
@@ -96,14 +99,13 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-
     </ion-item>
     <ion-item class="meeting-item">
       <ion-grid>
         <ion-row class="ion-nowrap">
-          <ion-col  class="img-left">
+          <ion-col class="img-left">
             <ion-avatar class="avater">
-              <img [src]="googlePic">
+              <img [src]="googlePic" />
             </ion-avatar>
           </ion-col>
           <ion-col>
@@ -123,12 +125,12 @@
         <ion-row class="ion-nowrap">
           <ion-col size="1">
             <ion-avatar class="avater small">
-              <img [src]="googlePic">
+              <img [src]="googlePic" />
             </ion-avatar>
           </ion-col>
           <ion-col size="1">
             <ion-avatar class="avater small">
-              <img [src]="googlePic">
+              <img [src]="googlePic" />
             </ion-avatar>
           </ion-col>
           <ion-col size="1">
@@ -141,14 +143,13 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-
     </ion-item>
     <ion-item class="meeting-item">
       <ion-grid>
         <ion-row class="ion-nowrap">
-          <ion-col  class="img-left">
+          <ion-col class="img-left">
             <ion-avatar class="avater">
-              <img [src]="googlePic">
+              <img [src]="googlePic" />
             </ion-avatar>
           </ion-col>
           <ion-col>
@@ -168,12 +169,12 @@
         <ion-row class="ion-nowrap">
           <ion-col size="1">
             <ion-avatar class="avater small">
-              <img [src]="googlePic">
+              <img [src]="googlePic" />
             </ion-avatar>
           </ion-col>
           <ion-col size="1">
             <ion-avatar class="avater small">
-              <img [src]="googlePic">
+              <img [src]="googlePic" />
             </ion-avatar>
           </ion-col>
           <ion-col size="1">
@@ -186,9 +187,6 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-
     </ion-item>
-
   </ion-list>
-
 </ion-content>

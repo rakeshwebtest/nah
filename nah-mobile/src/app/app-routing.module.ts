@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: 'user-profile', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) },
   {
-    path: 'meetings/:type',
+    path: 'meeting',
     loadChildren: () => import('./meetings/meetings.module').then( m => m.MeetingsPageModule)
   },
 ];

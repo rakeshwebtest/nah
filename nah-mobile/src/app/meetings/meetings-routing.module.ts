@@ -2,11 +2,21 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MeetingsPage } from './meetings.page';
+import { MeetingDetailsComponent } from './meeting-details/meeting-details.component';
+import { MeetingCreateComponent } from './meeting-create/meeting-create.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'type/:type',
     component: MeetingsPage
+  },
+  {
+    path: 'details',
+    component: MeetingDetailsComponent
+  },
+  {
+    path: 'create',
+    component: MeetingCreateComponent
   }
 ];
 
@@ -14,4 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MeetingsPageRoutingModule {}
+export class MeetingsPageRoutingModule { }

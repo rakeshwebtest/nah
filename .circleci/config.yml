@@ -307,6 +307,7 @@ jobs:
       # - run:
       #     name: Deploying
       #     command: scripts/deploy.sh
+
 workflows:
   build_and_deploy:
     jobs:
