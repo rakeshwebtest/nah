@@ -1,63 +1,315 @@
-version: 2
-defaults: &defaults
-  working_directory: ~/repo
-  docker:
-    - image: circleci/android:api-28-node
-  environment:
-    JVM_OPTS: -Xmx3200m
+# This code is licensed from CircleCI to the user under the MIT license. See
+# https://circleci.com/orbs/registry/licensing for details.
+version: 2.1
+
+description: |
+  Build and publish hybrid Apps based on Ionic for iOS / Android
+  Repository: https://github.com/okode/orbs
+
+cache-key-gradle: &cache-key-gradle
+  key: cache-gradle-{{ .Environment.CIRCLE_JOB }}-{{ .Environment.CIRCLE_BRANCH }}-{{ checksum "package-lock.json" }}
+
+cache-key-cocoapods: &cache-key-cocoapods
+  key: cache-cocoapods-{{ .Environment.CIRCLE_JOB }}-{{ checksum "<< parameters.cocoapods-lock-path >>" }}
+
+orbs:
+  common: okode/common@volatile
 
 jobs:
-  build:
-    <<: *defaults
+  test:
+    parameters:
+      skip-tests:
+        type: boolean
+        default: false
+      skip-lint:
+        type: boolean
+        default: false
+      skip-sonar:
+        type: boolean
+        default: false
+      skip-e2e:
+        type: boolean
+        default: false
+      persist-results:
+        type: boolean
+        default: false
+      node-version:
+        type: string
+        default: "12"
+      custom-npm-login:
+        type: boolean
+        default: false
+    docker:
+      - image: circleci/openjdk:8-node-browsers
+    steps:
+      - checkout
+      - common/node-upgrade:
+          version: << parameters.node-version >>
+      - when: 
+          condition: << parameters.custom-npm-login >>
+          steps:
+            - common/custom-npm-login
+      - common/npm-install
+      - run:
+          name: Building
+          command: npm run build -- --progress false --aot
+      - unless:
+          condition: << parameters.skip-tests >>
+          steps:
+            - common/chrome-upgrade
+            - run:
+                name: Running unit tests
+                command: npm run test -- --configuration ci
+            - unless:
+                condition: << parameters.skip-e2e >>
+                steps:
+                  - run:
+                      name: Running e2e tests
+                      command: npm run e2e
+            - store_test_results:
+                path: test-results
+      - unless:
+          condition: << parameters.skip-lint >>
+          steps:
+            - run:
+                name: Running lint
+                command: npx ng lint --force --format=json app > lint-results.json
+      - unless:
+          condition: << parameters.skip-sonar >>
+          steps:
+            - common/sonar
+      - when:
+          condition: << parameters.persist-results >>
+          steps:
+            - persist_to_workspace:
+                root: .
+                paths:
+                  - node_modules
+                  - test-results
+                  - lint-results.json
+                  - coverage
+                  - www
+  pwa:
+    parameters:
+      node-version:
+        type: string
+        default: "12"
+      custom-npm-login:
+        type: boolean
+        default: false
+    machine: true
+    environment:
+      NODE_OPTIONS: --max_old_space_size=4096
     steps:
       - checkout
       - run:
-            name: "Setup Environment Variables"
-            command: |
-              echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
-              echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
-      - run: 
-          name: "Install gradle"
-          command: |
-              wget https://services.gradle.org/distributions/gradle-4.0.2-bin.zip -P /tmp
-              sudo unzip -d /opt/gradle /tmp/gradle-*.zip
-              echo 'export GRADLE_HOME=/opt/gradle/gradle-4.0.2' >> $BASH_ENV
-              echo 'export PATH=$PATH:/opt/gradle/gradle-4.0.2/bin' >> $BASH_ENV
-              source $BASH_ENV
+          name: Upgrading Node to version << parameters.node-version >> using nvm
+          command: echo "source /opt/circleci/.nvm/nvm.sh &>/dev/null && nvm install << parameters.node-version >>" >> ${BASH_ENV}
+      - when: 
+          condition: << parameters.custom-npm-login >>
+          steps:
+            - common/custom-npm-login
+      - common/npm-install
       - run:
-            name: "move nah mobile folder"
-            command: |
-              cd nah-mobile
+          name: Building
+          command: npm run build -- --progress false --prod
+          no_output_timeout: 20m
+      - persist_to_workspace:
+          root: .
+          paths:
+            - www
+  ios:
+    parameters:
+      package-name:
+        type: string
+      team-id:
+        type: string
+      attach-workspace:
+        type: boolean
+        default: false
+      development-provisioning-name:
+        type: string
+      distribution-provisioning-name:
+        type: string
+      development-signing-password:
+        type: string
+        default: ''
+      distribution-signing-password:
+        type: string
+        default: ''
+      cocoapods-lock-path:
+        type: string
+        default: ''
+      cordova-version:
+        type: string
+        default: "8"
+      cocoapods-version:
+        type: string
+        default: "1.7.5"
+      xcode-version:
+        type: string
+        default: "11.2.1"
+      node-version:
+        type: string
+        default: "12"
+      dev-certs-repo-url:
+        type: string
+        default: ''
+      dist-certs-repo-url:
+        type: string
+        default: ''
+      ssh-permission-fingerprint:
+        type: string
+        default: ''
+      custom-npm-login:
+        type: boolean
+        default: false
+    macos:
+      xcode: "<< parameters.xcode-version >>"
+    steps:
+      - checkout
+      - run: cd nah-mobile
+      - when:
+          condition: << parameters.node-version >>
+          steps:
+            - run:
+                name: Installing node version << parameters.node-version >>
+                command: |
+                  brew unlink node
+                  HOMEBREW_NO_AUTO_UPDATE=1 brew install node@<< parameters.node-version >>
+                  brew link --overwrite node@<< parameters.node-version >> --force
+      - when:
+          condition: << parameters.custom-npm-login >>
+          steps:
+            - common/custom-npm-login
+      - common/npm-install
+      - common/install-ios:
+          cordova-version: << parameters.cordova-version >>
+          cocoapods-version: << parameters.cocoapods-version >>
+      - common/keychain:
+          package-name: << parameters.package-name >>
+          team-id: << parameters.team-id >>
+          development-provisioning-name: << parameters.development-provisioning-name >>
+          distribution-provisioning-name: << parameters.distribution-provisioning-name >>
+          development-signing-password: << parameters.development-signing-password >>
+          distribution-signing-password: << parameters.distribution-signing-password >>
+          dev-certs-repo-url: << parameters.dev-certs-repo-url >>
+          dist-certs-repo-url: << parameters.dist-certs-repo-url >>
+          ssh-permission-fingerprint: << parameters.ssh-permission-fingerprint >>
+      - when:
+          condition: << parameters.cocoapods-lock-path >>
+          steps:
+            - restore_cache:
+                << : *cache-key-cocoapods
+            - run:
+                name: Installing Cocoapods dependencies
+                command: pod setup
+      - when:
+          condition: << parameters.attach-workspace >>
+          steps:
+            - attach_workspace:
+                at: .
+            - run:
+                name: Clearing sourcemaps
+                command: find www -name *.map -type f -delete
       - run:
-            name: "Install ionic and cordova"
-            command: |
-              sudo npm install -g ionic cordova yarn
+          name: Building
+          command: scripts/build.sh
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: .
+          paths:
+            - output
+      - when:
+          condition: << parameters.cocoapods-lock-path >>
+          steps:
+            - run:
+                name: Restoring << parameters.cocoapods-lock-path >>
+                command: git checkout << parameters.cocoapods-lock-path >>
+            - save_cache:
+                << : *cache-key-cocoapods
+                paths:
+                  - ~/.cocoapods
       - run:
-            name: "Install npm packages"
-            command: |
-              cd nah-mobile && yarn install
+          name: Deploying
+          command: scripts/deploy.sh
+  android:
+    parameters:
+      attach-workspace:
+        type: boolean
+        default: false
+      cordova-version:
+        type: string
+        default: "8"
+      api-version:
+        type: string
+        default: "28"
+      gradle-version:
+        type: string
+        default: "5.4.1"
+      node-version:
+        type: string
+        default: "12"
+      dist-certs-repo-url:
+        type: string
+        default: ''
+      ssh-permission-fingerprint:
+        type: string
+        default: ''
+      custom-npm-login:
+        type: boolean
+        default: false
+    docker:
+      - image: circleci/android:api-<< parameters.api-version >>-node
+    steps:
+      - checkout
+      - run: cd nah-mobile
+      - common/node-upgrade:
+          version: << parameters.node-version >>
+      - when:
+          condition: << parameters.custom-npm-login >>
+          steps:
+            - run:
+                name: Logging into custom NPM registry
+                command: sudo npm install -g npm-cli-adduser && npm-cli-adduser
+      - common/npm-install
+      - common/install-android:
+          gradle-version: << parameters.gradle-version >>
+          cordova-version: << parameters.cordova-version >>
+      - restore_cache:
+          << : *cache-key-gradle
+      - when:
+          condition: << parameters.attach-workspace >>
+          steps:
+            - attach_workspace:
+                at: .
+            - run:
+                name: Clearing sourcemaps
+                command: find www -name *.map -type f -delete
+      - common/keystores:
+          dist-certs-repo-url: << parameters.dist-certs-repo-url >>
+          ssh-permission-fingerprint: << parameters.ssh-permission-fingerprint >>
       - run:
-            name: "Install Cordova plugins and add android platform"
-            command: |
-              cd nah-mobile && ionic cordova platform add android --noresources
-              ionic config set -g telemetry true
+          name: Building
+          command: scripts/build.sh
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: .
+          paths:
+            - output
       - run:
-            name: "Generate apk"
-            command: |
-              cd nah-mobile && ionic cordova build android --keystore=keys/android/nah.keystore
-              mkdir -p /tmp/apk
-              cp -r platforms/android/app/build/outputs/apk/debug/app-debug.apk /tmp/apk
-      - run:
-            name: "Keysotr build"
-            command: |
-              cd nah-mobile && keytool -list -v -keystore keys/android/nah.keystore -alias key0 -storepass nahnah -keypass nahnah
-           
-      - store_artifacts:
-            path: /tmp/apk
-            destination: apks
-
-workflows:
-  version: 2
-  build_and_deploy:
-    jobs:
-      - build1
+          name: Restoring package-lock.json
+          command: git checkout package-lock.json
+      - save_cache:
+          << : *cache-key-gradle
+          paths:
+            - ~/.gradle/caches
+      # - run:
+      #     name: Deploying
+      #     command: scripts/deploy.sh
+  workflows:
+    version: 2
+    build_and_deploy:
+      jobs:
+        - ios
+        - android

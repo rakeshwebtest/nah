@@ -1,0 +1,63 @@
+version: 2
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/android:api-28-node
+  environment:
+    JVM_OPTS: -Xmx3200m
+
+jobs:
+  android:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+            name: "Setup Environment Variables"
+            command: |
+              echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
+              echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
+      - run: 
+          name: "Install gradle"
+          command: |
+              wget https://services.gradle.org/distributions/gradle-4.0.2-bin.zip -P /tmp
+              sudo unzip -d /opt/gradle /tmp/gradle-*.zip
+              echo 'export GRADLE_HOME=/opt/gradle/gradle-4.0.2' >> $BASH_ENV
+              echo 'export PATH=$PATH:/opt/gradle/gradle-4.0.2/bin' >> $BASH_ENV
+              source $BASH_ENV
+      - run:
+            name: "move nah mobile folder"
+            command: |
+              cd nah-mobile
+      - run:
+            name: "Install ionic and cordova"
+            command: |
+              sudo npm install -g ionic cordova yarn
+      - run:
+            name: "Install npm packages"
+            command: |
+              cd nah-mobile && yarn install
+      - run:
+            name: "Install Cordova plugins and add android platform"
+            command: |
+              cd nah-mobile && ionic cordova platform add android --noresources
+              ionic config set -g telemetry true
+      - run:
+            name: "Generate apk"
+            command: |
+              cd nah-mobile && ionic cordova build android --keystore=keys/android/nah.keystore
+              mkdir -p /tmp/apk
+              cp -r platforms/android/app/build/outputs/apk/debug/app-debug.apk /tmp/apk
+      - run:
+            name: "Keysotr build"
+            command: |
+              cd nah-mobile && keytool -list -v -keystore keys/android/nah.keystore -alias key0 -storepass nahnah -keypass nahnah
+           
+      - store_artifacts:
+            path: /tmp/apk
+            destination: apks
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - android1
