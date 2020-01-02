@@ -1,0 +1,18 @@
+{
+    "android": {
+        "debug": {
+            "keystore": "./keys/android/nah.keystore",
+            "storePassword": "nahnah",
+            "alias": "key0",
+            "password" : "nahnah",
+            "keystoreType": ""
+        },
+        "release": {
+            "keystore": "./keys/android/nah.keystore",
+            "storePassword": "nahnah",
+            "alias": "key0",
+            "password" : "nahnah",
+            "keystoreType": ""
+        }
+    }
+}

@@ -4,8 +4,23 @@ import { UserEntity } from 'src/user/user.entity';
 @Entity({ name: 'meeting' })
 export class MeetingEntity extends BaseEntity {
 
-    @Column({ length: 25, nullable: true })
-    name: string;
+    @Column({ length: 250, nullable: true })
+    title: string;
+
+    @Column({ type: 'text', nullable: true })
+    agenda: string;
+
+    @Column({ type: 'date', nullable: true })
+    startDate: string;
+
+    @Column({ type: 'date', nullable: true })
+    endDate: string;
+
+    @Column({ type: 'time', nullable: true })
+    startTime: string;
+
+    @Column({ type: 'time', nullable: true })
+    endTime: string;
 
     @Column({ length: 250, nullable: true })
     imageUrl: string;
