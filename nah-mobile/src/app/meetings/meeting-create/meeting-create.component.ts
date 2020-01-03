@@ -117,13 +117,15 @@ export class MeetingCreateComponent implements OnInit {
 
 
   submit(model) {
-    console.log(model);
+    console.log('model',this.model);
     const formData = new FormData();
-    formData.append('data 12', model);
+    formData.append('file', model.image);
+    formData.append('title', model.name);
+    formData.append('agenda', model.agenda);
     const HttpUploadOptions = {
       headers: new HttpHeaders({ "Content-Type": "multipart/form-data" })
     };
-    this.http.post('meeting', formData, HttpUploadOptions).subscribe(res => {
+    this.http.post('meeting', formData).subscribe(res => {
       console.log('res', res);
     });
   }

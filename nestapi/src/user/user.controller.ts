@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes, Request } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserEntity } from './user.entity';
 import {
@@ -18,7 +18,14 @@ export class UsersController {
     constructor(public service: UserService, public groupService: GroupService) { }
 
     @Get()
-    async getUser() {
+    async getUser(@Request() req) {
+        const data: any = await this.service.getUsers();
+        const userInfo = req['sessionUser'];
+        return { message: 'ok', data, userInfo};
+    }
+
+    @Post()
+    async getUser1(@Request() req) {
         const data: any = await this.service.getUsers();
         return { message: 'ok', data };
     }
@@ -53,11 +60,11 @@ export class UsersController {
 
         const data = await this.service.updateUser(user);
         const token = await this.service.generateJWT(data);
-        return { message: 'Login Succussfully', data: { user:_user || user, token } };
+        return { message: 'Login Succussfully', data: { user: _user || user, token } };
     }
     @UsePipes(new ValidationPipe())
     @Put()
-   async update(@Body() user: CreateUserDto) {
+    async update(@Body() user: CreateUserDto) {
         // create group if newGroupName there
         if (user.newGroupName) {
             const group: CreateGroupDto = {
@@ -66,7 +73,7 @@ export class UsersController {
             }
             this.groupService.updateGroup(group);
         }
-        if(user.followGroups){
+        if (user.followGroups) {
             for (let index = 0; index < user.followGroups.length; index++) {
                 const follow = user.followGroups[index];
                 await this.groupService.follow(follow);

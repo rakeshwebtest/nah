@@ -40,3 +40,5 @@ src/config.ts
 
 # code testing coverage
 coverage
+
+/uploads
