@@ -7,9 +7,10 @@ import { AuthMiddleware } from './auth.middleware';
 import { GroupService } from 'src/group/group.service';
 import { GroupEntity } from 'src/group/group.entity';
 import { GroupFollowEntity } from 'src/group/group-follows.entity';
+import { MeetingEntity } from 'src/meeting/meeting.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity, GroupEntity,GroupFollowEntity])],
+  imports: [TypeOrmModule.forFeature([UserEntity, GroupEntity, GroupFollowEntity, MeetingEntity])],
   providers: [UserService, AuthMiddleware, GroupService],
   controllers: [UsersController]
 })

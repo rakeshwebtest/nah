@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 import { BaseEntity } from '../shared/base.entity';
-import { UserEntity } from 'src/user/user.entity';
+import { UserEntity } from './../user/user.entity';
+import { GroupEntity } from './../group/group.entity';
 @Entity({ name: 'meeting' })
 export class MeetingEntity extends BaseEntity {
 
@@ -10,20 +11,20 @@ export class MeetingEntity extends BaseEntity {
     @Column({ type: 'text', nullable: true })
     agenda: string;
 
-    @Column({ type: 'date', nullable: true })
-    startDate: string;
+    @Column({ type: 'timestamp', name: 'meetingDate', default: () => 'LOCALTIMESTAMP' })
+    meetingDate: string;
 
-    @Column({ type: 'date', nullable: true })
-    endDate: string;
-
-    @Column({ type: 'time', nullable: true })
+    @Column({ type: 'timestamp', name: 'startTime', default: () => 'LOCALTIMESTAMP' })
     startTime: string;
 
-    @Column({ type: 'time', nullable: true })
+    @Column({ type: 'timestamp', name: 'endTime', default: () => 'LOCALTIMESTAMP' })
     endTime: string;
 
-    @Column({ length: 250, nullable: true })
+    @Column({ length: 1250, nullable: true })
     imageUrl: string;
+
+    @ManyToOne(type => GroupEntity, group => group.meetings)
+    group: GroupEntity;
 
     @ManyToOne(type => UserEntity, user => user.meetings)
     user: UserEntity;
@@ -31,7 +32,6 @@ export class MeetingEntity extends BaseEntity {
     @ManyToMany(type => UserEntity, user => user.id)
     @JoinTable()
     members: UserEntity[];
-
     // @ManyToOne(type => UserEntity, user => user.groups)
     // createdBy: UserEntity;
 }

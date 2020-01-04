@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, OneToMany, JoinColumn } from 'typeorm';
 import { BaseEntity } from '../shared/base.entity';
 import { UserEntity } from 'src/user/user.entity';
+import { MeetingEntity } from 'src/meeting/meeting.entity';
 // import { UserEntity } from 'src/user/user.entity';
 @Entity({ name: 'group' })
 export class GroupEntity extends BaseEntity {
@@ -16,7 +17,8 @@ export class GroupEntity extends BaseEntity {
     @Column({ default: 0 })
     followersCount: number;
 
-
+    @OneToMany(type => MeetingEntity, meeting => meeting.group)
+    meetings: GroupEntity[];
 
     @Column()
     createdBy: number;

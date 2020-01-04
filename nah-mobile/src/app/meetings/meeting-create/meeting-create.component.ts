@@ -3,6 +3,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { FormGroup } from '@angular/forms';
 import { AppHttpClient } from 'src/app/utils';
 import { HttpHeaders } from '@angular/common/http';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-meeting-create',
@@ -14,7 +15,7 @@ export class MeetingCreateComponent implements OnInit {
   form = new FormGroup({});
   model = {};
   fields: FormlyFieldConfig[] = [{
-    key: 'name',
+    key: 'title',
     type: 'input',
     wrappers: ['vertical'],
     className: 'col-12 ion-padding-t-10',
@@ -25,7 +26,7 @@ export class MeetingCreateComponent implements OnInit {
     }
   },
   {
-    key: 'saynoto',
+    key: 'groupId',
     type: 'select',
     wrappers: ['vertical'],
     className: 'col-12',
@@ -65,22 +66,12 @@ export class MeetingCreateComponent implements OnInit {
     fieldGroupClassName: 'row',
     fieldGroup: [
       {
-        key: 'startDate',
+        key: 'meetingDate',
         type: 'datetime',
         wrappers: ['vertical'],
-        className: 'col-6',
+        className: 'col-12',
         templateOptions: {
           label: 'Start Date',
-          placeholder: 'Choose Date',
-        }
-      },
-      {
-        key: 'endDate',
-        type: 'datetime',
-        wrappers: ['vertical'],
-        className: 'col-6',
-        templateOptions: {
-          label: 'End Date',
           placeholder: 'Choose Date',
         }
       },
@@ -111,17 +102,23 @@ export class MeetingCreateComponent implements OnInit {
     ],
   }
   ];
-  constructor(private http: AppHttpClient) { }
+  constructor(private http: AppHttpClient, private authService: AuthenticationService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+    console.log('')
+  }
 
 
   submit(model) {
-    console.log('model',this.model);
+    const userInfo = this.authService.getUserInfo();
+    console.log('this.userInfo', userInfo);
     const formData = new FormData();
-    formData.append('file', model.image);
-    formData.append('title', model.name);
-    formData.append('agenda', model.agenda);
+    // formData.append('file', model.image);
+    model.createdBy = userInfo.id;
+    for (let key in model) {
+      formData.append(key, model[key]);
+    }
     const HttpUploadOptions = {
       headers: new HttpHeaders({ "Content-Type": "multipart/form-data" })
     };
