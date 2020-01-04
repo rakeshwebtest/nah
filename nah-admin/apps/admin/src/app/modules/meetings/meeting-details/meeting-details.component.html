@@ -1,27 +1,42 @@
 <div class="p-contain">
     <div class="row m-0 box">
         <div class="col-12 col-md-4">
-                <label class="custom-label">Meeting name</label>
-                <div class="label-value">Team meeting </div>
+            <label class="custom-label">City</label>
+            <div class="label-value">New York </div>
         </div>
         <div class="col-12 col-md-4">
-                <label class="custom-label">Meeting Type</label>
-                <div class="label-value">General </div>
+            <label class="custom-label">Meeting Title</label>
+            <div class="label-value">Meeting 1 </div>
         </div>
         <div class="col-12 col-md-4">
-                <label class="custom-label">Meeting Duration</label>
-                <div class="label-value">4 hours </div>
+            <label class="custom-label">Date</label>
+            <div class="label-value">05-01-2020 </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <label class="custom-label">Time</label>
+            <div class="label-value">10:00 To 11:00 </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <label class="custom-label">Venue</label>
+            <div class="label-value">New York </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <label class="custom-label">Status</label>
+            <div class="label-value">New | Published | Completed | Cancelled </div>
         </div>
     </div>
     <div>
         <mat-tab-group>
-            <mat-tab label="Images"> 
+            <mat-tab label="Images">
                 <ul class="images-list">
                     <li *ngFor="let item of imgList;"><img [src]="item.url" alt=""></li>
                 </ul>
             </mat-tab>
-            <mat-tab label="Videos"> Content 2 </mat-tab>
-            <mat-tab label="Comments"> Content 3 </mat-tab>
-          </mat-tab-group>
+            <mat-tab label="Videos"> <ul class="images-list">
+                <li *ngFor="let item of imgList;"><img [src]="item.url" alt=""></li>
+            </ul>
+        </mat-tab>
+            <mat-tab label="Comments"> No comments </mat-tab>
+        </mat-tab-group>
     </div>
 </div>

@@ -23,55 +23,38 @@ export class MeetingListComponent implements OnInit {
   sessionInfo: any = {};
   users: any = [];
   userInfo: any = {};
-  fields: FormlyFieldConfig[] = [
-    {
-      fieldGroupClassName: 'row',
-      fieldGroup: [
-        {
-          className: 'col-12',
-          key: 'meetingName',
-          type: 'input',
-          templateOptions: {
-            type: 'text',
-            label: 'Meeting Name',
-            description: '',
-            placeholder: 'Enter Meeting Name',
-            required: true
-          }
-        }
-      ]
-    }
-  ];
-  constructor(private modalService: NgbModal, 
-    private router: Router, 
+
+  constructor(private modalService: NgbModal,
+    private router: Router,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.cols = [
-      { field: 'meetingId', header: 'Meeting Id' },
-      { field: 'meetingName', header: 'Meeting Name' },
-      { field: 'meetingType', header: 'Meeting Type' }
+      { field: 'city', header: 'City' },
+      { field: 'meetingName', header: 'Meeting Title' },
+      { field: 'meetingDate', header: 'Date' },
+      { field: 'meetingTime', header: 'Time' },
+      { field: 'meetingVenue', header: 'Venue' },
+      { field: 'createdBy', header: 'Organized By' }
     ];
     this.meetingList = [
       {
-        'meetingId': 1,'meetingName': 'Raja','meetingType': 'admin'
+        'city': 'New York', 'meetingName': 'Meeting 1', 'meetingDate': '05-01-2020', 'meetingTime': '10:00 To 11:00', 'meetingVenue': 'New York', 'createdBy': 'Mohan Babu'
       },
       {
-        'meetingId': 2,'meetingName': 'Mohan','meetingType': 'admin'
+        'city': 'Los Angeles', 'meetingName': 'Meeting 2', 'meetingDate': '04-01-2020', 'meetingTime': '10:00 To 11:00', 'meetingVenue': 'Los Angeles', 'createdBy': 'prasad duggirala'
       },
       {
-        'meetingId': 3,'meetingName': 'Rakesh','meetingType': 'admin'
+        'city': 'Chicago', 'meetingName': 'Meeting 3', 'meetingDate': '03-01-2020', 'meetingTime': '10:00 To 11:00', 'meetingVenue': 'Chicago', 'createdBy': 'UZ 16LAB'
       }
     ];
   }
-  onAdd(addMeeting) {
-    this.modalRef = this.modalService.open(addMeeting, {});
-}
-onUpdate(addMeeting) {
-    this.modalRef = this.modalService.open(addMeeting, {});
-}
-onRowSelect(event) {
-console.log('event', event);
-this.router.navigate(['details'], {relativeTo: this.activatedRoute.parent})
-}
+
+  onUpdate(event) {
+    this.router.navigate(['details'], { relativeTo: this.activatedRoute.parent })
+  }
+  onRowSelect(event) {
+    console.log('event', event);
+    this.router.navigate(['details'], { relativeTo: this.activatedRoute.parent })
+  }
 }

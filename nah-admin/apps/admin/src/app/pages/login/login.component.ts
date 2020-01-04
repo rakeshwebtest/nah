@@ -31,13 +31,13 @@ export class LoginComponent implements OnInit {
     // TODO: Use EventEmitter with form value
     this.submitted = true;
     // stop here if form is invalid
-    // if (this.loginForm.invalid) {
-    //   return;
-    // }
-    const payload = {
-      "command": "authenticateUser",
-      "requestData": this.loginForm.value
-    };
+    if (this.loginForm.invalid) {
+      return;
+    }
+    // const payload = {
+    //   "command": "authenticateUser",
+    //   "requestData": this.loginForm.value
+    // };
    // this.appHttp.get('jsonBlob/69e416bb-cbb7-11e9-a895-abb8290d8490').subscribe(res => {
   //  this.appHttp.post(API_CONFIG.LOGIN, payload).subscribe(res => {
   //     console.log('res', res);

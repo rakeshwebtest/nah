@@ -47,19 +47,18 @@ export class CityListComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'cityId', header: 'City Id' },
-      { field: 'cityName', header: 'City Name' },
-      { field: 'cityType', header: 'City Type' }
+      { field: 'name', header: 'City Name' },
+      { field: 'createdBy', header: 'Created By' }
     ];
     this.cityList = [
       {
-        'cityId': 1, 'cityName': 'Raja', 'cityType': 'admin'
+        'name': 'New York','createdBy': 'Admin'
       },
       {
-        'cityId': 2, 'cityName': 'Mohan', 'cityType': 'admin'
+        'name': 'Los Angeles','createdBy': 'Admin'
       },
       {
-        'cityId': 3, 'cityName': 'Rakesh', 'cityType': 'admin'
+        'name': 'Chicago','createdBy': 'Admin'
       }
     ];
   }
