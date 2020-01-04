@@ -128,21 +128,7 @@ export class SideMenuComponent implements OnInit {
             'type': 'custom'
           }
         ]
-      },
-      {
-        'label': 'Groups',
-        'code': 'groups',
-        'icon': 'fa fa-object-group',
-        'app': 'zc-core',
-        'childs': [
-          {
-            'label': 'Groups',
-            'code': 'groups/list',
-            'icon': 'fa fa-phone',
-            'type': 'custom'
-          }
-        ]
-      },
+      },      
       {
         'label': 'Meetings',
         'code': 'meetings',
@@ -166,6 +152,20 @@ export class SideMenuComponent implements OnInit {
           {
             'label': 'City',
             'code': 'city/list',
+            'icon': 'fa fa-phone',
+            'type': 'custom'
+          }
+        ]
+      },
+      {
+        'label': 'Groups',
+        'code': 'groups',
+        'icon': 'fa fa-object-group',
+        'app': 'zc-core',
+        'childs': [
+          {
+            'label': 'Groups',
+            'code': 'groups/list',
             'icon': 'fa fa-phone',
             'type': 'custom'
           }

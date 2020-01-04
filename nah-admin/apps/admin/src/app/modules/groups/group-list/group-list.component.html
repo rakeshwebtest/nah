@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-sm btn-danger" (click)="onAddGroup(addGroup)">Add</button>
     </div>
-  <p-table [columns]="cols" [value]="groupList" [responsive]="true" [(selection)]="selectedUsers">
+  <p-table [columns]="cols" [value]="groupList" [responsive]="true">
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns">

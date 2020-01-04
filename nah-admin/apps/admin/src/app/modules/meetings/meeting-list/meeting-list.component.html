@@ -1,8 +1,8 @@
 <div class="p-contain">
-    <div class="d-flex justify-content-end">
+    <!-- <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-sm btn-danger" (click)="onAdd(addMeeting)">Add</button>
-    </div>
-  <p-table  [columns]="cols" [value]="meetingList" [responsive]="true" selectionMode="single" [(selection)]="selectedMeetings" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
+    </div> -->
+  <p-table  [columns]="cols" [value]="meetingList" [responsive]="true" selectionMode="single"  (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowSelect($event)">
     <ng-template pTemplate="header" let-columns>
       <tr >
         <th *ngFor="let col of columns">
@@ -48,7 +48,7 @@
                 <a
                   class="dropdown-item"
                   (click)="onUpdate(addMeeting)"
-                  >Edit Meeting</a
+                  >View Meeting</a
                 >
               </li>
             </div>

@@ -32,7 +32,7 @@ export class GroupListComponent implements OnInit {
           type: 'input',
           templateOptions: {
             type: 'text',
-            label: 'Group Name',
+            label: 'Say No To',
             description: '',
             placeholder: 'Enter Group Name',
             required: true
@@ -45,19 +45,18 @@ export class GroupListComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'groupId', header: 'Group Id' },
-      { field: 'groupName', header: 'Group Name' },
-      { field: 'groupType', header: 'Group Type' }
+      { field: 'name', header: 'Group Name' },
+      { field: 'createdBy', header: 'Created By' }
     ];
     this.groupList = [
       {
-        'groupId': 1,'groupName': 'Raja','groupType': 'admin'
+        'name': 'Say No To Trump','createdBy': 'Mohan Babu'
       },
       {
-        'groupId': 2,'groupName': 'Mohan','groupType': 'admin'
+        'name': 'Say No To Veg','createdBy': 'prasad duggirala'
       },
       {
-        'groupId': 3,'groupName': 'Rakesh','groupType': 'admin'
+        'name': 'Say No To Plastic','createdBy': 'UZ 16LAB'
       }
     ];
   }

@@ -25,45 +25,21 @@ export class UserListComponent implements OnInit, OnDestroy {
       fieldGroup: [
         {
           className: 'col-12 col-md-6',
-          key: 'userId',
-          type: 'input',
-          wrappers: ['horizontal-field'],
-          templateOptions: {
-            label: 'User ID',
-            placeholder: 'Enter User ID',
-            required: true,
-            readonly: true
-          }
-        },
-        {
-          className: 'col-12 col-md-6',
-          key: 'userName',
+          key: 'name',
           type: 'input',
           wrappers: ['horizontal-field'],
           templateOptions: {
             attributes: {
               autocomplete: 'off',
             },
-            label: 'User Name',
+            label: 'Name',
             placeholder: 'Enter User Name',
             required: true
           },
-        },
+        },        
         {
           className: 'col-12 col-md-6',
-          key: 'mobileNumber',
-          type: 'input',
-          wrappers: ['horizontal-field'],
-          templateOptions: {
-            type: 'number',
-            label: 'Mobile Number',
-            placeholder: 'Enter Mobile Number',
-            required: true
-          }
-        },
-        {
-          className: 'col-12 col-md-6',
-          key: 'emailId',
+          key: 'email',
           type: 'input',
           wrappers: ['horizontal-field'],
           templateOptions: {
@@ -74,30 +50,23 @@ export class UserListComponent implements OnInit, OnDestroy {
         },
         {
           className: 'col-12 col-md-6',
-          key: 'maxProfitMatch',
-          type: 'input',
+          key: 'typeOfNoer',
+          type: 'select',
           wrappers: ['horizontal-field'],
           templateOptions: {
-            type: 'number',
-            label: 'Max Profit Match',
-            placeholder: 'Enter number',
-            required: true
+            label: 'Type Of Noer',
+            options: [
+              {
+                label: 'Anties',
+                value: 'anties'
+              },
+              {
+                label: 'Hater',
+                value: 'hater'
+              }
+            ]
           }
-        },
-        {
-          className: 'col-12 col-md-6',
-          key: 'maxProfitFancy',
-          type: 'input',
-          wrappers: ['horizontal-field'],
-          // defaultValue: 20,
-          templateOptions: {
-            type: 'number',
-            label: 'Max Profit Fancy',
-            placeholder: 'Enter number',
-            required: true,
-            //  max: 200
-          }
-        }
+        }        
       ]
     }
 
@@ -150,110 +119,30 @@ export class UserListComponent implements OnInit, OnDestroy {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    // this.sessionInfo = this.ls.getItem('user', true);
-    // const payload = {
-    //   "command": "getUsers",
-    //   "requestData": {
-    //     "userId": this.sessionInfo.userId
-    //   }
-    // };
-
-    // this.appHttp.post(API_CONFIG.USER_LIST, payload).subscribe(res => {
-    //   this.userList = res.data || [];
-    // });
+  
     this.cols = [
-      { field: 'userId', header: 'User Id' },
-      { field: 'userName', header: 'User Name' },
-      { field: 'userType', header: 'User Type' }
+      { field: 'name', header: 'Name' },
+      { field: 'email', header: 'Email' },
+      { field: 'typeOfNoer', header: 'Type Of Noer' }
     ];
     this.userList = [
       {
-        'userId': 1,'userName': 'Raja','userType': 'admin'
+        'name': 'Mohan Babu','email': 'palaekirimohanbabu@gmail.com','typeOfNoer': 'anties'
       },
       {
-        'userId': 2,'userName': 'Mohan','userType': 'admin'
+        'name': 'prasad duggirala','email': 'prasadduggirala2@gmail.com','typeOfNoer': 'hater', active: true
       },
       {
-        'userId': 3,'userName': 'Rakesh','userType': 'admin'
+        'name': 'UZ 16LAB','email': 'uzveda115@gmail.com','typeOfNoer': 'anties'
       }
     ];
   }
-  //start create / debit amout
-  getUserCreditDebitInfo() {
-    const payload: any = {};
-    payload.command = 'initCreditAndDebitForm';
-    payload.requestData = { userId: this.sessionInfo.userId, userType: this.sessionInfo.userType };
-    return this.appHttp.post(API_CONFIG.USER_WALLET, payload);
-  }
-  onCreditDebitAmount(creditAmount, type: 'Credit' | 'Debit', row) {
-    this.model.amount = 0;
-    this.model.user = row.userId;
-    this.modalTitle = type;
-    this.amoutType = (type === 'Credit') ? 'creditAmount' : 'debitAmount';
-    this.getUserCreditDebitInfo().subscribe(res => {
-      // set max min value of field amout
-      //  this.fields[0].fieldGroup[5].templateOptions.max = this.userInfo.maxProfitMatch; // defaultValue
-      this.fields[0].fieldGroup[0].templateOptions.min = 1;
-
-      if (res.data) {
-        console.log('res.data', res.data);
-        if (type === 'Credit') {
-          this.fields[0].fieldGroup[0].templateOptions.max = res.data.credit;
-          this.fields[0].fieldGroup[0].templateOptions.description = 'Max Credit Amount ' + res.data.credit;
-          this.model.amount = res.data.credit;
-        } else {
-          this.fields[0].fieldGroup[0].templateOptions.max = res.data.debit;
-          this.fields[0].fieldGroup[0].templateOptions.description = 'Max Debit Amount ' + res.data.debit;
-
-          this.model.amount = res.data.debit;
-        }
-      }
-      this.modalRef = this.modalService.open(creditAmount, {});
-    });
-
-  }
-  addAmount() {
-    if (this.form.valid) {
-      const payload: any = {};
-      payload.command = this.amoutType;
-      payload.requestData = { userId: this.model.user, updatedBy: this.sessionInfo.userId };
-      if (this.amoutType === 'creditAmount')
-        payload.requestData.credit = this.model.amount;
-      if (this.amoutType === 'debitAmount')
-        payload.requestData.debit = this.model.amount;
-      if (this.form.valid) {
-        this.appHttp.post(API_CONFIG.USER_WALLET, payload).subscribe(res => {
-          this.modalRef.close();
-          this.headerInfo.updateHeaderInfo();
-        });
-      }
-
-    }
-  }
+ 
+ 
   updateUser(updateUserTemp, user) {
     this.userModel = user;
-    const payload: any = {};
-    payload.command = 'initCreateUserForm';
-    // payload.requestData = { userId: this.sessionInfo.userId, userType: this.sessionInfo.userType };
-    payload.requestData = { userId: user.userId, userType: user.userType };
-    // this.appHttp.get('jsonBlob/d1d9879e-ed88-11e9-bf4f-1b7660dce7d0').subscribe(res => {
-    this.appHttp.post(API_CONFIG.ADD_USER, payload).subscribe(res => {
-      if (res.data) {
-        this.userInfo = res.data;
-        this.userFields[0].fieldGroup[4].templateOptions.max = this.userInfo.maxProfitMatch; // defaultValue
-        this.userFields[0].fieldGroup[4].templateOptions.description = 'Max Profit Match :' + this.userInfo.maxProfitMatch; // defaultValue
-        this.userFields[0].fieldGroup[4].templateOptions.min = 0;
-        this.userFields[0].fieldGroup[5].templateOptions.max = this.userInfo.maxProfitFancy;
-        this.userFields[0].fieldGroup[5].templateOptions.description = 'Max Profit Fancy :' + this.userInfo.maxProfitFancy;
-        this.userFields[0].fieldGroup[5].templateOptions.min = 0;
-        this.userFields[0].fieldGroup[4].defaultValue = 1;
-        // this.model.maxProfitMatch = userInfo.maxProfitMatch;
-        // this.model.maxProfitFancy = userInfo.maxProfitFancy;
-
-        console.log('this.fields -->', this.fields[0].fieldGroup[4]);
-        this.showForm = true;
-      }
-    });
+    const payload: any = {};   
+    this.showForm = true;
     this.modalRef = this.modalService.open(updateUserTemp, { size: 'lg' });
   }
   userSubmit(data) {
@@ -286,46 +175,46 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   }
   suspend() {
-    const suspendUsers: any = [];
-    this.selectedUsers.forEach(user => {
-      suspendUsers.push({userId: user.userId, updatedBy: this.sessionInfo.userId});
-    });
-    this.suspendUsers(suspendUsers);
+    // const suspendUsers: any = [];
+    // this.selectedUsers.forEach(user => {
+    //   suspendUsers.push({userId: user.userId, updatedBy: this.sessionInfo.userId});
+    // });
+    // this.suspendUsers(suspendUsers);
   }
   activate() {
-    const activateUsers: any = [];
-    this.selectedUsers.forEach(user => {
-      activateUsers.push({userId: user.userId, updatedBy: this.sessionInfo.userId});
-    });
-    this.activateUsers(activateUsers);
+    // const activateUsers: any = [];
+    // this.selectedUsers.forEach(user => {
+    //   activateUsers.push({userId: user.userId, updatedBy: this.sessionInfo.userId});
+    // });
+    // this.activateUsers(activateUsers);
   }
 
   suspendUsers(users?: []) {
-    const payload: any = {};
-    let requestData: any = {};
-    payload.command = 'suspendUsers';
-    requestData = users;
-    payload.requestData = requestData;
-    this.appHttp.post(API_CONFIG.ADD_USER, payload).subscribe(res => {
-      if (res.success) {
-        this.selectedUsers = [];
-        this.ngOnInit();
-      }
-    });
+    // const payload: any = {};
+    // let requestData: any = {};
+    // payload.command = 'suspendUsers';
+    // requestData = users;
+    // payload.requestData = requestData;
+    // this.appHttp.post(API_CONFIG.ADD_USER, payload).subscribe(res => {
+    //   if (res.success) {
+    //     this.selectedUsers = [];
+    //     this.ngOnInit();
+    //   }
+    // });
   }
   
   activateUsers(users?: []) {
-    const payload: any = {};
-    let requestData: any = {};
-    payload.command = 'activateUsers';
-    requestData = users;
-    payload.requestData = requestData;
-    this.appHttp.post(API_CONFIG.ADD_USER, payload).subscribe(res => {
-      if (res.success) {
-        this.selectedUsers = [];
-        this.ngOnInit();
-      }
-    });
+    // const payload: any = {};
+    // let requestData: any = {};
+    // payload.command = 'activateUsers';
+    // requestData = users;
+    // payload.requestData = requestData;
+    // this.appHttp.post(API_CONFIG.ADD_USER, payload).subscribe(res => {
+    //   if (res.success) {
+    //     this.selectedUsers = [];
+    //     this.ngOnInit();
+    //   }
+    // });
   }
 
   ngOnDestroy(): void {
