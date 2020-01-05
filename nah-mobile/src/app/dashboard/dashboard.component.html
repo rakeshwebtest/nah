@@ -81,7 +81,7 @@
               <ion-text class="fallowing-members">Members are Following</ion-text>
             </ion-text>
           </ion-col>
-          <ion-col size="4" class="ion-text-end" *ngIf="m.isCreatedBy">
+          <ion-col size="4" class="ion-text-end" *ngIf="!m.isCreatedBy">
             <ion-text style="font-weight: bold;display: block;font-size: 14px;">New yark, NY</ion-text>
             <ion-button color="medium" (click)="meetingJoin(m)" *ngIf="m.isMember">Un Join</ion-button>
             <ion-button color="danger" (click)="meetingJoin(m)" *ngIf="!m.isMember">Join</ion-button>

@@ -18,11 +18,11 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private http: AppHttpClient,
     private loading: LoadingService) { }
-  @HostListener('document:ionBackButton', ['$event'])
-  private async overrideHardwareBackAction($event: any) {
-    console.log('back pressed');
-    // await this.modalController.dismiss();
-  }
+  // @HostListener('document:ionBackButton', ['$event'])
+  // private async overrideHardwareBackAction($event: any) {
+  //   console.log('back pressed');
+  //   // await this.modalController.dismiss();
+  // }
   ngOnInit() {
     console.log('ngOninit');
     const userInfo: any = this.authService.getUserInfo();
