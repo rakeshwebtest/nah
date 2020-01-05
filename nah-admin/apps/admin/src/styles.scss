@@ -198,6 +198,12 @@ a {
     transition: all 0.3s;
     @media (max-width: 991px) {
       transform: translate(-100%) !important;
+      .logo{
+        padding: 0 !important;
+        img{
+          width: 100% !important;
+        }
+      }
     }
   }
   .main {
