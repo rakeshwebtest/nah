@@ -102,11 +102,24 @@ export class MeetingCreateComponent implements OnInit {
     ],
   }
   ];
+  groupList = [];
   constructor(private http: AppHttpClient, private authService: AuthenticationService) { }
 
   ngOnInit() {
-
-    console.log('')
+    const userInfo = this.authService.getUserInfo();
+    this.http.get('group/list/' + userInfo.id).subscribe(res => {
+      console.log(res);
+      if (res.data) {
+        this.groupList = res.data.map(item => {
+          const group = {
+            label: item.name,
+            value: item.id
+          };
+          return group;
+        })
+      }
+      this.fields[1].templateOptions.options = this.groupList || [];
+    });
   }
 
 

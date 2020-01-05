@@ -5,16 +5,26 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { CreateMeetingDto } from './dto/create-meeting.dto';
 import { ValidationPipe } from './../shared/pipes/validation.pipe';
+import { JoinMeetingDto } from './dto/join-member.dto';
 @Controller('meeting')
 export class MeetingController {
 
   constructor(public meetingService: MeetingService) { }
+  /**
+   * get all meeting with meembers
+   */
 
   @Get()
   async getMeetings() {
     const data: any = await this.meetingService.getMeetings();
     return { message: 'ok', data };
   }
+  /**
+   * create meeting or update meeting
+   * @param image 
+   * @param meetingDto 
+   * @param req 
+   */
   @UsePipes(new ValidationPipe())
   @UseInterceptors(FileInterceptor('image', {
     storage: diskStorage({
@@ -31,5 +41,14 @@ export class MeetingController {
     console.log('meetingDto', meetingDto);
     const data = await this.meetingService.createMeeting(meetingDto);
     return { message: 'ok', data };
+  }
+
+  /**
+   * join or unjoin meeting members
+   */
+  @UsePipes(new ValidationPipe())
+  @Post('join')
+  async joinOrUnjoin(@Body() meetingMebers: JoinMeetingDto, @Request() req) {
+    return  this.meetingService.joinMember(meetingMebers);
   }
 }

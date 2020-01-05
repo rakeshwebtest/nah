@@ -1,7 +1,8 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm';
 import { BaseEntity } from '../shared/base.entity';
 import { UserEntity } from './../user/user.entity';
 import { GroupEntity } from './../group/group.entity';
+import {MeetingMembersEntity} from './meeting-members.entity'
 @Entity({ name: 'meeting' })
 export class MeetingEntity extends BaseEntity {
 
@@ -29,9 +30,11 @@ export class MeetingEntity extends BaseEntity {
     @ManyToOne(type => UserEntity, user => user.meetings)
     user: UserEntity;
 
-    @ManyToMany(type => UserEntity, user => user.id)
-    @JoinTable()
-    members: UserEntity[];
+    @OneToMany(type => MeetingMembersEntity, mm => mm.meeting)
+    members: MeetingMembersEntity[];
+    // @ManyToMany(type => UserEntity, user => user.id)
+    // @JoinTable()
+    // members: UserEntity[];
     // @ManyToOne(type => UserEntity, user => user.groups)
     // createdBy: UserEntity;
 }

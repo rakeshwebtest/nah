@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, OneToMany, JoinColum
 import { BaseEntity } from '../shared/base.entity';
 import { UserEntity } from 'src/user/user.entity';
 import { MeetingEntity } from 'src/meeting/meeting.entity';
+import { GroupFollowEntity } from './group-follows.entity';
 // import { UserEntity } from 'src/user/user.entity';
 @Entity({ name: 'group' })
 export class GroupEntity extends BaseEntity {
@@ -19,6 +20,9 @@ export class GroupEntity extends BaseEntity {
 
     @OneToMany(type => MeetingEntity, meeting => meeting.group)
     meetings: GroupEntity[];
+
+    @OneToMany(type => GroupFollowEntity, gf => gf.group)
+    followers: GroupFollowEntity[];
 
     @Column()
     createdBy: number;
