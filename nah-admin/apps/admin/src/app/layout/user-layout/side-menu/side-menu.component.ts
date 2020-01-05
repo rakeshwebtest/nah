@@ -118,13 +118,13 @@ export class SideMenuComponent implements OnInit {
       {
         'label': 'Dashboard',
         'code': 'company-list',
-        'icon': 'fa fa-users',
+        'icon': 'fa fa-dashboard',
         'app': 'zc-core',
         'childs': [
           {
             'label': 'Dashboard',
             'code': 'dashboard',
-            'icon': 'fa fa-circle',
+            'icon': 'fa fa-dashboard',
             'type': 'custom'
           }
         ]
