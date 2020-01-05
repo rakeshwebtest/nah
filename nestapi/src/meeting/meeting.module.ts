@@ -5,9 +5,10 @@ import { MeetingEntity } from './meeting.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from 'src/user/user.entity';
 import { GroupEntity } from 'src/group/group.entity';
+import { MeetingMembersEntity } from './meeting-members.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([MeetingEntity, UserEntity, GroupEntity])],
+  imports: [TypeOrmModule.forFeature([MeetingEntity, MeetingMembersEntity, UserEntity, GroupEntity])],
   controllers: [MeetingController],
   providers: [MeetingService]
 })
