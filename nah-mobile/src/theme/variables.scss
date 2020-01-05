@@ -97,6 +97,10 @@ $font-32: 32px;
   --padding-start: var(--ion-padding, 5px);
   padding-left: var(--ion-padding, 5px);
 }
+.ion-padding-r-5{
+  --padding-end: var(--ion-padding, 5px);
+  padding-right: var(--ion-padding, 5px);
+}
 .ion-padding-l-10{
   --padding-start: var(--ion-padding, 10px);
   padding-left: var(--ion-padding, 10px);
@@ -113,10 +117,22 @@ $font-32: 32px;
   --padding-top: var(--ion-padding, 10px);
   padding-top: var(--ion-padding, 10px);
 }
+.ion-padding-b-5{
+  --padding-bottom: var(--ion-padding, 5px);
+  padding-bottom: var(--ion-padding, 5px);
+}
+.ion-padding-b-0{
+  --padding-bottom: var(--ion-padding, 0px);
+  padding-bottom: var(--ion-padding, 0px);
+}
 
 .ion-margin-l-10{
   --margin-start: var(--ion-margin, 10px);
   margin-left: var(--ion-margin, 10px);
+}
+.ion-margin-r-5{
+  --margin-end: var(--ion-margin, 5px);
+  margin-right: var(--ion-margin, 5px);
 }
 .ion-margin-t-10{
   --margin-top: var(--ion-margin, 10px);
@@ -125,4 +141,8 @@ $font-32: 32px;
 .ion-margin-t-5{
   --margin-top: var(--ion-margin, 5px);
   margin-top: var(--ion-margin, 5px);
+}
+.ion-margin-t-0{
+  --margin-top: var(--ion-margin, 0px);
+  margin-top: var(--ion-margin, 0px);
 }

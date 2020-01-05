@@ -8,9 +8,9 @@
 </ion-header>
 <ion-content>
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>Lets gather and make it success</ion-card-title>
-      <ion-card-subtitle color="danger">Say no to Trumph</ion-card-subtitle>
+    <ion-card-header class="ion-padding-b-5">
+      <ion-card-title >Lets gather and make it success</ion-card-title>
+      <ion-card-subtitle class="ion-margin-t-0" color="danger">Say no to Trumph</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
@@ -32,16 +32,16 @@
         </ion-row>
         <ion-row class="ion-nowrap">
           <ion-col size="7">
-            <ion-avatar class="avatar">
+            <ion-avatar class="avatar ion-margin-r-5">
               <img src="assets/images/logo.png" />
             </ion-avatar>
-            <ion-avatar class="avatar">
+            <ion-avatar class="avatar ion-margin-r-5">
               <img src="assets/images/logo.png" />
             </ion-avatar>
-            <ion-avatar class="avatar">
+            <ion-avatar class="avatar ion-margin-r-5">
               <img src="assets/images/logo.png" />
             </ion-avatar>
-            <ion-avatar class="avatar">
+            <ion-avatar class="avatar ion-margin-r-5">
               <img src="assets/images/logo.png" />
             </ion-avatar>
           </ion-col>
@@ -49,11 +49,59 @@
             90 more
           </ion-col>
           <ion-col class="fallowing-members">
-            View All 
+            <ion-text color="danger" style="cursor: pointer;">View All</ion-text>   
           </ion-col>
         </ion-row>
         <ion-row>
-          
+          <ion-tabs>
+            <ion-tab-bar>
+              <ion-tab-button tab="images">
+                <ion-label>Images</ion-label>
+              </ion-tab-button>
+              <ion-tab-button tab="videos">
+                <ion-label>Videos</ion-label>
+              </ion-tab-button>
+            </ion-tab-bar>
+          </ion-tabs>
+        </ion-row>
+        <ion-row class="ion-nowrap">
+          <ion-col >
+            <!-- <ion-avatar class="image-thumb ion-margin-r-5">
+              <img src="assets/images/default-user.png"/>
+            </ion-avatar>
+            <ion-avatar class="image-thumb ion-margin-r-5">
+              <img src="assets/images/user-1.jpg"/>
+            </ion-avatar>
+            <ion-avatar class="image-thumb ion-margin-r-5">
+              <img src="assets/images/user-2.jpg"/>
+            </ion-avatar> -->
+            <ion-list>
+              <ion-item class="image-thumb" *ngFor="let item of imgList">
+                  <ion-img  [src]="item.url"></ion-img>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+
+        </ion-row>
+        <ion-row>
+          <ion-list class="meeting-list meeting-list-d">
+              <ion-grid class="meeting-item">
+                <ion-row class="ion-nowrap">
+                  <ion-col class="img-left">
+                    <ion-avatar class="avater">
+                      <img [src]="googlePic" />
+                    </ion-avatar>
+                  </ion-col>
+                  <ion-col size="7">
+                    <ion-label class="meeting-title" style="display: block;color: #000;">Let's gather our barriors</ion-label>
+                    <ion-label class="meeting-sub-title">Say No To Harrasment</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <label class="meeting-date">5 minutes ago</label>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+          </ion-list>
         </ion-row>
       </ion-grid>
     </ion-card-content>
