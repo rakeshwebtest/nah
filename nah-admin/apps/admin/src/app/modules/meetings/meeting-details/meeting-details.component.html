@@ -1,28 +1,36 @@
 <div class="p-contain">
     <div class="row m-0 box">
-        <div class="col-12 col-md-4">
-            <label class="custom-label">City</label>
-            <div class="label-value">New York </div>
+        <div class="col-12 col-md-3">
+            <label class="custom-label">Image</label>
+            <div class="label-value">
+                <img width="100%" src="assets/images/meeting.jpg" alt="">
+            </div>
         </div>
-        <div class="col-12 col-md-4">
-            <label class="custom-label">Meeting Title</label>
-            <div class="label-value">Meeting 1 </div>
-        </div>
-        <div class="col-12 col-md-4">
-            <label class="custom-label">Date</label>
-            <div class="label-value">05-01-2020 </div>
-        </div>
-        <div class="col-12 col-md-4">
-            <label class="custom-label">Time</label>
-            <div class="label-value">10:00 To 11:00 </div>
-        </div>
-        <div class="col-12 col-md-4">
-            <label class="custom-label">Venue</label>
-            <div class="label-value">New York </div>
-        </div>
-        <div class="col-12 col-md-4">
-            <label class="custom-label">Status</label>
-            <div class="label-value">New | Published | Completed | Cancelled </div>
+        <div class="col-12 col-md-9 row align-items-center">
+            <div class="col-12 col-md-4">
+                <label class="custom-label">City</label>
+                <div class="label-value">New York </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <label class="custom-label">Meeting Title</label>
+                <div class="label-value">Meeting 1 </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <label class="custom-label">Date</label>
+                <div class="label-value">05-01-2020 </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <label class="custom-label">Time</label>
+                <div class="label-value">10:00 To 11:00 </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <label class="custom-label">Venue</label>
+                <div class="label-value">New York </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <label class="custom-label">Status</label>
+                <div class="label-value">New | Published | Completed | Cancelled </div>
+            </div>
         </div>
     </div>
     <div>
@@ -33,10 +41,22 @@
                 </ul>
             </mat-tab>
             <mat-tab label="Videos"> <ul class="images-list">
-                <li *ngFor="let item of imgList;"><img [src]="item.url" alt=""></li>
+                <li *ngFor="let video of videoList;">
+                    <!-- <iframe width="200" height="180" src="https://www.youtube.com/embed/gMsOw2urOQU"></iframe> -->
+                    <iframe width="200" height="180" [src]="video.url | safe"></iframe>
+                </li>
             </ul>
         </mat-tab>
-            <mat-tab label="Comments"> No comments </mat-tab>
+            <mat-tab label="Comments">
+                <ul class="comments-list">
+                    <li  *ngFor="let comment of commentsList;">
+                        <div class="comment">
+                            <img [src]="comment.url" alt="">
+                            <p>{{comment.description}}</p>
+                        </div>
+                    </li>
+                </ul>
+            </mat-tab>
         </mat-tab-group>
     </div>
 </div>

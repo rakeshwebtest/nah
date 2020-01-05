@@ -7,6 +7,7 @@
           <th style="width: 4em">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
+          <th>Name</th>
         <th *ngFor="let col of columns">
           {{ col.header }}
         </th>
@@ -17,6 +18,12 @@
       <tr>
         <td>
               <p-tableCheckbox [value]="user"></p-tableCheckbox>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            <img class="avatar" [src]="user.image" alt="">
+            <span class="pl-1">{{user.name}}</span>
+          </div>
         </td>
         <td *ngFor="let col of columns">
           <span class="ui-column-title">{{ col.header }}</span>

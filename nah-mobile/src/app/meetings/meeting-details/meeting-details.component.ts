@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-meeting-details',
@@ -7,8 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MeetingDetailsComponent implements OnInit {
   title = 'Meeting Details';
-  constructor() { }
+  imgList = [];
+  googlePic: any;
+  constructor(private authService: AuthenticationService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const userInfo: any = this.authService.isAuthenticated();
+    this.googlePic = userInfo.user.imageUrl;
+    this.imgList = [
+      { 'url': 'assets/images/default-user.png' },
+      { 'url': 'assets/images/user-1.jpg' },
+      { 'url': 'assets/images/user-2.jpg' },
+      { 'url': 'assets/images/user-1.jpg' },
+      { 'url': 'assets/images/default-user.png' },
+      { 'url': 'assets/images/user-2.jpg' }
+    ];
+  }
 
 }

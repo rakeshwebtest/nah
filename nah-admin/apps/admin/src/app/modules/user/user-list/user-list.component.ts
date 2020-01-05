@@ -121,19 +121,18 @@ export class UserListComponent implements OnInit, OnDestroy {
   ngOnInit() {
   
     this.cols = [
-      { field: 'name', header: 'Name' },
       { field: 'email', header: 'Email' },
       { field: 'typeOfNoer', header: 'Type Of Noer' }
     ];
     this.userList = [
       {
-        'name': 'Mohan Babu','email': 'palaekirimohanbabu@gmail.com','typeOfNoer': 'anties'
+        'image':'assets/images/default-user.png', 'name': 'Mohan Babu','email': 'palaekirimohanbabu@gmail.com','typeOfNoer': 'anties'
       },
       {
-        'name': 'prasad duggirala','email': 'prasadduggirala2@gmail.com','typeOfNoer': 'hater', active: true
+        'image':'assets/images/user-1.jpg', 'name': 'prasad duggirala','email': 'prasadduggirala2@gmail.com','typeOfNoer': 'hater', active: true
       },
       {
-        'name': 'UZ 16LAB','email': 'uzveda115@gmail.com','typeOfNoer': 'anties'
+        'image':'assets/images/user-2.jpg', 'name': 'UZ 16LAB','email': 'uzveda115@gmail.com','typeOfNoer': 'anties'
       }
     ];
   }
