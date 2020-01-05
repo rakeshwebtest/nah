@@ -1,7 +1,14 @@
 .image-thumb{
-    width: 100px;
-    height: 100px;
-    float: left;
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+    img{
+        border-radius: 7px;
+    }
+}
+.image-list{
+    display: flex;
+    flex-wrap: wrap;
 }
 .meeting-item{
     .item-native{
@@ -52,3 +59,4 @@
         padding: 0 !important;
     }
 }
+.meeting-list{width: 100%;}
