@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'theapp-meeting-details',
   templateUrl: './meeting-details.component.html',
@@ -31,5 +30,6 @@ export class MeetingDetailsComponent implements OnInit {
       { 'url': '../../../../assets/images/default-user.png', 'description': `I think I'll speak in a British accent at my next meeting. ` }
     ];
   }
+
 
 }

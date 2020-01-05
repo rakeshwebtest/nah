@@ -10,9 +10,10 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { TableModule } from 'primeng/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatTabsModule} from '@angular/material/tabs';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
-  declarations: [MeetingListComponent, MeetingDetailsComponent],
+  declarations: [MeetingListComponent, MeetingDetailsComponent, SafePipe],
   imports: [
     CommonModule,
     MeetingsRoutingModule,
@@ -25,6 +26,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     TableModule,
     NgbModule,
     MatTabsModule
+  ],
+  exports: [
+    SafePipe
   ]
 })
 export class MeetingsModule { }

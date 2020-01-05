@@ -42,7 +42,8 @@
             </mat-tab>
             <mat-tab label="Videos"> <ul class="images-list">
                 <li *ngFor="let video of videoList;">
-                    <iframe width="200" height="180" src="https://www.youtube.com/embed/gMsOw2urOQU"></iframe>
+                    <!-- <iframe width="200" height="180" src="https://www.youtube.com/embed/gMsOw2urOQU"></iframe> -->
+                    <iframe width="200" height="180" [src]="video.url | safe"></iframe>
                 </li>
             </ul>
         </mat-tab>
