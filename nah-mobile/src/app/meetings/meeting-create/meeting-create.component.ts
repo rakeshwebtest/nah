@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { AppHttpClient } from 'src/app/utils';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-meeting-create',
@@ -48,6 +49,7 @@ export class MeetingCreateComponent implements OnInit {
     wrappers: ['vertical'],
     className: 'col-12',
     templateOptions: {
+      required: true,
       label: 'Meeting Information',
       placeholder: 'Enter Meeting Information',
     }
@@ -58,6 +60,7 @@ export class MeetingCreateComponent implements OnInit {
     wrappers: ['vertical'],
     className: 'col-12',
     templateOptions: {
+      required: true,
       label: 'Image',
       placeholder: 'Upload Image',
     }
@@ -71,6 +74,7 @@ export class MeetingCreateComponent implements OnInit {
         wrappers: ['vertical'],
         className: 'col-12',
         templateOptions: {
+          required: true,
           label: 'Start Date',
           placeholder: 'Choose Date',
         }
@@ -81,6 +85,7 @@ export class MeetingCreateComponent implements OnInit {
         wrappers: ['vertical'],
         className: 'col-6',
         templateOptions: {
+          required: true,
           label: 'Start Time',
           placeholder: 'Choose Time',
           displayFormat: 'hh mm A',
@@ -93,6 +98,7 @@ export class MeetingCreateComponent implements OnInit {
         wrappers: ['vertical'],
         className: 'col-6',
         templateOptions: {
+          required: true,
           label: 'End Time',
           placeholder: 'Choose Time',
           displayFormat: 'hh mm A',
@@ -103,7 +109,7 @@ export class MeetingCreateComponent implements OnInit {
   }
   ];
   groupList = [];
-  constructor(private http: AppHttpClient, private authService: AuthenticationService) { }
+  constructor(private http: AppHttpClient, private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
     const userInfo = this.authService.getUserInfo();
@@ -137,6 +143,8 @@ export class MeetingCreateComponent implements OnInit {
     };
     this.http.post('meeting', formData).subscribe(res => {
       console.log('res', res);
+      this.router.navigate(['/dashboard']);
+
     });
   }
 }
