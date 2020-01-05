@@ -116,6 +116,20 @@ export class SideMenuComponent implements OnInit {
     // }
     this.menu = [
       {
+        'label': 'Dashboard',
+        'code': 'company-list',
+        'icon': 'fa fa-users',
+        'app': 'zc-core',
+        'childs': [
+          {
+            'label': 'Dashboard',
+            'code': 'dashboard',
+            'icon': 'fa fa-circle',
+            'type': 'custom'
+          }
+        ]
+      },
+      {
         'label': 'Users',
         'code': 'user',
         'icon': 'fa fa-users',

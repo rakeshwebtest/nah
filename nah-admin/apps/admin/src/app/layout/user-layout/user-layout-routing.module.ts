@@ -13,6 +13,13 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'dashboard',
+        loadChildren: '../../dashboard/dashboard.module#DashboardModule',
+        data: {
+          breadcrumbs: 'Dashboard'
+        }
+      },
+      {
         path: 'users',
         loadChildren: '../../modules/user/user.module#UserModule',
         data: {

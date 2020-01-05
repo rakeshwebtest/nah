@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   public eventDetails: any[] = [];
   sportsList: any = [];
   activeEventType = 'all'; // all today tomorrow
+  data:any;
   constructor(private router: Router, private appHttp: AppHttpClient) { }
 
   ngOnInit() {
@@ -46,6 +47,19 @@ export class DashboardComponent implements OnInit {
     //     eventStatus: 'In-play'
     //   }
     // ]
+    this.data = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [
+          {
+              label: 'First Dataset',
+              data: [65, 59, 80, 81, 56, 55, 40]
+          },
+          {
+              label: 'Second Dataset',
+              data: [28, 48, 40, 19, 86, 27, 90]
+          }
+      ]
+  }
   }
   getSports(type = 'all') {
     this.activeEventType = type;
