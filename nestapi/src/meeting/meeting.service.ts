@@ -17,8 +17,9 @@ export class MeetingService {
     async getMeetings(): Promise<MeetingEntity[]> {
         return getRepository(MeetingEntity)
             .createQueryBuilder('m')
-            .select(["m", "u.id", "u.displayName", "u.imageUrl", "mm", "user.id", "user.displayName", "user.imageUrl"])
-            .leftJoin('m.user', 'u')
+            .select(["m","group", "u.id", "u.displayName", "u.imageUrl", "mm", "user.id", "user.displayName", "user.imageUrl"])
+            .leftJoin('m.createdBy', 'u')
+            .leftJoin('m.group', 'group')
             .leftJoin("m.members", 'mm')
             .leftJoin("mm.user", 'user')
             .getMany();
@@ -41,8 +42,8 @@ export class MeetingService {
         const userId = parseInt(meeting.createdBy);
         const groupId = parseInt(meeting.groupId);
         // user 
-        _meeting.user = new UserEntity();
-        _meeting.user.id = userId;
+        _meeting.createdBy = new UserEntity();
+        _meeting.createdBy.id = userId;
 
         // group
         _meeting.group = new GroupEntity();

@@ -33,7 +33,7 @@ export class UserEntity extends BaseEntity {
     @OneToMany(type => GroupFollowEntity, gf => gf.user)
     following: GroupFollowEntity[];
 
-    @OneToMany(type => MeetingEntity, meeting => meeting.user) // note: we will create author property in the Photo class below
+    @OneToMany(type => MeetingEntity, meeting => meeting.createdBy) // note: we will create author property in the Photo class below
     meetings: MeetingEntity[];
 
 }

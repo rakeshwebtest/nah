@@ -14,8 +14,18 @@ export class MeetingController {
    * get all meeting with meembers
    */
 
-  @Get()
+  @Get('list')
   async getMeetings() {
+    const data: any = await this.meetingService.getMeetings();
+    return { message: 'ok', data };
+  }
+    /**
+   * get all meeting with meembers
+   * :type upcomeing , coming ,createdId 
+   */
+
+  @Get('list/:type/:id')
+  async getMeetingsByType() {
     const data: any = await this.meetingService.getMeetings();
     return { message: 'ok', data };
   }

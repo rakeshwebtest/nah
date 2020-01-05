@@ -28,7 +28,7 @@ export class MeetingEntity extends BaseEntity {
     group: GroupEntity;
 
     @ManyToOne(type => UserEntity, user => user.meetings)
-    user: UserEntity;
+    createdBy: UserEntity;
 
     @OneToMany(type => MeetingMembersEntity, mm => mm.meeting)
     members: MeetingMembersEntity[];
