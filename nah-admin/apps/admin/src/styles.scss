@@ -634,7 +634,7 @@ body .ui-table .ui-table-thead > tr > th {
   color: #008fda;
 }
 @media(max-width: 40em){
-  theapp-user-list{
+  theapp-user-list,theapp-meeting-list,theapp-city-list,theapp-group-list{
     .ui-table-responsive .ui-table-tbody>tr{
       box-shadow: 0px 0px 6px #999;
       position: relative;
