@@ -6,6 +6,7 @@ import { extname } from 'path';
 import { CreateMeetingDto } from './dto/create-meeting.dto';
 import { ValidationPipe } from './../shared/pipes/validation.pipe';
 import { JoinMeetingDto } from './dto/join-member.dto';
+import { UPLOADBASEPATH } from 'src/config';
 @Controller('meeting')
 export class MeetingController {
 
@@ -17,12 +18,18 @@ export class MeetingController {
   @Get('list')
   async getMeetings() {
     const data: any = await this.meetingService.getMeetings();
+    if (data) {
+      data.map(meeting => {
+        if (meeting.imageUrl)
+          meeting.imageUrl = UPLOADBASEPATH + meeting.imageUrl;
+      });
+    }
     return { message: 'ok', data };
   }
-    /**
-   * get all meeting with meembers
-   * :type upcomeing , coming ,createdId 
-   */
+  /**
+ * get all meeting with meembers
+ * :type upcomeing , coming ,createdId 
+ */
 
   @Get('list/:type/:id')
   async getMeetingsByType() {
@@ -59,6 +66,6 @@ export class MeetingController {
   @UsePipes(new ValidationPipe())
   @Post('join')
   async joinOrUnjoin(@Body() meetingMebers: JoinMeetingDto, @Request() req) {
-    return  this.meetingService.joinMember(meetingMebers);
+    return this.meetingService.joinMember(meetingMebers);
   }
 }
