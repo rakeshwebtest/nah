@@ -10,6 +10,7 @@ import { MeetingsPage } from './meetings.page';
 import { MeetingDetailsComponent } from './meeting-details/meeting-details.component';
 import { MeetingCreateComponent } from './meeting-create/meeting-create.component';
 import { NahFormlyModule } from '../utils/nah-formly/nah-formly.module';
+import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { NahFormlyModule } from '../utils/nah-formly/nah-formly.module';
     FormsModule,
     IonicModule,
     MeetingsPageRoutingModule,
-    NahFormlyModule
+    NahFormlyModule,
+    MeetingListModule
   ],
   declarations: [MeetingsPage, MeetingDetailsComponent, MeetingCreateComponent]
 })

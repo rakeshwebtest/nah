@@ -1,0 +1,128 @@
+<ion-list class="meeting-list">
+
+  <ion-item class="meeting-item" *ngFor="let m of meetingList">
+    <ion-grid>
+      <ion-row class="ion-nowrap">
+        <ion-col class="img-left">
+          <!-- <ion-avatar class="avater small">
+            <img [src]="m.imageUrl" />
+          </ion-avatar> -->
+          <ion-thumbnail>
+            <ion-img [src]="m.imageUrl"></ion-img>
+          </ion-thumbnail>
+
+        </ion-col>
+        <ion-col>
+          <ion-label class="meeting-title">{{m.title}}</ion-label>
+          <ion-label class="meeting-sub-title">Say No To {{m.group.name}}</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <label class="meeting-desc">
+          {{m.agenda}}
+        </label>
+      </ion-row>
+      <ion-row class="ion-nowrap">
+        <ion-col size="8" class="ion-no-padding">
+          <label class="meeting-date" style="display: block;">{{m.meetingDate | date:"mediumDate"}},
+            {{m.startTime | date:'shortTime'}} - {{m.endTime | date:'shortTime'}} </label>
+          <ion-text class="ion-align-items-center" style="display: flex;">
+            <ion-avatar class="avater small" *ngFor="let m of m.members">
+              <img [src]="m.user.imageUrl" />
+            </ion-avatar>
+            <ion-text class="fallowing-members">Members are Following</ion-text>
+          </ion-text>
+        </ion-col>
+        <ion-col size="4" class="ion-text-end" *ngIf="!m.isCreatedBy">
+          <ion-text style="font-weight: bold;display: block;font-size: 14px;">New yark, NY</ion-text>
+          <ion-button color="medium" (click)="meetingJoin(m)" *ngIf="m.isMember">Un Join</ion-button>
+          <ion-button color="danger" (click)="meetingJoin(m)" *ngIf="!m.isMember">Join</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <!-- <ion-item class="meeting-item">
+    <ion-grid>
+      <ion-row class="ion-nowrap">
+        <ion-col class="img-left">
+          <ion-avatar class="avater">
+            <img [src]="googlePic" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col>
+          <ion-label class="meeting-title">Let's gather our barriors</ion-label>
+          <ion-label class="meeting-sub-title">Say No To Harrasment</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <label class="meeting-desc">
+          orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scram
+        </label>
+      </ion-row>
+      <ion-row class="ion-nowrap">
+        <ion-col size="8" class="ion-no-padding">
+          <label class="meeting-date" style="display: block;">14 Nov 2019, 08:00 - 9:00 pm</label>
+          <ion-text class="ion-align-items-center" style="display: flex;">
+            <ion-avatar class="avater small">
+              <img [src]="googlePic" />
+            </ion-avatar>
+            <ion-avatar class="avater small">
+              <img [src]="googlePic" />
+            </ion-avatar>
+            <ion-avatar class="avater small">
+              <img [src]="googlePic" />
+            </ion-avatar>
+            <ion-text class="fallowing-members">Members are Following</ion-text>
+          </ion-text>
+        </ion-col>
+        <ion-col size="4" class="ion-text-end">
+          <ion-text style="font-weight: bold;display: block;font-size: 14px;">New yark, NY</ion-text>
+          <ion-button color="medium">Un Join</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-item class="meeting-item">
+    <ion-grid>
+      <ion-row class="ion-nowrap">
+        <ion-col class="img-left">
+          <ion-avatar class="avater">
+            <img [src]="googlePic" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col>
+          <ion-label class="meeting-title">Let's gather our barriors</ion-label>
+          <ion-label class="meeting-sub-title">Say No To Harrasment</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <label class="meeting-desc">
+          orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scram
+        </label>
+      </ion-row>
+      <ion-row class="ion-nowrap">
+        <ion-col size="8" class="ion-no-padding">
+          <label class="meeting-date" style="display: block;">14 Nov 2019, 08:00 - 9:00 pm</label>
+          <ion-text class="ion-align-items-center" style="display: flex;">
+            <ion-avatar class="avater small">
+              <img [src]="googlePic" />
+            </ion-avatar>
+            <ion-avatar class="avater small">
+              <img [src]="googlePic" />
+            </ion-avatar>
+            <ion-avatar class="avater small">
+              <img [src]="googlePic" />
+            </ion-avatar>
+            <ion-text class="fallowing-members">Members are Following</ion-text>
+          </ion-text>
+        </ion-col>
+        <ion-col size="4" class="ion-text-end">
+          <ion-text style="font-weight: bold;display: block;font-size: 14px;">New yark, NY</ion-text>
+          <ion-button color="medium">Un Join</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item> -->
+</ion-list>
