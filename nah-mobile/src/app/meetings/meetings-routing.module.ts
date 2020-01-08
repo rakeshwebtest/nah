@@ -11,7 +11,7 @@ const routes: Routes = [
     component: MeetingsPage
   },
   {
-    path: 'details',
+    path: 'details/:id',
     component: MeetingDetailsComponent
   },
   {

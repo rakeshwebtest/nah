@@ -5,6 +5,7 @@ import { AppHttpClient } from 'src/app/utils';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-meeting-create',
@@ -109,7 +110,10 @@ export class MeetingCreateComponent implements OnInit {
   }
   ];
   groupList = [];
-  constructor(private http: AppHttpClient, private authService: AuthenticationService, private router: Router) { }
+  constructor(private http: AppHttpClient,
+    public loadingController: LoadingController,
+    private authService: AuthenticationService,
+    private router: Router) { }
 
   ngOnInit() {
     const userInfo = this.authService.getUserInfo();
@@ -129,7 +133,12 @@ export class MeetingCreateComponent implements OnInit {
   }
 
 
-  submit(model) {
+  async submit(model) {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...'
+    });
+    this.presentLoading(loading);
+
     const userInfo = this.authService.getUserInfo();
     console.log('this.userInfo', userInfo);
     const formData = new FormData();
@@ -144,7 +153,12 @@ export class MeetingCreateComponent implements OnInit {
     this.http.post('meeting', formData).subscribe(res => {
       console.log('res', res);
       this.router.navigate(['/dashboard']);
-
+      loading.dismiss();
+    }, err => {
+      loading.dismiss();
     });
+  }
+  async presentLoading(loading) {
+    return await loading.present();
   }
 }

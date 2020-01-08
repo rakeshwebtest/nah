@@ -12,8 +12,8 @@ import { AppHttpClient } from '../utils';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor(
+  googlePic: string;
+  constructor(private authService: AuthenticationService,
     private router: Router) { }
   // @HostListener('document:ionBackButton', ['$event'])
   // private async overrideHardwareBackAction($event: any) {
@@ -21,6 +21,8 @@ export class DashboardComponent implements OnInit {
   //   // await this.modalController.dismiss();
   // }
   ngOnInit() {
+    const userInfo: any = this.authService.isAuthenticated();
+    this.googlePic = userInfo.user.imageUrl;
     console.log('ngOninit');
 
   }
@@ -31,6 +33,4 @@ export class DashboardComponent implements OnInit {
     console.log('log');
     this.router.navigate(['/user-profile']);
   }
-
-
 }

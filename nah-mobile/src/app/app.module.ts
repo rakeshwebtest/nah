@@ -17,11 +17,12 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AppRoutingModule } from './app-routing.module';
+import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 
 
 //driverOrder: ['indexeddb', 'sqlite', 'websql']
 @NgModule({
-  declarations: [AppComponent, SignInComponent, ChooseUserGroupsComponent, GroupCreateModalComponent],
+  declarations: [AppComponent, AdminLayoutComponent, SignInComponent, ChooseUserGroupsComponent, GroupCreateModalComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,

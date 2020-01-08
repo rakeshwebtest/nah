@@ -1,3 +1,14 @@
+.image-thumb{
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+    img{
+        border-radius: 7px;
+    }
+}
+ion-refresher {
+    position: inherit !important;
+}
 .meeting-item{
     .item-native{
         padding: 0 ;

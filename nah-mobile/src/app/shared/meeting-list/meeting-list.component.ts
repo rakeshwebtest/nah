@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AppHttpClient } from 'src/app/utils';
 import { LoadingService } from 'src/app/utils/loading.service';
 import { Router } from '@angular/router';
 import { Meeting } from 'src/app/meetings/meeting';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-meeting-list',
   templateUrl: './meeting-list.component.html',
   styleUrls: ['./meeting-list.component.scss'],
 })
-export class MeetingListComponent implements OnInit {
+export class MeetingListComponent implements OnInit, OnDestroy {
   googlePic: any;
   meetingList: Meeting[] = [];
   constructor(private authService: AuthenticationService,
@@ -20,11 +22,17 @@ export class MeetingListComponent implements OnInit {
 
   ngOnInit() {
 
+    this.getMeetings().subscribe(res => {
+      this.meetingList = res;
+    });
+
+  }
+  getMeetings(): Observable<Meeting[]> {
     const userInfo: any = this.authService.getUserInfo();
     this.googlePic = userInfo.imageUrl;
-    this.http.get('meeting/list').subscribe(res => {
+    return this.http.get('meeting/list').pipe(map(res => {
       let _meetingList: Meeting[] = <Meeting[]>res.data || [];
-      this.meetingList = _meetingList.map(m => {
+      _meetingList.map(m => {
         m.isCreatedBy = false;
         m.isMember = false;
         if (m.createdBy.id === userInfo.id)
@@ -36,7 +44,9 @@ export class MeetingListComponent implements OnInit {
         }
         return m;
       });
-    })
+      console.log('dow');
+      return _meetingList;
+    }));
   }
   meetingJoin(m) {
     const userInfo: any = this.authService.getUserInfo();
@@ -56,5 +66,22 @@ export class MeetingListComponent implements OnInit {
       console.log('res', res);
     });
   }
+  clickMeeting(meeting) {
+    this.router.navigate(['/meeting/details/' + meeting.id]);
+  }
+  reloadItems(eve) {
+    console.log('eve', eve);
+  }
+  async doRefresh(event) {
+    this.getMeetings().subscribe(res => {
+      this.meetingList = res;
+      event.target.complete();
+    });
+
+  }
+  ngOnDestroy() {
+
+  }
+
 
 }

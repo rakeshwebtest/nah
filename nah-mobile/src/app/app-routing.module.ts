@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ChooseUserGroupsComponent } from './sign-in/choose-user-groups/choose-user-groups.component';
 import { IfLoginGuard } from './services/iflogin-guard.service';
+import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 
 const routes: Routes = [
   {
@@ -20,15 +21,22 @@ const routes: Routes = [
     component: ChooseUserGroupsComponent
   },
   {
-    path: 'about',
-    loadChildren: () => import('./about/about.module').then(m => m.AboutPageModule)
-  },
-  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
-  { path: 'user-profile', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) },
-  {
-    path: 'meeting',
-    loadChildren: () => import('./meetings/meetings.module').then( m => m.MeetingsPageModule)
+    path: '',
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: 'about',
+        loadChildren: () => import('./about/about.module').then(m => m.AboutPageModule)
+      },
+      { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path: 'user-profile', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) },
+      {
+        path: 'meeting',
+        loadChildren: () => import('./meetings/meetings.module').then(m => m.MeetingsPageModule)
+      }
+    ]
   }
+
 ];
 
 @NgModule({
