@@ -55,7 +55,7 @@ export class ChooseUserGroupsComponent implements OnInit {
       this.http.put('user', this.profile).subscribe(res => {
         this.nativeStorage.get('USER_INFO').then(user => {
           user.user.typeOfNoer = this.profile.typeOfNoer;
-          user.user.country = this.profile.country;
+          user.user.cityId = this.profile.cityId;
           this.nativeStorage.set('USER_INFO', user);
         });
         this.loadingService.hide();
@@ -73,8 +73,8 @@ export class ChooseUserGroupsComponent implements OnInit {
       this.presentAlert('Chose Type of Noer');
       return false;
     }
-    if (!this.profile.country) {
-      this.presentAlert('Select Country');
+    if (!this.profile.cityId) {
+      this.presentAlert('Select City');
       return false;
     }
     // if (this.profile.followGroups !== 0) {

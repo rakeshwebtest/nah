@@ -24,10 +24,11 @@ export class SignInComponent implements OnInit {
     private userConfigService: UserConfigService) { }
 
   ngOnInit() {
+    this.getCities();
 
   }
   getCities() {
-    this.http.get('group/list').subscribe(res => {
+    this.http.get('city/list').subscribe(res => {
       this.cityList = res.data;
     });
   }

@@ -84,9 +84,11 @@ export class UsersController {
         const _userEntity = new UserEntity();
         if (user.cityId) {
             _userEntity.city = new CityEntity();
-            _userEntity.city.id = user.id;
+            _userEntity.city.id = user.cityId;
         }
         _userEntity.typeOfNoer = user.typeOfNoer;
+        _userEntity.email = user.email;
+        _userEntity.id = user.id;
         return this.service.updateUser(_userEntity);
     }
 
