@@ -1,8 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { BaseEntity } from './../shared/base.entity';
 import { GroupEntity } from 'src/group/group.entity';
 import { GroupFollowEntity } from 'src/group/group-follows.entity';
 import { MeetingEntity } from 'src/meeting/meeting.entity';
+import { CityEntity } from 'src/city/city.entity';
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
 
@@ -24,8 +25,11 @@ export class UserEntity extends BaseEntity {
     @Column({ length: 25, nullable: true })
     typeOfNoer: string;
 
-    @Column({ length: 25, default: '' })
-    country: string;
+    // @Column({ length: 25, default: '' })
+    // country: string;
+
+    @ManyToOne(type => CityEntity, city => city.users)
+    city: CityEntity;
 
     // @OneToMany(type => GroupEntity, group => group.createBy)
     // groups: GroupEntity[];

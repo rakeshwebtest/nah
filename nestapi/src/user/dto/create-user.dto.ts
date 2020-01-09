@@ -8,8 +8,8 @@ export class CreateUserDto {
     @IsNotEmpty()
     readonly id: number;
     @IsNotEmpty()
-    readonly country: string;
+    readonly cityId: number;
     readonly followGroups: GroupFollowDto[];
-    readonly newGroupName:string;
-    updatedDate:Date;
+    readonly newGroupName: string;
+    updatedDate: Date;
 }

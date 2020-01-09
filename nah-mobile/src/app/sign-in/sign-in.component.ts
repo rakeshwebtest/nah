@@ -11,12 +11,12 @@ import { LoadingService } from '../utils/loading.service';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-
+  cityList: any = [];
   profile: any = {
     typeOfNoer: null, // anties || rejection || hater
-    country: null,
-    followGroups:[],
-    newGroupName:null
+    cityId: null,
+    followGroups: [],
+    newGroupName: null
   };
 
   constructor(private router: Router, private http: AppHttpClient,
@@ -25,6 +25,11 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+  getCities() {
+    this.http.get('group/list').subscribe(res => {
+      this.cityList = res.data;
+    });
   }
   onCreateGroup() {
     this.userConfigService.updateProfile = this.profile;

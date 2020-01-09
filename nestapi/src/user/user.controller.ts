@@ -11,6 +11,7 @@ import { ValidationPipe } from './../shared/pipes/validation.pipe';
 import { CreateUserDto } from './dto/create-user.dto';
 import { GroupService } from 'src/group/group.service';
 import { CreateGroupDto } from 'src/group/dto/create-group.dto';
+import { CityEntity } from 'src/city/city.entity';
 
 @Controller('user')
 export class UsersController {
@@ -21,7 +22,7 @@ export class UsersController {
     async getUser(@Request() req) {
         const data: any = await this.service.getUsers();
         const userInfo = req['sessionUser'];
-        return { message: 'ok', data, userInfo};
+        return { message: 'ok', data, userInfo };
     }
 
     @Post()
@@ -70,7 +71,7 @@ export class UsersController {
             const group: CreateGroupDto = {
                 name: user.newGroupName,
                 createdBy: user.id
-            }
+            };
             this.groupService.updateGroup(group);
         }
         if (user.followGroups) {
@@ -80,8 +81,13 @@ export class UsersController {
             }
             // this.groupService.updateFollowGroup(user.followGroups);
         }
-
-        return this.service.updateUser(user);
+        const _userEntity = new UserEntity();
+        if (user.cityId) {
+            _userEntity.city = new CityEntity();
+            _userEntity.city.id = user.id;
+        }
+        _userEntity.typeOfNoer = user.typeOfNoer;
+        return this.service.updateUser(_userEntity);
     }
 
     @Delete(':id')

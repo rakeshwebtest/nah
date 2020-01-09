@@ -7,6 +7,7 @@ import { GroupModule } from './group/group.module';
 import { MeetingModule } from './meeting/meeting.module';
 import * as path from 'path';
 import { MulterModule } from '@nestjs/platform-express';
+import { CityModule } from './city/city.module';
 const ormConfig = require('./../ormconfig.json')
 
 @Module({
@@ -17,7 +18,8 @@ const ormConfig = require('./../ormconfig.json')
     MeetingModule,
     MulterModule.register({
       dest: './uploads',
-    })
+    }),
+    CityModule
   ],
   controllers: [AppController],
   providers: [],
