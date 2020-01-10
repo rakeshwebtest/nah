@@ -122,17 +122,18 @@ export class UserListComponent implements OnInit, OnDestroy {
   
     this.cols = [
       { field: 'email', header: 'Email' },
-      { field: 'typeOfNoer', header: 'Type Of Noer' }
+      { field: 'typeOfNoer', header: 'Type Of Noer' },
+      { field: 'city', header: 'City' },
     ];
     this.userList = [
       {
-        'image':'assets/images/default-user.png', 'name': 'Mohan Babu','email': 'palaekirimohanbabu@gmail.com','typeOfNoer': 'anties'
+        'image':'assets/images/default-user.png', 'name': 'Mohan Babu','email': 'palaekirimohanbabu@gmail.com','typeOfNoer': 'anties', 'city': 'New York'
       },
       {
-        'image':'assets/images/user-1.jpg', 'name': 'prasad duggirala','email': 'prasadduggirala2@gmail.com','typeOfNoer': 'hater', active: true
+        'image':'assets/images/user-1.jpg', 'name': 'prasad duggirala','email': 'prasadduggirala2@gmail.com','typeOfNoer': 'hater', 'city': 'Los Angeles', active: true
       },
       {
-        'image':'assets/images/user-2.jpg', 'name': 'UZ 16LAB','email': 'uzveda115@gmail.com','typeOfNoer': 'anties'
+        'image':'assets/images/user-2.jpg', 'name': 'UZ 16LAB','email': 'uzveda115@gmail.com','typeOfNoer': 'anties', 'city': 'Chicago'
       }
     ];
   }

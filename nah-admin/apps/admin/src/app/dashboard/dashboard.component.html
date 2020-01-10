@@ -1,10 +1,13 @@
 <div class="p-contain">
   <div class="row m-0">
-    <div class="col-12 col-md-6 p-1 shadow">
+    <!-- <div class="col-12 col-md-6 p-1 shadow">
       <p-chart type="bar" [data]="barData"></p-chart>
+    </div> -->
+    <div class="col-12 col-md-6 mt-3 mt-md-0 p-1 shadow">
+      <p-chart type="pie" [data]="cityWiseUsersData" [options]="cityWiseUsersOptions"></p-chart>
     </div>
     <div class="col-12 col-md-6 mt-3 mt-md-0 p-1 shadow">
-      <p-chart type="pie" [data]="pieData"></p-chart>
+      <p-chart type="pie" [data]="cityWiseMeetingsData" [options]="cityWiseMeetingsOptions"></p-chart>
     </div>
   </div>
   

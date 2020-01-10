@@ -1,12 +1,12 @@
 <div class="p-contain">
-    <button type="submit" class="btn btn-sm btn-primary mr-1" *ngIf="selectedUsers.length > 0" (click)="suspend()">Suspend</button>
-    <button type="submit" class="btn btn-sm btn-primary" *ngIf="selectedUsers.length > 0" (click)="activate()">Activate</button>
+    <!-- <button type="submit" class="btn btn-sm btn-primary mr-1" *ngIf="selectedUsers.length > 0" (click)="suspend()">Suspend</button>
+    <button type="submit" class="btn btn-sm btn-primary" *ngIf="selectedUsers.length > 0" (click)="activate()">Activate</button> -->
   <p-table [columns]="cols" [value]="userList" [responsive]="true" [(selection)]="selectedUsers">
     <ng-template pTemplate="header" let-columns>
       <tr>
-          <th style="width: 4em">
+          <!-- <th style="width: 4em">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-          </th>
+          </th> -->
           <th>Name</th>
         <th *ngFor="let col of columns">
           {{ col.header }}
@@ -16,9 +16,9 @@
     </ng-template>
     <ng-template pTemplate="body" let-user let-columns="columns">
       <tr>
-        <td>
+        <!-- <td>
               <p-tableCheckbox [value]="user"></p-tableCheckbox>
-        </td>
+        </td> -->
         <td>
           <div class="d-flex align-items-center">
             <img class="avatar" [src]="user.image" alt="">
@@ -62,13 +62,13 @@
               <li *ngIf="!user.active">
                 <a class="dropdown-item" (click)="activateUsers([{userId: user.userId, updatedBy: sessionInfo.userId }])">Activate User</a>
               </li>
-              <li>
+              <!-- <li>
                 <a
                   class="dropdown-item"
                   (click)="updateUser(updateUserTemp, user)"
                   >Edit User</a
                 >
-              </li>
+              </li> -->
             </div>
           </div>
         </td>
