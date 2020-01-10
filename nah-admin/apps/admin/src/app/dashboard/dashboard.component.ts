@@ -17,31 +17,62 @@ export class DashboardComponent implements OnInit {
   activeEventType = 'all'; // all today tomorrow
   barData: any;
   pieData: any;
+  cityWiseUsersData: any;
+  cityWiseUsersOptions: any;
+  cityWiseMeetingsData: any;
+  cityWiseMeetingsOptions: any;
+
   constructor(private router: Router, private appHttp: AppHttpClient) { }
 
-  ngOnInit() {
-    this.barData = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label: 'My First dataset',
-          backgroundColor: '#42A5F5',
-          borderColor: '#1E88E5',
-          data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-          label: 'My Second dataset',
-          backgroundColor: '#9CCC65',
-          borderColor: '#7CB342',
-          data: [28, 48, 40, 19, 86, 27, 90]
-        }
-      ]
-    }
-    this.pieData = {
-      labels: ['A', 'B', 'C'],
+  ngOnInit() {    
+    this.getCityWiseUsersData();  
+    this.getCityWiseMeetingsData();  
+  }
+  getCityWiseUsersData() {
+    this.cityWiseUsersOptions = {
+      title: {
+        display: true,
+        text: 'City Vs Users',
+        fontSize: 16
+      },
+      legend: {
+        position: 'bottom'
+      }
+    };
+    this.cityWiseUsersData = {
+      labels: ['New York', 'Los Angeles', 'Chicago'],
       datasets: [
         {
           data: [300, 50, 100],
+          backgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56"
+          ],
+          hoverBackgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56"
+          ]
+        }]
+    };
+  }
+  getCityWiseMeetingsData() {
+    this.cityWiseMeetingsOptions = {
+      title: {
+        display: true,
+        text: 'City Vs Meetings',
+        fontSize: 16
+      },
+      legend: {
+        position: 'bottom'
+      }
+    };
+    this.cityWiseMeetingsData = {
+      labels: ['New York', 'Los Angeles', 'Chicago'],
+      datasets: [
+        {
+          data: [100, 150, 80],
           backgroundColor: [
             "#FF6384",
             "#36A2EB",
