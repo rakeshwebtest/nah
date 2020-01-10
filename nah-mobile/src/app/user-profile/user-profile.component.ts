@@ -88,4 +88,11 @@ export class UserProfileComponent implements OnInit {
     const color = Math.floor(0x1000000 * Math.random()).toString(16);
     return '#' + ('000000' + color).slice(-6);
   }
+  deleteGroup(group: any, index) {
+    this.groupList.splice(index, 1);
+    this.http.delete('group/' + group.id).subscribe(res => {
+      
+    });
+
+  }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UploadedFile, UseInterceptors, Request, UsePipes } from '@nestjs/common';
+import { Controller, Get, Post, Body, UploadedFile, UseInterceptors, Request, UsePipes, Param, Query } from '@nestjs/common';
 import { MeetingService } from './meeting.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -16,15 +16,10 @@ export class MeetingController {
    */
 
   @Get('list')
-  async getMeetings() {
-    const data: any = await this.meetingService.getMeetings();
-    if (data) {
-      data.map(meeting => {
-        if (meeting.imageUrl)
-          meeting.imageUrl = UPLOADBASEPATH + meeting.imageUrl;
-      });
-    }
-    return { message: 'ok', data };
+  async getMeetings(@Query() query) {
+    const data: any = await this.meetingService.getMeetings(query);
+
+    return { message: 'ok', data, query };
   }
   /**
  * get all meeting with meembers
@@ -32,8 +27,8 @@ export class MeetingController {
  */
 
   @Get('list/:type/:id')
-  async getMeetingsByType() {
-    const data: any = await this.meetingService.getMeetings();
+  async getMeetingsByType(@Query() query) {
+    const data: any = await this.meetingService.getMeetings(query);
     return { message: 'ok', data };
   }
   /**

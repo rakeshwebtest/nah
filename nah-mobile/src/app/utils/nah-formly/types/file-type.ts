@@ -5,6 +5,7 @@ import { FieldType } from '@ngx-formly/core';
     selector: 'formly-field-file',
     template: `
   <ion-input  type="file"
+  accept="image/x-png,image/gif,image/jpeg"
   (change)="onFileChange($event)"
    [formControl]="formControl" [ionFormlyAttributes]="field"></ion-input>
   `,

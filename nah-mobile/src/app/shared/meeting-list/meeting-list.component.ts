@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AppHttpClient } from 'src/app/utils';
 import { LoadingService } from 'src/app/utils/loading.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Meeting } from 'src/app/meetings/meeting';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -17,6 +17,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
   meetingList: Meeting[] = [];
   constructor(private authService: AuthenticationService,
     private router: Router,
+    private activeRouter: ActivatedRoute,
     private http: AppHttpClient,
     private loading: LoadingService) { }
 
@@ -28,9 +29,18 @@ export class MeetingListComponent implements OnInit, OnDestroy {
 
   }
   getMeetings(): Observable<Meeting[]> {
+    const params = this.activeRouter.snapshot.params;
+
+    console.log('parm', params);
     const userInfo: any = this.authService.getUserInfo();
     this.googlePic = userInfo.imageUrl;
-    return this.http.get('meeting/list').pipe(map(res => {
+    let queryString = '?type=' + params.type || 'all';
+    if (params.type === 'my-meeting') {
+      queryString += '&userId=' + userInfo.id;
+    }
+
+
+    return this.http.get('meeting/list' + queryString).pipe(map(res => {
       let _meetingList: Meeting[] = <Meeting[]>res.data || [];
       _meetingList.map(m => {
         m.isCreatedBy = false;

@@ -152,7 +152,8 @@ export class MeetingCreateComponent implements OnInit {
     };
     this.http.post('meeting', formData).subscribe(res => {
       console.log('res', res);
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard'], { queryParams: { reload: true } });
+      // window.location.reload();
       loading.dismiss();
     }, err => {
       loading.dismiss();

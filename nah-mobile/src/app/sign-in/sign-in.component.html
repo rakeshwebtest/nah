@@ -61,7 +61,7 @@
           okText="Okay"
           cancelText="Dismiss"
         >
-          <ion-select-option value="c.id" *ngFor="let c of cityList">{{ c.name }}</ion-select-option>
+          <ion-select-option [value]="c.id" *ngFor="let c of cityList">{{ c.name }}</ion-select-option>
           <!-- <ion-select-option value="usa">USA</ion-select-option> -->
         </ion-select>
       </ion-col>

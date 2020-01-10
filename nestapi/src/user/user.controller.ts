@@ -89,7 +89,8 @@ export class UsersController {
         _userEntity.typeOfNoer = user.typeOfNoer;
         _userEntity.email = user.email;
         _userEntity.id = user.id;
-        return this.service.updateUser(_userEntity);
+        const data = await this.service.updateUser(_userEntity);
+        return { message: 'Update Succussfully', data };
     }
 
     @Delete(':id')

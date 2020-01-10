@@ -1,4 +1,4 @@
-import { Controller, Get, UsePipes, Post, Body, HttpException, HttpStatus, Param } from '@nestjs/common';
+import { Controller, Get, UsePipes, Post, Body, HttpException, HttpStatus, Param, Delete } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { ValidationPipe } from 'src/shared/pipes/validation.pipe';
 import { CreateGroupDto } from './dto/create-group.dto';
@@ -14,7 +14,7 @@ export class GroupController {
         return { message: 'Fetch Groups', data };
     }
     @Get('list/:id')
-    async getGroupById(@Param() params:any) {
+    async getGroupById(@Param() params: any) {
 
         const data: any = await this.service.getGroupById(params.id);
         return { message: 'Fetch Groups', data };
@@ -56,6 +56,11 @@ export class GroupController {
         //     return { message: 'successfully Followed Group', data };
         // }
 
+    }
+    @Delete(':id')
+    async deleteGruop(@Param() params: any) {
+        const data = await this.service.deleteGroup(params.id);
+        return { message: 'Delete Successfullly', data };
     }
 
 }

@@ -27,4 +27,7 @@ export class GroupEntity extends BaseEntity {
     @Column()
     createdBy: number;
 
+    @Column({ default: 0 })
+    isDeleted: number;
+
 }

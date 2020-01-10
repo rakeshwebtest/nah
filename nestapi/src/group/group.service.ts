@@ -16,11 +16,12 @@ export class GroupService {
 
     async getGroups(): Promise<any[]> {
         return await <any>getRepository(GroupEntity)
-        .createQueryBuilder('group')
-        .select(["group","gf","user.id","user.displayName","user.imageUrl"])
-        .leftJoin('group.followers', 'gf')
-        .leftJoin('gf.user', 'user')
-        .getMany();
+            .createQueryBuilder('group')
+            .select(["group", "gf", "user.id", "user.displayName", "user.imageUrl"])
+            .leftJoin('group.followers', 'gf')
+            .leftJoin('gf.user', 'user')
+            .where('group.isDeleted != 1')
+            .getMany();
 
         // const mapGroups =  groups.map(group=>{
         //     let _followers:any[] = [];
@@ -43,13 +44,13 @@ export class GroupService {
     }
     async getGroupById(userId): Promise<any[]> {
         return await <any>getRepository(GroupEntity)
-        .createQueryBuilder('group')
-        .select(["group","gf","user.id","user.displayName","user.imageUrl"])
-        .leftJoin('group.followers', 'gf')
-        .leftJoin('gf.user', 'user')
-        .where('group.createdBy = :id', { id: userId })
-        .orWhere('user.id= :id', { id: userId })
-        .getMany();
+            .createQueryBuilder('group')
+            .select(["group", "gf", "user.id", "user.displayName", "user.imageUrl"])
+            .leftJoin('group.followers', 'gf')
+            .leftJoin('gf.user', 'user')
+            .where('group.createdBy = :id && isDeleted != 1', { id: userId })
+            .orWhere('user.id= :id', { id: userId })
+            .getMany();
     }
     async getMembersByGroupId(groupId) {
         return getRepository(GroupFollowEntity)
@@ -73,7 +74,7 @@ export class GroupService {
     async isFollower1(groupFollow: GroupFollowDto) {
         return getRepository(GroupFollowEntity)
             .createQueryBuilder('gf')
-            .where('gf.groupId = :groupId && gf.userId = :userId', { groupId:groupFollow.groupId,userId:groupFollow.userId })
+            .where('gf.groupId = :groupId && gf.userId = :userId', { groupId: groupFollow.groupId, userId: groupFollow.userId })
             .getMany();
     }
     async follow(groupFollow: GroupFollowDto) {
@@ -125,12 +126,17 @@ export class GroupService {
             .createQueryBuilder()
             .insert()
             .into(GroupFollowEntity)
-           // .values(groupFollows)
+            // .values(groupFollows)
             .execute();
     }
     async checkGroupName(group: CreateGroupDto): Promise<GroupEntity> {
         return await this.groupRepository.findOne({
             where: [{ name: group.name, createBy: group.createdBy }],
         });
+    }
+    async deleteGroup(groupId) {
+        const group = new GroupEntity();
+        group.isDeleted = 1;
+        return await this.groupRepository.update(groupId,group);
     }
 }

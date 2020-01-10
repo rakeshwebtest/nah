@@ -32,6 +32,7 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       console.log('already');
+      
       // Here we will check if the user is already logged in
       // because we don't want to ask users to log in each time they open the app
       // this.nativeStorage.getItem('google_user')
