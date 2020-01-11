@@ -6,20 +6,25 @@
     refreshingText="Refreshing...">
   </ion-refresher-content>
 </ion-refresher>
+<ion-row class="ion-align-items-center no-meetings" *ngIf="!isMeetings">
+  <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
+    No Meetings Available
+  </ion-col>
+</ion-row>
 <ion-list class="meeting-list">
   <ion-item class="meeting-item" *ngFor="let m of meetingList">
-    <ion-grid>
+    <ion-grid class="ion-no-padding" >
       <ion-row class="ion-nowrap" (click)="clickMeeting(m)">
-        <ion-col class="img-left">
+        <ion-col class="img-left ion-no-padding">
           <!-- <ion-avatar class="avater small">
             <img [src]="m.imageUrl" />
           </ion-avatar> -->
-          <ion-thumbnail>
-            <ion-img [src]="m.imageUrl"></ion-img>
+          <ion-thumbnail class="" style="display: flex;align-items: center;justify-content: center;">
+            <ion-img class="avatar" [src]="m.imageUrl"></ion-img>
           </ion-thumbnail>
 
         </ion-col>
-        <ion-col>
+        <ion-col class="ion-no-padding" style="display: flex;flex-direction:column;justify-content: center;">
           <ion-label class="meeting-title">{{m.title}}</ion-label>
           <ion-label class="meeting-sub-title">Say No To {{m.group.name}}</ion-label>
         </ion-col>
@@ -29,11 +34,11 @@
           {{m.agenda}}
         </label>
       </ion-row>
-      <ion-row class="ion-nowrap">
+      <ion-row class="ion-nowrap row-last ion-align-items-center">
         <ion-col size="8" class="ion-no-padding">
           <label class="meeting-date" style="display: block;">{{m.meetingDate | date:"mediumDate"}},
             {{m.startTime | date:'shortTime'}} - {{m.endTime | date:'shortTime'}} </label>
-          <ion-text class="ion-align-items-center" style="display: flex;" *ngIf="m.members.length > 0">
+          <ion-text class="ion-align-items-center" style="display: flex;flex-wrap:wrap;" *ngIf="m.members.length > 0">
             <ion-avatar class="avater small" *ngFor="let m of m.members">
               <img [src]="m.user.imageUrl" />
             </ion-avatar>

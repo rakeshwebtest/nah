@@ -8,12 +8,14 @@
     </ion-title>
   </ion-toolbar>
 </ion-header> -->
-<ion-content class="ion-vertical-align-content">
-  <ion-row class="ion-text-center ion-padding margin-top-50">
+<ion-card class="ion-vertical-align-content" style="margin: 0;height: 100%;align-items: center;display: flex;justify-content: center;">
+
+  <ion-card-content>
+  <ion-row class="ion-text-center ion-padding ">
     <ion-col>
       <ion-img
         class="ion-text-center"
-        style="width: 100px; height: 100px;margin: 0 auto;"
+        style="width: 175px; height: 175px;margin: 0 auto;"
         src="assets/images/logo.png"
       ></ion-img>
     </ion-col>
@@ -35,15 +37,8 @@
       </ion-card-content>
     </ion-card>
   </ion-row> -->
- 
- 
-</ion-content>
-<ion-footer>
-  <!-- <ion-row class="ion-justify-content-center">
-    <h3 class="red-color font-24">A new way to hate...!</h3>
-  </ion-row> -->
-  <ion-row  class="ion-justify-content-center ion-margin-top ion-margin-bottom">
-    <ion-button color="danger" (click)="signInWithGoogle()">
+  <ion-row  class="ion-justify-content-center margin-top-100 ion-margin-bottom">
+    <ion-button color="danger" (click)="signInWithGoogle()" style="font-size: 16px;;">
       
       <!-- <ion-icon class="custom-google"></ion-icon> -->
       <ion-img class="" style="width:30px;width: 25px;background: #fff;padding: 5px;border-radius: 5px;margin-right: 5px;" src="assets/images/google.png"></ion-img>
@@ -54,4 +49,22 @@
       Continu without Google Test
     </ion-button> -->
   </ion-row>
-</ion-footer>
+</ion-card-content>
+</ion-card>
+<!-- <ion-footer> -->
+  <!-- <ion-row class="ion-justify-content-center">
+    <h3 class="red-color font-24">A new way to hate...!</h3>
+  </ion-row> -->
+  <!-- <ion-row  class="ion-justify-content-center ion-margin-top ion-margin-bottom">
+    <ion-button color="danger" (click)="signInWithGoogle()"> -->
+      
+      <!-- <ion-icon class="custom-google"></ion-icon> -->
+      <!-- <ion-img class="" style="width:30px;width: 25px;background: #fff;padding: 5px;border-radius: 5px;margin-right: 5px;" src="assets/images/google.png"></ion-img>
+      Sign in with Google
+    </ion-button> -->
+    <!-- <ion-button color="light" (click)="signInWithGoogleTest()">
+           <ion-img class="ion-padding-r-10" style="width:30px;" src="assets/images/google.png"></ion-img>
+      Continu without Google Test
+    </ion-button> -->
+  <!-- </ion-row> -->
+<!-- </ion-footer> -->

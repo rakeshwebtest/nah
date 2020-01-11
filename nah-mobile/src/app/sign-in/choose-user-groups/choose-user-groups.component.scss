@@ -1,7 +1,9 @@
 .group-item{
-
+    flex: 0 0 auto;
+    width: auto;
     ion-chip {
         border-radius: 0px;
+        margin: 0;
         &.active{
             background-color: #f00;
             color:white;

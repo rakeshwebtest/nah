@@ -1,18 +1,18 @@
-<ion-content class="ion-padding">
-  <ion-grid>
-    <ion-row class="ion-align-items-center ion-margin">
+<ion-content >
+  <ion-grid style="height: 100%;align-items: center;justify-content: center;display: flex;flex-direction: column;">
+    <ion-row class="ion-align-items-center">
       <ion-col class="ion-text-center">
         <ion-button color="light">
           <ion-label> Hey, Let us know about your Noer</ion-label>
         </ion-button>
       </ion-col>
     </ion-row>
-    <ion-row class="ion-justify-content-center ion-margin-top">
+    <ion-row class="ion-justify-content-center margin-top-50">
       <ion-col class="ion-text-center">
         <ion-label>Select type of Noer</ion-label>
       </ion-col>
     </ion-row>
-    <ion-row class="type-of-noer ion-margin-bottom">
+    <ion-row class="type-of-noer">
       <ion-col class="ion-text-center align-center ion-activatable" (click)="noerSelection('anties')">
         <ion-avatar class="avatar ion-align-items-center" [ngClass]="{ active: profile.typeOfNoer == 'anties' }">
           <ion-icon class="custom-antie"></ion-icon>
@@ -20,7 +20,7 @@
         </ion-avatar>
         <ion-label class="ion-padding-t-5">Antie's</ion-label>
         <ion-label class="ion-text-center ion-padding-t-5" style="font-size: small; opacity: 0.5;"
-          >What's your Anti</ion-label
+          >What your Anti</ion-label
         >
         <ion-ripple-effect></ion-ripple-effect>
       </ion-col>
@@ -31,7 +31,7 @@
         </ion-avatar>
         <ion-label class="ion-padding-t-5">Rejector</ion-label>
         <ion-label class="ion-text-center ion-padding-t-5" style="font-size: small; opacity: 0.5;"
-          >What's your Reject</ion-label
+          >What your Reject</ion-label
         >
         <ion-ripple-effect></ion-ripple-effect>
       </ion-col>
@@ -42,18 +42,18 @@
         </ion-avatar>
         <ion-label class="ion-padding-t-5">Hater</ion-label>
         <ion-label class="ion-text-center ion-padding-t-5" style="font-size: small; opacity: 0.5;"
-          >What's your Hate</ion-label
+          >What your Hate</ion-label
         >
         <ion-ripple-effect></ion-ripple-effect>
       </ion-col>
     </ion-row>
-    <ion-row class="ion-margin-top">
+    <ion-row class="ion-margin-top margin-top-50">
       <ion-col class="ion-text-center">
         <ion-label>Choose your City</ion-label>
       </ion-col>
     </ion-row>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="6">
+    <ion-row class="ion-justify-content-center" style="width: 80%;">
+      <ion-col size="12">
         <ion-select
           class="ion-padding-r-10"
           [(ngModel)]="profile.cityId"
@@ -66,7 +66,7 @@
         </ion-select>
       </ion-col>
     </ion-row>
-    <ion-row class="ion-justify-content-center ion-margin-top margin-top-150">
+    <ion-row class="ion-justify-content-center ion-margin-top margin-top-50">
       <ion-button color="danger" (click)="onCreateGroup()" [disabled]="!profile.typeOfNoer || !profile.cityId">
         Choose your 'Say No To Group'
       </ion-button>

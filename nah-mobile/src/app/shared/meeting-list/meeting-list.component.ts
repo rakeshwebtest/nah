@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 export class MeetingListComponent implements OnInit, OnDestroy {
   googlePic: any;
   meetingList: Meeting[] = [];
+  isMeetings = false;
   constructor(private authService: AuthenticationService,
     private router: Router,
     private activeRouter: ActivatedRoute,
@@ -25,6 +26,9 @@ export class MeetingListComponent implements OnInit, OnDestroy {
 
     this.getMeetings().subscribe(res => {
       this.meetingList = res;
+      if (this.meetingList.length > 0) {
+        this.isMeetings = true;
+      }
     });
 
   }
