@@ -1,6 +1,18 @@
 <div class="p-contain">
-    <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-sm btn-danger" (click)="onAddGroup(addGroup)">Add</button>
+
+    <div class="row m-0 filters-widget">
+      <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
+        <p-dropdown [options]="groupList" [(ngModel)]="selectedCity" placeholder="Select a Group" optionLabel="name" [showClear]="true"></p-dropdown>
+      </div>
+      <!-- <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
+        <p-dropdown [options]="noerTypes" [(ngModel)]="selectedCity" placeholder="Type Of Noer" optionLabel="name" [showClear]="true"></p-dropdown>
+      </div> -->
+      <div class="col-12 col-md-4 mb-1 p-0">
+        <input type="text" pInputText placeholder="Search">
+      </div>
+        <div class="col-12 col-md-4 mb-1 p-0 d-flex justify-content-end">
+          <button type="button" class="btn btn-sm btn-danger" (click)="onAddGroup(addGroup)">Add</button>
+      </div>
     </div>
   <p-table [columns]="cols" [value]="groupList" [responsive]="true">
     <ng-template pTemplate="header" let-columns>

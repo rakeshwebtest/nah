@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { GroupsRoutingModule } from './groups-routing.module';
 import { GroupListComponent } from './group-list/group-list.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { TableModule } from 'primeng/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -22,7 +24,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     }),
     FormlyBootstrapModule,
     TableModule,
-    NgbModule
+    NgbModule,
+    DropdownModule,
+    InputTextModule,
+    FormsModule
   ]
 })
 export class GroupsModule { }

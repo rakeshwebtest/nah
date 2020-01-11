@@ -834,3 +834,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
   background-color: #e11f27;
 }
+.ui-dropdown{width:100%;}
+.ui-inputtext{    
+  height: 34px;
+  width: 100%;
+}
+.filters-widget{
+  position: sticky;
+  top: 60px;
+  z-index: 1;
+  background-color: #fff;
+  @media(max-width:991px) {
+    margin: 0;
+  }
+}
+input::placeholder,
+.ui-placeholder{
+  font-size:12px !important;
+  color:#999 !important;
+  line-height: 26px;
+}
