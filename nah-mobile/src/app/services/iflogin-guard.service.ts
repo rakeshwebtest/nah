@@ -16,9 +16,9 @@ export class IfLoginGuard implements CanActivate {
     const _user: any = this.authenticationService.isAuthenticated();
     if(_user){
       if (_user.user.typeOfNoer) {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['/dashboard']);
       } else {
-        this.router.navigate(['sign-in']);
+        this.router.navigate(['/sign-in']);
       }
       return false;
     }else{

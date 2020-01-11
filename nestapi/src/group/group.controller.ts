@@ -1,4 +1,4 @@
-import { Controller, Get, UsePipes, Post, Body, HttpException, HttpStatus, Param, Delete } from '@nestjs/common';
+import { Controller, Get, UsePipes, Post, Body, HttpException, HttpStatus, Param, Delete, Query } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { ValidationPipe } from 'src/shared/pipes/validation.pipe';
 import { CreateGroupDto } from './dto/create-group.dto';
@@ -9,8 +9,8 @@ export class GroupController {
     constructor(public service: GroupService) { }
 
     @Get('list')
-    async getGroups() {
-        const data: any = await this.service.getGroups();
+    async getGroups(@Query() query) {
+        const data: any = await this.service.getGroups(query);
         return { message: false, data };
     }
     @Get('list/:id')

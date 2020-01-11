@@ -13,6 +13,7 @@ import { AppHttpClient } from '../utils';
 })
 export class DashboardComponent implements OnInit {
   googlePic: string;
+  showList = false;
   constructor(private authService: AuthenticationService,
     private router: Router) { }
   // @HostListener('document:ionBackButton', ['$event'])
@@ -20,6 +21,10 @@ export class DashboardComponent implements OnInit {
   //   console.log('back pressed');
   //   // await this.modalController.dismiss();
   // }
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter');
+    this.reload();
+  }
   ngOnInit() {
     const userInfo: any = this.authService.isAuthenticated();
     this.googlePic = userInfo.user.imageUrl;
@@ -32,5 +37,11 @@ export class DashboardComponent implements OnInit {
   navProfile() {
     console.log('log');
     this.router.navigate(['/user-profile']);
+  }
+  reload() {
+    this.showList = false;
+    setTimeout(() => {
+      this.showList = true;
+    }, 100);
   }
 }

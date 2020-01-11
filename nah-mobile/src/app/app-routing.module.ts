@@ -4,6 +4,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { ChooseUserGroupsComponent } from './sign-in/choose-user-groups/choose-user-groups.component';
 import { IfLoginGuard } from './services/iflogin-guard.service';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -18,11 +19,12 @@ const routes: Routes = [
   },
   {
     path: 'choose-user-group',
-    component: ChooseUserGroupsComponent
+    component: ChooseUserGroupsComponent,
   },
   {
     path: '',
     component: AdminLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'about',
