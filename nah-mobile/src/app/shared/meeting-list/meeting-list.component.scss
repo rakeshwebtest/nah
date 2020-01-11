@@ -68,3 +68,14 @@ ion-refresher {
     padding: 7px;
     margin: 5px;
 }
+.count-circle{
+    display: flex;
+    width: 15px;
+    height: 15px;
+    background-color: #999;
+    color: #fff;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    margin-right: 3px;
+}
