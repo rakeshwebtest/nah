@@ -14,6 +14,7 @@ export class UserProfileComponent implements OnInit {
   googlePic: String;
   userInfo: any;
   groupList = [];
+  customColors = ['#f00', '#0f0', '#00f', '#70C149', '#E6B211', '#EE5641', '#ED008C', '#40B4D9', '#9A6AB6', '#AE8C4C'];
   constructor(private authService: AuthenticationService,
     private popoverController: PopoverController,
     private modalController: ModalController,
