@@ -4,7 +4,7 @@
     "host": "localhost",
     "port": 3306,
     "username": "root",
-    "password": "trk@2012",
+    "password": "password",
     "database": "nah",
     "entities": [
       "src/**/**.entity{.ts,.js}"
