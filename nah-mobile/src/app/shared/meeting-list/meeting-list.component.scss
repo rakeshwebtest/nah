@@ -10,6 +10,7 @@ ion-refresher {
     position: inherit !important;
 }
 .meeting-item{
+    padding-bottom: 10px;
     .item-native{
         padding: 0 ;
     }
@@ -29,6 +30,8 @@ ion-refresher {
             align-items: center;
             justify-content: center;
             margin-right: 5px;
+            min-width: 20px;
+            margin-bottom: 2px;
         }
     }
     .meeting-title{
@@ -45,7 +48,7 @@ ion-refresher {
     }
     .meeting-date{
         font-size: 12px;
-        padding-top: 5px;
+        padding-bottom: 5px;
     }
     .fallowing-members{
         font-size: 10px;
@@ -53,4 +56,15 @@ ion-refresher {
         display: flex;
         align-items: center;
     }
+    &:last-child{
+        .row-last{
+            padding-bottom: 35px;
+        }
+    }
+}
+.no-meetings{
+    background-color: #ccc;
+    border-radius: 5px;
+    padding: 7px;
+    margin: 5px;
 }

@@ -14,14 +14,17 @@
   </ion-fab>
   <ion-searchbar></ion-searchbar>
   <ion-grid class="group">
-    <ion-col class="group-item" *ngFor="let item of groupList">
-      <ion-chip class="chip" *ngIf="item.createdBy !== userInfo.id" [ngClass]="{active:item.active}" (click)="itemClick(item)">
-        <ion-label><strong>Say No To</strong> {{item.name}}</ion-label>
-      </ion-chip>
-      <ion-chip class="chip active" *ngIf="item.createdBy === userInfo.id" >
-        <ion-label><strong>Say No To</strong> {{item.name}}</ion-label>
-      </ion-chip>
-    </ion-col>
+    <ion-row>
+      <ion-col class="group-item" *ngFor="let item of groupList">
+        <ion-chip class="chip" *ngIf="item.createdBy !== userInfo.id" [ngClass]="{active:item.active}" (click)="itemClick(item)">
+          <ion-label style="white-space: nowrap;"><strong>Say No To</strong> {{item.name}}</ion-label>
+        </ion-chip>
+        <ion-chip class="chip active" *ngIf="item.createdBy === userInfo.id" >
+          <ion-label style="white-space: nowrap;"><strong>Say No To</strong> {{item.name}}</ion-label>
+        </ion-chip>
+      </ion-col>
+
+    </ion-row>
   </ion-grid>
   <!-- <ion-row class="ion-justify-content-center">
     <ion-col size="6">
@@ -31,7 +34,10 @@
       </ion-item>
     </ion-col>
   </ion-row> -->
-  <ion-row class="ion-justify-content-center margin-top-150">
+  
+</ion-content>
+<ion-footer>
+  <ion-row class="ion-justify-content-center">
     <ion-col size="10">
       <ion-button style="width:100%;" color="danger" (click)="updateSignIn()"  [disabled]="profile.followGroups.length < 1 ">
         START EXPLORING
@@ -39,4 +45,4 @@
 
     </ion-col>
   </ion-row>
-</ion-content>
+</ion-footer>
