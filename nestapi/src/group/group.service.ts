@@ -14,15 +14,19 @@ export class GroupService {
         @InjectRepository(GroupFollowEntity) private readonly groupFollowRepository: Repository<GroupFollowEntity>
     ) { }
 
-    async getGroups(): Promise<any[]> {
-        return await <any>getRepository(GroupEntity)
+    async getGroups(query): Promise<GroupEntity[]> {
+        const db = getRepository(GroupEntity)
             .createQueryBuilder('group')
             .select(["group", "gf", "user.id", "user.displayName", "user.imageUrl"])
             .leftJoin('group.followers', 'gf')
             .leftJoin('gf.user', 'user')
-            .where('group.isDeleted != 1')
-            .getMany();
+            .where('group.isDeleted != 1');
 
+        if (query.search) {
+            db.where("group.name like :name", {name: '%' + query.search + '%' })
+        }
+
+        return await db.getMany();
         // const mapGroups =  groups.map(group=>{
         //     let _followers:any[] = [];
         //     if(group.followers.length > 0){
@@ -137,6 +141,6 @@ export class GroupService {
     async deleteGroup(groupId) {
         const group = new GroupEntity();
         group.isDeleted = 1;
-        return await this.groupRepository.update(groupId,group);
+        return await this.groupRepository.update(groupId, group);
     }
 }

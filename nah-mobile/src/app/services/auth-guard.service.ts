@@ -12,7 +12,9 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(): boolean {
-    return this.authenticationService.isAuthenticated();
+    const data = this.authenticationService.isAuthenticated();
+    console.log('data --loing',data);
+    return (data) ? true : false;
   }
 
 }

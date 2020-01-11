@@ -15,10 +15,12 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class ChooseUserGroupsComponent implements OnInit {
   groupList = [
   ];
+  filterGroupList = [];
+  searchKey: any;
   profile: any;
   userInfo: any;
-  followingGroups:string[] = [];
-  createdGroups:string[] = [];
+  followingGroups: string[] = [];
+  createdGroups: string[] = [];
   constructor(private router: Router, private loadingService: LoadingService,
     private alertController: AlertController,
     private http: AppHttpClient,
@@ -35,12 +37,25 @@ export class ChooseUserGroupsComponent implements OnInit {
     this.getGroups();
   }
   getGroups() {
-    this.http.get('group/list').subscribe(res => {
+    let query: string = '';
+    if (this.searchKey) {
+      // query = '?search=' + this.searchKey;
+    }
+    this.http.get('group/list' + query).subscribe(res => {
       console.log('list', res);
       this.groupList = res.data || [];
-      this.profile.followGroups = this.groupList.filter(g=>g.createdBy === this.userInfo.id);
-      console.log('this.profile.followGroups',this.profile.followGroups);
+      this.filterGroupList = res.data || [];
+      this.profile.followGroups = this.groupList.filter(g => g.createdBy === this.userInfo.id);
+      console.log('this.profile.followGroups', this.profile.followGroups);
     });
+  }
+  searchFilter(event) {
+    this.searchKey = event.target.value;
+    // this.getGroups();
+    this.filterGroupList = this.groupList.filter(item => {
+      return (item.name.toLowerCase().indexOf(this.searchKey.toLowerCase()) > -1);
+    })
+
   }
   async updateSignIn() {
     const { email, id } = this.userConfigService.user.user;
@@ -99,8 +114,12 @@ export class ChooseUserGroupsComponent implements OnInit {
       component: GroupCreateModalComponent,
       cssClass: "group-create-modal"
     });
-    modal.onDidDismiss().then(arg=>{
-      this.getGroups();
+    modal.onDidDismiss().then(arg => {
+      // console.log('modal ',arg);
+      this.filterGroupList = [arg.data, ...this.filterGroupList];
+      this.groupList = this.filterGroupList;
+      // this.filterGroupList.push(arg.data);
+      // this.getGroups();
     });
     return await modal.present();
   }

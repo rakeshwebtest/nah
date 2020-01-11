@@ -12,10 +12,10 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-searchbar></ion-searchbar>
+  <ion-searchbar (ionInput)="searchFilter($event)" (ionBlur)="searchFilter($event)"></ion-searchbar>
   <ion-grid class="group">
     <ion-row>
-      <ion-col class="group-item" *ngFor="let item of groupList">
+      <ion-col class="group-item" *ngFor="let item of filterGroupList">
         <ion-chip class="chip" *ngIf="item.createdBy !== userInfo.id" [ngClass]="{active:item.active}" (click)="itemClick(item)">
           <ion-label style="white-space: nowrap;"><strong>Say No To</strong> {{item.name}}</ion-label>
         </ion-chip>

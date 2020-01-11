@@ -28,7 +28,7 @@ export class MeetingService {
             .orderBy("m.createdDate", "DESC");
 
         if (query.type && query.type === 'upcoming') {
-            db.where('m.meetingDate > now()');
+            db.where('m.meetingDate >= DATE(NOW())');
         }
         if (query.type && query.type === 'my-meeting' && query.userId) {
             db.where('u.id = :id', { id: query.userId });
