@@ -37,7 +37,6 @@ lerna-debug.log*
 #config files
 ormconfig.json
 nah-config.json
-src/config.ts
 
 # code testing coverage
 coverage
