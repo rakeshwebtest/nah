@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController, ModalController } from '@ionic/angular';
+import { PopoverController, ModalController, AlertController } from '@ionic/angular';
 import { AppHttpClient } from '../utils';
 import { AuthenticationService } from '../services/authentication.service';
 import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
@@ -17,6 +17,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private authService: AuthenticationService,
     private popoverController: PopoverController,
     private modalController: ModalController,
+    private alertCtrl: AlertController,
     private http: AppHttpClient) { }
 
   ngOnInit() {
@@ -94,5 +95,27 @@ export class UserProfileComponent implements OnInit {
       
     });
 
+  }
+
+  async deleteGroupConfirm(group: any, index) {
+    let alert = await this.alertCtrl.create({
+      message: 'Do you want to delete this group?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Okay',
+          handler: () => {
+            this.deleteGroup(group, index);
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 }

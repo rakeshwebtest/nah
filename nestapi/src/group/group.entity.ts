@@ -19,7 +19,7 @@ export class GroupEntity extends BaseEntity {
     followersCount: number;
 
     @OneToMany(type => MeetingEntity, meeting => meeting.group)
-    meetings: GroupEntity[];
+    meetings: MeetingEntity[];
 
     @OneToMany(type => GroupFollowEntity, gf => gf.group)
     followers: GroupFollowEntity[];

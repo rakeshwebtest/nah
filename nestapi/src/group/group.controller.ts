@@ -11,13 +11,13 @@ export class GroupController {
     @Get('list')
     async getGroups() {
         const data: any = await this.service.getGroups();
-        return { message: 'Fetch Groups', data };
+        return { message: false, data };
     }
     @Get('list/:id')
     async getGroupById(@Param() params: any) {
 
         const data: any = await this.service.getGroupById(params.id);
-        return { message: 'Fetch Groups', data };
+        return { message: false, data };
     }
     @UsePipes(new ValidationPipe())
     @Post()
@@ -28,7 +28,7 @@ export class GroupController {
             throw new HttpException({ message: 'Already group name created', errors: 'Already group exists' }, HttpStatus.BAD_REQUEST);
         } else {
             const data: any = await this.service.updateGroup(group);
-            return { message: 'Successfully updated Group', data };
+            return { message: 'Successfully Create A Group', data };
         }
     }
 
@@ -60,7 +60,7 @@ export class GroupController {
     @Delete(':id')
     async deleteGruop(@Param() params: any) {
         const data = await this.service.deleteGroup(params.id);
-        return { message: 'Delete Successfullly', data };
+        return { message: 'Group Delete Successfullly', data };
     }
 
 }

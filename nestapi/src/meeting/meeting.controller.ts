@@ -18,7 +18,7 @@ export class MeetingController {
   async getMeetings(@Query() query) {
     const data: any = await this.meetingService.getMeetings(query);
 
-    return { message: 'ok', data, query };
+    return { message: false, data, query };
   }
   /**
  * get all meeting with meembers
@@ -28,7 +28,7 @@ export class MeetingController {
   @Get('list/:type/:id')
   async getMeetingsByType(@Query() query) {
     const data: any = await this.meetingService.getMeetings(query);
-    return { message: 'ok', data };
+    return { message: false, data };
   }
   /**
    * create meeting or update meeting
@@ -51,7 +51,7 @@ export class MeetingController {
     meetingDto.imageUrl = image.path;
     console.log('meetingDto', meetingDto);
     const data = await this.meetingService.createMeeting(meetingDto);
-    return { message: 'ok', data };
+    return { message: 'Successfully Create A Meeting', data };
   }
 
   /**

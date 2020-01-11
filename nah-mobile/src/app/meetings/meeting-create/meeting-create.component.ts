@@ -36,12 +36,7 @@ export class MeetingCreateComponent implements OnInit {
       label: 'Say No To',
       placeholder: 'Enter Say No To',
       required: true,
-      options: [
-        { value: 1, label: 'Option 1' },
-        { value: 2, label: 'Option 2' },
-        { value: 3, label: 'Option 3' },
-        { value: 4, label: 'Option 4' },
-      ]
+      options: []
     }
   },
   {
@@ -55,6 +50,30 @@ export class MeetingCreateComponent implements OnInit {
       placeholder: 'Enter Meeting Information',
     }
   },
+  {
+    key: 'location',
+    type: 'input',
+    wrappers: ['vertical'],
+    className: 'col-12 ion-padding-t-10',
+    templateOptions: {
+      label: 'Location',
+      placeholder: 'Enter Meeting Title',
+      required: true,
+    }
+  },
+  {
+    key: 'cityId',
+    type: 'select',
+    wrappers: ['vertical'],
+    className: 'col-12',
+    templateOptions: {
+      label: 'Select City',
+      placeholder: 'Select City',
+      required: true,
+      options: []
+    }
+  },
+
   {
     key: 'image',
     type: 'file',
@@ -73,10 +92,21 @@ export class MeetingCreateComponent implements OnInit {
         key: 'meetingDate',
         type: 'datetime',
         wrappers: ['vertical'],
-        className: 'col-12',
+        className: 'col-6',
         templateOptions: {
           required: true,
           label: 'Start Date',
+          placeholder: 'Choose Date',
+        }
+      },
+      {
+        key: 'endDate',
+        type: 'datetime',
+        wrappers: ['vertical'],
+        className: 'col-6',
+        templateOptions: {
+          required: true,
+          label: 'End Date',
           placeholder: 'Choose Date',
         }
       },
@@ -117,6 +147,7 @@ export class MeetingCreateComponent implements OnInit {
 
   ngOnInit() {
     const userInfo = this.authService.getUserInfo();
+    this.getCities();
     this.http.get('group/list/' + userInfo.id).subscribe(res => {
       console.log(res);
       if (res.data) {
@@ -129,6 +160,21 @@ export class MeetingCreateComponent implements OnInit {
         })
       }
       this.fields[1].templateOptions.options = this.groupList || [];
+    });
+  }
+  getCities() {
+    this.http.get('city/list').subscribe(res => {
+      if (res.data) {
+        const cityList = res.data.map(item => {
+          const city = {
+            label: item.name,
+            value: item.id
+          };
+          return city;
+        });
+        this.fields[4].templateOptions.options = cityList;
+      }
+      
     });
   }
 

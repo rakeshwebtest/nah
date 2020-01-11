@@ -87,10 +87,10 @@ export class GroupService {
         const isFollower = await this.isFollower(followMember);
         if (isFollower) {
             await this.groupFollowRepository.delete(isFollower);
-            return { message: 'successfully Un Followed Group', isFollower };
+            return { message: 'Successfully Un-Follow Group', isFollower };
         } else {
             const data = await this.groupFollowRepository.save(followMember);
-            return { message: 'successfully Followed Group', data };
+            return { message: 'Successfully Follow Group', data };
         }
 
         // return isFollower; // await this.groupFollowRepository.save(followMember);

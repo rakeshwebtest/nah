@@ -7,6 +7,7 @@ import { UserEntity } from 'src/user/user.entity';
 import { GroupEntity } from 'src/group/group.entity';
 import { MeetingMembersEntity } from './meeting-members.entity';
 import { SERVERBASEPATH } from 'src/config';
+import { CityEntity } from 'src/city/city.entity';
 
 @Injectable()
 export class MeetingService {
@@ -67,9 +68,11 @@ export class MeetingService {
         _meeting.title = meeting.title;
         _meeting.agenda = meeting.agenda;
         _meeting.meetingDate = meeting.meetingDate;
+        _meeting.endDate = meeting.endDate;
         _meeting.startTime = meeting.startTime;
         _meeting.endTime = meeting.endTime;
         _meeting.imageUrl = meeting.imageUrl;
+        _meeting.location = meeting.location;
 
         const userId = parseInt(meeting.createdBy);
         const groupId = parseInt(meeting.groupId);
@@ -80,6 +83,11 @@ export class MeetingService {
         // group
         _meeting.group = new GroupEntity();
         _meeting.group.id = groupId;
+
+        // city
+        _meeting.city = new CityEntity();
+        _meeting.city.id = parseInt(meeting.cityId);
+
         console.log('_meeting', _meeting)
         return this.meetingRepository.save(_meeting);
         // return data;
@@ -99,10 +107,10 @@ export class MeetingService {
         const isMember = await this.meetingMembersRepository.findOne(meetingMember);
         if (isMember) {
             await this.meetingMembersRepository.delete(isMember);
-            return { message: 'successfully Un join member', isMember };
+            return { message: 'Successfully Un-join Member', isMember };
         } else {
             const data = await this.meetingMembersRepository.save(meetingMember);
-            return { message: 'successfully Followed Group', data };
+            return { message: 'Successfully Join Member', data };
         }
     }
 

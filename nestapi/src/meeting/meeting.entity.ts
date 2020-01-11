@@ -3,6 +3,7 @@ import { BaseEntity } from '../shared/base.entity';
 import { UserEntity } from './../user/user.entity';
 import { GroupEntity } from './../group/group.entity';
 import { MeetingMembersEntity } from './meeting-members.entity'
+import { CityEntity } from 'src/city/city.entity';
 @Entity({ name: 'meeting' })
 export class MeetingEntity extends BaseEntity {
 
@@ -15,6 +16,12 @@ export class MeetingEntity extends BaseEntity {
     @Column({ type: 'timestamp', name: 'meetingDate', default: () => 'LOCALTIMESTAMP' })
     meetingDate: string;
 
+    @Column({ type: 'timestamp', name: 'endDate', default: () => 'LOCALTIMESTAMP' })
+    endDate: string;
+
+    @Column({ length: 250, nullable: true })
+    location: string;
+
     @Column({ type: 'timestamp', name: 'startTime', default: () => 'LOCALTIMESTAMP' })
     startTime: string;
 
@@ -23,6 +30,9 @@ export class MeetingEntity extends BaseEntity {
 
     @Column({ length: 1250, nullable: true })
     imageUrl: string;
+
+    @ManyToOne(type => CityEntity, city => city.meetings)
+    city: CityEntity;
 
     @ManyToOne(type => GroupEntity, group => group.meetings)
     group: GroupEntity;

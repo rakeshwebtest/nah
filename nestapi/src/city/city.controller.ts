@@ -8,6 +8,6 @@ export class CityController {
     @Get('list')
     async getCities() {
         const data = await this.cityService.getCities();
-        return { message: 'ok', data };
+        return { message: false, data };
     }
 }

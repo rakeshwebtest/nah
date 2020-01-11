@@ -33,11 +33,11 @@
         <ion-col size="8" class="ion-no-padding">
           <label class="meeting-date" style="display: block;">{{m.meetingDate | date:"mediumDate"}},
             {{m.startTime | date:'shortTime'}} - {{m.endTime | date:'shortTime'}} </label>
-          <ion-text class="ion-align-items-center" style="display: flex;">
+          <ion-text class="ion-align-items-center" style="display: flex;" *ngIf="m.members.length > 0">
             <ion-avatar class="avater small" *ngFor="let m of m.members">
               <img [src]="m.user.imageUrl" />
             </ion-avatar>
-            <ion-text class="fallowing-members">Members are Following</ion-text>
+            <ion-text class="fallowing-members">Joined Meeting Members</ion-text>
           </ion-text>
         </ion-col>
         <ion-col size="4" class="ion-text-end" *ngIf="!m.isCreatedBy">

@@ -10,12 +10,13 @@ import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { map, filter, tap } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
+import { AppToasterService } from './app-toaster.service';
 @Injectable({
     providedIn: 'root'
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
-    constructor(private authenticationService: AuthenticationService) { }
+    constructor(private authenticationService: AuthenticationService, private toater: AppToasterService) { }
 
     /**
      *
@@ -100,11 +101,15 @@ export class HttpInterceptorService implements HttpInterceptor {
             }
         } else {
             // Multiple error
+            if(resJson.message){
+                this.toater.presentToast(resJson.message);
+            }
             if (resJson.data && resJson.data.errors) {
                 console.log('resJson.data.errors', resJson.data.errors);
                 Object.keys(resJson.data.errors).forEach(e => {
                 });
             } else {
+
             }
         }
         return resJson;

@@ -12,7 +12,12 @@ export class CreateMeetingDto {
     @IsNotEmpty({ message: "Required groupd" })
     groupId: string;
 
+    @IsNotEmpty({ message: "Required groupd" })
+    cityId: string;
+
     meetingDate: string;
+    endDate:string;
+    location:string;
     startTime: string;
     endTime: string;
     imageUrl: string;

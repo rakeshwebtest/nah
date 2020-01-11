@@ -61,7 +61,7 @@ export class UsersController {
 
         const data = await this.service.updateUser(user);
         const token = await this.service.generateJWT(data);
-        return { message: 'Login Succussfully', data: { user: _user || user, token } };
+        return { message: false, data: { user: _user || user, token } };
     }
     @UsePipes(new ValidationPipe())
     @Put()
