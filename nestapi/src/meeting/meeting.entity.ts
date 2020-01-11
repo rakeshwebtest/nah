@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, ManyToMany, JoinTabl
 import { BaseEntity } from '../shared/base.entity';
 import { UserEntity } from './../user/user.entity';
 import { GroupEntity } from './../group/group.entity';
-import {MeetingMembersEntity} from './meeting-members.entity'
+import { MeetingMembersEntity } from './meeting-members.entity'
 @Entity({ name: 'meeting' })
 export class MeetingEntity extends BaseEntity {
 
@@ -32,6 +32,9 @@ export class MeetingEntity extends BaseEntity {
 
     @OneToMany(type => MeetingMembersEntity, mm => mm.meeting)
     members: MeetingMembersEntity[];
+
+    @Column({ default: 0 })
+    isPublished: number;
     // @ManyToMany(type => UserEntity, user => user.id)
     // @JoinTable()
     // members: UserEntity[];

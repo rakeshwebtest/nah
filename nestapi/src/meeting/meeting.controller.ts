@@ -6,7 +6,6 @@ import { extname } from 'path';
 import { CreateMeetingDto } from './dto/create-meeting.dto';
 import { ValidationPipe } from './../shared/pipes/validation.pipe';
 import { JoinMeetingDto } from './dto/join-member.dto';
-import { UPLOADBASEPATH } from 'src/config';
 @Controller('meeting')
 export class MeetingController {
 

@@ -1,2 +1,2 @@
 export const SECRET = 'the-apps';
-export const UPLOADBASEPATH = 'http://nah.theapp.com/api/';
+export const UPLOADBASEPATH = 'http://nah.theapp.in/api/';

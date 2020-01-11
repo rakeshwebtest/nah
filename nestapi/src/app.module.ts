@@ -8,16 +8,16 @@ import { MeetingModule } from './meeting/meeting.module';
 import * as path from 'path';
 import { MulterModule } from '@nestjs/platform-express';
 import { CityModule } from './city/city.module';
-const ormConfig = require('./../ormconfig.json')
+import { DB } from './config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({ ...ormConfig, entities: [path.join(__dirname, '**/*.entity{.ts,.js}')] }),
+    TypeOrmModule.forRoot({ ...DB, entities: [path.join(__dirname, '**/*.entity{.ts,.js}')] }),
     UserModule,
     GroupModule,
     MeetingModule,
     MulterModule.register({
-      dest: './uploads',
+      dest: './uploads'
     }),
     CityModule
   ],

@@ -6,7 +6,7 @@ import { CreateMeetingDto } from './dto/create-meeting.dto';
 import { UserEntity } from 'src/user/user.entity';
 import { GroupEntity } from 'src/group/group.entity';
 import { MeetingMembersEntity } from './meeting-members.entity';
-import { UPLOADBASEPATH } from 'src/config';
+import { SERVERBASEPATH } from 'src/config';
 
 @Injectable()
 export class MeetingService {
@@ -36,14 +36,14 @@ export class MeetingService {
         if (query.meetingId) { // single meeting
             db.where('m.id = :meetingId', { meetingId: query.meetingId });
             const data: any = await db.getOne();
-            data.imageUrl = UPLOADBASEPATH + data.imageUrl;
+            data.imageUrl = SERVERBASEPATH + data.imageUrl;
             return data;
         } else {
             const data = await db.getMany(); // all meeting
             if (data) {
                 data.map(meeting => {
                     if (meeting.imageUrl)
-                        meeting.imageUrl = UPLOADBASEPATH + meeting.imageUrl;
+                        meeting.imageUrl = SERVERBASEPATH + meeting.imageUrl;
                 });
             }
             return data;
@@ -55,7 +55,7 @@ export class MeetingService {
         if (data) {
             data.map(meeting => {
                 if (meeting.imageUrl)
-                    meeting.imageUrl = UPLOADBASEPATH + meeting.imageUrl;
+                    meeting.imageUrl = SERVERBASEPATH + meeting.imageUrl;
             });
         }
     }
