@@ -42,7 +42,7 @@
             <ion-avatar class="avater small" *ngFor="let m of m.members">
               <img [src]="m.user.imageUrl" />
             </ion-avatar>
-            <ion-text class="fallowing-members">Joined Meeting Members</ion-text>
+            <ion-text class="fallowing-members">{{m.members.length}} People are going</ion-text>
           </ion-text>
         </ion-col>
         <ion-col size="4" class="ion-text-end" *ngIf="!m.isCreatedBy">
