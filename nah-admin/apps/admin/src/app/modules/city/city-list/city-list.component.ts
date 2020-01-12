@@ -22,6 +22,7 @@ export class CityListComponent implements OnInit {
   sessionInfo: any = {};
   users: any = [];
   userInfo: any = {};
+  selectedCity: any;
   fields: FormlyFieldConfig[] = [
     {
       fieldGroupClassName: 'row',
@@ -52,13 +53,13 @@ export class CityListComponent implements OnInit {
     ];
     this.cityList = [
       {
-        'name': 'New York','createdBy': 'Admin'
+        'name': 'New York', 'createdBy': 'Admin'
       },
       {
-        'name': 'Los Angeles','createdBy': 'Admin'
+        'name': 'Los Angeles', 'createdBy': 'Admin'
       },
       {
-        'name': 'Chicago','createdBy': 'Admin'
+        'name': 'Chicago', 'createdBy': 'Admin'
       }
     ];
   }

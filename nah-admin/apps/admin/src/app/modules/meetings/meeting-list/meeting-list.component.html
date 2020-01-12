@@ -4,14 +4,17 @@
     </div> -->
     <div class="row m-0 filters-widget">
       <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
-        <p-dropdown [options]="cityList" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
+        <input type="text" pInputText placeholder="Search Meeting Name">
       </div>
       <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
+        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
+      </div>
+      <!-- <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
         <p-dropdown [options]="meetingList" [(ngModel)]="selectedCity" placeholder="Select Meeting" optionLabel="name" [showClear]="true"></p-dropdown>
-      </div>
-      <div class="col-12 col-md-4 mb-1 p-0">
+      </div> -->
+      <!-- <div class="col-12 col-md-4 mb-1 p-0">
         <input type="text" pInputText placeholder="Search">
-      </div>
+      </div> -->
       </div>
   <p-table  [columns]="cols" [value]="meetingList" [responsive]="true" selectionMode="single"  (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowSelect($event)">
     <ng-template pTemplate="header" let-columns>

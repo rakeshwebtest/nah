@@ -16,6 +16,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   //user form
   userForm = new FormGroup({});
   userModel: any = {};
+  selectedCity:any;
   userOptions: FormlyFormOptions = {
   };
   showForm = false;
