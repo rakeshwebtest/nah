@@ -30,7 +30,7 @@ export class GroupCreateModalComponent implements OnInit {
     }
 
   }
-  dismiss(data) {
+  dismiss(data?:any) {
     // using the injected ModalController this page
     // can "dismiss" itself and optionally pass back data
     this.modalCtrl.dismiss(data);
