@@ -13,6 +13,7 @@ export class GroupListComponent implements OnInit {
   cols = [];
   modalRef: NgbModalRef;
   // creadit || debit info
+  selectedCity:any;
   modalTitle: string;
   form = new FormGroup({});
   options: FormlyFormOptions = {};

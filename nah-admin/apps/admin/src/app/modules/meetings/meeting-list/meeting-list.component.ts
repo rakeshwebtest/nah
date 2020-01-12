@@ -12,6 +12,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class MeetingListComponent implements OnInit {
   selectedMeetings: any;
   cols = [];
+  cityList = [];
+  selectedCity:any;
   meetingList = [];
   modalRef: NgbModalRef;
   modalTitle: string;
@@ -23,6 +25,11 @@ export class MeetingListComponent implements OnInit {
   sessionInfo: any = {};
   users: any = [];
   userInfo: any = {};
+  cities = [
+    {name: 'New York', code: 'NY'},
+    {name: 'Los Angeles', code: 'LA'},
+    {name: 'Chicago', code: 'CH'}
+  ];
 
   constructor(private modalService: NgbModal,
     private router: Router,

@@ -46,7 +46,7 @@
           </ion-text>
         </ion-col>
         <ion-col size="4" class="ion-text-end" *ngIf="!m.isCreatedBy">
-          <ion-text style="font-weight: bold;display: block;font-size: 14px;">{{m?.createdBy?.city?.name}}</ion-text>
+          <ion-text style="font-weight: bold;display: block;font-size: 14px;">{{m?.city?.name}}</ion-text>
           <ion-button color="medium" (click)="meetingJoin(m)" *ngIf="m.isMember">Un Join</ion-button>
           <ion-button color="danger" (click)="meetingJoin(m)" *ngIf="!m.isMember">Join</ion-button>
         </ion-col>
