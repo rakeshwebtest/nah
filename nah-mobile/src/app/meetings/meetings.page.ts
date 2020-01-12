@@ -22,7 +22,7 @@ export class MeetingsPage implements OnInit {
         this.title = "My Meetings";
         break;
       case 'upcoming':
-        this.title = "Upcoming";
+        this.title = "Upcoming Meetings";
         break;
       default:
         this.title = "All Meetings";
