@@ -7,15 +7,17 @@ export interface Meeting {
     endTime: string;
     imageUrl: string;
     group: {
-        name: string
+        name: string;
+    }
+    location: string;
+    city: {
+        name: string;
     }
     createdBy: {
         id: number;
         displayName: string;
         imageUrl: string;
-        city: {
-            name: string;
-        }
+
     }
     members?: Member[];
     isMember?: boolean;

@@ -21,7 +21,7 @@ export class MeetingService {
             .createQueryBuilder('m')
             .select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm", "user.id", "user.displayName", "user.imageUrl", "city"])
             .leftJoin('m.createdBy', 'u')
-            .leftJoin('u.city', 'city')
+            .leftJoin('m.city', 'city')
             .leftJoin('m.group', 'group')
             .leftJoin("m.members", 'mm')
             .leftJoin("mm.user", 'user')
