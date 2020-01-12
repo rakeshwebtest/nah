@@ -90,6 +90,8 @@ export class UserListComponent implements OnInit, OnDestroy {
   userCreditDebitInfo: any = {};
   sessionInfo: any = {};
   users: any = [];
+  cities: any = [];
+  noerTypes: any = [];
   userInfo: any = {};
   fields: FormlyFieldConfig[] = [
     {
@@ -135,6 +137,16 @@ export class UserListComponent implements OnInit, OnDestroy {
       {
         'image':'assets/images/user-2.jpg', 'name': 'UZ 16LAB','email': 'uzveda115@gmail.com','typeOfNoer': 'anties', 'city': 'Chicago'
       }
+    ];
+    this.cities = [
+      {name: 'New York', code: 'NY'},
+      {name: 'Los Angeles', code: 'LA'},
+      {name: 'Chicago', code: 'CH'}
+    ];
+    this.noerTypes = [
+      {name: 'Anties', code: 'AN'},
+      {name: 'Hater', code: 'HA'},
+      {name: 'Rejector', code: 'RJ'}
     ];
   }
  
