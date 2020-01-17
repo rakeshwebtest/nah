@@ -16,7 +16,7 @@ async function bootstrap() {
 
   const options = new DocumentBuilder()
     .setTitle('NAH API')
-    .setDescription('nah api')
+    .setDescription('NAH api')
     .setVersion('1.0')
     .addBearerAuth()
     .build();

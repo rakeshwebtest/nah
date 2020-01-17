@@ -1,6 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { CityService } from './city.service';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('City')
 @Controller('city')
 export class CityController {
     constructor(public cityService: CityService) { }

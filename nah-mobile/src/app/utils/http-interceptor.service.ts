@@ -49,7 +49,7 @@ export class HttpInterceptorService implements HttpInterceptor {
             //  request.headers.append('authorization', _user.token);
             request = request.clone({
                 setHeaders: {
-                    authorization: _user.token
+                    authorization: 'Bearer ' + _user.token
                 },
                 body: request.body
             });
@@ -101,7 +101,7 @@ export class HttpInterceptorService implements HttpInterceptor {
             }
         } else {
             // Multiple error
-            if(resJson.message){
+            if (resJson.message) {
                 this.toater.presentToast(resJson.message);
             }
             if (resJson.data && resJson.data.errors) {

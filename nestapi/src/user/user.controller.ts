@@ -5,6 +5,7 @@ import {
     ApiBearerAuth,
     ApiResponse,
     ApiOperation,
+    ApiTags
 } from '@nestjs/swagger';
 import { LoginUserDto } from './dto';
 import { ValidationPipe } from './../shared/pipes/validation.pipe';
@@ -13,6 +14,7 @@ import { GroupService } from 'src/group/group.service';
 import { CreateGroupDto } from 'src/group/dto/create-group.dto';
 import { CityEntity } from 'src/city/city.entity';
 
+@ApiTags('Users')
 @Controller('user')
 export class UsersController {
 

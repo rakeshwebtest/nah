@@ -4,9 +4,10 @@ import { ValidationPipe } from 'src/shared/pipes/validation.pipe';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { GroupFollowDto } from './dto/group-follow.dto';
 import { AuthMiddleware } from 'src/user/auth.middleware';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiBearerAuth()
+@ApiTags('Group')
 @Controller('group')
 export class GroupController {
     constructor(public service: GroupService) { }

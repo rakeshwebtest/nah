@@ -6,6 +6,10 @@ import { extname } from 'path';
 import { CreateMeetingDto } from './dto/create-meeting.dto';
 import { ValidationPipe } from './../shared/pipes/validation.pipe';
 import { JoinMeetingDto } from './dto/join-member.dto';
+import { ApiBearerAuth, ApiTags, ApiProperty } from '@nestjs/swagger';
+
+@ApiBearerAuth()
+@ApiTags('Meeting')
 @Controller('meeting')
 export class MeetingController {
 
@@ -32,10 +36,11 @@ export class MeetingController {
   }
   /**
    * create meeting or update meeting
-   * @param image 
-   * @param meetingDto 
-   * @param req 
+   * @param image
+   * @param meetingDto
+   * @param req
    */
+ 
   @UsePipes(new ValidationPipe())
   @UseInterceptors(FileInterceptor('image', {
     storage: diskStorage({
