@@ -23,7 +23,7 @@ export class AuthMiddleware implements NestMiddleware {
         }
         // req.userInfo = {};
         // req.user = user.user;
-        req['sessionUser'] = { user, userId };
+        req['sessionUser'] = { user:user.user, userId };
         next();
 
       } else {

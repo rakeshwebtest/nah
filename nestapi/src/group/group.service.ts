@@ -14,37 +14,30 @@ export class GroupService {
         @InjectRepository(GroupFollowEntity) private readonly groupFollowRepository: Repository<GroupFollowEntity>
     ) { }
 
-    async getGroups(query): Promise<GroupEntity[]> {
+    async getGroups(query): Promise<any> {
+        const take = query.take || 10
+        const skip = query.skip || 0
+        
         const db = getRepository(GroupEntity)
             .createQueryBuilder('group')
             .select(["group", "gf", "user.id", "user.displayName", "user.imageUrl"])
             .leftJoin('group.followers', 'gf')
+            .loadRelationCountAndMap('group.followersCount','group.followers', 'gf')
             .leftJoin('gf.user', 'user')
             .where('group.isDeleted != 1');
 
         if (query.search) {
             db.where("group.name like :name", {name: '%' + query.search + '%' })
         }
+        db.take(take);
+        db.skip(skip);
 
-        return await db.getMany();
-        // const mapGroups =  groups.map(group=>{
-        //     let _followers:any[] = [];
-        //     if(group.followers.length > 0){
-        //         _followers = group.followers.map(f=>{
-        //             return f.user;
-        //         });
-        //     }
-        //     group.followers = _followers;
-        //     return group;
-        // });
-        // return mapGroups;
-        // return  this.groupRepository.find({relations:["followings"]});
-        // const groups = await <any>this.groupRepository.find();
-        // for (let index = 0; index < groups.length; index++) {
-        //     const group = groups[index];
-        //     group.followers = await this.getMembersByGroupId(group.id);
-        // }
-        // return groups;
+        const [result, total] = await db.getManyAndCount();
+        return {
+            data: result,
+            count: total
+        }
+      
     }
     async getGroupById(userId): Promise<any[]> {
         return await <any>getRepository(GroupEntity)

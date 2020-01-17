@@ -1,17 +1,21 @@
-import { Controller, Get, UsePipes, Post, Body, HttpException, HttpStatus, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, UsePipes, Post, Body, HttpException, HttpStatus, Param, Delete, Query, UseGuards, Req } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { ValidationPipe } from 'src/shared/pipes/validation.pipe';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { GroupFollowDto } from './dto/group-follow.dto';
+import { AuthMiddleware } from 'src/user/auth.middleware';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @Controller('group')
 export class GroupController {
     constructor(public service: GroupService) { }
 
     @Get('list')
-    async getGroups(@Query() query) {
+    async getGroups(@Query() query, @Req() req) {
         const data: any = await this.service.getGroups(query);
-        return { message: false, data };
+        // urse:req.sessionUser
+        return { message: false, ...data };
     }
     @Get('list/:id')
     async getGroupById(@Param() params: any) {
