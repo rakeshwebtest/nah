@@ -3,7 +3,7 @@
     <ion-toolbar>
       <ion-buttons slot="start" class="white-color">
         <ion-back-button></ion-back-button>
-        <ion-title>{{title }}</ion-title>
+        <ion-title>{{title}}</ion-title>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
@@ -18,7 +18,7 @@
         <ion-img class="ion-text-center" [src]="meeting.imageUrl"></ion-img>
         <ion-text class="ion-padding-t-5">
           {{meeting.agenda}}
-        </ion-textclass="avater small ion-margin-r-5>
+        </ion-text>
         <ion-grid class="ion-no-padding">
           <ion-row>
             <ion-col size="7">
@@ -75,7 +75,8 @@
                 <ion-img class="image-thumb" *ngFor="let item of imgList" [src]="item.url"></ion-img>
                 <!-- </ion-item> -->
                 <ion-text color="danger"
-                  style="cursor: pointer;align-items: center;justify-content: center;display: flex;">View All</ion-text>
+                  style="cursor: pointer;align-items: center;justify-content: center;display: flex;">View All
+                </ion-text>
               </ion-list>
             </ion-col>
 
