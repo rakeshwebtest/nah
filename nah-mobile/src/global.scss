@@ -168,3 +168,10 @@ ion-tabs{
     top: -8px;
     z-index: 2;
 }
+.meeting-item {
+    .img-left{
+        .avatar{
+            border-radius: 5px;
+        }
+    }
+}
