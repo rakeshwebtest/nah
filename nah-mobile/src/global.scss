@@ -163,3 +163,15 @@ ion-tabs{
         border-radius: 50%;
     }
 }
+.sticky-search{
+    position: sticky;
+    top: -8px;
+    z-index: 2;
+}
+.meeting-item {
+    .img-left{
+        .avatar{
+            border-radius: 5px;
+        }
+    }
+}

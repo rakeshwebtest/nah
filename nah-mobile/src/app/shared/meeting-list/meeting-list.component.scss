@@ -9,8 +9,9 @@
 ion-refresher {
     position: inherit !important;
 }
+.meeting-list{padding-top: 5px;}
 .meeting-item{
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     .item-native{
         padding: 0 ;
     }
@@ -37,6 +38,7 @@ ion-refresher {
     .meeting-title{
         widows: 100%;
         font-size: 14px;
+        font-weight: 600;
     }
     .meeting-sub-title{
         font-size: 12px;
