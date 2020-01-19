@@ -29,13 +29,15 @@ export class MeetingCreateComponent implements OnInit {
   },
   {
     key: 'groupId',
-    type: 'select',
+    type: 'selectable',
     wrappers: ['vertical'],
     className: 'col-12',
     templateOptions: {
-      label: 'Say No To',
-      placeholder: 'Enter Say No To',
+      label: 'Group',
+      placeholder: 'Select Group',
       required: true,
+      itemValueField: 'value',
+      itemTextField: 'label',
       options: []
     }
   },
@@ -63,13 +65,15 @@ export class MeetingCreateComponent implements OnInit {
   },
   {
     key: 'cityId',
-    type: 'select',
+    type: 'selectable',
     wrappers: ['vertical'],
     className: 'col-12',
     templateOptions: {
-      label: 'Select City',
+      label: 'City',
       placeholder: 'Select City',
       required: true,
+      itemValueField: 'id',
+      itemTextField: 'name',
       options: []
     }
   },
@@ -153,7 +157,7 @@ export class MeetingCreateComponent implements OnInit {
       if (res.data) {
         this.groupList = res.data.map(item => {
           const group = {
-            label: item.name,
+            label: 'Say No To ' + item.name,
             value: item.id
           };
           return group;
@@ -172,9 +176,9 @@ export class MeetingCreateComponent implements OnInit {
           };
           return city;
         });
-        this.fields[4].templateOptions.options = cityList;
+        this.fields[4].templateOptions.options = res.data || [];//cityList;
       }
-      
+
     });
   }
 

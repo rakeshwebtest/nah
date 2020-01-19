@@ -18,7 +18,7 @@ import { AuthGuard } from './services/auth-guard.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
-
+import { IonicSelectableModule } from 'ionic-selectable';
 
 //driverOrder: ['indexeddb', 'sqlite', 'websql']
 @NgModule({
@@ -29,6 +29,7 @@ import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
     FormsModule,
     HttpClientModule,
     IonicModule.forRoot(),
+    IonicSelectableModule,
     IonicStorageModule.forRoot({
       name: '__nah',
       driverOrder: ['indexeddb', 'sqlite', 'websql']

@@ -15,7 +15,7 @@ export class GroupService {
     ) { }
 
     async getGroups(query): Promise<any> {
-        const take = query.take || 10
+        const take = query.take || 200
         const skip = query.skip || 0
         
         const db = getRepository(GroupEntity)
@@ -80,7 +80,8 @@ export class GroupService {
         const followMember = new GroupFollowEntity();
         followMember.group = new GroupEntity();
         followMember.group.id = groupFollow.groupId;
-        followMember.user = user;
+        followMember.user = new UserEntity();
+        followMember.user.id = groupFollow.userId;
         const isFollower = await this.isFollower(followMember);
         if (isFollower) {
             await this.groupFollowRepository.delete(isFollower);

@@ -1,4 +1,4 @@
-<ion-content >
+<ion-content>
   <ion-grid style="height: 100%;align-items: center;justify-content: center;display: flex;flex-direction: column;">
     <ion-row class="ion-align-items-center">
       <ion-col class="ion-text-center">
@@ -19,9 +19,8 @@
           <!-- <ion-icon name="people"></ion-icon> -->
         </ion-avatar>
         <ion-label class="ion-padding-t-5">Antie's</ion-label>
-        <ion-label class="ion-text-center ion-padding-t-5" style="font-size: small; opacity: 0.5;"
-          >What your Anti</ion-label
-        >
+        <ion-label class="ion-text-center ion-padding-t-5" style="font-size: small; opacity: 0.5;">What your Anti
+        </ion-label>
         <ion-ripple-effect></ion-ripple-effect>
       </ion-col>
       <ion-col class="ion-text-center align-center ion-activatable" (click)="noerSelection('rejection')">
@@ -30,9 +29,8 @@
           <!-- <ion-icon class="ion-align-items-center" name="people"></ion-icon> -->
         </ion-avatar>
         <ion-label class="ion-padding-t-5">Rejector</ion-label>
-        <ion-label class="ion-text-center ion-padding-t-5" style="font-size: small; opacity: 0.5;"
-          >What your Reject</ion-label
-        >
+        <ion-label class="ion-text-center ion-padding-t-5" style="font-size: small; opacity: 0.5;">What your Reject
+        </ion-label>
         <ion-ripple-effect></ion-ripple-effect>
       </ion-col>
       <ion-col class="ion-text-center align-center ion-activatable" (click)="noerSelection('hater')">
@@ -41,9 +39,8 @@
           <!-- <ion-icon name="people"></ion-icon> -->
         </ion-avatar>
         <ion-label class="ion-padding-t-5">Hater</ion-label>
-        <ion-label class="ion-text-center ion-padding-t-5" style="font-size: small; opacity: 0.5;"
-          >What your Hate</ion-label
-        >
+        <ion-label class="ion-text-center ion-padding-t-5" style="font-size: small; opacity: 0.5;">What your Hate
+        </ion-label>
         <ion-ripple-effect></ion-ripple-effect>
       </ion-col>
     </ion-row>
@@ -54,16 +51,15 @@
     </ion-row>
     <ion-row class="ion-justify-content-center" style="width: 80%;">
       <ion-col size="12">
-        <ion-select
-          class="ion-padding-r-10"
-          [(ngModel)]="profile.cityId"
-          placeholder="Select Your City"
-          okText="Okay"
-          cancelText="Dismiss"
-        >
+
+        <ionic-selectable item-content [(ngModel)]="profile.cityId" placeholder="Select Your City" itemValueField="id"
+        shouldStoreItemValue="id"  itemTextField="name" [items]="cityList" [canSearch]="true">
+        </ionic-selectable>
+
+        <!-- <ion-select class="ion-padding-r-10" [(ngModel)]="profile.cityId" placeholder="Select Your City" okText="Okay"
+          cancelText="Dismiss">
           <ion-select-option [value]="c.id" *ngFor="let c of cityList">{{ c.name }}</ion-select-option>
-          <!-- <ion-select-option value="usa">USA</ion-select-option> -->
-        </ion-select>
+        </ion-select> -->
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center ion-margin-top margin-top-50">
