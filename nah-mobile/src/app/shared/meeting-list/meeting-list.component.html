@@ -14,8 +14,8 @@
 <ion-list class="meeting-list">
   <ion-item class="meeting-item" *ngFor="let m of meetingList">
     <ion-grid class="ion-no-padding" >
-      <ion-row class="ion-nowrap" (click)="clickMeeting(m)">
-        <ion-col class="img-left ion-no-padding">
+      <ion-row class="ion-nowrap ion-align-items-center">
+        <ion-col class="img-left ion-no-padding" (click)="clickMeeting(m)">
           <!-- <ion-avatar class="avater small">
             <img [src]="m.imageUrl" />
           </ion-avatar> -->
@@ -24,9 +24,14 @@
           </ion-thumbnail>
 
         </ion-col>
-        <ion-col class="ion-no-padding" style="display: flex;flex-direction:column;justify-content: center;">
+        <ion-col class="ion-no-padding" style="display: flex;flex-direction:column;justify-content: center;" (click)="clickMeeting(m)">
           <ion-label class="meeting-title">{{m.title}}</ion-label>
           <ion-label class="meeting-sub-title">Say No To {{m.group.name}}</ion-label>
+        </ion-col>
+        <ion-col size="4" class="ion-text-end ion-no-padding" *ngIf="!m.isCreatedBy">
+          <ion-text style="font-weight: bold;display: block;font-size: 12px;">{{m?.city?.name}}</ion-text>
+          <ion-button class="ion-no-margin" size="small" color="medium" (click)="meetingJoin(m)" *ngIf="m.isMember">Un Join</ion-button>
+          <ion-button class="ion-no-margin" size="small" color="danger" (click)="meetingJoin(m)" *ngIf="!m.isMember">Join</ion-button>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -35,7 +40,7 @@
         </label>
       </ion-row>
       <ion-row class="ion-nowrap row-last ion-align-items-center">
-        <ion-col size="8" class="ion-no-padding">
+        <ion-col class="ion-no-padding">
           <label class="meeting-date" style="display: block;">{{m.meetingDate | date:"mediumDate"}},
             {{m.startTime | date:'shortTime'}} - {{m.endTime | date:'shortTime'}} </label>
           <ion-text class="ion-align-items-center" style="display: flex;flex-wrap:wrap;" *ngIf="m.members.length > 0">
@@ -45,11 +50,7 @@
             <ion-text class="fallowing-members"><span class="count-circle">{{m.members.length}}</span> People are going</ion-text>
           </ion-text>
         </ion-col>
-        <ion-col size="4" class="ion-text-end" *ngIf="!m.isCreatedBy">
-          <ion-text style="font-weight: bold;display: block;font-size: 14px;">{{m?.city?.name}}</ion-text>
-          <ion-button color="medium" (click)="meetingJoin(m)" *ngIf="m.isMember">Un Join</ion-button>
-          <ion-button color="danger" (click)="meetingJoin(m)" *ngIf="!m.isMember">Join</ion-button>
-        </ion-col>
+        
       </ion-row>
     </ion-grid>
   </ion-item>
