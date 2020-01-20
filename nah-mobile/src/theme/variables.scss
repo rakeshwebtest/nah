@@ -93,6 +93,10 @@ $font-32: 32px;
   --padding-end: var(--ion-padding, 10px);
   padding-right: var(--ion-padding, 10px);
 }
+.ion-padding-l-0{
+  --padding-start: var(--ion-padding, 0px);
+  padding-left: var(--ion-padding, 0px);
+}
 .ion-padding-l-5{
   --padding-start: var(--ion-padding, 5px);
   padding-left: var(--ion-padding, 5px);

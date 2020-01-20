@@ -62,9 +62,9 @@
                     }}</label>
                   </ion-avatar>
                 </ion-col>
-                <ion-col>
+                <ion-col class="ion-padding-l-0">
                   <ion-row class="ion-nowrap ion-align-items-center">
-                    <ion-col>
+                    <ion-col class="ion-padding-l-0">
                       <ion-label class="meeting-title"><strong>Say No To</strong> {{ item.name }}</ion-label>
                     </ion-col>
                   </ion-row>
@@ -84,15 +84,23 @@
                       </ion-text>
                     </ion-col>
                     
-                    <ion-col  class="ion-text-end ion-no-padding" *ngIf="userInfo.id !== item.createdBy">
-                      <ion-button style="font-size: 12p;" color="medium" class="ion-no-margin" (click)="follow(item)" *ngIf="item.isFollower">
+                    <!-- <ion-col  class="ion-text-end ion-no-padding" *ngIf="userInfo.id !== item.createdBy">
+                      <ion-button size="small" style="font-size: 12p;" color="medium" class="ion-no-margin" (click)="follow(item)" *ngIf="item.isFollower">
                         Un Follow
                       </ion-button>
-                      <ion-button style="font-size: 12p;" color="danger" class="ion-no-margin" (click)="follow(item)" *ngIf="!item.isFollower">
+                      <ion-button size="small" style="font-size: 12p;" color="danger" class="ion-no-margin" (click)="follow(item)" *ngIf="!item.isFollower">
                         Follow
                       </ion-button>
-                    </ion-col>
+                    </ion-col> -->
                   </ion-row>
+                </ion-col>
+                <ion-col size="4" class="ion-text-end" *ngIf="userInfo.id !== item.createdBy">
+                  <ion-button size="small" style="font-size: 12p;" color="medium" class="ion-no-margin" (click)="follow(item)" *ngIf="item.isFollower">
+                    Un Follow
+                  </ion-button>
+                  <ion-button size="small" style="font-size: 12p;" color="danger" class="ion-no-margin" (click)="follow(item)" *ngIf="!item.isFollower">
+                    Follow
+                  </ion-button>
                 </ion-col>
                 <ion-col size="3" class="ion-text-end" *ngIf="userInfo.id === item.createdBy">
                   <ion-icon name="trash" class="icon-big" (click)="deleteGroupConfirm(item,gInx)"></ion-icon>
