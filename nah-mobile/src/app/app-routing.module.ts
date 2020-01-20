@@ -35,13 +35,14 @@ const routes: Routes = [
       {
         path: 'meeting',
         loadChildren: () => import('./meetings/meetings.module').then(m => m.MeetingsPageModule)
+      },
+      {
+        path: 'group',
+        loadChildren: () => import('./group/group.module').then( m => m.GroupPageModule)
       }
     ]
   },
-  {
-    path: 'group',
-    loadChildren: () => import('./group/group.module').then( m => m.GroupPageModule)
-  }
+  
 
 ];
 
