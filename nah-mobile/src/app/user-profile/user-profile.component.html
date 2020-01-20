@@ -94,7 +94,7 @@
                     </ion-col> -->
                   </ion-row>
                 </ion-col>
-                <ion-col  class="ion-text-end" *ngIf="userInfo.id !== item.createdBy">
+                <ion-col size="4" class="ion-text-end" *ngIf="userInfo.id !== item.createdBy">
                   <ion-button size="small" style="font-size: 12p;" color="medium" class="ion-no-margin" (click)="follow(item)" *ngIf="item.isFollower">
                     Un Follow
                   </ion-button>
