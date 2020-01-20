@@ -4,6 +4,7 @@ import { UserEntity } from './../user/user.entity';
 import { GroupEntity } from './../group/group.entity';
 import { MeetingMembersEntity } from './meeting-members.entity'
 import { CityEntity } from 'src/city/city.entity';
+import { MeetingCommentsEntity } from './meeting-comments.entity';
 @Entity({ name: 'meeting' })
 export class MeetingEntity extends BaseEntity {
 
@@ -42,6 +43,9 @@ export class MeetingEntity extends BaseEntity {
 
     @OneToMany(type => MeetingMembersEntity, mm => mm.meeting)
     members: MeetingMembersEntity[];
+
+    @OneToMany(type => MeetingCommentsEntity, mc => mc.meeting)
+    comments: MeetingCommentsEntity[];
 
     @Column({ default: 0 })
     isPublished: number;

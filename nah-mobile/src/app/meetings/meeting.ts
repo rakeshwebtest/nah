@@ -19,6 +19,7 @@ export interface Meeting {
         imageUrl: string;
 
     }
+    comments?: any[];
     members?: Member[];
     isMember?: boolean;
     isCreatedBy?: boolean;

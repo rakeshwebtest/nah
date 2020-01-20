@@ -1,9 +1,10 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToOne, ManyToMany } from 'typeorm';
 import { BaseEntity } from './../shared/base.entity';
 import { GroupEntity } from 'src/group/group.entity';
 import { GroupFollowEntity } from 'src/group/group-follows.entity';
 import { MeetingEntity } from 'src/meeting/meeting.entity';
 import { CityEntity } from 'src/city/city.entity';
+import { MeetingCommentsEntity } from 'src/meeting/meeting-comments.entity';
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
 
@@ -39,5 +40,10 @@ export class UserEntity extends BaseEntity {
 
     @OneToMany(type => MeetingEntity, meeting => meeting.createdBy) // note: we will create author property in the Photo class below
     meetings: MeetingEntity[];
+
+    @OneToMany(type => MeetingCommentsEntity, mc => mc.createdBy) // note: we will create author property in the Photo class below
+    comments: MeetingCommentsEntity[];
+
+    
 
 }

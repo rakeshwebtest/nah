@@ -14,12 +14,13 @@ export class MeetingDetailsComponent implements OnInit {
   imgList = [];
   googlePic: any;
   meeting: Meeting;
+  commentMsg:string;
   constructor(private authService: AuthenticationService, private router: ActivatedRoute, private http: AppHttpClient) { }
 
   ngOnInit() {
-    
-    const userInfo: any = this.authService.isAuthenticated();
-    this.googlePic = userInfo.user.imageUrl;
+
+    const userInfo: any = this.authService.getUserInfo();
+    this.googlePic = userInfo.imageUrl;
     this.imgList = [
       { 'url': 'assets/images/default-user.png' },
       { 'url': 'assets/images/user-1.jpg' },
@@ -30,9 +31,28 @@ export class MeetingDetailsComponent implements OnInit {
     ];
     const meetingId = this.router.snapshot.params.id;
     this.http.get('meeting/list?meetingId=' + meetingId).subscribe(res => {
-        if(res.data){
-          this.meeting = res.data;
-        }
+      if (res.data) {
+        this.meeting = res.data;
+      }
+    });
+  }
+  addComment(comment) {
+
+    const meetingId = this.router.snapshot.params.id;
+    const userInfo: any = this.authService.getUserInfo();
+    const payLoad = {
+      comment:comment,
+      meetingId:meetingId,
+      userId:userInfo.id
+    }
+    // this.meeting.comments.push();
+    this.http.post('meeting/comment',payLoad).subscribe(res => {
+      if (res.data) {
+        const _comment = res.data;
+        _comment.createdBy = userInfo;
+        this.meeting.comments.unshift(_comment);
+        this.commentMsg = null;
+      }
     });
   }
 

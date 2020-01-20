@@ -7,6 +7,7 @@ import { CreateMeetingDto } from './dto/create-meeting.dto';
 import { ValidationPipe } from './../shared/pipes/validation.pipe';
 import { JoinMeetingDto } from './dto/join-member.dto';
 import { ApiBearerAuth, ApiTags, ApiProperty } from '@nestjs/swagger';
+import { CommentDto } from './dto/comment.dto';
 
 @ApiBearerAuth()
 @ApiTags('Meeting')
@@ -66,5 +67,14 @@ export class MeetingController {
   @Post('join')
   async joinOrUnjoin(@Body() meetingMebers: JoinMeetingDto, @Request() req) {
     return this.meetingService.joinMember(meetingMebers);
+  }
+
+  /**
+   * join or unjoin meeting members
+   */
+  @UsePipes(new ValidationPipe())
+  @Post('comment')
+  async addComment(@Body() comment: CommentDto, @Request() req) {
+    return this.meetingService.addComment(comment);
   }
 }

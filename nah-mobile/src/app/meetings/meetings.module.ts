@@ -11,7 +11,7 @@ import { MeetingDetailsComponent } from './meeting-details/meeting-details.compo
 import { MeetingCreateComponent } from './meeting-create/meeting-create.component';
 import { NahFormlyModule } from '../utils/nah-formly/nah-formly.module';
 import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
-
+import { TimeagoModule } from 'ngx-timeago';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +19,8 @@ import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
     IonicModule,
     MeetingsPageRoutingModule,
     NahFormlyModule,
-    MeetingListModule
+    MeetingListModule,
+    TimeagoModule.forRoot()
   ],
   declarations: [MeetingsPage, MeetingDetailsComponent, MeetingCreateComponent]
 })
