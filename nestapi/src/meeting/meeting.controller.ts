@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body, UploadedFile, UseInterceptors, Request, UsePipes, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, UploadedFile, UseInterceptors, Request, UsePipes, Param, Query, UploadedFiles } from '@nestjs/common';
 import { MeetingService } from './meeting.service';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { CreateMeetingDto } from './dto/create-meeting.dto';
@@ -8,6 +8,20 @@ import { ValidationPipe } from './../shared/pipes/validation.pipe';
 import { JoinMeetingDto } from './dto/join-member.dto';
 import { ApiBearerAuth, ApiTags, ApiProperty } from '@nestjs/swagger';
 import { CommentDto } from './dto/comment.dto';
+import * as path from 'path';
+
+const imageFilter = (req, file, callback) => {
+    console.log('file',file);
+  let ext = path.extname(file.originalname);
+
+  if (ext === '.png' || ext === '.jpeg' || ext === '.jpg') {
+    return callback(null, true);
+  } else {
+    req.fileValidationError = 'Invalid file type';
+    return callback(new Error('Invalid file type'), false);
+  }
+}
+
 
 @ApiBearerAuth()
 @ApiTags('Meeting')
@@ -25,6 +39,7 @@ export class MeetingController {
 
     return { message: false, data, query };
   }
+
   /**
  * get all meeting with meembers
  * :type upcomeing , coming ,createdId 
@@ -41,7 +56,7 @@ export class MeetingController {
    * @param meetingDto
    * @param req
    */
- 
+
   @UsePipes(new ValidationPipe())
   @UseInterceptors(FileInterceptor('image', {
     storage: diskStorage({
@@ -77,4 +92,29 @@ export class MeetingController {
   async addComment(@Body() comment: CommentDto, @Request() req) {
     return this.meetingService.addComment(comment);
   }
+
+  @Post('images')
+  // @UseInterceptors(FilesInterceptor('images[]', 20, {
+  //   fileFilter: imageFilter
+  // }))
+  @UseInterceptors(FilesInterceptor('images[]', 20,{
+    fileFilter: imageFilter,
+    storage: diskStorage({
+      destination: './uploads',
+      filename: (req, image, cb) => {
+        const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
+        return cb(null, `${randomName}${extname(image.originalname)}`)
+      }
+    })
+  }))
+  meetingImages(@UploadedFiles() images, @Body() fileDto: any) {
+
+    console.log(images);
+    console.log(fileDto);
+
+    return {images,fileDto};
+
+  }
+
+
 }

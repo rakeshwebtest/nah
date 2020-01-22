@@ -1,21 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
     selector: 'formly-field-file',
     template: `
+    {{multiple}}
   <ion-input  type="file" label="test" 
   accept="image/x-png,image/gif,image/jpeg"
+   [multiple]="to.multiple"
   (change)="onFileChange($event)"
    [formControl]="formControl" [ionFormlyAttributes]="field"></ion-input>
   `,
 })
-export class FieldFileComponent extends FieldType {
+export class FieldFileComponent extends FieldType implements OnInit {
+    ngOnInit() {
+    }
 
     onFileChange(event) {
-        if (event.target.files.length > 0) {
-            const file = event.target.files[0];
-            this.formControl.setValue(file);
+        if (this.to.multiple) {
+            if (event.target.files.length > 0) {
+                // const files:File[] = [];
+                // for (let index = 0; index < event.target.files.length; index++) {
+                //     const file = event.target.files[index];
+                //     files.push(file);
+
+                // }
+                this.formControl.setValue(event.target.files);
+            }
+        } else {
+            if (event.target.files.length > 0) {
+                const file = event.target.files[0];
+                this.formControl.setValue(file);
+            }
         }
+
     }
 }

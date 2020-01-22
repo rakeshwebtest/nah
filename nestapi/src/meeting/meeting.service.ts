@@ -14,7 +14,7 @@ import { CommentDto } from './dto/comment.dto';
 @Injectable()
 export class MeetingService {
     constructor(@InjectRepository(MeetingEntity) private readonly meetingRepository: Repository<MeetingEntity>,
-    @InjectRepository(MeetingCommentsEntity) private readonly meetingCommentRepository: Repository<MeetingCommentsEntity>,
+        @InjectRepository(MeetingCommentsEntity) private readonly meetingCommentRepository: Repository<MeetingCommentsEntity>,
         @InjectRepository(MeetingMembersEntity) private readonly meetingMembersRepository: Repository<MeetingEntity>) {
 
     }
@@ -22,9 +22,9 @@ export class MeetingService {
     async getMeetings(query: any): Promise<MeetingEntity | MeetingEntity[]> {
         const db = getRepository(MeetingEntity)
             .createQueryBuilder('m')
-            .select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm", 
-            "user.id", "user.displayName", "user.imageUrl", "city",
-            "mc","mc_createdBy.id","mc_createdBy.imageUrl","mc_createdBy.displayName"])
+            .select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm",
+                "user.id", "user.displayName", "user.imageUrl", "city",
+                "mc", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"])
             .leftJoin('m.createdBy', 'u')
             .leftJoin('m.city', 'city')
             .leftJoin('m.group', 'group')
@@ -34,17 +34,21 @@ export class MeetingService {
             .leftJoin("m.comments", 'mc')
             .leftJoin("mc.createdBy", 'mc_createdBy')
             .leftJoin("mm.user", 'user')
-            .orderBy({"m.createdDate": "DESC","mc.createdDate":"DESC"});
+            .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" });
+
+            // get meeting by group owner or group follower   
+            db.where('gf_user.id= :id', { id: query.userId })
+            .orWhere('group.createdBy= :id', { id: query.userId });
 
         if (query.type && query.type === 'upcoming') {
             db.where('m.meetingDate >= DATE(NOW())');
         }
-        if (query.type && query.type === 'my-meeting' && query.userId) {
+        if (query.type && query.type === 'my-meeting') {
             db.where('u.id = :id', { id: query.userId })
-            .orWhere('gf_user.id= :id', { id: query.userId })
-            .orWhere('group.createdBy= :id', { id: query.userId })
-        }
+        } 
 
+
+        // get meeting details   
         if (query.meetingId) { // single meeting
             db.where('m.id = :meetingId', { meetingId: query.meetingId });
             const data: any = await db.getOne();
@@ -124,8 +128,8 @@ export class MeetingService {
             return { message: 'Successfully Join Member', data };
         }
     }
-    async addComment(commentDto:CommentDto){
-        const comment  = new MeetingCommentsEntity();
+    async addComment(commentDto: CommentDto) {
+        const comment = new MeetingCommentsEntity();
         comment.createdBy = new UserEntity();
         comment.meeting = new MeetingEntity();
         comment.meeting.id = commentDto.meetingId;

@@ -37,9 +37,10 @@ export class MeetingListComponent implements OnInit, OnDestroy {
     const userInfo: any = this.authService.getUserInfo();
     this.googlePic = userInfo.imageUrl;
     let queryString = '?type=' + params.type || 'all';
-    if (params.type === 'my-meeting') {
-      queryString += '&userId=' + userInfo.id;
-    }
+    queryString += '&userId=' + userInfo.id;
+    // if (params.type === 'my-meeting') {
+    //   queryString += '&userId=' + userInfo.id;
+    // }
 
 
     return this.http.get('meeting/list' + queryString).pipe(map(res => {

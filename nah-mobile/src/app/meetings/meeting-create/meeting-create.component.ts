@@ -84,6 +84,7 @@ export class MeetingCreateComponent implements OnInit {
     wrappers: ['vertical'],
     className: 'col-12',
     templateOptions: {
+      multiple:false,
       required: true,
       label: 'Image',
       placeholder: 'Upload Image',

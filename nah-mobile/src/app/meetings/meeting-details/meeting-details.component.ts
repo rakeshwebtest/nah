@@ -3,6 +3,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AppHttpClient } from 'src/app/utils';
 import { ActivatedRoute } from '@angular/router';
 import { Meeting } from './../meeting';
+import { FormGroup } from '@angular/forms';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
   selector: 'app-meeting-details',
@@ -14,7 +16,24 @@ export class MeetingDetailsComponent implements OnInit {
   imgList = [];
   googlePic: any;
   meeting: Meeting;
-  commentMsg:string;
+  commentMsg: string;
+  form = new FormGroup({});
+  imageModel = {};
+  fields: FormlyFieldConfig[] = [
+    {
+      key: 'images',
+      type: 'file',
+      wrappers: ['vertical'],
+      className: 'col-12',
+      templateOptions: {
+        multiple:true,
+        required: true,
+        label: 'Image',
+        placeholder: 'Upload Image',
+      }
+    }
+
+  ];
   constructor(private authService: AuthenticationService, private router: ActivatedRoute, private http: AppHttpClient) { }
 
   ngOnInit() {
@@ -41,12 +60,12 @@ export class MeetingDetailsComponent implements OnInit {
     const meetingId = this.router.snapshot.params.id;
     const userInfo: any = this.authService.getUserInfo();
     const payLoad = {
-      comment:comment,
-      meetingId:meetingId,
-      userId:userInfo.id
+      comment: comment,
+      meetingId: meetingId,
+      userId: userInfo.id
     }
     // this.meeting.comments.push();
-    this.http.post('meeting/comment',payLoad).subscribe(res => {
+    this.http.post('meeting/comment', payLoad).subscribe(res => {
       if (res.data) {
         const _comment = res.data;
         _comment.createdBy = userInfo;
@@ -54,6 +73,30 @@ export class MeetingDetailsComponent implements OnInit {
         this.commentMsg = null;
       }
     });
+  }
+  uploadImages() {
+    const formData = new FormData();
+    // for (let key in this.imageModel) {
+    //   formData.append(key, this.imageModel[key]);
+    // }
+    // console.log('files',this.imageModel);
+    const files:any[] = this.imageModel['images'];
+    for (let index = 0; index < files.length; index++) {
+      const file = files[index];
+      formData.append('images[]', file);
+      
+    }
+
+
+
+    this.http.post('meeting/images', formData).subscribe(res => {
+      console.log('res',res);
+      if (res.data) {
+       
+      }
+    });
+
+
   }
 
 }
