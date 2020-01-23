@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { MyGroupComponent } from './my-group/my-group.component';
+import { GroupDetailsComponent } from './group-details/group-details.component';
 
-import { GroupPage } from './group.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: GroupPage
+    path: 'list',
+    component: MyGroupComponent
+  },
+  {
+    path: 'details/:id',
+    component: GroupDetailsComponent
   }
 ];
 
@@ -15,5 +20,5 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class GroupPageRoutingModule {
-  
+
 }

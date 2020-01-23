@@ -4,6 +4,7 @@ import { UserProfileComponent } from './user-profile.component';
 import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
+import { GroupListModule } from '../shared/group-list/group-list.module';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
-    IonicModule
+    IonicModule,
+    GroupListModule
   ]
 })
 export class UserProfileModule { }

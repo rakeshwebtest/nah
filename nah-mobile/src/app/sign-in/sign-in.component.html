@@ -52,7 +52,8 @@
     <ion-row class="ion-justify-content-center" style="width: 80%;">
       <ion-col size="12">
 
-        <ionic-selectable item-content [(ngModel)]="profile.cityId" placeholder="Select Your City" itemValueField="id"
+        <ionic-selectable item-content  closeButtonSlot="end" closeButtonText="Close"
+        [(ngModel)]="profile.cityId" placeholder="Select Your City" itemValueField="id"
         shouldStoreItemValue="id"  itemTextField="name" [items]="cityList" [canSearch]="true">
         </ionic-selectable>
 

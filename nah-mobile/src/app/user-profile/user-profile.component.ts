@@ -4,6 +4,7 @@ import { AppHttpClient } from '../utils';
 import { AuthenticationService } from '../services/authentication.service';
 import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
 import { GroupCreateModalComponent } from '../group-create-modal/group-create-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,14 +20,14 @@ export class UserProfileComponent implements OnInit {
     private popoverController: PopoverController,
     private modalController: ModalController,
     private alertCtrl: AlertController,
+    private router: Router,
     private http: AppHttpClient) { }
 
   ngOnInit() {
     const userInfo: any = this.authService.isAuthenticated();
     this.userInfo = userInfo.user;
     this.googlePic = userInfo.user.imageUrl;
-    console.log('this.userInfo', userInfo);
-    this.getGroups();
+
   }
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
@@ -37,44 +38,7 @@ export class UserProfileComponent implements OnInit {
     });
     return await popover.present();
   }
-  getGroups() {
-    this.http.get('group/list').subscribe(res => {
-      console.log('list gro', res);
-      const _groupList = res.data || [];
-      _groupList.map(item => {
-        if (item.followers.length > 0) {
-          const isFollower = item.followers.find(f => f.user && f.user.id === this.userInfo.id);
-          item.textColor = this.getRandomColor();
-          if (isFollower) {
-            item.isFollower = true;
-          }
-        }
-      });
-      this.groupList = _groupList;
-    });
-  }
-  follow(item) {
-    item.isFollower = !item.isFollower;
-    const payload = {
-      groupId: item.id,
-      userId: this.userInfo.id
-    };
-    if (!item.isFollower) {
-      const followerIndx = item.followers.findIndex(f => f.user && f.user.id === this.userInfo.id);
-      item.followers.splice(followerIndx, 1);
-    } else {
-      const followUser = {
-        groupId: item.id,
-        userId: this.userInfo.id,
-        user: this.userInfo
-      };
-      item.followers.push(followUser);
-    }
 
-    this.http.post('group/follow', payload).subscribe(res => {
-
-    });
-  }
   async presentModal() {
     console.log('0k');
     const modal = await this.modalController.create({
@@ -82,41 +46,14 @@ export class UserProfileComponent implements OnInit {
       cssClass: 'group-create-modal'
     });
     modal.onDidDismiss().then(arg => {
-      this.getGroups();
+      // this.getGroups();
     });
     return await modal.present();
   }
-  getRandomColor() {
-    const color = Math.floor(0x1000000 * Math.random()).toString(16);
-    return '#' + ('000000' + color).slice(-6);
-  }
-  deleteGroup(group: any, index) {
-    this.groupList.splice(index, 1);
-    this.http.delete('group/' + group.id).subscribe(res => {
-      
-    });
+ 
 
-  }
 
-  async deleteGroupConfirm(group: any, index) {
-    let alert = await this.alertCtrl.create({
-      message: 'Do you want to delete this group?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Okay',
-          handler: () => {
-            this.deleteGroup(group, index);
-          }
-        }
-      ]
-    });
-    await alert.present();
+  navGroupList() {
+    this.router.navigate(['/group/list']);
   }
 }

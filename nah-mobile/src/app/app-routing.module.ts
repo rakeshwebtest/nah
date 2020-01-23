@@ -41,9 +41,7 @@ const routes: Routes = [
         loadChildren: () => import('./group/group.module').then( m => m.GroupPageModule)
       }
     ]
-  },
-  
-
+  }
 ];
 
 @NgModule({

@@ -20,7 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { IonicSelectableModule } from 'ionic-selectable';
 
-//driverOrder: ['indexeddb', 'sqlite', 'websql']
+// driverOrder: ['indexeddb', 'sqlite', 'websql']
+
 @NgModule({
   declarations: [AppComponent, AdminLayoutComponent, SignInComponent, ChooseUserGroupsComponent, GroupCreateModalComponent],
   imports: [

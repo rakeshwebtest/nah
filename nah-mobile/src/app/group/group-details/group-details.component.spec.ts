@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { GroupPage } from './group.page';
+import { GroupDetailsComponent } from './group-details.component';
 
-describe('GroupPage', () => {
-  let component: GroupPage;
-  let fixture: ComponentFixture<GroupPage>;
+describe('GroupDetailsComponent', () => {
+  let component: GroupDetailsComponent;
+  let fixture: ComponentFixture<GroupDetailsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GroupPage ],
+      declarations: [ GroupDetailsComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GroupPage);
+    fixture = TestBed.createComponent(GroupDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
