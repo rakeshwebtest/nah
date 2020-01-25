@@ -1,0 +1,66 @@
+.meeting-item{
+    .icon-big{
+        font-size: 20px;
+        padding: 7px;
+        cursor: pointer;
+    }
+    .item-native{
+        padding: 0 ;
+    }
+    .img-left{
+        max-width: 50px;
+    }
+    .avater{
+        width: 40px;
+        height: 40px;
+        &.small{
+            width: 20px;
+            height: 20px;
+            background-color: #ccc;
+            text-align: center;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        };
+        &.text{
+            background-color: #ccc;
+            text-align: center;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .meeting-title{
+        widows: 100%;
+        font-size: 14px;
+    }
+    .meeting-sub-title{
+        font-size: 12px;
+        color: #f00;
+    }
+    .meeting-desc{
+        font-size:10px;
+        color:#736d6d;
+    }
+    .meeting-date{
+        font-size: 12px;
+        padding-top: 5px;
+    }
+    .fallowing-members{
+        font-size: 10px;
+        color: #999;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.image-thumb{
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+    img{
+        border-radius: 7px;
+    }
+}

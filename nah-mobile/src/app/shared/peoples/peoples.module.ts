@@ -12,6 +12,7 @@ import { IonicModule } from '@ionic/angular';
     CommonModule,
     IonicModule
   ],
+  entryComponents:[PeoplesListComponent],
   exports: [PeoplesIconsComponent, PeoplesListComponent]
 })
 export class PeoplesModule { }

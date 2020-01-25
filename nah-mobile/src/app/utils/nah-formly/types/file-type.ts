@@ -4,8 +4,7 @@ import { FieldType } from '@ngx-formly/core';
 @Component({
     selector: 'formly-field-file',
     template: `
-    {{multiple}}
-  <ion-input  type="file" label="test" 
+  <ion-input  type="file" label="test" [ngClass]="{'multiple':to.multiple}"
   accept="image/x-png,image/gif,image/jpeg"
    [multiple]="to.multiple"
   (change)="onFileChange($event)"
@@ -14,6 +13,7 @@ import { FieldType } from '@ngx-formly/core';
 })
 export class FieldFileComponent extends FieldType implements OnInit {
     ngOnInit() {
+
     }
 
     onFileChange(event) {

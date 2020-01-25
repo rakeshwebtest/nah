@@ -1,19 +1,35 @@
-<ion-list class="meeting-list meeting-list-d" *ngFor="let m of peoples">
-  <ion-grid class="meeting-item ion-no-padding">
-    <ion-row class="ion-nowrap">
-      <ion-col size="2" class="img-left ion-no-padding">
-        <ion-avatar class="avater">
-          <img [src]="m.user.imageUrl" />
-        </ion-avatar>
-      </ion-col>
-      <ion-col size="7" class="ion-no-padding">
-        <!-- <ion-label class="meeting-title" style="display: block;color: #000;">Let's gather our barriors
-        </ion-label> -->
-        <ion-label class="meeting-sub-title">{{c.displayName}}</ion-label>
-      </ion-col>
-      <!-- <ion-col size="3" class="ion-no-padding">
-        <label class="meeting-date" timeago [date]="m.updatedDate"></label>
-      </ion-col> -->
-    </ion-row>
-  </ion-grid>
-</ion-list>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="white-color">
+     {{label}}
+    </ion-buttons>
+    <ion-buttons slot="end" class="white-color" (click)="dismiss()">
+      Close
+     </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list class="meeting-list">
+    <ion-item class="meeting-item" *ngFor="let f of peoples">
+      <ion-grid class="ion-no-padding" >
+        <ion-row class="ion-nowrap ion-align-items-center">
+          <ion-col class="img-left ion-no-padding">
+            <ion-thumbnail class="" style="display: flex;align-items: center;">
+              <ion-img class="avatar" [src]="f.user.imageUrl"></ion-img>
+            </ion-thumbnail>
+  
+          </ion-col>
+          <ion-col class="ion-no-padding" style="display: flex;flex-direction:column;justify-content: center;">
+            <ion-label class="meeting-title">{{f.user.displayName}} </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-nowrap row-last ion-align-items-center ion-padding-b-5">
+          <ion-col class="ion-no-padding">
+            <label class="meeting-date" style="display: block;">
+              {{f.createdDate | date:'shortTime'}} - {{f.updatedDate | date:'shortTime'}} </label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>

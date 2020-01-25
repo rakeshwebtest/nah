@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-peoples-list',
@@ -7,9 +8,17 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PeoplesListComponent implements OnInit {
   @Input() peoples: any[] = [];
-  @Input() label:string;
-  constructor() { }
+  @Input() label: string;
+  constructor(public modalController: ModalController) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+  dismiss() {
+    // using the injected ModalController this page
+    // can "dismiss" itself and optionally pass back data
+    this.modalController.dismiss({
+      'dismissed': true
+    });
+  }
+
 
 }
