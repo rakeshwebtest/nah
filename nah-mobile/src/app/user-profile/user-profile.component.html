@@ -47,10 +47,10 @@
     <ion-row class="">
       <ion-tabs>
         <ion-tab-bar>
-          <ion-tab-button (click)="activeTab='myGroups'">
-            <ion-label>My group</ion-label>
+          <ion-tab-button [ngClass]="{'active': activeTab=='myGroups'}" (click)="activeTab='myGroups'">
+            <ion-label >My Groups</ion-label>
           </ion-tab-button>
-          <ion-tab-button (click)="activeTab='all'">
+          <ion-tab-button [ngClass]="{'active': activeTab=='all'}" (click)="activeTab='all'">
             <ion-label>All Groups</ion-label>
           </ion-tab-button>
         </ion-tab-bar>
@@ -74,11 +74,7 @@
       <ng-container *ngSwitchCase="'all'">
         <app-group-list></app-group-list>
       </ng-container>
-
     </ng-container>
-
-
-    <app-group-list #groupC></app-group-list>
 
   </ion-grid>
 
