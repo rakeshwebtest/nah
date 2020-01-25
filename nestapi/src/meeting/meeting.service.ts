@@ -50,6 +50,7 @@ export class MeetingService {
         if (query.type && query.type === 'upcoming') {
             db.where('m.meetingDate >= DATE(NOW())');
         }
+        
         if (query.type && query.type === 'my-meeting') {
             db.where('u.id = :id', { id: query.userId })
         } else {
@@ -179,7 +180,7 @@ export class MeetingService {
     async meetingPublished(meetingId) {
         const meeting = new MeetingEntity();
         meeting.isPublished = 1;
-        const data = await this.meetingRepository.update(meetingId,meeting);
+        const data = await this.meetingRepository.update(meetingId, meeting);
         return { message: 'Meeting Published Successfully', data };
     }
 
