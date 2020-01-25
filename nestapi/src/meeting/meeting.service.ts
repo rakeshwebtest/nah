@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { MeetingEntity } from './meeting.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, getConnection } from 'typeorm';
 import { CreateMeetingDto } from './dto/create-meeting.dto';
 import { UserEntity } from 'src/user/user.entity';
 import { GroupEntity } from 'src/group/group.entity';
@@ -10,11 +10,15 @@ import { SERVERBASEPATH } from 'src/config';
 import { CityEntity } from 'src/city/city.entity';
 import { MeetingCommentsEntity } from './meeting-comments.entity';
 import { CommentDto } from './dto/comment.dto';
+import { MeetingPhotosEntity } from './meeting-photos.entity';
+import { MeetingVideosEntity } from './meeting-videos.entity';
 
 @Injectable()
 export class MeetingService {
     constructor(@InjectRepository(MeetingEntity) private readonly meetingRepository: Repository<MeetingEntity>,
         @InjectRepository(MeetingCommentsEntity) private readonly meetingCommentRepository: Repository<MeetingCommentsEntity>,
+        @InjectRepository(MeetingPhotosEntity) private readonly meetingPhotosRepository: Repository<MeetingPhotosEntity>,
+        @InjectRepository(MeetingVideosEntity) private readonly meetingVideoRepository: Repository<MeetingVideosEntity>,
         @InjectRepository(MeetingMembersEntity) private readonly meetingMembersRepository: Repository<MeetingEntity>) {
 
     }
@@ -22,7 +26,7 @@ export class MeetingService {
     async getMeetings(query: any): Promise<MeetingEntity | MeetingEntity[]> {
         const db = getRepository(MeetingEntity)
             .createQueryBuilder('m')
-            .select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm",
+            .select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm", "mp",
                 "user.id", "user.displayName", "user.imageUrl", "city",
                 "mc", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"])
             .leftJoin('m.createdBy', 'u')
@@ -32,12 +36,15 @@ export class MeetingService {
             .leftJoin('gf.user', 'gf_user')
             .leftJoin("m.members", 'mm')
             .leftJoin("m.comments", 'mc')
+            .leftJoin("m.photos", 'mp')
+            .leftJoin("m.videos", 'mv')
             .leftJoin("mc.createdBy", 'mc_createdBy')
             .leftJoin("mm.user", 'user')
             .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" });
 
-            // get meeting by group owner or group follower   
-            db.where('gf_user.id= :id', { id: query.userId })
+
+        // get meeting by group owner or group follower   
+        db.where('gf_user.id= :id', { id: query.userId })
             .orWhere('group.createdBy= :id', { id: query.userId });
 
         if (query.type && query.type === 'upcoming') {
@@ -45,21 +52,22 @@ export class MeetingService {
         }
         if (query.type && query.type === 'my-meeting') {
             db.where('u.id = :id', { id: query.userId })
-        } 
+        } else {
+            db.where('m.isPublished = 1');
+        }
 
 
-        // get meeting details   
+        // get one meeting details   
         if (query.meetingId) { // single meeting
             db.where('m.id = :meetingId', { meetingId: query.meetingId });
             const data: any = await db.getOne();
-            data.imageUrl = SERVERBASEPATH + data.imageUrl;
-            return data;
+            // data.imageUrl = SERVERBASEPATH + data.imageUrl;
+            return this.bindFileBasePath(data);
         } else {
             const data = await db.getMany(); // all meeting
             if (data) {
                 data.map(meeting => {
-                    if (meeting.imageUrl)
-                        meeting.imageUrl = SERVERBASEPATH + meeting.imageUrl;
+                    return this.bindFileBasePath(meeting);
                 });
             }
             return data;
@@ -67,13 +75,19 @@ export class MeetingService {
         // return  this.meetingRepository.find({relations:["user","members"]});
 
     }
-    bindFileBasePath(data) {
-        if (data) {
-            data.map(meeting => {
-                if (meeting.imageUrl)
-                    meeting.imageUrl = SERVERBASEPATH + meeting.imageUrl;
-            });
+    bindFileBasePath(meeting) {
+        if (meeting) {
+            if (meeting.imageUrl)
+                meeting.imageUrl = SERVERBASEPATH + meeting.imageUrl;
+            if (meeting.photos) {
+                meeting.photos.map(p => {
+                    if (p.imagePath)
+                        p.imagePath = SERVERBASEPATH + p.imagePath;
+                });
+            }
+
         }
+        return meeting;
     }
     /**
      * createing meeting
@@ -88,6 +102,7 @@ export class MeetingService {
         _meeting.endTime = meeting.endTime;
         _meeting.imageUrl = meeting.imageUrl;
         _meeting.location = meeting.location;
+        _meeting.isPublished = parseInt(meeting.isPublished);
 
         const userId = parseInt(meeting.createdBy);
         const groupId = parseInt(meeting.groupId);
@@ -138,5 +153,34 @@ export class MeetingService {
         const data = await this.meetingCommentRepository.save(comment);
         return { message: 'Add Comment Successfully', data };
     }
+    async uploadMeetingImages(images: any[], meetingId) {
+        // const photos:MeetingPhotosEntity
+        const imagesList: any[] = images.map(img => {
+            const meeting = new MeetingEntity();
+            meeting.id = meetingId;
 
-}
+            return { imagePath: img.path, meeting: meeting };
+        });
+
+        console.log('imagess', imagesList);
+        const data = await getConnection()
+            .createQueryBuilder()
+            .insert()
+            .into(MeetingPhotosEntity)
+            .values(imagesList)
+            .execute();
+        imagesList.map(meeting => {
+            if (meeting.imagePath)
+                meeting.imagePath = SERVERBASEPATH + meeting.imagePath;
+        });
+        return imagesList;
+
+    }
+    async meetingPublished(meetingId) {
+        const meeting = new MeetingEntity();
+        meeting.isPublished = 1;
+        const data = await this.meetingRepository.update(meetingId,meeting);
+        return { message: 'Meeting Published Successfully', data };
+    }
+
+} 

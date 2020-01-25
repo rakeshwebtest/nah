@@ -1,0 +1,23 @@
+.avater{
+    width: 30px;
+    height: 30px;
+    &.small{
+        width: 20px;
+        height: 20px;
+        background-color: #ccc;
+        text-align: center;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 5px;
+        min-width: 20px;
+        margin-bottom: 2px;
+    }
+}
+.fallowing-members{
+    font-size: 10px;
+    color: #999;
+    display: flex;
+    align-items: center;
+}

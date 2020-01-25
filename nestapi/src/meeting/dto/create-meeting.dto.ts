@@ -26,6 +26,7 @@ export class CreateMeetingDto {
     startTime: string;
     endTime: string;
     imageUrl: string;
+    isPublished: string;
     // @IsNotEmpty({ message: "Required Created By" })
     // readonly createBy: number;
 }

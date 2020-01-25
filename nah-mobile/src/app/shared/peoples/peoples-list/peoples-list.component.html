@@ -1,0 +1,19 @@
+<ion-list class="meeting-list meeting-list-d" *ngFor="let m of peoples">
+  <ion-grid class="meeting-item ion-no-padding">
+    <ion-row class="ion-nowrap">
+      <ion-col size="2" class="img-left ion-no-padding">
+        <ion-avatar class="avater">
+          <img [src]="m.user.imageUrl" />
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="7" class="ion-no-padding">
+        <!-- <ion-label class="meeting-title" style="display: block;color: #000;">Let's gather our barriors
+        </ion-label> -->
+        <ion-label class="meeting-sub-title">{{c.displayName}}</ion-label>
+      </ion-col>
+      <!-- <ion-col size="3" class="ion-no-padding">
+        <label class="meeting-date" timeago [date]="m.updatedDate"></label>
+      </ion-col> -->
+    </ion-row>
+  </ion-grid>
+</ion-list>

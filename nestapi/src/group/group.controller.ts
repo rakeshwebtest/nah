@@ -33,6 +33,7 @@ export class GroupController {
             throw new HttpException({ message: 'Already group name created', errors: 'Already group exists' }, HttpStatus.BAD_REQUEST);
         } else {
             const data: any = await this.service.updateGroup(group);
+            data.followers = [];
             return { message: 'Successfully Create A Group', data };
         }
     }

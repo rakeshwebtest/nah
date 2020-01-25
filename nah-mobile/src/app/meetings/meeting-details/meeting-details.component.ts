@@ -18,7 +18,9 @@ export class MeetingDetailsComponent implements OnInit {
   meeting: Meeting;
   commentMsg: string;
   form = new FormGroup({});
-  imageModel = {};
+  imageModel: any = {};
+  activeTab: string = 'images';
+
   fields: FormlyFieldConfig[] = [
     {
       key: 'images',
@@ -26,7 +28,7 @@ export class MeetingDetailsComponent implements OnInit {
       wrappers: ['vertical'],
       className: 'col-12',
       templateOptions: {
-        multiple:true,
+        multiple: true,
         required: true,
         label: 'Image',
         placeholder: 'Upload Image',
@@ -54,6 +56,12 @@ export class MeetingDetailsComponent implements OnInit {
         this.meeting = res.data;
       }
     });
+    this.form.valueChanges.subscribe(res => {
+      console.log('value changes', this.imageModel);
+      if (this.imageModel.images) {
+        this.uploadImages();
+      };
+    });
   }
   addComment(comment) {
 
@@ -80,22 +88,30 @@ export class MeetingDetailsComponent implements OnInit {
     //   formData.append(key, this.imageModel[key]);
     // }
     // console.log('files',this.imageModel);
-    const files:any[] = this.imageModel['images'];
+    const files: any[] = this.imageModel['images'];
     for (let index = 0; index < files.length; index++) {
       const file = files[index];
       formData.append('images[]', file);
-      
+
     }
 
 
 
-    this.http.post('meeting/images', formData).subscribe(res => {
-      console.log('res',res);
+    this.http.post('meeting/images/' + this.meeting.id, formData).subscribe(res => {
       if (res.data) {
-       
+        this.imageModel = {};
+        this.form.reset();
+        this.meeting.photos.push(...res.data);
       }
     });
 
+
+  }
+  publishMeeting(m:Meeting) {
+    this.meeting.isPublished = 1;
+    this.http.get('meeting/publish/' + m.id).subscribe(res => {
+
+    });
 
   }
 

@@ -24,7 +24,8 @@ export class GroupService {
             .leftJoin('group.followers', 'gf')
             .loadRelationCountAndMap('group.followersCount','group.followers', 'gf')
             .leftJoin('gf.user', 'user')
-            .where('group.isDeleted != 1');
+            .where('group.isDeleted != 1')
+            .orderBy({ "group.createdDate": "DESC"});
 
         if (query.search) {
             db.where("group.name like :name", {name: '%' + query.search + '%' })
@@ -47,6 +48,7 @@ export class GroupService {
             .leftJoin('gf.user', 'user')
             .where('group.createdBy = :id && isDeleted != 1', { id: userId })
             .orWhere('user.id= :id', { id: userId })
+            .orderBy({ "group.createdDate": "DESC"})
             .getMany();
     }
     async getMembersByGroupId(groupId) {

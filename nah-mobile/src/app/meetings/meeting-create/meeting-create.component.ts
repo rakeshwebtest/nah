@@ -184,12 +184,16 @@ export class MeetingCreateComponent implements OnInit {
   }
 
 
-  async submit(model) {
+  async submit(model,isPublish) {
     const loading = await this.loadingController.create({
       message: 'Please wait...'
     });
     this.presentLoading(loading);
-
+    if(isPublish){
+      model.isPublished = 1;
+    }else{
+      model.isPublished = 0;
+    }
     const userInfo = this.authService.getUserInfo();
     console.log('this.userInfo', userInfo);
     const formData = new FormData();

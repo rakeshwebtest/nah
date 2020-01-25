@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PopoverController, ModalController, AlertController } from '@ionic/angular';
 import { AppHttpClient } from '../utils';
 import { AuthenticationService } from '../services/authentication.service';
 import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
 import { GroupCreateModalComponent } from '../group-create-modal/group-create-modal.component';
 import { Router } from '@angular/router';
+import { GroupListComponent } from '../shared/group-list/group-list.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,6 +16,8 @@ export class UserProfileComponent implements OnInit {
   googlePic: String;
   userInfo: any;
   groupList = [];
+  @ViewChild(GroupListComponent, { static: false }) groupC: GroupListComponent;
+
   customColors = ['#f00', '#0f0', '#00f', '#70C149', '#E6B211', '#EE5641', '#ED008C', '#40B4D9', '#9A6AB6', '#AE8C4C'];
   constructor(private authService: AuthenticationService,
     private popoverController: PopoverController,
@@ -47,10 +50,13 @@ export class UserProfileComponent implements OnInit {
     });
     modal.onDidDismiss().then(arg => {
       // this.getGroups();
+      console.log('arg', arg);
+      if (arg.data)
+        this.groupC.addGroup(arg.data);
     });
     return await modal.present();
   }
- 
+
 
 
   navGroupList() {

@@ -11,7 +11,7 @@ import { CommentDto } from './dto/comment.dto';
 import * as path from 'path';
 
 const imageFilter = (req, file, callback) => {
-    console.log('file',file);
+  console.log('file', file);
   let ext = path.extname(file.originalname);
 
   if (ext === '.png' || ext === '.jpeg' || ext === '.jpg') {
@@ -93,11 +93,17 @@ export class MeetingController {
     return this.meetingService.addComment(comment);
   }
 
-  @Post('images')
+  @Get('publish/:meetingId')  
+  async meetingPublished(@Param() params: any) {
+    return this.meetingService.meetingPublished(params.meetingId);
+  }
+  
+
+  @Post('images/:meetingId')
   // @UseInterceptors(FilesInterceptor('images[]', 20, {
   //   fileFilter: imageFilter
   // }))
-  @UseInterceptors(FilesInterceptor('images[]', 20,{
+  @UseInterceptors(FilesInterceptor('images[]', 20, {
     fileFilter: imageFilter,
     storage: diskStorage({
       destination: './uploads',
@@ -107,12 +113,13 @@ export class MeetingController {
       }
     })
   }))
-  meetingImages(@UploadedFiles() images, @Body() fileDto: any) {
+  async meetingImages(@UploadedFiles() images, @Body() fileDto: any, @Param() params: any) {
 
     console.log(images);
     console.log(fileDto);
+    const data = await this.meetingService.uploadMeetingImages(images, params.meetingId);
 
-    return {images,fileDto};
+    return { message: "Successfull Upload image", data };
 
   }
 

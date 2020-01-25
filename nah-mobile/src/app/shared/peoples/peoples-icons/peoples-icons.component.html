@@ -1,0 +1,4 @@
+<ion-avatar class="avater small" *ngFor="let m of peoples">
+  <img [src]="m.user.imageUrl" />
+</ion-avatar>
+<ion-text class="fallowing-members"><span class="count-circle">{{peoples.length}}</span> {{label}}</ion-text>

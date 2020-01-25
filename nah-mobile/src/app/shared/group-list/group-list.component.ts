@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AppHttpClient } from 'src/app/utils';
@@ -10,6 +10,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./group-list.component.scss'],
 })
 export class GroupListComponent implements OnInit {
+  @Input() type: 'mygroups' | 'all';
   googlePic: String;
   userInfo: any;
   groupList = [];
@@ -26,7 +27,12 @@ export class GroupListComponent implements OnInit {
     this.getGroups();
   }
   getGroups() {
-    this.http.get('group/list').subscribe(res => {
+    let url = 'group/list';
+    if (this.type === 'mygroups') {
+      url += '/'+this.userInfo.id;
+    } 
+
+    this.http.get(url).subscribe(res => {
       console.log('list gro', res);
       const _groupList = res.data || [];
       _groupList.map(item => {
@@ -85,6 +91,9 @@ export class GroupListComponent implements OnInit {
     });
     await alert.present();
   }
+  addGroup(group){
+    this.groupList.unshift(group);
+  }
   getRandomColor() {
     const color = Math.floor(0x1000000 * Math.random()).toString(16);
     return '#' + ('000000' + color).slice(-6);
@@ -97,7 +106,7 @@ export class GroupListComponent implements OnInit {
 
   }
   navGroupDetails(g) {
-    console.log('g',g);
+    console.log('g', g);
     this.router.navigate(['/group/details/' + g.id]);
   }
 }

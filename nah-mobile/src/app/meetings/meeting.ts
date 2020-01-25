@@ -21,8 +21,15 @@ export interface Meeting {
     }
     comments?: any[];
     members?: Member[];
+    photos?: Photo[];
     isMember?: boolean;
     isCreatedBy?: boolean;
+    isPublished?:number;
+}
+interface Photo{
+    imagePath:string;
+    id:number;
+
 }
 interface Member {
     id: number;
