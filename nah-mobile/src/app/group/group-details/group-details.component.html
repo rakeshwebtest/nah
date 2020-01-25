@@ -23,10 +23,10 @@
     <ion-row class="">
       <ion-tabs>
         <ion-tab-bar>
-          <ion-tab-button (click)="activeTab='followers'">
+          <ion-tab-button [ngClass]="{'active': activeTab=='followers'}" (click)="activeTab='followers'">
             <ion-label>Followers</ion-label>
           </ion-tab-button>
-          <ion-tab-button (click)="activeTab='meetings'">
+          <ion-tab-button [ngClass]="{'active': activeTab=='meetings'}" (click)="activeTab='meetings'">
             <ion-label>Meetings</ion-label>
           </ion-tab-button>
         </ion-tab-bar>
