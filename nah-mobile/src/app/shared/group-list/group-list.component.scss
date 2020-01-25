@@ -55,4 +55,7 @@
         display: flex;
         align-items: center;
     }
+    &:last-child{
+        margin-bottom: 40px;
+    }
 }

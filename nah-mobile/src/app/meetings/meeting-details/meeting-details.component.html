@@ -3,7 +3,7 @@
     <ion-toolbar>
       <ion-buttons slot="start" class="white-color">
         <ion-back-button></ion-back-button>
-        <ion-title>{{title}}</ion-title>
+        <ion-title class="ion-no-padding" style="font-size: 16px;">{{title}}</ion-title>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
@@ -26,7 +26,7 @@
 
 
       <ion-card-content>
-        <ion-img class="ion-text-center" [src]="meeting.imageUrl"></ion-img>
+        <ion-img class="ion-text-center m-height-250" [src]="meeting.imageUrl" style="height: 200px;"></ion-img>
         <ion-grid class="ion-no-padding">
           <ion-row class="ion-padding-t-5">
             <ion-col class="ion-no-padding">
@@ -117,12 +117,12 @@
                       <img [src]="c.createdBy.imageUrl" />
                     </ion-avatar>
                   </ion-col>
-                  <ion-col size="7" class="ion-no-padding">
+                  <ion-col size="6" class="ion-no-padding">
                     <!-- <ion-label class="meeting-title" style="display: block;color: #000;">Let's gather our barriors
                     </ion-label> -->
                     <ion-label class="meeting-sub-title">{{c.comment}}</ion-label>
                   </ion-col>
-                  <ion-col size="3" class="ion-no-padding">
+                  <ion-col size="4" class="ion-no-padding ion-text-right">
                     <label class="meeting-date" timeago [date]="c.updatedDate"></label>
                   </ion-col>
                 </ion-row>

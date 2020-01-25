@@ -14,7 +14,7 @@ export class GroupDetailsComponent implements OnInit {
   followersList = [];
   meetingsList = [];
   activeTab = 'meetings';
-  customColors = ['#f00', '#0f0', '#00f', '#70C149', '#E6B211', '#EE5641', '#ED008C', '#40B4D9', '#9A6AB6', '#AE8C4C'];
+  customColors = ['#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000'];
   constructor(private storage: Storage) { }
 
   ngOnInit() {
