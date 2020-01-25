@@ -113,6 +113,7 @@ ion-select {
     ion-input,ion-textarea,ion-datetime {
         border:1px solid #ccc !important;
         font-size: 15px;
+        margin-top: 0px;
     }
 } 
 .select-placeholder{font-size: 15px !important;}
@@ -181,23 +182,40 @@ ion-tabs{
     font-size: 12px;
 }
 formly-field-file ion-input{
-    width: 70px !important;
-    height: 70px;
+    width: 100% !important;
+    height: 35px;
     // background-color: #ccc;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 0px;
     position: relative;
     &::before{
-        content: '';
-        background-image: url('assets/images/upload-image.png');
+        content: 'Choose file';
         background-repeat: no-repeat;
         background-size: 45px;
         background-position: center;
         position: absolute;
         top: 0;
-        left: 0;
-        width: 70px;
+        left: 10px;
+        width: 100px;
+        height: 35px;
+        line-height: 33px;
+        color: #999;
+    }
+    &.multiple-files{
+        width: 70px !important;
         height: 70px;
+        &::before{
+            content: '';
+            background-image: url('assets/images/upload-image.png');
+            background-repeat: no-repeat;
+            background-size: 45px;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 70px;
+            height: 70px;
+        }
     }
 }
 formly-field-file ion-input input{
@@ -221,7 +239,31 @@ ion-tab-button{
     padding: 5px;
     border: 1px solid #ccc !important;
     border-radius: 5px !important;
-    &.active{
-        color: var(--ion-color-danger);
+    font-size: 16px;
+    ion-label{
+        text-transform: uppercase;
+    }
+    &.active,&:hover{
+        background-color: var(--ion-color-danger);
+        color: #ffffff;
+        ion-label{
+            text-transform: uppercase;
+            color: #ffffff;
+        }
     }
 } 
+.ionic-selectable-cover{
+    border: 1px solid #ccc !important;
+}
+.ionic-selectable-value-item{
+    font-size: 14px;
+    padding: 0 10px;
+}
+.no-meetings{
+    background-color: #d8d8d8;
+    border-radius: 5px;
+    padding: 7px;
+    margin: 5px;
+    color: #827d7d;
+    font-size: 14px;
+}
