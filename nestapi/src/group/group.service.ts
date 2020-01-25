@@ -20,8 +20,9 @@ export class GroupService {
         
         const db = getRepository(GroupEntity)
             .createQueryBuilder('group')
-            .select(["group", "gf", "user.id", "user.displayName", "user.imageUrl"])
+            .select(["group", "gf","gm", "user.id", "user.displayName", "user.imageUrl"])
             .leftJoin('group.followers', 'gf')
+            .leftJoin('group.meetings', 'gm')
             .loadRelationCountAndMap('group.followersCount','group.followers', 'gf')
             .leftJoin('gf.user', 'user')
             .where('group.isDeleted != 1')
@@ -43,8 +44,9 @@ export class GroupService {
     async getGroupById(userId): Promise<any[]> {
         return await <any>getRepository(GroupEntity)
             .createQueryBuilder('group')
-            .select(["group", "gf", "user.id", "user.displayName", "user.imageUrl"])
+            .select(["group", "gf","gm", "user.id", "user.displayName", "user.imageUrl"])
             .leftJoin('group.followers', 'gf')
+            .leftJoin('group.meetings', 'gm')
             .leftJoin('gf.user', 'user')
             .where('group.createdBy = :id && isDeleted != 1', { id: userId })
             .orWhere('user.id= :id', { id: userId })

@@ -7,5 +7,30 @@
   </ion-toolbar>
 </ion-header>
 <ion-content> 
-  
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-align-items-center">
+      <ion-col class="img-left">
+        <ion-avatar class="avater text" >
+          <label style="font-weight: bold;font-size:16px;color:#fff;">{{
+            group.name.charAt(0)
+          }}</label>
+        </ion-avatar>
+      </ion-col>
+      <ion-col class="ion-padding-l-0">
+        <ion-row class="ion-nowrap ion-align-items-center" >
+          <ion-col class="ion-padding-l-0" >
+            <ion-label class="meeting-title"><strong>Say No To</strong> {{ group.name }}</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-nowrap ion-align-items-center ion-justify-content-between">
+          <ion-col class="ion-no-padding" style="display: flex;flex-wrap: wrap;">
+
+            <app-peoples-icons [peoples]="group.followers" label="Members are Following"></app-peoples-icons>
+
+          </ion-col>
+
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

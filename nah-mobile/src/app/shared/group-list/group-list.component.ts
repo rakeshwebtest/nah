@@ -3,7 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AppHttpClient } from 'src/app/utils';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-group-list',
   templateUrl: './group-list.component.html',
@@ -19,6 +19,7 @@ export class GroupListComponent implements OnInit {
   constructor(private alertCtrl: AlertController,
     private authService: AuthenticationService,
     private router: Router,
+    private storage: Storage,
     private http: AppHttpClient) { }
 
   ngOnInit() {
@@ -107,6 +108,9 @@ export class GroupListComponent implements OnInit {
   }
   navGroupDetails(g) {
     console.log('g', g);
-    this.router.navigate(['/group/details/' + g.id]);
+    this.storage.set('groupDetails',g).then(res=>{
+      this.router.navigate(['/group/details/' + g.id]);
+    });
+ 
   }
 }

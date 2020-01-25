@@ -9,6 +9,7 @@ import { MyGroupComponent } from './my-group/my-group.component';
 import { GroupDetailsComponent } from './group-details/group-details.component';
 import { GroupService } from './group.service';
 import { GroupListModule } from '../shared/group-list/group-list.module';
+import { PeoplesModule } from '../shared/peoples/peoples.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { GroupListModule } from '../shared/group-list/group-list.module';
     FormsModule,
     IonicModule,
     GroupPageRoutingModule,
-    GroupListModule
+    GroupListModule,
+    PeoplesModule
   ],
   providers: [GroupService],
   declarations: [MyGroupComponent, GroupDetailsComponent]
