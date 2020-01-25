@@ -13,7 +13,7 @@ export class GroupDetailsComponent implements OnInit {
   };
   followersList = [];
   meetingsList = [];
-  activeTab = 'followers';
+  activeTab = 'meetings';
   customColors = ['#f00', '#0f0', '#00f', '#70C149', '#E6B211', '#EE5641', '#ED008C', '#40B4D9', '#9A6AB6', '#AE8C4C'];
   constructor(private storage: Storage) { }
 
