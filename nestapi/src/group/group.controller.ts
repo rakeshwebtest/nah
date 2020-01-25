@@ -19,7 +19,7 @@ export class GroupController {
         return { message: false, ...data };
     }
     @Get('list/:id')
-    async getGroupById(@Param() params: any) {
+    async getGroupById(@Param() params: any,@Query() query) {
 
         const data: any = await this.service.getGroupById(params.id);
         return { message: false, data };

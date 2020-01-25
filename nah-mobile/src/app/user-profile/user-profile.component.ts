@@ -53,7 +53,7 @@ export class UserProfileComponent implements OnInit {
       // this.getGroups();
       console.log('arg', arg);
       if (arg.data)
-        this.groupC.addGroup(arg.data);
+        this.groupC.ngOnInit();
     });
     return await modal.present();
   }

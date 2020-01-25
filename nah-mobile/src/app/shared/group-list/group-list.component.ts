@@ -28,10 +28,12 @@ export class GroupListComponent implements OnInit {
     this.getGroups();
   }
   getGroups() {
-    let url = 'group/list';
+    let url = 'group/list?userId='+this.userInfo.id;
     if (this.type === 'mygroups') {
-      url += '/'+this.userInfo.id;
-    } 
+      url += '&createdBy=true';
+    } else{
+      url += '&notCreatedBy=true';
+    }
 
     this.http.get(url).subscribe(res => {
       console.log('list gro', res);

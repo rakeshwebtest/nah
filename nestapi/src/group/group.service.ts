@@ -29,6 +29,14 @@ export class GroupService {
             .where('group.isDeleted != 1')
             .orderBy({ "group.createdDate": "DESC" });
 
+        // get user 
+        if(query.userId && query.createdBy){
+            db.where('group.createdBy = :id', { id: query.userId });
+        }
+        if(query.userId && query.notCreatedBy){
+            db.where('group.createdBy != :id', { id: query.userId });
+        }
+
         if (query.search) {
             db.where("group.name like :name", { name: '%' + query.search + '%' })
         }

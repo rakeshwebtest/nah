@@ -52,17 +52,7 @@ export class MeetingCreateComponent implements OnInit {
       placeholder: 'Enter Meeting Information',
     }
   },
-  {
-    key: 'location',
-    type: 'input',
-    wrappers: ['vertical'],
-    className: 'col-12 ion-padding-t-10',
-    templateOptions: {
-      label: 'Location',
-      placeholder: 'Enter Meeting Title',
-      required: true,
-    }
-  },
+
   {
     key: 'cityId',
     type: 'selectable',
@@ -75,6 +65,17 @@ export class MeetingCreateComponent implements OnInit {
       itemValueField: 'id',
       itemTextField: 'name',
       options: []
+    }
+  },
+  {
+    key: 'location',
+    type: 'input',
+    wrappers: ['vertical'],
+    className: 'col-12 ion-padding-t-10',
+    templateOptions: {
+      label: 'Location',
+      placeholder: 'Enter Location',
+      required: true,
     }
   },
 
@@ -177,7 +178,7 @@ export class MeetingCreateComponent implements OnInit {
           };
           return city;
         });
-        this.fields[4].templateOptions.options = res.data || [];//cityList;
+        this.fields[3].templateOptions.options = res.data || [];//cityList;
       }
 
     });
