@@ -44,12 +44,11 @@
         <ion-col class="ion-no-padding">
           <label class="meeting-date" style="display: block;">{{m.meetingDate | date:"mediumDate"}} - {{m.endDate | date:"mediumDate"}},
             {{m.startTime | date:'shortTime'}} - {{m.endTime | date:'shortTime'}} </label>
-          <ion-text class="ion-align-items-center" style="display: flex;flex-wrap:wrap;" *ngIf="m.members.length > 0">
+          
             <!-- <ion-avatar class="avater small" *ngFor="let m of m.members">
               <img [src]="m.user.imageUrl" />
             </ion-avatar> -->
             <app-peoples-icons [peoples]="m.members" label="People are going"></app-peoples-icons>
-          </ion-text>
         </ion-col>
         
       </ion-row>

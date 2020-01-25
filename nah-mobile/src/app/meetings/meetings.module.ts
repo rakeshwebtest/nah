@@ -12,12 +12,14 @@ import { MeetingCreateComponent } from './meeting-create/meeting-create.componen
 import { NahFormlyModule } from '../utils/nah-formly/nah-formly.module';
 import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
 import { TimeagoModule } from 'ngx-timeago';
+import { NgxIonicImageViewerModule } from 'ngx-ionic-image-viewer';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     MeetingsPageRoutingModule,
+    NgxIonicImageViewerModule,
     NahFormlyModule,
     MeetingListModule,
     TimeagoModule.forRoot()

@@ -23,7 +23,7 @@ export class GroupDetailsComponent implements OnInit {
         this.group = res;
         this.followersList = this.group.followers;
         this.meetingsList = this.group.meetings;
-        console.log('this.followersList', this.followersList[0].name);
+        // console.log('this.followersList', this.followersList[0].name);
     });
   }
 

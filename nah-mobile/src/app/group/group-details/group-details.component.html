@@ -34,6 +34,11 @@
     </ion-row>
     <ng-container [ngSwitch]="activeTab">
       <ng-container *ngSwitchCase="'followers'">
+        <ion-row class="ion-align-items-center no-meetings" *ngIf="followersList.length==0">
+          <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
+            No Meetings Available
+          </ion-col>
+        </ion-row>
         <ion-list class="meeting-list">
           <ion-item class="meeting-item" *ngFor="let f of followersList">
             <ion-grid class="ion-no-padding" >
@@ -60,6 +65,11 @@
         </ion-list>
       </ng-container>
       <ng-container *ngSwitchCase="'meetings'">
+        <ion-row class="ion-align-items-center no-meetings" *ngIf="meetingsList.length==0">
+          <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
+            No Meetings Available
+          </ion-col>
+        </ion-row>
         <ion-list class="meeting-list">
           <ion-item class="meeting-item" *ngFor="let m of meetingsList">
             <ion-grid class="ion-no-padding" >
