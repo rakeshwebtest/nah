@@ -180,3 +180,30 @@ ion-tabs{
 .button-small {
     font-size: 12px;
 }
+formly-field-file ion-input{
+    width: 70px !important;
+    height: 70px;
+    // background-color: #ccc;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: relative;
+    &::before{
+        content: '';
+        background-image: url('assets/images/upload-image.png');
+        background-repeat: no-repeat;
+        background-size: 45px;
+        background-position: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 70px;
+        height: 70px;
+    }
+}
+formly-field-file ion-input input{
+    opacity: 0;
+    height: 100%;
+}
+.border{
+    border: 1px solid #ccc;
+}

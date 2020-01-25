@@ -29,8 +29,8 @@ export class MeetingDetailsComponent implements OnInit {
       className: 'col-12',
       templateOptions: {
         multiple: true,
-        required: true,
-        label: 'Image',
+        required: false,
+        label: '',
         placeholder: 'Upload Image',
       }
     }
