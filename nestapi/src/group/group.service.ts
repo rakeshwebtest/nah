@@ -48,7 +48,7 @@ export class GroupService {
             .leftJoin('group.followers', 'gf')
             .leftJoin('group.meetings', 'gm')
             .leftJoin('gf.user', 'user')
-            .where('group.createdBy = :id && isDeleted != 1', { id: userId })
+            .where('group.createdBy = :id && group.isDeleted != 1', { id: userId })
             .orWhere('user.id= :id', { id: userId })
             .orderBy({ "group.createdDate": "DESC"})
             .getMany();
