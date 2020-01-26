@@ -98,7 +98,7 @@
 ion-refresher {
     position: inherit !important;
 }
-.meeting-list{padding-top: 5px;}
+.meeting-list{padding-top: 5px; margin-bottom: 35px;}
 .meeting-item{
     padding-bottom: 5px;
     .item-native{
@@ -150,7 +150,7 @@ ion-refresher {
     }
     &:last-child{
         .row-last{
-            margin-bottom: 35px;
+           
         }
     }
 }
