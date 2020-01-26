@@ -41,24 +41,22 @@ export class MeetingService {
             .leftJoin("m.videos", 'mv')
             .leftJoin("mc.createdBy", 'mc_createdBy')
             .leftJoin("mm.user", 'user')
-            .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" });
+            .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" })
+            .andWhere('group.isDeleted != 1')
+            .andWhere('m.isDeleted != 1');
 
-            console.log('query groupId',query.groupId);
         if (query.groupId) {
-            console.log('query groupId2',query.groupId);
-            db.where('m.group.id= :id', { id: query.groupId });
+            db.andWhere('group.id= :id', { id: query.groupId });
         } else {
-            // get meeting by group owner or group follower   
-            db.where('gf_user.id= :id', { id: query.userId })
-                .orWhere('group.createdBy= :id', { id: query.userId });
+            db.andWhere('(gf_user.id= :id OR group.createdBy= :id)', { id: query.userId });
         }
 
         if (query.type && query.type === 'upcoming') {
-            db.where('m.meetingDate >= DATE(NOW())');
+            db.andWhere('m.meetingDate >= DATE(NOW())');
         }
 
         if (query.type && query.type === 'my-meeting') {
-            db.where('u.id = :id', { id: query.userId })
+            db.andWhere('u.id = :id', { id: query.userId })
         } else {
             db.andWhere('m.isPublished = 1');
         }
