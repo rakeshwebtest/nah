@@ -22,6 +22,7 @@ export interface Meeting {
     comments?: any[];
     members?: Member[];
     photos?: Photo[];
+    videos?: any[];
     isMember?: boolean;
     isCreatedBy?: boolean;
     isPublished?:number;

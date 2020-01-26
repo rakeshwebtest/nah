@@ -6,10 +6,11 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./group-details.component.scss'],
 })
 export class GroupDetailsComponent implements OnInit {
-  group = {
+  group:any = {
     name: '',
     followers: [],
-    meetings: []
+    meetings: [],
+    id:null
   };
   followersList = [];
   meetingsList = [];
