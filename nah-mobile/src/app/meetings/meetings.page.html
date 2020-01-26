@@ -6,6 +6,11 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-fab class="add-btn" vertical="end" horizontal="end" slot="fixed">
+  <ion-fab-button color="danger" [routerLink]="['/meeting/create']">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 <ion-content>
   <app-meeting-list></app-meeting-list>
   <!-- <ion-list class="meeting-list">
