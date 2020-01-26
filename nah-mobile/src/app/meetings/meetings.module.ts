@@ -13,6 +13,8 @@ import { NahFormlyModule } from '../utils/nah-formly/nah-formly.module';
 import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
 import { TimeagoModule } from 'ngx-timeago';
 import { NgxIonicImageViewerModule } from 'ngx-ionic-image-viewer';
+import { MeetingVideosComponent } from './meeting-details/meeting-videos/meeting-videos.component';
+import { PeoplesModule } from '../shared/peoples/peoples.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -22,8 +24,9 @@ import { NgxIonicImageViewerModule } from 'ngx-ionic-image-viewer';
     NgxIonicImageViewerModule,
     NahFormlyModule,
     MeetingListModule,
-    TimeagoModule.forRoot()
+    TimeagoModule.forRoot(),
+    PeoplesModule
   ],
-  declarations: [MeetingsPage, MeetingDetailsComponent, MeetingCreateComponent]
+  declarations: [MeetingsPage, MeetingVideosComponent, MeetingDetailsComponent, MeetingCreateComponent]
 })
 export class MeetingsPageModule { }

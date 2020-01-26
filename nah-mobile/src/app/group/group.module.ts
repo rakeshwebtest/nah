@@ -10,6 +10,7 @@ import { GroupDetailsComponent } from './group-details/group-details.component';
 import { GroupService } from './group.service';
 import { GroupListModule } from '../shared/group-list/group-list.module';
 import { PeoplesModule } from '../shared/peoples/peoples.module';
+import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { PeoplesModule } from '../shared/peoples/peoples.module';
     IonicModule,
     GroupPageRoutingModule,
     GroupListModule,
-    PeoplesModule
+    PeoplesModule,
+    MeetingListModule
   ],
   providers: [GroupService],
   declarations: [MyGroupComponent, GroupDetailsComponent]

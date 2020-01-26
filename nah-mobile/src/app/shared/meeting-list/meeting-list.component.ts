@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AppHttpClient } from 'src/app/utils';
 import { LoadingService } from 'src/app/utils/loading.service';
@@ -16,6 +16,8 @@ export class MeetingListComponent implements OnInit, OnDestroy {
   googlePic: any;
   meetingList: Meeting[] = [];
   noMeetingMsg = false;
+  @Input() type = 'all';
+  @Input() groupId: any;
   constructor(private authService: AuthenticationService,
     private router: Router,
     private activeRouter: ActivatedRoute,
@@ -26,7 +28,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
 
     this.getMeetings().subscribe(res => {
       this.meetingList = res;
-      
+
     });
 
   }
@@ -36,8 +38,10 @@ export class MeetingListComponent implements OnInit, OnDestroy {
     console.log('parm', params);
     const userInfo: any = this.authService.getUserInfo();
     this.googlePic = userInfo.imageUrl;
-    let queryString = '?type=' + params.type || 'all';
+    let queryString = '?type=' + this.type;
     queryString += '&userId=' + userInfo.id;
+    if (this.groupId)
+      queryString += '&groupId=' + this.groupId;
     // if (params.type === 'my-meeting') {
     //   queryString += '&userId=' + userInfo.id;
     // }
@@ -57,10 +61,9 @@ export class MeetingListComponent implements OnInit, OnDestroy {
         }
         return m;
       });
-      console.log('dow');
       if (_meetingList.length == 0) {
         this.noMeetingMsg = true;
-      }else{
+      } else {
         this.noMeetingMsg = false;
       }
       return _meetingList;

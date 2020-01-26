@@ -10,14 +10,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class MeetingsPage implements OnInit {
   googlePic: any;
   title: any;
+  params = this.route.snapshot.params;
   constructor(private authService: AuthenticationService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const userInfo: any = this.authService.isAuthenticated();
     this.googlePic = userInfo.user.imageUrl;
-    const params = this.route.snapshot.params;
-    this.title = params.type;
-    switch (params.type) {
+  
+    this.title = this.params.type;
+    switch (this.params.type) {
       case 'my-meeting':
         this.title = "My Meetings";
         break;

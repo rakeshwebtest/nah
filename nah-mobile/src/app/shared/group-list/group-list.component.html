@@ -1,3 +1,8 @@
+<ion-row class="ion-align-items-center no-meetings" *ngIf="noGroupMsg">
+  <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
+    No Groups Available
+  </ion-col>
+</ion-row>
 <ion-list class="meeting-list">
   <ion-card class="meeting-item ion-no-padding" *ngFor="let item of groupList;let gInx=index;">
     <ion-grid class="ion-no-padding">

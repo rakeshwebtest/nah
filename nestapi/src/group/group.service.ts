@@ -31,7 +31,7 @@ export class GroupService {
 
         // get user 
         if(query.userId && query.createdBy){
-            db.where('group.createdBy = :id', { id: query.userId });
+            db.andWhere('group.createdBy = :id', { id: query.userId });
         }
         if(query.userId && query.notCreatedBy){
             db.where('group.createdBy != :id', { id: query.userId });

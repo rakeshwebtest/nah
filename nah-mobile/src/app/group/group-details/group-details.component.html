@@ -66,35 +66,7 @@
         </ion-list>
       </ng-container>
       <ng-container *ngSwitchCase="'meetings'">
-        <ion-row class="ion-align-items-center no-meetings" *ngIf="meetingsList.length==0">
-          <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
-            No Meetings Available
-          </ion-col>
-        </ion-row>
-        <ion-list class="meeting-list">
-          <ion-item class="meeting-item" *ngFor="let m of meetingsList">
-            <ion-grid class="ion-no-padding" >
-              <ion-row class="ion-nowrap ion-align-items-center">
-                <ion-col class="img-left ion-no-padding">
-                  <ion-thumbnail class="" style="display: flex;align-items: center;">
-                    <ion-img class="avatar" [src]="m.imageUrl"></ion-img>
-                  </ion-thumbnail>
-        
-                </ion-col>
-                <ion-col class="ion-no-padding" style="display: flex;flex-direction:column;justify-content: center;">
-                  <ion-label class="meeting-title">{{m.title}} </ion-label>
-                </ion-col>
-              </ion-row>
-              <ion-row class="ion-nowrap row-last ion-align-items-center ion-padding-b-5">
-                <ion-col class="ion-no-padding">
-                  <label class="meeting-date" style="display: block;">
-                    {{m.createdDate | date:'shortTime'}} - {{m.updatedDate | date:'shortTime'}} </label>
-                </ion-col>
-                
-              </ion-row>
-            </ion-grid>
-          </ion-item>
-        </ion-list>
+        <app-meeting-list *ngIf="group.id" type="group"[groupId]="group.id" ></app-meeting-list>
       </ng-container>
     </ng-container>
   </ion-grid>

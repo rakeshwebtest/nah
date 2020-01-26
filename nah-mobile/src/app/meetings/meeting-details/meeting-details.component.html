@@ -46,19 +46,7 @@
             </ion-col>
           </ion-row>
           <ion-row class="ion-nowrap">
-            <ion-col size="7" class="meeting-item" style="display:flex;">
-              <ion-avatar class="avater small ion-margin-r-5" *ngFor="let m of meeting.members">
-                <img [src]="m.user.imageUrl" />
-              </ion-avatar>
-            </ion-col>
-            <ng-container *ngIf="meeting.members.length > 0">
-              <ion-col class="fallowing-members">
-                {{meeting.members.length}} more
-              </ion-col>
-              <!-- <ion-col class="fallowing-members">
-                <ion-text color="danger" style="cursor: pointer;">View All</ion-text>
-              </ion-col> -->
-            </ng-container>
+            <app-peoples-icons [peoples]="meeting.members" label="Members are Following"></app-peoples-icons>
           </ion-row>
           <ion-row>
             <ion-tabs>
@@ -98,7 +86,7 @@
               </ion-row>
             </ng-container>
             <ng-container *ngSwitchCase="'videos'">
-              video
+              <app-meeting-videos [videos]="meeting.videos" [meetingId]="meeting.id"></app-meeting-videos>
             </ng-container>
             <ng-container *ngSwitchDefault>
               members

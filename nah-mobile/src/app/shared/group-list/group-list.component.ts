@@ -15,7 +15,7 @@ export class GroupListComponent implements OnInit {
   userInfo: any;
   groupList = [];
   customColors = ['#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000'];
-
+  noGroupMsg = false;
   constructor(private alertCtrl: AlertController,
     private authService: AuthenticationService,
     private router: Router,
@@ -46,8 +46,14 @@ export class GroupListComponent implements OnInit {
             item.isFollower = true;
           }
         }
+       
       });
       this.groupList = _groupList;
+      if (_groupList.length == 0) {
+        this.noGroupMsg = true;
+      } else {
+        this.noGroupMsg = false;
+      }
     });
   }
   follow(item) {

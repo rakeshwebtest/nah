@@ -12,6 +12,7 @@ import { MeetingCommentsEntity } from './meeting-comments.entity';
 import { CommentDto } from './dto/comment.dto';
 import { MeetingPhotosEntity } from './meeting-photos.entity';
 import { MeetingVideosEntity } from './meeting-videos.entity';
+import { VideoDto } from './dto/video.dto';
 
 @Injectable()
 export class MeetingService {
@@ -28,7 +29,7 @@ export class MeetingService {
             .createQueryBuilder('m')
             .select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm", "mp",
                 "user.id", "user.displayName", "user.imageUrl", "city",
-                "mc", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"])
+                "mc","mv", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"])
             .leftJoin('m.createdBy', 'u')
             .leftJoin('m.city', 'city')
             .leftJoin('m.group', 'group')
@@ -42,22 +43,27 @@ export class MeetingService {
             .leftJoin("mm.user", 'user')
             .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" });
 
-
-        // get meeting by group owner or group follower   
-        db.where('gf_user.id= :id', { id: query.userId })
-            .orWhere('group.createdBy= :id', { id: query.userId });
+            console.log('query groupId',query.groupId);
+        if (query.groupId) {
+            console.log('query groupId2',query.groupId);
+            db.where('m.group.id= :id', { id: query.groupId });
+        } else {
+            // get meeting by group owner or group follower   
+            db.where('gf_user.id= :id', { id: query.userId })
+                .orWhere('group.createdBy= :id', { id: query.userId });
+        }
 
         if (query.type && query.type === 'upcoming') {
             db.where('m.meetingDate >= DATE(NOW())');
         }
-        
+
         if (query.type && query.type === 'my-meeting') {
             db.where('u.id = :id', { id: query.userId })
         } else {
-            db.where('m.isPublished = 1');
+            db.andWhere('m.isPublished = 1');
         }
 
-
+        db.printSql();
         // get one meeting details   
         if (query.meetingId) { // single meeting
             db.where('m.id = :meetingId', { meetingId: query.meetingId });
@@ -153,6 +159,14 @@ export class MeetingService {
         comment.comment = commentDto.comment;
         const data = await this.meetingCommentRepository.save(comment);
         return { message: 'Add Comment Successfully', data };
+    }
+    async addVideo(videoDto: VideoDto) {
+        const video = new MeetingVideosEntity();
+        video.meeting = new MeetingEntity();
+        video.meeting.id = videoDto.meetingId;
+        video.videoPath = videoDto.videoPath;
+        const data = await this.meetingVideoRepository.save(video);
+        return { message: 'Add Video Successfully', data };
     }
     async uploadMeetingImages(images: any[], meetingId) {
         // const photos:MeetingPhotosEntity

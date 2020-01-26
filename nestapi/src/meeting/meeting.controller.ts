@@ -8,6 +8,7 @@ import { ValidationPipe } from './../shared/pipes/validation.pipe';
 import { JoinMeetingDto } from './dto/join-member.dto';
 import { ApiBearerAuth, ApiTags, ApiProperty } from '@nestjs/swagger';
 import { CommentDto } from './dto/comment.dto';
+import { VideoDto } from './dto/video.dto';
 import * as path from 'path';
 
 const imageFilter = (req, file, callback) => {
@@ -91,6 +92,15 @@ export class MeetingController {
   @Post('comment')
   async addComment(@Body() comment: CommentDto, @Request() req) {
     return this.meetingService.addComment(comment);
+  }
+
+    /**
+   * join or unjoin meeting members
+   */
+  @UsePipes(new ValidationPipe())
+  @Post('video')
+  async addVideos(@Body() video: VideoDto, @Request() req) {
+    return this.meetingService.addVideo(video);
   }
 
   @Get('publish/:meetingId')  
