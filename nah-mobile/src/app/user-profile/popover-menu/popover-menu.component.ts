@@ -3,7 +3,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { LaunchReview } from '@ionic-native/launch-review/ngx';
+// import { LaunchReview } from '@ionic-native/launch-review/ngx';
 
 @Component({
   selector: 'app-popover-menu',
