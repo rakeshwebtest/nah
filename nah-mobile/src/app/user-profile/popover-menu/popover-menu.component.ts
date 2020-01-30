@@ -14,7 +14,6 @@ export class PopoverMenuComponent implements OnInit {
 
   constructor(private authService: AuthenticationService,
     private googlePlus: GooglePlus,
-    private launchReview: LaunchReview,
     private router: Router, private popoverController: PopoverController) { }
 
   ngOnInit() { }
@@ -31,13 +30,13 @@ export class PopoverMenuComponent implements OnInit {
     await this.popoverController.dismiss();
   }
   feedback() {
-    this.launchReview.launch()
-      .then(() => console.log('Successfully launched store app'));
+    // this.launchReview.launch()
+    //   .then(() => console.log('Successfully launched store app'));
 
-    if (this.launchReview.isRatingSupported()) {
-      this.launchReview.rating()
-        .then(() => console.log('Successfully launched rating dialog'));
-    }
+    // if (this.launchReview.isRatingSupported()) {
+    //   this.launchReview.rating()
+    //     .then(() => console.log('Successfully launched rating dialog'));
+    // }
   }
 
 }
