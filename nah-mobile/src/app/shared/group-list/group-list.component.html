@@ -1,8 +1,3 @@
-<ion-row class="ion-align-items-center no-meetings" *ngIf="noGroupMsg">
-  <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
-    No Groups Available
-  </ion-col>
-</ion-row>
 <ion-list class="meeting-list">
   <ion-card class="meeting-item ion-no-padding" *ngFor="let item of groupList;let gInx=index;">
     <ion-grid class="ion-no-padding">
@@ -42,3 +37,13 @@
     </ion-grid>
   </ion-card>
 </ion-list>
+
+<ion-row class="ion-align-items-center no-meetings" *ngIf="noGroupMsg">
+  <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
+    No Groups Available
+  </ion-col>
+</ion-row>
+<ion-infinite-scroll threshold="100px" (ionInfinite)="getGroups($event)">
+  <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>

@@ -19,7 +19,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { IonicSelectableModule } from 'ionic-selectable';
-
+import { LaunchReview } from '@ionic-native/launch-review/ngx';
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 
 @NgModule({
@@ -39,6 +39,7 @@ import { IonicSelectableModule } from 'ionic-selectable';
   entryComponents: [GroupCreateModalComponent],
   providers: [
     StatusBar,
+    LaunchReview,
     SplashScreen,
     GooglePlus,
     AuthGuard,

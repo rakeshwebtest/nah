@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { AlertController, IonInfiniteScroll } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AppHttpClient } from 'src/app/utils';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -10,12 +10,16 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./group-list.component.scss'],
 })
 export class GroupListComponent implements OnInit {
+  // @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
+
   @Input() type: 'mygroups' | 'all';
   googlePic: String;
   userInfo: any;
   groupList = [];
   customColors = ['#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000'];
   noGroupMsg = false;
+  take = 10;
+  skip = 0;
   constructor(private alertCtrl: AlertController,
     private authService: AuthenticationService,
     private router: Router,
@@ -25,18 +29,21 @@ export class GroupListComponent implements OnInit {
   ngOnInit() {
     const userInfo: any = this.authService.isAuthenticated();
     this.userInfo = userInfo.user;
+    this.groupList = [];
     this.getGroups();
   }
-  getGroups() {
-    let url = 'group/list?userId='+this.userInfo.id;
+  getGroups(infiniteScroll?: any) {
+
+    let url = 'group/list?userId=' + this.userInfo.id;
     if (this.type === 'mygroups') {
       url += '&createdBy=true';
-    } else{
+    } else {
       url += '&notCreatedBy=true';
     }
+    url += '&skip=' + this.groupList.length;
+    url += '&take=' + this.take;
 
     this.http.get(url).subscribe(res => {
-      console.log('list gro', res);
       const _groupList = res.data || [];
       _groupList.map(item => {
         if (item.followers.length > 0) {
@@ -46,10 +53,16 @@ export class GroupListComponent implements OnInit {
             item.isFollower = true;
           }
         }
-       
+
       });
-      this.groupList = _groupList;
-      if (_groupList.length == 0) {
+
+
+      this.groupList = [...this.groupList, ..._groupList];
+
+      if (infiniteScroll)
+        infiniteScroll.target.complete();
+
+      if (this.groupList.length == 0) {
         this.noGroupMsg = true;
       } else {
         this.noGroupMsg = false;
@@ -100,7 +113,7 @@ export class GroupListComponent implements OnInit {
     });
     await alert.present();
   }
-  addGroup(group){
+  addGroup(group) {
     this.groupList.unshift(group);
   }
   getRandomColor() {
@@ -116,9 +129,25 @@ export class GroupListComponent implements OnInit {
   }
   navGroupDetails(g) {
     console.log('g', g);
-    this.storage.set('groupDetails',g).then(res=>{
+    this.storage.set('groupDetails', g).then(res => {
       this.router.navigate(['/group/details/' + g.id]);
     });
- 
+
+  }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation', infiniteScroll);
+    // infiniteScroll.complete();
+    // setTimeout(() => {
+    //   for (let i = 0; i < 30; i++) {
+    //     this.items.push( this.items.length );
+    //   }
+
+    //   console.log('Async operation has ended');
+    //   infiniteScroll.complete();
+    // }, 500);
+  }
+  toggleInfiniteScroll() {
+    // this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 }
