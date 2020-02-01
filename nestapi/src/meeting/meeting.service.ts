@@ -110,6 +110,7 @@ export class MeetingService {
         _meeting.endTime = meeting.endTime;
         _meeting.imageUrl = meeting.imageUrl;
         _meeting.location = meeting.location;
+        _meeting.contactInfo = meeting.contactInfo;
         _meeting.isPublished = parseInt(meeting.isPublished);
 
         const userId = parseInt(meeting.createdBy);
@@ -207,6 +208,11 @@ export class MeetingService {
         report.comment = reportDto.comment;
         const data = await this.meetingReportRepository.save(report);
         return { message: 'Report submit Successfully', data };
+    }
+    async deleteMeeting(meetingId) {
+        const meeting = new MeetingEntity();
+        meeting.isDeleted = 1;
+        return await this.meetingRepository.update(meetingId, meeting);
     }
 
 } 

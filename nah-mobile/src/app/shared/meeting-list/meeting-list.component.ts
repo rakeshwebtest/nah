@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Meeting } from 'src/app/meetings/meeting';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-meeting-list',
@@ -20,6 +21,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
   @Input() groupId: any;
   constructor(private authService: AuthenticationService,
     private router: Router,
+    private alertCtrl:AlertController,
     private activeRouter: ActivatedRoute,
     private http: AppHttpClient,
     private loading: LoadingService) { }
@@ -97,6 +99,36 @@ export class MeetingListComponent implements OnInit, OnDestroy {
     this.getMeetings().subscribe(res => {
       this.meetingList = res;
       event.target.complete();
+    });
+
+  }
+
+  async deleteMeetingConfirm(meeting: any, index) {
+    let alert = await this.alertCtrl.create({
+      message: 'Do you want to delete this Meeting?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Okay',
+          handler: () => {
+            this.deleteMeeting(meeting, index);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  deleteMeeting(meeting: any, index) {
+    this.meetingList.splice(index, 1);
+    this.http.delete('meeting/' + meeting.id).subscribe(res => {
+      // this.meetingList.splice(index, 1);
     });
 
   }
