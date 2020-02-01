@@ -61,3 +61,10 @@
 }
 .meeting-list{width: 100%;}
 .m-height-250 img{max-height: 250px;}
+.profile-settings{
+    justify-content: flex-end;
+    ion-icon{
+        font-size: 27px;
+        padding-right: 16px;
+    }
+}
