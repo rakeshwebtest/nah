@@ -60,7 +60,6 @@ export class ChooseUserGroupsComponent implements OnInit {
   async updateSignIn() {
     const { email, id } = this.userConfigService.user.user;
     this.profile.followGroups = this.groupList.filter(item => item.active).map(item => { return { userId: id, groupId: item.id } });
-    console.log('this.profile.followGroups -->', this.profile.followGroups);
 
     if (this.checkValidation()) {
       await this.loadingService.show();
