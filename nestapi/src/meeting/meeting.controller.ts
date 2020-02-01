@@ -10,6 +10,7 @@ import { ApiBearerAuth, ApiTags, ApiProperty } from '@nestjs/swagger';
 import { CommentDto } from './dto/comment.dto';
 import { VideoDto } from './dto/video.dto';
 import * as path from 'path';
+import { ReportDto } from './dto/report.dto';
 
 const imageFilter = (req, file, callback) => {
   console.log('file', file);
@@ -46,11 +47,11 @@ export class MeetingController {
  * :type upcomeing , coming ,createdId 
  */
 
-  @Get('list/:type/:id')
-  async getMeetingsByType(@Query() query) {
-    const data: any = await this.meetingService.getMeetings(query);
-    return { message: false, data };
-  }
+  // @Get('list/:type/:id')
+  // async getMeetingsByType(@Query() query) {
+  //   const data: any = await this.meetingService.getMeetings(query);
+  //   return { message: false, data };
+  // }
   /**
    * create meeting or update meeting
    * @param image
@@ -86,7 +87,9 @@ export class MeetingController {
   }
 
   /**
-   * join or unjoin meeting members
+   * 
+   * @param comment 
+   * @param req 
    */
   @UsePipes(new ValidationPipe())
   @Post('comment')
@@ -94,8 +97,10 @@ export class MeetingController {
     return this.meetingService.addComment(comment);
   }
 
-    /**
-   * join or unjoin meeting members
+  /**
+   * 
+   * @param video 
+   * @param req 
    */
   @UsePipes(new ValidationPipe())
   @Post('video')
@@ -103,16 +108,18 @@ export class MeetingController {
     return this.meetingService.addVideo(video);
   }
 
-  @Get('publish/:meetingId')  
+  @Get('publish/:meetingId')
   async meetingPublished(@Param() params: any) {
     return this.meetingService.meetingPublished(params.meetingId);
   }
-  
+  /**
+   * 
+   * @param images 
+   * @param fileDto 
+   * @param params 
+   */
 
   @Post('images/:meetingId')
-  // @UseInterceptors(FilesInterceptor('images[]', 20, {
-  //   fileFilter: imageFilter
-  // }))
   @UseInterceptors(FilesInterceptor('images[]', 20, {
     fileFilter: imageFilter,
     storage: diskStorage({
@@ -132,6 +139,18 @@ export class MeetingController {
     return { message: "Successfull Upload image", data };
 
   }
+
+  /**
+ * 
+ * @param report 
+ * @param req 
+ */
+  @UsePipes(new ValidationPipe())
+  @Post('report')
+  async addReport(@Body() report: ReportDto, @Request() req) {
+    return this.meetingService.addReport(report);
+  }
+
 
 
 }

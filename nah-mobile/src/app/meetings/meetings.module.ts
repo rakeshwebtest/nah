@@ -15,6 +15,9 @@ import { TimeagoModule } from 'ngx-timeago';
 import { NgxIonicImageViewerModule } from 'ngx-ionic-image-viewer';
 import { MeetingVideosComponent } from './meeting-details/meeting-videos/meeting-videos.component';
 import { PeoplesModule } from '../shared/peoples/peoples.module';
+import { MeetingDetailsActionsComponent } from './meeting-details/meeting-details-actions/meeting-details-actions.component';
+import { ReportModule } from '../shared/report/report.module';
+import { ReportComponent } from '../shared/report/report.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -25,8 +28,10 @@ import { PeoplesModule } from '../shared/peoples/peoples.module';
     NahFormlyModule,
     MeetingListModule,
     TimeagoModule.forRoot(),
-    PeoplesModule
+    PeoplesModule,
+    ReportModule
   ],
-  declarations: [MeetingsPage, MeetingVideosComponent, MeetingDetailsComponent, MeetingCreateComponent]
+  declarations: [MeetingsPage, MeetingDetailsActionsComponent, MeetingVideosComponent, MeetingDetailsComponent, MeetingCreateComponent],
+  entryComponents: [MeetingDetailsActionsComponent,ReportComponent]
 })
 export class MeetingsPageModule { }

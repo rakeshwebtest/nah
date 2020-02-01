@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Meeting } from './../meeting';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { PopoverController } from '@ionic/angular';
+import { MeetingDetailsActionsComponent } from './meeting-details-actions/meeting-details-actions.component';
 
 @Component({
   selector: 'app-meeting-details',
@@ -36,7 +38,9 @@ export class MeetingDetailsComponent implements OnInit {
     }
 
   ];
-  constructor(private authService: AuthenticationService, private router: ActivatedRoute, private http: AppHttpClient) { }
+  constructor(private authService: AuthenticationService,
+    private popoverController: PopoverController,
+    private router: ActivatedRoute, private http: AppHttpClient) { }
 
   ngOnInit() {
 
@@ -107,12 +111,25 @@ export class MeetingDetailsComponent implements OnInit {
 
 
   }
-  publishMeeting(m:Meeting) {
+  publishMeeting(m: Meeting) {
     this.meeting.isPublished = 1;
     this.http.get('meeting/publish/' + m.id).subscribe(res => {
 
     });
 
+  }
+
+  async actionMenu(ev: any) {
+    const popover = await this.popoverController.create({
+      component: MeetingDetailsActionsComponent,
+      componentProps: {
+        meetingId: this.meeting.id
+      },
+      event: ev,
+      animated: true,
+      showBackdrop: true
+    });
+    return await popover.present();
   }
 
 }

@@ -1,0 +1,23 @@
+<ion-content>
+  <form  (ngSubmit)="submitReport()">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12">
+        <ion-item class="border border-b-none">
+          <!-- <ion-label><strong>Say No To</strong></ion-label> -->
+          <!-- <ion-label position="floating">Enter A Group Name</ion-label> -->
+          <ion-input name="comment" placeholder="Enter A Report" autofocus="true" [(ngModel)]="comment"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="3" class="center">
+        <ion-button color="danger" type="submit" [disabled]="!comment">
+          Report
+        </ion-button>
+      </ion-col>
+      <!-- <ion-col size="6">
+        <ion-button  color="light" (click)="dismiss()">
+          Close
+        </ion-button>
+      </ion-col> -->
+    </ion-row>
+  </form>
+</ion-content>
