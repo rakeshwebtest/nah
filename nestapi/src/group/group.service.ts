@@ -16,7 +16,7 @@ export class GroupService {
     ) { }
 
     async getGroups(query): Promise<any> {
-        const take = query.take || 10
+        const take = query.take || 100
         const skip = query.skip || 0
 
         const db = getRepository(GroupEntity)

@@ -5,7 +5,7 @@ import { MeetingEntity } from './meeting.entity';
 @Entity({ name: 'meeting_photos' })
 export class MeetingPhotosEntity extends BaseEntity {
   
-    @ManyToOne(type => MeetingEntity, meeting => meeting.photos)
+    @ManyToOne(type => MeetingEntity, meeting => meeting.photos, { onDelete: 'CASCADE' })
     meeting: MeetingEntity;
 
     @Column({ length: 1250, nullable: true })

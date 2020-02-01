@@ -18,8 +18,14 @@ export class UserEntity extends BaseEntity {
     @Column({ length: 250, nullable: true })
     imageUrl: string;
 
-    @Column({ length: 25, nullable: true })
+    @Column({ length: 25, default:'google' })
     provider: string;
+
+    @Column({ length: 25, nullable: true })
+    password: string;
+
+    @Column({ length: 25, default:'user' })
+    role: string;
 
     @Column({ type: 'text', nullable: true })
     idToken: string;

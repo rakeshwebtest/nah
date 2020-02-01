@@ -5,7 +5,7 @@ import { UserEntity } from 'src/user/user.entity';
 @Entity({ name: 'meeting_report' })
 export class MeetingReportEntity extends BaseEntity {
   
-    @ManyToOne(type => MeetingEntity, meeting => meeting.reports)
+    @ManyToOne(type => MeetingEntity, meeting => meeting.reports, { onDelete: 'CASCADE' })
     meeting: MeetingEntity;
 
     @Column({ length: 1250, nullable: true })
@@ -18,7 +18,7 @@ export class MeetingReportEntity extends BaseEntity {
     // @Column()
     // userId: number; 
     
-    @ManyToOne(type => UserEntity, user => user.reports)
+    @ManyToOne(type => UserEntity, user => user.reports, { onDelete: 'CASCADE' })
     createdBy: UserEntity;
 
 }

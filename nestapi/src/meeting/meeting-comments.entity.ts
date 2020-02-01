@@ -9,7 +9,7 @@ export class MeetingCommentsEntity extends BaseEntity {
     @Column({ length: 250, nullable: true })
     comment: string;
 
-    @ManyToOne(type => MeetingEntity, meeting => meeting.comments)
+    @ManyToOne(type => MeetingEntity, meeting => meeting.comments, { onDelete: 'CASCADE' })
     meeting: MeetingEntity;
 
     // @Column()
@@ -17,7 +17,7 @@ export class MeetingCommentsEntity extends BaseEntity {
     // @Column()
     // userId: number;
 
-    @ManyToOne(type => UserEntity, user => user.comments)
+    @ManyToOne(type => UserEntity, user => user.comments, { onDelete: 'CASCADE' })
     createdBy: UserEntity;
 
 }

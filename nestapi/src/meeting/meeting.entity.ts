@@ -41,7 +41,7 @@ export class MeetingEntity extends BaseEntity {
     @ManyToOne(type => CityEntity, city => city.meetings)
     city: CityEntity;
 
-    @ManyToOne(type => GroupEntity, group => group.meetings)
+    @ManyToOne(type => GroupEntity, group => group.meetings, { onDelete: 'CASCADE' })
     group: GroupEntity;
 
     @ManyToOne(type => UserEntity, user => user.meetings)

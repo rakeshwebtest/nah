@@ -4,8 +4,8 @@ import { UserEntity } from 'src/user/user.entity';
 import { GroupEntity } from './group.entity';
 @Entity({ name: 'group_follows' })
 export class GroupFollowEntity extends BaseEntity {
-  
-    @ManyToOne(type => GroupEntity, group => group.followers)
+
+    @ManyToOne(type => GroupEntity, group => group.followers, { onDelete: 'CASCADE' })
     group: GroupEntity;
 
     // @Column()
@@ -13,7 +13,7 @@ export class GroupFollowEntity extends BaseEntity {
     // @Column()
     // userId: number;
 
-    @ManyToOne(type => UserEntity, user => user.following)
+    @ManyToOne(type => UserEntity, user => user.following, { onDelete: 'CASCADE' })
     user: UserEntity;
 
 }

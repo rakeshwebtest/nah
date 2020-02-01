@@ -18,10 +18,10 @@ export class GroupEntity extends BaseEntity {
     @Column({ default: 0 })
     followersCount: number;
 
-    @OneToMany(type => MeetingEntity, meeting => meeting.group)
+    @OneToMany(type => MeetingEntity, meeting => meeting.group, { onDelete: 'CASCADE' })
     meetings: MeetingEntity[];
 
-    @OneToMany(type => GroupFollowEntity, gf => gf.group)
+    @OneToMany(type => GroupFollowEntity, gf => gf.group, { onDelete: 'CASCADE' })
     followers: GroupFollowEntity[];
 
     @Column()

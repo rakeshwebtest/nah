@@ -5,7 +5,7 @@ import { MeetingEntity } from './meeting.entity';
 @Entity({ name: 'meeting_members' })
 export class MeetingMembersEntity extends BaseEntity {
   
-    @ManyToOne(type => MeetingEntity, meeting => meeting.members)
+    @ManyToOne(type => MeetingEntity, meeting => meeting.members, { onDelete: 'CASCADE' })
     meeting: MeetingEntity;
 
     // @Column()
@@ -13,7 +13,7 @@ export class MeetingMembersEntity extends BaseEntity {
     // @Column()
     // userId: number;
 
-    @ManyToOne(type => UserEntity, user => user.meetings)
+    @ManyToOne(type => UserEntity, user => user.meetings, { onDelete: 'CASCADE' })
     user: UserEntity;
 
 }

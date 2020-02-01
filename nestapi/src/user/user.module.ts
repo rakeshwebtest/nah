@@ -21,7 +21,8 @@ export class UserModule {
       .forRoutes(
         { path: 'user', method: RequestMethod.GET },
         { path: 'user', method: RequestMethod.PUT },
-        { path: 'group/*', method: RequestMethod.GET }
+        { path: 'group/*', method: RequestMethod.ALL },
+        { path: 'meeting/*', method: RequestMethod.ALL }
       );
   }
 }

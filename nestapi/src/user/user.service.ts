@@ -38,16 +38,18 @@ export class UserService {
     async deleteUser(user: UserEntity) {
         this.usersRepository.delete(user);
     }
-    async findById(id: number): Promise<UserRO> {
-        console.log('id', id);
-        const user = await this.usersRepository.findOne(id);
+    async findById(id: number): Promise<any> {
+        const user = await this.usersRepository.findOne({
+            select: ['id', 'email', 'displayName', 'role', 'typeOfNoer', 'imageUrl'],
+            where: [{ id: id }]
+        });
 
         if (!user) {
             const errors = { User: ' not found' };
             throw new HttpException({ errors }, 401);
         }
 
-        return this.buildUserRO(user);
+        return user;
     }
     public generateJWT(user) {
         const today = new Date();

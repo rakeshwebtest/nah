@@ -36,10 +36,10 @@ export class MeetingController {
    */
 
   @Get('list')
-  async getMeetings(@Query() query) {
+  async getMeetings(@Query() query, @Request() req) {
     const data: any = await this.meetingService.getMeetings(query);
-
-    return { message: false, data, query };
+    const sessionUser = req['sessionUser'];
+    return { message: false, data, query, sessionUser };
   }
 
   /**
@@ -152,8 +152,8 @@ export class MeetingController {
   }
   @Delete(':meetingId')
   async deleteGruop(@Param() params: any) {
-      const data = await this.meetingService.deleteMeeting(params.meetingId);
-      return { message: 'Meeting Delete Successfullly', data };
+    const data = await this.meetingService.deleteMeeting(params.meetingId);
+    return { message: 'Meeting Delete Successfullly', data };
   }
 
 
