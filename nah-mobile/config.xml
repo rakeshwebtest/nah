@@ -106,7 +106,6 @@
     <plugin name="cordova-plugin-device" spec="2.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-    <plugin name="cordova-plugin-apprate" spec="^1.5.0" />
     <plugin name="cordova-plugin-googleplus" spec="^8.2.1">
         <variable name="REVERSED_CLIENT_ID" value="712248616094-lkqulv5ng4p2uvo2516924in2gontqg3.apps.googleusercontent.com" />
         <variable name="WEB_APPLICATION_CLIENT_ID" value="712248616094-54q4g8qhskhij9dbc0g1s7p8ecu02bfr.apps.googleusercontent.com" />
