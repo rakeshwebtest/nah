@@ -24,66 +24,80 @@
   <!-- <link rel="stylesheet" href="device-mockups/device-mockups.min.css"> -->
 
   <!-- Custom styles for this template -->
+  <link href="css/aos.css" rel="stylesheet">
+  <link href="css/slick.css" rel="stylesheet">
+  <link href="css/slick-theme.css" rel="stylesheet">
+  <link href="css/fontawesome.min.css" rel="stylesheet">
   <link href="css/new-age.min.css" rel="stylesheet">
 
 </head>
 <style>
-  .avatar{
+  .avatar {
     width: 170px;
     margin: 0 auto;
     height: 170px;
-    background-color: rgba(255,255,255,.5);
+    background-color: rgba(255, 255, 255, .5);
     border-radius: 50%;
     padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .avatar:hover{
-    background-color: rgba(255,255,255,1);
+
+  .avatar:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
+
+  .img-circle img {
+    width: 85%;
   }
 </style>
+
 <body id="page-top">
 
   <!-- Navigation -->
-  <!-- <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="img/logo.png" alt=""></a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#download">Download</a>
+            <a class="nav-link js-scroll-trigger" href="#download">About Nah</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#features">Features</a>
+          <li class="nav-item social-icon">
+            <a class="nav-link " href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a class="nav-link js-scroll-trigger" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a class="nav-link js-scroll-trigger" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
-  </nav> -->
+  </nav>
 
   <header class="masthead">
     <div class="container h-100">
       <div class="row h-100">
         <div class="col-lg-12 my-auto">
           <div class="header-content mx-auto text-center">
-            <div class="img-circle avatar mb-3"><img src="img/logo.png" alt=""></div>
-            <h1 class="mb-5">NAH is a new mobile app, or anything else!</h1>
+            <div class="img-circle avatar mb-3" data-aos="zoom-in"><img src="img/logo.png" alt=""></div>
+            <h1 class="mb-5" data-aos="fade-up">NAH is a new mobile app, or anything else!</h1>
             <!-- <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">Start Now for Free!</a> -->
           </div>
-          <section class="download bg-primary1 text-center mb-4" id="download">
+          <section class="download bg-primary1 text-center mb-4">
             <div class="container">
               <div class="row">
                 <div class="col-md-8 mx-auto">
-                  <p>Our app is available on any mobile device! Download now to get started!</p>
-                  <div class="badges">
+                  <p data-aos="fade-up">Our app is available on any mobile device! Download now to get started!</p>
+                  <div class="badges" data-aos="fade-up">
                     <a class="badge-link" href="#"><img src="img/google-play-badge.svg" alt=""></a>
                     <a class="badge-link" href="#"><img src="img/app-store-badge.svg" alt=""></a>
                   </div>
@@ -94,10 +108,69 @@
         </div>
       </div>
     </div>
-    
+
 
   </header>
+  <section id="download">
+    <div class="container">
 
+      <div class="row m-0 about-us">
+        <diiv class="col-12 col-md-3">
+          <section class="regular slider text-center" data-aos="fade-up">
+            <div>
+              <img src="img/slide-2.jpeg">
+            </div>
+            <div>
+              <img src="img/slide-3.jpeg">
+            </div>
+            <div>
+              <img src="img/slide-4.jpeg">
+            </div>
+            <div>
+              <img src="img/slide-5.jpeg">
+            </div>
+          </section>
+        </diiv>
+        <diiv class="col-12 col-md-9 about-right pl-0 pl-md-5" data-aos="fade-up">
+          <p>NAH as a meet up platform for people who shares the same kind of refusal tendency. NAH provides users
+            a platform to discuss topics from Kim Jong-Un to ketchup on hot dogs. It's totally free app with some
+            different monetization strategies. </p>
+          <h3>How does this App work ? </h3>
+          <ul>
+            <li>
+              NAH is a different platform which helps in gathering people around the world based on them disliking
+              the same thing they are pessimists and optimists, but we NAH emphasize the fact about hating
+              stubbing your toe or a crowded subway.
+            </li>
+            <li>
+              It's not about hating groups of people, but to bring the same kind of dislike-minded people
+              together.
+            </li>
+            <li>
+              In this app, you can meet with people who refuses or dislike the same thing as you do.
+            </li>
+
+            </li>
+          </ul>
+        </diiv>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="container">
+      <div class="row m-0">
+        <div class="badges col-12 col-md">
+          <a class="badge-link" href="#"><img src="img/google-play-badge.svg" alt=""></a>
+          <a class="badge-link" href="#"><img src="img/app-store-badge.svg" alt=""></a>
+        </div>
+        <div class="nav-item social-icon col-12 col-md-auto p-0 pt-2">
+          <a class="nav-link " href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a class="nav-link js-scroll-trigger" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a class="nav-link js-scroll-trigger" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 
 
@@ -110,8 +183,19 @@
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for this template -->
+  <script src="js/aos.js"></script>
+  <script src="js/slick.min.js"></script>
   <script src="js/new-age.js"></script>
-
+  <script>
+    AOS.init();
+    $(".regular").slick({
+      dots: true,
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true
+    });
+  </script>
 </body>
 
 </html>
