@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UploadedFile, UseInterceptors, Request, UsePipes, Param, Query, UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Post, Body, UploadedFile, UseInterceptors, Request, UsePipes, Param, Query, UploadedFiles, Delete } from '@nestjs/common';
 import { MeetingService } from './meeting.service';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -150,7 +150,11 @@ export class MeetingController {
   async addReport(@Body() report: ReportDto, @Request() req) {
     return this.meetingService.addReport(report);
   }
-
+  @Delete(':meetingId')
+  async deleteGruop(@Param() params: any) {
+      const data = await this.meetingService.deleteMeeting(params.meetingId);
+      return { message: 'Meeting Delete Successfullly', data };
+  }
 
 
 }

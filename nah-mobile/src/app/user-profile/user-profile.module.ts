@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
 import { GroupListModule } from '../shared/group-list/group-list.module';
+import { AppRate } from '@ionic-native/app-rate/ngx';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
     UserProfileComponent,
     PopoverMenuComponent
   ],
+  providers:[AppRate],
   entryComponents: [PopoverMenuComponent],
   imports: [
     RouterModule.forChild(routes),

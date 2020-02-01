@@ -28,6 +28,28 @@ export class MeetingCreateComponent implements OnInit {
     }
   },
   {
+    key: 'agenda',
+    type: 'textarea',
+    wrappers: ['vertical'],
+    className: 'col-12',
+    templateOptions: {
+      required: true,
+      label: 'Meeting Information',
+      placeholder: 'Enter Meeting Information',
+    }
+  },
+  {
+    key: 'contactInfo',
+    type: 'textarea',
+    wrappers: ['vertical'],
+    className: 'col-12',
+    templateOptions: {
+      required: true,
+      label: 'Contact Information',
+      placeholder: 'Enter Contact Information',
+    }
+  },
+  {
     key: 'groupId',
     type: 'selectable',
     wrappers: ['vertical'],
@@ -41,17 +63,7 @@ export class MeetingCreateComponent implements OnInit {
       options: []
     }
   },
-  {
-    key: 'agenda',
-    type: 'textarea',
-    wrappers: ['vertical'],
-    className: 'col-12',
-    templateOptions: {
-      required: true,
-      label: 'Meeting Information',
-      placeholder: 'Enter Meeting Information',
-    }
-  },
+
 
   {
     key: 'cityId',
@@ -165,7 +177,7 @@ export class MeetingCreateComponent implements OnInit {
           return group;
         })
       }
-      this.fields[1].templateOptions.options = this.groupList || [];
+      this.fields[3].templateOptions.options = this.groupList || [];
     });
   }
   getCities() {
@@ -178,7 +190,7 @@ export class MeetingCreateComponent implements OnInit {
           };
           return city;
         });
-        this.fields[3].templateOptions.options = res.data || [];//cityList;
+        this.fields[4].templateOptions.options = res.data || [];//cityList;
       }
 
     });

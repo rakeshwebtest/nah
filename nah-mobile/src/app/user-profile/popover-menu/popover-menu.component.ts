@@ -3,6 +3,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { AppRate } from '@ionic-native/app-rate/ngx';
 // import { LaunchReview } from '@ionic-native/launch-review/ngx';
 
 @Component({
@@ -11,9 +12,11 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
   styleUrls: ['./popover-menu.component.scss'],
 })
 export class PopoverMenuComponent implements OnInit {
+  
 
   constructor(private authService: AuthenticationService,
     private googlePlus: GooglePlus,
+    private appRate: AppRate,
     private router: Router, private popoverController: PopoverController) { }
 
   ngOnInit() { }
@@ -30,13 +33,23 @@ export class PopoverMenuComponent implements OnInit {
     await this.popoverController.dismiss();
   }
   feedback() {
-    // this.launchReview.launch()
-    //   .then(() => console.log('Successfully launched store app'));
-
-    // if (this.launchReview.isRatingSupported()) {
-    //   this.launchReview.rating()
-    //     .then(() => console.log('Successfully launched rating dialog'));
+    this.appRate.preferences.storeAppURL = {
+      ios: '<app_id>',
+      android: 'market://details?id=<package_name>',
+      windows: 'ms-windows-store://review/?ProductId=<store_id>'
+    }
+    this.appRate.promptForRating(true);
+    // or, override the whole preferences object
+    // this.appRate.preferences = {
+    //   usesUntilPrompt: 3,
+    //   storeAppURL: {
+    //     ios: '<app_id>',
+    //     android: 'market://details?id=<package_name>',
+    //     windows: 'ms-windows-store://review/?ProductId=<store_id>'
+    //   }
     // }
+
+    // this.appRate.promptForRating(false);
   }
 
 }

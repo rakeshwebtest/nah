@@ -2,11 +2,14 @@ import { IsNotEmpty, IsNumber } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 export class CreateMeetingDto {
     @ApiProperty()
-    @IsNotEmpty({ message: "Required Meeting Name" })
+    @IsNotEmpty({ message: "Required Meeting Information required" })
     title: string;
     @ApiProperty()
-    @IsNotEmpty({ message: "Required Meeting Name" })
+    @IsNotEmpty({ message: "Required Meeting Information required" })
     agenda: string;
+    @ApiProperty()
+    @IsNotEmpty({ message: "Required Contact Info" })
+    contactInfo: string;
     @ApiProperty()
     @IsNotEmpty({ message: "Required CreateBy" })
     createdBy: string;
@@ -14,7 +17,7 @@ export class CreateMeetingDto {
     @IsNotEmpty({ message: "Required groupd" })
     groupId: string;
     @ApiProperty()
-    @IsNotEmpty({ message: "Required groupd" })
+    @IsNotEmpty({ message: "Required city" })
     cityId: string;
     @ApiProperty()
     meetingDate: string;
