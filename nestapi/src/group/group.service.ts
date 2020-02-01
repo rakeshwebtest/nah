@@ -50,7 +50,6 @@ export class GroupService {
                 return this.bindFileBasePath(meeting);
             });
         });
-        console.log(result);
         return {
             data: result,
             count: total

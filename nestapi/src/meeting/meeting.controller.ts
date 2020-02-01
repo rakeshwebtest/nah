@@ -13,7 +13,6 @@ import * as path from 'path';
 import { ReportDto } from './dto/report.dto';
 
 const imageFilter = (req, file, callback) => {
-  console.log('file', file);
   let ext = path.extname(file.originalname);
 
   if (ext === '.png' || ext === '.jpeg' || ext === '.jpg') {
@@ -72,7 +71,6 @@ export class MeetingController {
   @Post()
   async createMeeting(@UploadedFile() image, @Body() meetingDto: CreateMeetingDto, @Request() req) {
     meetingDto.imageUrl = image.path;
-    console.log('meetingDto', meetingDto);
     const data = await this.meetingService.createMeeting(meetingDto);
     return { message: 'Successfully Create A Meeting', data };
   }
@@ -132,8 +130,6 @@ export class MeetingController {
   }))
   async meetingImages(@UploadedFiles() images, @Body() fileDto: any, @Param() params: any) {
 
-    console.log(images);
-    console.log(fileDto);
     const data = await this.meetingService.uploadMeetingImages(images, params.meetingId);
 
     return { message: "Successfull Upload image", data };

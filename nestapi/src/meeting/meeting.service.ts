@@ -127,7 +127,6 @@ export class MeetingService {
         _meeting.city = new CityEntity();
         _meeting.city.id = parseInt(meeting.cityId);
 
-        console.log('_meeting', _meeting)
         return this.meetingRepository.save(_meeting);
         // return data;
 
@@ -179,7 +178,6 @@ export class MeetingService {
             return { imagePath: img.path, meeting: meeting };
         });
 
-        console.log('imagess', imagesList);
         const data = await getConnection()
             .createQueryBuilder()
             .insert()
