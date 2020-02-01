@@ -5,6 +5,9 @@
         <ion-back-button></ion-back-button>
         <ion-title class="ion-no-padding" style="font-size: 16px;">{{title}}</ion-title>
       </ion-buttons>
+      <ion-row class="profile-settings text-10">
+        <ion-icon style="cursor: pointer;" name="cog" color="light" (click)="actionMenu($event)"></ion-icon>
+      </ion-row>
     </ion-toolbar>
   </ion-header>
   <ion-content>

@@ -5,6 +5,7 @@ import { GroupFollowEntity } from 'src/group/group-follows.entity';
 import { MeetingEntity } from 'src/meeting/meeting.entity';
 import { CityEntity } from 'src/city/city.entity';
 import { MeetingCommentsEntity } from 'src/meeting/meeting-comments.entity';
+import { MeetingReportEntity } from 'src/meeting/meeting-report.entity';
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
 
@@ -44,6 +45,8 @@ export class UserEntity extends BaseEntity {
     @OneToMany(type => MeetingCommentsEntity, mc => mc.createdBy) // note: we will create author property in the Photo class below
     comments: MeetingCommentsEntity[];
 
-    
+
+    @OneToMany(type => MeetingReportEntity, mr => mr.createdBy) // note: we will create author property in the Photo class below
+    reports: MeetingReportEntity[];
 
 }

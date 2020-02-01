@@ -13,11 +13,14 @@ import { CommentDto } from './dto/comment.dto';
 import { MeetingPhotosEntity } from './meeting-photos.entity';
 import { MeetingVideosEntity } from './meeting-videos.entity';
 import { VideoDto } from './dto/video.dto';
+import { ReportDto } from './dto/report.dto';
+import { MeetingReportEntity } from './meeting-report.entity';
 
 @Injectable()
 export class MeetingService {
     constructor(@InjectRepository(MeetingEntity) private readonly meetingRepository: Repository<MeetingEntity>,
         @InjectRepository(MeetingCommentsEntity) private readonly meetingCommentRepository: Repository<MeetingCommentsEntity>,
+        @InjectRepository(MeetingReportEntity) private readonly meetingReportRepository: Repository<MeetingReportEntity>,
         @InjectRepository(MeetingPhotosEntity) private readonly meetingPhotosRepository: Repository<MeetingPhotosEntity>,
         @InjectRepository(MeetingVideosEntity) private readonly meetingVideoRepository: Repository<MeetingVideosEntity>,
         @InjectRepository(MeetingMembersEntity) private readonly meetingMembersRepository: Repository<MeetingEntity>) {
@@ -194,6 +197,16 @@ export class MeetingService {
         meeting.isPublished = 1;
         const data = await this.meetingRepository.update(meetingId, meeting);
         return { message: 'Meeting Published Successfully', data };
+    }
+    async addReport(reportDto: ReportDto) {
+        const report = new MeetingReportEntity();
+        report.createdBy = new UserEntity();
+        report.meeting = new MeetingEntity();
+        report.meeting.id = reportDto.meetingId;
+        report.createdBy.id = reportDto.userId;
+        report.comment = reportDto.comment;
+        const data = await this.meetingReportRepository.save(report);
+        return { message: 'Report submit Successfully', data };
     }
 
 } 
