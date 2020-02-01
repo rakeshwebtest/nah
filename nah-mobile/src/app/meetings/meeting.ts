@@ -6,6 +6,7 @@ export interface Meeting {
     startTime: string;
     endTime: string;
     imageUrl: string;
+    contactInfo: string;
     group: {
         name: string;
     }
