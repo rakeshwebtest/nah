@@ -14,7 +14,9 @@ export class GroupController {
 
     @Get('list')
     async getGroups(@Query() query, @Req() req) {
-        const data: any = await this.service.getGroups(query);
+        const sessionUser = req.sessionUser;
+        console.log('sessionUser',sessionUser);
+        const data: any = await this.service.getGroups(query,sessionUser);
         // urse:req.sessionUser
         return { message: false, ...data };
     }

@@ -27,8 +27,11 @@ export class UserEntity extends BaseEntity {
     @Column({ length: 25, default:'user' })
     role: string;
 
-    @Column({ type: 'text', nullable: true })
-    idToken: string;
+    @Column({ length: 25, default:'active' })
+    status: string;
+
+    // @Column({ type: 'text', nullable: true })
+    // idToken: string;
 
     @Column({ length: 25, nullable: true })
     typeOfNoer: string;
@@ -45,14 +48,16 @@ export class UserEntity extends BaseEntity {
     @OneToMany(type => GroupFollowEntity, gf => gf.user)
     following: GroupFollowEntity[];
 
-    @OneToMany(type => MeetingEntity, meeting => meeting.createdBy) // note: we will create author property in the Photo class below
+    @OneToMany(type => MeetingEntity, meeting => meeting.createdBy) 
     meetings: MeetingEntity[];
 
-    @OneToMany(type => MeetingCommentsEntity, mc => mc.createdBy) // note: we will create author property in the Photo class below
+    @OneToMany(type => GroupEntity, group => group.createdBy) 
+    groups: GroupEntity[];
+
+    @OneToMany(type => MeetingCommentsEntity, mc => mc.createdBy)
     comments: MeetingCommentsEntity[];
 
-
-    @OneToMany(type => MeetingReportEntity, mr => mr.createdBy) // note: we will create author property in the Photo class below
+    @OneToMany(type => MeetingReportEntity, mr => mr.createdBy)
     reports: MeetingReportEntity[];
 
 }

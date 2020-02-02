@@ -19,23 +19,25 @@ import { CityEntity } from 'src/city/city.entity';
 export class UsersController {
 
     constructor(public service: UserService, public groupService: GroupService) { }
-
-    @Get()
+    @ApiBearerAuth()
+    @Get('list')
     async getUser(@Request() req) {
         const data: any = await this.service.getUsers();
         const userInfo = req['sessionUser'];
         return { message: 'ok', data, userInfo };
     }
-
+    @ApiBearerAuth()
     @Post()
-    async getUser1(@Request() req) {
-        const data: any = await this.service.getUsers();
+    async updateUser(@Body() user: CreateUserDto) {
+        const data: any = await this.service.updateUser(user);
         return { message: 'ok', data };
     }
 
-    @Get(':id')
-    get(@Param() params) {
-        return this.service.getUser(params.id);
+    @ApiBearerAuth()
+    @Get(':userId')
+    async get(@Param('userId') id:number) {
+        const data:any = await this.service.getUser(id);
+        return { message: 'ok', data };
     }
 
     // @Post('users/login')
