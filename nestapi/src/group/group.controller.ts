@@ -15,7 +15,6 @@ export class GroupController {
     @Get('list')
     async getGroups(@Query() query, @Req() req) {
         const sessionUser = req.sessionUser;
-        console.log('sessionUser',sessionUser);
         const data: any = await this.service.getGroups(query,sessionUser);
         // urse:req.sessionUser
         return { message: false, ...data };
@@ -30,8 +29,6 @@ export class GroupController {
     @Post()
     async createGroup(@Body() group: CreateGroupDto,@Req() req) {
         //check groupname exist or not
-
-        console.log('r sessionUser',req.sessionUser);
         const sessionUser = req.sessionUser;
         const isGroup = await this.service.checkGroupName(group);
         if (isGroup) {
