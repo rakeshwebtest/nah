@@ -90,11 +90,11 @@ export class GroupService {
             .where('gf.groupId = :groupId', { groupId })
             .getMany();
     }
-    async updateGroup(groupDto: CreateGroupDto) {
+    async updateGroup(groupDto: CreateGroupDto,sessionUser) {
         const group = new GroupEntity();
         group.name = groupDto.name;
         group.createdBy = new UserEntity();
-        group.createdBy.id = groupDto.createdBy;
+        group.createdBy.id = sessionUser.id;
         return this.groupRepository.save(group);
     }
     // async getGroupById(groupId: number): Promise<GroupEntity> {
@@ -167,7 +167,7 @@ export class GroupService {
     }
     async checkGroupName(group: CreateGroupDto): Promise<GroupEntity> {
         return await this.groupRepository.findOne({
-            where: [{ name: group.name, createBy: group.createdBy }],
+            where: [{ name: group.name}],
         });
     }
     async deleteGroup(groupId) {

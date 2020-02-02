@@ -5,10 +5,6 @@ export class CreateGroupDto {
     @ApiProperty()
     @IsNotEmpty({ message: "Required Group Name" })
     name: string;
-    @ApiProperty()
-    @IsNumber()
-    @IsNotEmpty({ message: "Required CreateBy" })
-    createdBy: number;
     // @IsNotEmpty({ message: "Required Created By" })
     // readonly createBy: number;
 }
