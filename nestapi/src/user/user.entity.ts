@@ -15,7 +15,7 @@ export class UserEntity extends BaseEntity {
     @Column({ length: 250 })
     email: string;
 
-    @Column({ length: 250, nullable: true })
+    @Column({ length: 250, default: "/assets/images/avatar.png" })
     imageUrl: string;
 
     @Column({ length: 25, default:'google' })

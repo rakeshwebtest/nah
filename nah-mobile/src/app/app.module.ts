@@ -20,6 +20,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { IonicSelectableModule } from 'ionic-selectable';
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
+// IonicStorageModule.forRoot({
+//   name: '__nah',
+//   driverOrder: ['indexeddb', 'sqlite', 'websql','localstorage']
+// }),
 
 @NgModule({
   declarations: [AppComponent, AdminLayoutComponent, SignInComponent, ChooseUserGroupsComponent, GroupCreateModalComponent],
@@ -30,10 +34,12 @@ import { IonicSelectableModule } from 'ionic-selectable';
     HttpClientModule,
     IonicModule.forRoot(),
     IonicSelectableModule,
-    IonicStorageModule.forRoot({
-      name: '__nah',
-      driverOrder: ['indexeddb', 'sqlite', 'websql']
-    }),
+    IonicStorageModule.forRoot(
+      {
+        name: '__nah',
+        driverOrder: ['localstorage']
+      }
+    )
   ],
   entryComponents: [GroupCreateModalComponent],
   providers: [
