@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes, Request } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes, Request, Req } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserEntity } from './user.entity';
 import {
@@ -66,16 +66,18 @@ export class UsersController {
         const token = await this.service.generateJWT(data);
         return { message: false, data: { user: _user || user, token } };
     }
+
+    @ApiBearerAuth()
     @UsePipes(new ValidationPipe())
     @Put()
-    async update(@Body() user: CreateUserDto) {
+    async update(@Body() user: CreateUserDto,@Req() req) {
         // create group if newGroupName there
+        const sessionUser = req.sessionUser;
         if (user.newGroupName) {
             const group: CreateGroupDto = {
-                name: user.newGroupName,
-                createdBy: user.id
+                name: user.newGroupName
             };
-            this.groupService.updateGroup(group);
+            this.groupService.updateGroup(group,sessionUser);
         }
         if (user.followGroups) {
             for (let index = 0; index < user.followGroups.length; index++) {

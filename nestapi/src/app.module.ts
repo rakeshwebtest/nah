@@ -36,6 +36,7 @@ export class AppModule {
       .forRoutes(
         { path: 'user/list', method: RequestMethod.GET },
         { path: 'user', method: RequestMethod.PUT },
+        { path: 'group', method: RequestMethod.ALL },
         { path: 'group/*', method: RequestMethod.ALL },
         { path: 'meeting/*', method: RequestMethod.ALL }
       );

@@ -116,6 +116,7 @@ export class ChooseUserGroupsComponent implements OnInit {
     modal.onDidDismiss().then(arg => {
       // console.log('modal ',arg);
       this.filterGroupList = [arg.data, ...this.filterGroupList];
+      this.profile.followGroups.push(arg.data);
       this.groupList = this.filterGroupList;
       // this.filterGroupList.push(arg.data);
       // this.getGroups();

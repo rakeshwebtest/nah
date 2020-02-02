@@ -30,6 +30,8 @@ export class GroupController {
     @Post()
     async createGroup(@Body() group: CreateGroupDto,@Req() req) {
         //check groupname exist or not
+
+        console.log('r sessionUser',req.sessionUser);
         const sessionUser = req.sessionUser;
         const isGroup = await this.service.checkGroupName(group);
         if (isGroup) {

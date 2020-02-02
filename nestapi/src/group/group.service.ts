@@ -39,7 +39,7 @@ export class GroupService {
                 db.andWhere('group.createdBy = :id', { id: sessionUser.id });
             }
             if (sessionUser.id && query.notCreatedBy) {
-                db.where('group.createdBy != :id', { id: sessionUser.id });
+                db.where('createdBy.id != :id', { id: sessionUser.id });
             }
         }
         if (query.search) {
@@ -90,7 +90,7 @@ export class GroupService {
             .where('gf.groupId = :groupId', { groupId })
             .getMany();
     }
-    async updateGroup(groupDto: CreateGroupDto,sessionUser) {
+    async updateGroup(groupDto: CreateGroupDto, sessionUser) {
         const group = new GroupEntity();
         group.name = groupDto.name;
         group.createdBy = new UserEntity();
@@ -167,7 +167,7 @@ export class GroupService {
     }
     async checkGroupName(group: CreateGroupDto): Promise<GroupEntity> {
         return await this.groupRepository.findOne({
-            where: [{ name: group.name}],
+            where: [{ name: group.name }],
         });
     }
     async deleteGroup(groupId) {
