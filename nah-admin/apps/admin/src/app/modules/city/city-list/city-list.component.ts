@@ -3,6 +3,7 @@ import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup } from '@angular/forms';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AppHttpClient } from '../../../utils/app-http-client.service';
 
 @Component({
   selector: 'theapp-city-list',
@@ -44,24 +45,34 @@ export class CityListComponent implements OnInit {
   ];
   constructor(private modalService: NgbModal,
     private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private appHttp: AppHttpClient) { }
 
   ngOnInit() {
     this.cols = [
-      { field: 'name', header: 'City Name' },
-      { field: 'createdBy', header: 'Created By' }
+      { field: 'name', header: 'City Name' }
     ];
-    this.cityList = [
-      {
-        'name': 'New York', 'createdBy': 'Admin'
-      },
-      {
-        'name': 'Los Angeles', 'createdBy': 'Admin'
-      },
-      {
-        'name': 'Chicago', 'createdBy': 'Admin'
+    // this.cityList = [
+    //   {
+    //     'name': 'New York', 'createdBy': 'Admin'
+    //   },
+    //   {
+    //     'name': 'Los Angeles', 'createdBy': 'Admin'
+    //   },
+    //   {
+    //     'name': 'Chicago', 'createdBy': 'Admin'
+    //   }
+    // ];
+    this.getCities();
+    
+  }
+  getCities() {
+    const payload: any = {};
+    this.appHttp.get('city/list').subscribe(res => {
+      if(res.data) {
+        this.cityList = res.data;
       }
-    ];
+    });
   }
   onAdd(addCity) {
     this.modalRef = this.modalService.open(addCity, {});

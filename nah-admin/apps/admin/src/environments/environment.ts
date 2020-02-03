@@ -7,7 +7,7 @@ export const environment = {
   localStorageKey:"lc",
   apiUrl1:"https://jsonblob.com/api/",
   apiUrl2:"http://192.168.0.38:8080/myownapp/rest/",
-  apiUrl: "http://49.207.9.238:8080/myownapp/rest/"
+  apiUrl: "http://nah.theapp.in/api/"
 
 };
 

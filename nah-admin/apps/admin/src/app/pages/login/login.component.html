@@ -10,13 +10,13 @@
         <input
           type="text"
           pInputText
-          formControlName="userId"
+          formControlName="email"
           placeholder="Username"
-          [ngClass]="{ 'is-invalid': submitted && f.userId.errors }"
+          [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
         />
       </div>
-      <div *ngIf="submitted && f.userId.errors" class="text-danger">
-        <div *ngIf="f.userId.errors.required">Username is required</div>
+      <div *ngIf="submitted && f.email.errors" class="text-danger">
+        <div *ngIf="f.email.errors.required">Email is required</div>
       </div>
     </div>
     <div class="form-group">

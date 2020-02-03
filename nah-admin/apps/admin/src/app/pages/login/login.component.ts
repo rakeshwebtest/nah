@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      userId: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
 
@@ -38,15 +38,17 @@ export class LoginComponent implements OnInit {
     //   "command": "authenticateUser",
     //   "requestData": this.loginForm.value
     // };
-   // this.appHttp.get('jsonBlob/69e416bb-cbb7-11e9-a895-abb8290d8490').subscribe(res => {
-  //  this.appHttp.post(API_CONFIG.LOGIN, payload).subscribe(res => {
-  //     console.log('res', res);
-  //     if (res) {
-  //       this.ls.setItem('user', res.data, true);
-  //     }
+    const payload: any = this.loginForm.value;
+  // this.appHttp.get('jsonBlob/69e416bb-cbb7-11e9-a895-abb8290d8490').subscribe(res => {
+   this.appHttp.post('user/login', payload).subscribe(res => {
+      console.log('res', res);
+      if (res) {
+        this.ls.setItem('user', res.data, true);
+        this.router.navigate(['/admin/dashboard']);
+      }
       
-  //   });
-    this.router.navigate(['/admin/dashboard']);
+    });
+    
 
   }
 }

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class LocalStorageService {
 
-  localStorageKey = "lc"; //environment.localStorageKey;
+  localStorageKey = "nah"; //environment.localStorageKey;
   constructor() { }
   /**
    * @param {any} key

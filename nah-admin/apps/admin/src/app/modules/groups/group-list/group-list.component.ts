@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup } from '@angular/forms';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
+import { AppHttpClient } from '../../../utils/app-http-client.service';
 
 @Component({
   selector: 'theapp-group-list',
@@ -42,24 +43,33 @@ export class GroupListComponent implements OnInit {
       ]
     }
   ];
-  constructor(private modalService:NgbModal) { }
+  constructor(private modalService:NgbModal, private appHttp: AppHttpClient) { }
 
   ngOnInit() {
     this.cols = [
       { field: 'name', header: 'Group Name' },
       { field: 'createdBy', header: 'Created By' }
     ];
-    this.groupList = [
-      {
-        'name': 'Say No To Trump','createdBy': 'Mohan Babu'
-      },
-      {
-        'name': 'Say No To Veg','createdBy': 'prasad duggirala'
-      },
-      {
-        'name': 'Say No To Plastic','createdBy': 'UZ 16LAB'
+    // this.groupList = [
+    //   {
+    //     'name': 'Say No To Trump','createdBy': 'Mohan Babu'
+    //   },
+    //   {
+    //     'name': 'Say No To Veg','createdBy': 'prasad duggirala'
+    //   },
+    //   {
+    //     'name': 'Say No To Plastic','createdBy': 'UZ 16LAB'
+    //   }
+    // ];
+    this.getGroups();
+  }
+  getGroups() {
+    const payload: any = {};
+    this.appHttp.get('group/list').subscribe(res => {
+      if(res.data) {
+        this.groupList = res.data;
       }
-    ];
+    });
   }
   onAddGroup(addGroup) {
       this.modalRef = this.modalService.open(addGroup, {});
