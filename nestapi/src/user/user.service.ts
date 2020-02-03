@@ -16,9 +16,9 @@ export class UserService {
         return this.usersRepository.find();
     }
 
-    async getUser(_id: number): Promise<UserEntity[]> {
-        return this.usersRepository.find({
-            select: ['displayName'],
+    async getUser(_id: number): Promise<UserEntity> {
+        return this.usersRepository.findOne({
+            select: ['id', 'email', 'displayName', 'typeOfNoer', 'imageUrl', 'city'],
             where: [{ id: _id }]
         });
     }

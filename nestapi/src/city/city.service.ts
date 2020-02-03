@@ -10,4 +10,14 @@ export class CityService {
     async getCities(): Promise<CityEntity[]> {
         return this.cityRepository.find();
     }
+    async createUpdateCity(city): Promise<CityEntity> {
+        return this.cityRepository.save(city);
+    }
+    async deleteCity(cityId: number): Promise<any> {
+        let city = new CityEntity();
+        city.id = cityId;
+        return this.cityRepository.delete(city);
+    }
+
+
 }

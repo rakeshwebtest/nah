@@ -7,6 +7,7 @@ import { CreateGroupDto } from './dto/create-group.dto';
 import { GroupFollowDto } from './dto/group-follow.dto';
 import { UserEntity } from 'src/user/user.entity';
 import { SERVERBASEPATH } from 'src/config';
+import { User } from 'src/user/user.decorator';
 @Injectable()
 export class GroupService {
 
@@ -15,13 +16,14 @@ export class GroupService {
         @InjectRepository(GroupFollowEntity) private readonly groupFollowRepository: Repository<GroupFollowEntity>
     ) { }
 
-    async getGroups(query): Promise<any> {
+    async getGroups(query, sessionUser): Promise<any> {
         const take = query.take || 100
         const skip = query.skip || 0
 
         const db = getRepository(GroupEntity)
             .createQueryBuilder('group')
-            .select(["group", "gf", "gm", "user.id", "user.displayName", "user.imageUrl"])
+            .select(["group", "gf", "gm", "createdBy", "user.id", "user.displayName", "user.imageUrl"])
+            .leftJoin('group.createdBy', 'createdBy')
             .leftJoin('group.followers', 'gf')
             .leftJoin('group.meetings', 'gm')
             .loadRelationCountAndMap('group.followersCount', 'group.followers', 'gf')
@@ -29,17 +31,21 @@ export class GroupService {
             .where('group.isDeleted != 1')
             .orderBy({ "group.createdDate": "DESC" });
 
-        // get user 
-        if(query.userId && query.createdBy){
-            db.andWhere('group.createdBy = :id', { id: query.userId });
-        }
-        if(query.userId && query.notCreatedBy){
-            db.where('group.createdBy != :id', { id: query.userId });
-        }
+        if (sessionUser.role === 'admin') {
+            // get user 
 
+        } else {
+            if (sessionUser.id && query.createdBy) {
+                db.andWhere('group.createdBy = :id', { id: sessionUser.id });
+            }
+            if (sessionUser.id && query.notCreatedBy) {
+                db.where('createdBy.id != :id', { id: sessionUser.id });
+            }
+        }
         if (query.search) {
             db.where("group.name like :name", { name: '%' + query.search + '%' })
         }
+
         db.take(take);
         db.skip(skip);
 
@@ -84,7 +90,11 @@ export class GroupService {
             .where('gf.groupId = :groupId', { groupId })
             .getMany();
     }
-    async updateGroup(group: CreateGroupDto) {
+    async updateGroup(groupDto: CreateGroupDto, sessionUser) {
+        const group = new GroupEntity();
+        group.name = groupDto.name;
+        group.createdBy = new UserEntity();
+        group.createdBy.id = sessionUser.id;
         return this.groupRepository.save(group);
     }
     // async getGroupById(groupId: number): Promise<GroupEntity> {
@@ -157,7 +167,7 @@ export class GroupService {
     }
     async checkGroupName(group: CreateGroupDto): Promise<GroupEntity> {
         return await this.groupRepository.findOne({
-            where: [{ name: group.name, createBy: group.createdBy }],
+            where: [{ name: group.name }],
         });
     }
     async deleteGroup(groupId) {

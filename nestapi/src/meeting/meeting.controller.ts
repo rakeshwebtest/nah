@@ -36,8 +36,9 @@ export class MeetingController {
 
   @Get('list')
   async getMeetings(@Query() query, @Request() req) {
-    const data: any = await this.meetingService.getMeetings(query);
     const sessionUser = req['sessionUser'];
+    const data: any = await this.meetingService.getMeetings(query,sessionUser);
+    
     return { message: false, data, query, sessionUser };
   }
 

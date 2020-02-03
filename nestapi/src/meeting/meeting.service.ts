@@ -27,7 +27,7 @@ export class MeetingService {
 
     }
 
-    async getMeetings(query: any): Promise<MeetingEntity | MeetingEntity[]> {
+    async getMeetings(query: any,sessionUser): Promise<MeetingEntity | MeetingEntity[]> {
         const db = getRepository(MeetingEntity)
             .createQueryBuilder('m')
             .select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm", "mp",
@@ -47,24 +47,26 @@ export class MeetingService {
             .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" })
             .andWhere('group.isDeleted != 1')
             .andWhere('m.isDeleted != 1');
+        if(sessionUser.role === 'admin'){
 
-        if (query.groupId) {
-            db.andWhere('group.id= :id', { id: query.groupId });
-        } else {
-            db.andWhere('(gf_user.id= :id OR group.createdBy= :id)', { id: query.userId });
+        }else{
+            if (query.groupId) {
+                db.andWhere('group.id= :id', { id: query.groupId });
+            } else {
+                db.andWhere('(gf_user.id= :id OR group.createdBy= :id)', { id: query.userId });
+            }
+    
+            if (query.type && query.type === 'upcoming') {
+                db.andWhere('m.meetingDate >= DATE(NOW())');
+            }
+    
+            if (query.type && query.type === 'my-meeting') {
+                db.andWhere('u.id = :id', { id: sessionUser.id })
+            } else {
+                db.andWhere('m.isPublished = 1');
+            }
         }
 
-        if (query.type && query.type === 'upcoming') {
-            db.andWhere('m.meetingDate >= DATE(NOW())');
-        }
-
-        if (query.type && query.type === 'my-meeting') {
-            db.andWhere('u.id = :id', { id: query.userId })
-        } else {
-            db.andWhere('m.isPublished = 1');
-        }
-
-        db.printSql();
         // get one meeting details   
         if (query.meetingId) { // single meeting
             db.where('m.id = :meetingId', { meetingId: query.meetingId });

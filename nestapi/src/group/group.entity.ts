@@ -24,8 +24,8 @@ export class GroupEntity extends BaseEntity {
     @OneToMany(type => GroupFollowEntity, gf => gf.group, { onDelete: 'CASCADE' })
     followers: GroupFollowEntity[];
 
-    @Column()
-    createdBy: number;
+    @ManyToOne(type => UserEntity, user => user.groups,{ onDelete: 'CASCADE' })
+    createdBy: UserEntity;
 
     @Column({ default: 0 })
     isDeleted: number;

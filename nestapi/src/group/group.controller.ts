@@ -14,7 +14,8 @@ export class GroupController {
 
     @Get('list')
     async getGroups(@Query() query, @Req() req) {
-        const data: any = await this.service.getGroups(query);
+        const sessionUser = req.sessionUser;
+        const data: any = await this.service.getGroups(query,sessionUser);
         // urse:req.sessionUser
         return { message: false, ...data };
     }
@@ -26,13 +27,14 @@ export class GroupController {
     }
     @UsePipes(new ValidationPipe())
     @Post()
-    async createGroup(@Body() group: CreateGroupDto) {
+    async createGroup(@Body() group: CreateGroupDto,@Req() req) {
         //check groupname exist or not
+        const sessionUser = req.sessionUser;
         const isGroup = await this.service.checkGroupName(group);
         if (isGroup) {
             throw new HttpException({ message: 'Already group name created', errors: 'Already group exists' }, HttpStatus.BAD_REQUEST);
         } else {
-            const data: any = await this.service.updateGroup(group);
+            const data: any = await this.service.updateGroup(group,sessionUser);
             data.followers = [];
             return { message: 'Successfully Create A Group', data };
         }

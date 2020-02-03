@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes, Request } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes, Request, Req } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserEntity } from './user.entity';
 import {
@@ -19,23 +19,25 @@ import { CityEntity } from 'src/city/city.entity';
 export class UsersController {
 
     constructor(public service: UserService, public groupService: GroupService) { }
-
-    @Get()
+    @ApiBearerAuth()
+    @Get('list')
     async getUser(@Request() req) {
         const data: any = await this.service.getUsers();
         const userInfo = req['sessionUser'];
         return { message: 'ok', data, userInfo };
     }
-
+    @ApiBearerAuth()
     @Post()
-    async getUser1(@Request() req) {
-        const data: any = await this.service.getUsers();
+    async updateUser(@Body() user: CreateUserDto) {
+        const data: any = await this.service.updateUser(user);
         return { message: 'ok', data };
     }
 
-    @Get(':id')
-    get(@Param() params) {
-        return this.service.getUser(params.id);
+    @ApiBearerAuth()
+    @Get(':userId')
+    async get(@Param('userId') id:number) {
+        const data:any = await this.service.getUser(id);
+        return { message: 'ok', data };
     }
 
     // @Post('users/login')
@@ -64,16 +66,18 @@ export class UsersController {
         const token = await this.service.generateJWT(data);
         return { message: false, data: { user: _user || user, token } };
     }
+
+    @ApiBearerAuth()
     @UsePipes(new ValidationPipe())
     @Put()
-    async update(@Body() user: CreateUserDto) {
+    async update(@Body() user: CreateUserDto,@Req() req) {
         // create group if newGroupName there
+        const sessionUser = req.sessionUser;
         if (user.newGroupName) {
             const group: CreateGroupDto = {
-                name: user.newGroupName,
-                createdBy: user.id
+                name: user.newGroupName
             };
-            this.groupService.updateGroup(group);
+            this.groupService.updateGroup(group,sessionUser);
         }
         if (user.followGroups) {
             for (let index = 0; index < user.followGroups.length; index++) {

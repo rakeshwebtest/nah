@@ -45,7 +45,7 @@ export class ChooseUserGroupsComponent implements OnInit {
       console.log('list', res);
       this.groupList = res.data || [];
       this.filterGroupList = res.data || [];
-      this.profile.followGroups = this.groupList.filter(g => g.createdBy === this.userInfo.id);
+      this.profile.followGroups = this.groupList.filter(g => g.createdBy.id === this.userInfo.id);
       console.log('this.profile.followGroups', this.profile.followGroups);
     });
   }
@@ -80,7 +80,7 @@ export class ChooseUserGroupsComponent implements OnInit {
   itemClick(item) {
     item.active = !item.active;
     const { email, id } = this.userConfigService.user.user;
-    this.profile.followGroups = this.groupList.filter(item => item.active || item.createdBy === this.userInfo.id).map(item => { return { userId: id, groupId: item.id } });
+    this.profile.followGroups = this.groupList.filter(item => item.active || item.createdBy.id === this.userInfo.id).map(item => { return { userId: id, groupId: item.id } });
   }
   checkValidation() {
     if (!this.profile.typeOfNoer) {
@@ -116,6 +116,7 @@ export class ChooseUserGroupsComponent implements OnInit {
     modal.onDidDismiss().then(arg => {
       // console.log('modal ',arg);
       this.filterGroupList = [arg.data, ...this.filterGroupList];
+      this.profile.followGroups.push(arg.data);
       this.groupList = this.filterGroupList;
       // this.filterGroupList.push(arg.data);
       // this.getGroups();

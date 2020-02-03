@@ -1,13 +1,14 @@
 <ion-header class="hearder">
   <ion-toolbar class="space-between-center">
     <!-- <ion-icon class="custom-google"></ion-icon>  -->
-    <!-- <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
-      <ion-img class="ion-padding-r-10 ion-margin-l-10" style="width:30px;float:left;" src="assets/images/logo.png"></ion-img>
-      Dashboard
-    </ion-text> -->
+
     <ion-buttons slot="start" class="white-color">
-      <ion-img class="ion-padding-r-10 ion-margin-l-10" style="width: 30px;display: inline-block;background-color: #fff;height: 30px;border-radius: 50%;text-align: center;padding: 3px;margin-right: 5px;" src="assets/images/logo.png"></ion-img>
-      
+      <ion-img class="ion-padding-r-10 ion-margin-l-10"
+        style="width: 30px;display: inline-block;background-color: #fff;height: 30px;border-radius: 50%;text-align: center;padding: 3px;margin-right: 5px;"
+        src="assets/images/logo.png"></ion-img>
+      <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
+        What are you upto?
+      </ion-text>
     </ion-buttons>
     <ion-avatar class="image-avater ion-activatable" (click)="navProfile()">
       <img [src]="googlePic" />
@@ -22,12 +23,11 @@
   </ion-fab-button>
 </ion-fab>
 <ion-row class="ion-padding-t-10">
-  <ion-col class="ion-text-center align-center ion-activatable" (click)="meetingClick('all')">
+  <ion-col class="ion-text-center align-center ion-activatable" style="background-color: bisque;">
     <ion-avatar class="avatar ion-align-items-center">
       <ion-icon name="people"></ion-icon>
     </ion-avatar>
     <ion-label class="ion-padding-t-5">All Meetings</ion-label>
-    <ion-ripple-effect></ion-ripple-effect>
   </ion-col>
   <ion-col class="ion-text-center align-center ion-activatable" (click)="meetingClick('my-meeting')">
     <ion-avatar class="avatar ion-align-items-center">
@@ -40,14 +40,14 @@
     <ion-avatar class="avatar ion-align-items-center">
       <ion-icon name="people"></ion-icon>
     </ion-avatar>
-    <ion-label class="ion-padding-t-5">Upcoming</ion-label>
+    <ion-label class="ion-padding-t-5">Future Meetings</ion-label>
     <ion-ripple-effect></ion-ripple-effect>
   </ion-col>
 </ion-row>
 <!-- <ion-item-divider>
   </ion-item-divider> -->
 <ion-label class="ion-padding-t-10 ion-padding-l-20 ion-margin-t-10 d-block border-top">
-  Recent Meetings
+  All Meetings
 </ion-label>
 
 <ion-content>
