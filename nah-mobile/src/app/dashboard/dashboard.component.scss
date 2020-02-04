@@ -13,3 +13,11 @@
 // .meeting-list{
 
 // }
+.ion-activatable {
+    &.active{
+        .avatar{
+            background: #f00;
+            color: #fff;
+        }
+    }
+}
