@@ -10,9 +10,10 @@ import { MeetingCommentsEntity } from './meeting-comments.entity';
 import { MeetingPhotosEntity } from './meeting-photos.entity';
 import { MeetingVideosEntity } from './meeting-videos.entity';
 import { MeetingReportEntity } from './meeting-report.entity';
+import { MeetingCommentReplyEntity } from './meeting-comment-reply.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([MeetingEntity, MeetingMembersEntity,MeetingReportEntity, UserEntity, GroupEntity, MeetingCommentsEntity, MeetingPhotosEntity, MeetingVideosEntity])],
+  imports: [TypeOrmModule.forFeature([MeetingEntity, MeetingMembersEntity, MeetingReportEntity, UserEntity, GroupEntity, MeetingCommentsEntity, MeetingCommentReplyEntity, MeetingPhotosEntity, MeetingVideosEntity])],
   controllers: [MeetingController],
   providers: [MeetingService]
 })

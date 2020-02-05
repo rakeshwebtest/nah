@@ -14,7 +14,7 @@ export class MeetingCommentReplyEntity extends BaseEntity {
     // @Column()
     // userId: number;
     @ManyToOne(type => MeetingCommentsEntity, mc => mc.replys, { onDelete: 'CASCADE' })
-    meetingComment: MeetingEntity;
+    meetingComment: MeetingCommentsEntity;
 
     @ManyToOne(type => UserEntity, user => user.comments, { onDelete: 'CASCADE' })
     createdBy: UserEntity;

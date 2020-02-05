@@ -11,6 +11,7 @@ import { CommentDto } from './dto/comment.dto';
 import { VideoDto } from './dto/video.dto';
 import * as path from 'path';
 import { ReportDto } from './dto/report.dto';
+import { CommentReplyDto } from './dto/comment-reply.dto';
 
 const imageFilter = (req, file, callback) => {
   let ext = path.extname(file.originalname);
@@ -37,8 +38,8 @@ export class MeetingController {
   @Get('list')
   async getMeetings(@Query() query, @Request() req) {
     const sessionUser = req['sessionUser'];
-    const data: any = await this.meetingService.getMeetings(query,sessionUser);
-    
+    const data: any = await this.meetingService.getMeetings(query, sessionUser);
+
     return { message: false, data, query, sessionUser };
   }
 
@@ -94,6 +95,12 @@ export class MeetingController {
   @Post('comment')
   async addComment(@Body() comment: CommentDto, @Request() req) {
     return this.meetingService.addComment(comment);
+  }
+
+  @UsePipes(new ValidationPipe())
+  @Post('comment-reply')
+  async addCommentReplay(@Body() commentReply: CommentReplyDto, @Request() req) {
+    return this.meetingService.addCommentReply(commentReply);
   }
 
   /**

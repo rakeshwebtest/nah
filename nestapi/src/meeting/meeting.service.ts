@@ -15,6 +15,8 @@ import { MeetingVideosEntity } from './meeting-videos.entity';
 import { VideoDto } from './dto/video.dto';
 import { ReportDto } from './dto/report.dto';
 import { MeetingReportEntity } from './meeting-report.entity';
+import { CommentReplyDto } from './dto/comment-reply.dto';
+import { MeetingCommentReplyEntity } from './meeting-comment-reply.entity';
 
 @Injectable()
 export class MeetingService {
@@ -23,7 +25,9 @@ export class MeetingService {
         @InjectRepository(MeetingReportEntity) private readonly meetingReportRepository: Repository<MeetingReportEntity>,
         @InjectRepository(MeetingPhotosEntity) private readonly meetingPhotosRepository: Repository<MeetingPhotosEntity>,
         @InjectRepository(MeetingVideosEntity) private readonly meetingVideoRepository: Repository<MeetingVideosEntity>,
-        @InjectRepository(MeetingMembersEntity) private readonly meetingMembersRepository: Repository<MeetingEntity>) {
+        @InjectRepository(MeetingMembersEntity) private readonly meetingMembersRepository: Repository<MeetingEntity>,
+        @InjectRepository(MeetingCommentReplyEntity) private readonly meetingCommentReplyRepository: Repository<MeetingCommentReplyEntity>,
+        ) {
 
     }
 
@@ -161,6 +165,16 @@ export class MeetingService {
         comment.createdBy.id = commentDto.userId;
         comment.comment = commentDto.comment;
         const data = await this.meetingCommentRepository.save(comment);
+        return { message: 'Add Comment Successfully', data };
+    }
+    async addCommentReply(commentDto: CommentReplyDto) {
+        const comment = new MeetingCommentReplyEntity();
+        comment.createdBy = new UserEntity();
+        comment.meetingComment = new MeetingCommentsEntity();
+        comment.meetingComment.id = commentDto.meetingCommentId;
+        comment.createdBy.id = commentDto.userId;
+        comment.comment = commentDto.comment;
+        const data = await this.meetingCommentReplyRepository.save(comment);
         return { message: 'Add Comment Successfully', data };
     }
     async addVideo(videoDto: VideoDto) {
