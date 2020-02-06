@@ -36,7 +36,7 @@ export class MeetingService {
             .createQueryBuilder('m')
             .select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm", "mp",
                 "user.id", "user.displayName", "user.imageUrl", "city",
-                "mc","mv", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"])
+                "mc","mv","mcr","mcr_createdBy", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"])
             .leftJoin('m.createdBy', 'u')
             .leftJoin('m.city', 'city')
             .leftJoin('m.group', 'group')
@@ -44,9 +44,11 @@ export class MeetingService {
             .leftJoin('gf.user', 'gf_user')
             .leftJoin("m.members", 'mm')
             .leftJoin("m.comments", 'mc')
+            .leftJoin("mc.createdBy", 'mc_createdBy')
+            .leftJoin("mc.replys", 'mcr')
+            .leftJoin("mcr.createdBy", 'mcr_createdBy')
             .leftJoin("m.photos", 'mp')
             .leftJoin("m.videos", 'mv')
-            .leftJoin("mc.createdBy", 'mc_createdBy')
             .leftJoin("mm.user", 'user')
             .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" })
             .andWhere('group.isDeleted != 1')

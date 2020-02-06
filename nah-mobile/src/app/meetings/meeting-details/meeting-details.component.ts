@@ -22,6 +22,7 @@ export class MeetingDetailsComponent implements OnInit {
   form = new FormGroup({});
   imageModel: any = {};
   activeTab: string = 'images';
+  replyMsg: any = {};
 
   fields: FormlyFieldConfig[] = [
     {
@@ -71,20 +72,45 @@ export class MeetingDetailsComponent implements OnInit {
 
     const meetingId = this.router.snapshot.params.id;
     const userInfo: any = this.authService.getUserInfo();
-    const payLoad = {
-      comment: comment,
-      meetingId: meetingId,
-      userId: userInfo.id
+    let payLoad = {
+
     }
-    // this.meeting.comments.push();
-    this.http.post('meeting/comment', payLoad).subscribe(res => {
-      if (res.data) {
-        const _comment = res.data;
-        _comment.createdBy = userInfo;
-        this.meeting.comments.unshift(_comment);
-        this.commentMsg = null;
+    if (this.replyMsg.id) {
+      payLoad = {
+        meetingCommentId: this.replyMsg.id,
+        comment: comment,
+        userId: userInfo.id
       }
-    });
+      this.http.post('meeting/comment-reply', payLoad).subscribe(res => {
+        if (res.data) {
+          const _comment = res.data;
+          _comment.createdBy = userInfo;
+          this.replyMsg.replys.push(_comment);
+          this.commentMsg = null;
+        }
+        this.replyMsg = {};
+      });
+
+    } else {
+      payLoad = {
+        comment: comment,
+        meetingId: meetingId,
+        userId: userInfo.id
+      }
+      this.http.post('meeting/comment', payLoad).subscribe(res => {
+        if (res.data) {
+          const _comment = res.data;
+          _comment.createdBy = userInfo;
+          _comment.replys = [];
+          this.meeting.comments.unshift(_comment);
+
+          this.commentMsg = null;
+        }
+      });
+    }
+
+    // this.meeting.comments.push();
+    
   }
   uploadImages() {
     const formData = new FormData();
@@ -130,6 +156,13 @@ export class MeetingDetailsComponent implements OnInit {
       showBackdrop: true
     });
     return await popover.present();
+  }
+  replyComment(c) {
+    this.replyMsg = c;
+
+  }
+  clearReply() {
+    this.replyMsg = {};
   }
 
 }

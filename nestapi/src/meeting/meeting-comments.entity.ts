@@ -12,7 +12,7 @@ export class MeetingCommentsEntity extends BaseEntity {
     @ManyToOne(type => MeetingEntity, meeting => meeting.comments, { onDelete: 'CASCADE' })
     meeting: MeetingEntity;
 
-    @OneToMany(type => MeetingCommentReplyEntity, mcr => mcr.comment)
+    @OneToMany(type => MeetingCommentReplyEntity, mcr => mcr.meetingComment)
     replys: MeetingCommentReplyEntity[];
 
     // @Column()

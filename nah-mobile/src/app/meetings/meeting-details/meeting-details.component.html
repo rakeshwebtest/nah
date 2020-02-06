@@ -65,7 +65,7 @@
                 <ion-tab-button [ngClass]="{'active': activeTab=='images'}" (click)="activeTab='images'">
                   <ion-label>Images</ion-label>
                 </ion-tab-button>
-                <ion-tab-button  [ngClass]="{'active': activeTab=='videos'}" (click)="activeTab='videos'">
+                <ion-tab-button [ngClass]="{'active': activeTab=='videos'}" (click)="activeTab='videos'">
                   <ion-label>Videos</ion-label>
                 </ion-tab-button>
               </ion-tab-bar>
@@ -79,8 +79,8 @@
 
 
                   <ion-list class="image-list">
-                    <ion-img-viewer class="image-thumb" *ngFor="let item of meeting.photos" [title]="meeting.title" scheme="dark"
-                      [src]="item.imagePath">
+                    <ion-img-viewer class="image-thumb" *ngFor="let item of meeting.photos" [title]="meeting.title"
+                      scheme="dark" [src]="item.imagePath">
                     </ion-img-viewer>
                     <!-- <ion-img class="image-thumb" *ngFor="let item of meeting.photos" [src]="item.imagePath"></ion-img> -->
 
@@ -121,6 +121,21 @@
                   <ion-col size="4" class="ion-no-padding ion-text-right">
                     <label class="meeting-date" timeago [date]="c.updatedDate"></label>
                   </ion-col>
+              
+                </ion-row>
+                <ion-row *ngFor="let rc of c.replys">
+                  <ion-chip>
+                    <ion-avatar>
+                      <img [src]="rc.createdBy.imageUrl">
+                    </ion-avatar>
+                    <ion-label>{{rc.comment}}</ion-label>
+                  </ion-chip>
+                </ion-row>
+                <ion-row (click)="replyComment(c)">
+                  <ion-col size="4" class="ion-no-padding ion-text-right">
+                    <ion-icon name="repeat"></ion-icon>
+                    <label>Reply</label>
+                  </ion-col>
                 </ion-row>
               </ion-grid>
             </ion-list>
@@ -133,6 +148,15 @@
 <ion-footer *ngIf="meeting">
   <ion-list class="meeting-list meeting-list-d">
     <ion-grid class="meeting-item ion-no-padding">
+      <ion-row *ngIf="replyMsg.id">
+        <ion-chip>
+
+          <ion-text color="dark">
+            <h3>{{replyMsg.comment}}</h3>
+          </ion-text>
+          <ion-icon (click)="clearReply()" name="close-circle-outline"></ion-icon>
+        </ion-chip>
+      </ion-row>
       <ion-row class="ion-nowrap ion-align-items-center">
         <ion-col size="2" class="img-left">
           <ion-avatar class="avater" style="margin: 0 auto;">

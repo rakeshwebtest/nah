@@ -23,6 +23,8 @@ export class DashboardComponent implements OnInit {
   // }
   ionViewWillEnter() {
     console.log('ionViewWillEnter');
+    const userInfo: any = this.authService.isAuthenticated();
+    this.googlePic = userInfo.user.imageUrl;
     this.reload();
   }
   ngOnInit() {

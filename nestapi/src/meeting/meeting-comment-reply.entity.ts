@@ -1,7 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn, ManyToMany, OneToMany } from 'typeorm';
 import { BaseEntity } from '../shared/base.entity';
 import { UserEntity } from 'src/user/user.entity';
-import { MeetingEntity } from './meeting.entity';
 import { MeetingCommentsEntity } from './meeting-comments.entity';
 @Entity({ name: 'meeting_comment_reply' })
 export class MeetingCommentReplyEntity extends BaseEntity {
