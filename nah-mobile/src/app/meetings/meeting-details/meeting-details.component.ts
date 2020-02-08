@@ -166,7 +166,7 @@ export class MeetingDetailsComponent implements OnInit {
   clearReply() {
     this.replyMsg = {};
   }
-  async deleteComment(items:any[],inx) {
+  async deleteComment(items:any[],inx,reply) {
     let alert = await this.alertCtrl.create({
       message: 'Do you want to delete this Comment?',
       buttons: [
