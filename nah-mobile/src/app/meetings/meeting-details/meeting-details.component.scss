@@ -45,7 +45,7 @@
         color:#736d6d;
     }
     .meeting-date{
-        font-size: 12px;
+        font-size: 11px;
         padding-top: 5px;
         color:#736d6d;
     }
@@ -59,7 +59,13 @@
         padding: 0 !important;
     }
 }
-.meeting-list{width: 100%;}
+.meeting-list{
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    &:last-child{
+        border-bottom: none;
+    }
+}
 .m-height-250 img{max-height: 250px;}
 .profile-settings{
     justify-content: flex-end;
@@ -67,4 +73,20 @@
         font-size: 27px;
         padding-right: 16px;
     }
+}
+.reply-list {
+    display: flex;
+    justify-content: flex-end;
+}
+.custom-chip{
+    background-color: #f04141;
+    color: #fff;
+}
+.comments-title{
+    color: #000;
+    font-weight: bold;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding: 0 0 5px 0px;
+    font-size: 16px;
 }
