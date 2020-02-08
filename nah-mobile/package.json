@@ -46,13 +46,14 @@
     "cordova-res": "^0.8.1",
     "core-js": "^2.5.4",
     "ionic-selectable": "^4.5.1",
-    "ionicons": "^5.0.0",
+    "ionicons": "5.0.0-17",
     "ngx-ionic-image-viewer": "^0.4.0",
     "ngx-timeago": "^1.0.3",
     "node-sass": "^4.13.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "cordova-browser": "5.0.4"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.801.2",
@@ -88,6 +89,8 @@
   "description": "An Ionic project",
   "cordova": {
     "platforms": [
+      "browser",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
