@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AppHttpClient } from '../../../utils/app-http-client.service';
 
 @Component({
   selector: 'theapp-meeting-list',
@@ -31,18 +32,17 @@ export class MeetingListComponent implements OnInit {
     {name: 'Chicago', code: 'CH'}
   ];
 
-  constructor(private modalService: NgbModal,
+  constructor(private appHttp: AppHttpClient, private modalService: NgbModal,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.cols = [
-      { field: 'city', header: 'City' },
       { field: 'meetingName', header: 'Meeting Title' },
       { field: 'meetingDate', header: 'Date' },
       { field: 'meetingTime', header: 'Time' },
-      { field: 'meetingVenue', header: 'Venue' },
-      { field: 'createdBy', header: 'Organized By' }
+      { field: 'meetingVenue', header: 'Location' },
+      { field: 'city', header: 'City' }
     ];
     this.meetingList = [
       {
@@ -55,6 +55,17 @@ export class MeetingListComponent implements OnInit {
         'city': 'Chicago', 'meetingName': 'Meeting 3', 'meetingDate': '03-01-2020', 'meetingTime': '10:00 To 11:00', 'meetingVenue': 'Chicago', 'createdBy': 'UZ 16LAB'
       }
     ];
+
+    this.getMeetings();
+  }
+
+  getMeetings() {
+    const payload: any = {};
+    this.appHttp.get('meeting/list').subscribe(res => {
+      if(res.data) {
+        this.meetingList = res.data;
+      }
+    });
   }
 
   onUpdate(event) {

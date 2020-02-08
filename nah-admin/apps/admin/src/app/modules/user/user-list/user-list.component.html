@@ -1,11 +1,11 @@
 <div class="p-contain">
   <div class="row m-0 filters-widget">
-    <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
+    <!-- <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
       <p-dropdown [options]="cities" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
     </div>
     <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
       <p-dropdown [options]="noerTypes" [(ngModel)]="selectedCity" placeholder="Type Of Noer" optionLabel="name" [showClear]="true"></p-dropdown>
-    </div>
+    </div> -->
     <div class="col-12 col-md-4 mb-1 p-0">
       <input type="text" pInputText placeholder="Search">
     </div>
@@ -38,8 +38,8 @@
         </td> -->
         <td>
           <div class="d-flex align-items-center">
-            <img class="avatar" [src]="user.image" alt="">
-            <span class="pl-1">{{user.name}}</span>
+            <img class="avatar" [src]="user.imageUrl" alt="">
+            <span class="pl-1">{{user.displayName}}</span>
           </div>
         </td>
         <td *ngFor="let col of columns">

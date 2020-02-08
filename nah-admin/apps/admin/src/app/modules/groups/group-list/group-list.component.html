@@ -17,17 +17,18 @@
   <p-table [columns]="cols" [value]="groupList" [responsive]="true">
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th *ngFor="let col of columns">
-          {{ col.header }}
-        </th>
+        <th>Group Name</th>
+        <th>Created By</th>
         <th class="actions-th">Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user let-columns="columns">
       <tr>
-        <td *ngFor="let col of columns">
-          <span class="ui-column-title">{{ col.header }}</span>
-          {{ user[col.field] }}
+        <td>
+          {{ user.name }}
+        </td>
+        <td>
+          {{ user.createdBy.displayName }}
         </td>
         <td>
           <div

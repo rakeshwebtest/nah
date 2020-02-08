@@ -80,4 +80,7 @@ export class CityListComponent implements OnInit {
   onUpdate(addCity) {
     this.modalRef = this.modalService.open(addCity, {});
   }
+  addCity() {
+    console.log('add city model-->', this.model);
+  }
 }

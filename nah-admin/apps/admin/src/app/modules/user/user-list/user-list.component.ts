@@ -149,8 +149,19 @@ export class UserListComponent implements OnInit, OnDestroy {
       {name: 'Hater', code: 'HA'},
       {name: 'Rejector', code: 'RJ'}
     ];
+    this.getUsers();
+
   }
  
+  getUsers() {
+    const payload: any = {};
+    this.appHttp.get('user/list').subscribe(res => {
+      console.log('users list', res);
+      if(res.data) {
+        this.userList = res.data;
+      }
+    });
+  }
  
   updateUser(updateUserTemp, user) {
     this.userModel = user;

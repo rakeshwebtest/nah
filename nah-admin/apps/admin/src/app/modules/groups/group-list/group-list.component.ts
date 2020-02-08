@@ -48,7 +48,7 @@ export class GroupListComponent implements OnInit {
   ngOnInit() {
     this.cols = [
       { field: 'name', header: 'Group Name' },
-      { field: 'createdBy', header: 'Created By' }
+      { field: 'createdBy.displayName', header: 'Created By' }
     ];
     // this.groupList = [
     //   {

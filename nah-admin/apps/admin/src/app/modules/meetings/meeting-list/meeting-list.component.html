@@ -6,9 +6,9 @@
       <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
         <input type="text" pInputText placeholder="Search Meeting Name">
       </div>
-      <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
+      <!-- <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
         <p-dropdown [options]="cities" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
-      </div>
+      </div> -->
       <!-- <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
         <p-dropdown [options]="meetingList" [(ngModel)]="selectedCity" placeholder="Select Meeting" optionLabel="name" [showClear]="true"></p-dropdown>
       </div> -->
@@ -27,9 +27,20 @@
     </ng-template>
     <ng-template pTemplate="body" let-user let-columns="columns">
       <tr [pSelectableRow]="rowData">
-        <td *ngFor="let col of columns">
-          <span class="ui-column-title">{{ col.header }}</span>
-          {{ user[col.field] }}
+        <td>          
+          {{ user.title }}
+        </td>
+        <td>          
+          {{ user.meetingDate | date}}
+        </td>
+        <td>          
+          {{ user.startTime | date : 'shortTime' }} To {{ user.endTime | date : 'shortTime' }}
+        </td>
+        <td>          
+          {{ user.location }}
+        </td>
+        <td>          
+          {{ user.city.name }}
         </td>
         <td>
           <div
