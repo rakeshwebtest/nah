@@ -9,9 +9,9 @@
 ion-refresher {
     position: inherit !important;
 }
-.meeting-list{padding-top: 5px;padding-bottom: 35px;}
+.meeting-list{padding-top: 0px;padding-bottom: 35px;}
 .meeting-item{
-    padding-bottom: 5px;
+    padding-bottom: 0px;
     .item-native{
         padding: 0 ;
     }
@@ -47,11 +47,12 @@ ion-refresher {
     .meeting-desc{
         font-size:12px;
         color:#736d6d;
-        padding-bottom:5px;
+        padding-bottom:0px;
     }
     .meeting-date{
         font-size: 12px;
         padding-bottom: 5px;
+        padding-top: 3px;
     }
     .fallowing-members{
         font-size: 10px;

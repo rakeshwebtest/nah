@@ -1,11 +1,23 @@
 <ion-content>
-  <form  (ngSubmit)="updateSignIn()">
+  <form (ngSubmit)="updateSignIn()">
+    <ion-row >
+      <ion-col size="12" class="ion-text-center">
+        <ion-chip> Now, think about </ion-chip>
+      </ion-col>
+      <ul style="margin-top: 0px;">
+        <li>What do you against the most?</li>
+        <li>What do you hate the most</li>
+        <li>What do you rejects the most?</li>
+      </ul>
+
+    </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-col size="12">
         <ion-item class="border border-b-none">
           <ion-label><strong>Say No To</strong></ion-label>
           <!-- <ion-label position="floating">Enter A Group Name</ion-label> -->
-          <ion-input name="newGroupName" placeholder="Enter Group Name" autofocus="true" [(ngModel)]="newGroupName"></ion-input>
+          <ion-input name="newGroupName" placeholder="Enter Group Name" autofocus="true" [(ngModel)]="newGroupName">
+          </ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="6">
@@ -14,7 +26,7 @@
         </ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button  color="light" (click)="dismiss()">
+        <ion-button color="light" (click)="dismiss()">
           Close
         </ion-button>
       </ion-col>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AppHttpClient } from 'src/app/utils';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +14,7 @@ import { MeetingDetailsActionsComponent } from './meeting-details-actions/meetin
   styleUrls: ['./meeting-details.component.scss'],
 })
 export class MeetingDetailsComponent implements OnInit {
+
   title = 'Meeting Details';
   imgList = [];
   googlePic: any;
