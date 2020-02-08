@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Meeting } from './../meeting';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, AlertController } from '@ionic/angular';
 import { MeetingDetailsActionsComponent } from './meeting-details-actions/meeting-details-actions.component';
 
 @Component({
@@ -24,7 +24,7 @@ export class MeetingDetailsComponent implements OnInit {
   imageModel: any = {};
   activeTab: string = 'images';
   replyMsg: any = {};
-
+  userInfo:any = {};
   fields: FormlyFieldConfig[] = [
     {
       key: 'images',
@@ -41,13 +41,14 @@ export class MeetingDetailsComponent implements OnInit {
 
   ];
   constructor(private authService: AuthenticationService,
+    private alertCtrl:AlertController,
     private popoverController: PopoverController,
     private router: ActivatedRoute, private http: AppHttpClient) { }
 
   ngOnInit() {
 
-    const userInfo: any = this.authService.getUserInfo();
-    this.googlePic = userInfo.imageUrl;
+    this.userInfo = this.authService.getUserInfo();
+    this.googlePic = this.userInfo.imageUrl;
     this.imgList = [
       { 'url': 'assets/images/default-user.png' },
       { 'url': 'assets/images/user-1.jpg' },
@@ -164,6 +165,27 @@ export class MeetingDetailsComponent implements OnInit {
   }
   clearReply() {
     this.replyMsg = {};
+  }
+  async deleteComment(items:any[],inx) {
+    let alert = await this.alertCtrl.create({
+      message: 'Do you want to delete this Comment?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Okay',
+          handler: () => {
+            items.splice(inx,1);
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }

@@ -102,10 +102,10 @@
           </ng-container>
 
           <ion-row *ngIf="meeting.comments.length > 0">
-            <h3 class="comments-title" >COMMENTS</h3>
+            <h3 class="comments-title">COMMENTS</h3>
 
 
-            <ion-list class="meeting-list meeting-list-d" *ngFor="let c of meeting.comments">
+            <ion-list class="meeting-list meeting-list-d" *ngFor="let c of meeting.comments;let cInx=index;">
               <ion-grid class="meeting-item ion-no-padding">
                 <ion-row class="ion-nowrap ion-align-items-center">
                   <ion-col size="2" class="img-left ion-no-padding">
@@ -118,6 +118,8 @@
                     </ion-label> -->
                     <ion-label class="meeting-sub-title" style="font-weight: bold;">{{c.createdBy.displayName}}
                     </ion-label>
+            
+
 
                   </ion-col>
                   <ion-col size="3" class="ion-no-padding ion-text-right">
@@ -125,12 +127,15 @@
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col class="ion-no-padding" size="2"></ion-col>
+                  <ion-col class="ion-no-padding" size="2">
+                  </ion-col>
                   <ion-col class="ion-no-padding" size="10">
+                    
                     <ion-label class="meeting-sub-title">{{c.comment}}</ion-label>
+                    
                   </ion-col>
                 </ion-row>
-                <ion-row class="reply-list meeting-item" *ngFor="let rc of c.replys">
+                <ion-row class="reply-list meeting-item" *ngFor="let rc of c.replys;let inx=index;">
                   <ion-chip class="custom-chip">
                     <ion-label class="meeting-sub-title" style="font-weight: bold;">{{rc.createdBy.displayName}}
                     </ion-label>
@@ -140,15 +145,23 @@
                   </ion-chip>
                   <ion-col size="12" class="ion-text-right ion-padding-t-0"
                     style="display: flex;align-items: center;justify-content: flex-end;">
-                    <ion-icon name="close-circle" class="ion-padding-r-5" style="cursor: pointer;"></ion-icon>
+                    
                     <ion-label class="meeting-sub-title">{{rc.comment}}</ion-label>
+                    <ion-icon name="trash" *ngIf="userInfo.id === rc.createdBy.id" (click)="deleteComment(c.replys,inx,true)" class="ion-padding-r-5"
+                      style="cursor: pointer;"></ion-icon>
                   </ion-col>
                 </ion-row>
                 <ion-row (click)="replyComment(c)">
-                  <ion-col size="4" class="ion-no-padding" style="color:#f00;">
+                  <ion-col>
+                    <ion-icon *ngIf="userInfo.id === c.createdBy.id" name="trash" (click)="deleteComment(meeting.comments,cInx,false)" class="ion-padding-r-5"
+                    style="cursor: pointer;"></ion-icon>
+                  </ion-col>
+                  <ion-col size="4" class="ion-no-padding ion-text-right" style="color:#f00;">
                     <ion-icon name="repeat"></ion-icon>
                     <label>Reply</label>
+
                   </ion-col>
+                  
                 </ion-row>
               </ion-grid>
             </ion-list>
@@ -177,7 +190,8 @@
           </ion-avatar>
         </ion-col>
         <ion-col size="7" class="">
-          <ion-textarea class="border" style="margin: 0;" #commentMsgEle [(ngModel)]="commentMsg" placeholder="Enter Comments">
+          <ion-textarea class="border" style="margin: 0;" #commentMsgEle [(ngModel)]="commentMsg"
+            placeholder="Enter Comments">
           </ion-textarea>
         </ion-col>
         <ion-col size="3" class="ion-text-center">
