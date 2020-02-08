@@ -31,7 +31,7 @@
         </ion-col>
         <ion-col size="4" class="ion-text-end ion-no-padding" *ngIf="!m.isCreatedBy">
           <ion-text style="font-weight: bold;display: block;font-size: 12px;">{{m?.city?.name}}</ion-text>
-          <ion-button class="ion-no-margin" size="small" color="medium" (click)="meetingJoin(m)" *ngIf="m.isMember">Un Join</ion-button>
+          <ion-button class="ion-no-margin" size="small" color="medium" (click)="meetingJoin(m)" *ngIf="m.isMember">Unjoin</ion-button>
           <ion-button class="ion-no-margin" size="small" color="danger" (click)="meetingJoin(m)" *ngIf="!m.isMember">Join</ion-button>
         </ion-col>
         <ion-col size="3" class="ion-text-end" *ngIf="m.isCreatedBy">
@@ -40,7 +40,7 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <label class="meeting-desc">
+        <label class="meeting-desc ellipsas">
           {{m.agenda}}
         </label>
       </ion-row>

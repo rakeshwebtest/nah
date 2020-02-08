@@ -99,10 +99,17 @@ ion-select {
     border-bottom: none;
 }
 .group-create-modal .modal-wrapper {
-    height: 20%;
+    height: 40%;
     position: absolute; 
-    top: 80%;
+    top: 60%;
     display: block;
+}
+.ellipsas
+{
+    overflow: hidden; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical; 
 }
 
 .label-full-width {
