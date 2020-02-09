@@ -38,9 +38,6 @@ ul{
 section {
     padding: 0px 0;
 }
-section h2 {
-    font-size: 50px;
-}
 #mainNav {
     border-color: rgba(34, 34, 34, .05);
     background-color: #fff;
@@ -139,6 +136,50 @@ footer .badge-link img{
 }
 .nav-item .dropdown-menu{
    padding: 10px;
+}
+.card{margin-bottom: 15px; box-shadow: 0px 0px 6px #999;}
+.card-header{padding: 0;background-color: rgba(171, 112, 112, 0.16);}
+.card-header button{
+    text-transform: lowercase;
+    display: block;
+    width: 100%;
+    text-align: left;
+    color: #000;
+}
+.card-header button:focus,.card-header button:hover{
+    text-decoration: none;
+}
+.sticky {
+   border-left: 1px solid #ccc;
+   padding: 0 20px 20px;
+}
+.sticky .menu{
+    position: sticky;
+    top:60px;
+    z-index: 9;
+}
+#menu-center ul li a{
+    padding: 10px;
+    display: block;
+    color: #000;
+}
+#menu-center ul li a.active{
+    padding: 10px;
+    display: block;
+    color: #fff;
+    background-color: #e31e27;
+}
+.terms-widget{
+    padding-top: 60px;
+}
+.terms-block{
+    margin-bottom: 30px;
+    padding:0 0 30px 0;
+    border-bottom: 1px solid #ccc;
+}
+.terms-block:last-child{
+    margin-bottom: 0px;
+    border-bottom: none;
 }
 @media (min-width:992px) {
     #mainNav {
@@ -367,6 +408,14 @@ footer ul li a {
     font-size: 12px;
     color: rgba(255, 255, 255, .3);
 }
+footer ul li {
+    transform: scale(1);
+    transition: all .3s;
+}
+footer ul li:hover {
+    transform: scale(1.2);
+    transition: all .3s;
+}
 footer ul li a.active, footer ul li a:active, footer ul li a:focus, footer ul li a:hover {
     text-decoration: none;
 }
@@ -422,6 +471,12 @@ footer .col-md-6{
     justify-content: center;
     margin-left: 5px;
     padding: 5px;
+    transform: scale(1);
+    transition: all .3s;
+}
+.social-icon a:hover{
+    transform: scale(1.2);
+    transition: all .3s;
 }
 .slick-prev:before, .slick-next:before{
     color: #000;
