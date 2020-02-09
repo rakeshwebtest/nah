@@ -104,7 +104,7 @@ footer .badge-link img{
 .feature {
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0px 0px 6px #ccc;
+    box-shadow: 0px 0px 6px #999;
     height: 100%;
     text-align: justify;
 }
@@ -181,6 +181,11 @@ footer .badge-link img{
     margin-bottom: 0px;
     border-bottom: none;
 }
+#faqs{
+    background: #cacaca;
+    padding: 20px;
+}
+.navbar-brand{display: none;}
 @media (min-width:992px) {
     #mainNav {
     border-color: transparent;
@@ -495,5 +500,17 @@ footer .col-md-6{
     }
     footer h4{
         font-size: 18px;
+    }
+    #faqs{
+        padding: 0px;
+    }
+    .footer-part2{
+        text-align: center;
+    }
+    .navbar{background-color: rgba(0, 0, 0, .5) !important;}
+    .navbar-brand{display: block;}
+    .navbar-light .navbar-toggler {
+        color: rgba(255, 255, 255, 1) !important;
+        border-color: rgba(255, 255, 255, 1) !important;
     }
 }
