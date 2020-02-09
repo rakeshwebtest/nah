@@ -23,11 +23,11 @@
         <th class="actions-th">Actions</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-user let-columns="columns">
+    <ng-template pTemplate="body" let-city let-columns="columns">
       <tr >
         <td *ngFor="let col of columns">
           <span class="ui-column-title">{{ col.header }}</span>
-          {{ user[col.field] }}
+          {{ city[col.field] }}
         </td>
         <td>
           <div
@@ -42,48 +42,17 @@
               ngbDropdownMenu
               aria-labelledby="dropdownBasic1"
             >
-              <!-- <li>
-                <a
-                  class="dropdown-item"
-                  (click)="onCreditDebitAmount(creditAmount, 'Credit', user)"
-                  >Credit Amount</a
-                >
-              </li>
               <li>
                 <a
                   class="dropdown-item"
-                  (click)="onCreditDebitAmount(creditAmount, 'Debit', user)"
-                  >Debit Amount</a
-                >
-              </li> -->
-              <li>
-                <a
-                  class="dropdown-item"
-                  (click)="onUpdate(addCity)"
+                  (click)="onUpdate(addCity, city)"
                   >Edit City</a
                 >
               </li>
             </div>
           </div>
         </td>
-      </tr>
-      <!-- <tr>
-          <td>{{user.userId}}</td>
-          <td>{{user.userName}}</td>
-          <td>{{user.userType}}</td>
-          <td>{{user.maxProfitMatch}}</td>
-          <td>{{user.maxProfitFancy}}</td>
-          <td>{{user.agentId}}</td>
-          <td>
-              <div class="actions-dp" ngbDropdown placement="bottom-right" container="body">
-                  <a class='fa fa-ellipsis-v' ngbDropdownToggle></a>
-                  <div class="actions-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                      <li> <a class="dropdown-item" (click)="onCreditAmount(creditAmount)">Credit amount</a></li>
-                      <li> <a class="dropdown-item">Debit amount</a></li>
-                  </div>
-              </div>
-          </td>
-      </tr> -->
+      </tr>      
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
       <tr>
@@ -96,7 +65,8 @@
 </div>
 <ng-template #addCity let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h3>Add</h3>
+      <h3 *ngIf="!model.id">Add City</h3>
+      <h3 *ngIf="model.id">Update City</h3>
       <button
         type="button"
         class="btn close"
@@ -115,12 +85,19 @@
           [options]="options"
         >
           <div class="d-flex justify-content-center">
-            <button
+            <button *ngIf="!model.id"
               type="submit"
               class="btn btn-sm btn-primary mr-1"
               (click)="saveCity()"
             >
-              Add
+              Save
+            </button>
+            <button *ngIf="model.id"
+              type="submit"
+              class="btn btn-sm btn-primary mr-1"
+              (click)="updateCity()"
+            >
+              Update
             </button>
           </div>
         </formly-form>

@@ -30,7 +30,7 @@ export class CityListComponent implements OnInit {
       fieldGroup: [
         {
           className: 'col-12',
-          key: 'cityName',
+          key: 'name',
           type: 'input',
           templateOptions: {
             type: 'text',
@@ -75,12 +75,33 @@ export class CityListComponent implements OnInit {
     });
   }
   onAdd(addCity) {
+    this.model = {};
     this.modalRef = this.modalService.open(addCity, {});
   }
-  onUpdate(addCity) {
+  onUpdate(addCity, row) {
+    this.model = row;
     this.modalRef = this.modalService.open(addCity, {});
   }
   saveCity() {
     console.log('add city model-->', this.model);
+    if(this.form.valid) {
+      this.appHttp.post('city', this.model).subscribe(res => {
+        if(res.data) {
+          this.modalRef.close();
+          this.ngOnInit();
+        }
+      });
+    }
+  }
+  updateCity() {
+    console.log('add city model-->', this.model);
+    if(this.form.valid) {
+      this.appHttp.put('city', this.model).subscribe(res => {
+        if(res.data) {
+          this.modalRef.close();
+          this.ngOnInit();
+        }
+      });
+    }
   }
 }
