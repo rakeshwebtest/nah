@@ -59,6 +59,11 @@ section {
     font-size: 16px;
     padding: 8px 10px;
     color: #222;
+    min-width: 36px;
+    max-height: 35px;
+}
+#mainNav .navbar-toggler:focus {
+    outline: none;
 }
 #mainNav .navbar-nav>li>a {
     font-size: 11px;
@@ -197,6 +202,15 @@ footer .badge-link img{
 .navbar-brand{display: none;}
 .card-header .collapsed i::before{
     content: "\f067";
+}
+.navbar.active{
+    min-height: 100vh;
+    background-color: #e31e27 !important;
+    align-items: baseline;
+    transition: all .3s;
+}
+.navbar.active .navbar-toggler i::before{
+    content: "\f00d";
 }
 @media (min-width:992px) {
     #mainNav {
@@ -486,7 +500,7 @@ footer .col-md-6{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 5px;
+    margin-right: 5px;
     padding: 5px;
     transform: scale(1);
     transition: all .3s;
@@ -522,14 +536,23 @@ footer .col-md-6{
     .navbar{background-color: transparent !important;}
     .navbar-brand{opacity: 0;display: block;}
     .navbar-light .navbar-toggler {
-        color: rgba(255, 255, 255, 1) !important;
-        border-color: rgba(255, 255, 255, 1) !important;
+        /* color: rgba(255, 255, 255, 1) !important;
+        border-color: rgba(255, 255, 255, 1) !important; */
+        background: #fff;
     }
     .sticky{order: -1;}
     p {
         font-size: 14px;
     }
     #mainNav .navbar-nav>li>a, #mainNav .navbar-nav>li>a:focus {
-        color: #fff;
+        font-weight: bold;
+        color: #fff ;
+    }
+    #mainNav .navbar-nav>li>a.active {
+        color: #000 !important;
+        background-color: transparent;
+    }
+    .social-icon {
+        justify-content: flex-start;
     }
 }

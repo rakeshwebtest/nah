@@ -40,3 +40,21 @@
   $(window).scroll(navbarCollapse);
 
 })(jQuery); // End of use strict
+$(document).ready(function () {
+  if(window.innerWidth <= 767) {
+    $('.navbar-toggler').click(function () {
+        $(this).parent().parent().toggleClass("active");
+    });
+    $('.nav-link.js-scroll-trigger').click(function () {
+        $(this).parent().parent().parent().parent().parent().toggleClass("active");
+    });
+    $(window).scroll(function(){
+      // e.preventDefault();
+      if($(".fixed-top").hasClass("active")) {
+        $('body').css('overflow', 'hidden');
+      } else {
+        $('body').css('overflow', 'auto');
+      }
+    });
+  }
+});
