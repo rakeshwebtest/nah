@@ -137,6 +137,9 @@ footer .badge-link img{
 .nav-item .dropdown-menu{
    padding: 10px;
 }
+.nav-item .dropdown-menu li a{
+    color: #000;
+}
 .card{margin-bottom: 15px; box-shadow: 0px 0px 6px #999;}
 .card-header{padding: 0;background-color: rgba(171, 112, 112, 0.16);}
 .card-header button{
@@ -400,7 +403,7 @@ footer {
     padding: 10px 0;
     /* text-align: center; */
     color: rgba(255, 255, 255, .3);
-    background-color: #222;
+    background-color: rgba(0,0,0,0.9);
 }
 footer p {
     font-size: 12px;
