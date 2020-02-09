@@ -51,7 +51,9 @@ $(document).ready(function () {
       }
     })
     $('.nav-link.js-scroll-trigger').click(function () {
-      $(this).parent().parent().parent().parent().parent().toggleClass("active");
+      if (window.innerWidth <= 767) {
+        $(this).parent().parent().parent().parent().parent().toggleClass("active");
+      }
     });
     $(window).scroll(function () {
         if ($(".fixed-top").hasClass("active")) {
