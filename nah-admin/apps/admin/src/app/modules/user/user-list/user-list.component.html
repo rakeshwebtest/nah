@@ -28,7 +28,7 @@
         <th *ngFor="let col of columns">
           {{ col.header }}
         </th>
-        <th class="actions-th">Actions</th>
+        <!-- <th class="actions-th">Actions</th> -->
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user let-columns="columns">
@@ -46,7 +46,7 @@
           <span class="ui-column-title">{{ col.header }}</span>
           {{ user[col.field] }}
         </td>
-        <td>
+        <!-- <td>
           <div
             class="actions-dp"
             ngbDropdown
@@ -58,37 +58,16 @@
               class="actions-dropdown-menu"
               ngbDropdownMenu
               aria-labelledby="dropdownBasic1"
-            >
-              <!-- <li>
-                <a
-                  class="dropdown-item"
-                  (click)="onCreditDebitAmount(creditAmount, 'Credit', user)"
-                  >Credit Amount</a
-                >
-              </li>
-              <li>
-                <a
-                  class="dropdown-item"
-                  (click)="onCreditDebitAmount(creditAmount, 'Debit', user)"
-                  >Debit Amount</a
-                >
-              </li> -->
+            >              
               <li *ngIf="user.active">
                 <a class="dropdown-item" (click)="suspendUsers([{userId: user.userId, updatedBy: sessionInfo.userId }])">Suspend User</a>
               </li>
               <li *ngIf="!user.active">
                 <a class="dropdown-item" (click)="activateUsers([{userId: user.userId, updatedBy: sessionInfo.userId }])">Activate User</a>
-              </li>
-              <!-- <li>
-                <a
-                  class="dropdown-item"
-                  (click)="updateUser(updateUserTemp, user)"
-                  >Edit User</a
-                >
-              </li> -->
+              </li>            
             </div>
           </div>
-        </td>
+        </td> -->
       </tr>
       <!-- <tr>
           <td>{{user.userId}}</td>
