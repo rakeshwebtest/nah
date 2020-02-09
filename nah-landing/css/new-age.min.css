@@ -513,4 +513,5 @@ footer .col-md-6{
         color: rgba(255, 255, 255, 1) !important;
         border-color: rgba(255, 255, 255, 1) !important;
     }
+    .sticky{order: -1;}
 }
