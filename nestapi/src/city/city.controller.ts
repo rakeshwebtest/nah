@@ -13,6 +13,12 @@ export class CityController {
         return { message: false, data };
     }
 
+    @Get('info')
+    async getInfo() {
+        const data = await this.cityService.getCitiesInfo();
+        return { message: false, data };
+    }
+
     @Post()
     async createCity(@Body() city: CityCreateDto) {
         const data = await this.cityService.createUpdateCity(city);

@@ -96,6 +96,25 @@ export class MeetingController {
   async addComment(@Body() comment: CommentDto, @Request() req) {
     return this.meetingService.addComment(comment);
   }
+  /**
+   * 
+   * @param id 
+   */
+  @Delete('comment\:commentId')
+  async deleteComment(@Param('commentId') id: number) {
+    const data = await this.meetingService.deleteComment(id);
+    return { message: 'successfull delete comment', data };
+  }
+
+  /**
+   *
+   * @param id
+   */
+  @Delete('comment\:commentId\:replyCommentId')
+  async deleteReplyComment(@Param('commentId') id: number,@Param('replyCommentId') replyCommentId: number) {
+    const data = await this.meetingService.deleteComment(id,replyCommentId);
+    return { message: 'successfull delete comment', data };
+  }
 
   @UsePipes(new ValidationPipe())
   @Post('comment-reply')
@@ -159,6 +178,4 @@ export class MeetingController {
     const data = await this.meetingService.deleteMeeting(params.meetingId);
     return { message: 'Meeting Delete Successfullly', data };
   }
-
-
 }

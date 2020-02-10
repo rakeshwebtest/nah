@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CityEntity } from './city.entity';
-import { Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 
 @Injectable()
 export class CityService {
@@ -9,6 +9,13 @@ export class CityService {
     }
     async getCities(): Promise<CityEntity[]> {
         return this.cityRepository.find();
+    }
+    async getCitiesInfo(): Promise<CityEntity[]> {
+        const db = getRepository(CityEntity)
+            .createQueryBuilder('city');
+        db.loadRelationCountAndMap('city.meetingsCount', 'city.meetings', 'cmCount');
+        db.loadRelationCountAndMap('city.usersCount', 'city.users', 'cuCount');
+        return db.getMany();
     }
     async createUpdateCity(city): Promise<CityEntity> {
         return this.cityRepository.save(city);
