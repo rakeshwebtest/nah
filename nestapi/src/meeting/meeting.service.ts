@@ -27,16 +27,16 @@ export class MeetingService {
         @InjectRepository(MeetingVideosEntity) private readonly meetingVideoRepository: Repository<MeetingVideosEntity>,
         @InjectRepository(MeetingMembersEntity) private readonly meetingMembersRepository: Repository<MeetingEntity>,
         @InjectRepository(MeetingCommentReplyEntity) private readonly meetingCommentReplyRepository: Repository<MeetingCommentReplyEntity>,
-        ) {
+    ) {
 
     }
 
-    async getMeetings(query: any,sessionUser): Promise<MeetingEntity | MeetingEntity[]> {
+    async getMeetings(query: any, sessionUser): Promise<MeetingEntity | MeetingEntity[]> {
         const db = getRepository(MeetingEntity)
             .createQueryBuilder('m')
             .select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm", "mp",
                 "user.id", "user.displayName", "user.imageUrl", "city",
-                "mc","mv","mcr","mcr_createdBy", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"])
+                "mc", "mv", "mcr", "mcr_createdBy", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"])
             .leftJoin('m.createdBy', 'u')
             .leftJoin('m.city', 'city')
             .leftJoin('m.group', 'group')
@@ -53,19 +53,19 @@ export class MeetingService {
             .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" })
             .andWhere('group.isDeleted != 1')
             .andWhere('m.isDeleted != 1');
-        if(sessionUser.role === 'admin'){
+        if (sessionUser.role === 'admin') {
 
-        }else{
+        } else {
             if (query.groupId) {
                 db.andWhere('group.id= :id', { id: query.groupId });
             } else {
                 db.andWhere('(gf_user.id= :id OR group.createdBy= :id)', { id: query.userId });
             }
-    
+
             if (query.type && query.type === 'upcoming') {
                 db.andWhere('m.meetingDate >= DATE(NOW())');
             }
-    
+
             if (query.type && query.type === 'my-meeting') {
                 db.andWhere('u.id = :id', { id: sessionUser.id })
             } else {
@@ -229,6 +229,18 @@ export class MeetingService {
         const meeting = new MeetingEntity();
         meeting.isDeleted = 1;
         return await this.meetingRepository.update(meetingId, meeting);
+    }
+    async deleteComment(commentId: number, replyCommentId?: number): Promise<any> {
+        const comment = new MeetingCommentsEntity();
+        comment.id = commentId;
+        if (replyCommentId) {
+            const replay = new MeetingCommentReplyEntity();
+            replay.id = replyCommentId;
+            return this.meetingCommentReplyRepository.delete(replay);
+
+        } else {
+            return this.meetingCommentRepository.delete(comment);
+        }
     }
 
 } 

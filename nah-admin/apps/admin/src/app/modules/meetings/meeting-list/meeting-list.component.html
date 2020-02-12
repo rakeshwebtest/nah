@@ -22,7 +22,7 @@
         <th *ngFor="let col of columns">
           {{ col.header }}
         </th>
-        <th class="actions-th">Actions</th>
+        <!-- <th class="actions-th">Actions</th> -->
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user let-columns="columns">
@@ -42,7 +42,7 @@
         <td>          
           {{ user.city.name }}
         </td>
-        <td>
+        <!-- <td>
           <div
             class="actions-dp"
             ngbDropdown
@@ -54,21 +54,7 @@
               class="actions-dropdown-menu"
               ngbDropdownMenu
               aria-labelledby="dropdownBasic1"
-            >
-              <!-- <li>
-                <a
-                  class="dropdown-item"
-                  (click)="onCreditDebitAmount(creditAmount, 'Credit', user)"
-                  >Credit Amount</a
-                >
-              </li>
-              <li>
-                <a
-                  class="dropdown-item"
-                  (click)="onCreditDebitAmount(creditAmount, 'Debit', user)"
-                  >Debit Amount</a
-                >
-              </li> -->
+            >              
               <li>
                 <a
                   class="dropdown-item"
@@ -78,7 +64,7 @@
               </li>
             </div>
           </div>
-        </td>
+        </td> -->
       </tr>
       <!-- <tr>
           <td>{{user.userId}}</td>
