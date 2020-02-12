@@ -1,3 +1,4 @@
+
 (function ($) {
   "use strict"; // Start of use strict
 
@@ -38,7 +39,9 @@
   navbarCollapse();
   // Collapse the navbar when page is scrolled
   $(window).scroll(navbarCollapse);
-
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  }
 })(jQuery); // End of use strict
 $(document).ready(function () {
   if (window.innerWidth <= 767) {
@@ -64,6 +67,29 @@ $(document).ready(function () {
     });
   }
 });
-window.onbeforeunload = function () {
-  window.scrollTo(0, 0);
-}
+$(window).resize( function(){
+  // console.log('33' );
+  if (window.innerWidth <= 767) {
+    $('.navbar-toggler').click(function () {
+      // console.log('11');
+      $(this).parent().parent().toggleClass("active");
+      if ($(".fixed-top").hasClass("active")) {
+        $('body').css('overflow', 'hidden');
+      } else {
+        $('body').css('overflow', 'auto');
+      }
+    })
+    $('.nav-link.js-scroll-trigger').click(function () {
+      if (window.innerWidth <= 767) {
+        $(this).parent().parent().parent().parent().parent().toggleClass("active");
+      }
+    });
+    $(window).scroll(function () {
+        if ($(".fixed-top").hasClass("active")) {
+          $('body').css('overflow', 'hidden');
+        } else {
+          $('body').css('overflow', 'auto');
+        }
+    });
+  }
+})
