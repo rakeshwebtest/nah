@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Platform } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthenticationService } from './services/authentication.service';
-
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { Location } from "@angular/common";
 @Component({
   selector: 'theapp-root',
   templateUrl: './app.component.html',
@@ -24,6 +25,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     private router: Router,
+    private ga: GoogleAnalytics,
+    private location: Location,
     private authenticationService: AuthenticationService
   ) {
     this.initializeApp();
@@ -31,8 +34,25 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+
       console.log('already');
-      
+      let trakerReady = false;
+      this.ga.startTrackerWithId('222691743')
+        .then(() => {
+          trakerReady = true;
+        }).catch(e => alert('Error starting GoogleAnalytics == ' + e));
+
+      this.router.events.subscribe((val) => {
+        let cRoute = 'home';
+        if (this.location.path() != "") {
+          cRoute = this.location.path();
+        }
+        
+        console.log('cRoute', cRoute);
+        if (trakerReady)
+          this.ga.trackView(cRoute);
+
+      });
       // Here we will check if the user is already logged in
       // because we don't want to ask users to log in each time they open the app
       // this.nativeStorage.getItem('google_user')
