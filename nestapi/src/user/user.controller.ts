@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes, Request, Req } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes, Request, Req, HttpStatus, HttpException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserEntity } from './user.entity';
 import {
@@ -30,14 +30,14 @@ export class UsersController {
     @Post()
     async updateUser(@Body() user: CreateUserDto) {
         const data: any = await this.service.updateUser(user);
-        return { message: 'ok', data };
+        return { message: false, data };
     }
 
     @ApiBearerAuth()
     @Get(':userId')
-    async get(@Param('userId') id:number) {
-        const data:any = await this.service.getUser(id);
-        return { message: 'ok', data };
+    async get(@Param('userId') id: number) {
+        const data: any = await this.service.getUser(id);
+        return { message: false, data };
     }
 
     // @Post('users/login')
@@ -56,28 +56,36 @@ export class UsersController {
     @Post('login')
     async create(@Body() user: LoginUserDto) {
         // check user
-        const _user: UserEntity = await this.service.checkUser(user.email);
+        let _user: UserEntity;
+        if (user.provider === 'login') {
+            _user = await this.service.checkUser(user.email, user.password);
+        } else {
+            _user = await this.service.checkUser(user.email);
+            const data = await this.service.updateUser(user);
+        }
         if (_user) {
             user.id = _user.id;
             user.updatedDate = new Date();
+        } else {
+            throw new HttpException({ message: 'Invalid Login details', success: false, errors: 'Invalid Login details' }, HttpStatus.OK);
         }
 
-        const data = await this.service.updateUser(user);
-        const token = await this.service.generateJWT(data);
-        return { message: false, data: { user: _user || user, token } };
+
+        const token = await this.service.generateJWT(_user);
+        return { message: false,success: true, data: { user: _user || user, token } };
     }
 
     @ApiBearerAuth()
     @UsePipes(new ValidationPipe())
     @Put()
-    async update(@Body() user: CreateUserDto,@Req() req) {
+    async update(@Body() user: CreateUserDto, @Req() req) {
         // create group if newGroupName there
         const sessionUser = req.sessionUser;
         if (user.newGroupName) {
             const group: CreateGroupDto = {
                 name: user.newGroupName
             };
-            this.groupService.updateGroup(group,sessionUser);
+            this.groupService.updateGroup(group, sessionUser);
         }
         if (user.followGroups) {
             for (let index = 0; index < user.followGroups.length; index++) {

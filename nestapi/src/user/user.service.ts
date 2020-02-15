@@ -6,6 +6,7 @@ import { SECRET } from '../config';
 const jwt = require('jsonwebtoken');
 import { UserRO } from './user.interface';
 import { LoginUserDto } from './dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
@@ -22,16 +23,23 @@ export class UserService {
             where: [{ id: _id }]
         });
     }
-    async checkUser(_email: string): Promise<UserEntity> {
+    async checkUser(_email: string, password?: string): Promise<UserEntity> {
         // select: ['id', 'displayName','typeOfNeor'],
+
+        let _where = [];
+        if(password){
+            _where = [{ email: _email,password: password}];
+        }else{
+            _where = [{ email: _email }];
+        }
         return this.usersRepository.findOne({
             select: ['id', 'email', 'displayName', 'typeOfNoer', 'imageUrl', 'city'],
-            where: [{ email: _email }],
+            where: _where,
             relations: ["city"]
         });
     }
 
-    async updateUser(user: LoginUserDto) {
+    async updateUser(user: LoginUserDto | CreateUserDto) {
         return this.usersRepository.save(user);
     }
 

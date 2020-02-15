@@ -6,6 +6,10 @@ export class LoginUserDto {
   @IsNotEmpty()
   @IsEmail()
   readonly email: string;
+  @ApiProperty()
+  readonly provider: string;
+  @ApiProperty()
+  readonly password: string;
   id: number;
   updatedDate: Date;
 }
