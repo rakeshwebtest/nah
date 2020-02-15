@@ -39,14 +39,14 @@ export class LoginComponent implements OnInit {
     //   "requestData": this.loginForm.value
     // };
     const payload: any = this.loginForm.value;
+    payload.provider = 'login';
   // this.appHttp.get('jsonBlob/69e416bb-cbb7-11e9-a895-abb8290d8490').subscribe(res => {
    this.appHttp.post('user/login', payload).subscribe(res => {
       console.log('res', res);
-      if (res) {
+      if (res.success) {
         this.ls.setItem('user', res.data, true);
         this.router.navigate(['/admin/dashboard']);
-      }
-      
+      }      
     });
     
 
