@@ -41,7 +41,7 @@
         <mat-tab-group>
             <mat-tab label="Images">
                 <ul class="images-list">
-                    <li *ngFor="let item of meeting.photos;">
+                    <li *ngFor="let item of meeting?.photos">
                         <img [src]="item.imagePath" alt="">
                     </li>
                 </ul>
@@ -56,7 +56,7 @@
         </mat-tab>
             <mat-tab label="Comments">
                 <ul class="comments-list">
-                    <li  *ngFor="let comment of meeting.comments;">
+                    <li  *ngFor="let comment of meeting?.comments;">
                         <div class="comment">
                             <img [src]="comment.createdBy.imageUrl" alt="">
                             <p style="font-weight: bold;">{{comment.createdBy.displayName}}</p>

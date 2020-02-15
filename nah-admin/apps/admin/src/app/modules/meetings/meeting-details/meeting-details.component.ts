@@ -11,7 +11,7 @@ export class MeetingDetailsComponent implements OnInit {
   videoList = [];
   commentsList = [];
   meetingId = 0;
-  meeting = {};
+  meeting: any = {};
   constructor(private appHttp: AppHttpClient, private activeRouter: ActivatedRoute) { }
 
   ngOnInit() {
