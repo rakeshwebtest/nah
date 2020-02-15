@@ -3,33 +3,37 @@
         <div class="col-12 col-md-3">
             <label class="custom-label">Image</label>
             <div class="label-value">
-                <img width="100%" src="assets/images/meeting.jpg" alt="">
+                <img width="100%" [src]="meeting.imageUrl" alt="">
             </div>
         </div>
-        <div class="col-12 col-md-9 row align-items-center">
-            <div class="col-12 col-md-4">
-                <label class="custom-label">City</label>
-                <div class="label-value">New York </div>
-            </div>
+        <div class="col-12 col-md-9 row align-items-center">            
             <div class="col-12 col-md-4">
                 <label class="custom-label">Meeting Title</label>
-                <div class="label-value">Meeting 1 </div>
+                <div class="label-value"> {{ meeting.title}} </div>
             </div>
             <div class="col-12 col-md-4">
                 <label class="custom-label">Date</label>
-                <div class="label-value">05-01-2020 </div>
+                <div class="label-value">{{ meeting.meetingDate | date}} </div>
             </div>
             <div class="col-12 col-md-4">
                 <label class="custom-label">Time</label>
-                <div class="label-value">10:00 To 11:00 </div>
+                <div class="label-value">{{ meeting.startTime | date : 'shortTime' }} To {{ meeting.endTime | date : 'shortTime' }} </div>
             </div>
             <div class="col-12 col-md-4">
-                <label class="custom-label">Venue</label>
-                <div class="label-value">New York </div>
+                <label class="custom-label">Location</label>
+                <div class="label-value">{{ meeting.location }} </div>
             </div>
             <div class="col-12 col-md-4">
-                <label class="custom-label">Status</label>
-                <div class="label-value">New | Published | Completed | Cancelled </div>
+                <label class="custom-label">Contact Details</label>
+                <div class="label-value">{{ meeting.contactInfo }}</div>
+            </div>
+            <div class="col-12 col-md-4">
+                <label class="custom-label">Group</label>
+                <div class="label-value">{{ meeting.group?.name }} </div>
+            </div>
+            <div class="col-12">
+                <label class="custom-label">Description</label>
+                <div class="label-value">{{ meeting.agenda }} </div>
             </div>
         </div>
     </div>

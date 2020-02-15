@@ -11,7 +11,7 @@ export class MeetingDetailsComponent implements OnInit {
   videoList = [];
   commentsList = [];
   meetingId = 0;
-  meetingDetails = {};
+  meeting = {};
   constructor(private appHttp: AppHttpClient, private activeRouter: ActivatedRoute) { }
 
   ngOnInit() {
@@ -41,8 +41,10 @@ export class MeetingDetailsComponent implements OnInit {
 
   getMeetingDetails() {
     const payload: any = { id: this.meetingId };
-    this.appHttp.post('meeting/json/', payload).subscribe(res => {
-
+    this.appHttp.get('meeting/list?meetingId='+this.meetingId).subscribe(res => {
+      if(res.data) {
+        this.meeting = res.data;
+      }
     });
   }
 
