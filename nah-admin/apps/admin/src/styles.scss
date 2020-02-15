@@ -844,8 +844,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   top: 60px;
   z-index: 1;
   background-color: #fff;
+  display: flex;
+  justify-content: flex-end;
   @media(max-width:991px) {
     margin: 0;
+  }
+  @media(max-width:767px) {
+    justify-content: flex-start;
   }
 }
 input::placeholder,

@@ -1,13 +1,14 @@
 @import '../../../styles';
 header{
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 11;
+    z-index: 99;
     background-color: #ffffff;
     height: 60px;
     display: flex;
     padding-left: 70px;
     transition: all 0.3s;
+    width: 100%;
     .header-widget{
         display: flex;
         align-items: center;
@@ -238,6 +239,7 @@ header{
 .main{
     min-height: calc(100vh - 141px);
     transition: all .3s;
+    padding-top: 60px;
 }
 footer{
     background-color: #212529;
