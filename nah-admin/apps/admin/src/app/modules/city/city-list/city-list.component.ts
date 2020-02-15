@@ -17,7 +17,7 @@ export class CityListComponent implements OnInit {
   modalTitle: string;
   form = new FormGroup({});
   options: FormlyFormOptions = {};
-  amoutType: string;
+  search: string;
   model: any = {};
   userCreditDebitInfo: any = {};
   sessionInfo: any = {};
@@ -103,5 +103,13 @@ export class CityListComponent implements OnInit {
         }
       });
     }
+  }
+  searchList() {
+    console.log('search -->', this.search);
+    this.appHttp.get('city/list?search='+this.search).subscribe(res => {
+      if(res.data) {
+        this.cityList = res.data;
+      }
+    });
   }
 }
