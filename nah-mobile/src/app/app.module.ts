@@ -32,7 +32,11 @@ import { IonicSelectableModule } from 'ionic-selectable';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot(
+      {
+        backButtonText: ''
+      }
+    ),
     IonicSelectableModule,
     IonicStorageModule.forRoot(
       {
