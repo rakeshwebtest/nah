@@ -41,22 +41,27 @@
         <mat-tab-group>
             <mat-tab label="Images">
                 <ul class="images-list">
-                    <li *ngFor="let item of imgList;"><img [src]="item.url" alt=""></li>
+                    <li *ngFor="let item of meeting.photos;">
+                        <img [src]="item.imagePath" alt="">
+                    </li>
                 </ul>
             </mat-tab>
-            <mat-tab label="Videos"> <ul class="images-list">
-                <li *ngFor="let video of videoList;">
-                    <!-- <iframe width="200" height="180" src="https://www.youtube.com/embed/gMsOw2urOQU"></iframe> -->
+            <mat-tab label="Videos"> 
+                <ul class="images-list">
+                <!-- <li *ngFor="let video of videoList;">
+                    <iframe width="200" height="180" src="https://www.youtube.com/embed/gMsOw2urOQU"></iframe>
                     <iframe width="200" height="180" [src]="video.url | safe"></iframe>
-                </li>
-            </ul>
+                </li> -->
+                </ul>
         </mat-tab>
             <mat-tab label="Comments">
                 <ul class="comments-list">
-                    <li  *ngFor="let comment of commentsList;">
+                    <li  *ngFor="let comment of meeting.comments;">
                         <div class="comment">
-                            <img [src]="comment.url" alt="">
-                            <p>{{comment.description}}</p>
+                            <img [src]="comment.createdBy.imageUrl" alt="">
+                            <p style="font-weight: bold;">{{comment.createdBy.displayName}}</p>
+                            <p>{{comment.comment}}</p>
+                            
                         </div>
                     </li>
                 </ul>
