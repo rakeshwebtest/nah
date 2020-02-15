@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { MeetingEntity } from './meeting.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, getRepository, getConnection } from 'typeorm';
-import { CreateMeetingDto } from './dto/create-meeting.dto';
+import { CreateMeetingDto, MeetingQueryDao } from './dto/create-meeting.dto';
 import { UserEntity } from 'src/user/user.entity';
 import { GroupEntity } from 'src/group/group.entity';
 import { MeetingMembersEntity } from './meeting-members.entity';
@@ -31,7 +31,10 @@ export class MeetingService {
 
     }
 
-    async getMeetings(query: any, sessionUser): Promise<MeetingEntity | MeetingEntity[]> {
+    async getMeetings(query: MeetingQueryDao, sessionUser): Promise<MeetingEntity | { data: MeetingEntity[], total: number }> {
+
+        const take = query.take || 500
+        const skip = query.skip || 0
         const db = getRepository(MeetingEntity)
             .createQueryBuilder('m')
             .select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm", "mp",
@@ -59,7 +62,7 @@ export class MeetingService {
             if (query.groupId) {
                 db.andWhere('group.id= :id', { id: query.groupId });
             } else {
-                db.andWhere('(gf_user.id= :id OR group.createdBy= :id)', { id: query.userId });
+                db.andWhere('(gf_user.id= :id OR group.createdBy= :id)', { id: sessionUser.id });
             }
 
             if (query.type && query.type === 'upcoming') {
@@ -73,6 +76,10 @@ export class MeetingService {
             }
         }
 
+        if (query.search) {
+            db.where("m.title like :name", { name: '%' + query.search + '%' })
+        }
+
         // get one meeting details   
         if (query.meetingId) { // single meeting
             db.where('m.id = :meetingId', { meetingId: query.meetingId });
@@ -80,15 +87,16 @@ export class MeetingService {
             // data.imageUrl = SERVERBASEPATH + data.imageUrl;
             return this.bindFileBasePath(data);
         } else {
-            const data = await db.getMany(); // all meeting
-            if (data) {
-                data.map(meeting => {
+            db.take(take);
+            db.skip(skip);
+            const [result, total] = await db.getManyAndCount(); // all meeting
+            if (result) {
+                result.map(meeting => {
                     return this.bindFileBasePath(meeting);
                 });
             }
-            return data;
+            return { data: result, total: total };
         }
-        // return  this.meetingRepository.find({relations:["user","members"]});
 
     }
     bindFileBasePath(meeting) {

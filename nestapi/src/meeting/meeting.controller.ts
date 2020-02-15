@@ -3,10 +3,10 @@ import { MeetingService } from './meeting.service';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { CreateMeetingDto } from './dto/create-meeting.dto';
+import { CreateMeetingDto, MeetingQueryDao } from './dto/create-meeting.dto';
 import { ValidationPipe } from './../shared/pipes/validation.pipe';
 import { JoinMeetingDto } from './dto/join-member.dto';
-import { ApiBearerAuth, ApiTags, ApiProperty } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags, ApiProperty, ApiConsumes } from '@nestjs/swagger';
 import { CommentDto } from './dto/comment.dto';
 import { VideoDto } from './dto/video.dto';
 import * as path from 'path';
@@ -36,11 +36,16 @@ export class MeetingController {
    */
 
   @Get('list')
-  async getMeetings(@Query() query, @Request() req) {
+  async getMeetings(@Query() query: MeetingQueryDao, @Request() req) {
     const sessionUser = req['sessionUser'];
-    const data: any = await this.meetingService.getMeetings(query, sessionUser);
-
-    return { message: false, data, query, sessionUser };
+    let data: any;
+    if (query.meetingId) {
+      data = await this.meetingService.getMeetings(query, sessionUser);
+      return { message: false, data };
+    } else {
+      data = await this.meetingService.getMeetings(query, sessionUser);
+      return { message: false, ...data };
+    }
   }
 
   /**
@@ -59,7 +64,7 @@ export class MeetingController {
    * @param meetingDto
    * @param req
    */
-
+  @ApiConsumes('multipart/form-data')
   @UsePipes(new ValidationPipe())
   @UseInterceptors(FileInterceptor('image', {
     storage: diskStorage({
@@ -72,7 +77,9 @@ export class MeetingController {
   }))
   @Post()
   async createMeeting(@UploadedFile() image, @Body() meetingDto: CreateMeetingDto, @Request() req) {
-    meetingDto.imageUrl = image.path;
+    console.log(image, meetingDto);
+    if (image && image.path)
+      meetingDto.imageUrl = image.path;
     const data = await this.meetingService.createMeeting(meetingDto);
     return { message: 'Successfully Create A Meeting', data };
   }
@@ -111,8 +118,8 @@ export class MeetingController {
    * @param id
    */
   @Delete('comment\:commentId\:replyCommentId')
-  async deleteReplyComment(@Param('commentId') id: number,@Param('replyCommentId') replyCommentId: number) {
-    const data = await this.meetingService.deleteComment(id,replyCommentId);
+  async deleteReplyComment(@Param('commentId') id: number, @Param('replyCommentId') replyCommentId: number) {
+    const data = await this.meetingService.deleteComment(id, replyCommentId);
     return { message: 'successfull delete comment', data };
   }
 
