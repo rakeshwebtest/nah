@@ -16,33 +16,33 @@
         <input type="text" pInputText placeholder="Search">
       </div> -->
       </div>
-  <p-table  [columns]="cols" [value]="meetingList" [responsive]="true" selectionMode="single"  (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowSelect($event)">
+  <p-table  [columns]="cols" [value]="meetingList" [responsive]="true" selectionMode="single">
     <ng-template pTemplate="header" let-columns>
       <tr >
         <th *ngFor="let col of columns">
           {{ col.header }}
         </th>
-        <!-- <th class="actions-th">Actions</th> -->
+        <th class="actions-th">Actions</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-user let-columns="columns">
+    <ng-template pTemplate="body" let-meeting let-columns="columns">
       <tr [pSelectableRow]="rowData">
         <td>          
-          {{ user.title }}
+          {{ meeting.title }}
         </td>
         <td>          
-          {{ user.meetingDate | date}}
+          {{ meeting.meetingDate | date}}
         </td>
         <td>          
-          {{ user.startTime | date : 'shortTime' }} To {{ user.endTime | date : 'shortTime' }}
+          {{ meeting.startTime | date : 'shortTime' }} To {{ meeting.endTime | date : 'shortTime' }}
         </td>
         <td>          
-          {{ user.location }}
+          {{ meeting.location }}
         </td>
         <td>          
-          {{ user.city.name }}
+          {{ meeting.city.name }}
         </td>
-        <!-- <td>
+        <td>
           <div
             class="actions-dp"
             ngbDropdown
@@ -58,31 +58,14 @@
               <li>
                 <a
                   class="dropdown-item"
-                  (click)="onUpdate(addMeeting)"
+                  (click)="onView(meeting)"
                   >View Meeting</a
                 >
               </li>
             </div>
           </div>
-        </td> -->
+        </td>
       </tr>
-      <!-- <tr>
-          <td>{{user.userId}}</td>
-          <td>{{user.userName}}</td>
-          <td>{{user.userType}}</td>
-          <td>{{user.maxProfitMatch}}</td>
-          <td>{{user.maxProfitFancy}}</td>
-          <td>{{user.agentId}}</td>
-          <td>
-              <div class="actions-dp" ngbDropdown placement="bottom-right" container="body">
-                  <a class='fa fa-ellipsis-v' ngbDropdownToggle></a>
-                  <div class="actions-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                      <li> <a class="dropdown-item" (click)="onCreditAmount(creditAmount)">Credit amount</a></li>
-                      <li> <a class="dropdown-item">Debit amount</a></li>
-                  </div>
-              </div>
-          </td>
-      </tr> -->
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
       <tr>
@@ -93,36 +76,4 @@
     </ng-template>
   </p-table>
 </div>
-<ng-template #addMeeting let-c="close" let-d="dismiss">
-    <div class="modal-header">
-      <h3>Add</h3>
-      <button
-        type="button"
-        class="btn close"
-        aria-label="Close"
-        (click)="d('Cross click')"
-      >
-        <span aria-hidden="true" class="fa fa-times"></span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="form" ngNativeValidate>
-        <formly-form
-          [form]="form"
-          [model]="model"
-          [fields]="fields"
-          [options]="options"
-        >
-          <div class="d-flex justify-content-center">
-            <button
-              type="submit"
-              class="btn btn-sm btn-primary mr-1"
-              (click)="addAmount()"
-            >
-              Add
-            </button>
-          </div>
-        </formly-form>
-      </form>
-    </div>
-  </ng-template>
+

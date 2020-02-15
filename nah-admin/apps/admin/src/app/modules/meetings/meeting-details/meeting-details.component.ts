@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AppHttpClient } from '../../../utils/app-http-client.service';
 @Component({
   selector: 'theapp-meeting-details',
   templateUrl: './meeting-details.component.html',
@@ -8,9 +10,14 @@ export class MeetingDetailsComponent implements OnInit {
   imgList = [];
   videoList = [];
   commentsList = [];
-  constructor() { }
+  meetingId = 0;
+  meetingDetails = {};
+  constructor(private appHttp: AppHttpClient, private activeRouter: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.meetingId = this.activeRouter.snapshot.params.id;
+    console.log('meetingId -->', this.meetingId);
     this.imgList = [
       { 'url': '../../../../assets/images/hate.png' },
       { 'url': '../../../../assets/images/hate.png' },
@@ -29,6 +36,14 @@ export class MeetingDetailsComponent implements OnInit {
       { 'url': '../../../../assets/images/user-2.jpg', 'description': `I think I'll speak in a British accent at my next meeting. It seems to be much more effective.This meeting is naff AF, the IT dude is so salty over the costs of moving his department.This meeting is naff AF, the IT dude is so salty over the costs of moving his department  ` },
       { 'url': '../../../../assets/images/default-user.png', 'description': `I think I'll speak in a British accent at my next meeting. ` }
     ];
+    this.getMeetingDetails();
+  }
+
+  getMeetingDetails() {
+    const payload: any = { id: this.meetingId };
+    this.appHttp.post('meeting/json/', payload).subscribe(res => {
+
+    });
   }
 
 

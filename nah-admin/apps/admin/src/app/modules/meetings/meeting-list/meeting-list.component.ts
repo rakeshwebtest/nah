@@ -14,7 +14,7 @@ export class MeetingListComponent implements OnInit {
   selectedMeetings: any;
   cols = [];
   cityList = [];
-  selectedCity:any;
+  selectedCity: any;
   meetingList = [];
   modalRef: NgbModalRef;
   modalTitle: string;
@@ -27,9 +27,9 @@ export class MeetingListComponent implements OnInit {
   users: any = [];
   userInfo: any = {};
   cities = [
-    {name: 'New York', code: 'NY'},
-    {name: 'Los Angeles', code: 'LA'},
-    {name: 'Chicago', code: 'CH'}
+    { name: 'New York', code: 'NY' },
+    { name: 'Los Angeles', code: 'LA' },
+    { name: 'Chicago', code: 'CH' }
   ];
 
   constructor(private appHttp: AppHttpClient, private modalService: NgbModal,
@@ -62,7 +62,7 @@ export class MeetingListComponent implements OnInit {
   getMeetings() {
     const payload: any = {};
     this.appHttp.get('meeting/list').subscribe(res => {
-      if(res.data) {
+      if (res.data) {
         this.meetingList = res.data;
       }
     });
@@ -74,5 +74,9 @@ export class MeetingListComponent implements OnInit {
   onRowSelect(event) {
     console.log('event', event);
     this.router.navigate(['details'], { relativeTo: this.activatedRoute.parent })
+  }
+  onView(meeting) {
+    console.log('meeting', meeting);
+    this.router.navigate(['details/' + meeting.id], { relativeTo: this.activatedRoute.parent })
   }
 }

@@ -15,7 +15,7 @@ const routes: Routes = [
     component: MeetingListComponent
   },
   {
-    path: 'details',
+    path: 'details/:id',
     component: MeetingDetailsComponent
   },
 ];
