@@ -60,7 +60,7 @@ export class UsersController {
         if (user.provider === 'login') {
             _user = await this.service.checkUser(user.email, user.password);
             if (!_user)
-                throw new HttpException({ message: 'Invalid Login details', success: false, errors: 'Invalid Login details' }, HttpStatus.OK);
+                throw new HttpException({ message: 'Invalid Login details', success: false }, HttpStatus.OK);
 
         } else {
             _user = await this.service.checkUser(user.email);

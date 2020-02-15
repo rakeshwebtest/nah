@@ -106,11 +106,11 @@ export class HttpInterceptorService implements HttpInterceptor {
             }
         } else {
             // Multiple error
-            this.toasterService.show('error', resJson.message, ' ');
-            if (resJson.data && resJson.data.errors) {
-                console.log('resJson.data.errors', resJson.data.errors);
-                Object.keys(resJson.data.errors).forEach(e => {
-                    this.toasterService.show('error', resJson.data.errors[e], e);
+            // this.toasterService.show('error', resJson.message, ' ');
+            if (resJson.errors) {
+                console.log('resJson.errors', resJson.errors);
+                Object.keys(resJson.errors).forEach(e => {
+                    this.toasterService.show('error', resJson.errors[e], e);
                 });
             } else {
                 this.toasterService.show('error', resJson.message, ' ');

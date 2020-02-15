@@ -6,9 +6,9 @@ export class LoginUserDto {
   @IsNotEmpty()
   @IsEmail()
   readonly email: string;
-  @ApiProperty()
+  @ApiProperty({ enum: ["google", "login"], default: 'google' })
   readonly provider: string;
-  @ApiProperty()
+  @ApiProperty({ description: "if provider is login, this field is required" })
   readonly password: string;
   id: number;
   updatedDate: Date;
