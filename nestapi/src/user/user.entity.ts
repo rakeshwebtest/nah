@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToOne, ManyToMany } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToOne, ManyToMany, Index } from 'typeorm';
 import { BaseEntity } from './../shared/base.entity';
 import { GroupEntity } from 'src/group/group.entity';
 import { GroupFollowEntity } from 'src/group/group-follows.entity';
@@ -11,7 +11,8 @@ export class UserEntity extends BaseEntity {
 
     @Column({ length: 25, nullable: true })
     displayName: string;
-
+    
+    @Index({ unique: true })
     @Column({ length: 250 })
     email: string;
 

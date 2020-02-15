@@ -7,8 +7,13 @@ import { Repository, getRepository } from 'typeorm';
 export class CityService {
     constructor(@InjectRepository(CityEntity) private readonly cityRepository: Repository<CityEntity>) {
     }
-    async getCities(): Promise<CityEntity[]> {
-        return this.cityRepository.find();
+    async getCities(search): Promise<CityEntity[]> {
+        const db = getRepository(CityEntity)
+        .createQueryBuilder('city');
+        if (search) {
+            db.where("city.name like :name", { name: '%' + search + '%' })
+        }
+        return db.getMany();
     }
     async getCitiesInfo(): Promise<CityEntity[]> {
         const db = getRepository(CityEntity)

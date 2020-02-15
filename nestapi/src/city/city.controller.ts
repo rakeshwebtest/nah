@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Body, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Body, Delete, Param, Query } from '@nestjs/common';
 import { CityService } from './city.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CityCreateDto, CityUpdateDto } from './city.dto'
@@ -8,8 +8,8 @@ export class CityController {
     constructor(public cityService: CityService) { }
 
     @Get('list')
-    async getCities() {
-        const data = await this.cityService.getCities();
+    async getCities(@Query('search') search:string) {
+        const data = await this.cityService.getCities(search);
         return { message: false, data };
     }
 
@@ -18,7 +18,6 @@ export class CityController {
         const data = await this.cityService.getCitiesInfo();
         return { message: false, data };
     }
-
     @Post()
     async createCity(@Body() city: CityCreateDto) {
         const data = await this.cityService.createUpdateCity(city);

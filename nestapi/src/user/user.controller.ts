@@ -24,7 +24,7 @@ export class UsersController {
     async getUser(@Request() req) {
         const data: any = await this.service.getUsers();
         const userInfo = req['sessionUser'];
-        return { message: 'ok', data, userInfo };
+        return { message: false, data, userInfo };
     }
     @ApiBearerAuth()
     @Post()
@@ -59,20 +59,19 @@ export class UsersController {
         let _user: UserEntity;
         if (user.provider === 'login') {
             _user = await this.service.checkUser(user.email, user.password);
+            if (!_user)
+                throw new HttpException({ message: 'Invalid Login details', success: false, errors: 'Invalid Login details' }, HttpStatus.OK);
+
         } else {
             _user = await this.service.checkUser(user.email);
+            if (_user) {
+                user.id = _user.id;
+                user.updatedDate = new Date();
+            }
             const data = await this.service.updateUser(user);
         }
-        if (_user) {
-            user.id = _user.id;
-            user.updatedDate = new Date();
-        } else {
-            throw new HttpException({ message: 'Invalid Login details', success: false, errors: 'Invalid Login details' }, HttpStatus.OK);
-        }
-
-
         const token = await this.service.generateJWT(_user);
-        return { message: false,success: true, data: { user: _user || user, token } };
+        return { message: false, success: true, data: { user: _user || user, token } };
     }
 
     @ApiBearerAuth()
