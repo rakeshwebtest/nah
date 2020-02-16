@@ -128,29 +128,6 @@ export class GroupService {
             const data = await this.groupFollowRepository.save(followMember);
             return { message: 'Successfully Follow Group', data };
         }
-
-        // return isFollower; // await this.groupFollowRepository.save(followMember);
-        // const isFollower = await this.isFollower(followMember);
-        // console.log('isFollower',isFollower);
-        // if (isFollower) {
-        //     const data: any = await this.unFollow(isFollower.id);
-        //     if (data) {
-        //         const group: any = await this.getGroupById(followMember.groupId);
-        //         group.followersCount = group.followersCount - 1;
-        //         this.updateGroup(group);
-        //     }
-        //     return { message: 'successfully Un Followed Group', data };
-        //     // throw new HttpException({ message: 'Already followed group', errors: 'Already followed group' }, HttpStatus.BAD_REQUEST);
-        // } else {
-        //     const data: any = await this.groupFollowRepository.save(groupFollow);
-        //     if (data) {
-        //         const group: any = await this.getGroupById(followMember.groupId);
-        //         group.followersCount = group.followersCount + 1;
-
-        //         this.updateGroup(group);
-        //     }
-        //     return { message: 'successfully Followed Group', data };
-        // }
     }
     async unFollow(id: number) {
         return this.groupFollowRepository.delete(id);

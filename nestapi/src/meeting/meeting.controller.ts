@@ -169,6 +169,16 @@ export class MeetingController {
     return { message: "Successfull Upload image", data };
 
   }
+   /**
+ * 
+ * @param report 
+ * @param req 
+ */
+@Get('report')
+async getReports(@Request() req) {
+  const data = await this.meetingService.getReports();
+  return { message: false, data };
+}
 
   /**
  * 

@@ -7,11 +7,13 @@ import { Repository, getRepository } from 'typeorm';
 export class CityService {
     constructor(@InjectRepository(CityEntity) private readonly cityRepository: Repository<CityEntity>) {
     }
-    async getCities(search): Promise<CityEntity[]> {
+    async getCities(query): Promise<CityEntity[]> {
         const db = getRepository(CityEntity)
         .createQueryBuilder('city');
-        if (search) {
-            db.where("city.name like :name", { name: '%' + search + '%' })
+        db.loadRelationCountAndMap('city.meetingsCount', 'city.meetings', 'cmCount');
+        db.loadRelationCountAndMap('city.usersCount', 'city.users', 'cuCount');
+        if (query.search) {
+            db.where("city.name like :name", { name: '%' + query.search + '%' })
         }
         return db.getMany();
     }
@@ -30,6 +32,4 @@ export class CityService {
         city.id = cityId;
         return this.cityRepository.delete(city);
     }
-
-
 }
