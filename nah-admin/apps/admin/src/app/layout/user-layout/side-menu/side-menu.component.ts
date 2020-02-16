@@ -186,7 +186,7 @@ export class SideMenuComponent implements OnInit {
         ]
       },
       {
-        'label': 'Reports',
+        'label': 'User Reports',
         'code': 'reports',
         'icon': 'fa fa-copy',
         'app': 'zc-core',

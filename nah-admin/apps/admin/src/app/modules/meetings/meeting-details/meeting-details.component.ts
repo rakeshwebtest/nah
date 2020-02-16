@@ -47,6 +47,13 @@ export class MeetingDetailsComponent implements OnInit {
       }
     });
   }
+  deleteComment(id) {
+    this.appHttp.delete('meeting/comment'+id).subscribe(res => {
+      if(res.data) {
+        this.getMeetingDetails();
+      }
+    });
+  }
 
 
 }

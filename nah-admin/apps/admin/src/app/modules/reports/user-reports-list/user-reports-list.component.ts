@@ -11,6 +11,7 @@ export class UserReportsListComponent implements OnInit {
   reportsList = [];
   cols = [];
   modalRef: NgbModalRef;
+  search: string;
   constructor(private modalService:NgbModal, private appHttp: AppHttpClient) { }
 
   ngOnInit() {
@@ -18,7 +19,14 @@ export class UserReportsListComponent implements OnInit {
   }
   getReports() {
     const payload: any = {};
-    this.appHttp.get('group/list').subscribe(res => {
+    this.appHttp.get('meeting/report').subscribe(res => {
+      if(res.data) {
+        this.reportsList = res.data;
+      }
+    });
+  }
+  searchList() {
+    this.appHttp.get('user/list?search='+this.search).subscribe(res => {
       if(res.data) {
         this.reportsList = res.data;
       }

@@ -17,18 +17,26 @@
   <p-table [columns]="cols" [value]="reportsList" [responsive]="true">
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th>Report Name</th>
+        <th>Meeting Title</th>
+        <th>Report</th>
         <th>Created By</th>
+        <th>Date</th>
         <!-- <th class="actions-th">Actions</th> -->
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user let-columns="columns">
       <tr>
         <td>
-          {{ user.name }}
+          {{ user.meeting?.title }}
+        </td>
+        <td>
+          {{ user.comment }}
         </td>
         <td>
           {{ user.createdBy.displayName }}
+        </td>
+        <td>
+          {{ user.createdDate | date }}
         </td>
         <!-- <td>
           <div
@@ -80,7 +88,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
       <tr>
-        <td class="text-center" colspan="2">
+        <td class="text-center" colspan="4">
           No records found
         </td>
       </tr>
