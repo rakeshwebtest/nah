@@ -90,6 +90,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   model: any = {};
   userCreditDebitInfo: any = {};
   sessionInfo: any = {};
+  search: string;
   users: any = [];
   cities: any = [];
   noerTypes: any = [];
@@ -249,5 +250,12 @@ export class UserListComponent implements OnInit, OnDestroy {
       this.modalRef.close();
     }
 
+  }
+  searchList() {
+    this.appHttp.get('user/list?search='+this.search).subscribe(res => {
+      if(res.data) {
+        this.userList = res.data;
+      }
+    });
   }
 }

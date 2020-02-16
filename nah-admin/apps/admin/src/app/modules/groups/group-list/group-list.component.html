@@ -8,7 +8,7 @@
         <p-dropdown [options]="noerTypes" [(ngModel)]="selectedCity" placeholder="Type Of Noer" optionLabel="name" [showClear]="true"></p-dropdown>
       </div> -->
       <div class="col-12 col-md-4 mb-1 p-0">
-        <input type="text" pInputText placeholder="Search">
+        <input type="text" pInputText placeholder="Search" [(ngModel)]="search" (keyup)="searchList()">
       </div>
         <!-- <div class="col-12 col-md-4 mb-1 p-0 d-flex justify-content-end">
           <button type="button" class="btn btn-sm btn-danger" (click)="onAddGroup(addGroup)">Add</button>
@@ -80,7 +80,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
       <tr>
-        <td class="text-center" colspan="8">
+        <td class="text-center" colspan="2">
           No records found
         </td>
       </tr>
