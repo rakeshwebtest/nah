@@ -4,8 +4,30 @@
     flex-wrap: wrap;
     li{
         margin: 5px;
+        position: relative;
         img{
             width: 150px;
+        }
+        i{
+            font-size: 18px;
+            position: absolute;
+            bottom: 10px;
+            width: 35px;
+            height: 35px;
+            background-color: #fff;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            text-align: center;
+            display: flex;
+            right: 10px;
+            align-items: center;
+            justify-content: center;
+            z-index: 9;
+            cursor: pointer;
+            &:hover{
+                background-color: #E31E27;
+                color: #fff;
+            }
         }
     }
 }
@@ -13,9 +35,11 @@
     li{
         padding: 15px;
         border-bottom: 1px solid #efefef;
+        position: relative;
         .comment{
             display: flex;
             align-items: center;
+
             img{
                 width: 50px;
                 height: 50px;
@@ -25,13 +49,36 @@
                 padding-left: 10px;
                 color: #999;
             }
+            
         }
-       &:last-child{
-        border-bottom: none;
-       }     
-       .comment-info{
-           padding-left: 60px;
-           margin: 0;
-       }
+        &:last-child{
+            border-bottom: none;
+        }     
+        .comment-info{
+            padding-left: 60px;
+            margin: 0;
+            padding-right: 40px;
+        }
+        i{
+            font-size: 18px;
+            position: absolute;
+            bottom: 10px;
+            width: 35px;
+            height: 35px;
+            background-color: #fff;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            text-align: center;
+            display: flex;
+            right: 10px;
+            align-items: center;
+            justify-content: center;
+            z-index: 9;
+            cursor: pointer;
+            &:hover{
+                background-color: #E31E27;
+                color: #fff;
+            }
+        }
     }
 }

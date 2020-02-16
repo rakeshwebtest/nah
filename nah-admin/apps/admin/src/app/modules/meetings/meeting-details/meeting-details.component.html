@@ -43,6 +43,7 @@
                 <ul class="images-list">
                     <li *ngFor="let item of meeting?.photos">
                         <img [src]="item.imagePath" alt="">
+                        <i class="fa fa-trash"></i>
                     </li>
                 </ul>
             </mat-tab>
@@ -62,6 +63,7 @@
                             <p style="font-weight: bold;">{{comment.createdBy.displayName}}</p>
                         </div>
                         <p class="comment-info">{{comment.comment}}</p>
+                        <i class="fa fa-times-circle"></i>
                     </li>
                 </ul>
             </mat-tab>

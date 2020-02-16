@@ -8,18 +8,20 @@ import { TableModule } from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
-
+import { UserReportsListComponent } from './user-reports-list/user-reports-list.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
-  declarations: [ProfitLossComponent, BetHistoryComponent],
+  declarations: [ProfitLossComponent, BetHistoryComponent, UserReportsListComponent],
   imports: [
     CommonModule,
     ReportsRoutingModule,
     TableModule,
     DropdownModule,
     RadioButtonModule,
-    FormsModule
+    FormsModule,
+    InputTextModule
     ]
 })
 export class ReportsModule { }
