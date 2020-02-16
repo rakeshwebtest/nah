@@ -22,34 +22,28 @@
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>
-<ion-row class="ion-padding-t-10 ion-align-items-start">
-  <ion-col class="ion-text-center align-center ion-activatable active" >
-    <ion-avatar class="avatar ion-align-items-center">
-      <ion-icon name="people"></ion-icon>
-    </ion-avatar>
-    <ion-label class="ion-padding-t-5">All Meetings</ion-label>
-  </ion-col>
-  <ion-col class="ion-text-center align-center ion-activatable" (click)="meetingClick('my-meeting')">
-    <ion-avatar class="avatar ion-align-items-center">
-      <ion-icon class="ion-align-items-center" name="people"></ion-icon>
-    </ion-avatar>
-    <ion-label class="ion-padding-t-5">My Meetings</ion-label>
-    <ion-ripple-effect></ion-ripple-effect>
-  </ion-col>
-  <ion-col class="ion-text-center align-center ion-activatable" (click)="meetingClick('upcoming')">
-    <ion-avatar class="avatar ion-align-items-center">
-      <ion-icon name="people"></ion-icon>
-    </ion-avatar>
-    <ion-label class="ion-padding-t-5">Future Meetings</ion-label>
-    <ion-ripple-effect></ion-ripple-effect>
-  </ion-col>
-</ion-row>
-<!-- <ion-item-divider>
-  </ion-item-divider> -->
-<ion-label class="ion-padding-t-10 ion-padding-l-20 ion-margin-t-10 d-block border-top">
-  All Meetings
-</ion-label>
+<ion-tabs>
+  <ion-tab-bar slot="top">
+    <ion-tab-button tab="type/all">
+      <ion-avatar class="avatar ion-align-items-center">
+        <ion-icon class="ion-align-items-center" name="people"></ion-icon>
+      </ion-avatar>
+      <ion-label>All Meeting</ion-label>
+      <ion-badge></ion-badge>
+    </ion-tab-button>
 
-<ion-content>
-  <app-meeting-list *ngIf="showList"></app-meeting-list>
-</ion-content>
+    <ion-tab-button tab="type/my-meeting">
+      <ion-avatar class="avatar ion-align-items-center">
+        <ion-icon class="ion-align-items-center" name="people"></ion-icon>
+      </ion-avatar>
+      <ion-label>My Meetings</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="type/upcoming">
+      <ion-avatar class="avatar ion-align-items-center">
+        <ion-icon class="ion-align-items-center" name="people"></ion-icon>
+      </ion-avatar>
+      <ion-label>Future Meetings</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
