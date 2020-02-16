@@ -7,7 +7,7 @@
       <p-dropdown [options]="noerTypes" [(ngModel)]="selectedCity" placeholder="Type Of Noer" optionLabel="name" [showClear]="true"></p-dropdown>
     </div> -->
     <div class="col-12 col-md-4 mb-1 p-0">
-      <input type="text" pInputText placeholder="Search">
+      <input type="text" pInputText placeholder="Search" [(ngModel)]="search" (keyup)="searchList()">
     </div>
   </div>
     <!-- <button type="submit" class="btn btn-sm btn-primary mr-1" *ngIf="selectedUsers.length > 0" (click)="suspend()">Suspend</button>
@@ -42,9 +42,14 @@
             <span class="pl-1">{{user.displayName}}</span>
           </div>
         </td>
-        <td *ngFor="let col of columns">
-          <span class="ui-column-title">{{ col.header }}</span>
-          {{ user[col.field] }}
+        <td>
+          {{ user.email }}
+        </td>
+        <td>
+          {{ user.typeOfNoer }}
+        </td>
+        <td>
+          {{ user.city?.name }}
         </td>
         <!-- <td>
           <div
@@ -89,7 +94,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
       <tr>
-        <td class="text-center" colspan="8">
+        <td class="text-center" colspan="4">
           No records found
         </td>
       </tr>

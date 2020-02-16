@@ -21,6 +21,7 @@ export class MeetingListComponent implements OnInit {
   form = new FormGroup({});
   options: FormlyFormOptions = {};
   amoutType: string;
+  search: string;
   model: any = {};
   userCreditDebitInfo: any = {};
   sessionInfo: any = {};
@@ -78,5 +79,12 @@ export class MeetingListComponent implements OnInit {
   onView(meeting) {
     console.log('meeting', meeting);
     this.router.navigate(['details/' + meeting.id], { relativeTo: this.activatedRoute.parent })
+  }
+  searchList() {
+    this.appHttp.get('meeting/list?search='+this.search).subscribe(res => {
+      if(res.data) {
+        this.meetingList = res.data;
+      }
+    });
   }
 }

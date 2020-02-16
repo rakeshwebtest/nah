@@ -24,6 +24,7 @@ export class GroupListComponent implements OnInit {
   sessionInfo: any = {};
   users: any = [];
   userInfo: any = {};
+  search: string;
   fields: FormlyFieldConfig[] = [
     {
       fieldGroupClassName: 'row',
@@ -76,5 +77,12 @@ export class GroupListComponent implements OnInit {
   }
   updateGroup(addGroup) {
       this.modalRef = this.modalService.open(addGroup, {});
+  }
+  searchList() {
+    this.appHttp.get('group/list?search='+this.search).subscribe(res => {
+      if(res.data) {
+        this.groupList = res.data;
+      }
+    });
   }
 }

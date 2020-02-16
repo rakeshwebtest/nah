@@ -25,8 +25,57 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router, private appHttp: AppHttpClient) { }
 
   ngOnInit() {    
-    this.getCityWiseUsersData();  
-    this.getCityWiseMeetingsData();  
+    // this.getCityWiseUsersData();  
+    // this.getCityWiseMeetingsData();
+    this.getCityData();
+  }
+  getCityData() {
+    this.cityWiseUsersOptions = {
+      title: {
+        display: true,
+        text: 'City Vs Users',
+        fontSize: 16
+      },
+      legend: {
+        position: 'bottom'
+      }
+    };
+    this.cityWiseMeetingsOptions = {
+      title: {
+        display: true,
+        text: 'City Vs Meetings',
+        fontSize: 16
+      },
+      legend: {
+        position: 'bottom'
+      }
+    };
+    this.appHttp.get('city/info').subscribe(res => {
+      if(res.data) {
+        const cities: any = [];
+        const users: any = [];
+        const meetings: any = [];        
+        res.data.forEach(city => {
+          cities.push(city.name);
+          users.push(city.usersCount);
+          meetings.push(city.meetingsCount);
+        });
+        this.cityWiseUsersData = {
+          labels: cities,
+          datasets: [
+            {
+              data: users
+            }]
+        };
+        this.cityWiseMeetingsData = {
+          labels: cities,
+          datasets: [
+            {
+              data: meetings
+            }]
+        };
+      }
+    });
   }
   getCityWiseUsersData() {
     this.cityWiseUsersOptions = {
