@@ -57,6 +57,7 @@ export class UsersController {
     async create(@Body() user: LoginUserDto) {
         // check user
         let _user: UserEntity;
+        let token: string;
         if (user.provider === 'login') {
             _user = await this.service.checkUser(user.email, user.password);
             if (!_user)
@@ -67,10 +68,14 @@ export class UsersController {
             if (_user && _user.id) {
                 user.id = _user.id;
                 user.updatedDate = new Date();
+            } else {
+                _user = <any>user;
             }
-            _user = await this.service.updateUser(user);
+            _user = await this.service.updateUser(_user);
         }
-        const token = await this.service.generateJWT(_user);
+
+        token = await this.service.generateJWT(_user);
+
         return { message: false, success: true, data: { user: _user || user, token } };
     }
 
