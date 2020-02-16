@@ -14,7 +14,9 @@ export class UserService {
     constructor(@InjectRepository(UserEntity) private readonly usersRepository: Repository<UserEntity>) { }
 
     async getUsers(): Promise<UserEntity[]> {
-        return this.usersRepository.find();
+        return this.usersRepository.find({
+            relations: ["city"]
+        });
     }
 
     async getUser(_id: number): Promise<UserEntity> {

@@ -13,10 +13,6 @@ export class GroupEntity extends BaseEntity {
     @Column({ length: 250, nullable: true })
     imageUrl: string;
 
-    // @ManyToOne(type => UserEntity, user => user.groups)
-    // createBy: UserEntity;
-    @Column({ default: 0 })
-    followersCount: number;
 
     @OneToMany(type => MeetingEntity, meeting => meeting.group, { onDelete: 'CASCADE' })
     meetings: MeetingEntity[];

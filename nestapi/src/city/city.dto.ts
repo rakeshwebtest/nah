@@ -8,7 +8,12 @@ export class CityCreateDto {
 export class CityUpdateDto {
     @ApiProperty()
     readonly id:number;
-    @IsNotEmpty({ message: "Required Group Name" })
+    @IsNotEmpty({ message: "Required City Name" })
     @ApiProperty()
     readonly name: string;
+}
+
+export class CityListQueryDto {
+    @ApiProperty({required:false})
+    readonly search: string;
 }

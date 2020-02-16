@@ -223,6 +223,11 @@ export class MeetingService {
         const data = await this.meetingRepository.update(meetingId, meeting);
         return { message: 'Meeting Published Successfully', data };
     }
+    async getReports():Promise<MeetingReportEntity[]>{
+        return this.meetingReportRepository.find({
+            relations:['meeting','createdBy','meeting.createdBy']
+        });
+    }
     async addReport(reportDto: ReportDto) {
         const report = new MeetingReportEntity();
         report.createdBy = new UserEntity();

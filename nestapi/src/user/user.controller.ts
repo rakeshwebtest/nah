@@ -64,11 +64,11 @@ export class UsersController {
 
         } else {
             _user = await this.service.checkUser(user.email);
-            if (_user) {
+            if (_user && _user.id) {
                 user.id = _user.id;
                 user.updatedDate = new Date();
             }
-            const data = await this.service.updateUser(user);
+            _user = await this.service.updateUser(user);
         }
         const token = await this.service.generateJWT(_user);
         return { message: false, success: true, data: { user: _user || user, token } };
