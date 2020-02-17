@@ -54,6 +54,7 @@
                 <ul class="images-list">
                 <li *ngFor="let video of meeting?.videos;">
                     <iframe width="200" height="180" [src]="video.videoPath | safe"></iframe>
+                    <i class="fa fa-times-circle"></i>
                 </li>
                 <li *ngIf="meeting.videos && meeting.videos.length < 1">
                     No videos found
@@ -79,3 +80,6 @@
         </mat-tab-group>
     </div>
 </div>
+
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
