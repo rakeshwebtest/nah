@@ -26,7 +26,7 @@ import { UserEntity } from './user/user.entity';
     CityModule
   ],
   controllers: [AppController],
-  providers: [AuthMiddleware,UserService],
+  providers: [AuthMiddleware, UserService],
 })
 export class AppModule {
   constructor(private readonly connection: Connection) { }
@@ -35,6 +35,8 @@ export class AppModule {
       .apply(AuthMiddleware)
       .forRoutes(
         { path: 'user/list', method: RequestMethod.GET },
+        { path: 'user/block/*', method: RequestMethod.ALL },
+        { path: 'user/unblock/*', method: RequestMethod.ALL },
         { path: 'user', method: RequestMethod.PUT },
         { path: 'group', method: RequestMethod.ALL },
         { path: 'group/*', method: RequestMethod.ALL },

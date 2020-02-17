@@ -1,6 +1,6 @@
 import { Injectable, Inject, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Like, getRepository } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { SECRET } from '../config';
 const jwt = require('jsonwebtoken');
@@ -13,10 +13,14 @@ export class UserService {
 
     constructor(@InjectRepository(UserEntity) private readonly usersRepository: Repository<UserEntity>) { }
 
-    async getUsers(): Promise<UserEntity[]> {
-        return this.usersRepository.find({
-            relations: ["city"]
-        });
+    async getUsers(query): Promise<UserEntity[]> {
+
+        const db = getRepository(UserEntity)
+            .createQueryBuilder("u");
+        if (query.search)
+            db.where("u.email like :name or u.displayName like :name", { name: '%' + query.search + '%' })
+
+        return db.getMany();
     }
 
     async getUser(_id: number): Promise<UserEntity> {
@@ -29,9 +33,9 @@ export class UserService {
         // select: ['id', 'displayName','typeOfNeor'],
 
         let _where = [];
-        if(password){
-            _where = [{ email: _email,password: password}];
-        }else{
+        if (password) {
+            _where = [{ email: _email, password: password }];
+        } else {
             _where = [{ email: _email }];
         }
         return this.usersRepository.findOne({

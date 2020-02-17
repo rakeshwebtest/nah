@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes, Request, Req, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes, Request, Req, Query, HttpStatus, HttpException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserEntity } from './user.entity';
 import {
@@ -9,7 +9,7 @@ import {
 } from '@nestjs/swagger';
 import { LoginUserDto } from './dto';
 import { ValidationPipe } from './../shared/pipes/validation.pipe';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, UserLIstQuery } from './dto/create-user.dto';
 import { GroupService } from 'src/group/group.service';
 import { CreateGroupDto } from 'src/group/dto/create-group.dto';
 import { CityEntity } from 'src/city/city.entity';
@@ -21,8 +21,8 @@ export class UsersController {
     constructor(public service: UserService, public groupService: GroupService) { }
     @ApiBearerAuth()
     @Get('list')
-    async getUser(@Request() req) {
-        const data: any = await this.service.getUsers();
+    async getUser(@Request() req, @Query() query: UserLIstQuery) {
+        const data: any = await this.service.getUsers(query);
         const userInfo = req['sessionUser'];
         return { message: false, data, userInfo };
     }
@@ -31,6 +31,38 @@ export class UsersController {
     async updateUser(@Body() user: CreateUserDto) {
         const data: any = await this.service.updateUser(user);
         return { message: false, data };
+    }
+
+    @ApiBearerAuth()
+    @Get('block/:userId')
+    async blockUser(@Request() req, @Param('userId') id: number) {
+        const sessionUser: any = req['sessionUser'];
+        console.log(req['sessionUser']);
+        if (sessionUser.role === 'admin') {
+            const userInfo: any = await this.service.getUser(id);
+            userInfo.status = 'block';
+            const data: any = await this.service.updateUser(userInfo);
+            return { message: 'Successfully Block User', success: true, data };
+        } else {
+            return { message: 'Permission denied', success: false };
+        }
+
+    }
+
+    @ApiBearerAuth()
+    @Get('unblock/:userId')
+    async unblockUser(@Request() req, @Param('userId') id: number) {
+        const sessionUser: any = req['sessionUser'];
+        console.log(req['sessionUser']);
+        if (sessionUser.role === 'admin') {
+            const userInfo: any = await this.service.getUser(id);
+            userInfo.status = 'active';
+            const data: any = await this.service.updateUser(userInfo);
+            return { message: 'Successfully Active User', success: true, data };
+        } else {
+            return { message: 'Permission denied', success: false };
+        }
+
     }
 
     @ApiBearerAuth()

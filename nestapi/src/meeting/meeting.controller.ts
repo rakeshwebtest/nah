@@ -49,16 +49,6 @@ export class MeetingController {
   }
 
   /**
- * get all meeting with meembers
- * :type upcomeing , coming ,createdId 
- */
-
-  // @Get('list/:type/:id')
-  // async getMeetingsByType(@Query() query) {
-  //   const data: any = await this.meetingService.getMeetings(query);
-  //   return { message: false, data };
-  // }
-  /**
    * create meeting or update meeting
    * @param image
    * @param meetingDto
@@ -95,8 +85,8 @@ export class MeetingController {
 
   /**
    * 
-   * @param comment 
-   * @param req 
+   * @param comment
+   * @param req
    */
   @UsePipes(new ValidationPipe())
   @Post('comment')
@@ -140,6 +130,28 @@ export class MeetingController {
     return this.meetingService.addVideo(video);
   }
 
+  /**
+   * 
+   * @param params 
+   */
+  @UsePipes(new ValidationPipe())
+  @Delete('video/:videoId')
+  async deleteVideo(@Param('videoId') videoId: number) {
+    const data = await this.meetingService.deleteVideo(videoId);
+    return { message: 'Delete comment successfull', data };
+  }
+
+  /**
+ * 
+ * @param params 
+ */
+  @UsePipes(new ValidationPipe())
+  @Delete('photo/:photoId')
+  async deletePhoto(@Param('photoId') photoId: number) {
+    const data = await this.meetingService.deletePhoto(photoId);
+    return { message: 'Delete video successfull', data };
+  }
+
   @Get('publish/:meetingId')
   async meetingPublished(@Param() params: any) {
     return this.meetingService.meetingPublished(params.meetingId);
@@ -169,16 +181,16 @@ export class MeetingController {
     return { message: "Successfull Upload image", data };
 
   }
-   /**
- * 
- * @param report 
- * @param req 
- */
-@Get('report')
-async getReports(@Request() req) {
-  const data = await this.meetingService.getReports();
-  return { message: false, data };
-}
+  /**
+* 
+* @param report 
+* @param req 
+*/
+  @Get('report')
+  async getReports(@Request() req) {
+    const data = await this.meetingService.getReports();
+    return { message: false, data };
+  }
 
   /**
  * 
