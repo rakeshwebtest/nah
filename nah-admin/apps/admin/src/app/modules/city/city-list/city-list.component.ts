@@ -50,7 +50,8 @@ export class CityListComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'name', header: 'City Name' }
+      { field: 'name', header: 'City Name' },
+      { field: 'usersCount', header: 'Total Users' }
     ];
     // this.cityList = [
     //   {

@@ -43,7 +43,7 @@
                 <ul class="images-list">
                     <li *ngFor="let item of meeting?.photos">
                         <img [src]="item.imagePath" alt="">
-                        <i class="fa fa-trash"></i>
+                        <i class="fa fa-trash" (click)="deleteImage(item.id)"></i>
                     </li>
                     <li *ngIf="meeting.photos && meeting.photos.length < 1">
                         No images found
@@ -54,7 +54,8 @@
                 <ul class="images-list">
                 <li *ngFor="let video of meeting?.videos;">
                     <iframe width="200" height="180" [src]="video.videoPath | safe"></iframe>
-                    <i class="fa fa-times-circle"></i>
+                    <!-- <i class="fa fa-times-circle"></i> -->
+                    <i class="fa fa-times-circle" (click)="deleteVideo(video.id)"></i>
                 </li>
                 <li *ngIf="meeting.videos && meeting.videos.length < 1">
                     No videos found

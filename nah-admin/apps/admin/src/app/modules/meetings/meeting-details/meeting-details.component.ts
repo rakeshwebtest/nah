@@ -51,14 +51,38 @@ export class MeetingDetailsComponent implements OnInit {
       }
     });
   }
+  deleteImage(id) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to perform this action?',
+      accept: () => {
+        this.appHttp.delete('meeting/photo/'+id).subscribe(res => {
+          //if(res.data) {
+            this.getMeetingDetails();
+          // }
+        });
+      }
+    })
+  }
+  deleteVideo(id) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to perform this action?',
+      accept: () => {
+        this.appHttp.delete('meeting/video/'+id).subscribe(res => {
+          //if(res.data) {
+            this.getMeetingDetails();
+          // }
+        });
+      }
+    })
+  }
   deleteComment(id) {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to perform this action?',
       accept: () => {
         this.appHttp.delete('meeting/comment'+id).subscribe(res => {
-          if(res.data) {
+          // if(res.data) {
             this.getMeetingDetails();
-          }
+          // }
         });
       }
     })

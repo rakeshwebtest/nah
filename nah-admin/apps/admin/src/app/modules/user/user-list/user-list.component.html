@@ -28,7 +28,7 @@
         <th *ngFor="let col of columns">
           {{ col.header }}
         </th>
-        <!-- <th class="actions-th">Actions</th> -->
+        <th class="actions-th">Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user let-columns="columns">
@@ -51,7 +51,7 @@
         <td>
           {{ user.city?.name }}
         </td>
-        <!-- <td>
+        <td>
           <div
             class="actions-dp"
             ngbDropdown
@@ -64,15 +64,15 @@
               ngbDropdownMenu
               aria-labelledby="dropdownBasic1"
             >              
-              <li *ngIf="user.active">
-                <a class="dropdown-item" (click)="suspendUsers([{userId: user.userId, updatedBy: sessionInfo.userId }])">Suspend User</a>
+              <li *ngIf="user.status === 'active'">
+                <a class="dropdown-item" (click)="suspendUser(user)">Block User</a>
               </li>
-              <li *ngIf="!user.active">
-                <a class="dropdown-item" (click)="activateUsers([{userId: user.userId, updatedBy: sessionInfo.userId }])">Activate User</a>
+              <li *ngIf="user.status === 'block'">
+                <a class="dropdown-item" (click)="activateUser(user)">Activate User</a>
               </li>            
             </div>
           </div>
-        </td> -->
+        </td>
       </tr>
       <!-- <tr>
           <td>{{user.userId}}</td>
@@ -94,7 +94,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
       <tr>
-        <td class="text-center" colspan="4">
+        <td class="text-center" colspan="5">
           No records found
         </td>
       </tr>
