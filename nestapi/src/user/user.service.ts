@@ -16,8 +16,8 @@ export class UserService {
     async getUsers(query): Promise<UserEntity[]> {
 
         const db = getRepository(UserEntity)
-            .createQueryBuilder("u");
-        db.leftJoin('u.city', 'city');
+            .createQueryBuilder("u").select(["u", "c"]);
+        db.leftJoin('u.city', 'c');
         if (query.search)
             db.where("u.email like :name or u.displayName like :name", { name: '%' + query.search + '%' })
 
@@ -47,6 +47,12 @@ export class UserService {
     }
 
     async updateUser(user: LoginUserDto | CreateUserDto) {
+        return this.usersRepository.save(user);
+    }
+    async changePassword(sessionUser, password) {
+        const user = new UserEntity();
+        user.id = sessionUser.id;
+        user.password = password;
         return this.usersRepository.save(user);
     }
 

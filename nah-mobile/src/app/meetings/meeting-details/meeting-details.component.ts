@@ -183,9 +183,10 @@ export class MeetingDetailsComponent implements OnInit {
             const comment = items[inx];
             let _url = 'meeting/comment/';
             if (reply) {
-              _url += comment.id;
-            } else {
               _url += 'reply/' + comment.id;
+            
+            } else {
+              _url += comment.id;
             }
 
             this.http.delete(_url).subscribe(res => {

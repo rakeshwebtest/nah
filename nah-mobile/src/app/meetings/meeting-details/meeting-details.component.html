@@ -151,12 +151,12 @@
                       style="cursor: pointer;"></ion-icon>
                   </ion-col>
                 </ion-row>
-                <ion-row (click)="replyComment(c)">
+                <ion-row >
                   <ion-col>
                     <ion-icon *ngIf="userInfo.id === c.createdBy.id" name="trash" (click)="deleteComment(meeting.comments,cInx,false)" class="ion-padding-r-5"
                     style="cursor: pointer;"></ion-icon>
                   </ion-col>
-                  <ion-col size="4" class="ion-no-padding ion-text-right" style="color:#f00;">
+                  <ion-col (click)="replyComment(c)" size="4" class="ion-no-padding ion-text-right" style="color:#f00;">
                     <ion-icon name="repeat"></ion-icon>
                     <label>Reply</label>
 

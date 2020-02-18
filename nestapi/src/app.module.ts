@@ -36,6 +36,7 @@ export class AppModule {
       .forRoutes(
         { path: 'user/list', method: RequestMethod.GET },
         { path: 'user/block/*', method: RequestMethod.ALL },
+        { path: 'user/changePassword', method: RequestMethod.ALL },
         { path: 'user/unblock/*', method: RequestMethod.ALL },
         { path: 'user', method: RequestMethod.PUT },
         { path: 'group', method: RequestMethod.ALL },
