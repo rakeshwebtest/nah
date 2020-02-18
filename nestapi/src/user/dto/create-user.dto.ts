@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, MinLength, Max, Min, Length, MaxLength } from 'class-validator';
 import { GroupFollowDto } from 'src/group/dto/group-follow.dto';
 import { ApiProperty } from '@nestjs/swagger';
 export class CreateUserDto {
@@ -17,4 +17,11 @@ export class CreateUserDto {
 export class UserLIstQuery {
     @ApiProperty({ required: false })
     search: string;
+}
+export class ChangePassword {
+    @ApiProperty({ required: true })
+    @IsNotEmpty()
+    @MinLength(4)
+    @MaxLength(12)
+    password: string;
 }

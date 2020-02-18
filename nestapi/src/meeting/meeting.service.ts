@@ -175,7 +175,7 @@ export class MeetingService {
         comment.createdBy.id = commentDto.userId;
         comment.comment = commentDto.comment;
         const data = await this.meetingCommentRepository.save(comment);
-        return { message: 'Add Comment Successfully', data };
+        return { message: 'Added Comment Successfully', data };
     }
     async addCommentReply(commentDto: CommentReplyDto) {
         const comment = new MeetingCommentReplyEntity();
@@ -185,7 +185,7 @@ export class MeetingService {
         comment.createdBy.id = commentDto.userId;
         comment.comment = commentDto.comment;
         const data = await this.meetingCommentReplyRepository.save(comment);
-        return { message: 'Add Comment Successfully', data };
+        return { message: 'Added Comment Successfully', data };
     }
     async addVideo(videoDto: VideoDto) {
         const video = new MeetingVideosEntity();
@@ -193,17 +193,17 @@ export class MeetingService {
         video.meeting.id = videoDto.meetingId;
         video.videoPath = videoDto.videoPath;
         const data = await this.meetingVideoRepository.save(video);
-        return { message: 'Add Video Successfully', data };
+        return { message: 'Added Video Successfully', data };
     }
     async deleteVideo(videoId: number) {
         const video = new MeetingVideosEntity();
         video.id = videoId;
-        this.meetingVideoRepository.delete(video);
+        return await this.meetingVideoRepository.delete(video);
     }
     async deletePhoto(imageId: number) {
         const photo = new MeetingPhotosEntity();
         photo.id = imageId;
-        this.meetingVideoRepository.delete(photo);
+       return await this.meetingPhotosRepository.delete(photo);
     }
     async uploadMeetingImages(images: any[], meetingId) {
         // const photos:MeetingPhotosEntity
@@ -231,7 +231,7 @@ export class MeetingService {
         const meeting = new MeetingEntity();
         meeting.isPublished = 1;
         const data = await this.meetingRepository.update(meetingId, meeting);
-        return { message: 'Meeting Published Successfully', data };
+        return { message: 'Published Successfully', data };
     }
     async getReports(): Promise<MeetingReportEntity[]> {
         return this.meetingReportRepository.find({
@@ -246,7 +246,7 @@ export class MeetingService {
         report.createdBy.id = reportDto.userId;
         report.comment = reportDto.comment;
         const data = await this.meetingReportRepository.save(report);
-        return { message: 'Report submit Successfully', data };
+        return { message: 'Submited Successfully', data };
     }
     async deleteMeeting(meetingId) {
         const meeting = new MeetingEntity();
