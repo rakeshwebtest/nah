@@ -195,6 +195,16 @@ export class MeetingService {
         const data = await this.meetingVideoRepository.save(video);
         return { message: 'Add Video Successfully', data };
     }
+    async deleteVideo(videoId: number) {
+        const video = new MeetingVideosEntity();
+        video.id = videoId;
+        this.meetingVideoRepository.delete(video);
+    }
+    async deletePhoto(imageId: number) {
+        const photo = new MeetingPhotosEntity();
+        photo.id = imageId;
+        this.meetingVideoRepository.delete(photo);
+    }
     async uploadMeetingImages(images: any[], meetingId) {
         // const photos:MeetingPhotosEntity
         const imagesList: any[] = images.map(img => {
@@ -223,9 +233,9 @@ export class MeetingService {
         const data = await this.meetingRepository.update(meetingId, meeting);
         return { message: 'Meeting Published Successfully', data };
     }
-    async getReports():Promise<MeetingReportEntity[]>{
+    async getReports(): Promise<MeetingReportEntity[]> {
         return this.meetingReportRepository.find({
-            relations:['meeting','createdBy','meeting.createdBy']
+            relations: ['meeting', 'createdBy', 'meeting.createdBy']
         });
     }
     async addReport(reportDto: ReportDto) {
@@ -243,15 +253,14 @@ export class MeetingService {
         meeting.isDeleted = 1;
         return await this.meetingRepository.update(meetingId, meeting);
     }
-    async deleteComment(commentId: number, replyCommentId?: number): Promise<any> {
-        const comment = new MeetingCommentsEntity();
-        comment.id = commentId;
+    async deleteComment(commentId?: number, replyCommentId?: number): Promise<any> {
         if (replyCommentId) {
             const replay = new MeetingCommentReplyEntity();
             replay.id = replyCommentId;
             return this.meetingCommentReplyRepository.delete(replay);
-
         } else {
+            const comment = new MeetingCommentsEntity();
+            comment.id = commentId;
             return this.meetingCommentRepository.delete(comment);
         }
     }

@@ -25,8 +25,63 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router, private appHttp: AppHttpClient) { }
 
   ngOnInit() {    
-    this.getCityWiseUsersData();  
-    this.getCityWiseMeetingsData();  
+    // this.getCityWiseUsersData();  
+    // this.getCityWiseMeetingsData();
+    this.getCityData();
+  }
+  getCityData() {
+    this.cityWiseUsersOptions = {
+      title: {
+        display: true,
+        text: 'City Vs Users',
+        fontSize: 16
+      },
+      legend: {
+        position: 'bottom'
+      }
+    };
+    this.cityWiseMeetingsOptions = {
+      title: {
+        display: true,
+        text: 'City Vs Meetings',
+        fontSize: 16
+      },
+      legend: {
+        position: 'bottom'
+      }
+    };
+    this.appHttp.get('city/info').subscribe(res => {
+      if(res.data) {
+        const cities: any = [];
+        const users: any = [];
+        const meetings: any = [];        
+        res.data.forEach(city => {
+          cities.push(city.name);
+          users.push(city.usersCount);
+          meetings.push(city.meetingsCount);
+        });
+        this.cityWiseUsersData = {
+          labels: cities,
+          datasets: [
+            {
+              data: users,
+              backgroundColor: [
+                '#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000', '#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324'
+            ]
+            }]
+        };
+        this.cityWiseMeetingsData = {
+          labels: cities,
+          datasets: [
+            {
+              data: meetings,
+              backgroundColor: [
+                '#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000', '#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324'
+            ]
+            }]
+        };
+      }
+    });
   }
   getCityWiseUsersData() {
     this.cityWiseUsersOptions = {

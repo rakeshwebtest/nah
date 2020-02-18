@@ -44,20 +44,10 @@ export class MeetingController {
       return { message: false, data };
     } else {
       data = await this.meetingService.getMeetings(query, sessionUser);
-      return { message: false, ...data };
+      return { message: false, success: true, ...data };
     }
   }
 
-  /**
- * get all meeting with meembers
- * :type upcomeing , coming ,createdId 
- */
-
-  // @Get('list/:type/:id')
-  // async getMeetingsByType(@Query() query) {
-  //   const data: any = await this.meetingService.getMeetings(query);
-  //   return { message: false, data };
-  // }
   /**
    * create meeting or update meeting
    * @param image
@@ -81,7 +71,7 @@ export class MeetingController {
     if (image && image.path)
       meetingDto.imageUrl = image.path;
     const data = await this.meetingService.createMeeting(meetingDto);
-    return { message: 'Successfully Create A Meeting', data };
+    return { message: 'Create successfull', success: true, data };
   }
 
   /**
@@ -95,8 +85,8 @@ export class MeetingController {
 
   /**
    * 
-   * @param comment 
-   * @param req 
+   * @param comment
+   * @param req
    */
   @UsePipes(new ValidationPipe())
   @Post('comment')
@@ -107,20 +97,20 @@ export class MeetingController {
    * 
    * @param id 
    */
-  @Delete('comment\:commentId')
+  @Delete('comment/:commentId')
   async deleteComment(@Param('commentId') id: number) {
     const data = await this.meetingService.deleteComment(id);
-    return { message: 'successfull delete comment', data };
+    return { message: 'Deleted successfull', success: true, data };
   }
 
   /**
    *
    * @param id
    */
-  @Delete('comment\:commentId\:replyCommentId')
-  async deleteReplyComment(@Param('commentId') id: number, @Param('replyCommentId') replyCommentId: number) {
-    const data = await this.meetingService.deleteComment(id, replyCommentId);
-    return { message: 'successfull delete comment', data };
+  @Delete('comment/reply/:replyCommentId')
+  async deleteReplyComment(@Param('replyCommentId') replyCommentId: number) {
+    const data = await this.meetingService.deleteComment(null, replyCommentId);
+    return { message: 'Deleted successfull', success: true, data };
   }
 
   @UsePipes(new ValidationPipe())
@@ -138,6 +128,28 @@ export class MeetingController {
   @Post('video')
   async addVideos(@Body() video: VideoDto, @Request() req) {
     return this.meetingService.addVideo(video);
+  }
+
+  /**
+   * 
+   * @param params 
+   */
+  @UsePipes(new ValidationPipe())
+  @Delete('video/:videoId')
+  async deleteVideo(@Param('videoId') videoId: number) {
+    const data = await this.meetingService.deleteVideo(videoId);
+    return { message: 'Deleted successfull', data };
+  }
+
+  /**
+ * 
+ * @param params
+ */
+  @UsePipes(new ValidationPipe())
+  @Delete('photo/:photoId')
+  async deletePhoto(@Param('photoId') photoId: number) {
+    const data = await this.meetingService.deletePhoto(photoId);
+    return { message: 'Deleted successfull', data };
   }
 
   @Get('publish/:meetingId')
@@ -169,16 +181,16 @@ export class MeetingController {
     return { message: "Successfull Upload image", data };
 
   }
-   /**
- * 
- * @param report 
- * @param req 
- */
-@Get('report')
-async getReports(@Request() req) {
-  const data = await this.meetingService.getReports();
-  return { message: false, data };
-}
+  /**
+* 
+* @param report 
+* @param req 
+*/
+  @Get('report')
+  async getReports(@Request() req) {
+    const data = await this.meetingService.getReports();
+    return { message: false, data };
+  }
 
   /**
  * 

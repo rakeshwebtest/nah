@@ -7,7 +7,7 @@
       <p-dropdown [options]="noerTypes" [(ngModel)]="selectedCity" placeholder="Type Of Noer" optionLabel="name" [showClear]="true"></p-dropdown>
     </div> -->
     <div class="col-12 col-md-4 mb-1 p-0">
-      <input type="text" pInputText placeholder="Search">
+      <input type="text" pInputText placeholder="Search" [(ngModel)]="search" (keyup)="searchList()">
     </div>
   </div>
     <!-- <button type="submit" class="btn btn-sm btn-primary mr-1" *ngIf="selectedUsers.length > 0" (click)="suspend()">Suspend</button>
@@ -28,7 +28,7 @@
         <th *ngFor="let col of columns">
           {{ col.header }}
         </th>
-        <!-- <th class="actions-th">Actions</th> -->
+        <th class="actions-th">Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user let-columns="columns">
@@ -42,11 +42,16 @@
             <span class="pl-1">{{user.displayName}}</span>
           </div>
         </td>
-        <td *ngFor="let col of columns">
-          <span class="ui-column-title">{{ col.header }}</span>
-          {{ user[col.field] }}
+        <td>
+          {{ user.email }}
         </td>
-        <!-- <td>
+        <td>
+          {{ user.typeOfNoer }}
+        </td>
+        <td>
+          {{ user.city?.name }}
+        </td>
+        <td>
           <div
             class="actions-dp"
             ngbDropdown
@@ -59,15 +64,15 @@
               ngbDropdownMenu
               aria-labelledby="dropdownBasic1"
             >              
-              <li *ngIf="user.active">
-                <a class="dropdown-item" (click)="suspendUsers([{userId: user.userId, updatedBy: sessionInfo.userId }])">Suspend User</a>
+              <li *ngIf="user.status === 'active'">
+                <a class="dropdown-item" (click)="suspendUser(user)">Block User</a>
               </li>
-              <li *ngIf="!user.active">
-                <a class="dropdown-item" (click)="activateUsers([{userId: user.userId, updatedBy: sessionInfo.userId }])">Activate User</a>
+              <li *ngIf="user.status === 'block'">
+                <a class="dropdown-item" (click)="activateUser(user)">Activate User</a>
               </li>            
             </div>
           </div>
-        </td> -->
+        </td>
       </tr>
       <!-- <tr>
           <td>{{user.userId}}</td>
@@ -89,7 +94,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
       <tr>
-        <td class="text-center" colspan="8">
+        <td class="text-center" colspan="5">
           No records found
         </td>
       </tr>

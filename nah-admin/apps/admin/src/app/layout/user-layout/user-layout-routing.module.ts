@@ -46,6 +46,13 @@ const routes: Routes = [
         data: {
           breadcrumbs: 'City'
         }
+      },
+      {
+        path: 'reports',
+        loadChildren: '../../modules/reports/reports.module#ReportsModule',
+        data: {
+          breadcrumbs: 'Reports'
+        }
       }
     ]
   }

@@ -16,7 +16,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   //user form
   userForm = new FormGroup({});
   userModel: any = {};
-  selectedCity:any;
+  selectedCity: any;
   userOptions: FormlyFormOptions = {
   };
   showForm = false;
@@ -37,7 +37,7 @@ export class UserListComponent implements OnInit, OnDestroy {
             placeholder: 'Enter User Name',
             required: true
           },
-        },        
+        },
         {
           className: 'col-12 col-md-6',
           key: 'email',
@@ -67,7 +67,7 @@ export class UserListComponent implements OnInit, OnDestroy {
               }
             ]
           }
-        }        
+        }
       ]
     }
 
@@ -90,6 +90,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   model: any = {};
   userCreditDebitInfo: any = {};
   sessionInfo: any = {};
+  search: string;
   users: any = [];
   cities: any = [];
   noerTypes: any = [];
@@ -122,7 +123,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-  
+
     this.cols = [
       { field: 'email', header: 'Email' },
       { field: 'typeOfNoer', header: 'Type Of Noer' },
@@ -130,42 +131,42 @@ export class UserListComponent implements OnInit, OnDestroy {
     ];
     this.userList = [
       {
-        'image':'assets/images/default-user.png', 'name': 'Mohan Babu','email': 'palaekirimohanbabu@gmail.com','typeOfNoer': 'anties', 'city': 'New York'
+        'image': 'assets/images/default-user.png', 'name': 'Mohan Babu', 'email': 'palaekirimohanbabu@gmail.com', 'typeOfNoer': 'anties', 'city': 'New York'
       },
       {
-        'image':'assets/images/user-1.jpg', 'name': 'prasad duggirala','email': 'prasadduggirala2@gmail.com','typeOfNoer': 'hater', 'city': 'Los Angeles', active: true
+        'image': 'assets/images/user-1.jpg', 'name': 'prasad duggirala', 'email': 'prasadduggirala2@gmail.com', 'typeOfNoer': 'hater', 'city': 'Los Angeles', active: true
       },
       {
-        'image':'assets/images/user-2.jpg', 'name': 'UZ 16LAB','email': 'uzveda115@gmail.com','typeOfNoer': 'anties', 'city': 'Chicago'
+        'image': 'assets/images/user-2.jpg', 'name': 'UZ 16LAB', 'email': 'uzveda115@gmail.com', 'typeOfNoer': 'anties', 'city': 'Chicago'
       }
     ];
     this.cities = [
-      {name: 'New York', code: 'NY'},
-      {name: 'Los Angeles', code: 'LA'},
-      {name: 'Chicago', code: 'CH'}
+      { name: 'New York', code: 'NY' },
+      { name: 'Los Angeles', code: 'LA' },
+      { name: 'Chicago', code: 'CH' }
     ];
     this.noerTypes = [
-      {name: 'Anties', code: 'AN'},
-      {name: 'Hater', code: 'HA'},
-      {name: 'Rejector', code: 'RJ'}
+      { name: 'Anties', code: 'AN' },
+      { name: 'Hater', code: 'HA' },
+      { name: 'Rejector', code: 'RJ' }
     ];
     this.getUsers();
 
   }
- 
+
   getUsers() {
     const payload: any = {};
     this.appHttp.get('user/list').subscribe(res => {
       console.log('users list', res);
-      if(res.data) {
+      if (res.data) {
         this.userList = res.data;
       }
     });
   }
- 
+
   updateUser(updateUserTemp, user) {
     this.userModel = user;
-    const payload: any = {};   
+    const payload: any = {};
     this.showForm = true;
     this.modalRef = this.modalService.open(updateUserTemp, { size: 'lg' });
   }
@@ -213,32 +214,16 @@ export class UserListComponent implements OnInit, OnDestroy {
     // this.activateUsers(activateUsers);
   }
 
-  suspendUsers(users?: []) {
-    // const payload: any = {};
-    // let requestData: any = {};
-    // payload.command = 'suspendUsers';
-    // requestData = users;
-    // payload.requestData = requestData;
-    // this.appHttp.post(API_CONFIG.ADD_USER, payload).subscribe(res => {
-    //   if (res.success) {
-    //     this.selectedUsers = [];
-    //     this.ngOnInit();
-    //   }
-    // });
+  suspendUser(user) {
+    this.appHttp.get('user/block/' + user.id).subscribe(res => {
+      this.ngOnInit();
+    });
   }
-  
-  activateUsers(users?: []) {
-    // const payload: any = {};
-    // let requestData: any = {};
-    // payload.command = 'activateUsers';
-    // requestData = users;
-    // payload.requestData = requestData;
-    // this.appHttp.post(API_CONFIG.ADD_USER, payload).subscribe(res => {
-    //   if (res.success) {
-    //     this.selectedUsers = [];
-    //     this.ngOnInit();
-    //   }
-    // });
+
+  activateUser(user) {
+    this.appHttp.get('user/unblock/' + user.id).subscribe(res => {
+      this.ngOnInit();
+    });
   }
 
   ngOnDestroy(): void {
@@ -249,5 +234,12 @@ export class UserListComponent implements OnInit, OnDestroy {
       this.modalRef.close();
     }
 
+  }
+  searchList() {
+    this.appHttp.get('user/list?search=' + this.search).subscribe(res => {
+      if (res.data) {
+        this.userList = res.data;
+      }
+    });
   }
 }

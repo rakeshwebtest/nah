@@ -1,5 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 import { GroupFollowDto } from 'src/group/dto/group-follow.dto';
+import { ApiProperty } from '@nestjs/swagger';
 export class CreateUserDto {
     @IsNotEmpty({ message: "Select Type of noer" })
     readonly typeOfNoer: string;
@@ -12,4 +13,8 @@ export class CreateUserDto {
     readonly followGroups: GroupFollowDto[];
     readonly newGroupName: string;
     updatedDate: Date;
+}
+export class UserLIstQuery {
+    @ApiProperty({ required: false })
+    search: string;
 }

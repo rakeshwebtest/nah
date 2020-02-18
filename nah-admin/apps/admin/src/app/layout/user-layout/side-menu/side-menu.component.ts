@@ -184,6 +184,20 @@ export class SideMenuComponent implements OnInit {
             'type': 'custom'
           }
         ]
+      },
+      {
+        'label': 'User Reports',
+        'code': 'reports',
+        'icon': 'fa fa-copy',
+        'app': 'zc-core',
+        'childs': [
+          {
+            'label': 'Reports',
+            'code': 'reports/list',
+            'icon': 'fa fa-copy',
+            'type': 'custom'
+          }
+        ]
       }
     ];
   }

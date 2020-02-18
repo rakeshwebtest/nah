@@ -13,7 +13,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { SafePipe } from './safe.pipe';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 @NgModule({
   declarations: [MeetingListComponent, MeetingDetailsComponent, SafePipe],
   imports: [
@@ -30,7 +30,8 @@ import { InputTextModule } from 'primeng/inputtext';
     MatTabsModule,
     DropdownModule,
     InputTextModule,
-    FormsModule
+    FormsModule,
+    ConfirmDialogModule
   ],
   exports: [
     SafePipe

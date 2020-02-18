@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppHttpClient } from '../../../utils/app-http-client.service';
+import { ConfirmationService } from 'primeng/api';
 @Component({
   selector: 'theapp-meeting-details',
   templateUrl: './meeting-details.component.html',
-  styleUrls: ['./meeting-details.component.scss']
+  styleUrls: ['./meeting-details.component.scss'],
+  providers: [ConfirmationService]
 })
 export class MeetingDetailsComponent implements OnInit {
   imgList = [];
@@ -12,7 +14,9 @@ export class MeetingDetailsComponent implements OnInit {
   commentsList = [];
   meetingId = 0;
   meeting: any = {};
-  constructor(private appHttp: AppHttpClient, private activeRouter: ActivatedRoute) { }
+  constructor(private appHttp: AppHttpClient, 
+    private activeRouter: ActivatedRoute,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
 
@@ -47,6 +51,49 @@ export class MeetingDetailsComponent implements OnInit {
       }
     });
   }
-
+  deleteImage(id) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to perform this action?',
+      accept: () => {
+        this.appHttp.delete('meeting/photo/'+id).subscribe(res => {
+          //if(res.data) {
+            this.getMeetingDetails();
+          // }
+        });
+      }
+    })
+  }
+  deleteVideo(id) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to perform this action?',
+      accept: () => {
+        this.appHttp.delete('meeting/video/'+id).subscribe(res => {
+          //if(res.data) {
+            this.getMeetingDetails();
+          // }
+        });
+      }
+    })
+  }
+  deleteComment(id) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to perform this action?',
+      accept: () => {
+        this.appHttp.delete('meeting/comment'+id).subscribe(res => {
+          // if(res.data) {
+            this.getMeetingDetails();
+          // }
+        });
+      }
+    })
+  }
+  // confirm(id) {
+  //   this.confirmationService.confirm({
+  //       message: 'Are you sure that you want to perform this action?',
+  //       accept: () => {
+  //           this.deleteComment(id);
+  //       }
+  //   });
+  // }
 
 }
