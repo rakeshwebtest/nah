@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private router: Router, private appHttp: AppHttpClient) { }
 
-  ngOnInit() {    
+  ngOnInit() {
     // this.getCityWiseUsersData();  
     // this.getCityWiseMeetingsData();
     this.getCityData();
@@ -51,33 +51,42 @@ export class DashboardComponent implements OnInit {
       }
     };
     this.appHttp.get('city/info').subscribe(res => {
-      if(res.data) {
-        const cities: any = [];
+      if (res.data) {
+        const userCities: any = [];
+        const meetingCities: any = [];
         const users: any = [];
-        const meetings: any = [];        
+        const meetings: any = [];
         res.data.forEach(city => {
-          cities.push(city.name);
-          users.push(city.usersCount);
-          meetings.push(city.meetingsCount);
+          if (city.usersCount > 0) {
+            userCities.push(city.name);
+            users.push(city.usersCount);
+            meetings.push(city.meetingsCount);
+          }
+
+          if (city.meetingsCount > 0) {
+            meetingCities.push(city.name);
+            meetings.push(city.meetingsCount);
+          }
+
         });
         this.cityWiseUsersData = {
-          labels: cities,
+          labels: userCities,
           datasets: [
             {
               data: users,
               backgroundColor: [
                 '#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000', '#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324'
-            ]
+              ]
             }]
         };
         this.cityWiseMeetingsData = {
-          labels: cities,
+          labels: meetingCities,
           datasets: [
             {
               data: meetings,
               backgroundColor: [
                 '#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000', '#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324'
-            ]
+              ]
             }]
         };
       }

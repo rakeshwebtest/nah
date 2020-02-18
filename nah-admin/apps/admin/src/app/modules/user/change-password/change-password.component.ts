@@ -68,19 +68,11 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   submit(data: any) {
-    const payload: any = {};
-    let requestData: any = {};
-    payload.command = 'updatePassword';
-    requestData.password = data.password.password;
-    requestData.userId = this.sessionInfo.userId;
-    requestData.updatedBy = this.sessionInfo.updatedBy;
-    payload.requestData = requestData;
-    console.log('user payload', payload);
+    const payload: any = {};   
+    payload.password = data.password.password;  
     if (this.form.valid) {
-      this.appHttp.post(API_CONFIG.ADD_USER, payload).subscribe(res => {
-        if (res.success) {
-          this.router.navigate(['/admin/dashboard']);
-        }
+      this.appHttp.put('user/changePassword', payload).subscribe(res => {
+       
       });
     }
 

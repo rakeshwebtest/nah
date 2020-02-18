@@ -79,7 +79,7 @@ export class MeetingDetailsComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to perform this action?',
       accept: () => {
-        this.appHttp.delete('meeting/comment'+id).subscribe(res => {
+        this.appHttp.delete('meeting/comment/'+id).subscribe(res => {
           // if(res.data) {
             this.getMeetingDetails();
           // }

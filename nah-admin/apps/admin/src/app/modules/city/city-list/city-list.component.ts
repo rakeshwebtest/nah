@@ -75,6 +75,11 @@ export class CityListComponent implements OnInit {
       }
     });
   }
+  onDelete(city) {
+    this.appHttp.delete('city/'+city.id).subscribe(res => {
+      this.getCities();
+    });
+  }
   onAdd(addCity) {
     this.model = {};
     this.modalRef = this.modalService.open(addCity, {});
