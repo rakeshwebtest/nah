@@ -253,15 +253,14 @@ export class MeetingService {
         meeting.isDeleted = 1;
         return await this.meetingRepository.update(meetingId, meeting);
     }
-    async deleteComment(commentId: number, replyCommentId?: number): Promise<any> {
-        const comment = new MeetingCommentsEntity();
-        comment.id = commentId;
+    async deleteComment(commentId?: number, replyCommentId?: number): Promise<any> {
         if (replyCommentId) {
             const replay = new MeetingCommentReplyEntity();
             replay.id = replyCommentId;
             return this.meetingCommentReplyRepository.delete(replay);
-
         } else {
+            const comment = new MeetingCommentsEntity();
+            comment.id = commentId;
             return this.meetingCommentRepository.delete(comment);
         }
     }

@@ -24,7 +24,7 @@ export class MeetingDetailsComponent implements OnInit {
   imageModel: any = {};
   activeTab: string = 'images';
   replyMsg: any = {};
-  userInfo:any = {};
+  userInfo: any = {};
   fields: FormlyFieldConfig[] = [
     {
       key: 'images',
@@ -41,7 +41,7 @@ export class MeetingDetailsComponent implements OnInit {
 
   ];
   constructor(private authService: AuthenticationService,
-    private alertCtrl:AlertController,
+    private alertCtrl: AlertController,
     private popoverController: PopoverController,
     private router: ActivatedRoute, private http: AppHttpClient) { }
 
@@ -112,7 +112,7 @@ export class MeetingDetailsComponent implements OnInit {
     }
 
     // this.meeting.comments.push();
-    
+
   }
   uploadImages() {
     const formData = new FormData();
@@ -166,7 +166,7 @@ export class MeetingDetailsComponent implements OnInit {
   clearReply() {
     this.replyMsg = {};
   }
-  async deleteComment(items:any[],inx,reply) {
+  async deleteComment(items: any[], inx, reply) {
     let alert = await this.alertCtrl.create({
       message: 'Do you want to delete this Comment?',
       buttons: [
@@ -180,7 +180,19 @@ export class MeetingDetailsComponent implements OnInit {
         {
           text: 'Okay',
           handler: () => {
-            items.splice(inx,1);
+            const comment = items[inx];
+            let _url = 'meeting/comment/';
+            if (reply) {
+              _url += comment.id;
+            } else {
+              _url += 'reply/' + comment.id;
+            }
+
+            this.http.delete(_url).subscribe(res => {
+
+            });
+            items.splice(inx, 1);
+
           }
         }
       ]
