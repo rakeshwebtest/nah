@@ -42,7 +42,7 @@ export class UsersController {
             const userInfo: any = await this.service.getUser(id);
             userInfo.status = 'block';
             const data: any = await this.service.updateUser(userInfo);
-            return { message: 'Successfully Block User', success: true, data };
+            return { message: 'Successfully Blocked User', success: true, data };
         } else {
             return { message: 'Permission denied', success: false };
         }
@@ -58,7 +58,7 @@ export class UsersController {
             const userInfo: any = await this.service.getUser(id);
             userInfo.status = 'active';
             const data: any = await this.service.updateUser(userInfo);
-            return { message: 'Successfully Active User', success: true, data };
+            return { message: 'Actived User Successfully', success: true, data };
         } else {
             return { message: 'Permission denied', success: false };
         }
@@ -139,7 +139,7 @@ export class UsersController {
         _userEntity.email = user.email;
         _userEntity.id = user.id;
         const data = await this.service.updateUser(_userEntity);
-        return { message: 'Update Succussfully', data };
+        return { message: 'Updated Succussfully', data };
     }
 
     @Delete(':id')

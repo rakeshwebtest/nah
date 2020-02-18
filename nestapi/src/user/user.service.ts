@@ -17,6 +17,7 @@ export class UserService {
 
         const db = getRepository(UserEntity)
             .createQueryBuilder("u");
+        db.leftJoin('u.city', 'city');
         if (query.search)
             db.where("u.email like :name or u.displayName like :name", { name: '%' + query.search + '%' })
 

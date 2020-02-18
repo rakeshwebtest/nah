@@ -71,7 +71,7 @@ export class MeetingController {
     if (image && image.path)
       meetingDto.imageUrl = image.path;
     const data = await this.meetingService.createMeeting(meetingDto);
-    return { message: 'Successfully Create A Meeting', data };
+    return { message: 'Create successfull', data };
   }
 
   /**
@@ -97,20 +97,20 @@ export class MeetingController {
    * 
    * @param id 
    */
-  @Delete('comment\:commentId')
+  @Delete('comment/:commentId')
   async deleteComment(@Param('commentId') id: number) {
     const data = await this.meetingService.deleteComment(id);
-    return { message: 'successfull delete comment', data };
+    return { message: 'Deleted successfull', data };
   }
 
   /**
    *
    * @param id
    */
-  @Delete('comment\:commentId\:replyCommentId')
+  @Delete('comment/:commentId/:replyCommentId')
   async deleteReplyComment(@Param('commentId') id: number, @Param('replyCommentId') replyCommentId: number) {
     const data = await this.meetingService.deleteComment(id, replyCommentId);
-    return { message: 'successfull delete comment', data };
+    return { message: 'Deleted successfull', data };
   }
 
   @UsePipes(new ValidationPipe())
@@ -138,18 +138,18 @@ export class MeetingController {
   @Delete('video/:videoId')
   async deleteVideo(@Param('videoId') videoId: number) {
     const data = await this.meetingService.deleteVideo(videoId);
-    return { message: 'Delete comment successfull', data };
+    return { message: 'Deleted successfull', data };
   }
 
   /**
  * 
- * @param params 
+ * @param params
  */
   @UsePipes(new ValidationPipe())
   @Delete('photo/:photoId')
   async deletePhoto(@Param('photoId') photoId: number) {
     const data = await this.meetingService.deletePhoto(photoId);
-    return { message: 'Delete video successfull', data };
+    return { message: 'Deleted successfull', data };
   }
 
   @Get('publish/:meetingId')
