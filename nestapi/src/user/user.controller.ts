@@ -9,7 +9,7 @@ import {
 } from '@nestjs/swagger';
 import { LoginUserDto } from './dto';
 import { ValidationPipe } from './../shared/pipes/validation.pipe';
-import { CreateUserDto, UserLIstQuery } from './dto/create-user.dto';
+import { CreateUserDto, UserLIstQuery, ChangePassword } from './dto/create-user.dto';
 import { GroupService } from 'src/group/group.service';
 import { CreateGroupDto } from 'src/group/dto/create-group.dto';
 import { CityEntity } from 'src/city/city.entity';
@@ -32,6 +32,14 @@ export class UsersController {
         const data: any = await this.service.updateUser(user);
         return { message: false, data };
     }
+    @ApiBearerAuth()
+    @UsePipes(new ValidationPipe())
+    @Put('changePassword')
+    async updatePasswordUser(@Body() user: ChangePassword, @Request() req) {
+        const sessionUser: any = req['sessionUser'];
+        const data: any = await this.service.changePassword(sessionUser, user.password);
+        return { message: 'Updated Successfully', success: true, data };
+    }
 
     @ApiBearerAuth()
     @Get('block/:userId')
@@ -53,7 +61,6 @@ export class UsersController {
     @Get('unblock/:userId')
     async unblockUser(@Request() req, @Param('userId') id: number) {
         const sessionUser: any = req['sessionUser'];
-        console.log(req['sessionUser']);
         if (sessionUser.role === 'admin') {
             const userInfo: any = await this.service.getUser(id);
             userInfo.status = 'active';

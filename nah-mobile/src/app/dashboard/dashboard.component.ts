@@ -14,8 +14,9 @@ import { AppHttpClient } from '../utils';
 export class DashboardComponent implements OnInit {
   googlePic: string;
   showList = false;
+  activeTab = 'type/all';
   constructor(private authService: AuthenticationService,
-    private router: Router) { }
+  private router: Router) { }
   // @HostListener('document:ionBackButton', ['$event'])
   // private async overrideHardwareBackAction($event: any) {
   //   console.log('back pressed');

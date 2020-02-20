@@ -11,7 +11,7 @@ export class UserEntity extends BaseEntity {
 
     @Column({ length: 25, nullable: true })
     displayName: string;
-    
+
     @Index({ unique: true })
     @Column({ length: 250 })
     email: string;
@@ -19,20 +19,20 @@ export class UserEntity extends BaseEntity {
     @Column({ length: 250, default: "/assets/images/avatar.png" })
     imageUrl: string;
 
-    @Column({ length: 25, default:'google' })
+    @Column({ length: 25, default: 'google' })
     provider: string;
 
-    @Column({ length: 25, nullable: true })
+    @Column({ length: 25, nullable: true, select: false })
     password: string;
 
-    @Column({ length: 25, default:'user' })
+    @Column({ length: 25, default: 'user' })
     role: string;
 
-    @Column({ length: 25, default:'active' })
+    @Column({ length: 25, default: 'active' })
     status: string;
 
-    // @Column({ type: 'text', nullable: true })
-    // idToken: string;
+    @Column({ type: 'text', nullable: true, select: false })
+    idToken: string;
 
     @Column({ length: 25, nullable: true })
     typeOfNoer: string;
@@ -49,10 +49,10 @@ export class UserEntity extends BaseEntity {
     @OneToMany(type => GroupFollowEntity, gf => gf.user)
     following: GroupFollowEntity[];
 
-    @OneToMany(type => MeetingEntity, meeting => meeting.createdBy) 
+    @OneToMany(type => MeetingEntity, meeting => meeting.createdBy)
     meetings: MeetingEntity[];
 
-    @OneToMany(type => GroupEntity, group => group.createdBy) 
+    @OneToMany(type => GroupEntity, group => group.createdBy)
     groups: GroupEntity[];
 
     @OneToMany(type => MeetingCommentsEntity, mc => mc.createdBy)

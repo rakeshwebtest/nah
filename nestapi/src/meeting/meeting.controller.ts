@@ -71,7 +71,7 @@ export class MeetingController {
     if (image && image.path)
       meetingDto.imageUrl = image.path;
     const data = await this.meetingService.createMeeting(meetingDto);
-    return { message: 'Create successfull', success: true, data };
+    return { message: 'Created successfully', success: true, data };
   }
 
   /**
@@ -138,7 +138,7 @@ export class MeetingController {
   @Delete('video/:videoId')
   async deleteVideo(@Param('videoId') videoId: number) {
     const data = await this.meetingService.deleteVideo(videoId);
-    return { message: 'Deleted successfull', data };
+    return { message: 'Deleted successfully', data };
   }
 
   /**
@@ -149,7 +149,7 @@ export class MeetingController {
   @Delete('photo/:photoId')
   async deletePhoto(@Param('photoId') photoId: number) {
     const data = await this.meetingService.deletePhoto(photoId);
-    return { message: 'Deleted successfull', data };
+    return { message: 'Deleted successfully', data };
   }
 
   @Get('publish/:meetingId')
@@ -178,7 +178,7 @@ export class MeetingController {
 
     const data = await this.meetingService.uploadMeetingImages(images, params.meetingId);
 
-    return { message: "Successfull Upload image", data };
+    return { message: "Uploaded Successfully", data };
 
   }
   /**
@@ -205,6 +205,6 @@ export class MeetingController {
   @Delete(':meetingId')
   async deleteGruop(@Param() params: any) {
     const data = await this.meetingService.deleteMeeting(params.meetingId);
-    return { message: 'Meeting Delete Successfullly', data };
+    return { message: 'Deleted Successfully', data };
   }
 }

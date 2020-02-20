@@ -65,7 +65,9 @@ export class HttpInterceptorService implements HttpInterceptor {
                 }
                 return event;
             }, error => {
-                console.error('NICE ERROR', error);
+                if(error.status === 401){
+                    this.authenticationService.logout();
+                }
             }));
 
 
@@ -104,9 +106,9 @@ export class HttpInterceptorService implements HttpInterceptor {
             if (resJson.message) {
                 this.toater.presentToast(resJson.message);
             }
-            if (resJson.data && resJson.data.errors) {
+            if (resJson && resJson.errors) {
                 console.log('resJson.data.errors', resJson.data.errors);
-                Object.keys(resJson.data.errors).forEach(e => {
+                Object.keys(resJson.errors).forEach(e => {
                 });
             } else {
 

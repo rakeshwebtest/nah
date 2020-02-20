@@ -15,6 +15,7 @@ export class CityService {
         if (query.search) {
             db.where("city.name like :name", { name: '%' + query.search + '%' })
         }
+        db.orderBy('id','DESC');
         return db.getMany();
     }
     async getCitiesInfo(): Promise<CityEntity[]> {

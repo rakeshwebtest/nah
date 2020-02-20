@@ -6,10 +6,7 @@ import { MeetingDetailsComponent } from './meeting-details/meeting-details.compo
 import { MeetingCreateComponent } from './meeting-create/meeting-create.component';
 
 const routes: Routes = [
-  {
-    path: 'type/:type',
-    component: MeetingsPage
-  },
+
   {
     path: 'details/:id',
     component: MeetingDetailsComponent

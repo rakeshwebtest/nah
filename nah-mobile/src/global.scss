@@ -242,6 +242,22 @@ ion-tab-bar{
     font-size: 16px;
     height: 40px;
 }
+.custom-tabs ion-tab-bar{
+    height: 75px;
+    padding-bottom: 5px;
+}
+.custom-tabs ion-label{
+    font-size: 14px;
+    padding-top: 5px;
+    margin: 0;
+}
+.custom-tabs .avatar {
+    margin-top: 5px;
+}
+.custom-tabs ion-tab-button a {
+    padding: 0;
+}
+
 ion-tab-button{
     padding: 5px;
     border: 1px solid #ccc !important;
