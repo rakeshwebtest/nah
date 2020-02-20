@@ -257,6 +257,15 @@ ion-tab-bar{
 .custom-tabs ion-tab-button a {
     padding: 0;
 }
+.custom-tabs ion-tab-button {
+    &.active,&:hover{
+        background-color: transparent;
+        color: #000000;
+        ion-label{
+            color: #000;
+        }
+    }
+}
 
 ion-tab-button{
     padding: 5px;
