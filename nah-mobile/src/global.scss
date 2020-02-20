@@ -258,6 +258,7 @@ ion-tab-bar{
     padding: 0;
 }
 .custom-tabs ion-tab-button {
+    padding: 0;
     &.active,&:hover{
         background-color: transparent;
         color: #000000;
