@@ -58,13 +58,12 @@ export class DashboardComponent implements OnInit {
         const meetings: any = [];
         res.data.forEach(city => {
           if (city.usersCount > 0) {
-            userCities.push(city.name);
+            userCities.push(city.name + ' (' + city.usersCount + ')');
             users.push(city.usersCount);
-            meetings.push(city.meetingsCount);
           }
 
           if (city.meetingsCount > 0) {
-            meetingCities.push(city.name);
+            meetingCities.push(city.name + ' (' + city.meetingsCount + ')');
             meetings.push(city.meetingsCount);
           }
 
