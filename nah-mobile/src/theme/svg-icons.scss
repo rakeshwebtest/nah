@@ -24,6 +24,15 @@ ion-icon {
   &[class*="custom-logo"] {
     mask-image: url(assets/images/logo.png);
   }
+  &[class*="custom-all-meetings"] {
+    mask-image: url(assets/svg/ic_all_meetings.svg);
+  }
+  &[class*="custom-created-by-me"] {
+    mask-image: url(assets/svg/ic_created_by_me.svg);
+  }
+  &[class*="custom-upcoming"] {
+    mask-image: url(assets/svg/ic_upcoming.svg);
+  }
 }
 // ion-back-button {
 //   &[class*="back"] {
