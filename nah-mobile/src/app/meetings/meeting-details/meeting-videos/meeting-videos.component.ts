@@ -14,6 +14,7 @@ export class MeetingVideosComponent implements OnInit {
   videoPaths = [];
   modelVideoPath: any;
   trustedVideoUrl: SafeResourceUrl;
+  showForm = false;
   constructor(private http: AppHttpClient, private domSanitizer: DomSanitizer) { }
 
   ngOnInit() {
@@ -34,5 +35,7 @@ export class MeetingVideosComponent implements OnInit {
     video.selfPath = this.domSanitizer.bypassSecurityTrustResourceUrl(video.videoPath);
     return video;
   }
-
+  addVideoBtn() {
+    this.showForm = !this.showForm;
+  }
 }
