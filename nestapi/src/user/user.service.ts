@@ -40,7 +40,7 @@ export class UserService {
             _where = [{ email: _email }];
         }
         return this.usersRepository.findOne({
-            select: ['id', 'email', 'displayName', 'typeOfNoer', 'imageUrl', 'city'],
+            select: ['id', 'email', 'displayName', 'typeOfNoer', 'imageUrl', 'city','status'],
             where: _where,
             relations: ["city"]
         });
@@ -61,14 +61,14 @@ export class UserService {
     }
     async findById(id: number): Promise<any> {
         const user = await this.usersRepository.findOne({
-            select: ['id', 'email', 'displayName', 'role', 'typeOfNoer', 'imageUrl'],
+            select: ['id', 'email', 'displayName', 'role', 'typeOfNoer', 'imageUrl','status'],
             where: [{ id: id }]
         });
 
-        if (!user) {
-            const errors = { User: ' not found' };
-            throw new HttpException({ errors }, 401);
-        }
+        // if (!user) {
+        //     const errors = { User: ' not found' };
+        //     throw new HttpException({ errors }, 401);
+        // }
 
         return user;
     }

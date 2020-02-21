@@ -99,12 +99,20 @@ export class UsersController {
         let token: string;
         if (user.provider === 'login') {
             _user = await this.service.checkUser(user.email, user.password);
-            if (!_user)
+            if (!_user) {
                 throw new HttpException({ message: 'Invalid Login details', success: false }, HttpStatus.OK);
+            } else {
+                if (_user.status === 'block')
+                    throw new HttpException({ message: 'Blocked User', success: false }, HttpStatus.FORBIDDEN);
 
+            }
         } else {
             _user = await this.service.checkUser(user.email);
             if (_user && _user.id) {
+                console.log('_user',_user);
+                if (_user.status === 'block')
+                    throw new HttpException({ message: 'Blocked User', success: false }, HttpStatus.FORBIDDEN);
+
                 user.id = _user.id;
                 user.updatedDate = new Date();
             } else {

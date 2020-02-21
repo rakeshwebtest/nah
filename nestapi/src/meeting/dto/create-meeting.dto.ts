@@ -1,6 +1,7 @@
 import { IsNotEmpty, IsNumber } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { timer } from 'rxjs';
+import { strict } from 'assert';
 export class CreateMeetingDto {
 
     @ApiProperty({ type: 'string', format: 'binary' })
@@ -34,7 +35,7 @@ export class CreateMeetingDto {
     @ApiProperty()
     endTime: string;
     imageUrl: string;
-     @ApiProperty()
+    @ApiProperty()
     isPublished: string;
     // @IsNotEmpty({ message: "Required Created By" })
     // readonly createBy: number;
@@ -58,4 +59,9 @@ export class MeetingQueryDao {
     @ApiProperty({ required: false, default: 0 })
     skip: number;
 
+}
+
+export class GetReportDto {
+    @ApiProperty({ required: false })
+    search: string;
 }

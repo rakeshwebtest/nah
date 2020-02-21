@@ -203,7 +203,7 @@ export class MeetingService {
     async deletePhoto(imageId: number) {
         const photo = new MeetingPhotosEntity();
         photo.id = imageId;
-       return await this.meetingPhotosRepository.delete(photo);
+        return await this.meetingPhotosRepository.delete(photo);
     }
     async uploadMeetingImages(images: any[], meetingId) {
         // const photos:MeetingPhotosEntity
@@ -233,10 +233,19 @@ export class MeetingService {
         const data = await this.meetingRepository.update(meetingId, meeting);
         return { message: 'Published Successfully', data };
     }
-    async getReports(): Promise<MeetingReportEntity[]> {
-        return this.meetingReportRepository.find({
-            relations: ['meeting', 'createdBy', 'meeting.createdBy']
-        });
+    async getReports(query): Promise<MeetingReportEntity[]> {
+        // return this.meetingReportRepository.find({
+        //     relations: ['meeting', 'createdBy', 'meeting.createdBy']
+        // });
+        const db = getRepository(MeetingReportEntity)
+            .createQueryBuilder("mr").select(["mr", "m", "c", "mc"]);
+        db.leftJoin('mr.meeting', 'm');
+        db.leftJoin('mr.createdBy', 'c');
+        db.leftJoin('m.createdBy', 'mc');
+        if (query.search)
+            db.where("mr.comment like :name or c.displayName like :name or m.title like :name", { name: '%' + query.search + '%' })
+        db.orderBy({ "mr.createdDate": "DESC" })
+        return db.getMany();
     }
     async addReport(reportDto: ReportDto) {
         const report = new MeetingReportEntity();

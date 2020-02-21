@@ -5,6 +5,7 @@ import {
     HttpEvent,
     HttpInterceptor,
     HttpResponse,
+    HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
@@ -56,7 +57,6 @@ export class HttpInterceptorService implements HttpInterceptor {
         }
         // Working Code
         // request.headers.append('Content-Type', 'application/json');
-        console.log('request', request);
 
         return next.handle(request).pipe(
             tap(event => {
@@ -65,9 +65,14 @@ export class HttpInterceptorService implements HttpInterceptor {
                 }
                 return event;
             }, error => {
-                if(error.status === 401){
+                if (error.status === 401) {
                     this.authenticationService.logout();
+                } else {
+                    if (error.error) {
+                        this.getResponse(error.error);
+                    }
                 }
+
             }));
 
 

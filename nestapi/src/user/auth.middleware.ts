@@ -20,6 +20,9 @@ export class AuthMiddleware implements NestMiddleware {
         if (!user) {
           throw new HttpException('User not found.', HttpStatus.UNAUTHORIZED);
         }
+        if (user.status === 'block')
+          throw new HttpException({ message: 'Blocked User', success: false }, HttpStatus.FORBIDDEN);
+
         // req.userInfo = {};
         req['sessionUser'] = user;
         next();

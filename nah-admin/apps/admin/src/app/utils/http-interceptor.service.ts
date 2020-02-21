@@ -43,7 +43,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         request = request.clone({
             setHeaders: {
                 // 'Access-Control-Allow-Origin': '*',
-                
+
                 "Content-Type": "application/json"
             },
             url: request.url
@@ -52,7 +52,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 
         // if user logged in you need to pass token
         if (this.sessionService.checkSession()) {
-           
+
             const sessionUser: any = this.ls.getItem('user', true);
             console.log('this.ls.getItem', sessionUser);
             request = request.clone({
@@ -82,7 +82,8 @@ export class HttpInterceptorService implements HttpInterceptor {
                 this.sessionService.sessionExpired();
                 this.toasterService.show('error', err.error.message);
             } else {
-                this.toasterService.show('error', err.name, err.message + ' Url :' + request.url);
+                if (err.error.message)
+                    this.toasterService.show('error', err.error.message);
             }
             // return Observable.throw(err);
             return throwError(err);
