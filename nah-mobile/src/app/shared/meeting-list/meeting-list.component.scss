@@ -36,9 +36,10 @@ ion-refresher {
         }
     }
     .meeting-title{
-        widows: 100%;
+        width: 100%;
         font-size: 14px;
         font-weight: 600;
+        white-space: inherit;
     }
     .meeting-sub-title{
         font-size: 12px;

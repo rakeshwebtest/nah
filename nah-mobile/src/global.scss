@@ -250,6 +250,9 @@ ion-tab-bar{
     font-size: 14px;
     padding-top: 5px;
     margin: 0;
+    @media(max-width:360px){
+        font-size: 11px;
+    }
 }
 .custom-tabs .avatar {
     margin-top: 5px;
@@ -271,7 +274,7 @@ ion-tab-bar{
 
 ion-tab-button{
     padding: 5px;
-    border: 1px solid #ccc !important;
+    // border: 1px solid #ccc !important;
     border-radius: 5px !important;
     font-size: 16px;
     ion-label{
