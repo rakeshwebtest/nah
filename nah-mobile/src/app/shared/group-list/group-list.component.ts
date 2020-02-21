@@ -14,6 +14,7 @@ export class GroupListComponent implements OnInit {
 
   @Input() type: 'mygroups' | 'all';
   googlePic: String;
+  showLoading = false;
   userInfo: any;
   groupList = [];
   customColors = ['#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000'];
@@ -43,8 +44,10 @@ export class GroupListComponent implements OnInit {
     url += '&skip=' + this.groupList.length;
     url += '&take=' + this.take;
 
+    this.showLoading = true;
     this.http.get(url).subscribe(res => {
       const _groupList = res.data || [];
+      this.showLoading = false;
       _groupList.map(item => {
         if (item.followers.length > 0) {
           const isFollower = item.followers.find(f => f.user && f.user.id === this.userInfo.id);
