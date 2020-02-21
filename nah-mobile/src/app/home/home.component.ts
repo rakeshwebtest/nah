@@ -67,22 +67,13 @@ export class HomeComponent {
   }
   async login(user) {
     this.http.post('user/login', user).subscribe(res => {
-      const _resUser: any = res.data;
-      this.userConfigService.user = _resUser;
-      console.log('_resUser', _resUser);
-      // save user data on the native storage
-      this.authenticationService.login(_resUser);
-      // this.nativeStorage.setItem('google_user', _resUser).then(() => {
-      //   if (_resUser) {
-      //     if (_resUser.typeOfNoer) {
-      //       this.router.navigate(['/dashboard']);
-      //     } else {
-      //       this.router.navigate(['/sign-in']);
-      //     }
-      //   }
-      // }, (error) => {
-      //   console.log(error);
-      // });
+      if (res.success) {
+        const _resUser: any = res.data;
+        this.userConfigService.user = _resUser;
+        console.log('_resUser', _resUser);
+        // save user data on the native storage
+        this.authenticationService.login(_resUser);
+      }
     });
   }
 

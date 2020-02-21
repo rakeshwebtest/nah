@@ -3,7 +3,7 @@ import { MeetingService } from './meeting.service';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { CreateMeetingDto, MeetingQueryDao } from './dto/create-meeting.dto';
+import { CreateMeetingDto, MeetingQueryDao, GetReportDto } from './dto/create-meeting.dto';
 import { ValidationPipe } from './../shared/pipes/validation.pipe';
 import { JoinMeetingDto } from './dto/join-member.dto';
 import { ApiBearerAuth, ApiTags, ApiProperty, ApiConsumes } from '@nestjs/swagger';
@@ -187,9 +187,9 @@ export class MeetingController {
 * @param req 
 */
   @Get('report')
-  async getReports(@Request() req) {
-    const data = await this.meetingService.getReports();
-    return { message: false, data };
+  async getReports(@Request() req, @Query() query: GetReportDto) {
+    const data = await this.meetingService.getReports(query);
+    return { message: false, success: true, data };
   }
 
   /**
