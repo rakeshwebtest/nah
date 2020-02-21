@@ -5,7 +5,8 @@ import { AppHttpClient } from 'src/app/utils';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
+import { GroupCreateModalComponent } from 'src/app/group-create-modal/group-create-modal.component';
 
 @Component({
   selector: 'app-meeting-create',
@@ -15,7 +16,7 @@ import { LoadingController } from '@ionic/angular';
 export class MeetingCreateComponent implements OnInit {
   title = 'Create A Meeting';
   form = new FormGroup({});
-  model = {};
+  model: any = {};
   fields: FormlyFieldConfig[] = [{
     key: 'title',
     type: 'input',
@@ -34,6 +35,7 @@ export class MeetingCreateComponent implements OnInit {
     className: 'col-12',
     templateOptions: {
       required: true,
+      maxLength: 1000,
       label: 'Meeting Information',
       placeholder: 'Enter Meeting Information',
     }
@@ -45,25 +47,45 @@ export class MeetingCreateComponent implements OnInit {
     className: 'col-12',
     templateOptions: {
       required: true,
+      maxLength: 1000,
       label: 'Contact Information',
       placeholder: 'Enter Contact Information',
     }
   },
   {
-    key: 'groupId',
-    type: 'selectable',
-    wrappers: ['vertical'],
-    className: 'col-12',
-    templateOptions: {
-      label: 'Group',
-      placeholder: 'Select Group',
-      required: true,
-      itemValueField: 'value',
-      itemTextField: 'label',
-      options: []
-    }
+    fieldGroupClassName: 'row',
+    fieldGroup: [
+      {
+        key: 'groupId',
+        type: 'selectable',
+        wrappers: ['vertical'],
+        className: 'col-6',
+        templateOptions: {
+          label: 'Group',
+          placeholder: 'Select Group',
+          required: true,
+          itemValueField: 'value',
+          itemTextField: 'label',
+          options: []
+        }
+      },
+      {
+        type: 'button',
+        templateOptions: {
+          label: '',
+          text: 'Add Group',
+          class: "ion-color ion-color-light",
+          btnType: 'info',
+          type: 'button',
+          onClick: ($event) => {
+            // this.form.get('someInput').setValue('clicked!');
+            this.openGroupModel();
+          },
+          description: 'These can have labels and stuff too if you want....',
+        },
+      }
+    ]
   },
-
 
   {
     key: 'cityId',
@@ -97,8 +119,8 @@ export class MeetingCreateComponent implements OnInit {
     wrappers: ['vertical'],
     className: 'col-12',
     templateOptions: {
-      multiple:false,
-      required: true,
+      multiple: false,
+      required: false,
       label: 'Image',
       placeholder: 'Upload Image',
     }
@@ -159,6 +181,7 @@ export class MeetingCreateComponent implements OnInit {
   ];
   groupList = [];
   constructor(private http: AppHttpClient,
+    private modalController: ModalController,
     public loadingController: LoadingController,
     private authService: AuthenticationService,
     private router: Router) { }
@@ -177,7 +200,7 @@ export class MeetingCreateComponent implements OnInit {
           return group;
         })
       }
-      this.fields[3].templateOptions.options = this.groupList || [];
+      this.fields[3].fieldGroup[0].templateOptions.options = this.groupList || [];
     });
   }
   getCities() {
@@ -197,14 +220,14 @@ export class MeetingCreateComponent implements OnInit {
   }
 
 
-  async submit(model,isPublish) {
+  async submit(model, isPublish) {
     const loading = await this.loadingController.create({
       message: 'Please wait...'
     });
     this.presentLoading(loading);
-    if(isPublish){
+    if (isPublish) {
       model.isPublished = 1;
-    }else{
+    } else {
       model.isPublished = 0;
     }
     const userInfo = this.authService.getUserInfo();
@@ -229,5 +252,26 @@ export class MeetingCreateComponent implements OnInit {
   }
   async presentLoading(loading) {
     return await loading.present();
+  }
+  async openGroupModel() {
+    const modal = await this.modalController.create({
+      component: GroupCreateModalComponent,
+      cssClass: 'group-create-modal'
+    });
+    modal.onDidDismiss().then(arg => {
+      // this.getGroups();
+      console.log('arg',this.model);
+      
+      if (arg.data) {
+        const group = {
+          label:arg.data.name,
+          value:arg.data.id
+        }
+        this.groupList.push(group);
+        this.form.controls.groupId.setValue(arg.data.id);
+      }
+      // this.groupC.ngOnInit();
+    });
+    return await modal.present();
   }
 }

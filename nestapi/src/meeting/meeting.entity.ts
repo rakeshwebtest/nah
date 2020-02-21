@@ -35,7 +35,7 @@ export class MeetingEntity extends BaseEntity {
     @Column({ type: 'timestamp', name: 'endTime', default: () => 'LOCALTIMESTAMP' })
     endTime: string;
 
-    @Column({ length: 1250, nullable: true })
+    @Column({ length: 1250, default:'uploads/logo.png' })
     imageUrl: string;
 
     @ManyToOne(type => CityEntity, city => city.meetings)

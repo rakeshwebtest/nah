@@ -12,5 +12,6 @@
     "synchronize": true
   },
   "secret": "the-app",
-  "serverBasePath":"http://nah.theapp.in/api/"
+  "serverBasePath":"http://nah.theapp.in/api/",
+   "uploadPath":"./uploads"
 }

@@ -6,9 +6,9 @@
     refreshingText="Refreshing...">
   </ion-refresher-content>
 </ion-refresher>
-<ion-row class="ion-align-items-center no-meetings" *ngIf="noMeetingMsg">
+<ion-row class="ion-align-items-center no-meetings" *ngIf="showMeetingMsg">
   <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
-    No Meetings Available
+   {{noMeetingMsg}}
   </ion-col>
 </ion-row>
 <ion-list class="meeting-list">

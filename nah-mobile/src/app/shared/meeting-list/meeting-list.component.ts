@@ -16,8 +16,9 @@ import { AlertController } from '@ionic/angular';
 export class MeetingListComponent implements OnInit, OnDestroy {
   googlePic: any;
   meetingList: Meeting[] = [];
-  noMeetingMsg = false;
-  @Input() type = 'all';
+  showMeetingMsg = false;
+  @Input() noMeetingMsg = 'Hmm, seems like they are no meetings.'
+  @Input() type = 'all' ;
   @Input() groupId: any;
   constructor(private authService: AuthenticationService,
     private router: Router,
@@ -36,8 +37,6 @@ export class MeetingListComponent implements OnInit, OnDestroy {
   }
   getMeetings(): Observable<Meeting[]> {
     const params = this.activeRouter.snapshot.params;
-
-    console.log('parm', params);
     const userInfo: any = this.authService.getUserInfo();
     this.googlePic = userInfo.imageUrl;
     let queryString = '?type=' + this.type;
@@ -64,9 +63,9 @@ export class MeetingListComponent implements OnInit, OnDestroy {
         return m;
       });
       if (_meetingList.length == 0) {
-        this.noMeetingMsg = true;
+        this.showMeetingMsg = true;
       } else {
-        this.noMeetingMsg = false;
+        this.showMeetingMsg = false;
       }
       return _meetingList;
     }));

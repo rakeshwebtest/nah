@@ -23,6 +23,11 @@
           <ion-label style="white-space: nowrap;"><strong>Say No To</strong> {{item.name}}</ion-label>
         </ion-chip>
       </ion-col>
+      <ion-row class="ion-align-items-center no-meetings" *ngIf="filterGroupList.length ===0">
+        <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
+          say NO groups
+        </ion-col>
+      </ion-row>
 
     </ion-row>
   </ion-grid>
