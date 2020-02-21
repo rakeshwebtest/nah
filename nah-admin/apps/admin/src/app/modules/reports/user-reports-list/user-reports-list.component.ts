@@ -26,7 +26,7 @@ export class UserReportsListComponent implements OnInit {
     });
   }
   searchList() {
-    this.appHttp.get('user/list?search='+this.search).subscribe(res => {
+    this.appHttp.get('meeting/report?search='+this.search).subscribe(res => {
       if(res.data) {
         this.reportsList = res.data;
       }
