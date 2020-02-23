@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "8.1.2",
     "@angular/router": "8.1.2",
     "@ionic-native/core": "5.0.0",
+    "@ionic-native/google-analytics": "^5.21.6",
     "@ionic-native/google-plus": "5.17.1",
     "@ionic-native/http": "5.18.0",
     "@ionic-native/native-storage": "5.0.0",
@@ -104,7 +105,8 @@
       },
       "cordova-plugin-nativestorage": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-statusbar": {}
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-google-analytics": {}
     }
   }
 }

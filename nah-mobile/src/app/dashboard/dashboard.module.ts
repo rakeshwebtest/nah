@@ -6,16 +6,15 @@ import { DashboardComponent } from './dashboard.component';
 import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
 import { MeetingsPageModule } from '../meetings/meetings.module';
 import { MeetingsPage } from '../meetings/meetings.page';
-
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    children:[
+    children: [
       {
         path: '',
-        pathMatch:'full',
-        redirectTo:'type/all'
+        pathMatch: 'full',
+        redirectTo: 'type/all'
       },
       {
         path: 'type/:type',

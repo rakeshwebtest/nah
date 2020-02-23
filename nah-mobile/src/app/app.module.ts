@@ -19,6 +19,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { IonicSelectableModule } from 'ionic-selectable';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 // IonicStorageModule.forRoot({
 //   name: '__nah',
@@ -52,6 +53,7 @@ import { IonicSelectableModule } from 'ionic-selectable';
     GooglePlus,
     AuthGuard,
     AuthenticationService,
+    GoogleAnalytics,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {

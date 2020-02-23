@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Platform } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthenticationService } from './services/authentication.service';
-
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 @Component({
   selector: 'theapp-root',
   templateUrl: './app.component.html',
@@ -24,6 +24,7 @@ export class AppComponent {
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     private router: Router,
+    private ga: GoogleAnalytics,
     private authenticationService: AuthenticationService
   ) {
     this.initializeApp();
@@ -31,8 +32,11 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      console.log('already');
-      
+      this.ga.startTrackerWithId('UA-158946994-1')
+        .then(() => {
+          this.startTracking();
+        }).catch(e => alert('Error starting GoogleAnalytics == ' + e));
+
       // Here we will check if the user is already logged in
       // because we don't want to ask users to log in each time they open the app
       // this.nativeStorage.getItem('google_user')
@@ -70,6 +74,25 @@ export class AppComponent {
 
       this.splashScreen.hide();
       this.statusBar.styleDefault();
+    });
+  }
+  startTracking() {
+    this.router.events.subscribe(res => {
+      if (res instanceof NavigationEnd) {
+        this.ga.trackView(res.url)
+          .then(() => { })
+          .catch(e => console.log(e));
+          console.log('traking',res.url);
+          this.ga.trackEvent('url', res.url);
+        if (this.authenticationService.isAuthenticated()) {
+          console.log(this.authenticationService.getUserInfo());
+          this.ga.trackEvent('user', JSON.stringify(this.authenticationService.getUserInfo()));
+        } else {
+          // this.ga.trackEvent('url', res.url);
+        }
+
+      }
+
     });
   }
 }
