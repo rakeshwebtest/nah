@@ -36,7 +36,7 @@ export class MeetingCreateComponent implements OnInit {
     templateOptions: {
       required: true,
       maxLength: 1000,
-      label: 'Meeting Information',
+      label: 'Meeting Information (Max size 1000 characters)',
       placeholder: 'Enter Meeting Information',
     }
   },
@@ -48,8 +48,9 @@ export class MeetingCreateComponent implements OnInit {
     templateOptions: {
       required: true,
       maxLength: 1000,
-      label: 'Contact Information',
+      label: 'Contact Information (Max size 1000 characters)',
       placeholder: 'Enter Contact Information',
+      description: 'Max size 1000 characters'
     }
   },
   {
@@ -59,7 +60,7 @@ export class MeetingCreateComponent implements OnInit {
         key: 'groupId',
         type: 'selectable',
         wrappers: ['vertical'],
-        className: 'col-6',
+        className: 'col-6 pr-0',
         templateOptions: {
           label: 'Group',
           placeholder: 'Select Group',
@@ -71,10 +72,11 @@ export class MeetingCreateComponent implements OnInit {
       },
       {
         type: 'button',
+        className: 'col-6 ion-text-right ion-padding-t-10 ion-margin-t-3',
         templateOptions: {
           label: '',
           text: 'Add Group',
-          class: "ion-color ion-color-light",
+          class: 'ion-color ion-color-danger',
           btnType: 'info',
           type: 'button',
           onClick: ($event) => {
