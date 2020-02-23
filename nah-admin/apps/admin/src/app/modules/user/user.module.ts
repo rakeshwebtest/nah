@@ -14,8 +14,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputTextModule} from 'primeng/inputtext';
+import { BlockedUserListComponent } from './blocked-user-list/blocked-user-list.component';
 @NgModule({
-  declarations: [UserCreateComponent, UserAmountComponent, UserListComponent, FieldWrapperComponent, ProfileComponent, ChangePasswordComponent],
+  declarations: [UserCreateComponent, UserAmountComponent, UserListComponent, FieldWrapperComponent, ProfileComponent, ChangePasswordComponent, BlockedUserListComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

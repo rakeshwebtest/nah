@@ -134,8 +134,20 @@ ion-select {
     padding-right: 15px;
     display: flex;
 }
+.col-8{
+    flex: 0 0 67%;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+}
 .col-6{
     flex: 0 0 50%;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+}
+.col-4{
+    flex: 0 0 33%;
     padding-left: 15px;
     padding-right: 15px;
     display: flex;
@@ -304,3 +316,10 @@ ion-tab-button{
     color: #827d7d;
     font-size: 14px;
 }
+.text-right{
+    text-align: right;
+}
+.pr-0{
+    padding-right: 0 !important;
+}
+.button-clear{color: #fff;}

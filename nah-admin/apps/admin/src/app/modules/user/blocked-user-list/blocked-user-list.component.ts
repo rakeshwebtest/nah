@@ -6,13 +6,13 @@ import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { FormGroup } from '@angular/forms';
 import { HeaderInfoService } from '../../../services/header-info.service';
-
 @Component({
-  selector: 'theapp-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss']
+  selector: 'theapp-blocked-user-list',
+  templateUrl: './blocked-user-list.component.html',
+  styleUrls: ['./blocked-user-list.component.scss']
 })
-export class UserListComponent implements OnInit, OnDestroy {
+
+export class BlockedUserListComponent implements OnInit, OnDestroy {
   //user form
   userForm = new FormGroup({});
   userModel: any = {};
@@ -156,7 +156,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   getUsers() {
     const payload: any = {};
-    this.appHttp.get('user/list?status=active').subscribe(res => {
+    this.appHttp.get('user/list?status=block').subscribe(res => {
       console.log('users list', res);
       if (res.data) {
         this.userList = res.data;
@@ -236,7 +236,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   }
   searchList() {
-    this.appHttp.get('user/list?status=active&search=' + this.search).subscribe(res => {
+    this.appHttp.get('user/list?status=block&search=' + this.search).subscribe(res => {
       if (res.data) {
         this.userList = res.data;
       }

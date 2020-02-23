@@ -130,14 +130,28 @@ export class SideMenuComponent implements OnInit {
         ]
       },
       {
-        'label': 'Users',
+        'label': 'Active Users',
         'code': 'user',
         'icon': 'fa fa-users',
         'app': 'zc-core',
         'childs': [
           {
-            'label': 'Users',
-            'code': 'users/list',
+            'label': 'Active Users',
+            'code': 'users/active',
+            'icon': 'fa fa-phone',
+            'type': 'custom'
+          }
+        ]
+      },
+      {
+        'label': 'Blocked Users',
+        'code': 'user',
+        'icon': 'fa fa-users',
+        'app': 'zc-core',
+        'childs': [
+          {
+            'label': 'Blocked Users',
+            'code': 'users/blocked',
             'icon': 'fa fa-phone',
             'type': 'custom'
           }

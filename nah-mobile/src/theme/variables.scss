@@ -105,6 +105,10 @@ $font-32: 32px;
   --padding-start: var(--ion-padding, 5px);
   padding-left: var(--ion-padding, 5px);
 }
+.ion-padding-r-0{
+  --padding-end: var(--ion-padding, 0px);
+  padding-right: var(--ion-padding, 0px);
+}
 .ion-padding-r-5{
   --padding-end: var(--ion-padding, 5px);
   padding-right: var(--ion-padding, 5px);
@@ -153,4 +157,8 @@ $font-32: 32px;
 .ion-margin-t-0{
   --margin-top: var(--ion-margin, 0px);
   margin-top: var(--ion-margin, 0px);
+}
+.ion-margin-t-3{
+  --margin-top: var(--ion-margin, 3px);
+  margin-top: var(--ion-margin, 3px);
 }
