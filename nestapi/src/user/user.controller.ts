@@ -24,7 +24,7 @@ export class UsersController {
     async getUser(@Request() req, @Query() query: UserLIstQuery) {
         const data: any = await this.service.getUsers(query);
         const userInfo = req['sessionUser'];
-        return { message: false, data, userInfo };
+        return { message: false, success: true, data };
     }
     @ApiBearerAuth()
     @Post()
@@ -109,7 +109,7 @@ export class UsersController {
         } else {
             _user = await this.service.checkUser(user.email);
             if (_user && _user.id) {
-                console.log('_user',_user);
+                console.log('_user', _user);
                 if (_user.status === 'block')
                     throw new HttpException({ message: 'Blocked User', success: false }, HttpStatus.FORBIDDEN);
 

@@ -14,13 +14,18 @@ export class UserService {
     constructor(@InjectRepository(UserEntity) private readonly usersRepository: Repository<UserEntity>) { }
 
     async getUsers(query): Promise<UserEntity[]> {
-
+        const take = query.take || 5000;
+        const skip = query.skip || 0;
         const db = getRepository(UserEntity)
             .createQueryBuilder("u").select(["u", "c"]);
         db.leftJoin('u.city', 'c');
         if (query.search)
-            db.where("u.email like :name or u.displayName like :name", { name: '%' + query.search + '%' })
+            db.where("(u.email like :name or u.displayName like :name)", { name: '%' + query.search + '%' })
+        if (query.status)
+            db.andWhere("u.status = :status", { status: query.status });
 
+        db.take(take);
+        db.skip(skip);
         return db.getMany();
     }
 
@@ -40,7 +45,7 @@ export class UserService {
             _where = [{ email: _email }];
         }
         return this.usersRepository.findOne({
-            select: ['id', 'email', 'displayName', 'typeOfNoer', 'imageUrl', 'city','status'],
+            select: ['id', 'email', 'displayName', 'typeOfNoer', 'imageUrl', 'city', 'status'],
             where: _where,
             relations: ["city"]
         });
@@ -61,7 +66,7 @@ export class UserService {
     }
     async findById(id: number): Promise<any> {
         const user = await this.usersRepository.findOne({
-            select: ['id', 'email', 'displayName', 'role', 'typeOfNoer', 'imageUrl','status'],
+            select: ['id', 'email', 'displayName', 'role', 'typeOfNoer', 'imageUrl', 'status'],
             where: [{ id: id }]
         });
 

@@ -17,6 +17,13 @@ export class CreateUserDto {
 export class UserLIstQuery {
     @ApiProperty({ required: false })
     search: string;
+    @ApiProperty({ required: false, enum: ["active", "block"] })
+    status: string;
+    @ApiProperty({ required: false, name: 'take', default: 1000 })
+    take: number;
+    @ApiProperty({ required: false, name: 'skip', default: 0 })
+    skip: number;
+
 }
 export class ChangePassword {
     @ApiProperty({ required: true })
