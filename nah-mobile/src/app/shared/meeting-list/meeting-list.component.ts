@@ -17,6 +17,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
   googlePic: any;
   meetingList: Meeting[] = [];
   showMeetingMsg = false;
+  showLoading = false;
   @Input() noMeetingMsg = 'Hmm, seems like they are no meetings.'
   @Input() type = 'all' ;
   @Input() groupId: any;
@@ -46,7 +47,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
     // if (params.type === 'my-meeting') {
     //   queryString += '&userId=' + userInfo.id;
     // }
-
+    this.showLoading = true;
 
     return this.http.get('meeting/list' + queryString).pipe(map(res => {
       let _meetingList: Meeting[] = <Meeting[]>res.data || [];
@@ -62,6 +63,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
         }
         return m;
       });
+      this.showLoading = false;
       if (_meetingList.length == 0) {
         this.showMeetingMsg = true;
       } else {
