@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn } from 't
 import { BaseEntity } from '../shared/base.entity';
 import { MeetingEntity } from './meeting.entity';
 import { UserEntity } from 'src/user/user.entity';
+import { MeetingReportCateogryEntity } from './meeting-report-category.entity';
 @Entity({ name: 'meeting_report' })
 export class MeetingReportEntity extends BaseEntity {
   
@@ -20,5 +21,8 @@ export class MeetingReportEntity extends BaseEntity {
     
     @ManyToOne(type => UserEntity, user => user.reports, { onDelete: 'CASCADE' })
     createdBy: UserEntity;
+
+    @ManyToOne(type => MeetingReportCateogryEntity, c => c.reports, { onDelete: 'CASCADE' })
+    category: MeetingReportCateogryEntity;
 
 }
