@@ -138,7 +138,7 @@ export class MeetingController {
   @Delete('video/:videoId')
   async deleteVideo(@Param('videoId') videoId: number) {
     const data = await this.meetingService.deleteVideo(videoId);
-    return { message: 'Deleted successfully', data };
+    return { message: 'Deleted successfully', success: true, data };
   }
 
   /**
@@ -149,7 +149,7 @@ export class MeetingController {
   @Delete('photo/:photoId')
   async deletePhoto(@Param('photoId') photoId: number) {
     const data = await this.meetingService.deletePhoto(photoId);
-    return { message: 'Deleted successfully', data };
+    return { message: 'Deleted successfully', success: true, data };
   }
 
   @Get('publish/:meetingId')
@@ -178,7 +178,7 @@ export class MeetingController {
 
     const data = await this.meetingService.uploadMeetingImages(images, params.meetingId);
 
-    return { message: "Uploaded Successfully", data };
+    return { message: "Uploaded Successfully", success: true, data };
 
   }
   /**
@@ -202,6 +202,19 @@ export class MeetingController {
   async addReport(@Body() report: ReportDto, @Request() req) {
     return this.meetingService.addReport(report);
   }
+
+  @Get('report/category')
+  async getReportCategory(@Request() req) {
+    const [result, total] = await this.meetingService.getReportCategoryList();
+    return { message: false, success: true, data: result, count: total };
+  }
+
+  @Get('report/category/info')
+  async getReportCategoryInfo(@Request() req) {
+    const data = await this.meetingService.getReportCategoryInfo();
+    return { message: false, success: true, data: data };
+  }
+
   @Delete(':meetingId')
   async deleteGruop(@Param() params: any) {
     const data = await this.meetingService.deleteMeeting(params.meetingId);

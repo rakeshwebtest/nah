@@ -10,7 +10,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
 import { UserReportsListComponent } from './user-reports-list/user-reports-list.component';
 import { InputTextModule } from 'primeng/inputtext';
-
+import {ChartModule} from 'primeng/chart';
 
 @NgModule({
   declarations: [ProfitLossComponent, BetHistoryComponent, UserReportsListComponent],
@@ -21,7 +21,8 @@ import { InputTextModule } from 'primeng/inputtext';
     DropdownModule,
     RadioButtonModule,
     FormsModule,
-    InputTextModule
+    InputTextModule,
+    ChartModule
     ]
 })
 export class ReportsModule { }

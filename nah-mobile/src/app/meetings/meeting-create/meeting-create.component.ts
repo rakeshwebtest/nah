@@ -138,6 +138,7 @@ export class MeetingCreateComponent implements OnInit {
         templateOptions: {
           required: true,
           label: 'Start Date',
+          min: this.getCurrentDateString(null),
           placeholder: 'Choose Date',
         }
       },
@@ -150,6 +151,11 @@ export class MeetingCreateComponent implements OnInit {
           required: true,
           label: 'End Date',
           placeholder: 'Choose Date',
+        },
+        expressionProperties: {
+          'templateOptions.min': (model) => {
+            return this.getCurrentDateString(model.meetingDate);
+          }
         }
       },
       {
@@ -262,12 +268,12 @@ export class MeetingCreateComponent implements OnInit {
     });
     modal.onDidDismiss().then(arg => {
       // this.getGroups();
-      console.log('arg',this.model);
-      
+      console.log('arg', this.model);
+
       if (arg.data) {
         const group = {
-          label:arg.data.name,
-          value:arg.data.id
+          label: arg.data.name,
+          value: arg.data.id
         }
         this.groupList.push(group);
         this.form.controls.groupId.setValue(arg.data.id);
@@ -275,5 +281,17 @@ export class MeetingCreateComponent implements OnInit {
       // this.groupC.ngOnInit();
     });
     return await modal.present();
+  }
+  getCurrentDateString(_date?:Date) {
+    let date = new Date();
+    if (_date) {
+      console.log('__date',_date,new Date(_date));
+      date = new Date(_date);
+    }
+    return date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+  }
+  getMaxDateString() {
+    const date = new Date();
+    return (date.getFullYear() + 2) + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
   }
 }

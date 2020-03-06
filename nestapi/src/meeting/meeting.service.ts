@@ -17,6 +17,7 @@ import { ReportDto } from './dto/report.dto';
 import { MeetingReportEntity } from './meeting-report.entity';
 import { CommentReplyDto } from './dto/comment-reply.dto';
 import { MeetingCommentReplyEntity } from './meeting-comment-reply.entity';
+import { MeetingReportCateogryEntity } from './meeting-report-category.entity';
 
 @Injectable()
 export class MeetingService {
@@ -27,6 +28,7 @@ export class MeetingService {
         @InjectRepository(MeetingVideosEntity) private readonly meetingVideoRepository: Repository<MeetingVideosEntity>,
         @InjectRepository(MeetingMembersEntity) private readonly meetingMembersRepository: Repository<MeetingEntity>,
         @InjectRepository(MeetingCommentReplyEntity) private readonly meetingCommentReplyRepository: Repository<MeetingCommentReplyEntity>,
+        @InjectRepository(MeetingReportCateogryEntity) private readonly meetingReportCateogryEntity: Repository<MeetingReportCateogryEntity>
     ) {
 
     }
@@ -238,8 +240,9 @@ export class MeetingService {
         //     relations: ['meeting', 'createdBy', 'meeting.createdBy']
         // });
         const db = getRepository(MeetingReportEntity)
-            .createQueryBuilder("mr").select(["mr", "m", "c", "mc"]);
+            .createQueryBuilder("mr").select(["mr", "m","mrc","c", "mc"]);
         db.leftJoin('mr.meeting', 'm');
+        db.leftJoin('mr.category', 'mrc');
         db.leftJoin('mr.createdBy', 'c');
         db.leftJoin('m.createdBy', 'mc');
         if (query.search)
@@ -251,6 +254,8 @@ export class MeetingService {
         const report = new MeetingReportEntity();
         report.createdBy = new UserEntity();
         report.meeting = new MeetingEntity();
+        report.category = new MeetingReportCateogryEntity();
+        report.category.id = reportDto.categoryId;
         report.meeting.id = reportDto.meetingId;
         report.createdBy.id = reportDto.userId;
         report.comment = reportDto.comment;
@@ -272,6 +277,19 @@ export class MeetingService {
             comment.id = commentId;
             return this.meetingCommentRepository.delete(comment);
         }
+    }
+    getReportCategoryList(): Promise<any> {
+        
+        return this.meetingReportCateogryEntity.findAndCount();
+    }
+
+    getReportCategoryInfo(): Promise<any> {
+        
+        const db = getRepository(MeetingReportCateogryEntity)
+            .createQueryBuilder('c');
+        db.loadRelationCountAndMap('c.reportCount', 'c.reports', 'crCount');
+        // db.loadRelationCountAndMap('c.meetingCount', 'c.reports.meeting', 'crmCount');
+        return db.getMany();
     }
 
 } 

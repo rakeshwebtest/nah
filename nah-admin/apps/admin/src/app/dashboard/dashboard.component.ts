@@ -21,13 +21,22 @@ export class DashboardComponent implements OnInit {
   cityWiseUsersOptions: any;
   cityWiseMeetingsData: any;
   cityWiseMeetingsOptions: any;
-
+  categoryWiseReportOptions = {
+    title: {
+      display: true,
+      text: 'Category Vs Reports',
+      fontSize: 16
+    },
+    legend: {
+      position: 'bottom'
+    }
+  };
+  categoryWiseReportData: any;
   constructor(private router: Router, private appHttp: AppHttpClient) { }
 
   ngOnInit() {
-    // this.getCityWiseUsersData();  
-    // this.getCityWiseMeetingsData();
     this.getCityData();
+    this.getReportData();
   }
   getCityData() {
     this.cityWiseUsersOptions = {
@@ -91,62 +100,33 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-  getCityWiseUsersData() {
-    this.cityWiseUsersOptions = {
-      title: {
-        display: true,
-        text: 'City Vs Users',
-        fontSize: 16
-      },
-      legend: {
-        position: 'bottom'
+  getReportData() {
+
+    this.appHttp.get('meeting/report/category/info').subscribe(res => {
+      if (res.data) {
+        const categories: any = [];
+        const reports: any = [];
+        res.data.forEach(category => {
+          if (category.reportCount > 0) {
+            categories.push(category.name + ' (' + category.reportCount + ')');
+            reports.push(category.reportCount);
+          }
+
+
+        });
+
+        this.categoryWiseReportData = {
+          labels: categories,
+          datasets: [
+            {
+              data: reports,
+              backgroundColor: [
+                '#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000', '#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324'
+              ]
+            }]
+        };
       }
-    };
-    this.cityWiseUsersData = {
-      labels: ['New York', 'Los Angeles', 'Chicago'],
-      datasets: [
-        {
-          data: [300, 50, 100],
-          backgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56"
-          ],
-          hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56"
-          ]
-        }]
-    };
-  }
-  getCityWiseMeetingsData() {
-    this.cityWiseMeetingsOptions = {
-      title: {
-        display: true,
-        text: 'City Vs Meetings',
-        fontSize: 16
-      },
-      legend: {
-        position: 'bottom'
-      }
-    };
-    this.cityWiseMeetingsData = {
-      labels: ['New York', 'Los Angeles', 'Chicago'],
-      datasets: [
-        {
-          data: [100, 150, 80],
-          backgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56"
-          ],
-          hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56"
-          ]
-        }]
-    };
+    });
+
   }
 }

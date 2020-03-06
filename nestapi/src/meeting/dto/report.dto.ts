@@ -11,4 +11,8 @@ export class ReportDto {
     @IsNotEmpty({ message: "Required Meeting Id" })
     meetingId: number;
 
+    @ApiProperty()
+    @IsNotEmpty({ message: "Required Category Id" })
+    categoryId: number;
+
 }
