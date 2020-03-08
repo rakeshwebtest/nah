@@ -20,30 +20,30 @@
   <p-table [columns]="cols" [value]="reportsList" [responsive]="true">
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th>Meeting Title</th>
-        <th>Report</th>
-        <th>Created By</th>
         <th>Category</th>
+        <th>Concern</th>
+        <th>Meeting Title</th>               
         <th>Date</th>
+        <th>Created By</th>        
         <!-- <th class="actions-th">Actions</th> -->
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user let-columns="columns">
       <tr>
         <td>
-          {{ user.meeting?.title }}
+          {{ user.category?.name}}
         </td>
         <td>
           {{ user.comment }}
         </td>
         <td>
-          {{ user.createdBy.displayName }}
-        </td>
-        <td>
-          {{ user.category?.name}}
-        </td>
+          {{ user.meeting?.title }}
+        </td>  
         <td>
           {{ user.createdDate | date }}
+        </td>
+        <td>
+          {{ user.createdBy.displayName }}
         </td>
         <!-- <td>
           <div
