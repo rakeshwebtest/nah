@@ -22,7 +22,7 @@ export class MeetingDetailsActionsComponent implements OnInit {
       componentProps:{
         meetingId:this.meetingId
       },
-      cssClass: 'group-create-modal'
+      cssClass: 'group-create-modal2'
     });
     return await modal.present();
   }

@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 export class ReportComponent implements OnInit {
   @Input() meetingId: any;
   constructor(private modalCtrl: ModalController, private http: AppHttpClient, private auth: AuthenticationService) { }
+  title = "Report a Concern";
   comment: any;
   form = new FormGroup({});
   model: any = {};
@@ -25,7 +26,7 @@ export class ReportComponent implements OnInit {
       wrappers: ['vertical'],
       className: 'col-12',
       templateOptions: {
-        label: 'Type',
+        label: 'WHY DOES THIS REVIEW CONCERN YOU?',
         placeholder: 'Select Type',
         required: true,
         itemValueField: 'id',
@@ -48,7 +49,7 @@ export class ReportComponent implements OnInit {
       templateOptions: {
         required: true,
         maxLength: 1000,
-        label: 'Comment (Max size 1000 characters)',
+        label: 'SOMETHING ELSE',
         placeholder: 'Enter Comment',
       }
     }];

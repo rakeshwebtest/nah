@@ -138,7 +138,7 @@ export class MeetingCreateComponent implements OnInit {
         templateOptions: {
           required: true,
           label: 'Start Date',
-          min: this.getCurrentDateString(null),
+          minDate: this.getCurrentDateString(null),
           placeholder: 'Choose Date',
         }
       },
