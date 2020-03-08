@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   categoryWiseReportOptions = {
     title: {
       display: true,
-      text: 'Category Vs Reports',
+      text: 'Category Vs Concerns',
       fontSize: 16
     },
     legend: {
