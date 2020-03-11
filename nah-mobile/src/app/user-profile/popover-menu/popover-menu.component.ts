@@ -12,7 +12,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
   styleUrls: ['./popover-menu.component.scss'],
 })
 export class PopoverMenuComponent implements OnInit {
-  
+
 
   constructor(private authService: AuthenticationService,
     private googlePlus: GooglePlus,
@@ -30,6 +30,12 @@ export class PopoverMenuComponent implements OnInit {
   }
   async DismissClick() {
     await this.popoverController.dismiss();
+  }
+  privacy() {
+    this.router.navigate(['/pages/faq']);
+  }
+  faq() {
+    this.router.navigate(['/pages/privacy']);
   }
   feedback() {
     // this.appRate.preferences.storeAppURL = {
