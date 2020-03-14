@@ -33,9 +33,11 @@ export class PopoverMenuComponent implements OnInit {
   }
   privacy() {
     this.router.navigate(['/pages/privacy']);
+    this.DismissClick();
   }
   faq() {
     this.router.navigate(['/pages/faq']);
+    this.DismissClick();
   }
   feedback() {
     // this.appRate.preferences.storeAppURL = {
