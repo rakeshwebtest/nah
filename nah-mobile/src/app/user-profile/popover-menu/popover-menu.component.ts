@@ -32,10 +32,10 @@ export class PopoverMenuComponent implements OnInit {
     await this.popoverController.dismiss();
   }
   privacy() {
-    this.router.navigate(['/pages/faq']);
+    this.router.navigate(['/pages/privacy']);
   }
   faq() {
-    this.router.navigate(['/pages/privacy']);
+    this.router.navigate(['/pages/faq']);
   }
   feedback() {
     // this.appRate.preferences.storeAppURL = {
