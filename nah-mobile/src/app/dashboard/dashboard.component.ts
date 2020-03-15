@@ -1,10 +1,8 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { UserConfigService } from '../utils/user-config.service';
-import { LoadingService } from '../utils/loading.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { Meeting } from '../meetings/meeting';
-import { AppHttpClient } from '../utils';
+import { MeetingListService } from '../shared/meeting-list/meeting-list.service';
+
 
 @Component({
   selector: 'theapp-dashboard',
@@ -15,36 +13,30 @@ export class DashboardComponent implements OnInit {
   googlePic: string;
   showList = false;
   activeTab = 'type/all';
+  firstTimeEnter = false;
   constructor(private authService: AuthenticationService,
-  private router: Router) { }
+    private ms: MeetingListService,
+    private router: Router) { }
   // @HostListener('document:ionBackButton', ['$event'])
   // private async overrideHardwareBackAction($event: any) {
   //   console.log('back pressed');
   //   // await this.modalController.dismiss();
   // }
   ionViewWillEnter() {
-    console.log('ionViewWillEnter');
     const userInfo: any = this.authService.getUserInfo();
     this.googlePic = userInfo.imageUrl;
-    this.reload();
+    if (this.firstTimeEnter)
+      this.ms.meetingReload();
+    this.firstTimeEnter = true;
   }
   ngOnInit() {
     const userInfo: any = this.authService.isAuthenticated();
     this.googlePic = userInfo.user.imageUrl;
-    console.log('ngOninit');
-
   }
   meetingClick(meetingType) {
     this.router.navigate(['/meeting/type/' + meetingType]);
   }
   navProfile() {
-    console.log('log');
     this.router.navigate(['/user-profile']);
-  }
-  reload() {
-    this.showList = false;
-    setTimeout(() => {
-      this.showList = true;
-    }, 100);
   }
 }

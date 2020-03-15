@@ -7,7 +7,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { GroupCreateModalComponent } from 'src/app/group-create-modal/group-create-modal.component';
-
+import { map, startWith, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-meeting-create',
   templateUrl: './meeting-create.component.html',
@@ -17,6 +17,7 @@ export class MeetingCreateComponent implements OnInit {
   title = 'Create A Meeting';
   form = new FormGroup({});
   model: any = {};
+  maxDate: any = (new Date()).getFullYear() + 3;
   fields: FormlyFieldConfig[] = [{
     key: 'title',
     type: 'input',
@@ -139,6 +140,7 @@ export class MeetingCreateComponent implements OnInit {
           required: true,
           label: 'Start Date',
           minDate: this.getCurrentDateString(null),
+          maxDate: this.maxDate,
           placeholder: 'Choose Date',
         }
       },
@@ -151,10 +153,19 @@ export class MeetingCreateComponent implements OnInit {
           required: true,
           label: 'End Date',
           placeholder: 'Choose Date',
+          maxDate: this.maxDate
         },
         expressionProperties: {
           'templateOptions.min': (model) => {
             return this.getCurrentDateString(model.meetingDate);
+          }
+        },
+        hooks: {
+          onInit: field => {
+            const _control = this.form.get('meetingDate');
+            _control.valueChanges.subscribe(res => {
+              field.formControl.setValue(null)
+            });
           }
         }
       },
@@ -198,7 +209,6 @@ export class MeetingCreateComponent implements OnInit {
     const userInfo = this.authService.getUserInfo();
     this.getCities();
     this.http.get('group/list/' + userInfo.id).subscribe(res => {
-      console.log(res);
       if (res.data) {
         this.groupList = res.data.map(item => {
           const group = {
@@ -239,7 +249,6 @@ export class MeetingCreateComponent implements OnInit {
       model.isPublished = 0;
     }
     const userInfo = this.authService.getUserInfo();
-    console.log('this.userInfo', userInfo);
     const formData = new FormData();
     // formData.append('file', model.image);
     model.createdBy = userInfo.id;
@@ -250,7 +259,6 @@ export class MeetingCreateComponent implements OnInit {
       headers: new HttpHeaders({ "Content-Type": "multipart/form-data" })
     };
     this.http.post('meeting', formData).subscribe(res => {
-      console.log('res', res);
       this.router.navigate(['/dashboard'], { queryParams: { reload: true } });
       // window.location.reload();
       loading.dismiss();
@@ -268,24 +276,22 @@ export class MeetingCreateComponent implements OnInit {
     });
     modal.onDidDismiss().then(arg => {
       // this.getGroups();
-      console.log('arg', this.model);
 
       if (arg.data) {
         const group = {
-          label: arg.data.name,
+          label: 'Say No To ' + arg.data.name,
           value: arg.data.id
         }
-        this.groupList.push(group);
+        this.groupList.unshift(group);
         this.form.controls.groupId.setValue(arg.data.id);
       }
       // this.groupC.ngOnInit();
     });
     return await modal.present();
   }
-  getCurrentDateString(_date?:Date) {
+  getCurrentDateString(_date?: Date) {
     let date = new Date();
     if (_date) {
-      console.log('__date',_date,new Date(_date));
       date = new Date(_date);
     }
     return date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);

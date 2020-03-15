@@ -24,8 +24,8 @@ export class GroupCreateModalComponent implements OnInit {
       this.http.post('group', { name: this.newGroupName, createdBy: user.id }).subscribe(res => {
         this.dismiss(res.data);
       }, err => {
-        console.log('error', err.message);
-        this.presentAlert(err.message);
+        // console.log('error', err.message);
+        // this.presentAlert(err.message);
       }); 
     }
 

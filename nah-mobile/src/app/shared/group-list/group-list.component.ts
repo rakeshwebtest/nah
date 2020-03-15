@@ -72,7 +72,8 @@ export class GroupListComponent implements OnInit {
       }
     });
   }
-  follow(item) {
+  follow(item,event) {
+    event.stopPropagation();
     item.isFollower = !item.isFollower;
     const payload = {
       groupId: item.id,

@@ -82,10 +82,10 @@ export class AppComponent {
         this.ga.trackView(res.url)
           .then(() => { })
           .catch(e => console.log(e));
-          console.log('traking',res.url);
+         // console.log('traking',res.url);
           this.ga.trackEvent('url', res.url);
         if (this.authenticationService.isAuthenticated()) {
-          console.log(this.authenticationService.getUserInfo());
+          // console.log(this.authenticationService.getUserInfo());
           this.ga.trackEvent('user', JSON.stringify(this.authenticationService.getUserInfo()));
         } else {
           // this.ga.trackEvent('url', res.url);

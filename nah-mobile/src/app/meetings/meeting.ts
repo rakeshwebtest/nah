@@ -3,6 +3,7 @@ export interface Meeting {
     title: string;
     agenda: string;
     meetingDate: string;
+    endDate:string;
     startTime: string;
     endTime: string;
     imageUrl: string;

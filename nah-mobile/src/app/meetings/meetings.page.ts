@@ -11,14 +11,11 @@ export class MeetingsPage implements OnInit {
   googlePic: any;
   title: any;
   noMeetingMsg: string;
+  showList = false;
   params = this.route.snapshot.params;
   queryParams = this.route.snapshot.queryParams;
   constructor(private authService: AuthenticationService, private route: ActivatedRoute) { }
   ionViewWillEnter() {
-    console.log('meeting ionViewWillEnter');
-    if (this.queryParams.reload) {
-      this.ngOnInit();
-    }
   }
   ngOnInit() {
     const userInfo: any = this.authService.isAuthenticated();
@@ -39,6 +36,13 @@ export class MeetingsPage implements OnInit {
         this.noMeetingMsg = "Hmm, seems like they are no meetings";
         break;
     }
+  }
+
+  reload() {
+    this.showList = false;
+    setTimeout(() => {
+      this.showList = true;
+    }, 100);
   }
 
 }

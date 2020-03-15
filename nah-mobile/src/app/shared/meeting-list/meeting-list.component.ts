@@ -2,11 +2,13 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AppHttpClient } from 'src/app/utils';
 import { LoadingService } from 'src/app/utils/loading.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Meeting } from 'src/app/meetings/meeting';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AlertController } from '@ionic/angular';
+import { MeetingListService } from './meeting-list.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-meeting-list',
@@ -19,22 +21,27 @@ export class MeetingListComponent implements OnInit, OnDestroy {
   showMeetingMsg = false;
   showLoading = false;
   @Input() noMeetingMsg = 'Hmm, seems like they are no meetings.'
-  @Input() type = 'all' ;
+  @Input() type = 'all';
   @Input() groupId: any;
+  msSubscription: Subscription;
   constructor(private authService: AuthenticationService,
     private router: Router,
-    private alertCtrl:AlertController,
+    private alertCtrl: AlertController,
     private activeRouter: ActivatedRoute,
     private http: AppHttpClient,
-    private loading: LoadingService) { }
+    private ms: MeetingListService,
+    private loading: LoadingService) {
+    this.msSubscription = this.ms.getChanges().subscribe(message => {
+      if (message) {
+          this.ngOnInit();
+      }
+    });
+  }
 
   ngOnInit() {
-
     this.getMeetings().subscribe(res => {
       this.meetingList = res;
-
     });
-
   }
   getMeetings(): Observable<Meeting[]> {
     const params = this.activeRouter.snapshot.params;
@@ -47,6 +54,8 @@ export class MeetingListComponent implements OnInit, OnDestroy {
     // if (params.type === 'my-meeting') {
     //   queryString += '&userId=' + userInfo.id;
     // }
+    // queryString += '&skip=' + 4;
+    // queryString += '&take=' + 10;
     this.showLoading = true;
 
     return this.http.get('meeting/list' + queryString).pipe(map(res => {
@@ -134,7 +143,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy() {
-
+    this.msSubscription.unsubscribe();
   }
 
 

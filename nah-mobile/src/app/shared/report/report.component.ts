@@ -19,28 +19,29 @@ export class ReportComponent implements OnInit {
   comment: any;
   form = new FormGroup({});
   model: any = {};
+  categoryLists = [];
+  // {
+  //   key: 'categoryId',
+  //   type: 'selectable',
+  //   wrappers: ['vertical'],
+  //   className: 'col-12',
+  //   templateOptions: {
+  //     label: 'WHY DOES THIS REVIEW CONCERN YOU?',
+  //     placeholder: 'Select Type',
+  //     required: true,
+  //     itemValueField: 'id',
+  //     itemTextField: 'name',
+  //     options: []
+  //   },
+  //   hooks: {
+  //     onInit: field => {
+  //       this.getCategory().subscribe(res => {
+  //         field.templateOptions.options = res;
+  //       })
+  //     }
+  //   }
+  // },
   fields: FormlyFieldConfig[] = [
-    {
-      key: 'categoryId',
-      type: 'selectable',
-      wrappers: ['vertical'],
-      className: 'col-12',
-      templateOptions: {
-        label: 'WHY DOES THIS REVIEW CONCERN YOU?',
-        placeholder: 'Select Type',
-        required: true,
-        itemValueField: 'id',
-        itemTextField: 'name',
-        options: []
-      },
-      hooks: {
-        onInit: field => {
-          this.getCategory().subscribe(res => {
-            field.templateOptions.options = res;
-          })
-        }
-      }
-    },
     {
       key: 'comment',
       type: 'textarea',
@@ -54,9 +55,10 @@ export class ReportComponent implements OnInit {
       }
     }];
   ngOnInit() {
-    // this.getCategory().subscribe(res=>{
-    //   console.log(res);
-    // });
+    this.model.categoryId = 1;
+    this.getCategory().subscribe(res=>{
+      this.categoryLists = res || [];
+    });
   }
   dismiss(data?: any) {
     // using the injected ModalController this page

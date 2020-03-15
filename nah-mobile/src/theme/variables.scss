@@ -162,3 +162,7 @@ $font-32: 32px;
   --margin-top: var(--ion-margin, 3px);
   margin-top: var(--ion-margin, 3px);
 }
+ion-content{
+  --padding-left: 5px;
+  --padding-right: 5px;
+  }

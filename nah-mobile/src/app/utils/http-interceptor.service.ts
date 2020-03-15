@@ -28,7 +28,7 @@ export class HttpInterceptorService implements HttpInterceptor {
      * @memberof HttpInterceptorService
      */
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('request', request.headers);
+        // console.log('request', request.headers);
         // request = request.clone({
         //     setHeaders: {
         //         'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         // });
         // console.log('chache user', user);
         if (this.authenticationService.isAuthenticated()) {
-            console.log('user', this.authenticationService.isAuthenticated());
+            // console.log('user', this.authenticationService.isAuthenticated());
             const _user: any = this.authenticationService.isAuthenticated();
             //  request.headers.append('authorization', _user.token);
             request = request.clone({
@@ -102,7 +102,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     private getResponse(res) {
         const resJson = res;
 
-        console.log('resJson', resJson);
+        // console.log('resJson', resJson);
         if (resJson && resJson.success) {
             if (resJson.message) {
             }
@@ -112,7 +112,7 @@ export class HttpInterceptorService implements HttpInterceptor {
                 this.toater.presentToast(resJson.message);
             }
             if (resJson && resJson.errors) {
-                console.log('resJson.data.errors', resJson.data.errors);
+                // console.log('resJson.data.errors', resJson.data.errors);
                 Object.keys(resJson.errors).forEach(e => {
                 });
             } else {

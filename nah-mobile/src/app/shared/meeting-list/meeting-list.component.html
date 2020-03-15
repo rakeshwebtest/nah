@@ -46,12 +46,12 @@
           <!-- <ion-icon name="color-filter" class="icon-big"></ion-icon> -->
         </ion-col>
       </ion-row>
-      <ion-row class="">
+      <ion-row (click)="clickMeeting(m)">
         <label class="meeting-desc ellipsas">
           {{m.agenda}}
         </label>
       </ion-row>
-      <ion-row class="ion-nowrap row-last ion-align-items-center ">
+      <ion-row (click)="clickMeeting(m)" class="ion-nowrap row-last ion-align-items-center ">
         <ion-col class="ion-padding-l-0 ion-padding-r-0">
           <label class="meeting-date" style="display: block;">{{m.meetingDate | date:"mediumDate"}} -
             {{m.endDate | date:"mediumDate"}},
@@ -60,9 +60,11 @@
           <!-- <ion-avatar class="avater small" *ngFor="let m of m.members">
               <img [src]="m.user.imageUrl" />
             </ion-avatar> -->
-          <app-peoples-icons [peoples]="m.members" label="People are going"></app-peoples-icons>
-        </ion-col>
+       </ion-col>
 
+      </ion-row>
+      <ion-row>
+        <app-peoples-icons [peoples]="m.members" label="People are going"></app-peoples-icons>
       </ion-row>
     </ion-grid>
   </ion-item>
