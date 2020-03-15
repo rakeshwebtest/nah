@@ -259,7 +259,7 @@ export class MeetingCreateComponent implements OnInit {
       headers: new HttpHeaders({ "Content-Type": "multipart/form-data" })
     };
     this.http.post('meeting', formData).subscribe(res => {
-      this.router.navigate(['/dashboard'], { queryParams: { reload: true } });
+      this.router.navigate(['/dashboard/type/my-meeting']);
       // window.location.reload();
       loading.dismiss();
     }, err => {

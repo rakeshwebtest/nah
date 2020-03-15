@@ -44,7 +44,7 @@ export class MeetingController {
       return { message: false, data };
     } else {
       data = await this.meetingService.getMeetings(query, sessionUser);
-      return { message: false, success: true, ...data };
+      return { message: false, success: true, ...data,query };
     }
   }
 

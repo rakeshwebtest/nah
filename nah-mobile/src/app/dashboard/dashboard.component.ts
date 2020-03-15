@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { MeetingListService } from '../shared/meeting-list/meeting-list.service';
 
@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   firstTimeEnter = false;
   constructor(private authService: AuthenticationService,
     private ms: MeetingListService,
+    private activeRouter:ActivatedRoute,
     private router: Router) { }
   // @HostListener('document:ionBackButton', ['$event'])
   // private async overrideHardwareBackAction($event: any) {
@@ -28,8 +29,12 @@ export class DashboardComponent implements OnInit {
     if (this.firstTimeEnter)
       this.ms.meetingReload();
     this.firstTimeEnter = true;
+    this.activeTab = 'type'+'/'+this.activeRouter.snapshot.children[0].params.type;
+    console.log('this.activeTab',this.activeTab);
+    console.log('this.activeRouter.snapshot.params',this.activeRouter.snapshot);
   }
   ngOnInit() {
+    console.log('this.activeRouter.snapshot.params',this.activeRouter.snapshot.params);
     const userInfo: any = this.authService.isAuthenticated();
     this.googlePic = userInfo.user.imageUrl;
   }

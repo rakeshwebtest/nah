@@ -8,11 +8,6 @@
     {{noMeetingMsg}}
   </ion-col>
 </ion-row>
-<ion-row  class="ion-align-items-center" *ngIf="showLoading">
-  <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;"> 
-    <ion-spinner></ion-spinner>
-  </ion-col>
-</ion-row>
 <ion-list class="meeting-list">
   <ion-item class="meeting-item" *ngFor="let m of meetingList;let mInx = index;">
     <ion-grid class="ion-no-padding">
@@ -153,3 +148,12 @@
     </ion-grid>
   </ion-item> -->
 </ion-list>
+<ion-row  class="ion-align-items-center" *ngIf="showLoading">
+  <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;"> 
+    <ion-spinner></ion-spinner>
+  </ion-col>
+</ion-row>
+<ion-infinite-scroll threshold="100px" (ionInfinite)="getMeetings($event)">
+  <ion-infinite-scroll-content loadingSpinner="none" loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>

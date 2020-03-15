@@ -17,12 +17,13 @@ import { Subscription } from 'rxjs';
 })
 export class MeetingListComponent implements OnInit, OnDestroy {
   googlePic: any;
-  meetingList: Meeting[] = [];
+  meetingList:any = [];
   showMeetingMsg = false;
   showLoading = false;
   @Input() noMeetingMsg = 'Hmm, seems like they are no meetings.'
   @Input() type = 'all';
   @Input() groupId: any;
+  take = 20;
   msSubscription: Subscription;
   constructor(private authService: AuthenticationService,
     private router: Router,
@@ -33,17 +34,19 @@ export class MeetingListComponent implements OnInit, OnDestroy {
     private loading: LoadingService) {
     this.msSubscription = this.ms.getChanges().subscribe(message => {
       if (message) {
-          this.ngOnInit();
+        this.getMeetings(null, true);
       }
     });
   }
 
   ngOnInit() {
-    this.getMeetings().subscribe(res => {
-      this.meetingList = res;
-    });
+    this.meetingList = [];
+    this.getMeetings(null, true);
   }
-  getMeetings(): Observable<Meeting[]> {
+  getMeetings(infiniteScroll?: any, reload?: any) {
+    if (reload) {
+      this.meetingList = [];
+    }
     const params = this.activeRouter.snapshot.params;
     const userInfo: any = this.authService.getUserInfo();
     this.googlePic = userInfo.imageUrl;
@@ -54,11 +57,11 @@ export class MeetingListComponent implements OnInit, OnDestroy {
     // if (params.type === 'my-meeting') {
     //   queryString += '&userId=' + userInfo.id;
     // }
-    // queryString += '&skip=' + 4;
-    // queryString += '&take=' + 10;
+    queryString += '&skip=' + this.meetingList.length;
+    queryString += '&take=' + this.take;
     this.showLoading = true;
 
-    return this.http.get('meeting/list' + queryString).pipe(map(res => {
+    this.http.get('meeting/list' + queryString).pipe(map(res => {
       let _meetingList: Meeting[] = <Meeting[]>res.data || [];
       _meetingList.map(m => {
         m.isCreatedBy = false;
@@ -72,14 +75,31 @@ export class MeetingListComponent implements OnInit, OnDestroy {
         }
         return m;
       });
+     
+
+      
+      return _meetingList;
+    })).subscribe(res => { 
       this.showLoading = false;
-      if (_meetingList.length == 0) {
+      this.meetingList = [...this.meetingList, ...res];
+      if (infiniteScroll){
+        infiniteScroll.target.complete();
+        // if(_meetingList.length === 0){
+        //   infiniteScroll.complete();
+        // }
+
+      }
+        
+
+      if (reload && reload.target)
+        reload.target.complete();
+
+      if (this.meetingList.length == 0) {
         this.showMeetingMsg = true;
       } else {
         this.showMeetingMsg = false;
       }
-      return _meetingList;
-    }));
+    });
   }
   meetingJoin(m) {
     const userInfo: any = this.authService.getUserInfo();
@@ -106,10 +126,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
     console.log('eve', eve);
   }
   async doRefresh(event) {
-    this.getMeetings().subscribe(res => {
-      this.meetingList = res;
-      event.target.complete();
-    });
+    this.getMeetings(null, event);
 
   }
 

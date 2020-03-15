@@ -35,27 +35,22 @@ export class MeetingService {
 
     async getMeetings(query: MeetingQueryDao, sessionUser): Promise<MeetingEntity | { data: MeetingEntity[], total: number }> {
 
-        const take = query.take || 500
-        const skip = query.skip || 0
+        let take = 500
+        let skip = 0
+        if (query.skip)
+            skip = query.skip;
+        if (query.take)
+            take = query.take;
+            
         const db = getRepository(MeetingEntity)
             .createQueryBuilder('m')
-            .select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm", "mp",
-                "user.id", "user.displayName", "user.imageUrl", "city",
-                "mc", "mv", "mcr", "mcr_createdBy", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"])
-            .leftJoin('m.createdBy', 'u')
+                .leftJoin('m.createdBy', 'u')
             .leftJoin('m.city', 'city')
             .leftJoin('m.group', 'group')
             .leftJoin('group.followers', 'gf')
             .leftJoin('gf.user', 'gf_user')
             .leftJoin("m.members", 'mm')
-            .leftJoin("m.comments", 'mc')
-            .leftJoin("mc.createdBy", 'mc_createdBy')
-            .leftJoin("mc.replys", 'mcr')
-            .leftJoin("mcr.createdBy", 'mcr_createdBy')
-            .leftJoin("m.photos", 'mp')
-            .leftJoin("m.videos", 'mv')
             .leftJoin("mm.user", 'user')
-            .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" })
             .andWhere('group.isDeleted != 1')
             .andWhere('m.isDeleted != 1');
         if (sessionUser.role === 'admin') {
@@ -84,16 +79,30 @@ export class MeetingService {
 
         // get one meeting details   
         if (query.meetingId) { // single meeting
+            db.select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm", "mp",
+            "user.id", "user.displayName", "user.imageUrl", "city",
+            "mc", "mv", "mcr", "mcr_createdBy", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"]);
+  
+            db.leftJoin("m.comments", 'mc')
+            .leftJoin("mc.createdBy", 'mc_createdBy')
+            .leftJoin("mc.replys", 'mcr')
+            .leftJoin("mcr.createdBy", 'mcr_createdBy')
+            .leftJoin("m.photos", 'mp')
+            .leftJoin("m.videos", 'mv')
+            .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" });
             db.where('m.id = :meetingId', { meetingId: query.meetingId });
             const data: any = await db.getOne();
             // data.imageUrl = SERVERBASEPATH + data.imageUrl;
             return this.bindFileBasePath(data);
         } else {
+            db.select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm",
+            "user.id", "user.displayName", "user.imageUrl", "city"])
+            .orderBy({ "m.createdDate": "DESC"});
             db.take(take);
             db.skip(skip);
             const [result, total] = await db.getManyAndCount(); // all meeting
             if (result) {
-                result.map(meeting => {
+               await result.map(meeting => {
                     return this.bindFileBasePath(meeting);
                 });
             }
@@ -240,7 +249,7 @@ export class MeetingService {
         //     relations: ['meeting', 'createdBy', 'meeting.createdBy']
         // });
         const db = getRepository(MeetingReportEntity)
-            .createQueryBuilder("mr").select(["mr", "m","mrc","c", "mc"]);
+            .createQueryBuilder("mr").select(["mr", "m", "mrc", "c", "mc"]);
         db.leftJoin('mr.meeting', 'm');
         db.leftJoin('mr.category', 'mrc');
         db.leftJoin('mr.createdBy', 'c');
@@ -279,12 +288,12 @@ export class MeetingService {
         }
     }
     getReportCategoryList(): Promise<any> {
-        
+
         return this.meetingReportCateogryEntity.findAndCount();
     }
 
     getReportCategoryInfo(): Promise<any> {
-        
+
         const db = getRepository(MeetingReportCateogryEntity)
             .createQueryBuilder('c');
         db.loadRelationCountAndMap('c.reportCount', 'c.reports', 'crCount');

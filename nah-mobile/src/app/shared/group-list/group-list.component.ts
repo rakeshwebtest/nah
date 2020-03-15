@@ -19,7 +19,7 @@ export class GroupListComponent implements OnInit {
   groupList = [];
   customColors = ['#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000'];
   noGroupMsg = false;
-  take = 10;
+  take = 20;
   skip = 0;
   constructor(private alertCtrl: AlertController,
     private authService: AuthenticationService,
