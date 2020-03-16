@@ -91,8 +91,11 @@ export class MeetingListComponent implements OnInit, OnDestroy {
       }
         
 
-      if (reload && reload.target)
+      if (reload && reload.target){
         reload.target.complete();
+        reload.target.disabled = false;
+      }
+        
 
       if (this.meetingList.length == 0) {
         this.showMeetingMsg = true;
