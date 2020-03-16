@@ -17,12 +17,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list class="col-12">
+  <ion-list class="col-12" style="padding-top: 10px;">
     <ion-radio-group [(ngModel)]="model.categoryId">
-     
         <ion-label class="label-full-width">WHY DOES THIS REVIEW CONCERN YOU?</ion-label>
-
-  
       <ion-item *ngFor="let item of categoryLists">
         <ion-label>{{item.name}}</ion-label>
         <ion-radio slot="start" [value]="item.id"></ion-radio>
