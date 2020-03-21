@@ -1,8 +1,3 @@
-<ion-row class="ion-align-items-center no-meetings" *ngIf="videoPaths.length==0">
-  <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
-    No Videos Available
-  </ion-col>
-</ion-row>
 <ion-row class="ion-align-items-end">
   <ion-col class="ion-justify-content-end" style="display: flex;">
     <ion-button class="" size="small" color="danger" (click)="addVideoBtn()" >
@@ -10,21 +5,13 @@
     </ion-button>
   </ion-col>
 </ion-row>
-<ion-row *ngIf="showForm" class="ion-nowrap ion-align-items-center">
-  <ion-col  class="">
-    <ion-textarea class="border" style="margin: 0;" [(ngModel)]="modelVideoPath" placeholder="Enter Embed Video Link">
-    </ion-textarea>
-  </ion-col>
-</ion-row>
-<ion-row *ngIf="showForm" class="ion-nowrap ion-align-items-center">
-  <ion-col  class="ion-text-center">
-    <ion-button size="small" color="danger" (click)="addVideo(modelVideoPath)" [disabled]="!modelVideoPath">
-      Add Embed Video Link
-    </ion-button>
+<ion-row class="ion-align-items-center no-meetings" *ngIf="videoPaths.length==0">
+  <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
+    No Videos Available
   </ion-col>
 </ion-row>
 <ion-row>
-  <ion-col size="3" *ngFor="let v of videoPaths">
-    <iframe  width="100%" height="150" [src]="v.selfPath" frameborder="0" allowfullscreen></iframe>
+  <ion-col size="12" *ngFor="let v of videoPaths">
+    <iframe  width="100%" height="180" [src]="v.selfPath" frameborder="0" allowfullscreen></iframe>
   </ion-col>
 </ion-row>

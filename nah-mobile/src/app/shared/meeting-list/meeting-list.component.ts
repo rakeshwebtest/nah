@@ -129,8 +129,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
     console.log('eve', eve);
   }
   async doRefresh(event) {
-    // this.getMeetings(null, event);
-
+    this.getMeetings(null, event);
   }
 
   async deleteMeetingConfirm(meeting: any, index) {

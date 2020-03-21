@@ -18,6 +18,7 @@ import { PeoplesModule } from '../shared/peoples/peoples.module';
 import { MeetingDetailsActionsComponent } from './meeting-details/meeting-details-actions/meeting-details-actions.component';
 import { ReportModule } from '../shared/report/report.module';
 import { ReportComponent } from '../shared/report/report.component';
+import { MeetingAddVideoPopupComponent } from './meeting-details/meeting-videos/meeting-add-video-popup/meeting-add-video-popup.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -31,7 +32,7 @@ import { ReportComponent } from '../shared/report/report.component';
     PeoplesModule,
     ReportModule
   ],
-  declarations: [MeetingsPage, MeetingDetailsActionsComponent, MeetingVideosComponent, MeetingDetailsComponent, MeetingCreateComponent],
-  entryComponents: [MeetingDetailsActionsComponent,ReportComponent]
+  declarations: [MeetingsPage, MeetingDetailsActionsComponent, MeetingVideosComponent, MeetingDetailsComponent, MeetingCreateComponent,MeetingAddVideoPopupComponent],
+  entryComponents: [MeetingDetailsActionsComponent,ReportComponent,MeetingAddVideoPopupComponent]
 })
 export class MeetingsPageModule { }
