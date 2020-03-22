@@ -144,7 +144,7 @@
                   </ion-col>
                 </ion-row>
                 <ion-row class="reply-list meeting-item" *ngFor="let rc of c.replys;let inx=index;">
-                  <label style="float: left;" class="meeting-date" timeago [date]="c.updatedDate"></label>
+                  <label style="float: left;" class="meeting-date" timeago [date]="rc.updatedDate"></label>
                   <ion-chip class="custom-chip">
                     
                     <ion-label class="meeting-sub-title" style="font-weight: bold;">{{rc.createdBy.displayName}}
