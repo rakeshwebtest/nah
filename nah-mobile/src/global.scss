@@ -221,6 +221,7 @@ formly-field-file ion-input{
     border: 1px solid #ccc;
     border-radius: 0px;
     position: relative;
+    border-radius: 8px;
     &::before{
         content: 'Choose file';
         background-repeat: no-repeat;
@@ -237,6 +238,7 @@ formly-field-file ion-input{
     &.multiple-files{
         width: 70px !important;
         height: 70px;
+        border-radius: 8px;
         &::before{
             content: '';
             background-image: url('assets/images/upload-image.png');
