@@ -12,8 +12,8 @@
 </ion-row>
 <ion-row>
   <ion-col size="12" *ngFor="let v of videoPaths;let inx=index;">
-    <ion-icon name="trash" *ngIf="userInfo.id === meeting.createdBy.id" (click)="deleteVideo(v,inx)" class="ion-padding-r-5"
-    style="cursor: pointer;"></ion-icon>
+    <!-- <ion-icon name="trash" *ngIf="userInfo.id === meeting.createdBy.id" (click)="deleteVideo(v,inx)" class="ion-padding-r-5"
+    style="cursor: pointer;"></ion-icon> -->
     <iframe  width="100%" height="180" [src]="v.selfPath" frameborder="0" allowfullscreen></iframe>
   </ion-col>
 </ion-row>
