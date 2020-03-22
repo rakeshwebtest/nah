@@ -30,7 +30,7 @@ export class MeetingDetailsComponent implements OnInit {
       key: 'images',
       type: 'file',
       wrappers: ['vertical'],
-      className: 'col-12',
+      className: '',
       templateOptions: {
         multiple: true,
         required: false,

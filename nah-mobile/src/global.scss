@@ -26,6 +26,9 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @import "theme/svg-icons";
+// body{
+//     --ion-background-color: #ff3700;
+// }
 ion-header{
   --ion-toolbar-background: var(--ion-color-danger);
   color: #ffffff;
@@ -198,7 +201,18 @@ ion-tabs{
     }
 }
 .button-small {
-    font-size: 10px;
+    font-size: 16px !important;
+    border-radius: 12px;
+    padding: 3px 0px;
+}
+.text-small{
+    font-size: 12px;
+}
+.text-medium{
+    font-size: 14px;
+}
+.text-large{
+    font-size: 16px;
 }
 formly-field-file ion-input{
     width: 100% !important;
@@ -327,3 +341,16 @@ ion-tab-button{
 .ionic-selectable-value-item,.item .sc-ion-label-md-h{
     white-space:inherit !important;
 }
+.header-logo {
+    width: 40px;
+    display: inline-block;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;padding: 3px;
+    margin-right: 5px;
+}
+ion-footer{
+    ion-textarea{border-radius: 30px;}
+}
+.d-flex{display: flex;}
+.black{color: #000000;}

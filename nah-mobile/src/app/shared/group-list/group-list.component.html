@@ -11,12 +11,17 @@
         </ion-col>
         <ion-col class="ion-padding-l-0" (click)="navGroupDetails(item)">
           <ion-row class="ion-nowrap ion-align-items-center" >
-            <ion-col class="ion-padding-l-0">
+            <ion-col class="ion-no-padding">
               <ion-label class="meeting-title"><strong>Say No To</strong> {{ item.name }}</ion-label>
+              <ion-text class="text-medium" color="danger">
+                <p class="ion-no-margin">
+                  Created by: <strong>{{ item.createdBy.displayName }}</strong>
+                </p>
+                </ion-text>
             </ion-col>
           </ion-row>
         </ion-col>
-        <ion-col size="4" class="ion-text-end" *ngIf="userInfo.id !== item.createdBy.id">
+        <ion-col size="auto" class="ion-text-end" *ngIf="userInfo.id !== item.createdBy.id">
           <ion-button size="small" style="font-size: 12p;" color="medium" class="ion-no-margin" (click)="follow(item,$event)"
             *ngIf="item.isFollower">
             Un Follow
@@ -26,13 +31,15 @@
             Follow
           </ion-button>
         </ion-col>
-        <ion-col size="3" class="ion-text-end" *ngIf="userInfo.id === item.createdBy.id">
+        <ion-col size="auto" class="ion-text-end" *ngIf="userInfo.id === item.createdBy.id">
           <ion-icon name="trash" class="icon-big" (click)="deleteGroupConfirm(item,gInx)"></ion-icon>
           <!-- <ion-icon name="color-filter" class="icon-big"></ion-icon> -->
         </ion-col>
       </ion-row>
-      <ion-row style="padding: 10px;" *ngIf="item.followers && item.followers.length > 0" class="ion-nowrap ion-align-items-center ion-justify-content-between">
-        <app-peoples-icons [peoples]="item.followers" label="Members are Following"></app-peoples-icons>
+      <ion-row *ngIf="item.followers && item.followers.length > 0" class="ion-nowrap ion-align-items-center ion-justify-content-between">
+        <ion-col class="ion-padding-t-0">
+          <app-peoples-icons [peoples]="item.followers" label="Members are Following"></app-peoples-icons>
+        </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
