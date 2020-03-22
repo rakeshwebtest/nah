@@ -20,6 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 // IonicStorageModule.forRoot({
 //   name: '__nah',
@@ -31,6 +33,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     IonicModule.forRoot(

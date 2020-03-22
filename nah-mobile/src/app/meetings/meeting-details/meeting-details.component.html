@@ -79,21 +79,25 @@
 
           <ng-container [ngSwitch]="activeTab">
             <ng-container *ngSwitchCase="'images'">
+
               <ion-row class="ion-nowrap">
                 <ion-col>
 
 
                   <ion-list class="image-list">
-                    <ion-img-viewer class="image-thumb" *ngFor="let item of meeting.photos" [title]="meeting.title"
-                      scheme="dark" [src]="item.imagePath">
-                    </ion-img-viewer>
+                    <p class="container" gallerize>
+                    <img  *ngFor="let item of meeting.photos" [title]="meeting.title"
+                      [src]="item.imagePath">
+                      </p>
                     <!-- <ion-img class="image-thumb" *ngFor="let item of meeting.photos" [src]="item.imagePath"></ion-img> -->
 
-                    <form [formGroup]="form">
-                      <formly-form [form]="form" [fields]="fields" [model]="imageModel">
-                      </formly-form>
-                    </form>
+                   
                   </ion-list>
+                  <form [formGroup]="form">
+                    <formly-form [form]="form" [fields]="fields" [model]="imageModel">
+                    </formly-form>
+                  </form>
+
                 </ion-col>
 
               </ion-row>
