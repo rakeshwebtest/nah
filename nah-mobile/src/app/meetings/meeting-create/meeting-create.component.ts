@@ -75,7 +75,7 @@ export class MeetingCreateComponent implements OnInit {
       },
       {
         type: 'button',
-        className: 'flex ion-text-right ion-padding-t-10 ion-margin-t-3',
+        className: 'flex ion-text-right ion-padding-t-10',
         templateOptions: {
           label: '',
           text: 'Add Group',
