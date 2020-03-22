@@ -19,6 +19,9 @@ import { MeetingDetailsActionsComponent } from './meeting-details/meeting-detail
 import { ReportModule } from '../shared/report/report.module';
 import { ReportComponent } from '../shared/report/report.component';
 import { MeetingAddVideoPopupComponent } from './meeting-details/meeting-videos/meeting-add-video-popup/meeting-add-video-popup.component';
+import { GalleryModule } from '@ngx-gallery/core';
+import { LightboxModule } from '@ngx-gallery/lightbox';
+import { GallerizeModule } from '@ngx-gallery/gallerize';
 @NgModule({
   imports: [
     CommonModule,
@@ -30,7 +33,10 @@ import { MeetingAddVideoPopupComponent } from './meeting-details/meeting-videos/
     MeetingListModule,
     TimeagoModule.forRoot(),
     PeoplesModule,
-    ReportModule
+    ReportModule,
+    GalleryModule,
+    LightboxModule,
+    GallerizeModule
   ],
   declarations: [MeetingsPage, MeetingDetailsActionsComponent, MeetingVideosComponent, MeetingDetailsComponent, MeetingCreateComponent,MeetingAddVideoPopupComponent],
   entryComponents: [MeetingDetailsActionsComponent,ReportComponent,MeetingAddVideoPopupComponent]
