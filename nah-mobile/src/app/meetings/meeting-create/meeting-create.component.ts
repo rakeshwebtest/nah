@@ -4,10 +4,11 @@ import { FormGroup } from '@angular/forms';
 import { AppHttpClient } from 'src/app/utils';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { GroupCreateModalComponent } from 'src/app/group-create-modal/group-create-modal.component';
 import { map, startWith, tap } from 'rxjs/operators';
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-meeting-create',
   templateUrl: './meeting-create.component.html',
@@ -17,6 +18,7 @@ export class MeetingCreateComponent implements OnInit {
   title = 'Create A Meeting';
   form = new FormGroup({});
   model: any = {};
+  formShow = false;
   maxDate: any = (new Date()).getFullYear() + 3;
   fields: FormlyFieldConfig[] = [{
     key: 'title',
@@ -203,6 +205,8 @@ export class MeetingCreateComponent implements OnInit {
     private modalController: ModalController,
     public loadingController: LoadingController,
     private authService: AuthenticationService,
+    private activeRoute: ActivatedRoute,
+    private nativeStorage: Storage,
     private router: Router) { }
 
   ngOnInit() {
@@ -220,6 +224,33 @@ export class MeetingCreateComponent implements OnInit {
       }
       this.fields[3].fieldGroup[0].templateOptions.options = this.groupList || [];
     });
+    if (this.activeRoute.snapshot.params.meetingId){
+
+      this.editMeeting();
+    }else{
+      this.formShow = true;
+    }
+  }
+  editMeeting() {
+    this.title = 'Edit A Meeting';
+    this.nativeStorage.get('meeting_edit').then(res => {
+      this.model = {
+        id: res.id,
+        title: res.title,
+        agenda: res.agenda,
+        contactInfo: res.contactInfo,
+        meetingDate: this.getCurrentDateString(res.meetingDate),
+        endDate: res.endDate,
+        location: res.location,
+        startTime: res.startTime,
+        endTime: res.endTime,
+        cityId: res.city.id,
+        groupId: res.group.id,
+        imageUrl: res.imageUrl
+      }
+      this.formShow = true;
+    })
+
   }
   getCities() {
     this.http.get('city/list').subscribe(res => {

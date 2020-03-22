@@ -67,10 +67,8 @@ export class MeetingController {
   }))
   @Post()
   async createMeeting(@UploadedFile() image, @Body() meetingDto: CreateMeetingDto, @Request() req) {
-    console.log(image, meetingDto);
-    if (image && image.path)
-      meetingDto.imageUrl = image.path;
-    const data = await this.meetingService.createMeeting(meetingDto);
+
+    const data = await this.meetingService.createMeeting(meetingDto,image);
     return { message: 'Created successfully', success: true, data };
   }
 

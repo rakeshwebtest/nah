@@ -41,10 +41,10 @@ export class MeetingService {
             skip = query.skip;
         if (query.take)
             take = query.take;
-            
+
         const db = getRepository(MeetingEntity)
             .createQueryBuilder('m')
-                .leftJoin('m.createdBy', 'u')
+            .leftJoin('m.createdBy', 'u')
             .leftJoin('m.city', 'city')
             .leftJoin('m.group', 'group')
             .leftJoin('group.followers', 'gf')
@@ -80,29 +80,29 @@ export class MeetingService {
         // get one meeting details   
         if (query.meetingId) { // single meeting
             db.select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm", "mp",
-            "user.id", "user.displayName", "user.imageUrl", "city",
-            "mc", "mv", "mcr", "mcr_createdBy", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"]);
-  
+                "user.id", "user.displayName", "user.imageUrl", "city",
+                "mc", "mv", "mcr", "mcr_createdBy", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"]);
+
             db.leftJoin("m.comments", 'mc')
-            .leftJoin("mc.createdBy", 'mc_createdBy')
-            .leftJoin("mc.replys", 'mcr')
-            .leftJoin("mcr.createdBy", 'mcr_createdBy')
-            .leftJoin("m.photos", 'mp')
-            .leftJoin("m.videos", 'mv')
-            .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" });
+                .leftJoin("mc.createdBy", 'mc_createdBy')
+                .leftJoin("mc.replys", 'mcr')
+                .leftJoin("mcr.createdBy", 'mcr_createdBy')
+                .leftJoin("m.photos", 'mp')
+                .leftJoin("m.videos", 'mv')
+                .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" });
             db.where('m.id = :meetingId', { meetingId: query.meetingId });
             const data: any = await db.getOne();
             // data.imageUrl = SERVERBASEPATH + data.imageUrl;
             return this.bindFileBasePath(data);
         } else {
             db.select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm",
-            "user.id", "user.displayName", "user.imageUrl", "city"])
-            .orderBy({ "m.createdDate": "DESC"});
+                "user.id", "user.displayName", "user.imageUrl", "city"])
+                .orderBy({ "m.createdDate": "DESC" });
             db.take(take);
             db.skip(skip);
             const [result, total] = await db.getManyAndCount(); // all meeting
             if (result) {
-               await result.map(meeting => {
+                await result.map(meeting => {
                     return this.bindFileBasePath(meeting);
                 });
             }
@@ -127,7 +127,7 @@ export class MeetingService {
     /**
      * createing meeting
      */
-    async createMeeting(meeting: CreateMeetingDto): Promise<MeetingEntity> {
+    async createMeeting(meeting: CreateMeetingDto, image): Promise<MeetingEntity> {
         const _meeting = new MeetingEntity();
         _meeting.title = meeting.title;
         _meeting.agenda = meeting.agenda;
@@ -135,10 +135,12 @@ export class MeetingService {
         _meeting.endDate = meeting.endDate;
         _meeting.startTime = meeting.startTime;
         _meeting.endTime = meeting.endTime;
-        _meeting.imageUrl = meeting.imageUrl;
         _meeting.location = meeting.location;
         _meeting.contactInfo = meeting.contactInfo;
         _meeting.isPublished = parseInt(meeting.isPublished);
+
+        if (image && image.path)
+            _meeting.imageUrl = image.path;
 
         const userId = parseInt(meeting.createdBy);
         const groupId = parseInt(meeting.groupId);
@@ -153,8 +155,11 @@ export class MeetingService {
         // city
         _meeting.city = new CityEntity();
         _meeting.city.id = parseInt(meeting.cityId);
+        if (meeting.id)
+            _meeting.id = parseInt(meeting.id);
 
         return this.meetingRepository.save(_meeting);
+
         // return data;
 
     }

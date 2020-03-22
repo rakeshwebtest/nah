@@ -4,6 +4,8 @@ import { timer } from 'rxjs';
 import { strict } from 'assert';
 export class CreateMeetingDto {
 
+    @ApiProperty()
+    id: string;
     @ApiProperty({ type: 'string', format: 'binary' })
     image: any;
     @ApiProperty()

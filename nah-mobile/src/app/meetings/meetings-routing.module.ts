@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'create',
     component: MeetingCreateComponent
+  },
+  {
+    path: 'edit/:meetingId',
+    component: MeetingCreateComponent
   }
 ];
 

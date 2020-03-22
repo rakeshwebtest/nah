@@ -163,7 +163,9 @@ export class MeetingDetailsComponent implements OnInit {
     const popover = await this.popoverController.create({
       component: MeetingDetailsActionsComponent,
       componentProps: {
-        meetingId: this.meeting.id
+        meetingId: this.meeting.id,
+        meeting: this.meeting,
+        userInfo: this.userInfo
       },
       event: ev,
       animated: true,
