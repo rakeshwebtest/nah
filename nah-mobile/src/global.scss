@@ -125,6 +125,10 @@ ion-select {
         font-size: 15px;
         margin-top: 0px;
     }
+    ion-input {
+        border-radius: 0px;
+        height: 42px;
+    }
 } 
 .select-placeholder{font-size: 15px !important;}
 .row{
@@ -138,7 +142,7 @@ ion-select {
     display: flex;
 }
 .col-8{
-    flex: 0 0 67%;
+    flex: 0 0 63%;
     padding-left: 15px;
     padding-right: 15px;
     display: flex;
@@ -150,7 +154,7 @@ ion-select {
     display: flex;
 }
 .col-4{
-    flex: 0 0 33%;
+    flex: 0 0 37%;
     padding-left: 15px;
     padding-right: 15px;
     display: flex;
@@ -231,10 +235,22 @@ formly-field-file ion-input{
         top: 0;
         left: 10px;
         width: 100px;
-        height: 35px;
-        line-height: 33px;
+        height: 40px;
+        line-height: 40px;
         color: #999;
     }
+    &.ion-untouched input{
+        opacity: 0;
+        height: 100%;
+    }
+    &.ion-touched{
+        &::before{
+            content: 'Chosen file';
+        }
+        input{
+            text-indent: -999px;
+         }
+    } 
     &.multiple-files{
         width: 70px !important;
         height: 70px;
@@ -253,8 +269,7 @@ formly-field-file ion-input{
         }
     }
 }
-formly-field-file ion-input input{
-    opacity: 0;
+formly-field-file ion-input  input{
     height: 100%;
 }
 .border{
@@ -356,3 +371,17 @@ ion-footer{
 }
 .d-flex{display: flex;}
 .black{color: #000000;}
+.required-star{
+    color: #F04141;
+}
+.side-by-side-flex{
+    display: flex;
+    padding: 0 15px;
+    margin-bottom: 15px;
+    .flex-auto{
+        flex: auto;
+    }
+    .flex{
+        flex: 0;
+    }
+}

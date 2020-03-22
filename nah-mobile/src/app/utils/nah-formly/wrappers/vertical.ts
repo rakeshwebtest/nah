@@ -8,7 +8,7 @@ import { FieldWrapper } from '@ngx-formly/core';
       <ion-col class="label-full-width" size="12">
         <ion-label style="width:100%;">
           {{ to.label }}
-          <span *ngIf="to.required && to.hideRequiredMarker !== true">*</span>
+          <span class="required-star" *ngIf="to.required && to.hideRequiredMarker !== true">*</span>
         </ion-label>
       </ion-col>
       <ion-col class="value-full-width" size="12">
