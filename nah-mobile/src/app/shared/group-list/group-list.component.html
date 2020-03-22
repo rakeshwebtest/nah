@@ -13,7 +13,7 @@
           <ion-row class="ion-nowrap ion-align-items-center" >
             <ion-col class="ion-no-padding">
               <ion-label class="meeting-title"><strong>Say No To</strong> {{ item.name }}</ion-label>
-              <ion-text class="text-medium" color="danger">
+              <ion-text class="text-medium" color="dark" size="small">
                 <p class="ion-no-margin ion-padding-t-5">
                   Created by: <strong>{{ item.createdBy.displayName }}</strong>
                 </p>
@@ -32,7 +32,7 @@
           </ion-button>
         </ion-col>
         <ion-col size="auto" class="ion-text-end" *ngIf="userInfo.id === item.createdBy.id">
-          <ion-icon size="large" name="trash" class="icon-big" (click)="deleteGroupConfirm(item,gInx)"></ion-icon>
+          <ion-icon size="large" color="medium" name="trash" class="icon-big" (click)="deleteGroupConfirm(item,gInx)"></ion-icon>
           <!-- <ion-icon name="color-filter" class="icon-big"></ion-icon> -->
         </ion-col>
       </ion-row>

@@ -23,11 +23,11 @@
   <!-- <ion-row class="ion-justify-content-center">
     <h3 class="red-color font-24">A new way to hate...!</h3>
   </ion-row> -->
-  <ion-toolbar>
-    <ion-button slot="start" color="danger" (click)="submit(model,false)" [disabled]="form.invalid">
+  <ion-toolbar class="ion-text-center">
+    <ion-button color="danger" (click)="submit(model,false)" [disabled]="form.invalid">
       Save as draft
     </ion-button>
-    <ion-button slot="end" color="danger" (click)="submit(model,true)" [disabled]="form.invalid">
+    <ion-button color="danger" (click)="submit(model,true)" [disabled]="form.invalid">
       Save & Publish
     </ion-button>
     <!-- <ion-button color="light" (click)="signInWithGoogleTest()">
