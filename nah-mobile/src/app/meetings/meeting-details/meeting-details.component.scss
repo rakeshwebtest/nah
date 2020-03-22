@@ -2,9 +2,16 @@
     width: 70px;
     height: 70px;
     margin: 5px;
+    margin-left: 0;
     img{
         border-radius: 7px;
+        height: 70px;
+        width: 70px;
     }
+}
+.image-thumb ion-img {
+    border-radius: 7px;
+    height: 100%;
 }
 .image-list{
     display: flex;
@@ -76,10 +83,11 @@
 }
 .reply-list {
     display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: flex-end;
-    padding-bottom: 5px;
+    padding-top: 5px;
+    align-items: baseline;
+    border-top: 1px solid #eaeaea;
 }
 .custom-chip{
     background-color: transparent;

@@ -12,8 +12,7 @@
   <ion-toolbar>
     <ion-buttons slot="start" class="white-color">
       <ion-back-button defaultHref="dashboard/type/all"></ion-back-button>
-      <ion-img class="ion-padding-r-10"
-        style="width: 30px;display: inline-block;height: 30px;border-radius: 50%;text-align: center;padding: 3px;margin-right: 5px;"
+      <ion-img class="ion-padding-r-10 header-logo"
         src="assets/svg/nah_logo_white.svg"></ion-img>
         <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
           Profile
@@ -39,6 +38,13 @@
     </ion-card-header>
     <ion-card-content class="card-body ion-text-center">
       <h3 class="username">{{ userInfo.displayName }}</h3>
+      <ion-text>
+        <ion-icon size="small" color="warning" name="star"></ion-icon>
+        <ion-icon size="small" color="warning" name="star"></ion-icon>
+        <ion-icon size="small" color="warning" name="star"></ion-icon>
+        <ion-icon size="small" name="star"></ion-icon>
+        <ion-icon size="small" name="star"></ion-icon>
+      </ion-text>
       <h5 class="country">{{ userInfo?.city?.name }}</h5>
       <h5 class="country">{{ userInfo.typeOfNoer }}</h5>
       <!-- <h6 class="followes">Followes: <ion-chip>
@@ -55,7 +61,7 @@
           <ion-tab-button [ngClass]="{'active': activeTab=='all'}" (click)="activeTab='all'">
             <ion-label>All Groups</ion-label>
           </ion-tab-button>
-          <ion-tab-button [ngClass]="{'active': activeTab=='myGroups'}" (click)="activeTab='myGroups'">
+          <ion-tab-button class="ion-margin-l-5" [ngClass]="{'active': activeTab=='myGroups'}" (click)="activeTab='myGroups'">
             <ion-label >My Groups</ion-label>
           </ion-tab-button>
     

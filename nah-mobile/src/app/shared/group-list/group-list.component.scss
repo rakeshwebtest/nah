@@ -1,5 +1,6 @@
 
 .meeting-item{
+    margin: 0;
     .icon-big{
         font-size: 20px;
         padding: 7px;
@@ -36,6 +37,7 @@
     .meeting-title{
         widows: 100%;
         font-size: 14px;
+        color: #000;
     }
     .meeting-sub-title{
         font-size: 12px;

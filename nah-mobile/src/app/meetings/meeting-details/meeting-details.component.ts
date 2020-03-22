@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { PopoverController, AlertController } from '@ionic/angular';
 import { MeetingDetailsActionsComponent } from './meeting-details-actions/meeting-details-actions.component';
-
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-meeting-details',
   templateUrl: './meeting-details.component.html',
@@ -30,7 +30,7 @@ export class MeetingDetailsComponent implements OnInit {
       key: 'images',
       type: 'file',
       wrappers: ['vertical'],
-      className: 'col-12',
+      className: '',
       templateOptions: {
         multiple: true,
         required: false,
@@ -58,9 +58,21 @@ export class MeetingDetailsComponent implements OnInit {
       { 'url': 'assets/images/user-2.jpg' }
     ];
     const meetingId = this.router.snapshot.params.id;
-    this.http.get('meeting/list?meetingId=' + meetingId).subscribe(res => {
-      if (res.data) {
-        this.meeting = res.data;
+    this.http.get('meeting/list?meetingId=' + meetingId).pipe(map(res => {
+      let m: Meeting = <Meeting>res.data;
+        m.isCreatedBy = false;
+        m.isMember = false;
+        if (m.createdBy.id === this.userInfo.id)
+          m.isCreatedBy = true;
+
+        const isUser = m.members.find(u => u.user.id == this.userInfo.id);
+        if (isUser) {
+          m.isMember = true;
+        }
+        return m;
+    })).subscribe(res => {
+      if (res) {
+        this.meeting = res;
       }
     });
     this.form.valueChanges.subscribe(res => {
@@ -199,6 +211,24 @@ export class MeetingDetailsComponent implements OnInit {
       ]
     });
     await alert.present();
+  }
+  meetingJoin(m) {
+    const userInfo: any = this.authService.getUserInfo();
+    const member = {
+      meetingId: m.id,
+      userId: userInfo.id
+    }
+    if (!m.isMember) {
+      m.members.push({ user: userInfo })
+    } else {
+      const memberIndx = m.members.findIndex(m => m.user && m.user.id === userInfo.id);
+      m.members.splice(memberIndx, 1);
+    }
+
+    m.isMember = !m.isMember;
+    this.http.post('meeting/join', member).subscribe(res => {
+      console.log('res', res);
+    });
   }
 
 }
