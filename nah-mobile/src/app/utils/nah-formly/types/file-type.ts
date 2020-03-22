@@ -9,6 +9,9 @@ import { FieldType } from '@ngx-formly/core';
    [multiple]="to.multiple"
   (change)="onFileChange($event)"
    [formControl]="formControl" [ionFormlyAttributes]="field"></ion-input>
+   <ion-img class="ion-text-center m-height-250" *ngIf="!formControl.value 
+   && !this.to.multiple && model.imageUrl" [src]="model.imageUrl" style="height: 150px;padding:10px"></ion-img>
+       
   `,
 })
 export class FieldFileComponent extends FieldType implements OnInit {
