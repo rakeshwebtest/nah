@@ -3,8 +3,7 @@
     <ion-toolbar>
       <ion-buttons slot="start" class="white-color">
         <ion-back-button></ion-back-button>
-        <ion-img class="ion-padding-r-10 header-logo"
-        src="assets/svg/nah_logo_white.svg"></ion-img>
+        <ion-img class="ion-padding-r-10 header-logo" src="assets/svg/nah_logo_white.svg"></ion-img>
         <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
           {{title}}
         </ion-text>
@@ -27,6 +26,16 @@
             <ion-button size="small" color="danger" *ngIf="meeting.isPublished==0" (click)="publishMeeting(meeting)">
               Publish
             </ion-button>
+            <ng-container *ngIf="meeting.isPublished==1 && !meeting.isCreatedBy">
+              <ion-button class="ion-no-margin button-small" size="small" color="medium" (click)="meetingJoin(meeting)"
+                *ngIf="meeting.isMember">
+                Unjoin</ion-button>
+              <ion-button class="ion-no-margin button-small" size="small" color="danger" (click)="meetingJoin(meeting)"
+                *ngIf="!meeting.isMember">
+                Join</ion-button>
+            </ng-container>
+
+
           </ion-col>
         </ion-row>
       </ion-card-header>
@@ -47,16 +56,17 @@
           </ion-row>
           <ion-row>
             <ion-col size="5" class="ion-padding-l-0 ion-padding-r-0  d-flex ion-align-items-center">
-              <ion-icon color="danger" class="ion-padding-r-3" size="small" name="calendar"></ion-icon> 
-              <ion-label color="danger">{{meeting.meetingDate | date:"mediumDate"}}</ion-label> 
+              <ion-icon color="danger" class="ion-padding-r-3" size="small" name="calendar"></ion-icon>
+              <ion-label color="danger">{{meeting.meetingDate | date:"mediumDate"}}</ion-label>
             </ion-col>
             <ion-col size="7" class="ion-no-padding d-flex ion-align-items-center" color="danger">
-              <ion-icon class="ion-padding-r-3" color="danger" size="small" name="alarm"></ion-icon> 
-              <ion-label color="danger" >{{meeting.startTime | date:'shortTime'}} -
-                {{meeting.endTime | date:'shortTime'}}</ion-label> 
+              <ion-icon class="ion-padding-r-3" color="danger" size="small" name="alarm"></ion-icon>
+              <ion-label color="danger">{{meeting.startTime | date:'shortTime'}} -
+                {{meeting.endTime | date:'shortTime'}}</ion-label>
             </ion-col>
             <ion-col class="ion-no-padding d-flex ion-align-items-center black">
-              <ion-icon class="ion-padding-r-3" size="small" name="pin"></ion-icon>{{meeting?.location}} {{meeting?.city?.name}}
+              <ion-icon class="ion-padding-r-3" size="small" name="pin"></ion-icon>{{meeting?.location}}
+              {{meeting?.city?.name}}
             </ion-col>
           </ion-row>
           <ion-row class="ion-nowrap ion-padding-b-5">
@@ -71,7 +81,8 @@
                 <ion-tab-button [ngClass]="{'active': activeTab=='images'}" (click)="activeTab='images'">
                   <ion-label>Images</ion-label>
                 </ion-tab-button>
-                <ion-tab-button class="ion-margin-l-5 " [ngClass]="{'active': activeTab=='videos'}" (click)="activeTab='videos'">
+                <ion-tab-button class="ion-margin-l-5 " [ngClass]="{'active': activeTab=='videos'}"
+                  (click)="activeTab='videos'">
                   <ion-label>Videos</ion-label>
                 </ion-tab-button>
               </ion-tab-bar>
@@ -80,29 +91,32 @@
 
           <ng-container [ngSwitch]="activeTab">
             <ng-container *ngSwitchCase="'images'">
+
               <ion-row class="ion-nowrap">
                 <ion-col>
 
 
                   <ion-list class="image-list">
-                    <!-- <ion-img-viewer class="image-thumb" *ngFor="let item of meeting.photos" [title]="meeting.title"
-                      scheme="dark" [src]="item.imagePath">
-                    </ion-img-viewer> -->
-                    <!-- <ion-img class="image-thumb" *ngFor="let item of meeting.photos" [src]="item.imagePath"></ion-img> -->
-                    <ion-thumbnail class="image-thumb" *ngFor="let item of meeting.photos" [title]="meeting.title">
+                    <div class="container" gallerize>
+                      <img class="image-thumb" *ngFor="let item of meeting.photos" [title]="meeting.title"
+                        [src]="item.imagePath">
+                    </div>
+                    <!-- <ion-thumbnail class="image-thumb" *ngFor="let item of meeting.photos" [title]="meeting.title">
                       <img [src]="item.imagePath" alt="">
-                    </ion-thumbnail>
+                    </ion-thumbnail> -->
                     <form [formGroup]="form" class="ion-margin-t-5">
                       <formly-form [form]="form" [fields]="fields" [model]="imageModel">
                       </formly-form>
                     </form>
                   </ion-list>
+
                 </ion-col>
 
               </ion-row>
             </ng-container>
             <ng-container *ngSwitchCase="'videos'">
-              <app-meeting-videos [videos]="meeting.videos" [meeting]="meeting" [userInfo]="userInfo" [meetingId]="meeting.id"></app-meeting-videos>
+              <app-meeting-videos [videos]="meeting.videos" [meeting]="meeting" [userInfo]="userInfo"
+                [meetingId]="meeting.id"></app-meeting-videos>
             </ng-container>
             <ng-container *ngSwitchDefault>
               members
@@ -126,7 +140,7 @@
                     </ion-label> -->
                     <ion-label class="meeting-sub-title" style="font-weight: bold;">{{c.createdBy.displayName}}
                     </ion-label>
-            
+
 
 
                   </ion-col>
@@ -138,15 +152,15 @@
                   <ion-col class="ion-no-padding" size="2">
                   </ion-col>
                   <ion-col class="ion-no-padding" size="10">
-                    
+
                     <ion-label class="meeting-sub-title">{{c.comment}}</ion-label>
-                    
+
                   </ion-col>
                 </ion-row>
                 <ion-row class="reply-list meeting-item" *ngFor="let rc of c.replys;let inx=index;">
                   <label style="float: left;" class="meeting-date" timeago [date]="rc.createdDate"></label>
                   <ion-chip class="custom-chip">
-                    
+
                     <ion-label class="meeting-sub-title" style="font-weight: bold;">{{rc.createdBy.displayName}}
                     </ion-label>
                     <ion-avatar>
@@ -155,23 +169,25 @@
                   </ion-chip>
                   <ion-col size="12" class="ion-text-right ion-padding-t-0"
                     style="display: flex;align-items: center;justify-content: flex-end;">
-                    
+
                     <ion-label class="meeting-sub-title">{{rc.comment}}</ion-label>
-                    <ion-icon name="trash" *ngIf="userInfo.id === rc.createdBy.id" (click)="deleteComment(c.replys,inx,true)" class="ion-padding-r-5"
-                      style="cursor: pointer;"></ion-icon>
+                    <ion-icon name="trash" *ngIf="userInfo.id === rc.createdBy.id"
+                      (click)="deleteComment(c.replys,inx,true)" class="ion-padding-r-5" style="cursor: pointer;">
+                    </ion-icon>
                   </ion-col>
                 </ion-row>
-                <ion-row >
+                <ion-row>
                   <ion-col>
-                    <ion-icon *ngIf="userInfo.id === c.createdBy.id" name="trash" (click)="deleteComment(meeting.comments,cInx,false)" class="ion-padding-r-5"
-                    style="cursor: pointer;"></ion-icon>
+                    <ion-icon *ngIf="userInfo.id === c.createdBy.id" name="trash"
+                      (click)="deleteComment(meeting.comments,cInx,false)" class="ion-padding-r-5"
+                      style="cursor: pointer;"></ion-icon>
                   </ion-col>
                   <ion-col (click)="replyComment(c)" size="4" class="ion-no-padding ion-text-right" style="color:#f00;">
                     <ion-icon name="repeat"></ion-icon>
                     <label>Reply</label>
 
                   </ion-col>
-                  
+
                 </ion-row>
               </ion-grid>
             </ion-list>
@@ -202,15 +218,16 @@
           </ion-avatar>
         </ion-col>
         <ion-col class="">
-          <ion-textarea class="border" style="margin: 0;" rows="1" maxlength="250" #commentMsgEle [(ngModel)]="commentMsg"
-            placeholder="Enter Comments">
+          <ion-textarea class="border" style="margin: 0;" rows="1" maxlength="250" #commentMsgEle
+            [(ngModel)]="commentMsg" placeholder="Enter Comments">
           </ion-textarea>
         </ion-col>
         <ion-col size="auto" class="ion-text-center">
           <!-- <ion-button size="small" color="danger" (click)="addComment(commentMsg)" [disabled]="!commentMsg">
             Send
           </ion-button> -->
-          <ion-icon *ngIf="commentMsg" size="large" color="danger" (click)="addComment(commentMsg)" name="send" ></ion-icon>
+          <ion-icon *ngIf="commentMsg" size="large" color="danger" (click)="addComment(commentMsg)" name="send">
+          </ion-icon>
         </ion-col>
       </ion-row>
     </ion-grid>
