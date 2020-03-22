@@ -55,13 +55,13 @@ export class MeetingCreateComponent implements OnInit {
     }
   },
   {
-    fieldGroupClassName: 'row',
+    fieldGroupClassName: 'row side-by-side-flex',
     fieldGroup: [
       {
         key: 'groupId',
         type: 'selectable',
         wrappers: ['vertical'],
-        className: 'col-6 pr-0',
+        className: 'flex-auto pr-0',
         templateOptions: {
           label: 'Group',
           placeholder: 'Select Group',
@@ -73,7 +73,7 @@ export class MeetingCreateComponent implements OnInit {
       },
       {
         type: 'button',
-        className: 'col-6 ion-text-right ion-padding-t-10 ion-margin-t-3',
+        className: 'flex ion-text-right ion-padding-t-10 ion-margin-t-3',
         templateOptions: {
           label: '',
           text: 'Add Group',

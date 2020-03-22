@@ -9,7 +9,7 @@
         </ion-text>
       </ion-buttons>
       <ion-row class="profile-settings text-10">
-        <ion-icon style="cursor: pointer;" name="flag" color="light" (click)="actionMenu($event)"></ion-icon>
+        <ion-icon style="cursor: pointer;" name="ellipsis-vertical" color="light" (click)="actionMenu($event)"></ion-icon>
       </ion-row>
     </ion-toolbar>
   </ion-header>
@@ -19,10 +19,10 @@
         <ion-row>
           <ion-col class="ion-no-padding">
             <ion-card-title style="font-size: 18px;">{{meeting.title}} </ion-card-title>
-            <ion-card-subtitle class="ion-margin-t-0" color="danger">Say No To {{meeting.group.name}}
+            <ion-card-subtitle class="ion-margin-t-5" color="danger">Say No To {{meeting.group.name}}
             </ion-card-subtitle>
           </ion-col>
-          <ion-col class="ion-text-right ion-no-padding" size="12">
+          <ion-col class="ion-text-right ion-no-padding" size="auto">
             <ion-button size="small" color="danger" *ngIf="meeting.isPublished==0" (click)="publishMeeting(meeting)">
               Publish
             </ion-button>
@@ -171,14 +171,14 @@
                     style="display: flex;align-items: center;justify-content: flex-end;">
 
                     <ion-label class="meeting-sub-title">{{rc.comment}}</ion-label>
-                    <ion-icon name="trash" *ngIf="userInfo.id === rc.createdBy.id"
+                    <ion-icon size="small" name="trash" *ngIf="userInfo.id === rc.createdBy.id"
                       (click)="deleteComment(c.replys,inx,true)" class="ion-padding-r-5" style="cursor: pointer;">
                     </ion-icon>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>
-                    <ion-icon *ngIf="userInfo.id === c.createdBy.id" name="trash"
+                    <ion-icon size="small" *ngIf="userInfo.id === c.createdBy.id" name="trash"
                       (click)="deleteComment(meeting.comments,cInx,false)" class="ion-padding-r-5"
                       style="cursor: pointer;"></ion-icon>
                   </ion-col>

@@ -1,6 +1,6 @@
 <ion-list class="meeting-list">
   <ion-card class="meeting-item ion-no-padding" *ngFor="let item of groupList;let gInx=index;">
-    <ion-grid class="ion-no-padding">
+    <ion-grid class="">
       <ion-row class="ion-align-items-center" (click)="navGroupDetails(item)">
         <ion-col class="img-left" (click)="navGroupDetails(item)">
           <ion-avatar class="avater text" [ngStyle]="{'backgroundColor':customColors[gInx % customColors.length]}">
@@ -14,7 +14,7 @@
             <ion-col class="ion-no-padding">
               <ion-label class="meeting-title"><strong>Say No To</strong> {{ item.name }}</ion-label>
               <ion-text class="text-medium" color="danger">
-                <p class="ion-no-margin">
+                <p class="ion-no-margin ion-padding-t-5">
                   Created by: <strong>{{ item.createdBy.displayName }}</strong>
                 </p>
                 </ion-text>
@@ -36,7 +36,7 @@
           <!-- <ion-icon name="color-filter" class="icon-big"></ion-icon> -->
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="item.followers && item.followers.length > 0" class="ion-nowrap ion-align-items-center ion-justify-content-between">
+      <ion-row *ngIf="item.followers && item.followers.length > 0" class="ion-nowrap ion-padding-t-5 ion-align-items-center ion-justify-content-between">
         <ion-col class="ion-padding-t-0">
           <app-peoples-icons [peoples]="item.followers" label="Members are Following"></app-peoples-icons>
         </ion-col>
