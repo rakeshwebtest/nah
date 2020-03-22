@@ -102,7 +102,7 @@
               </ion-row>
             </ng-container>
             <ng-container *ngSwitchCase="'videos'">
-              <app-meeting-videos [videos]="meeting.videos" [meetingId]="meeting.id"></app-meeting-videos>
+              <app-meeting-videos [videos]="meeting.videos" [meeting]="meeting" [userInfo]="userInfo" [meetingId]="meeting.id"></app-meeting-videos>
             </ng-container>
             <ng-container *ngSwitchDefault>
               members
@@ -144,7 +144,7 @@
                   </ion-col>
                 </ion-row>
                 <ion-row class="reply-list meeting-item" *ngFor="let rc of c.replys;let inx=index;">
-                  <label style="float: left;" class="meeting-date" timeago [date]="rc.updatedDate"></label>
+                  <label style="float: left;" class="meeting-date" timeago [date]="rc.createdDate"></label>
                   <ion-chip class="custom-chip">
                     
                     <ion-label class="meeting-sub-title" style="font-weight: bold;">{{rc.createdBy.displayName}}

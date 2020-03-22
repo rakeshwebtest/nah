@@ -17,17 +17,24 @@
 </ion-header>
 <ion-content>
   <ion-row class="ion-nowrap ion-align-items-center">
-    <ion-row>
+    <!-- <ion-row>
       <ion-label>https://www.youtube.com/embed/</ion-label>
-    </ion-row>
+    </ion-row> -->
+    <form [formGroup]="form">
+      <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+      <!-- <div class="col-12">
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div> -->
+    </form>
+
     <ion-row class="">
-      <ion-input type="text" class="border" style="margin: 0;" [(ngModel)]="modelVideoPath"
-        placeholder="Youtube Video Id">
-      </ion-input>
+      <!-- <ion-input type="text" class="border" style="margin: 0;" [(ngModel)]="modelVideoPath"
+        placeholder="Youtube Video URL">
+      </ion-input> -->
     </ion-row>
   </ion-row>
   <ion-row class="ion-justify-content-center">
-    <ion-button color="danger" type="submit" (click)="addVideo(modelVideoPath)" [disabled]="!modelVideoPath">
+    <ion-button color="danger" type="submit" (click)="addVideo(modelVideoPath)" [disabled]="this.form.invalid">
       Submit
     </ion-button>
   </ion-row>

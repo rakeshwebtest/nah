@@ -13,6 +13,8 @@ export class MeetingVideosComponent implements OnInit {
 
   @Input() videos: any[] = [];
   @Input() meetingId: number;
+  @Input() meeting:any;
+  @Input() userInfo:any;
   videoPaths = [];
   modelVideoPath: any;
   trustedVideoUrl: SafeResourceUrl;
@@ -39,6 +41,10 @@ export class MeetingVideosComponent implements OnInit {
     video.selfPath = this.domSanitizer.bypassSecurityTrustResourceUrl(video.videoPath);
     return video;
   }
+  deleteVideo(v,inx){
+    this.videoPaths.splice(inx,1);
+
+  }
 
   async addVideoBtn() {
     const modal = await this.modalController.create({
@@ -50,7 +56,9 @@ export class MeetingVideosComponent implements OnInit {
     });
     modal.onDidDismiss().then(arg => {
       if (arg.data) {
-        this.videoPaths.unshift(this.selfUrl(arg.data));
+        const data =  this.selfUrl(arg.data);
+        console.log('self url',data);
+        this.videoPaths.unshift(data);
       }
     });
     return await modal.present();
