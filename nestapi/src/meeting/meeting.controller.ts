@@ -176,7 +176,7 @@ export class MeetingController {
 
     const data = await this.meetingService.uploadMeetingImages(images, params.meetingId);
 
-    return { message: "Uploaded Successfully", success: true, data };
+    return { message: "Images are added successfully", success: true, data };
 
   }
   /**
@@ -198,7 +198,8 @@ export class MeetingController {
   @UsePipes(new ValidationPipe())
   @Post('report')
   async addReport(@Body() report: ReportDto, @Request() req) {
-    return this.meetingService.addReport(report);
+    const data = await this.meetingService.addReport(report);
+    return { message: 'Report Submit Successfully',success: true, data };
   }
 
   @Get('report/category')
@@ -216,6 +217,6 @@ export class MeetingController {
   @Delete(':meetingId')
   async deleteGruop(@Param() params: any) {
     const data = await this.meetingService.deleteMeeting(params.meetingId);
-    return { message: 'Deleted Successfully', data };
+    return { message: 'Deleted Successfully',success: true, data };
   }
 }

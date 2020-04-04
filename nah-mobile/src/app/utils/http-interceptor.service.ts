@@ -105,6 +105,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         // console.log('resJson', resJson);
         if (resJson && resJson.success) {
             if (resJson.message) {
+                this.toater.presentToast(resJson.message);
             }
         } else {
             // Multiple error

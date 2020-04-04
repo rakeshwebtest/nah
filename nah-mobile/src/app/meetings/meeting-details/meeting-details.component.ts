@@ -60,16 +60,16 @@ export class MeetingDetailsComponent implements OnInit {
     const meetingId = this.router.snapshot.params.id;
     this.http.get('meeting/list?meetingId=' + meetingId).pipe(map(res => {
       let m: Meeting = <Meeting>res.data;
-        m.isCreatedBy = false;
-        m.isMember = false;
-        if (m.createdBy.id === this.userInfo.id)
-          m.isCreatedBy = true;
+      m.isCreatedBy = false;
+      m.isMember = false;
+      if (m.createdBy.id === this.userInfo.id)
+        m.isCreatedBy = true;
 
-        const isUser = m.members.find(u => u.user.id == this.userInfo.id);
-        if (isUser) {
-          m.isMember = true;
-        }
-        return m;
+      const isUser = m.members.find(u => u.user.id == this.userInfo.id);
+      if (isUser) {
+        m.isMember = true;
+      }
+      return m;
     })).subscribe(res => {
       if (res) {
         this.meeting = res;
@@ -198,7 +198,7 @@ export class MeetingDetailsComponent implements OnInit {
             let _url = 'meeting/comment/';
             if (reply) {
               _url += 'reply/' + comment.id;
-            
+
             } else {
               _url += comment.id;
             }
@@ -231,6 +231,13 @@ export class MeetingDetailsComponent implements OnInit {
     this.http.post('meeting/join', member).subscribe(res => {
       console.log('res', res);
     });
+  }
+  deleteImg(photos, inx) {
+    const photo = photos[inx];
+    this.http.delete('meeting/photo/' + photo.id).subscribe(res => {
+      console.log('res', res);
+    });
+    photos.splice(inx, 1);
   }
 
 }

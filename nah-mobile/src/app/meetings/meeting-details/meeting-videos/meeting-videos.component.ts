@@ -41,11 +41,6 @@ export class MeetingVideosComponent implements OnInit {
     video.selfPath = this.domSanitizer.bypassSecurityTrustResourceUrl(video.videoPath);
     return video;
   }
-  deleteVideo(v,inx){
-    this.videoPaths.splice(inx,1);
-
-  }
-
   async addVideoBtn() {
     const modal = await this.modalController.create({
       component: MeetingAddVideoPopupComponent,
@@ -62,5 +57,12 @@ export class MeetingVideosComponent implements OnInit {
       }
     });
     return await modal.present();
+  }
+  deleteVideo(videos, inx) {
+    const video = videos[inx];
+    this.http.delete('meeting/video/' + video.id).subscribe(res => {
+      console.log('res', res);
+    });
+    videos.splice(inx, 1);
   }
 }
