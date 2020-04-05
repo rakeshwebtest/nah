@@ -72,7 +72,7 @@ export class MeetingService {
             } else {
                 db.andWhere('m.isPublished = 1');
             }
-            
+
         }
 
         if (query.search) {
@@ -141,6 +141,8 @@ export class MeetingService {
         _meeting.contactEmail = meeting.contactEmail;
         _meeting.contactMobile = meeting.contactMobile;
         _meeting.isPublished = parseInt(meeting.isPublished);
+        console.log('meeting.imageUrl ',meeting.imageUrl );
+        
         if (!meeting.imageUrl || isNull(meeting.imageUrl))
             _meeting.imageUrl = null;
 
