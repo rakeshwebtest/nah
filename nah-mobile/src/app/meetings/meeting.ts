@@ -2,6 +2,8 @@ export interface Meeting {
     id: number;
     title: string;
     agenda: string;
+    contactMobile:string;
+    contactEmail:string;
     meetingDate: string;
     endDate:string;
     startTime: string;
@@ -19,6 +21,7 @@ export interface Meeting {
         id: number;
         displayName: string;
         imageUrl: string;
+        typeOfNoer:string;
 
     }
     comments?: any[];

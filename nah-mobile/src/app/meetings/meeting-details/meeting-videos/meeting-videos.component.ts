@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { AppHttpClient } from 'src/app/utils';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { MeetingAddVideoPopupComponent } from './meeting-add-video-popup/meeting-add-video-popup.component';
 
 @Component({
@@ -13,13 +13,14 @@ export class MeetingVideosComponent implements OnInit {
 
   @Input() videos: any[] = [];
   @Input() meetingId: number;
-  @Input() meeting:any;
-  @Input() userInfo:any;
+  @Input() meeting: any;
+  @Input() userInfo: any;
   videoPaths = [];
   modelVideoPath: any;
   trustedVideoUrl: SafeResourceUrl;
   showForm = false;
   constructor(private http: AppHttpClient,
+    private alertCtrl: AlertController,
     private modalController: ModalController,
     private domSanitizer: DomSanitizer) { }
 
@@ -51,18 +52,42 @@ export class MeetingVideosComponent implements OnInit {
     });
     modal.onDidDismiss().then(arg => {
       if (arg.data) {
-        const data =  this.selfUrl(arg.data);
-        console.log('self url',data);
+        const data = this.selfUrl(arg.data);
+        console.log('self url', data);
         this.videoPaths.unshift(data);
       }
     });
     return await modal.present();
   }
-  deleteVideo(videos, inx) {
-    const video = videos[inx];
-    this.http.delete('meeting/video/' + video.id).subscribe(res => {
-      console.log('res', res);
+  async deleteVideo(videos, inx) {
+
+    let alert = await this.alertCtrl.create({
+      message: 'Do you want to delete v?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Okay',
+          handler: () => {
+            const video = videos[inx];
+            this.http.delete('meeting/video/' + video.id).subscribe(res => {
+              console.log('res', res);
+            });
+            this.videos.splice(inx, 1);
+            videos.splice(inx, 1);
+
+          }
+        }
+      ]
     });
-    videos.splice(inx, 1);
+    await alert.present();
   }
+
+
+
 }

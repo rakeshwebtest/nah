@@ -232,12 +232,31 @@ export class MeetingDetailsComponent implements OnInit {
       console.log('res', res);
     });
   }
-  deleteImg(photos, inx) {
-    const photo = photos[inx];
-    this.http.delete('meeting/photo/' + photo.id).subscribe(res => {
-      console.log('res', res);
+  async deleteImg(photos, inx) {
+    let alert = await this.alertCtrl.create({
+      message: 'Do you want to delete Image?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Okay',
+          handler: () => {
+            const photo = photos[inx];
+            this.http.delete('meeting/photo/' + photo.id).subscribe(res => {
+              console.log('res', res);
+            });
+            photos.splice(inx, 1);
+
+          }
+        }
+      ]
     });
-    photos.splice(inx, 1);
+    await alert.present();
   }
 
 }
