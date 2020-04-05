@@ -77,11 +77,11 @@
                   <ion-label>Peoples</ion-label>
                 </ion-tab-button> -->
                 <ion-tab-button [ngClass]="{'active': activeTab=='images'}" (click)="activeTab='images'">
-                  <ion-label>Images</ion-label>
+                  <ion-label>Images({{meeting.photos.length}})</ion-label>
                 </ion-tab-button>
                 <ion-tab-button class="ion-margin-l-5 " [ngClass]="{'active': activeTab=='videos'}"
                   (click)="activeTab='videos'">
-                  <ion-label>Videos</ion-label>
+                  <ion-label>Videos({{meeting.videos.length}})</ion-label>
                 </ion-tab-button>
               </ion-tab-bar>
             </ion-tabs>
@@ -126,7 +126,7 @@
           </ng-container>
 
           <ion-row *ngIf="meeting.comments.length > 0">
-            <h3 class="comments-title">COMMENTS</h3>
+            <h3 class="comments-title">COMMENTS({{meeting.comments.length}})</h3>
 
 
             <ion-list class="meeting-list meeting-list-d" *ngFor="let c of meeting.comments;let cInx=index;">

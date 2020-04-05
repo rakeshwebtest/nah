@@ -57,7 +57,11 @@
               <img [src]="m.user.imageUrl" />
             </ion-avatar> -->
         </ion-col>
-
+      </ion-row>
+      <ion-row (click)="clickMeeting(m)">
+        <label class="meeting-desc ellipsas">
+          {{m.createdBy.displayName}}@{{m.createdBy.typeOfNoer}}
+        </label>
       </ion-row>
       <ion-row class="ion-padding-b-5 ">
         <app-peoples-icons [peoples]="m.members" label="People are going"></app-peoples-icons>
