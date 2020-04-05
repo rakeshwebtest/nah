@@ -231,7 +231,7 @@ export class MeetingCreateComponent implements OnInit {
           return group;
         })
       }
-      this.fields[3].fieldGroup[0].templateOptions.options = this.groupList || [];
+      this.fields[4].fieldGroup[0].templateOptions.options = this.groupList || [];
     });
     if (this.activeRoute.snapshot.params.meetingId){
 
@@ -271,7 +271,7 @@ export class MeetingCreateComponent implements OnInit {
           };
           return city;
         });
-        this.fields[4].templateOptions.options = res.data || [];//cityList;
+        this.fields[5].templateOptions.options = res.data || [];//cityList;
       }
 
     });
@@ -299,9 +299,11 @@ export class MeetingCreateComponent implements OnInit {
       headers: new HttpHeaders({ "Content-Type": "multipart/form-data" })
     };
     this.http.post('meeting', formData).subscribe(res => {
+      if(res.success){
       this.router.navigate(['/dashboard/type/my-meeting']);
       // window.location.reload();
       loading.dismiss();
+      }
     }, err => {
       loading.dismiss();
     });
