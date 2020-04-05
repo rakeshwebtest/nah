@@ -44,16 +44,25 @@ export class MeetingCreateComponent implements OnInit {
     }
   },
   {
-    key: 'contactInfo',
-    type: 'textarea',
+    key: 'contact_mobile',
+    type: 'input',
     wrappers: ['vertical'],
-    className: 'col-12',
+    className: 'col-12 ion-padding-t-10',
     templateOptions: {
+      label: 'Mobile Number',
+      placeholder: 'Enter Mobile Number',
       required: true,
-      maxLength: 1000,
-      label: 'Contact Information (Max size 1000 characters)',
-      placeholder: 'Enter Contact Information',
-      description: 'Max size 1000 characters'
+    }
+  },
+  {
+    key: 'contact_email',
+    type: 'input',
+    wrappers: ['vertical'],
+    className: 'col-12 ion-padding-t-10',
+    templateOptions: {
+      label: 'Email',
+      placeholder: 'Enter Email',
+      required: true,
     }
   },
   {
