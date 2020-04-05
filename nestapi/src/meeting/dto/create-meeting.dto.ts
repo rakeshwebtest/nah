@@ -15,8 +15,11 @@ export class CreateMeetingDto {
     @IsNotEmpty({ message: "Required Meeting Information required" })
     agenda: string;
     @ApiProperty()
-    @IsNotEmpty({ message: "Required Contact Info" })
-    contactInfo: string;
+    @IsNotEmpty({ message: "Required Contact Email" })
+    contactEmail: string;
+    @ApiProperty()
+    @IsNotEmpty({ message: "Required Contact Mobile" })
+    contactMobile: string;
     @ApiProperty()
     @IsNotEmpty({ message: "Required CreateBy" })
     createdBy: string;
