@@ -79,8 +79,8 @@ export class MeetingService {
 
         // get one meeting details   
         if (query.meetingId) { // single meeting
-            db.select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm", "mp",
-                "user.id", "user.displayName", "user.imageUrl", "city",
+            db.select(["m", "group", "u", "mm", "mp",
+                "user", "city",
                 "mc", "mv", "mcr", "mcr_createdBy", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"]);
 
             db.leftJoin("m.comments", 'mc')
@@ -95,8 +95,8 @@ export class MeetingService {
             // data.imageUrl = SERVERBASEPATH + data.imageUrl;
             return this.bindFileBasePath(data);
         } else {
-            db.select(["m", "group", "u.id", "u.displayName", "u.imageUrl", "mm",
-                "user.id", "user.displayName", "user.imageUrl", "city"])
+            db.select(["m", "group", "u", "mm",
+                "user", "city"])
                 .orderBy({ "m.createdDate": "DESC" });
             db.take(take);
             db.skip(skip);

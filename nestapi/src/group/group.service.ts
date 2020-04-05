@@ -22,7 +22,7 @@ export class GroupService {
 
         const db = getRepository(GroupEntity)
             .createQueryBuilder('group')
-            .select(["group", "gf", "gm", "createdBy", "user.id", "user.displayName", "user.imageUrl"])
+            .select(["group", "gf", "gm", "createdBy", "user"])
             .leftJoin('group.createdBy', 'createdBy')
             .leftJoin('group.followers', 'gf')
             .leftJoin('group.meetings', 'gm')
@@ -30,6 +30,7 @@ export class GroupService {
             .leftJoin('gf.user', 'user')
             .where('group.isDeleted != 1')
             .orderBy({ "group.createdDate": "DESC" });
+
 
         if (sessionUser.role === 'admin') {
             // get user 
@@ -43,7 +44,7 @@ export class GroupService {
             }
         }
         if (query.search) {
-            db.where("group.name like :name", { name: '%' + query.search + '%' })
+            db.andWhere("group.name like :name", { name: '%' + query.search + '%' })
         }
 
         db.take(take);
@@ -66,7 +67,7 @@ export class GroupService {
     async getGroupById(userId): Promise<any[]> {
         let data = await <any>getRepository(GroupEntity)
             .createQueryBuilder('group')
-            .select(["group", "gf", "gm", "user.id", "user.displayName", "user.imageUrl"])
+            .select(["group", "gf", "gm", "user"])
             .leftJoin('group.followers', 'gf')
             .leftJoin('group.meetings', 'gm')
             .leftJoin('gf.user', 'user')

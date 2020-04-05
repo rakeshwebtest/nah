@@ -14,6 +14,7 @@ export class GroupListComponent implements OnInit {
 
   @Input() type: 'mygroups' | 'all';
   googlePic: String;
+  searchKey = null;
   showLoading = false;
   userInfo: any;
   groupList = [];
@@ -43,6 +44,8 @@ export class GroupListComponent implements OnInit {
     }
     url += '&skip=' + this.groupList.length;
     url += '&take=' + this.take;
+    if (this.searchKey)
+      url += '&search=' + this.searchKey;
 
     this.showLoading = true;
     this.http.get(url).subscribe(res => {
@@ -72,7 +75,7 @@ export class GroupListComponent implements OnInit {
       }
     });
   }
-  follow(item,event) {
+  follow(item, event) {
     event.stopPropagation();
     item.isFollower = !item.isFollower;
     const payload = {
@@ -153,5 +156,10 @@ export class GroupListComponent implements OnInit {
   }
   toggleInfiniteScroll() {
     // this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
+  searchFilter(event) {
+    this.searchKey = (event.target.value) ? event.target.value : null;
+    this.groupList = [];
+    this.getGroups();
   }
 }
