@@ -1,6 +1,14 @@
 <ion-list class="meeting-list">
-  <ion-searchbar class="sticky-search" (ionInput)="searchFilter($event)" (ionBlur)="searchFilter($event)"></ion-searchbar>
-  
+  <ion-row class="sticky-search">
+    <ion-col size="3">
+      <ion-text><strong>Say No To</strong></ion-text>
+    </ion-col>
+    <ion-col>
+      <ion-searchbar  (ionInput)="searchFilter($event)" (ionBlur)="searchFilter($event)">
+      </ion-searchbar>
+    </ion-col>
+  </ion-row>
+
   <ion-card class="meeting-item ion-no-padding" *ngFor="let item of groupList;let gInx=index;">
     <ion-grid class="">
       <ion-row class="ion-align-items-center" (click)="navGroupDetails(item)">
@@ -12,33 +20,35 @@
           </ion-avatar>
         </ion-col>
         <ion-col class="ion-padding-l-0" (click)="navGroupDetails(item)">
-          <ion-row class="ion-nowrap ion-align-items-center" >
+          <ion-row class="ion-nowrap ion-align-items-center">
             <ion-col class="ion-no-padding">
               <ion-label class="meeting-title"><strong>Say No To</strong> {{ item.name }}</ion-label>
               <ion-text class="text-medium" color="dark" size="small">
                 <p class="ion-no-margin ion-padding-t-5">
                   <strong>{{ item.createdBy.displayName }}@{{ item.createdBy.typeOfNoer }}</strong>
                 </p>
-                </ion-text>
+              </ion-text>
             </ion-col>
           </ion-row>
         </ion-col>
         <ion-col size="auto" class="ion-text-end" *ngIf="userInfo.id !== item.createdBy.id">
-          <ion-button size="small" style="font-size: 12p;" color="medium" class="ion-no-margin" (click)="follow(item,$event)"
-            *ngIf="item.isFollower">
+          <ion-button size="small" style="font-size: 12p;" color="medium" class="ion-no-margin"
+            (click)="follow(item,$event)" *ngIf="item.isFollower">
             Un Follow
           </ion-button>
-          <ion-button size="small" style="font-size: 12p;" color="danger" class="ion-no-margin" (click)="follow(item,$event)"
-            *ngIf="!item.isFollower">
+          <ion-button size="small" style="font-size: 12p;" color="danger" class="ion-no-margin"
+            (click)="follow(item,$event)" *ngIf="!item.isFollower">
             Follow
           </ion-button>
         </ion-col>
         <ion-col size="auto" class="ion-text-end" *ngIf="userInfo.id === item.createdBy.id">
-          <ion-icon size="large" color="medium" name="trash" class="icon-big" (click)="deleteGroupConfirm(item,gInx)"></ion-icon>
+          <ion-icon size="large" color="medium" name="trash" class="icon-big" (click)="deleteGroupConfirm(item,gInx)">
+          </ion-icon>
           <!-- <ion-icon name="color-filter" class="icon-big"></ion-icon> -->
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="item.followers && item.followers.length > 0" class="ion-nowrap ion-padding-t-5 ion-align-items-center ion-justify-content-between">
+      <ion-row *ngIf="item.followers && item.followers.length > 0"
+        class="ion-nowrap ion-padding-t-5 ion-align-items-center ion-justify-content-between">
         <ion-col class="ion-padding-t-0">
           <app-peoples-icons [peoples]="item.followers" label="Members are Following"></app-peoples-icons>
         </ion-col>
@@ -52,8 +62,8 @@
     No Groups Available
   </ion-col>
 </ion-row>
-<ion-row  class="ion-align-items-center" *ngIf="showLoading">
-  <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;"> 
+<ion-row class="ion-align-items-center" *ngIf="showLoading">
+  <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
     <ion-spinner></ion-spinner>
   </ion-col>
 </ion-row>

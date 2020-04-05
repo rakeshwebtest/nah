@@ -141,10 +141,10 @@ export class MeetingService {
         _meeting.contactEmail = meeting.contactEmail;
         _meeting.contactMobile = meeting.contactMobile;
         _meeting.isPublished = parseInt(meeting.isPublished);
-        console.log('meeting.imageUrl ',meeting.imageUrl );
-        
-        if (!meeting.imageUrl || isNull(meeting.imageUrl))
-            _meeting.imageUrl = null;
+        console.log('meeting.imageUrl ', meeting.imageUrl);
+
+        if (!meeting.imageUrl || isNull(meeting.imageUrl) || meeting.imageUrl == 'null')
+            _meeting.imageUrl = 'uploads/logo.png';
 
         if (image && image.path)
             _meeting.imageUrl = image.path;

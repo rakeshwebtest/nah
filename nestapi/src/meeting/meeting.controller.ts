@@ -41,10 +41,10 @@ export class MeetingController {
     let data: any;
     if (query.meetingId) {
       data = await this.meetingService.getMeetings(query, sessionUser);
-      return { message: false, data };
+      return { message: false, data, success: true };
     } else {
       data = await this.meetingService.getMeetings(query, sessionUser);
-      return { message: false, success: true, ...data,query };
+      return { message: false, success: true, ...data, query };
     }
   }
 
@@ -67,9 +67,13 @@ export class MeetingController {
   }))
   @Post()
   async createMeeting(@UploadedFile() image, @Body() meetingDto: CreateMeetingDto, @Request() req) {
+    let msg = 'Created successfully';
+    if (meetingDto.id) {
+      msg = 'Updated successfully';
+    }
+    const data = await this.meetingService.createMeeting(meetingDto, image);
 
-    const data = await this.meetingService.createMeeting(meetingDto,image);
-    return { message: 'Created successfully', success: true, data };
+    return { message: msg, success: true, data };
   }
 
   /**
@@ -199,7 +203,7 @@ export class MeetingController {
   @Post('report')
   async addReport(@Body() report: ReportDto, @Request() req) {
     const data = await this.meetingService.addReport(report);
-    return { message: 'Report Submit Successfully',success: true, data };
+    return { message: 'Report Submit Successfully', success: true, data };
   }
 
   @Get('report/category')
@@ -217,6 +221,6 @@ export class MeetingController {
   @Delete(':meetingId')
   async deleteGruop(@Param() params: any) {
     const data = await this.meetingService.deleteMeeting(params.meetingId);
-    return { message: 'Deleted Successfully',success: true, data };
+    return { message: 'Deleted Successfully', success: true, data };
   }
 }
