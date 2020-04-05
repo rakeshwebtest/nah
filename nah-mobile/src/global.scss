@@ -401,27 +401,37 @@ ion-footer{
     z-index: 9;
     font-size: 16px;
 }
-.custom-search{
-    ion-text{
-        position: absolute;
-        z-index: 1;
-        font-size: 17px;
-        left: 20px;
-        top: 24px;
-        font-weight: normal !important;
-    }
-    ion-searchbar{
-        background-color: #ffffff;
-    }
-    .searchbar-input.sc-ion-searchbar-md {
-        padding-inline-start: 95px;
-    }
-    .searchbar-search-icon.sc-ion-searchbar-md {
-        left: auto;
-        right: 15px;
-    }
-    .searchbar-clear-button.sc-ion-searchbar-md {
-        right: 40px;
+.group-search{
+    top: 0px !important;
+    .custom-search{
+        display: flex;
+        align-items: center;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 
+        0 3px 1px -2px rgba(0,0,0,.2), 
+        0 1px 5px 0 rgba(0,0,0,.12);
+        background-color: #fff;
+        ion-text{
+            position: relative;
+            z-index: 1;
+            font-size: 17px;
+            font-weight: normal !important;
+            min-width: 85px;
+        }
+        ion-searchbar{
+            background-color: #ffffff;
+            padding: 0;
+        }
+        .searchbar-input.sc-ion-searchbar-md {
+            padding-inline-start: 10px;
+            box-shadow: none;
+        }
+        .searchbar-search-icon.sc-ion-searchbar-md {
+            left: auto;
+            right: 15px;
+        }
+        .searchbar-clear-button.sc-ion-searchbar-md {
+            right: 40px;
+        }
     }
 }
 .bg-red{
