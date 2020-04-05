@@ -45,7 +45,7 @@ export class MeetingCreateComponent implements OnInit {
   },
   {
     key: 'contactMobile',
-    type: 'input',
+    type: 'number',
     wrappers: ['vertical'],
     className: 'col-12 ion-padding-t-10',
     templateOptions: {
