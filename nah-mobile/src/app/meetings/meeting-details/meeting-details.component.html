@@ -96,8 +96,10 @@
 
                   <ion-list class="">
                     <div class="container image-list" gallerize>
-                      <div *ngFor="let item of meeting.photos;let imgIndex=index;">
-                        <span class="img-delete" (click)="deleteImg(meeting.photos,imgIndex)">X</span>
+                      <div class="image-list-block" *ngFor="let item of meeting.photos;let imgIndex=index;">
+                        <span class="img-delete" (click)="deleteImg(meeting.photos,imgIndex)">
+                          <ion-icon name="trash"></ion-icon>
+                        </span>
                         <img class="image-thumb"  [title]="meeting.title"
                         [src]="item.imagePath">
                       </div>

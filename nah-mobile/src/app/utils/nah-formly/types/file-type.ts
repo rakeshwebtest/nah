@@ -9,15 +9,25 @@ import { FieldType } from '@ngx-formly/core';
    [multiple]="to.multiple"
   (change)="onFileChange($event)"
    [formControl]="formControl" [ionFormlyAttributes]="field"></ion-input>
-   <div *ngIf="previewUrl 
+   <div class='file-view' *ngIf="previewUrl
    && !this.to.multiple">
-        <span (click)="deleteImg()" >Delete</span>
+        <span class="img-delete" (click)="deleteImg()">
+            <ion-icon name="trash"></ion-icon>
+        </span>
         <ion-img class="ion-text-center m-height-250"  [src]="previewUrl" style="height: 150px;padding:10px"></ion-img>
     </div>
  `,
+    styles: [`
+    .file-view{
+        position: relative
+    }
+    .img-delete{
+        top: 5px;
+    }
+ `]
 })
 export class FieldFileComponent extends FieldType implements OnInit {
-    @ViewChild('fileInput',null) fileInput: ElementRef;
+    @ViewChild('fileInput', null) fileInput: ElementRef;
     previewUrl = null;
     ngOnInit() {
         console.log('te', this.model, this.field.key);
@@ -52,7 +62,7 @@ export class FieldFileComponent extends FieldType implements OnInit {
         reader.readAsDataURL(file);
         reader.onload = (_event) => {
             this.previewUrl = reader.result;
-        }
+        };
     }
     deleteImg() {
         this.formControl.setValue(null);
