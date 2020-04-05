@@ -136,7 +136,8 @@ export class MeetingService {
         _meeting.startTime = meeting.startTime;
         _meeting.endTime = meeting.endTime;
         _meeting.location = meeting.location;
-        _meeting.contactInfo = meeting.contactInfo;
+        _meeting.contactEmail = meeting.contactEmail;
+        _meeting.contactMobile = meeting.contactMobile;
         _meeting.isPublished = parseInt(meeting.isPublished);
 
         if (image && image.path)
