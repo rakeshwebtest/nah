@@ -385,3 +385,19 @@ ion-footer{
         flex: 0;
     }
 }
+.img-delete{
+    position: absolute;
+    background-color: red;
+    color: wheat;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0px;
+    top: 0px;
+    cursor: pointer;
+    z-index: 9;
+    font-size: 16px;
+}

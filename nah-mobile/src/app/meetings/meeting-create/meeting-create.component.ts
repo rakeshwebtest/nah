@@ -44,7 +44,7 @@ export class MeetingCreateComponent implements OnInit {
     }
   },
   {
-    key: 'contact_mobile',
+    key: 'contactMobile',
     type: 'input',
     wrappers: ['vertical'],
     className: 'col-12 ion-padding-t-10',
@@ -55,7 +55,7 @@ export class MeetingCreateComponent implements OnInit {
     }
   },
   {
-    key: 'contact_email',
+    key: 'contactEmail',
     type: 'input',
     wrappers: ['vertical'],
     className: 'col-12 ion-padding-t-10',

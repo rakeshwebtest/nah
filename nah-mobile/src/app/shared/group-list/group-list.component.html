@@ -1,4 +1,6 @@
 <ion-list class="meeting-list">
+  <ion-searchbar class="sticky-search" (ionInput)="searchFilter($event)" (ionBlur)="searchFilter($event)"></ion-searchbar>
+  
   <ion-card class="meeting-item ion-no-padding" *ngFor="let item of groupList;let gInx=index;">
     <ion-grid class="">
       <ion-row class="ion-align-items-center" (click)="navGroupDetails(item)">

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "196016802810",
+    "firebase_url": "https://nah-mobile-a6ab8.firebaseio.com",
+    "project_id": "nah-mobile-a6ab8",
+    "storage_bucket": "nah-mobile-a6ab8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196016802810:android:66a59be6f6a794219db243",
+        "android_client_info": {
+          "package_name": "com.nah.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196016802810-lnb3pk45vliiddoqokmgd7jfk33mb36c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASfoOpi6Tv7oIksmeEj-US_vkYmyk2rUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196016802810-lnb3pk45vliiddoqokmgd7jfk33mb36c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "196016802810-uuir6evcgcbl9lvr2ger7s1qdfj9iehr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nah.mobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

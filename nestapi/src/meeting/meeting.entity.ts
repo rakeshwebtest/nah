@@ -18,7 +18,10 @@ export class MeetingEntity extends BaseEntity {
     agenda: string;
 
     @Column({ type: 'text', nullable: true })
-    contactInfo: string;
+    contactEmail: string;
+
+    @Column({ type: 'text', nullable: true })
+    contactMobile: string;
 
     @Column({ type: 'timestamp', name: 'meetingDate', default: () => 'LOCALTIMESTAMP' })
     meetingDate: string;
