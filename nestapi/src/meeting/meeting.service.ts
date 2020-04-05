@@ -18,6 +18,7 @@ import { MeetingReportEntity } from './meeting-report.entity';
 import { CommentReplyDto } from './dto/comment-reply.dto';
 import { MeetingCommentReplyEntity } from './meeting-comment-reply.entity';
 import { MeetingReportCateogryEntity } from './meeting-report-category.entity';
+import { isNull } from 'util';
 
 @Injectable()
 export class MeetingService {
@@ -71,6 +72,7 @@ export class MeetingService {
             } else {
                 db.andWhere('m.isPublished = 1');
             }
+            
         }
 
         if (query.search) {
@@ -139,6 +141,8 @@ export class MeetingService {
         _meeting.contactEmail = meeting.contactEmail;
         _meeting.contactMobile = meeting.contactMobile;
         _meeting.isPublished = parseInt(meeting.isPublished);
+        if (!meeting.imageUrl || isNull(meeting.imageUrl))
+            _meeting.imageUrl = null;
 
         if (image && image.path)
             _meeting.imageUrl = image.path;
