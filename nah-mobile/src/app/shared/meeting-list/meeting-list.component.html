@@ -59,9 +59,11 @@
         </ion-col>
       </ion-row>
       <ion-row (click)="clickMeeting(m)">
-        <label class="meeting-desc ellipsas">
-          {{m.createdBy.displayName}}@{{m.createdBy.typeOfNoer}}
-        </label>
+        <ion-col class="ion-padding-l-0 ion-padding-r-0 ion-padding-b-0 ">
+          <label class="meeting-desc ellipsas">
+            created by: {{m.createdBy.displayName}}@{{m.createdBy.typeOfNoer}}
+          </label>
+        </ion-col>
       </ion-row>
       <ion-row class="ion-padding-b-5 ">
         <app-peoples-icons [peoples]="m.members" label="People are going"></app-peoples-icons>

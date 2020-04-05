@@ -1,9 +1,10 @@
 <ion-list class="meeting-list">
   <ion-row class="sticky-search">
-    <ion-col size="3">
+    <!-- <ion-col size="3">
+      
+    </ion-col> -->
+    <ion-col class="custom-search">
       <ion-text><strong>Say No To</strong></ion-text>
-    </ion-col>
-    <ion-col>
       <ion-searchbar  (ionInput)="searchFilter($event)" (ionBlur)="searchFilter($event)">
       </ion-searchbar>
     </ion-col>

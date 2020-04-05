@@ -47,9 +47,14 @@
               {{meeting.agenda}}
             </ion-col>
           </ion-row>
-          <ion-row class="ion-padding-t-5">
-            <ion-col class="ion-no-padding black">
-              {{meeting.contactMobile}} - {{meeting.contactEmail}}
+          <ion-row  class="ion-padding-t-5">
+            <ion-col size="5" class="ion-padding-l-0 ion-padding-r-0  d-flex ion-align-items-center">
+              <ion-icon color="dark" class="ion-padding-r-3" size="small" name="call"></ion-icon>
+              <ion-label color="dark">{{meeting.contactMobile}}</ion-label>
+            </ion-col>
+            <ion-col size="7" class="ion-padding-l-0 ion-padding-r-0  d-flex ion-align-items-center">
+              <ion-icon color="dark" class="ion-padding-r-3" size="small" name="mail"></ion-icon>
+              <ion-label color="dark">{{meeting.contactEmail}}</ion-label>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -69,7 +74,7 @@
           </ion-row>
           <ion-row class="ion-padding-t-5">
             <ion-col class="ion-no-padding black">
-              {{meeting?.createdBy?.displayName}}@{{meeting?.createdBy?.typeOfNoer}} 
+              Created by: {{meeting?.createdBy?.displayName}}@{{meeting?.createdBy?.typeOfNoer}} 
             </ion-col>
           </ion-row>
           <ion-row class="ion-nowrap ion-padding-b-5">

@@ -401,3 +401,26 @@ ion-footer{
     z-index: 9;
     font-size: 16px;
 }
+.custom-search{
+    ion-text{
+        position: absolute;
+        z-index: 1;
+        font-size: 17px;
+        left: 20px;
+        top: 24px;
+        font-weight: normal !important;
+    }
+    ion-searchbar{
+        background-color: #ffffff;
+    }
+    .searchbar-input.sc-ion-searchbar-md {
+        padding-inline-start: 95px;
+    }
+    .searchbar-search-icon.sc-ion-searchbar-md {
+        left: auto;
+        right: 15px;
+    }
+    .searchbar-clear-button.sc-ion-searchbar-md {
+        right: 40px;
+    }
+}
