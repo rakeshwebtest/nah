@@ -67,6 +67,11 @@
               {{meeting?.city?.name}}
             </ion-col>
           </ion-row>
+          <ion-row class="ion-padding-t-5">
+            <ion-col class="ion-no-padding black">
+              {{meeting?.createdBy?.displayName}}@{{meeting?.createdBy?.typeOfNoer}} 
+            </ion-col>
+          </ion-row>
           <ion-row class="ion-nowrap ion-padding-b-5">
             <app-peoples-icons [peoples]="meeting.members" label="Members are Following"></app-peoples-icons>
           </ion-row>
