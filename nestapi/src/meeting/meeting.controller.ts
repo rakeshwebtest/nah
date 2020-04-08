@@ -156,7 +156,14 @@ export class MeetingController {
 
   @Get('publish/:meetingId')
   async meetingPublished(@Param() params: any) {
-    return this.meetingService.meetingPublished(params.meetingId);
+    const data = await this.meetingService.meetingPublishedOrCanceled(params.meetingId, 'publish');
+    return { message: 'Published Successfully', success: true, data };
+
+  }
+  @Get('cancel/:meetingId')
+  async meetingCanceled(@Param() params: any) {
+    const data = await this.meetingService.meetingPublishedOrCanceled(params.meetingId, 'cancel');
+    return { message: 'Canceled Successfully', success: true, data };
   }
   /**
    * 

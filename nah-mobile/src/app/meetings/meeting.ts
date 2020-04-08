@@ -31,6 +31,7 @@ export interface Meeting {
     isMember?: boolean;
     isCreatedBy?: boolean;
     isPublished?:number;
+    isCanceled?:number;
 }
 interface Photo{
     imagePath:string;

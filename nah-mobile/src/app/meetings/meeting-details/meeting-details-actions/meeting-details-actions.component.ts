@@ -47,6 +47,7 @@ export class MeetingDetailsActionsComponent implements OnInit {
   }
 
   async deleteMeetingConfirm() {
+    this.DismissClick();
     let alert = await this.alertCtrl.create({
       message: 'Do you want to delete this Meeting?',
       buttons: [
@@ -75,6 +76,30 @@ export class MeetingDetailsActionsComponent implements OnInit {
 
     });
 
+  }
+
+  async cancelMeeting() {
+    let alert = await this.alertCtrl.create({
+      message: 'Do you want to cancel this Meeting?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Okay',
+          handler: () => {
+            this.meeting.isCanceled = 1;
+            this.http.get('meeting/cancel/' + this.meeting.id).subscribe(res => {
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }

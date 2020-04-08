@@ -70,7 +70,7 @@ export class MeetingService {
             if (query.type && query.type === 'my-meeting') {
                 db.andWhere('u.id = :id', { id: sessionUser.id })
             } else {
-                db.andWhere('m.isPublished = 1');
+                db.andWhere('(m.isPublished = 1 && m.isCanceled = 0)');
             }
 
         }
@@ -250,11 +250,19 @@ export class MeetingService {
         return imagesList;
 
     }
-    async meetingPublished(meetingId) {
+    async meetingPublishedOrCanceled(meetingId, type) {
         const meeting = new MeetingEntity();
-        meeting.isPublished = 1;
+        switch (type) {
+            case 'publish':
+                meeting.isPublished = 1;
+                break;
+            case 'cancel':
+                meeting.isCanceled = 1;
+            default:
+                break;
+        }
         const data = await this.meetingRepository.update(meetingId, meeting);
-        return { message: 'Published Successfully', data };
+        return data;
     }
     async getReports(query): Promise<MeetingReportEntity[]> {
         // return this.meetingReportRepository.find({

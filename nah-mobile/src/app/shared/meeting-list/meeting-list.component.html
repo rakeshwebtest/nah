@@ -23,22 +23,30 @@
         </ion-col>
         <ion-col class="ion-no-padding" style="display: flex;flex-direction:column;justify-content: center;"
           (click)="clickMeeting(m)">
-          <ion-label class="meeting-title">{{m.title}} <ion-text color="danger" *ngIf="m.isPublished==0">
+          <ion-label class="meeting-title">{{m.title}} 
+            <ion-text color="danger" *ngIf="m.isPublished==0">
               (Un-published)
+            </ion-text>
+            <ion-text color="danger" *ngIf="m.isCanceled==1">
+              (Canceled)
             </ion-text>
           </ion-label>
           <!-- <ion-label class="meeting-sub-title" *ngIf="m.isPublished==0">Un-published</ion-label> -->
           <ion-label class="meeting-sub-title ion-padding-t-5">Say No To {{m.group.name}}</ion-label>
         </ion-col>
-        <ion-col size="auto" class="ion-text-end ion-padding-t-10 ion-padding-l-0 ion-padding-r-0 ion-padding-b-0" *ngIf="!m.isCreatedBy">
+        <ion-col size="auto" class="ion-text-end ion-padding-t-10 ion-padding-l-0 ion-padding-r-0 ion-padding-b-0"
+          *ngIf="!m.isCreatedBy">
           <ion-text class="text-medium" style="display: block;">{{m?.city?.name}}</ion-text>
-          <ion-button class="ion-no-margin button-small" size="small" color="medium" (click)="meetingJoin(m)" *ngIf="m.isMember">
+          <ion-button class="ion-no-margin button-small" size="small" color="medium" (click)="meetingJoin(m)"
+            *ngIf="m.isMember">
             Unjoin</ion-button>
-          <ion-button class="ion-no-margin button-small" size="small" color="danger" (click)="meetingJoin(m)" *ngIf="!m.isMember">
+          <ion-button class="ion-no-margin button-small" size="small" color="danger" (click)="meetingJoin(m)"
+            *ngIf="!m.isMember">
             Join</ion-button>
         </ion-col>
         <ion-col size="auto" class="ion-text-end" *ngIf="m.isCreatedBy">
-          <ion-icon color="medium" style="color: #737373;" size="large" name="trash" class="icon-big" (click)="deleteMeetingConfirm(m,mInx)"></ion-icon>
+          <ion-icon color="medium" style="color: #737373;" size="large" name="trash" class="icon-big"
+            (click)="deleteMeetingConfirm(m,mInx)"></ion-icon>
           <!-- <ion-icon name="color-filter" class="icon-big"></ion-icon> -->
         </ion-col>
       </ion-row>

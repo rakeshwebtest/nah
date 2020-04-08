@@ -158,6 +158,13 @@ export class MeetingDetailsComponent implements OnInit {
     });
 
   }
+  cancelMeeting(m: Meeting) {
+    this.meeting.isCanceled = 1;
+    this.http.get('meeting/cancel/' + m.id).subscribe(res => {
+
+    });
+
+  }
 
   async actionMenu(ev: any) {
     const popover = await this.popoverController.create({

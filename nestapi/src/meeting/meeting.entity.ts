@@ -71,6 +71,9 @@ export class MeetingEntity extends BaseEntity {
     @Column({ default: 0 })
     isDeleted: number;
 
+    @Column({ default: 0 })
+    isCanceled: number;
+
     // members: UserEntity[];
     // @ManyToOne(type => UserEntity, user => user.groups)
     // createdBy: UserEntity;
