@@ -17,6 +17,8 @@ export class UserProfileComponent implements OnInit {
   userInfo: any;
   groupList = [];
   activeTab = "all";
+  rating: any = [];
+  points = 100;
   @ViewChild(GroupListComponent, { static: false }) groupC: GroupListComponent;
 
   customColors = ['#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000'];
@@ -31,7 +33,21 @@ export class UserProfileComponent implements OnInit {
     const userInfo: any = this.authService.isAuthenticated();
     this.userInfo = userInfo.user;
     this.googlePic = userInfo.user.imageUrl;
+    this.getUserRating();
 
+  }
+  getUserRating() {
+    if(this.points < 250) {
+      this.rating.length = 1;
+    } else if(this.points < 600) {
+      this.rating.length = 2;
+    } else if(this.points < 1300) {
+      this.rating.length = 3;
+    } else if(this.points < 3000) {
+      this.rating.length = 4;
+    } else {
+      this.rating.length = 5;
+    }
   }
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
