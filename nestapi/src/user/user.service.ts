@@ -31,7 +31,6 @@ export class UserService {
 
     async getUser(_id: number): Promise<UserEntity> {
         return this.usersRepository.findOne({
-            select: ['id', 'email', 'displayName', 'typeOfNoer', 'imageUrl', 'city'],
             where: [{ id: _id }]
         });
     }
@@ -45,7 +44,7 @@ export class UserService {
             _where = [{ email: _email }];
         }
         return this.usersRepository.findOne({
-            select: ['id', 'email', 'displayName', 'typeOfNoer', 'imageUrl', 'city', 'status'],
+            select: ['id', 'email', 'displayName', 'typeOfNoer', 'imageUrl', 'score', 'city', 'status'],
             where: _where,
             relations: ["city"]
         });
@@ -66,7 +65,7 @@ export class UserService {
     }
     async findById(id: number): Promise<any> {
         const user = await this.usersRepository.findOne({
-            select: ['id', 'email', 'displayName', 'role', 'typeOfNoer', 'imageUrl', 'status'],
+            select: ['id', 'email','score', 'displayName', 'role', 'typeOfNoer', 'imageUrl', 'status'],
             where: [{ id: id }]
         });
 
