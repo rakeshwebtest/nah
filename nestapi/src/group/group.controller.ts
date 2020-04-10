@@ -15,26 +15,26 @@ export class GroupController {
     @Get('list')
     async getGroups(@Query() query, @Req() req) {
         const sessionUser = req.sessionUser;
-        const data: any = await this.service.getGroups(query,sessionUser);
+        const data: any = await this.service.getGroups(query, sessionUser);
         // urse:req.sessionUser
         return { message: false, ...data };
     }
     @Get('list/:id')
-    async getGroupById(@Param() params: any,@Query() query) {
+    async getGroupById(@Param() params: any, @Query() query) {
 
         const data: any = await this.service.getGroupById(params.id);
-        return { message: false, data };
+        return { message: false, data, success: true };
     }
     @UsePipes(new ValidationPipe())
     @Post()
-    async createGroup(@Body() group: CreateGroupDto,@Req() req) {
+    async createGroup(@Body() group: CreateGroupDto, @Req() req) {
         //check groupname exist or not
         const sessionUser = req.sessionUser;
         const isGroup = await this.service.checkGroupName(group);
         if (isGroup) {
-            throw new HttpException({ message: 'Already group name created', errors: 'Already group exists' }, HttpStatus.BAD_REQUEST);
+            throw new HttpException({ message: 'Already group name created', success: false }, HttpStatus.BAD_REQUEST);
         } else {
-            const data: any = await this.service.updateGroup(group,sessionUser);
+            const data: any = await this.service.updateGroup(group, sessionUser);
             data.followers = [];
             return { message: 'Created Successfully', data };
         }
@@ -68,7 +68,7 @@ export class GroupController {
     @Delete(':id')
     async deleteGruop(@Param() params: any) {
         const data = await this.service.deleteGroup(params.id);
-        return { message: 'Deleted Successfully', data };
+        return { message: 'Deleted Successfully', data, success: true };
     }
 
 }
