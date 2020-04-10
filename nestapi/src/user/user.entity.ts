@@ -6,6 +6,7 @@ import { MeetingEntity } from 'src/meeting/meeting.entity';
 import { CityEntity } from 'src/city/city.entity';
 import { MeetingCommentsEntity } from 'src/meeting/meeting-comments.entity';
 import { MeetingReportEntity } from 'src/meeting/meeting-report.entity';
+import { MeetingMembersEntity } from 'src/meeting/meeting-members.entity';
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
 
@@ -37,8 +38,6 @@ export class UserEntity extends BaseEntity {
     @Column({ length: 25, nullable: true })
     typeOfNoer: string;
 
-    @Column({ default: 300 })
-    score: number;
 
     // @Column({ length: 25, default: '' })
     // country: string;
@@ -54,6 +53,10 @@ export class UserEntity extends BaseEntity {
 
     @OneToMany(type => MeetingEntity, meeting => meeting.createdBy)
     meetings: MeetingEntity[];
+
+    @OneToMany(type => MeetingMembersEntity, mm => mm.user)
+    meetingMember: MeetingMembersEntity[];
+    
 
     @OneToMany(type => GroupEntity, group => group.createdBy)
     groups: GroupEntity[];

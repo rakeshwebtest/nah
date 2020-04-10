@@ -29,10 +29,23 @@ export class UserService {
         return db.getMany();
     }
 
-    async getUser(_id: number): Promise<UserEntity> {
+    async getUserByOne(_id: number): Promise<UserEntity> {
         return this.usersRepository.findOne({
             where: [{ id: _id }]
         });
+    }
+    async getUser(_id: number): Promise<any> {
+        const db = getRepository(UserEntity)
+            .createQueryBuilder("u");
+        db.loadRelationCountAndMap('u.commentsCount', 'u.comments', 'commentsCount');
+        db.loadRelationCountAndMap('u.groupsCount', 'u.groups', 'groups');
+        db.loadRelationCountAndMap('u.groupFollowingCount', 'u.following', 'followingCount');
+        db.loadRelationCountAndMap('u.meetingsCount', 'u.meetings', 'mc',qb=>qb.where('mc.isPublished = 1 && mc.isCanceled = 0'));
+        db.loadRelationCountAndMap('u.meetingJoinCount', 'u.meetingMember', 'meetingsjoin');
+        db.where('id=:id', { id: _id });
+        const data:any = await db.getOne();
+        data.score = this.getScore(data);
+        return data;
     }
     async checkUser(_email: string, password?: string): Promise<UserEntity> {
         // select: ['id', 'displayName','typeOfNeor'],
@@ -44,7 +57,7 @@ export class UserService {
             _where = [{ email: _email }];
         }
         return this.usersRepository.findOne({
-            select: ['id', 'email', 'displayName', 'typeOfNoer', 'imageUrl', 'score', 'city', 'status'],
+            select: ['id', 'email', 'displayName', 'typeOfNoer', 'imageUrl', 'city', 'status'],
             where: _where,
             relations: ["city"]
         });
@@ -65,7 +78,7 @@ export class UserService {
     }
     async findById(id: number): Promise<any> {
         const user = await this.usersRepository.findOne({
-            select: ['id', 'email','score', 'displayName', 'role', 'typeOfNoer', 'imageUrl', 'status'],
+            select: ['id', 'email', 'displayName', 'role', 'typeOfNoer', 'imageUrl', 'status'],
             where: [{ id: id }]
         });
 
@@ -93,5 +106,18 @@ export class UserService {
         };
 
         return { user: userRO };
+    }
+    public getScore(data: any) {
+        const { commentsCount, groupsCount, groupFollowingCount, meetingJoinCount, meetingsCount } = data;
+        let score = 100; // Become a Noer
+        score += (groupsCount * 20); //create 1 group 20
+        score += (meetingJoinCount * 5); //join 1 meeting 5
+        score += (meetingsCount * 10); //create 1 meeting 10
+        score += (commentsCount * 1); //give 1 comment 1
+        score += (Math.trunc(groupsCount / 5) * 50); //When you created 5 group 50
+        score += (Math.trunc(meetingsCount / 10) * 50); //When you create 10 meetings 50
+        score +=  (Math.trunc(meetingJoinCount / 20) * 50); //when you joined 20 meetings 50
+        score +=  (Math.trunc(commentsCount / 30) * 50); //when you gave 30 comments 50
+        return score;
     }
 }

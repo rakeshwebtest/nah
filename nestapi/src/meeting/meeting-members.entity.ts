@@ -13,7 +13,7 @@ export class MeetingMembersEntity extends BaseEntity {
     // @Column()
     // userId: number;
 
-    @ManyToOne(type => UserEntity, user => user.meetings, { onDelete: 'CASCADE' })
+    @ManyToOne(type => UserEntity, user => user.meetingMember, { onDelete: 'CASCADE' })
     user: UserEntity;
 
 }
