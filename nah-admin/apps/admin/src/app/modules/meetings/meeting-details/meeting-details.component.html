@@ -23,13 +23,14 @@
                 <label class="custom-label">Location</label>
                 <div class="label-value">{{ meeting.location }} </div>
             </div>
-            <div class="col-12 col-md-4">
-                <label class="custom-label">Contact Details</label>
-                <div class="label-value">{{ meeting.contactInfo }}</div>
-            </div>
+           
             <div class="col-12 col-md-4">
                 <label class="custom-label">Group</label>
                 <div class="label-value">Say No To {{ meeting.group?.name }} </div>
+            </div>
+            <div class="col-12">
+                <label class="custom-label">Contact Details</label>
+                <div class="label-value">{{ meeting.contactMobile }}, {{ meeting.contactEmail }}</div>
             </div>
             <div class="col-12">
                 <label class="custom-label">Description</label>
