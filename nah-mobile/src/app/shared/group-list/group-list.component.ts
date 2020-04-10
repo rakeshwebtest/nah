@@ -99,7 +99,8 @@ export class GroupListComponent implements OnInit {
     });
   }
 
-  async deleteGroupConfirm(group: any, index) {
+  async deleteGroupConfirm(group: any, index,event) {
+    event.stopPropagation();
     let alert = await this.alertCtrl.create({
       message: 'Do you want to delete this group?',
       buttons: [
@@ -128,7 +129,8 @@ export class GroupListComponent implements OnInit {
     return '#' + ('000000' + color).slice(-6);
   }
   deleteGroup(group: any, index) {
-    this.groupList.splice(index, 1);
+    // this.groupList.splice(index, 1);
+    group.isDeleted = 1;
     this.http.delete('group/' + group.id).subscribe(res => {
 
     });

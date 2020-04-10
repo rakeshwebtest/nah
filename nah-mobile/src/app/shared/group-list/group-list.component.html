@@ -12,7 +12,7 @@
 
   <ion-card class="meeting-item ion-no-padding" *ngFor="let item of groupList;let gInx=index;">
     <ion-grid class="">
-      <ion-row class="ion-align-items-center" (click)="navGroupDetails(item)">
+      <ion-row class="ion-align-items-center" >
         <ion-col class="img-left" (click)="navGroupDetails(item)">
           <ion-avatar class="avater text" [ngStyle]="{'backgroundColor':customColors[gInx % customColors.length]}">
             <label style="font-weight: bold;font-size:16px;color:#fff;">{{
@@ -23,7 +23,11 @@
         <ion-col class="ion-padding-l-0" (click)="navGroupDetails(item)">
           <ion-row class="ion-nowrap ion-align-items-center">
             <ion-col class="ion-no-padding">
-              <ion-label class="meeting-title"><strong>Say No To</strong> {{ item.name }}</ion-label>
+              <ion-label class="meeting-title"><strong>Say No To</strong> {{ item.name }}
+                <ion-text color="danger" *ngIf="item.isDeleted==1">
+                  (Suspend)
+                </ion-text>
+              </ion-label>
               <ion-text class="text-medium" color="dark" size="small">
                 <p class="ion-no-margin ion-padding-t-5">
                   Created By: {{ item.createdBy.displayName }}@{{ item.createdBy.typeOfNoer }}
@@ -42,8 +46,8 @@
             Follow
           </ion-button>
         </ion-col>
-        <ion-col size="auto" class="ion-text-end" *ngIf="userInfo.id === item.createdBy.id">
-          <ion-icon size="large" color="medium" name="trash" class="icon-big" (click)="deleteGroupConfirm(item,gInx)">
+        <ion-col size="auto" class="ion-text-end" *ngIf="userInfo.id === item.createdBy.id && item.isDeleted == 0">
+          <ion-icon size="large" color="medium" name="trash" class="icon-big" (click)="deleteGroupConfirm(item,gInx,$event)">
           </ion-icon>
           <!-- <ion-icon name="color-filter" class="icon-big"></ion-icon> -->
         </ion-col>

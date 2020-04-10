@@ -76,9 +76,8 @@ export class UsersController {
     @Get(':userId')
     async get(@Param('userId') id: number) {
         const data: any = await this.service.getUser(id);
-        return { message: false, data };
+        return { message: false, data, success: true };
     }
-
     // @Post('users/login')
     // async login(@Body('user') loginUserDto: LoginUserDto): Promise<UserRO> {
     //     const _user = await this.userService.findOne(loginUserDto);

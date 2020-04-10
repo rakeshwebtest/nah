@@ -44,11 +44,10 @@
             *ngIf="!m.isMember">
             Join</ion-button>
         </ion-col>
-        <ion-col size="auto" class="ion-text-end" *ngIf="m.isCreatedBy">
+        <!-- <ion-col size="auto" class="ion-text-end" *ngIf="m.isCreatedBy">
           <ion-icon color="medium" style="color: #737373;" size="large" name="trash" class="icon-big"
             (click)="deleteMeetingConfirm(m,mInx)"></ion-icon>
-          <!-- <ion-icon name="color-filter" class="icon-big"></ion-icon> -->
-        </ion-col>
+        </ion-col> -->
       </ion-row>
       <ion-row (click)="clickMeeting(m)">
         <label class="meeting-desc ellipsas">

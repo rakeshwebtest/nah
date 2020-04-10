@@ -37,6 +37,9 @@ export class UserEntity extends BaseEntity {
     @Column({ length: 25, nullable: true })
     typeOfNoer: string;
 
+    @Column({ default: 300 })
+    score: number;
+
     // @Column({ length: 25, default: '' })
     // country: string;
 

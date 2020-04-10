@@ -28,7 +28,6 @@ export class GroupService {
             .leftJoin('group.meetings', 'gm')
             .loadRelationCountAndMap('group.followersCount', 'group.followers', 'gf')
             .leftJoin('gf.user', 'user')
-            .where('group.isDeleted != 1')
             .orderBy({ "group.createdDate": "DESC" });
 
 
@@ -38,6 +37,8 @@ export class GroupService {
         } else {
             if (sessionUser.id && query.createdBy) {
                 db.andWhere('group.createdBy = :id', { id: sessionUser.id });
+            }else{
+                db.where('group.isDeleted != 1');
             }
             if (sessionUser.id && query.notCreatedBy) {
                 db.where('createdBy.id != :id', { id: sessionUser.id });
