@@ -49,7 +49,7 @@ export class MeetingCreateComponent implements OnInit {
     wrappers: ['vertical'],
     className: 'col-12 ion-padding-t-10',
     templateOptions: {
-      type:"number",
+      type: "number",
       label: 'Mobile Number',
       placeholder: 'Enter Mobile Number',
       required: true,
@@ -234,10 +234,10 @@ export class MeetingCreateComponent implements OnInit {
       }
       this.fields[4].fieldGroup[0].templateOptions.options = this.groupList || [];
     });
-    if (this.activeRoute.snapshot.params.meetingId){
+    if (this.activeRoute.snapshot.params.meetingId) {
 
       this.editMeeting();
-    }else{
+    } else {
       this.formShow = true;
     }
   }
@@ -301,10 +301,12 @@ export class MeetingCreateComponent implements OnInit {
       headers: new HttpHeaders({ "Content-Type": "multipart/form-data" })
     };
     this.http.post('meeting', formData).subscribe(res => {
-      if(res.success){
-      this.router.navigate(['/dashboard/type/my-meeting']);
-      // window.location.reload();
-      loading.dismiss();
+      if (res.success) {
+        this.router.navigate(['/dashboard/type/my-meeting']);
+        // window.location.reload();
+        loading.dismiss();
+      }else{
+        loading.dismiss();
       }
     }, err => {
       loading.dismiss();

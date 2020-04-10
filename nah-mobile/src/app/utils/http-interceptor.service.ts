@@ -109,15 +109,16 @@ export class HttpInterceptorService implements HttpInterceptor {
             }
         } else {
             // Multiple error
-            if (resJson.message) {
-                this.toater.presentToast(resJson.message);
-            }
+           
             if (resJson && resJson.errors) {
                 // console.log('resJson.data.errors', resJson.data.errors);
                 Object.keys(resJson.errors).forEach(e => {
+                    this.toater.presentToast(resJson.errors[e]);
                 });
             } else {
-
+                if (resJson.message) {
+                    this.toater.presentToast(resJson.message);
+                }
             }
         }
         return resJson;

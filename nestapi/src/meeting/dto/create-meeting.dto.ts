@@ -1,7 +1,24 @@
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsDate, Validate, ValidateIf, ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { timer } from 'rxjs';
 import { strict } from 'assert';
+
+@ValidatorConstraint({ name: "customText", async: false })
+export class CustomDateCheck implements ValidatorConstraintInterface {
+
+    validate(text: string, args: ValidationArguments) {
+      
+        const myDate = new Date(text);
+        const currentDate =  new Date();
+        currentDate.setHours(0,0,0,0);
+        return myDate >= currentDate; // for async validations you must return a Promise<boolean> here
+    }
+
+    defaultMessage(args: ValidationArguments) { // here you can provide default error message if validation failed
+        return "Check Date";
+    }
+
+}
 export class CreateMeetingDto {
 
     @ApiProperty()
@@ -30,6 +47,10 @@ export class CreateMeetingDto {
     @IsNotEmpty({ message: "Required city" })
     cityId: string;
     @ApiProperty()
+    @IsNotEmpty({ message: "Required meetingDate" })
+    @Validate(CustomDateCheck, {
+        message: "Please Choose Valid Date"
+    })
     meetingDate: string;
     @ApiProperty()
     endDate: string;
