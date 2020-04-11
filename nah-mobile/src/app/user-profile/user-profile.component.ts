@@ -79,6 +79,7 @@ export class UserProfileComponent implements OnInit {
     });
     modal.onDidDismiss().then(arg => {
       // this.getGroups();
+      this.getUserRating();
       console.log('arg', arg);
       if (arg.data)
         this.groupC.ngOnInit();
