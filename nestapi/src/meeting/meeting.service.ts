@@ -141,6 +141,8 @@ export class MeetingService {
         _meeting.contactEmail = meeting.contactEmail;
         _meeting.contactMobile = meeting.contactMobile;
         _meeting.isPublished = parseInt(meeting.isPublished);
+        if (_meeting.isPublished === 1)
+            _meeting.isCanceled = 0;
         console.log('meeting.imageUrl ', meeting.imageUrl);
 
         if (!meeting.imageUrl || isNull(meeting.imageUrl) || meeting.imageUrl == 'null')
@@ -255,6 +257,7 @@ export class MeetingService {
         switch (type) {
             case 'publish':
                 meeting.isPublished = 1;
+                meeting.isCanceled = 0;
                 break;
             case 'cancel':
                 meeting.isCanceled = 1;

@@ -79,6 +79,7 @@ export class MeetingDetailsActionsComponent implements OnInit {
   }
 
   async cancelMeeting() {
+    this.DismissClick();
     let alert = await this.alertCtrl.create({
       message: 'Do you want to cancel this Meeting?',
       buttons: [
