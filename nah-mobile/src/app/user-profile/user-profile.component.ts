@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
   userInfo: any;
   groupList = [];
   activeTab = "all";
-  rating: any = [];
+  rating = 1;
   points = 100;
   showLoading = false;
   @ViewChild(GroupListComponent, { static: false }) groupC: GroupListComponent;
@@ -34,7 +34,6 @@ export class UserProfileComponent implements OnInit {
     const userInfo: any = this.authService.isAuthenticated();
     this.userInfo = userInfo.user;
     this.googlePic = userInfo.user.imageUrl;   
-    this.rating.length = 1; 
     this.getUserRating();
   }
   getUserRating() {
@@ -50,15 +49,15 @@ export class UserProfileComponent implements OnInit {
   }
   getRating() {
     if(this.points < 250) {
-      this.rating.length = 1;
+      this.rating = 1;
     } else if(this.points < 600) {
-      this.rating.length = 2;
+      this.rating = 2;
     } else if(this.points < 1300) {
-      this.rating.length = 3;
+      this.rating = 3;
     } else if(this.points < 3000) {
-      this.rating.length = 4;
+      this.rating = 4;
     } else {
-      this.rating.length = 5;
+      this.rating = 5;
     }
   }
   async presentPopover(ev: any) {

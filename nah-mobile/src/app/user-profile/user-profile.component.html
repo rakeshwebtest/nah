@@ -38,12 +38,13 @@
     </ion-card-header>
     <ion-card-content class="card-body ion-text-center">
       <h3 class="username">{{ userInfo.displayName }}</h3>
-      <ion-text *ngFor="let r of rating; let rdx = index">
-        <ion-icon size="small" color="warning" name="star"></ion-icon>
-        <!-- <ion-icon size="small" color="warning" name="star"></ion-icon>
-        <ion-icon size="small" color="warning" name="star"></ion-icon>
-        <ion-icon size="small" color="warning" name="star"></ion-icon>
-        <ion-icon size="small" color="warning" name="star"></ion-icon> -->
+      <ion-text>
+        <ion-icon size="small" [style.color]="rating >= 1 ? 'yellow' : ''" name="star"></ion-icon>
+        <ion-icon size="small" [style.color]="rating >= 2 ? 'yellow' : ''" name="star"></ion-icon>
+        <ion-icon size="small" [style.color]="rating >= 3 ? 'yellow' : ''" name="star"></ion-icon>
+        <ion-icon size="small" [style.color]="rating >= 4 ? 'yellow' : ''" name="star"></ion-icon>
+        <ion-icon size="small" [style.color]="rating >= 5 ? 'yellow' : ''" name="star"></ion-icon>
+        <!-- <ion-icon size="small" color="warning" name="star"></ion-icon> -->
       </ion-text>
       <h5 class="country">{{ userInfo?.city?.name }}</h5>
       <h5 class="country">{{ userInfo.typeOfNoer }}</h5>
