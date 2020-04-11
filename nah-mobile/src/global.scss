@@ -88,6 +88,9 @@ ion-header{
 .margin-top-50{
     margin-top: 50px;
 }
+.margin-top-40{
+    margin-top: 40px;
+}
 
 ion-select {
     border: 1px solid #ccc;
@@ -311,6 +314,7 @@ ion-tab-bar{
         color: #000000;
         ion-label{
             color: #000;
+            text-transform: capitalize;
         }
     }
 }
@@ -321,13 +325,13 @@ ion-tab-button{
     border-radius: 5px !important;
     font-size: 16px;
     ion-label{
-        text-transform: uppercase;
+        text-transform: capitalize;
     }
     &.active,&:hover{
         background-color: var(--ion-color-danger);
         color: #ffffff;
         ion-label{
-            text-transform: uppercase;
+            text-transform: capitalize;
             color: #ffffff;
         }
     }
@@ -439,4 +443,9 @@ ion-footer{
 }
 .white-color{
     color: #ffffff;
+}
+.no-label{
+    .label-full-width{
+        display: none;
+    }
 }
