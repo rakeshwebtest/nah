@@ -3,7 +3,7 @@
     <name>NAH</name>
     <description>An awesome nah app</description>
     <author email="support@nah.in" href="http://nah.com/">nah Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://localhost:8100" />
     <access origin="*" />
     <access origin="*" subdomains="true" />
     <allow-intent href="http://*/*" />
@@ -116,4 +116,5 @@
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <engine name="browser" spec="5.0.4" />
+    <allow-navigation href="http://localhost:8100" sessionid="9de8b602" />
 </widget>

@@ -102,7 +102,7 @@ export class GroupListComponent implements OnInit {
   async deleteGroupConfirm(group: any, index,event) {
     event.stopPropagation();
     let alert = await this.alertCtrl.create({
-      message: 'Do you want to delete this group?',
+      message: 'Do you want to Suspend the Group?',
       buttons: [
         {
           text: 'Cancel',
