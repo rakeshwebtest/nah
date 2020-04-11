@@ -42,29 +42,29 @@ export class UserEntity extends BaseEntity {
     // @Column({ length: 25, default: '' })
     // country: string;
 
-    @ManyToOne(type => CityEntity, city => city.users)
+    @ManyToOne(type => CityEntity, city => city.users,{ onDelete: 'CASCADE' })
     city: CityEntity;
 
     // @OneToMany(type => GroupEntity, group => group.createBy)
     // groups: GroupEntity[];
 
-    @OneToMany(type => GroupFollowEntity, gf => gf.user)
+    @OneToMany(type => GroupFollowEntity, gf => gf.user,{ onDelete: 'CASCADE' })
     following: GroupFollowEntity[];
 
-    @OneToMany(type => MeetingEntity, meeting => meeting.createdBy)
+    @OneToMany(type => MeetingEntity, meeting => meeting.createdBy,{ onDelete: 'CASCADE' })
     meetings: MeetingEntity[];
 
-    @OneToMany(type => MeetingMembersEntity, mm => mm.user)
+    @OneToMany(type => MeetingMembersEntity, mm => mm.user,{ onDelete: 'CASCADE' })
     meetingMember: MeetingMembersEntity[];
     
 
-    @OneToMany(type => GroupEntity, group => group.createdBy)
+    @OneToMany(type => GroupEntity, group => group.createdBy,{ onDelete: 'CASCADE' })
     groups: GroupEntity[];
 
-    @OneToMany(type => MeetingCommentsEntity, mc => mc.createdBy)
+    @OneToMany(type => MeetingCommentsEntity, mc => mc.createdBy,{ onDelete: 'CASCADE' })
     comments: MeetingCommentsEntity[];
 
-    @OneToMany(type => MeetingReportEntity, mr => mr.createdBy)
+    @OneToMany(type => MeetingReportEntity, mr => mr.createdBy,{ onDelete: 'CASCADE' })
     reports: MeetingReportEntity[];
 
 }
