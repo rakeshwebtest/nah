@@ -6,11 +6,11 @@
   <!-- meeting.isPublished==0 &&  -->
   <ion-item *ngIf="meeting.isCreatedBy" color="danger" class="text-10" (click)="editMeeting()">
     <ion-icon name="md-create" color="light"></ion-icon>
-    <ion-label>Edit</ion-label>
+    <ion-label> Edit Meeting</ion-label>
   </ion-item>
   <ion-item *ngIf="meeting.isCreatedBy && meeting.isPublished==1 && meeting.isCanceled == 0" color="danger" class="text-10" (click)="cancelMeeting()">
     <ion-icon name="close-circle-outline" color="light"></ion-icon>
-    <ion-label>Cancel</ion-label>
+    <ion-label> Cancel Meeting</ion-label>
   </ion-item>
   <!-- <ion-item *ngIf="meeting.isCreatedBy" color="danger" class="text-10" (click)="deleteMeetingConfirm()">
     <ion-icon name="md-trash" color="light"></ion-icon>
