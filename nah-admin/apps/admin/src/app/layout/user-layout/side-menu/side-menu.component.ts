@@ -186,7 +186,7 @@ export class SideMenuComponent implements OnInit {
         ]
       },
       {
-        'label': 'Say No To Groups',
+        'label': 'Groups',
         'code': 'groups',
         'icon': 'fa fa-object-group',
         'app': 'zc-core',
@@ -200,7 +200,7 @@ export class SideMenuComponent implements OnInit {
         ]
       },
       {
-        'label': 'User Concerns',
+        'label': 'Reports',
         'code': 'reports',
         'icon': 'fa fa-copy',
         'app': 'zc-core',

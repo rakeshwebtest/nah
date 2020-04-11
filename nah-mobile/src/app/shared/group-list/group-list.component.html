@@ -47,7 +47,7 @@
           </ion-button>
         </ion-col>
         <ion-col size="auto" class="ion-text-end" *ngIf="userInfo.id === item.createdBy.id && item.isDeleted == 0">
-          <ion-icon size="large" color="medium" name="trash" class="icon-big" (click)="deleteGroupConfirm(item,gInx,$event)">
+          <ion-icon size="large" color="danger" name="remove-circle-outline" class="icon-big" (click)="deleteGroupConfirm(item,gInx,$event)">
           </ion-icon>
           <!-- <ion-icon name="color-filter" class="icon-big"></ion-icon> -->
         </ion-col>
