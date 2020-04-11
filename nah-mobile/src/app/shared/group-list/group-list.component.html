@@ -36,7 +36,7 @@
             </ion-col>
           </ion-row>
         </ion-col>
-        <ion-col size="auto" class="ion-text-end" *ngIf="userInfo.id !== item.createdBy.id">
+        <ion-col size="auto" class="ion-text-end" *ngIf="userInfo.id !== item.createdBy.id  && item.isDeleted==0">
           <ion-button size="small" style="font-size: 12p;" color="medium" class="ion-no-margin"
             (click)="follow(item,$event)" *ngIf="item.isFollower">
             Un Follow
