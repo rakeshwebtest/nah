@@ -37,13 +37,15 @@ export class UserService {
     async getUser(_id: number): Promise<any> {
         const db = getRepository(UserEntity)
             .createQueryBuilder("u");
+        db.select(["u", "c"]);
+        db.leftJoin('u.city', 'c');
         db.loadRelationCountAndMap('u.commentsCount', 'u.comments', 'commentsCount');
         db.loadRelationCountAndMap('u.groupsCount', 'u.groups', 'groups');
         db.loadRelationCountAndMap('u.groupFollowingCount', 'u.following', 'followingCount');
-        db.loadRelationCountAndMap('u.meetingsCount', 'u.meetings', 'mc',qb=>qb.where('mc.isPublished = 1 && mc.isCanceled = 0'));
+        db.loadRelationCountAndMap('u.meetingsCount', 'u.meetings', 'mc', qb => qb.where('mc.isPublished = 1 && mc.isCanceled = 0'));
         db.loadRelationCountAndMap('u.meetingJoinCount', 'u.meetingMember', 'meetingsjoin');
-        db.where('id=:id', { id: _id });
-        const data:any = await db.getOne();
+        db.where('u.id=:id', { id: _id });
+        const data: any = await db.getOne();
         data.score = this.getScore(data);
         return data;
     }
@@ -116,8 +118,8 @@ export class UserService {
         score += (commentsCount * 1); //give 1 comment 1
         score += (Math.trunc(groupsCount / 5) * 50); //When you created 5 group 50
         score += (Math.trunc(meetingsCount / 10) * 50); //When you create 10 meetings 50
-        score +=  (Math.trunc(meetingJoinCount / 20) * 50); //when you joined 20 meetings 50
-        score +=  (Math.trunc(commentsCount / 30) * 50); //when you gave 30 comments 50
+        score += (Math.trunc(meetingJoinCount / 20) * 50); //when you joined 20 meetings 50
+        score += (Math.trunc(commentsCount / 30) * 50); //when you gave 30 comments 50
         return score;
     }
 }

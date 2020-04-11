@@ -40,6 +40,7 @@ export class UserProfileComponent implements OnInit {
     let url = 'user/' + this.userInfo.id;
     this.showLoading = true;
     this.http.get(url).subscribe(res => {
+      this.userInfo = res.data;
       if(res.data && res.data.score) {
         this.points = res.data.score;
       }
