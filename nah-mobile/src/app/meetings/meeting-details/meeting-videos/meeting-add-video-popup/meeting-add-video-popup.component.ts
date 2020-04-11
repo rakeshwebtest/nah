@@ -23,7 +23,7 @@ export class MeetingAddVideoPopupComponent implements OnInit {
     key: 'videoPath',
     type: 'input',
     wrappers: ['vertical'],
-    className: 'col-12 ion-padding-t-10',
+    className: 'ion-no-padding',
     templateOptions: {
       pattern: /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/,
       label: 'Past Youtube URL',
