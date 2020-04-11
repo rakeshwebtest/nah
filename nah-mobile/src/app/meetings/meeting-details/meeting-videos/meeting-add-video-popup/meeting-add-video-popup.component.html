@@ -15,17 +15,38 @@
     </ion-row>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="ion-padding video-widget">
+  <ion-row>
+    <ion-col>
+      <b>To copy YouTube videos, you'll need to know just 3 steps:</b>
+      <ol class="ion-no-margin ion-no-padding">
+        <li>
+          Navigate to <a href="https://www.youtube.com/" target="_blank">https://www.youtube.com/</a> 
+        </li>
+        <li>
+          Upload your video to YouTube Chanel (or) copy the link/URL for the video you want to insert from existing youtube video. 
+        </li>
+        <li>
+          Return to Nah app and Paste the link/URL. Then click "Insert”.
+        </li>
+      </ol>
+        
+        
+    </ion-col>
+  </ion-row>
   <ion-row class="ion-nowrap ion-align-items-center">
     <!-- <ion-row>
       <ion-label>https://www.youtube.com/embed/</ion-label>
     </ion-row> -->
-    <form [formGroup]="form">
-      <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-      <!-- <div class="col-12">
-        <button type="submit" class="btn btn-default">Submit</button>
-      </div> -->
-    </form>
+    <ion-col>
+      <form [formGroup]="form">
+        <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+        <!-- <div class="col-12">
+          <button type="submit" class="btn btn-default">Submit</button>
+        </div> -->
+      </form>
+
+    </ion-col>
 
     <ion-row class="">
       <!-- <ion-input type="text" class="border" style="margin: 0;" [(ngModel)]="modelVideoPath"
@@ -35,7 +56,7 @@
   </ion-row>
   <ion-row class="ion-justify-content-center">
     <ion-button color="danger" type="submit" (click)="addVideo()" [disabled]="this.form.invalid">
-      Submit
+      Insert
     </ion-button>
   </ion-row>
 </ion-content>
