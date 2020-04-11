@@ -52,8 +52,9 @@ export class MeetingService {
             .leftJoin('gf.user', 'gf_user')
             .leftJoin("m.members", 'mm')
             .leftJoin("mm.user", 'user')
-            .andWhere('group.isDeleted != 1')
             .andWhere('m.isDeleted != 1');
+
+        // .andWhere('group.isDeleted != 1')
         if (sessionUser.role === 'admin') {
 
         } else {

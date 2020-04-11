@@ -61,9 +61,13 @@ export class MeetingDetailsComponent implements OnInit {
     this.http.get('meeting/list?meetingId=' + meetingId).pipe(map(res => {
       let m: Meeting = <Meeting>res.data;
       m.isCreatedBy = false;
+      m.isSuspend = false;
       m.isMember = false;
       if (m.createdBy.id === this.userInfo.id)
         m.isCreatedBy = true;
+
+      if (m.group.isDeleted==1)
+        m.isSuspend = true;
 
       const isUser = m.members.find(u => u.user.id == this.userInfo.id);
       if (isUser) {

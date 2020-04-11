@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs';
 })
 export class MeetingListComponent implements OnInit, OnDestroy {
   googlePic: any;
-  meetingList:any = [];
+  meetingList: any = [];
   showMeetingMsg = false;
   showLoading = false;
   @Input() noMeetingMsg = 'Hmm, seems like they are no meetings.'
@@ -65,9 +65,13 @@ export class MeetingListComponent implements OnInit, OnDestroy {
       let _meetingList: Meeting[] = <Meeting[]>res.data || [];
       _meetingList.map(m => {
         m.isCreatedBy = false;
+        m.isSuspend = false;
         m.isMember = false;
         if (m.createdBy.id === userInfo.id)
           m.isCreatedBy = true;
+
+        if (m.group.isDeleted==1)
+          m.isSuspend = true;
 
         const isUser = m.members.find(u => u.user.id == userInfo.id);
         if (isUser) {
@@ -75,27 +79,27 @@ export class MeetingListComponent implements OnInit, OnDestroy {
         }
         return m;
       });
-     
 
-      
+
+
       return _meetingList;
-    })).subscribe(res => { 
+    })).subscribe(res => {
       this.showLoading = false;
       this.meetingList = [...this.meetingList, ...res];
-      if (infiniteScroll){
+      if (infiniteScroll) {
         infiniteScroll.target.complete();
         // if(_meetingList.length === 0){
         //   infiniteScroll.complete();
         // }
 
       }
-        
 
-      if (reload && reload.target){
+
+      if (reload && reload.target) {
         reload.target.complete();
         reload.target.disabled = false;
       }
-        
+
 
       if (this.meetingList.length == 0) {
         this.showMeetingMsg = true;

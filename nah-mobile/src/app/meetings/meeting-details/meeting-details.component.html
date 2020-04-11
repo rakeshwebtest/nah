@@ -8,7 +8,7 @@
           {{title}}
         </ion-text>
       </ion-buttons>
-      <ion-row class="profile-settings text-10">
+      <ion-row class="profile-settings text-10" *ngIf="!meeting.isSuspend">
         <ion-icon style="cursor: pointer;" name="md-more" color="light" (click)="actionMenu($event)"></ion-icon>
       </ion-row>
     </ion-toolbar>
@@ -20,13 +20,16 @@
           <ion-col class="ion-no-padding">
             <ion-card-title style="font-size: 18px;">{{meeting.title}} </ion-card-title>
             <ion-card-subtitle class="ion-margin-t-5" color="danger">Say No To {{meeting.group.name}}
+              <ion-text color="danger" *ngIf="meeting.isSuspend">
+                (Suspend)
+              </ion-text>
             </ion-card-subtitle>
           </ion-col>
           <ion-col class="ion-text-right ion-no-padding" size="auto">
             <ion-button size="small" color="danger" *ngIf="meeting.isPublished==0" (click)="publishMeeting(meeting)">
               Publish
             </ion-button>
-            <ng-container *ngIf="meeting.isPublished==1 && !meeting.isCreatedBy">
+            <ng-container *ngIf="meeting.isPublished==1 && !meeting.isCreatedBy && !meeting.isSuspend">
               <ion-button class="ion-no-margin button-small" size="small" color="medium" (click)="meetingJoin(meeting)"
                 *ngIf="meeting.isMember">
                 Unjoin</ion-button>
@@ -75,7 +78,7 @@
           <ion-row class="ion-padding-t-5">
             <ion-col class="ion-no-padding d-flex ion-align-items-center black ">
               <ion-icon class="ion-padding-r-3" color="dark" size="small" name="person"></ion-icon>
-              Created By: {{meeting?.createdBy?.displayName}}@{{meeting?.createdBy?.typeOfNoer}} 
+              Created By: {{meeting?.createdBy?.displayName}}@{{meeting?.createdBy?.typeOfNoer | titlecase}} 
             </ion-col>
           </ion-row>
           <ion-row class="ion-nowrap ion-padding-b-5">
@@ -108,18 +111,23 @@
                   <ion-list class="">
                     <div class="container image-list" gallerize>
                       <div class="image-list-block" *ngFor="let item of meeting.photos;let imgIndex=index;">
-                        <span class="img-delete" (click)="deleteImg(meeting.photos,imgIndex)">
+                        <span class="img-delete" *ngIf="!meeting.isSuspend" (click)="deleteImg(meeting.photos,imgIndex)">
                           <ion-icon name="trash"></ion-icon>
                         </span>
                         <img class="image-thumb"  [title]="meeting.title"
                         [src]="item.imagePath">
                       </div>
-                     
-                        <form [formGroup]="form" class="ion-margin-t-5">
+           
+                        <form [formGroup]="form" class="ion-margin-t-5"  *ngIf="!meeting.isSuspend">
                           <formly-form [form]="form" [fields]="fields" [model]="imageModel">
                           </formly-form>
                         </form>
                     </div>
+                    <ion-row class="ion-align-items-center no-meetings" *ngIf="meeting.photos.length==0 && meeting.isSuspend">
+                      <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
+                        No Images Available
+                      </ion-col>
+                    </ion-row>
                     <!-- <ion-thumbnail class="image-thumb" *ngFor="let item of meeting.photos" [title]="meeting.title">
                       <img [src]="item.imagePath" alt="">
                     </ion-thumbnail> -->
@@ -186,12 +194,12 @@
                     style="display: flex;align-items: center;justify-content: flex-end;">
 
                     <ion-label class="meeting-sub-title">{{rc.comment}}</ion-label>
-                    <ion-icon size="small" name="trash" *ngIf="userInfo.id === rc.createdBy.id"
+                    <ion-icon size="small" name="trash" *ngIf="userInfo.id === rc.createdBy.id && !meeting.isSuspend"
                       (click)="deleteComment(c.replys,inx,true)" class="ion-padding-r-5" style="cursor: pointer;">
                     </ion-icon>
                   </ion-col>
                 </ion-row>
-                <ion-row>
+                <ion-row *ngIf="!meeting.isSuspend">
                   <ion-col>
                     <ion-icon size="small" *ngIf="userInfo.id === c.createdBy.id" name="trash"
                       (click)="deleteComment(meeting.comments,cInx,false)" class="ion-padding-r-5"
@@ -212,7 +220,7 @@
     </ion-card>
   </ion-content>
 </ng-container>
-<ion-footer *ngIf="meeting">
+<ion-footer *ngIf="meeting && !meeting.isSuspend" >
   <ion-list class="meeting-list meeting-list-d">
     <ion-grid class="meeting-item ion-no-padding">
       <ion-row *ngIf="replyMsg.id">
@@ -223,10 +231,10 @@
           overflow: hidden;">
             {{replyMsg.comment}}
           </ion-text>
-          <ion-icon (click)="clearReply()" name="close-circle-outline"></ion-icon>
+          <ion-icon  (click)="clearReply()" name="close-circle-outline"></ion-icon>
         </ion-chip>
       </ion-row>
-      <ion-row class="ion-nowrap ion-align-items-center">
+      <ion-row class="ion-nowrap ion-align-items-center" *ngIf="!meeting.isSuspend">
         <ion-col size="2" class="img-left">
           <ion-avatar class="avater" style="margin: 0 auto;">
             <img [src]="googlePic" />
