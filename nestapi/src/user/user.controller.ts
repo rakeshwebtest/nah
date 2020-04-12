@@ -45,7 +45,6 @@ export class UsersController {
     @Get('block/:userId')
     async blockUser(@Request() req, @Param('userId') id: number) {
         const sessionUser: any = req['sessionUser'];
-        console.log(req['sessionUser']);
         if (sessionUser.role === 'admin') {
             const userInfo: any = await this.service.getUser(id);
             userInfo.status = 'block';
@@ -108,7 +107,6 @@ export class UsersController {
         } else {
             _user = await this.service.checkUser(user.email);
             if (_user && _user.id) {
-                console.log('_user', _user);
                 if (_user.status === 'block')
                     throw new HttpException({ message: 'Blocked User', success: false }, HttpStatus.FORBIDDEN);
 

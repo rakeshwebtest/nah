@@ -7,16 +7,24 @@ import { Repository, getRepository } from 'typeorm';
 export class CityService {
     constructor(@InjectRepository(CityEntity) private readonly cityRepository: Repository<CityEntity>) {
     }
-    async getCities(query): Promise<CityEntity[]> {
+    async getCities(query): Promise<{ data: CityEntity[], total: number }> {
         const db = getRepository(CityEntity)
-        .createQueryBuilder('city');
-        db.loadRelationCountAndMap('city.meetingsCount', 'city.meetings', 'cmCount');
-        db.loadRelationCountAndMap('city.usersCount', 'city.users', 'cuCount');
+            .createQueryBuilder('c');
+        db.select(['c.name', 'c.id']);
+        db.loadRelationCountAndMap('c.meetingsCount', 'c.meetings', 'cmCount');
+        db.loadRelationCountAndMap('c.usersCount', 'c.users', 'cuCount');
         if (query.search) {
-            db.where("city.name like :name", { name: '%' + query.search + '%' })
+            db.where("c.name like :name", { name: '%' + query.search + '%' })
         }
-        db.orderBy('id','DESC');
-        return db.getMany();
+        db.orderBy('id', 'DESC');
+
+        if (query.take)
+            db.take(query.take);
+        if (query.skip)
+            db.skip(query.skip);
+
+        const [result, total] = await db.getManyAndCount();
+        return { data: result, total: total };
     }
     async getCitiesInfo(): Promise<CityEntity[]> {
         const db = getRepository(CityEntity)

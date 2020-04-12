@@ -4,33 +4,85 @@ import { AppHttpClient } from '../utils';
 import { UserConfigService } from '../utils/user-config.service';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { LoadingService } from '../utils/loading.service';
-
+import { IonicSelectableComponent } from 'ionic-selectable';
+import { Subscription, Observable } from 'rxjs';
+import { map } from 'rxjs/operators'
+export interface City {
+  id: number;
+  name: string;
+}
 @Component({
   selector: 'theapp-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  cityList: any = [];
+  cityList: City[];
   profile: any = {
     typeOfNoer: null, // anties || rejection || hater
     cityId: null,
     followGroups: [],
     newGroupName: null
   };
+  citiesSubscription: Subscription;
 
   constructor(private router: Router, private http: AppHttpClient,
     public loadingService: LoadingService,
     private userConfigService: UserConfigService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    //this.getCities();
     this.getCities();
 
   }
-  getCities() {
-    this.http.get('city/list').subscribe(res => {
-      this.cityList = res.data;
+  searchCitites(event: {
+    component: IonicSelectableComponent,
+    text: string
+  }) {
+    this.cityList = [];
+    this.getCities(event);
+  }
+  getCities(infinity?: {
+    component: IonicSelectableComponent,
+    text: string
+  }) {
+    let skip = 0;
+    let take = 100;
+    if (infinity) {
+      skip = this.cityList.length;
+    } else {
+
+    }
+    const params: any = {
+      skip: skip,
+      take: take
+    };
+    if (infinity && infinity.text) {
+      console.log(infinity.text);
+      const searchText = infinity.text.trim().toLowerCase();
+      params.search = searchText;
+    }
+
+
+    this.http.get('city/list', { params: params }).subscribe(res => {
+      const result = <City[]>res.data;
+      if (infinity) {
+        this.cityList = [...this.cityList, ...result];
+        infinity.component.endInfiniteScroll();
+      } else {
+        this.cityList = result;
+      }
+
     });
+
+  }
+
+
+  getMoreCities(event: {
+    component: IonicSelectableComponent,
+    text: string
+  }) {
+    this.getCities(event);
   }
   onCreateGroup() {
     this.userConfigService.updateProfile = this.profile;

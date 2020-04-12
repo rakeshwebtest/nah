@@ -144,7 +144,6 @@ export class MeetingService {
         _meeting.isPublished = parseInt(meeting.isPublished);
         if (_meeting.isPublished === 1)
             _meeting.isCanceled = 0;
-        console.log('meeting.imageUrl ', meeting.imageUrl);
 
         if (!meeting.imageUrl || isNull(meeting.imageUrl) || meeting.imageUrl == 'null')
             _meeting.imageUrl = 'uploads/logo.png';

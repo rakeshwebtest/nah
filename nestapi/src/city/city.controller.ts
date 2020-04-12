@@ -9,8 +9,8 @@ export class CityController {
 
     @Get('list')
     async getCities(@Query() query: CityListQueryDto) {
-        const data = await this.cityService.getCities(query);
-        return { message: false, success: true, data };
+        const {data,total} = await this.cityService.getCities(query);
+        return { message: false, success: true, data,total };
     }
 
     @Get('info')

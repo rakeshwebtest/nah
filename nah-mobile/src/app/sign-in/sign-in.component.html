@@ -55,7 +55,11 @@
 
         <ionic-selectable item-content  closeButtonSlot="end" closeButtonText="Close"
         [(ngModel)]="profile.cityId" placeholder="Select Your City" itemValueField="id"
-        shouldStoreItemValue="id"  itemTextField="name" [items]="cityList" [canSearch]="true">
+        shouldStoreItemValue="id" 
+        [hasInfiniteScroll]="true"
+        (onSearch)="searchCitites($event)"
+        (onInfiniteScroll)="getMoreCities($event)"
+         itemTextField="name" [items]="cityList" [canSearch]="true">
         </ionic-selectable>
 
         <!-- <ion-select class="ion-padding-r-10" [(ngModel)]="profile.cityId" placeholder="Select Your City" okText="Okay"
