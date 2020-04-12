@@ -114,10 +114,13 @@ export class ChooseUserGroupsComponent implements OnInit {
       cssClass: "group-create-modal"
     });
     modal.onDidDismiss().then(arg => {
-      // console.log('modal ',arg);
-      this.filterGroupList = [arg.data, ...this.filterGroupList];
-      this.profile.followGroups.push(arg.data);
-      this.groupList = this.filterGroupList;
+      console.log('modal ',arg);
+      if (arg.data) {
+        this.filterGroupList = [arg.data, ...this.filterGroupList];
+        this.profile.followGroups.push(arg.data);
+        this.groupList = this.filterGroupList;
+      }
+
       // this.filterGroupList.push(arg.data);
       // this.getGroups();
     });
