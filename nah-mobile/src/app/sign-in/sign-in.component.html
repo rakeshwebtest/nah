@@ -52,25 +52,21 @@
     </ion-row>
     <ion-row class="ion-justify-content-center" style="width: 80%;">
       <ion-col size="12">
-
         <ionic-selectable item-content  closeButtonSlot="end" closeButtonText="Close"
-        [(ngModel)]="profile.cityId" placeholder="Select Your City" itemValueField="id"
-        shouldStoreItemValue="id" 
+        [(ngModel)]="profile.city" placeholder="Select Your City" itemValueField="id"
         [hasInfiniteScroll]="true"
         (onSearch)="searchCitites($event)"
         (onInfiniteScroll)="getMoreCities($event)"
          itemTextField="name" [items]="cityList" [canSearch]="true">
         </ionic-selectable>
-
-        <!-- <ion-select class="ion-padding-r-10" [(ngModel)]="profile.cityId" placeholder="Select Your City" okText="Okay"
-          cancelText="Dismiss">
-          <ion-select-option [value]="c.id" *ngFor="let c of cityList">{{ c.name }}</ion-select-option>
-        </ion-select> -->
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center ion-margin-top margin-top-40">
-      <ion-button color="danger" (click)="onCreateGroup()" [disabled]="!profile.typeOfNoer || !profile.cityId">
+      <ion-button color="danger" *ngIf="!showUpdateProfileBtn" (click)="onCreateGroup()" [disabled]="!profile.typeOfNoer || !profile.city">
         Choose your 'Say No To Group'
+      </ion-button>
+      <ion-button color="danger" *ngIf="showUpdateProfileBtn" (click)="updateProfile()" [disabled]="!profile.typeOfNoer || !profile.city">
+        Update Profile
       </ion-button>
     </ion-row>
     <!-- <ion-row class="ion-justify-content-center">

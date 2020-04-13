@@ -35,7 +35,6 @@ export class AuthenticationService {
   ifLoggedIn() {
     this.storage.get('USER_INFO').then((response) => {
       if (response) {
-        console.log('if log USER_INFO', response);
         this.authState.next(response);
         if (response.user.typeOfNoer) {
           this.router.navigate(['/dashboard']);

@@ -30,7 +30,8 @@ export class UsersController {
     @Post()
     async updateUser(@Body() user: CreateUserDto) {
         const data: any = await this.service.updateUser(user);
-        return { message: false, data };
+        const userInfo: any = await this.service.getUser(data.id);
+        return { message: false, data: userInfo };
     }
     @ApiBearerAuth()
     @UsePipes(new ValidationPipe())
@@ -143,15 +144,16 @@ export class UsersController {
             // this.groupService.updateFollowGroup(user.followGroups);
         }
         const _userEntity = new UserEntity();
-        if (user.cityId) {
+        if (user.city) {
             _userEntity.city = new CityEntity();
-            _userEntity.city.id = user.cityId;
+            _userEntity.city = user.city;
         }
         _userEntity.typeOfNoer = user.typeOfNoer;
         _userEntity.email = user.email;
         _userEntity.id = user.id;
         const data = await this.service.updateUser(_userEntity);
-        return { message: 'Updated Succussfully', data };
+        const userInfo: any = await this.service.getUser(data.id);
+        return { message: 'Updated Succussfully', data: userInfo };
     }
 
     @Delete(':id')

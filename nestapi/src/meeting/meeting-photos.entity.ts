@@ -11,6 +11,8 @@ export class MeetingPhotosEntity extends BaseEntity {
     @Column({ length: 1250, nullable: true })
     imagePath: string;
 
+    @ManyToOne(type => UserEntity, user => user.MeetingPhotos)
+    createdBy: UserEntity;
 
 
     // @Column()

@@ -1,13 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouteReuseStrategy } from '@angular/router';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { AppHttpClient, AppHttpClientCreator, HttpInterceptorService } from './utils';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { SignInComponent } from './sign-in/sign-in.component';
 import { ChooseUserGroupsComponent } from './sign-in/choose-user-groups/choose-user-groups.component';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -21,6 +20,7 @@ import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedProfileEditModule } from './shared/shared-profile-edit.module';
 
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 // IonicStorageModule.forRoot({
@@ -29,13 +29,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // }),
 
 @NgModule({
-  declarations: [AppComponent, AdminLayoutComponent, SignInComponent, ChooseUserGroupsComponent, GroupCreateModalComponent],
+  declarations: [AppComponent, AdminLayoutComponent, ChooseUserGroupsComponent, GroupCreateModalComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    CommonModule,
+    SharedProfileEditModule,
     IonicModule.forRoot(
       {
         backButtonText: ''

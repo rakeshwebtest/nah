@@ -68,8 +68,9 @@ export class ChooseUserGroupsComponent implements OnInit {
       this.profile.id = id;
       this.http.put('user', this.profile).subscribe(res => {
         this.nativeStorage.get('USER_INFO').then(user => {
-          user.user.typeOfNoer = this.profile.typeOfNoer;
-          user.user.cityId = this.profile.cityId;
+          // user.user.typeOfNoer = this.profile.typeOfNoer;
+          // user.user.cityId = this.profile.cityId;
+          user.user = res.data;
           this.nativeStorage.set('USER_INFO', user);
         });
         this.loadingService.hide();
@@ -87,7 +88,7 @@ export class ChooseUserGroupsComponent implements OnInit {
       this.presentAlert('Chose Type of Noer');
       return false;
     }
-    if (!this.profile.cityId) {
+    if (!this.profile.city.id) {
       this.presentAlert('Select City');
       return false;
     }
@@ -114,7 +115,7 @@ export class ChooseUserGroupsComponent implements OnInit {
       cssClass: "group-create-modal"
     });
     modal.onDidDismiss().then(arg => {
-      console.log('modal ',arg);
+      console.log('modal ', arg);
       if (arg.data) {
         this.filterGroupList = [arg.data, ...this.filterGroupList];
         this.profile.followGroups.push(arg.data);

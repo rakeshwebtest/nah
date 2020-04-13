@@ -1,13 +1,17 @@
 <ion-list class="ion-no-margin ion-no-padding">
-  <ion-item color="danger" class="text-10" (click)="about()">
+  <ion-item color="danger" class="text-10" (click)="navPage('/profile-edit')">
+    <!-- <ion-icon name="mail" color="light"></ion-icon> -->
+    <ion-label>Edit Profile</ion-label>
+  </ion-item>
+  <ion-item color="danger" class="text-10" (click)="navPage('/about')">
     <!-- <ion-icon name="mail" color="light"></ion-icon> -->
     <ion-label>About NAH</ion-label>
   </ion-item>
-  <ion-item color="danger" class="text-10" (click)="faq()">
+  <ion-item color="danger" class="text-10" (click)="navPage('/pages/faq')">
     <!-- <ion-icon name="mail" color="light"></ion-icon> -->
     <ion-label>FAQ's</ion-label>
   </ion-item>
-  <ion-item color="danger" class="text-10" (click)="privacy()">
+  <ion-item color="danger" class="text-10" (click)="navPage('/pages/privacy')">
     <!-- <ion-icon name="mail" color="light"></ion-icon> -->
     <ion-label>Privacy & Terms</ion-label>
   </ion-item>

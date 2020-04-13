@@ -129,7 +129,8 @@ export class MeetingController {
   @UsePipes(new ValidationPipe())
   @Post('video')
   async addVideos(@Body() video: VideoDto, @Request() req) {
-    return this.meetingService.addVideo(video);
+    const sessionUser = req['sessionUser'];
+    return this.meetingService.addVideo(video,sessionUser);
   }
 
   /**
@@ -183,9 +184,9 @@ export class MeetingController {
       }
     })
   }))
-  async meetingImages(@UploadedFiles() images, @Body() fileDto: any, @Param() params: any) {
-
-    const data = await this.meetingService.uploadMeetingImages(images, params.meetingId);
+  async meetingImages(@UploadedFiles() images, @Body() fileDto: any, @Param() params: any, @Request() req) {
+    const sessionUser = req['sessionUser'];
+    const data = await this.meetingService.uploadMeetingImages(images, params.meetingId,sessionUser);
 
     return { message: "Images are added successfully", success: true, data };
 

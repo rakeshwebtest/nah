@@ -11,6 +11,9 @@ export class MeetingVideosEntity extends BaseEntity {
     @Column({ length: 1250, nullable: true })
     videoPath: string;
 
+    @ManyToOne(type => UserEntity, user => user.MeetingVidoes)
+    createdBy: UserEntity;
+
 
 
     // @Column()

@@ -24,19 +24,12 @@ export class PopoverMenuComponent implements OnInit {
     this.googlePlus.logout();
     this.authService.logout();
   }
-  about() {
-    this.router.navigate(['about']);
-    this.DismissClick();
-  }
   async DismissClick() {
     await this.popoverController.dismiss();
   }
-  privacy() {
-    this.router.navigate(['/pages/privacy']);
-    this.DismissClick();
-  }
-  faq() {
-    this.router.navigate(['/pages/faq']);
+
+  navPage(url){
+    this.router.navigate([url]);
     this.DismissClick();
   }
   feedback() {

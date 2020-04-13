@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppHttpClient } from '../utils';
 import { UserConfigService } from '../utils/user-config.service';
@@ -18,9 +18,11 @@ export interface City {
 })
 export class SignInComponent implements OnInit {
   cityList: City[];
-  profile: any = {
+  @Input() showUpdateProfileBtn: boolean;
+  @Output() updatedProfileEvent: EventEmitter<any> = new EventEmitter();
+  @Input() profile = {
     typeOfNoer: null, // anties || rejection || hater
-    cityId: null,
+    city: null,
     followGroups: [],
     newGroupName: null
   };
@@ -88,6 +90,12 @@ export class SignInComponent implements OnInit {
     this.userConfigService.updateProfile = this.profile;
     this.router.navigate(['/choose-user-group']);
   }
+  updateProfile() {
+    this.http.put('user', this.profile).subscribe(res => {
+      this.updatedProfileEvent.emit(res.data);
+    });
+  }
+
   noerSelection(type) {
     switch (type) {
       case 'rejection':

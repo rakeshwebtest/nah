@@ -212,11 +212,14 @@ export class MeetingService {
         const data = await this.meetingCommentReplyRepository.save(comment);
         return { message: 'Added Comment Successfully', data };
     }
-    async addVideo(videoDto: VideoDto) {
+    async addVideo(videoDto: VideoDto, sessionUser) {
         const video = new MeetingVideosEntity();
         video.meeting = new MeetingEntity();
         video.meeting.id = videoDto.meetingId;
         video.videoPath = videoDto.videoPath;
+        const user = new UserEntity();
+        user.id = sessionUser.id;
+        video.createdBy = user;
         const data = await this.meetingVideoRepository.save(video);
         return { message: 'Added Video Successfully', data };
     }
@@ -230,13 +233,14 @@ export class MeetingService {
         photo.id = imageId;
         return await this.meetingPhotosRepository.delete(photo);
     }
-    async uploadMeetingImages(images: any[], meetingId) {
+    async uploadMeetingImages(images: any[], meetingId, sessionUser) {
         // const photos:MeetingPhotosEntity
         const imagesList: any[] = images.map(img => {
             const meeting = new MeetingEntity();
             meeting.id = meetingId;
-
-            return { imagePath: img.path, meeting: meeting };
+            const user = new UserEntity();
+            user.id = sessionUser.id;
+            return { imagePath: img.path, meeting: meeting, createdBy: user };
         });
 
         const data = await getConnection()

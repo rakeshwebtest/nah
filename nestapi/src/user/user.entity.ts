@@ -7,6 +7,8 @@ import { CityEntity } from 'src/city/city.entity';
 import { MeetingCommentsEntity } from 'src/meeting/meeting-comments.entity';
 import { MeetingReportEntity } from 'src/meeting/meeting-report.entity';
 import { MeetingMembersEntity } from 'src/meeting/meeting-members.entity';
+import { MeetingVideosEntity } from 'src/meeting/meeting-videos.entity';
+import { MeetingPhotosEntity } from 'src/meeting/meeting-photos.entity';
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
 
@@ -42,29 +44,35 @@ export class UserEntity extends BaseEntity {
     // @Column({ length: 25, default: '' })
     // country: string;
 
-    @ManyToOne(type => CityEntity, city => city.users,{ onDelete: 'CASCADE' })
+    @ManyToOne(type => CityEntity, city => city.users, { onDelete: 'CASCADE' })
     city: CityEntity;
 
     // @OneToMany(type => GroupEntity, group => group.createBy)
     // groups: GroupEntity[];
 
-    @OneToMany(type => GroupFollowEntity, gf => gf.user,{ onDelete: 'CASCADE' })
+    @OneToMany(type => GroupFollowEntity, gf => gf.user, { onDelete: 'CASCADE' })
     following: GroupFollowEntity[];
 
-    @OneToMany(type => MeetingEntity, meeting => meeting.createdBy,{ onDelete: 'CASCADE' })
+    @OneToMany(type => MeetingEntity, meeting => meeting.createdBy, { onDelete: 'CASCADE' })
     meetings: MeetingEntity[];
 
-    @OneToMany(type => MeetingMembersEntity, mm => mm.user,{ onDelete: 'CASCADE' })
-    meetingMember: MeetingMembersEntity[];
-    
+    @OneToMany(type => MeetingVideosEntity, mv => mv.createdBy, { onDelete: 'CASCADE' })
+    MeetingVidoes: MeetingVideosEntity[];
 
-    @OneToMany(type => GroupEntity, group => group.createdBy,{ onDelete: 'CASCADE' })
+    @OneToMany(type => MeetingPhotosEntity, mp => mp.createdBy, { onDelete: 'CASCADE' })
+    MeetingPhotos: MeetingPhotosEntity[];
+
+    @OneToMany(type => MeetingMembersEntity, mm => mm.user, { onDelete: 'CASCADE' })
+    meetingMember: MeetingMembersEntity[];
+
+
+    @OneToMany(type => GroupEntity, group => group.createdBy, { onDelete: 'CASCADE' })
     groups: GroupEntity[];
 
-    @OneToMany(type => MeetingCommentsEntity, mc => mc.createdBy,{ onDelete: 'CASCADE' })
+    @OneToMany(type => MeetingCommentsEntity, mc => mc.createdBy, { onDelete: 'CASCADE' })
     comments: MeetingCommentsEntity[];
 
-    @OneToMany(type => MeetingReportEntity, mr => mr.createdBy,{ onDelete: 'CASCADE' })
+    @OneToMany(type => MeetingReportEntity, mr => mr.createdBy, { onDelete: 'CASCADE' })
     reports: MeetingReportEntity[];
 
 }
