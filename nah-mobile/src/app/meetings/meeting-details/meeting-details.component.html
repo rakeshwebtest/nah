@@ -111,7 +111,7 @@
                   <ion-list class="">
                     <div class="container image-list" gallerize>
                       <div class="image-list-block" *ngFor="let item of meeting.photos;let imgIndex=index;">
-                        <span class="img-delete" *ngIf="!meeting.isSuspend" (click)="deleteImg(meeting.photos,imgIndex)">
+                        <span class="img-delete" *ngIf="!meeting.isSuspend && item.createdBy && item.createdBy.id==userInfo.id" (click)="deleteImg(meeting.photos,imgIndex)">
                           <ion-icon name="trash"></ion-icon>
                         </span>
                         <img class="image-thumb"  [title]="meeting.title"

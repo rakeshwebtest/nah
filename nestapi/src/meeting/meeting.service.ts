@@ -84,14 +84,16 @@ export class MeetingService {
         if (query.meetingId) { // single meeting
             db.select(["m", "group", "u", "mm", "mp",
                 "user", "city",
-                "mc", "mv", "mcr", "mcr_createdBy", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"]);
+                "mc","mp_createBy", "mv","mv_createBy", "mcr", "mcr_createdBy", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"]);
 
             db.leftJoin("m.comments", 'mc')
                 .leftJoin("mc.createdBy", 'mc_createdBy')
                 .leftJoin("mc.replys", 'mcr')
                 .leftJoin("mcr.createdBy", 'mcr_createdBy')
                 .leftJoin("m.photos", 'mp')
+                .leftJoin("mp.createdBy", 'mp_createBy')
                 .leftJoin("m.videos", 'mv')
+                .leftJoin("mv.createdBy", 'mv_createBy')
                 .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" });
             db.where('m.id = :meetingId', { meetingId: query.meetingId });
             const data: any = await db.getOne();

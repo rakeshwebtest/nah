@@ -28,7 +28,7 @@ export interface Meeting {
     comments?: any[];
     members?: Member[];
     photos?: Photo[];
-    videos?: any[];
+    videos?: Video[];
     isMember?: boolean;
     isCreatedBy?: boolean;
     isPublished?: number;
@@ -38,7 +38,26 @@ export interface Meeting {
 interface Photo {
     imagePath: string;
     id: number;
+    createdBy: {
+        id: number;
+        displayName: string;
+        imageUrl: string;
+        typeOfNoer: string;
 
+    }
+
+}
+interface Video{
+    videoPath: string;
+    id: number;
+    createdBy: {
+        id: number;
+        displayName: string;
+        imageUrl: string;
+        typeOfNoer: string;
+
+    }
+    
 }
 interface Member {
     id: number;
