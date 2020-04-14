@@ -24,10 +24,10 @@
     <h3 class="red-color font-24">A new way to hate...!</h3>
   </ion-row> -->
   <ion-toolbar class="ion-text-center">
-    <ion-button color="danger" (click)="submit(model,false)" [disabled]="form.invalid">
+    <ion-button color="danger" (click)="submit(model,false)" [disabled]="(form.valid)?false:true">
       Save as draft
     </ion-button>
-    <ion-button color="danger" (click)="submit(model,true)" [disabled]="form.invalid">
+    <ion-button color="danger" (click)="submit(model,true)" [disabled]="(form.valid)?false:true">
       Save & Publish
     </ion-button>
     <!-- <ion-button color="light" (click)="signInWithGoogleTest()">

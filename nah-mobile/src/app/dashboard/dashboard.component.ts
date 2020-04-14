@@ -17,18 +17,21 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthenticationService,
     private ms: MeetingListService,
     private activeRouter: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) {
+      
+     }
   // @HostListener('document:ionBackButton', ['$event'])
   // private async overrideHardwareBackAction($event: any) {
   //   console.log('back pressed');
   //   // await this.modalController.dismiss();
   // }
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     const userInfo: any = this.authService.getUserInfo();
     this.googlePic = userInfo.imageUrl;
-    if (this.firstTimeEnter && this.activeRouter.snapshot.children[0].params.type) {
+    console.log('ionViewWillEnter');
+    if (this.firstTimeEnter)
       this.ms.meetingReload();
-    }
+
     this.firstTimeEnter = true;
     this.activeTab = 'type' + '/' + this.activeRouter.snapshot.children[0].params.type;
     console.log('this.activeTab', this.activeTab);
