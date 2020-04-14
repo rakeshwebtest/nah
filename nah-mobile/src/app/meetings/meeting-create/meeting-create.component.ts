@@ -103,12 +103,13 @@ export class MeetingCreateComponent implements OnInit {
   },
 
   {
-    key: 'cityId',
+    key: 'city',
     type: 'selectable',
     wrappers: ['vertical'],
     className: 'col-12',
     templateOptions: {
       label: 'City',
+      type: 'city',
       placeholder: 'Select City',
       required: true,
       itemValueField: 'id',
@@ -221,7 +222,7 @@ export class MeetingCreateComponent implements OnInit {
 
   ngOnInit() {
     const userInfo = this.authService.getUserInfo();
-    this.getCities();
+    // this.getCities();
     this.http.get('group/list/' + userInfo.id).subscribe(res => {
       if (res.data) {
         this.groupList = res.data.map(item => {
@@ -255,7 +256,7 @@ export class MeetingCreateComponent implements OnInit {
         location: res.location,
         startTime: res.startTime,
         endTime: res.endTime,
-        cityId: res.city.id,
+        city: res.city,
         groupId: res.group.id,
         imageUrl: res.imageUrl
       }
@@ -290,6 +291,8 @@ export class MeetingCreateComponent implements OnInit {
     } else {
       model.isPublished = 0;
     }
+    if (model.city)
+      model.cityId = model.city.id;
     const userInfo = this.authService.getUserInfo();
     const formData = new FormData();
     // formData.append('file', model.image);
@@ -305,7 +308,7 @@ export class MeetingCreateComponent implements OnInit {
         this.router.navigate(['/dashboard/type/my-meeting']);
         // window.location.reload();
         loading.dismiss();
-      }else{
+      } else {
         loading.dismiss();
       }
     }, err => {
