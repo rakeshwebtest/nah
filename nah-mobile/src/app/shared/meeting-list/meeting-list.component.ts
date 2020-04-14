@@ -47,6 +47,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
     if (reload) {
       this.meetingList = [];
     }
+    console.log('reload',reload);
     const params = this.activeRouter.snapshot.params;
     const userInfo: any = this.authService.getUserInfo();
     this.googlePic = userInfo.imageUrl;

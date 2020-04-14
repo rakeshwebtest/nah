@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   firstTimeEnter = false;
   constructor(private authService: AuthenticationService,
     private ms: MeetingListService,
-    private activeRouter:ActivatedRoute,
+    private activeRouter: ActivatedRoute,
     private router: Router) { }
   // @HostListener('document:ionBackButton', ['$event'])
   // private async overrideHardwareBackAction($event: any) {
@@ -26,15 +26,16 @@ export class DashboardComponent implements OnInit {
   ionViewWillEnter() {
     const userInfo: any = this.authService.getUserInfo();
     this.googlePic = userInfo.imageUrl;
-    if (this.firstTimeEnter)
+    if (this.firstTimeEnter && this.activeRouter.snapshot.children[0].params.type) {
       this.ms.meetingReload();
-    this.firstTimeEnter = true;
-    this.activeTab = 'type'+'/'+this.activeRouter.snapshot.children[0].params.type;
-    console.log('this.activeTab',this.activeTab);
-    console.log('this.activeRouter.snapshot.params',this.activeRouter.snapshot);
+      this.firstTimeEnter = true;
+    }
+    this.activeTab = 'type' + '/' + this.activeRouter.snapshot.children[0].params.type;
+    console.log('this.activeTab', this.activeTab);
+    console.log('this.activeRouter.snapshot.params', this.activeRouter.snapshot);
   }
   ngOnInit() {
-    console.log('this.activeRouter.snapshot.params',this.activeRouter.snapshot.params);
+    console.log('this.activeRouter.snapshot.params', this.activeRouter.snapshot.params);
     const userInfo: any = this.authService.isAuthenticated();
     this.googlePic = userInfo.user.imageUrl;
   }
