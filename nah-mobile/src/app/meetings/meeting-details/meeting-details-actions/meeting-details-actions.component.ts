@@ -84,14 +84,14 @@ export class MeetingDetailsActionsComponent implements OnInit {
       message: 'Do you want to cancel this Meeting?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'No',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Okay',
+          text: 'Yes',
           handler: () => {
             this.meeting.isCanceled = 1;
             this.http.get('meeting/cancel/' + this.meeting.id).subscribe(res => {
