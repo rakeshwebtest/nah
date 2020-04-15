@@ -40,7 +40,7 @@
         </ion-col>
         <ion-col size="auto" class="ion-text-end ion-padding-t-10 ion-padding-l-0 ion-padding-r-0 ion-padding-b-0"
           *ngIf="!m.isCreatedBy && !m.isSuspend">
-          <ion-text class="text-medium" style="display: block;">{{m?.city?.name}}</ion-text>
+          <!-- <ion-text class="text-medium" style="display: block;">{{m?.city?.name}}</ion-text> -->
           <ion-button class="ion-no-margin button-small" size="small" color="medium" (click)="meetingJoin(m)"
             *ngIf="m.isMember">
             Unjoin</ion-button>
@@ -69,7 +69,15 @@
             </ion-avatar> -->
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col class="ion-padding-l-0 ion-padding-r-0 ion-padding-b-0 ">
+          <label class="meeting-desc ellipsas">
+           {{m.city.name}}
+          </label>
+        </ion-col>
+      </ion-row>
       <ion-row (click)="clickMeeting(m)">
+   
         <ion-col class="ion-padding-l-0 ion-padding-r-0 ion-padding-b-0 ">
           <label class="meeting-desc ellipsas">
             Created By: {{m.createdBy.displayName}}@{{m.createdBy.typeOfNoer | titlecase}}
