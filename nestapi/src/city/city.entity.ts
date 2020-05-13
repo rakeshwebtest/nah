@@ -11,7 +11,7 @@ export class CityEntity extends BaseEntity {
     @OneToMany(type => UserEntity, user => user.city)
     users: UserEntity[];
 
-    @OneToMany(type => MeetingEntity, meeting => meeting.group)
+    @OneToMany(type => MeetingEntity, meeting => meeting.city)
     meetings: MeetingEntity[];
 
 }
