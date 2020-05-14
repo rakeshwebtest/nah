@@ -49,7 +49,8 @@ const routes: Routes = [
   {
     path: 'profile-edit',
     loadChildren: () => import('./profile-edit/profile-edit.module').then( m => m.ProfileEditPageModule)
-  }
+  },
+
 
 ];
 

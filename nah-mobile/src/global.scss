@@ -177,10 +177,10 @@ vertical-field{
     border-radius: 50%;
     float: left;
 }
-ion-tabs{
-    position: relative !important;
-    contain: inherit !important;
-}
+// ion-tabs{
+//     position: relative !important;
+//     contain: inherit !important;
+// }
 .meeting-list-d {
     .item-native{
         padding: 0 !important;
@@ -278,64 +278,35 @@ formly-field-file ion-input  input{
 .border{
     border: 1px solid #ccc;
 }
-ion-tabs{
-    z-index: 0;
-}
-ion-tab-bar{
-    padding-top: 5px;
-    display: flex;
-    justify-content: space-evenly;
-    font-size: 16px;
-    height: 40px;
-}
-.custom-tabs ion-tab-bar{
-    height: 75px;
-    padding-bottom: 5px;
-}
-.custom-tabs ion-label{
-    font-size: 14px;
-    padding-top: 5px;
-    margin: 0;
-    @media(max-width:360px){
-        font-size: 11px;
-    }
-}
-.custom-tabs .avatar {
-    margin-top: 5px;
-    font-size: 42px;
-}
-.custom-tabs ion-tab-button a {
-    padding: 0;
-}
-.custom-tabs ion-tab-button {
-    padding: 0;
-    &.active,&:hover{
-        background-color: transparent;
-        color: #000000;
-        ion-label{
-            color: #000;
-            text-transform: capitalize;
-        }
-    }
-}
+// ion-tabs{
+//     z-index: 0;
+// }
+// ion-tab-bar{
+//     padding-top: 5px;
+//     display: flex;
+//     justify-content: space-evenly;
+//     font-size: 16px;
+//     height: 40px;
+// }
 
-ion-tab-button{
-    padding: 5px;
-    // border: 1px solid #ccc !important;
-    border-radius: 5px !important;
-    font-size: 16px;
-    ion-label{
-        text-transform: capitalize;
-    }
-    &.active,&:hover{
-        background-color: var(--ion-color-danger);
-        color: #ffffff;
-        ion-label{
-            text-transform: capitalize;
-            color: #ffffff;
-        }
-    }
-} 
+
+// ion-tab-button{
+//     padding: 5px;
+//     // border: 1px solid #ccc !important;
+//     border-radius: 5px !important;
+//     font-size: 16px;
+//     ion-label{
+//         text-transform: capitalize;
+//     }
+//     &.active,&:hover{
+//         background-color: var(--ion-color-danger);
+//         color: #ffffff;
+//         ion-label{
+//             text-transform: capitalize;
+//             color: #ffffff;
+//         }
+//     }
+// } 
 .ionic-selectable-cover{
     border: 1px solid #ccc !important;
 }

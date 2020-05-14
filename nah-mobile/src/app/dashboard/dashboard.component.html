@@ -15,34 +15,6 @@
     </ion-avatar>
   </ion-toolbar>
 </ion-header>
-
-<!-- <ion-fab class="add-btn" vertical="end" horizontal="end" slot="fixed">
-  <ion-fab-button color="danger" [routerLink]="['/meeting/create']">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
-</ion-fab> -->
-<ion-tabs class="custom-tabs">
-  <ion-tab-bar slot="top">
-    <ion-tab-button tab="type/all" (click)="activeTab='type/all'" [ngClass]="{'active': activeTab=='type/all'}">
-      <ion-avatar class="avatar ion-align-items-center">
-        <ion-icon class="ion-align-items-center custom-all-meetings"></ion-icon>
-      </ion-avatar>
-      <ion-label>All Meetings</ion-label>
-      <!-- <ion-badge></ion-badge> -->
-    </ion-tab-button>
-
-    <ion-tab-button tab="type/my-meeting" (click)="activeTab='type/my-meeting'" [ngClass]="{'active': activeTab=='type/my-meeting'}">
-      <ion-avatar class="avatar ion-align-items-center">
-        <ion-icon class="ion-align-items-center custom-created-by-me" ></ion-icon>
-      </ion-avatar>
-      <ion-label>My Meetings</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="type/upcoming" (click)="activeTab='type/upcoming'" [ngClass]="{'active': activeTab=='type/upcoming'}">
-      <ion-avatar class="avatar ion-align-items-center">
-        <ion-icon class="ion-align-items-center custom-upcoming" ></ion-icon>
-      </ion-avatar>
-      <ion-label>Future Meetings</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+<ion-content>
+  <ion-router-outlet></ion-router-outlet>
+</ion-content>
