@@ -5,11 +5,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
 import { GroupListModule } from '../shared/group-list/group-list.module';
+import { GroupListComponent } from '../shared/group-list/group-list.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: UserProfileComponent
+    component: UserProfileComponent,
+    children: [
+      {
+        path: ':type',
+        component: GroupListComponent
+      }
+    ]
   }
 ]
 

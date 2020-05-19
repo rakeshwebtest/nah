@@ -1,35 +1,26 @@
-<!-- <ion-header translucent no-border>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button color="light">
-        <ion-icon slot="start" name="ios-arrow-back"></ion-icon>
-        Profile
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start" class="white-color">
       <ion-back-button defaultHref="dashboard/type/all"></ion-back-button>
-      <ion-img class="ion-padding-r-10 header-logo"
-        src="assets/svg/nah_logo_white.svg"></ion-img>
-        <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
-          Profile
-        </ion-text>
+      <ion-img class="ion-padding-r-10 header-logo" src="assets/svg/nah_logo_white.svg"></ion-img>
+      <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
+        Profile
+      </ion-text>
     </ion-buttons>
     <ion-row class="profile-settings text-10">
       <ion-icon style="cursor: pointer;" name="md-more" color="light" (click)="presentPopover($event)"></ion-icon>
     </ion-row>
   </ion-toolbar>
+  
 </ion-header>
-<ion-fab class="add-btn" vertical="end" horizontal="end" slot="fixed" (click)="presentModal()">
-  <ion-fab-button color="danger">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
 
-<ion-content fullscreen="true" slot="fixed">
+<!-- fullscreen="true" slot="fixed" -->
+<ion-content scroll="true">
+  <ion-fab class="add-btn" vertical="end" horizontal="end" slot="fixed" (click)="presentModal()">
+    <ion-fab-button color="danger">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-card class="card">
     <ion-card-header>
       <ion-avatar class="image-avater image-center ion-activatable">
@@ -49,46 +40,21 @@
       <h5 class="country">{{ userInfo?.city?.name }}</h5>
       <h5 class="country">{{ userInfo.typeOfNoer }}</h5>
       <!-- <h6 class="followes">Followes: <ion-chip>
-          <ion-label>2</ion-label>
-        </ion-chip>
-      </h6> -->
+            <ion-label>2</ion-label>
+          </ion-chip>
+        </h6> -->
     </ion-card-content>
   </ion-card>
-
-  <ion-grid class="">
-    <ion-row class="">
-      <ion-tabs>
-        <ion-tab-bar>
-          <ion-tab-button [ngClass]="{'active': activeTab=='all'}" (click)="activeTab='all'">
-            <ion-label>All Groups</ion-label>
-          </ion-tab-button>
-          <ion-tab-button class="ion-margin-l-5" [ngClass]="{'active': activeTab=='myGroups'}" (click)="activeTab='myGroups'">
-            <ion-label >My Groups</ion-label>
-          </ion-tab-button>
-    
-        </ion-tab-bar>
-      </ion-tabs>
-      <!-- <ion-col class="ion-text-start">
-        <ion-label class="meeting-title " style="font-size: 18px;" (click)="presentModal()">Following Groups</ion-label>
-      </ion-col>
-      <ion-col class=" ion-text-end">
-        <ion-label class="meeting-title" style="color: red;cursor: pointer;" (click)="navGroupList()"
-          >My Group
-        </ion-label>
-        <ion-label class="meeting-title" style="color: red;cursor: pointer;" (click)="presentModal()"
-          >Create A Group
-        </ion-label>
-      </ion-col> -->
-    </ion-row>
-    <ng-container [ngSwitch]="activeTab">
-      <ng-container *ngSwitchCase="'myGroups'">
-        <app-group-list #groupC type="mygroups"></app-group-list>
-      </ng-container>
-      <ng-container *ngSwitchCase="'all'">
-        <app-group-list></app-group-list>
-      </ng-container>
-    </ng-container>
-
-  </ion-grid>
-
+  <ion-tabs>
+    <ion-tab-bar slot="top">
+      <ion-tab-button tab="mygroups" [ngClass]="{'active': activeTab=='all'}" (click)="activeTab='all'">
+        <ion-label>All Groups</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="all" class="ion-margin-l-5" [ngClass]="{'active': activeTab=='myGroups'}" (click)="activeTab='myGroups'">
+        <ion-label>My Groups</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  <!-- <app-group-list #groupC type="all"></app-group-list> -->
 </ion-content>
+
