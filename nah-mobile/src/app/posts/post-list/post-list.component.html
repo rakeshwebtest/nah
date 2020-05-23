@@ -1,6 +1,14 @@
-<app-agenda-view></app-agenda-view>
+<!-- <app-agenda-view></app-agenda-view> -->
 <ion-row class="ion-align-items-center no-meetings">
   <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
     No Posts Available
   </ion-col>
 </ion-row>
+<ion-fab class="add-btn" vertical="end" horizontal="end" slot="fixed">
+  <ion-fab-button color="danger" [routerLink]="['/agenda']">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-content>
+  
+</ion-content>

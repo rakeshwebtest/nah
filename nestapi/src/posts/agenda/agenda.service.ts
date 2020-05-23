@@ -27,8 +27,6 @@ export class AgendaService {
             const startDate = new Date();
             const days = (1000 * 60 * 60 * 24) * 90;
             const endDate = new Date(startDate.getTime() + days);
-            console.log(endDate);
-            console.log('startDate',startDate.getDate());
             req.startDate = startDate;
             req.endDate = endDate;
         }

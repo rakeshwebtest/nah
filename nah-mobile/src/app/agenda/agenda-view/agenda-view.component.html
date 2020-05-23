@@ -1,10 +1,13 @@
 <ion-card (click)="createAgenda()" *ngIf="agenda;else createAgendaTemp">
     <ion-card-header>
-    <ion-card-subtitle>Phase 1 day 17 Start:{{agenda.startDate | date}} End:{{agenda.endDate | date}}</ion-card-subtitle>
-    <ion-card-title>[AGENDA]</ion-card-title>
+    <ion-card-title>AGENDA</ion-card-title>
+    <ion-card-subtitle>Phase 1 day 17 From {{agenda.startDate | date}} To {{agenda.endDate | date}}</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
-    Say No To : <ion-badge color="primary" *ngFor="let topic of agenda.topics">{{topic.name}}</ion-badge>
+    <ion-row *ngFor="let topic of agenda.topics">
+      Say No To : <ion-badge color="primary" >{{topic.name}}</ion-badge>
+    </ion-row>
+    
   </ion-card-content>
 </ion-card>
 
