@@ -14,7 +14,7 @@ export class AgendaEntity extends BaseEntity {
     @Column({ type: 'timestamp', name: 'endDate', default: () => 'CURRENT_TIMESTAMP' })
     endDate: Date;
 
-    @OneToMany(type => AgendaTopicsEntity, topics => topics.agenda, { eager: true,onDelete: 'CASCADE',cascade: ["insert","update","remove"] })
+    @OneToMany(type => AgendaTopicsEntity, topics => topics.agenda, { eager: true,cascade: true,onDelete: 'CASCADE' })
     topics: AgendaTopicsEntity[];
 
     @ManyToOne(type => UserEntity, user => user.agenda, {eager: true, onDelete: 'CASCADE' })
