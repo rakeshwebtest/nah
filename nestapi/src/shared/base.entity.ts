@@ -1,6 +1,5 @@
 // base.entity.ts
 import { BeforeUpdate, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, BeforeInsert } from 'typeorm';
-import { Type } from 'class-transformer';
 
 export abstract class BaseEntity {
     // @PrimaryGeneratedColumn('uuid')

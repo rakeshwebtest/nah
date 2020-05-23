@@ -13,7 +13,16 @@
   </ion-toolbar>
   
 </ion-header>
-
+<ion-tabs>
+  <ion-tab-bar slot="top">
+    <ion-tab-button  [ngClass]="{'active': activeTab=='all'}" (click)="activeTab='all'">
+      <ion-label>All Groups</ion-label>
+    </ion-tab-button>
+    <ion-tab-button  class="ion-margin-l-5" [ngClass]="{'active': activeTab=='myGroups'}" (click)="activeTab='myGroups'">
+      <ion-label>My Groups</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
 <!-- fullscreen="true" slot="fixed" -->
 <ion-content scroll="true">
   <ion-fab class="add-btn" vertical="end" horizontal="end" slot="fixed" (click)="presentModal()">
@@ -45,16 +54,9 @@
         </h6> -->
     </ion-card-content>
   </ion-card>
-  <ion-tabs>
-    <ion-tab-bar slot="top">
-      <ion-tab-button tab="mygroups" [ngClass]="{'active': activeTab=='all'}" (click)="activeTab='all'">
-        <ion-label>All Groups</ion-label>
-      </ion-tab-button>
-      <ion-tab-button tab="all" class="ion-margin-l-5" [ngClass]="{'active': activeTab=='myGroups'}" (click)="activeTab='myGroups'">
-        <ion-label>My Groups</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
-  <!-- <app-group-list #groupC type="all"></app-group-list> -->
+  <app-group-list *ngIf="activeTab=='myGroups'" #groupC type="mygroups"></app-group-list>
+  <app-group-list *ngIf="activeTab=='all'" #groupC type="all"></app-group-list>
 </ion-content>
-
+<ion-footer>
+ 
+</ion-footer>

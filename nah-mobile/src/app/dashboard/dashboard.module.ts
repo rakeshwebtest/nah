@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'meeting/all'
+    redirectTo: 'meeting'
   },
   {
     path: '',
@@ -26,6 +26,11 @@ const routes: Routes = [
             path: 'meeting',
             component: MeetingTabsComponent,
             children: [
+              {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'all'
+              },
               {
                 path: ':type',
                 component: MeetingsPage,

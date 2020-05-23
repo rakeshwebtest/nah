@@ -10,12 +10,14 @@ import { FieldSelectableComponent } from './types/select-type';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { FormlyFieldButton } from './types/button-type.component';
 import { FieldDatetime } from './types/datetime'
+import { RepeatTypeComponent } from './types/repeat';
 @NgModule({
   declarations: [
     VerticalFieldComponent,
     FieldFileComponent,
     FieldSelectableComponent,
     FormlyFieldButton,
+    RepeatTypeComponent,
     FieldDatetime
   ],
   imports: [
@@ -30,7 +32,8 @@ import { FieldDatetime } from './types/datetime'
         { name: 'file', component: FieldFileComponent, wrappers: ['vertical'] },
         { name: 'button', component: FormlyFieldButton, wrappers: ['vertical'] },
         { name: 'datetime', component: FieldDatetime, wrappers: ['vertical'] },
-        { name: 'selectable', component: FieldSelectableComponent, wrappers: ['vertical'] }
+        { name: 'selectable', component: FieldSelectableComponent, wrappers: ['vertical'] },
+        { name: 'repeat', component: RepeatTypeComponent, wrappers: ['vertical'] }
       ],
       validationMessages: [
         { name: 'required', message: 'This field is required' },

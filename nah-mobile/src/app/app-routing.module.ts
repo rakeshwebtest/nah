@@ -38,18 +38,23 @@ const routes: Routes = [
       },
       {
         path: 'group',
-        loadChildren: () => import('./group/group.module').then( m => m.GroupPageModule)
+        loadChildren: () => import('./group/group.module').then(m => m.GroupPageModule)
+      },
+
+      {
+        path: 'agenda',
+        loadChildren: () => import('./agenda/agenda.module').then(m => m.AgendaPageModule)
       }
     ]
   },
   {
     path: 'pages',
-    loadChildren: () => import('./pages/pages.module').then( m => m.PagesPageModule)
+    loadChildren: () => import('./pages/pages.module').then(m => m.PagesPageModule)
   },
   {
     path: 'profile-edit',
-    loadChildren: () => import('./profile-edit/profile-edit.module').then( m => m.ProfileEditPageModule)
-  },
+    loadChildren: () => import('./profile-edit/profile-edit.module').then(m => m.ProfileEditPageModule)
+  }
 
 
 ];

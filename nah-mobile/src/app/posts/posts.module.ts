@@ -8,13 +8,15 @@ import { PostsPageRoutingModule } from './posts-routing.module';
 
 import { PostsPage } from './posts.page';
 import { PostListComponent } from './post-list/post-list.component';
+import { AgendaViewModule } from '../agenda/agenda-view/agenda-view.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PostsPageRoutingModule
+    PostsPageRoutingModule,
+    AgendaViewModule
   ],
   declarations: [PostsPage,PostListComponent]
 })

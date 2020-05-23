@@ -12,6 +12,7 @@ import { DB } from './config';
 import { AuthMiddleware } from './user/auth.middleware';
 import { UserService } from './user/user.service';
 import { UserEntity } from './user/user.entity';
+import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { UserEntity } from './user/user.entity';
     MulterModule.register({
       dest: './uploads'
     }),
-    CityModule
+    CityModule,
+    PostsModule
   ],
   controllers: [AppController],
   providers: [AuthMiddleware, UserService],
@@ -41,7 +43,8 @@ export class AppModule {
         { path: 'user', method: RequestMethod.PUT },
         { path: 'group', method: RequestMethod.ALL },
         { path: 'group/*', method: RequestMethod.ALL },
-        { path: 'meeting/*', method: RequestMethod.ALL }
+        { path: 'meeting/*', method: RequestMethod.ALL },
+        { path: 'agenda', method: RequestMethod.ALL }
       );
   }
 }

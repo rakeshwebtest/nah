@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="white-color">
+      <ion-back-button></ion-back-button>
+      <ion-img class="ion-padding-r-10 header-logo" src="assets/svg/nah_logo_white.svg"></ion-img>
+      <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
+        Agenda
+      </ion-text>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="isPublish===0;else agendaView">
+  <h1>Agenda</h1>
+  <form [formGroup]="form">
+    <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+  </form>
+  <ion-footer>
+    <ion-toolbar class="ion-text-center">
+      <ion-button color="danger" (click)="submit('draft')" [disabled]="(form.valid)?false:true">
+        Save as draft
+      </ion-button>
+      <ion-button color="danger" (click)="submit('publish')" [disabled]="(form.valid)?false:true">
+        Save & Publish
+      </ion-button>
+    </ion-toolbar>
+  </ion-footer>
+  </ng-container>
+</ion-content>
+
+
+<ng-template #agendaView>
+  <app-agenda-view></app-agenda-view>
+</ng-template>
