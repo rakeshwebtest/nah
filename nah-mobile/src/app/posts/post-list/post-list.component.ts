@@ -8,8 +8,10 @@ import { Router } from '@angular/router';
 })
 export class PostListComponent implements OnInit {
 
-  constructor(private router:Router) { }
-
-  ngOnInit() {}
+  constructor(private router: Router) { }
+  ionViewWillEnter() {
+    
+  }
+  ngOnInit() { }
 
 }

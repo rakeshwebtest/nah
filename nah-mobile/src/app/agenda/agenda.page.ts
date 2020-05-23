@@ -64,6 +64,7 @@ export class AgendaPage implements OnInit {
     this.http.post('agenda',this.model).subscribe(res=>{
       if(res.data){
         this.isPublish = res.data.isPublish;
+        this.model = res.data;
         console.log(res.data);
       }
     })

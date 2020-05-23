@@ -1,5 +1,8 @@
-<ion-tabs >
+<ion-tabs style="position: relative;height: 50px;">
   <ion-tab-bar slot="top">
+    <ion-tab-button tab="mygroups" [ngClass]="{'active': activeTab=='all'}" (click)="activeTab='all'">
+      <ion-label>My Noer Posts</ion-label>
+    </ion-tab-button>
     <ion-tab-button tab="mygroups" [ngClass]="{'active': activeTab=='all'}" (click)="activeTab='all'">
       <ion-label>All Groups</ion-label>
     </ion-tab-button>
