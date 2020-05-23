@@ -28,7 +28,8 @@ export class AgendaPage implements OnInit {
       fieldArray: {
         fieldGroup: [
           {
-            className: 'col-sm-4',
+            wrappers: ['vertical'],
+            className: 'repeat-input',
             type: 'input',
             key: 'name',
             templateOptions: {

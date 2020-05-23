@@ -33,6 +33,21 @@ ion-icon {
   &[class*="custom-upcoming"] {
     mask-image: url(assets/svg/ic_upcoming.svg);
   }
+  &[class*="custom-users"] {
+    mask-image: url(assets/svg/users.svg);
+  }
+  &[class*="custom-star"] {
+    mask-image: url(assets/svg/star.svg);
+  }
+  &[class*="custom-star-o"] {
+    mask-image: url(assets/svg/star-o.svg);
+  }
+  &[class*="custom-notifications"] {
+    mask-image: url(assets/svg/notifications.svg);
+  }
+  &[class*="custom-posts"] {
+    mask-image: url(assets/svg/posts.svg);
+  }
 }
 // ion-back-button {
 //   &[class*="back"] {
