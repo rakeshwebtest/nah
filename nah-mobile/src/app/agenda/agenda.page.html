@@ -18,17 +18,17 @@
   </form>
 </ng-container>
 </ion-content>
-      <ion-footer>
-        <ion-toolbar class="ion-text-center">
-          <ion-button color="danger" (click)="submit('draft')" [disabled]="(form.valid)?false:true">
-            Save as draft
-          </ion-button>
-          <ion-button color="danger" (click)="submit('publish')" [disabled]="(form.valid)?false:true">
-            Save & Publish
-          </ion-button>
-        </ion-toolbar>
-      </ion-footer>
-
+   
+<ion-footer *ngIf="isPublish===0">
+  <ion-toolbar class="ion-text-center">
+    <ion-button color="danger" (click)="submit('draft')" [disabled]="(form.valid)?false:true">
+      Save as draft
+    </ion-button>
+    <ion-button color="danger" (click)="submit('publish')" [disabled]="(form.valid)?false:true">
+      Save & Publish
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
 
 <ng-template #agendaView>
   <app-agenda-view></app-agenda-view>

@@ -24,6 +24,18 @@ export class AgendaPage implements OnInit {
       type: 'repeat',
       templateOptions: {
         addText: 'Add another topic',
+        max:2
+      },
+      validators: {
+        required: {
+          expression: (c) =>{
+            console.log('val',c.value,!c.value || c.value.length < 1);
+            return !(c.value && c.value.length < 1) },
+          message: (error, field: FormlyFieldConfig) => `"minimum one topic"`,
+        },
+      },
+      validation: {
+        show: true,
       },
       fieldArray: {
         fieldGroup: [

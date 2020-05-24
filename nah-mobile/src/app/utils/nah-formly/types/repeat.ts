@@ -10,9 +10,20 @@ import { FieldArrayType } from '@ngx-formly/core';
         <ion-button color="danger" type="button" (click)="remove(i)"><ion-icon name="trash"></ion-icon></ion-button>
       </div>
     </ion-row>
-    <ion-row style="margin:30px 0;display: flex;justify-content: center;">
+    <ion-row style="margin:30px 0;display: flex;justify-content: center;" *ngIf="checkLength()">
       <ion-button class="btn btn-primary" type="button" (click)="add()">{{ to.addText }}</ion-button>
     </ion-row>
   `,
 })
-export class RepeatTypeComponent extends FieldArrayType {}
+export class RepeatTypeComponent extends FieldArrayType {
+
+  checkLength(){
+    if(this.formControl.value && this.formControl.value.length){
+      if(this.to.max){
+        return this.formControl.value.length <= this.to.max;
+      }
+    }
+    return false;
+  }
+  
+}

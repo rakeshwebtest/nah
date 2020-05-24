@@ -40,6 +40,14 @@ const routes: Routes = [
           {
             path: 'posts',
             loadChildren: () => import('../posts/posts.module').then( m => m.PostsPageModule)
+          },
+          {
+            path: 'bookmark',
+            loadChildren: () => import('../bookmark/bookmark.module').then( m => m.BookmarkPageModule)
+          },
+          {
+            path: 'notifications',
+            loadChildren: () => import('../notifications/notifications.module').then( m => m.NotificationsPageModule)
           }
         ]
       }
