@@ -515,7 +515,7 @@ ion-footer{
     font-weight: bold;
 }
 .card-sub-title{
-    margin: 5px 0;
+    margin: 8px 0;
 }
 .text-red{
     color: #FB0102;
@@ -526,6 +526,7 @@ ion-footer{
 }
 .custom-card{
     box-shadow: none;
+    border-radius: 0px;
     ion-card-header{
         padding: 0;
     }
