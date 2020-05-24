@@ -1,6 +1,51 @@
 .agenda-list{
     margin-bottom: 5px;
+    color: #333;
     span{
         padding-right: 5px;
     }
+}
+.sub-title-info1{
+    text-transform: uppercase;
+    color:#1E1E1E;
+    font-weight: bold;
+    font-size: 15px;
+}
+.sub-title-info2{
+    padding-left: 20px;
+    font-size: 12px;
+}
+.bars-list{
+    display: flex;
+    padding: 0 10px;
+    // border-left: 4px solid #f00;
+    // margin-left: 5px;
+    span{
+        width: 7px;
+        margin-right: 3px;
+        background-color: #B3B3B3;
+        &.active{
+            background-color: #FB0102;
+        }
+    }
+}
+.lock{
+    background-color: #2E2E2E;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    justify-content: center;
+    flex:auto;
+    position: relative;
+    padding: 3px;
+    font-size: 21px;
+}
+.card-title{
+    font-size: 21px;
+    font-weight: bold;
+    display: flex;
+}
+ion-badge{
+    padding-top: 5px;
+    background-color: #FB0102 !important;
 }
