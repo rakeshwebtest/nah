@@ -461,6 +461,9 @@ ion-footer{
     color: #999999;
     font-size: 14px;
     border-bottom: 5px solid transparent;
+    @media(max-width: 400px){
+        font-size: 14px;
+    }
     a{
         padding: 0 5px !important;
     }
