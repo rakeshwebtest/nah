@@ -429,12 +429,21 @@ ion-footer{
     .tab-has-label {
         color: #999999;
         font-size: 12px;
+        @media(max-width: 420px){
+            font-size: 10px;
+        }
+        @media(max-width: 400px){
+            max-width: 19%;
+        }
         border-bottom: none;
         &.tab-selected{
             color: #FB0102;
         }
         ion-icon{
             font-size: 32px;
+            @media(max-width: 420px){
+                font-size: 21px;
+            }
         }
         &:hover{
             ion-icon{
@@ -452,7 +461,9 @@ ion-footer{
     color: #999999;
     font-size: 14px;
     border-bottom: 5px solid transparent;
-
+    a{
+        padding: 0 5px !important;
+    }
     &.tab-selected{
         border-color: #FB0102;
         color: #FB0102;
