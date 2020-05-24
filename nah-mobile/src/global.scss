@@ -546,3 +546,10 @@ ion-footer{
         margin: 5px 0;
     }
 }
+.tab-has-label #shadow-root a{
+    padding: 0 !important;
+}
+ion-tab-button {
+    --padding-start: 2px;
+    --padding-end: 2px;
+}
