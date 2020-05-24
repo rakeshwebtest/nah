@@ -48,6 +48,12 @@ ion-icon {
   &[class*="custom-posts"] {
     mask-image: url(assets/svg/posts.svg);
   }
+  &[class*="custom-add"] {
+    mask-image: url(assets/svg/add.svg);
+  }
+  &[class*="custom-search"] {
+    mask-image: url(assets/svg/search.svg);
+  }
 }
 // ion-back-button {
 //   &[class*="back"] {
