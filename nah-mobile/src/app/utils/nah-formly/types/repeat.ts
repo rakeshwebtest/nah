@@ -20,10 +20,10 @@ export class RepeatTypeComponent extends FieldArrayType {
   checkLength(){
     if(this.formControl.value && this.formControl.value.length){
       if(this.to.max){
-        return this.formControl.value.length <= this.to.max;
+        return this.formControl.value.length < this.to.max;
       }
     }
-    return false;
+    return true;
   }
   
 }
