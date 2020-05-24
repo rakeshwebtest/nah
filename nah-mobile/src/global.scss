@@ -497,5 +497,26 @@ ion-footer{
     }
 }
 .card-title{
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.card-sub-title{
+    margin: 5px 0;
+}
+.text-red{
+    color: #FB0102;
+}
+.text-date{
+    color: #484848;
+    font-weight: bold;
+}
+.custom-card{
+    box-shadow: none;
+    ion-card-header{
+        padding: 0;
+    }
+    ion-card-content{
+        padding: 0;
+        margin: 5px 0;
+    }
 }
