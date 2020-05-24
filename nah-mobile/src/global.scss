@@ -442,14 +442,25 @@ ion-footer{
         ion-icon{
             font-size: 32px;
             @media(max-width: 420px){
-                font-size: 21px;
+                font-size: 18px;
             }
+        }
+        ion-label{
+            text-overflow: initial !important;
+            width: 100%;
+            white-space: pre;
         }
         &:hover{
             ion-icon{
                 color: #FB0102 !important; 
             }
         }
+        &:host{
+            padding: 0;
+            a{
+                padding: 0;
+            }
+        } 
     }
 }
 .tabs-45{
@@ -499,7 +510,7 @@ ion-footer{
     align-items: flex-end;
     margin-bottom: 10px;
     .repeat-field{
-        flex: auto;
+        flex: 1 1 75%;
     }
     .repeat-delete{
         flex: 0;
