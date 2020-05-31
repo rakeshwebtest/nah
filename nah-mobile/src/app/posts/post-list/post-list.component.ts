@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post-list',
@@ -8,11 +8,29 @@ import { Router } from '@angular/router';
 })
 export class PostListComponent implements OnInit {
   public postList = [];
-  constructor(private router: Router) { }
-  ionViewWillEnter() {
+  showAgendaView = false;
+  constructor(private router: Router, private activeRouter: ActivatedRoute) {
 
   }
+  ionViewDidLoad(){
+    console.log('ionViewDidLoad');
+  }
+  // ionViewWillEnter(){
+  //   console.log('ionViewDidEnter');
+  // }
+  ionViewWillEnter() {
+    const params = this.activeRouter.snapshot.routeConfig.path;
+    console.log('params', params);
+    this.showAgendaView = false;
+    if (params === 'my-posts') {
+      // this.showAgendaView = true;
+      setTimeout(() => {
+        this.showAgendaView = true;
+      }, 100);
+    }
+  }
   ngOnInit() {
+
     this.postList = [
       {
         name: 'UZ 16LAB@anties',

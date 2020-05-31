@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { AppHttpClient } from '../utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agenda',
@@ -53,7 +54,7 @@ export class AgendaPage implements OnInit {
       }
     }
   ];
-  constructor(private http:AppHttpClient) { }
+  constructor(private http:AppHttpClient,private router:Router) { }
 
   ngOnInit() {
     this.getUserAgenda();
@@ -79,6 +80,7 @@ export class AgendaPage implements OnInit {
         this.isPublish = res.data.isPublish;
         this.model = res.data;
         console.log(res.data);
+        this.router.navigate(['/dashboard/posts/all']);
       }
     })
   }

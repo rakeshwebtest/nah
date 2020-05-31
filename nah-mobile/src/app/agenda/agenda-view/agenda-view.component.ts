@@ -9,8 +9,12 @@ import { Router } from '@angular/router';
 })
 export class AgendaViewComponent implements OnInit {
   agenda: any;
+  showCreateBtn:boolean;
   constructor(private http: AppHttpClient, private router: Router) { }
 
+  ionViewDidEnter() {
+   console.log('ionViewDidEnter');
+  }
   ngOnInit() {
     this.checkAgenda();
   }
@@ -19,7 +23,8 @@ export class AgendaViewComponent implements OnInit {
       const data: any = res;
       if (data.data) {
         this.agenda = data.data;
-        console.log(data.data);
+      } else {
+        this.showCreateBtn = true;
       }
     })
   }

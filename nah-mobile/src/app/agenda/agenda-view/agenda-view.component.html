@@ -1,4 +1,4 @@
-<ion-card class="ion-no-margin custom-card" (click)="createAgenda()" *ngIf="agenda;else createAgendaTemp">
+<ion-card class="ion-no-margin custom-card"  *ngIf="agenda">
     <ion-card-header>
     <ion-card-title class="card-title">AGENDA
       <div class="bars-list">
@@ -27,6 +27,6 @@
   </ion-card-content>
 </ion-card>
 
-<ng-template #createAgendaTemp>
+<ion-row *ngIf="showCreateBtn">
   <ion-button (click)="createAgenda()">Create Agenda</ion-button>
-</ng-template>
+</ion-row>
