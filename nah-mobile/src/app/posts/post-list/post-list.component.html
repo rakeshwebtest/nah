@@ -4,6 +4,50 @@
     No Posts Available
   </ion-col>
 </ion-row>
+<ion-row class="post-widget">
+  <ion-card class="post-list" *ngFor="let post of postList;">
+    <ion-card-header>
+      <ion-row>
+        <ion-col size="auto" class="col-avatar">
+          <ion-avatar class="post-avatar">
+            <img [src]="post.avatarUrl">
+          </ion-avatar>
+        </ion-col>
+        <ion-col class="col-avatar-right">
+          <ion-label>
+            <ion-text class="text-name">{{post.name}}</ion-text>
+            <ion-text class="post-stars">
+               <ion-icon name="star" color="warning"></ion-icon>
+               <ion-icon name="star"></ion-icon>
+               <ion-icon name="star"></ion-icon>
+               <ion-icon name="star"></ion-icon>
+               <ion-icon name="star"></ion-icon>
+            </ion-text> 
+          <span class="date">{{post.createdDate}}</span></ion-label>
+          <p><ion-text class="text-agenda">AGENDA</ion-text><ion-text>Say No To <span class="text-danger">#Antisexualism#</span></ion-text></p>  
+        </ion-col>
+      </ion-row>
+      <ion-card-title><ion-text>[Anti]</ion-text><ion-label>Why we MUST encourage ppl have sex?</ion-label> <ion-icon class="custom-antie"></ion-icon></ion-card-title>
+     
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-thumbnail class="post-image">
+        <ion-img [src]="post.imageUrl"></ion-img>
+      </ion-thumbnail>
+      <ion-text class="post-description" color="dark">
+        <p>Keep close to Nature's heart... and break clear away, once in awhile,
+          and climb a mountain or spend a week in the woods. Wash your spirit clean.</p>
+      </ion-text>
+      <ion-text class="post-footer">
+        <span><ion-icon name="thumbs-up"></ion-icon> 31</span>
+        <span><ion-icon name="thumbs-down"></ion-icon> 55</span>
+        <span><ion-icon name="chatbubbles"></ion-icon> 77</span>
+        <span><ion-icon name="star"></ion-icon> 0</span>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+</ion-row>
 <ion-fab class="add-btn" vertical="end" horizontal="end" slot="fixed">
   <ion-fab-button color="danger" [routerLink]="['/agenda']">
     <ion-icon name="add"></ion-icon>
