@@ -4,9 +4,32 @@ import { Routes, RouterModule } from '@angular/router';
 import { MeetingsPage } from './meetings.page';
 import { MeetingDetailsComponent } from './meeting-details/meeting-details.component';
 import { MeetingCreateComponent } from './meeting-create/meeting-create.component';
+import { MeetingTabsComponent } from './meeting-tabs/meeting-tabs.component';
 
 const routes: Routes = [
-
+  {
+    path:'',
+    redirectTo:'all',
+    pathMatch:'full'
+  },
+  {
+    path: '',
+    component: MeetingTabsComponent,
+    children: [
+      {
+        path: 'all',
+        component: MeetingsPage,
+      },
+      {
+        path: 'my-meeting',
+        component: MeetingsPage,
+      },
+      {
+        path: 'upcoming',
+        component: MeetingsPage,
+      }
+    ]
+  },
   {
     path: 'details/:id',
     component: MeetingDetailsComponent

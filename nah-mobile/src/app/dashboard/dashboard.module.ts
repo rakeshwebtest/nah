@@ -7,12 +7,11 @@ import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
 import { MeetingsPageModule } from '../meetings/meetings.module';
 import { MeetingsPage } from '../meetings/meetings.page';
 import { BottomTabsComponent } from './bottom-tabs/bottom-tabs.component';
-import { MeetingTabsComponent } from './meeting-tabs/meeting-tabs.component';
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'meeting'
+    redirectTo: 'meeting/all'
   },
   {
     path: '',
@@ -24,18 +23,7 @@ const routes: Routes = [
         children: [
           {
             path: 'meeting',
-            component: MeetingTabsComponent,
-            children: [
-              {
-                path: '',
-                pathMatch: 'full',
-                redirectTo: 'all'
-              },
-              {
-                path: ':type',
-                component: MeetingsPage,
-              }
-            ]
+            loadChildren: () => import('../meetings/meetings.module').then( m => m.MeetingsPageModule)
           },
           {
             path: 'posts',
@@ -59,15 +47,14 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     DashboardComponent,
-    BottomTabsComponent,
-    MeetingTabsComponent
+    BottomTabsComponent
   ],
   imports: [
-    RouterModule.forChild(routes),
     MeetingsPageModule,
     CommonModule,
     IonicModule,
     MeetingListModule
-  ]
+  ],
+  exports:[DashboardComponent]
 })
 export class DashboardModule { }

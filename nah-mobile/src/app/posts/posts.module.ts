@@ -9,6 +9,8 @@ import { PostsPageRoutingModule } from './posts-routing.module';
 import { PostsPage } from './posts.page';
 import { PostListComponent } from './post-list/post-list.component';
 import { AgendaViewModule } from '../agenda/agenda-view/agenda-view.module';
+import { PostDetatilsComponent } from './post-detatils/post-detatils.component';
+import { PostCreateComponent } from './post-create/post-create.component';
 
 @NgModule({
   imports: [
@@ -18,6 +20,6 @@ import { AgendaViewModule } from '../agenda/agenda-view/agenda-view.module';
     PostsPageRoutingModule,
     AgendaViewModule
   ],
-  declarations: [PostsPage,PostListComponent]
+  declarations: [PostsPage, PostListComponent, PostDetatilsComponent, PostCreateComponent]
 })
-export class PostsPageModule {}
+export class PostsPageModule { }

@@ -22,6 +22,7 @@ import { MeetingAddVideoPopupComponent } from './meeting-details/meeting-videos/
 import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
 import { GallerizeModule } from '@ngx-gallery/gallerize';
+import { MeetingTabsComponent } from './meeting-tabs/meeting-tabs.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -38,7 +39,7 @@ import { GallerizeModule } from '@ngx-gallery/gallerize';
     LightboxModule,
     GallerizeModule
   ],
-  declarations: [MeetingsPage, MeetingDetailsActionsComponent, MeetingVideosComponent, MeetingDetailsComponent, MeetingCreateComponent,MeetingAddVideoPopupComponent],
-  entryComponents: [MeetingDetailsActionsComponent,ReportComponent,MeetingAddVideoPopupComponent]
+  declarations: [MeetingsPage, MeetingTabsComponent, MeetingDetailsActionsComponent, MeetingVideosComponent, MeetingDetailsComponent, MeetingCreateComponent, MeetingAddVideoPopupComponent],
+  entryComponents: [MeetingDetailsActionsComponent, ReportComponent, MeetingAddVideoPopupComponent]
 })
 export class MeetingsPageModule { }

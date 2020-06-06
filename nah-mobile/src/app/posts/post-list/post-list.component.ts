@@ -58,4 +58,7 @@ export class PostListComponent implements OnInit {
       },
     ];
   }
+  navDetails(){
+    this.router.navigate(['/posts/details']);
+  }
 }

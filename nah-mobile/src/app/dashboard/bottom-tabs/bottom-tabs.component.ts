@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bottom-tabs',
@@ -8,31 +9,27 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class BottomTabsComponent implements OnInit {
 
-  constructor(public actionSheetController: ActionSheetController) { }
+  constructor(public actionSheetController: ActionSheetController,private router:Router) { }
 
   ngOnInit() {}
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
-      header: 'Actions',
+      header: 'Create New',
       cssClass: 'my-custom-class',
       buttons: [{
-        text: 'Create Meeting',
+        text: 'Meeting',
         role: 'destructive',
         icon: 'people',
         handler: () => {
+          this.router.navigate(['/meeting/create']);
           console.log('Delete clicked');
         }
       }, {
-        text: 'Create Post',
+        text: 'Post',
         icon: 'send',
         handler: () => {
+          this.router.navigate(['/posts/create']);
           console.log('Share clicked');
-        }
-      }, {
-        text: 'Create Group',
-        icon: 'albums',
-        handler: () => {
-          console.log('Play clicked');
         }
       }]
     });

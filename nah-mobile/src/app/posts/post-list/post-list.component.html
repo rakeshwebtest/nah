@@ -10,7 +10,7 @@
 </ion-row>
 
 <ion-row class="post-widget">
-  <ion-card class="post-list" *ngFor="let post of postList;">
+  <ion-card class="post-list" (click)="navDetails()"  *ngFor="let post of postList;">
     <ion-card-header>
       <ion-row>
         <ion-col size="auto" class="col-avatar">

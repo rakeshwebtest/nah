@@ -21,6 +21,7 @@ import { IonicSelectableModule } from 'ionic-selectable';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedProfileEditModule } from './shared/shared-profile-edit.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 // IonicStorageModule.forRoot({
@@ -38,6 +39,7 @@ import { SharedProfileEditModule } from './shared/shared-profile-edit.module';
     HttpClientModule,
     CommonModule,
     SharedProfileEditModule,
+    DashboardModule,
     IonicModule.forRoot(
       {
         backButtonText: ''

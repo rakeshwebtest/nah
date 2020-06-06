@@ -5,6 +5,7 @@ import { ChooseUserGroupsComponent } from './sign-in/choose-user-groups/choose-u
 import { IfLoginGuard } from './services/iflogin-guard.service';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -30,12 +31,42 @@ const routes: Routes = [
         path: 'about',
         loadChildren: () => import('./about/about.module').then(m => m.AboutPageModule)
       },
-      { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
-      { path: 'user-profile', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) },
+      {
+        path:'dashboard',
+        component:DashboardComponent,
+        children: [
+          {
+            path: 'meeting',
+            loadChildren: () => import('./meetings/meetings.module').then( m => m.MeetingsPageModule)
+          },
+          {
+            path: 'posts',
+            loadChildren: () => import('./posts/posts.module').then( m => m.PostsPageModule)
+          },
+          {
+            path: 'bookmark',
+            loadChildren: () => import('./bookmark/bookmark.module').then( m => m.BookmarkPageModule)
+          },
+          {
+            path: 'notifications',
+            loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
+          }
+        ]
+      },
       {
         path: 'meeting',
-        loadChildren: () => import('./meetings/meetings.module').then(m => m.MeetingsPageModule)
+        loadChildren: () => import('./meetings/meetings.module').then( m => m.MeetingsPageModule)
       },
+      {
+        path: 'posts',
+        loadChildren: () => import('./posts/posts.module').then( m => m.PostsPageModule)
+      },
+     
+      { path: 'user-profile', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) },
+      // {
+      //   path: 'meeting',
+      //   loadChildren: () => import('./meetings/meetings.module').then(m => m.MeetingsPageModule)
+      // },
       {
         path: 'group',
         loadChildren: () => import('./group/group.module').then(m => m.GroupPageModule)

@@ -3,11 +3,22 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PostsPage } from './posts.page';
 import { PostListComponent } from './post-list/post-list.component';
+import { PostCreateComponent } from './post-create/post-create.component';
+import { PostDetatilsComponent } from './post-detatils/post-detatils.component';
 
 const routes: Routes = [
   {
     path:'',
-    redirectTo:'all'
+    redirectTo:'all',
+    pathMatch:'full'
+  },
+  {
+    path:'create',
+    component:PostCreateComponent
+  },
+  {
+    path:'details',
+    component:PostDetatilsComponent
   },
   {
     path: '',
