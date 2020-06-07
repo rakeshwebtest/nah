@@ -2,20 +2,21 @@
     <ion-card-header>
     <ion-card-title class="card-title">AGENDA
       <div class="bars-list">
-        <span class="bar active"></span>
-        <span class="bar"></span>
+        <span class="bar" [ngClass]="{'active': activeDays>=inx}" *ngFor="let inx of totalDaysArray;"></span>
+        <!-- <span class="bar" [ngClass]="{'active': inx>=1}"></span>
+        <span class="bar" [ngClass]="{'active': day>=2}"></span>
+        <span class="bar " [ngClass]="{'active': day>=3}"></span>
         <span class="bar "></span>
         <span class="bar "></span>
         <span class="bar "></span>
-        <span class="bar "></span>
-        <span class="bar "></span>
+        <span class="bar "></span> -->
       </div>
-      <div class="lock">
+      <div class="lock" *ngIf="agenda.isLocked">
         <ion-icon name="lock"></ion-icon>
       </div>
     </ion-card-title>
     <ion-card-subtitle class="card-sub-title">
-      <span class="sub-title-info1">Phase <span class="text-red">1</span> day <span class="text-red">1</span></span>
+      <span class="sub-title-info1">Phase <span class="text-red">1</span> day <span class="text-red">{{activeDays}}</span></span>
       <span class="sub-title-info2">From <span class="text-date">{{agenda.startDate | date}}</span> To <span class="text-date">{{agenda.endDate | date}}</span></span>
        </ion-card-subtitle>
   </ion-card-header>

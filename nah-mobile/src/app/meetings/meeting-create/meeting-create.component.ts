@@ -20,7 +20,8 @@ export class MeetingCreateComponent implements OnInit {
   model: any = {};
   formShow = false;
   maxDate: any = (new Date()).getFullYear() + 3;
-  fields: FormlyFieldConfig[] = [{
+  fields: FormlyFieldConfig[] = [
+    {
     key: 'title',
     type: 'input',
     wrappers: ['vertical'],

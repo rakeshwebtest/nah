@@ -11,12 +11,14 @@ import { PostListComponent } from './post-list/post-list.component';
 import { AgendaViewModule } from '../agenda/agenda-view/agenda-view.module';
 import { PostDetatilsComponent } from './post-detatils/post-detatils.component';
 import { PostCreateComponent } from './post-create/post-create.component';
+import { NahFormlyModule } from '../utils/nah-formly/nah-formly.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    NahFormlyModule,
     PostsPageRoutingModule,
     AgendaViewModule
   ],

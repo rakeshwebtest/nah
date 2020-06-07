@@ -11,8 +11,29 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding information">
-<p>
-  post-create works!
-</p>
+
+<ion-content>
+  <form [formGroup]="form">
+    <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+    <!-- <div class="col-12">
+      <button type="submit" class="btn btn-default">Submit</button>
+    </div> -->
+  </form>
 </ion-content>
+<ion-footer>
+  <!-- <ion-row class="ion-justify-content-center">
+    <h3 class="red-color font-24">A new way to hate...!</h3>
+  </ion-row> -->
+  <ion-toolbar class="ion-text-center">
+    <ion-button color="danger" (click)="submit(model,false)" [disabled]="(form.valid)?false:true">
+      Save as draft
+    </ion-button>
+    <ion-button color="danger" (click)="submit(model,true)" [disabled]="(form.valid)?false:true">
+      Save & Publish
+    </ion-button>
+    <!-- <ion-button color="light" (click)="signInWithGoogleTest()">
+           <ion-img class="ion-padding-r-10" style="width:30px;" src="assets/images/google.png"></ion-img>
+      Continu without Google Test
+    </ion-button> -->
+  </ion-toolbar>
+</ion-footer>
