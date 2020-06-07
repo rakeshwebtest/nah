@@ -20,5 +20,17 @@ export class PostDetatilsComponent implements OnInit {
       }
     ];
   }
+  navDetails(){
+
+  }
+  replyComment(c?:any){
+
+  }
+  deleteComment(){
+
+  }
+  addComment(stg:string){
+    
+  }
 
 }
