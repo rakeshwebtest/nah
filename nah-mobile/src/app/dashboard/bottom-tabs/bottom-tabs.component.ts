@@ -12,36 +12,37 @@ export class BottomTabsComponent implements OnInit {
 
   constructor(public actionSheetController: ActionSheetController,
     private modalController: ModalController,
-    private router:Router) { }
+    private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Create New',
       cssClass: 'my-custom-class',
-      buttons: [{
-        text: 'Meeting',
-        role: 'destructive',
-        icon: 'people',
-        handler: () => {
-          this.router.navigate(['/meeting/create']);
-          console.log('Delete clicked');
-        }
-      }, {
-        text: 'Post',
-        icon: 'send',
-        handler: () => {
-          this.router.navigate(['/posts/create']);
-          console.log('Share clicked');
-        }
-      },
-      {
-        text: 'Group',
-        icon: 'people',
-        handler: () => {
+      buttons: [
+        {
+          text: 'Group',
+          icon: 'people',
+          handler: () => {
             this.presentGroupModal();
+          }
+        }, {
+          text: 'Post',
+          icon: 'send',
+          handler: () => {
+            this.router.navigate(['/posts/create']);
+            console.log('Share clicked');
+          }
+        }, {
+          text: 'Meeting',
+          role: 'destructive',
+          icon: 'people',
+          handler: () => {
+            this.router.navigate(['/meeting/create']);
+            console.log('Delete clicked');
+          }
         }
-      }]
+      ]
     });
     await actionSheet.present();
   }
@@ -51,8 +52,8 @@ export class BottomTabsComponent implements OnInit {
       cssClass: 'group-create-modal'
     });
     modal.onDidDismiss().then(arg => {
-      
-      
+
+
     });
     return await modal.present();
   }
