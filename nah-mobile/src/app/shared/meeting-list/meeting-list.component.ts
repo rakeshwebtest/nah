@@ -79,7 +79,6 @@ export class MeetingListComponent implements OnInit, OnDestroy {
           d1.setHours(time.getHours());
           d1.setMinutes(time.getMinutes());
           const today = new Date();
-          console.log(d1,today,d1.getTime() ,today.getTime());
           if (d1.getTime() < today.getTime()) {
             m.isCompleted = true;
           }else{
