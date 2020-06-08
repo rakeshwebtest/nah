@@ -11,6 +11,7 @@ import { IonicSelectableModule } from 'ionic-selectable';
 import { FormlyFieldButton } from './types/button-type.component';
 import { FieldDatetime } from './types/datetime'
 import { RepeatTypeComponent } from './types/repeat';
+import { FieldYoutubVideoUrlComponent } from './types/field-youtub-video-url/field-youtub-video-url.component';
 @NgModule({
   declarations: [
     VerticalFieldComponent,
@@ -18,18 +19,21 @@ import { RepeatTypeComponent } from './types/repeat';
     FieldSelectableComponent,
     FormlyFieldButton,
     RepeatTypeComponent,
-    FieldDatetime
+    FieldDatetime,
+    FieldYoutubVideoUrlComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
     ReactiveFormsModule,
+    FormsModule,
     FormlyIonicModule,
     IonicSelectableModule,
     FormlyModule.forRoot({
       wrappers: [{ name: 'vertical', component: VerticalFieldComponent }],
       types: [
         { name: 'file', component: FieldFileComponent, wrappers: ['vertical'] },
+        { name: 'video', component: FieldYoutubVideoUrlComponent, wrappers: ['vertical'] },
         { name: 'button', component: FormlyFieldButton, wrappers: ['vertical'] },
         { name: 'datetime', component: FieldDatetime, wrappers: ['vertical'] },
         { name: 'selectable', component: FieldSelectableComponent, wrappers: ['vertical'] },

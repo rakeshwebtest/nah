@@ -16,8 +16,22 @@ import { FieldType } from '@ngx-formly/core';
         </span>
         <ion-img class="ion-text-center m-height-250"  [src]="previewUrl" style="height: 150px;padding:10px"></ion-img>
     </div>
+    <div class='container multiple-image-list' *ngIf="previewUrls
+   && this.to.multiple">
+        <div class="image-list-block" *ngFor="let url of previewUrls;let inx=index">
+        <span class="img-delete" (click)="multipleImgDelete(inx)">
+            <ion-icon name="trash"></ion-icon>
+        </span>
+        <ion-img class="image-thumb"  [src]="url"></ion-img>
+        </div>
+    </div>
  `,
     styles: [`
+    .multiple-img-view{
+        max-height: 150px;
+        padding: 10px;
+        width: 90px;
+    }
     .file-view{
         position: relative
     }
@@ -29,6 +43,7 @@ import { FieldType } from '@ngx-formly/core';
 export class FieldFileComponent extends FieldType implements OnInit {
     @ViewChild('fileInput', null) fileInput: ElementRef;
     previewUrl = null;
+    previewUrls: any[] = [];
     ngOnInit() {
         console.log('te', this.model, this.field.key);
         const path = this.model['imageUrl'];
@@ -40,12 +55,18 @@ export class FieldFileComponent extends FieldType implements OnInit {
     onFileChange(event) {
         if (this.to.multiple) {
             if (event.target.files.length > 0) {
-                // const files:File[] = [];
-                // for (let index = 0; index < event.target.files.length; index++) {
-                //     const file = event.target.files[index];
-                //     files.push(file);
+                // this.previewUrls = [];
+                for (let index = 0; index < event.target.files.length; index++) {
+                    const file = event.target.files[index];
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = (_event) => {
+                        // this.previewUrl = reader.result;
+                        this.previewUrls.push(reader.result);
+                    };
 
-                // }
+
+                }
                 this.formControl.setValue(event.target.files);
             }
         } else {
@@ -69,5 +90,8 @@ export class FieldFileComponent extends FieldType implements OnInit {
         // this.fileInput.nativeElement.value = "";
         this.previewUrl = null;
         this.model.imageUrl = null;
+    }
+    multipleImgDelete(inx) {
+        this.previewUrls.splice(inx, 1);
     }
 }

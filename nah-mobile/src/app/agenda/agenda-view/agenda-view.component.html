@@ -21,8 +21,8 @@
        </ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
-    <ion-row class="agenda-list" *ngFor="let topic of agenda.topics">
-      <span>Say No To </span> <ion-badge color="danger" >{{topic.name | uppercase }}</ion-badge>
+    <ion-row class="agenda-list" >
+      <span>Say No To </span> <ion-badge color="danger" *ngFor="let topic of agenda.topics">{{topic.name | uppercase }}</ion-badge>
     </ion-row>
     
   </ion-card-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-create',
@@ -26,14 +27,23 @@ export class PostCreateComponent implements OnInit {
       key: 'topicId',
       type: 'selectable',
       wrappers: ['vertical'],
-      className: 'flex-auto pr-0',
+      className: 'col-12',
       templateOptions: {
         label: 'Topic',
         placeholder: 'Select Topic',
         required: true,
         itemValueField: 'value',
         itemTextField: 'label',
-        options: []
+        options: [
+          {
+            label:'topic 1',
+            value:1
+          },
+          {
+            label:'topic 2',
+            value:2
+          }
+        ]
       }
     },
     {
@@ -42,20 +52,32 @@ export class PostCreateComponent implements OnInit {
       wrappers: ['vertical'],
       className: 'col-12',
       templateOptions: {
-        multiple: false,
+        multiple: true,
         required: false,
         label: 'Image',
         placeholder: 'Upload Image',
       }
     },
+    {
+      key: 'videoPath',
+      type: 'video',
+      wrappers: ['vertical'],
+      className: 'col-12',
+      templateOptions: {
+        pattern: /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/,
+        label: 'Paste Youtube URL here',
+        placeholder: 'Paste Youtube URL here',
+        required: true
+      }
+    }
 
   ];
   formShow = false;
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {}
   submit(model,isPublish){
-
+    this.router.navigate(['/dashboard/posts/my-posts'])
   }
 
 }

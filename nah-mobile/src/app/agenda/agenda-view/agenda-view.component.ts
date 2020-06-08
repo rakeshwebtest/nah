@@ -27,10 +27,11 @@ export class AgendaViewComponent implements OnInit {
       if (data.data) {
         this.agenda = data.data;
         this.activeDays = this.getDays(this.agenda.startDate, null);
-        this.totalDays = this.getDays(this.agenda.startDate, this.agenda.endDate);
+        this.totalDays = this.getDays(this.agenda.startDate, this.agenda.endDate)+1;
         this.totalDaysArray = Array(this.totalDays).fill(0).map((x, i) => i + 1);
         if(this.activeDays>this.totalDays){
           this.agenda.isLocked = true;
+          this.activeDays = this.totalDays;
         }
         
       } else {

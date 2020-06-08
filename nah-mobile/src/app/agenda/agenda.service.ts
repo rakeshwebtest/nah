@@ -15,7 +15,7 @@ export class AgendaService {
       if (data.data) {
         this.agenda = data.data;
         this.agenda.activeDays = this.getDays(this.agenda.startDate, null);
-        this.agenda.totalDays = this.getDays(this.agenda.startDate, this.agenda.endDate);
+        this.agenda.totalDays = this.getDays(this.agenda.startDate, this.agenda.endDate)+1;
         this.agenda.totalDaysArray = Array(this.agenda.totalDays).fill(0).map((x, i) => i + 1);
         if (this.agenda.activeDays > this.agenda.totalDays) {
           this.agenda.isLocked = true;
