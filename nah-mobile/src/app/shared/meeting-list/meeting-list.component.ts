@@ -74,6 +74,18 @@ export class MeetingListComponent implements OnInit, OnDestroy {
         if (m.group.isDeleted==1)
           m.isSuspend = true;
 
+          const d1 = new Date(m.endDate);
+          const time =  new Date(m.endTime);
+          d1.setHours(time.getHours());
+          d1.setMinutes(time.getMinutes());
+          const today = new Date();
+          console.log(d1,today,d1.getTime() ,today.getTime());
+          if (d1.getTime() < today.getTime()) {
+            m.isCompleted = true;
+          }else{
+            m.isCompleted = false;
+          }
+
         const isUser = m.members.find(u => u.user.id == userInfo.id);
         if (isUser) {
           m.isMember = true;

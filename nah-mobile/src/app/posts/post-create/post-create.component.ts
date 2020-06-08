@@ -14,11 +14,22 @@ export class PostCreateComponent implements OnInit {
   fields: FormlyFieldConfig[] = [
     {
       key: 'title',
-      type: 'textarea',
+      type: 'input',
       wrappers: ['vertical'],
       className: 'col-12 ion-padding-t-10',
       templateOptions: {
         label: 'Post Title',
+        placeholder: 'Type Post Title',
+        required: true,
+      }
+    },
+    {
+      key: 'description',
+      type: 'textarea',
+      wrappers: ['vertical'],
+      className: 'col-12 ion-padding-t-10',
+      templateOptions: {
+        label: 'Description',
         placeholder: 'What\'s on your mind',
         required: true,
       }
@@ -36,11 +47,11 @@ export class PostCreateComponent implements OnInit {
         itemTextField: 'label',
         options: [
           {
-            label:'topic 1',
+            label:'Topic 1',
             value:1
           },
           {
-            label:'topic 2',
+            label:'Topic 2',
             value:2
           }
         ]

@@ -212,7 +212,7 @@
           </p>
         </ion-col>
         <ion-col size="auto" class="ion-text-end ion-padding-t-10 ion-padding-l-0 ion-padding-r-0 ion-padding-b-0"
-          *ngIf="!m.isCreatedBy && !m.isSuspend">
+          *ngIf="!m.isCreatedBy && !m.isSuspend && !m.isCompleted">
           <!-- <ion-text class="text-medium" style="display: block;">{{m?.city?.name}}</ion-text> -->
           <ion-button class="ion-no-margin button-small" size="small" color="medium" (click)="meetingJoin(m)"
             *ngIf="m.isMember">

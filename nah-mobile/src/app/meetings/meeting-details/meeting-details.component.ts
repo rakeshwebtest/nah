@@ -66,8 +66,19 @@ export class MeetingDetailsComponent implements OnInit {
       if (m.createdBy.id === this.userInfo.id)
         m.isCreatedBy = true;
 
-      if (m.group.isDeleted==1)
+      if (m.group.isDeleted == 1)
         m.isSuspend = true;
+
+      const d1 = new Date(m.endDate);
+      const time =  new Date(m.endTime);
+      d1.setHours(time.getHours());
+      d1.setMinutes(time.getMinutes());
+      const today = new Date();
+      if (d1.getTime() < today.getTime()) {
+        m.isCompleted = true;
+      }else{
+        m.isCompleted = false;
+      }
 
       const isUser = m.members.find(u => u.user.id == this.userInfo.id);
       if (isUser) {

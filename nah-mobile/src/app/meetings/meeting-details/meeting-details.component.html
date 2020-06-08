@@ -29,7 +29,7 @@
             <ion-button size="small" color="danger" *ngIf="meeting.isPublished==0" (click)="publishMeeting(meeting)">
               Publish
             </ion-button>
-            <ng-container *ngIf="meeting.isPublished==1 && !meeting.isCreatedBy && !meeting.isSuspend">
+            <ng-container *ngIf="meeting.isPublished==1 && !meeting.isCreatedBy && !meeting.isSuspend && !meeting.isCompleted">
               <ion-button class="ion-no-margin button-small" size="small" color="medium" (click)="meetingJoin(meeting)"
                 *ngIf="meeting.isMember">
                 Unjoin</ion-button>

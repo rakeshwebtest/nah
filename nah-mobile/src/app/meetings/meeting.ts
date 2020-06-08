@@ -34,6 +34,7 @@ export interface Meeting {
     isPublished?: number;
     isCanceled?: number;
     isSuspend?: boolean;
+    isCompleted?:boolean;
 }
 interface Photo {
     imagePath: string;

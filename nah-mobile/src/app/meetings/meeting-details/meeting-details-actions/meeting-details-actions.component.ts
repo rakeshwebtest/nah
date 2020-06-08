@@ -72,7 +72,7 @@ export class MeetingDetailsActionsComponent implements OnInit {
   deleteMeeting() {
     this.DismissClick();
     this.http.delete('meeting/' + this.meeting.id).subscribe(res => {
-      this.route.navigate(['dashboard/type/my-meeting']);
+      this.route.navigate(['dashboard/meeting/my-meeting']);
 
     });
 
