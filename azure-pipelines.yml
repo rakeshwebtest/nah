@@ -17,6 +17,7 @@ steps:
 
 - script: |
     npm install -g @angular/cli
+    cd nah-mobile
     npm install
     ng build --prod
   displayName: 'npm install and build'
