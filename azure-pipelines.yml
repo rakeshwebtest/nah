@@ -24,7 +24,7 @@ steps:
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'nah Degitalocean'
-    sourceFolder: 'api/dist'
+    sourceFolder: 'nestapi/dist'
     contents: '**'
     targetFolder: 'api'
     readyTimeout: '20000'
