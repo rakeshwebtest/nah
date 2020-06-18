@@ -20,6 +20,9 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and api build'
+- script: |
+    rm -r nestapi/node_modules
+  displayName: 'remove node_modules'
 
 - task: CopyFilesOverSSH@0
   inputs:
