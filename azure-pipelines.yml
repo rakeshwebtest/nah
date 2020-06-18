@@ -14,10 +14,31 @@ steps:
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
-
 - script: |
-    npm install -g @angular/cli
-    cd nah-mobile
+    cd nestapi
+    npm @nestjs/cli
     npm install
-    ng build --prod
-  displayName: 'npm install and build'
+    npm run build
+  displayName: 'npm install and api build'
+
+- task: CopyFilesOverSSH@0
+  inputs:
+    sshEndpoint: 'nah Degitalocean'
+    sourceFolder: 'api/dist'
+    contents: '**'
+    targetFolder: 'api'
+    readyTimeout: '20000'
+
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'nah Degitalocean'
+    runOptions: 'commands'
+    commands: 'forever restart /home/nah/api/main.js'
+    readyTimeout: '20000'
+
+# - script: |
+#     npm install -g @angular/cli
+#     cd nah-mobile
+#     npm install
+#     ng build --prod
+#   displayName: 'npm install and build'
