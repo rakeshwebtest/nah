@@ -43,8 +43,8 @@ steps:
     cordovaVersion: '8.0.0'
     p12: '$(key.p12path)'
     p12pwd: '$(key.p12pswd)'
-    provProfile: '$(Build.SourcesDirectory)/$(key.adhoc_provision)'
-    cwd: './nah-mobile'
+    provProfile: '$(key.adhoc_provision)'
+    cwd: 'nah-mobile'
     outputPattern: 'bin'
     targetEmulator: true
 
