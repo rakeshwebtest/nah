@@ -31,12 +31,13 @@ steps:
   inputs:
     platform: 'ios'
     configuration: '$(Configuration)'
-    cordovaVersion: '9.0.0'
+    cordovaVersion: '8.0.0'
     p12: '$(key.p12path)'
     p12pwd: '$(key.p12pswd)'
     provProfile: '$(key.adhoc_provision)'
     cwd: 'nah-mobile'
     outputPattern: 'bin'
+    targetEmulator: true
 
 
 
