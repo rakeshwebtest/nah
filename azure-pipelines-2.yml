@@ -29,11 +29,13 @@ steps:
 - script: |
     ls
   displayName: 'ls'
-- script: # script path or inline
-  workingDirectory: #
-  displayName: #
-  failOnStderr: #
-  env:  # mapping of environment variables to add
+
+- script: | # script path or inline
+    workingDirectory: #
+    displayName: #
+    failOnStderr: #
+    env:  # mapping of environment variables to add
+  displayName: 'info'
 - task: CordovaBuild@1
   inputs:
     platform: 'ios'
