@@ -20,8 +20,14 @@ steps:
   displayName: 'npm install and angular build'
 
 - script: |
-    cordova platform add android
+    cd nah-mobile && cordova platform add ios && cordov run build --prod
   displayName: 'add ios platform'
+
+- script: |
+    cd nah-mobile && cordova build ios --release
+  displayName: 'add ios platform'
+
+
 
 # - task: CordovaBuild@1
 #   inputs:
