@@ -7,15 +7,21 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
-
-
+  vmImage: 'macOS-latest'
 
 steps:
 
 - script: |
     cd nah-mobile
   displayName: 'npm install and angular build'
+
+- task: CordovaBuild@1
+  inputs:
+    platform: 'android'
+    configuration: '$(Configuration)'
+    outputPattern: 'bin'
+
+
 
 
 
