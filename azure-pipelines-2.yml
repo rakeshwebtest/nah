@@ -26,7 +26,14 @@ steps:
 # - script: |
 #     cordova build ios --release
 #   displayName: 'build ios release'
-
+- script: |
+    ls
+  displayName: 'ls'
+- script: # script path or inline
+  workingDirectory: #
+  displayName: #
+  failOnStderr: #
+  env:  # mapping of environment variables to add
 - task: CordovaBuild@1
   inputs:
     platform: 'ios'
