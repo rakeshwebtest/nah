@@ -27,15 +27,14 @@ steps:
 #     cordova build ios --release
 #   displayName: 'build ios release'
 
-
-- script: |
-    cd nah-mobile
-  displayName: 'build ios release'
 - task: CordovaBuild@1
   inputs:
     platform: 'android'
     configuration: '$(Configuration)'
     cordovaVersion: '9.0.0'
+    p12: '$(key.p12path)'
+    p12pwd: '$(key.p12pswd)'
+    provProfile: '$(key.adhoc_provision)'
     cwd: 'nah-mobile'
     outputPattern: 'bin'
 
