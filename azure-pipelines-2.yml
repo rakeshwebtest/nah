@@ -29,7 +29,7 @@ steps:
 
 - task: CordovaBuild@1
   inputs:
-    platform: 'android'
+    platform: 'ios'
     configuration: '$(Configuration)'
     cordovaVersion: '9.0.0'
     p12: '$(key.p12path)'
