@@ -30,12 +30,6 @@ steps:
     ls
   displayName: 'ls'
 
-- script: | # script path or inline
-    workingDirectory: $(Build.SourcesDirectory) #
-    displayName: #
-    failOnStderr: #
-    env:  # mapping of environment variables to add
-  displayName: 'info'
 - task: CordovaBuild@1
   inputs:
     platform: 'ios'
