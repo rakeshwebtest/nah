@@ -18,7 +18,7 @@ steps:
 - task: CordovaBuild@1
   inputs:
     platform: 'android'
-    configuration: '$(Configuration)'
+    configuration: '$(Configuration)/nah-mobile'
     outputPattern: 'bin'
 
 
