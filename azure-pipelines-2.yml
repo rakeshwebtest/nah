@@ -34,7 +34,9 @@ steps:
 - task: CordovaBuild@1
   inputs:
     platform: 'android'
-    configuration: '$(Configuration)/nah-mobile'
+    configuration: '$(Configuration)'
+    cordovaVersion: '9.0.0'
+    cwd: 'nah-mobile'
     outputPattern: 'bin'
 
 
