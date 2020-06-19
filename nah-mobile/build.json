@@ -14,5 +14,19 @@
             "password" : "nahnah",
             "keystoreType": ""
         }
-    }
+    },
+    "ios": {
+        "debug": {
+          "codeSignIdentity": "iPhone Developer",
+          "provisioningProfile": "Adhoc_profile",
+          "developmentTeam": "V798ATU9LP",
+          "packageType": "development"
+        },
+        "release": {
+          "codeSignIdentity": "iPhone Distribution",
+          "provisioningProfile": "Adhoc_profile",
+          "developmentTeam": "V798ATU9LP",
+          "packageType": "ad-hoc"
+        }
+      }
 }
