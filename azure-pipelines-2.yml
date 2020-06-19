@@ -31,7 +31,7 @@ steps:
   displayName: 'ls'
 
 - script: | # script path or inline
-    workingDirectory: #
+    workingDirectory: $(Build.SourcesDirectory) #
     displayName: #
     failOnStderr: #
     env:  # mapping of environment variables to add
