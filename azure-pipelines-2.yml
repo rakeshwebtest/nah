@@ -28,6 +28,7 @@ steps:
 #   displayName: 'build ios release'
 - script: |
     ls
+    cd nah-mobile
   displayName: 'ls'
 
 - task: CordovaBuild@1
