@@ -38,10 +38,22 @@ steps:
 #     ionic cordova platform add ios --noresources
 #   displayName: 'add ios platform'
 
+- script: /usr/local/bin/pod install
+  displayName: 'pod install using a script'
+
+- task: CocoaPods@0
+  displayName: 'pod install using the CocoaPods task with defaults'
+
+- task: CocoaPods@0
+  inputs:
+    forceRepoUpdate: true
+    projectDirectory: 'nah-mobile'
+  displayName: 'pod install using the CocoaPods task with a forced repo update and a custom project directory'
+  
 - script: |
     cd nah-mobile
     ls
-    ionic cordova prepare ios --no-interactive --confirm 
+    ionic cordova prepare ios --no-interactive --confirm --verbose 
   displayName: 'cordova prepare'
 
 - script: |
@@ -60,7 +72,6 @@ steps:
     packageApp: false
     signingOption: 'auto'
     teamId: 'V798ATU9LP'
-    workingDirectory: 'nah-mobile/platforms/ios'
     useXcpretty: false
 
 # - task: CordovaBuild@1
