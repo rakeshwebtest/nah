@@ -33,7 +33,7 @@ steps:
 
 - script: |
     ls
-    cd nah-mobilec
+    cd nah-mobile
     ionic cordova platform add ios --verbose
   displayName: 'add ios platform'
 
