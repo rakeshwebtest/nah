@@ -49,6 +49,7 @@ steps:
     xcWorkspacePath: 'nah-mobile/platforms/ios/NAH.xcworkspace'
     packageApp: false
     signingOption: 'auto'
+    teamId: 'V798ATU9LP'
 
 # - task: CordovaBuild@1
 #   inputs:
