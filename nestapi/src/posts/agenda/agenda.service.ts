@@ -24,11 +24,11 @@ export class AgendaService {
     }
     async saveUpdate(req,sessionUser) {
         if(req.isPublish){
-            const startDate = new Date();
-            const days = (1000 * 60 * 60 * 24) * 7;
-            const endDate = new Date(startDate.getTime() + days);
-            req.startDate = startDate;
-            req.endDate = endDate;
+            // const startDate = new Date();
+            // const days = (1000 * 60 * 60 * 24) * 7;
+            // const endDate = new Date(startDate.getTime() + days);
+            // req.startDate = startDate;
+            // req.endDate = endDate;
         }
         req.createdBy = sessionUser.id;
         const data = await this.agendaRepository.save(req);

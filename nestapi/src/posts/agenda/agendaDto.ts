@@ -7,6 +7,8 @@ class User {
     @ApiProperty()
     @IsNotEmpty({ message: "User required" })
     id: number;
+
+
 }
 class Topic {
     @ApiProperty()
@@ -15,8 +17,13 @@ class Topic {
 }
 export class CreateAgendaDto {
     @ApiProperty()
+    @IsNotEmpty({ message: "Required Agenda Title" })
+    title: string;
+
+    @ApiProperty()
     @ValidateNested()
     createdBy: User;
+    
     @ApiProperty()
     @ValidateNested()
     topics:Topic[]

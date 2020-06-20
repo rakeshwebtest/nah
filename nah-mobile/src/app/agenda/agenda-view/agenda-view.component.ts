@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppHttpClient } from 'src/app/utils';
 import { Router } from '@angular/router';
+import { AgendaService } from '../agenda.service';
 
 @Component({
   selector: 'app-agenda-view',
@@ -13,13 +14,15 @@ export class AgendaViewComponent implements OnInit {
   activeDays = 1;
   totalDaysArray = [];
   totalDays = 0;
-  constructor(private http: AppHttpClient, private router: Router) { }
+  constructor(private http: AppHttpClient, private router: Router,public agendaS:AgendaService) { }
 
   ionViewDidEnter() {
     console.log('ionViewDidEnter');
   }
   ngOnInit() {
-    this.checkAgenda();
+    // this.checkAgenda();
+    console.log("agenda$" ,this.agendaS.agenda$)
+    this.agendaS.checkAgenda();
   }
   checkAgenda() {
     this.http.get('agenda/check').subscribe(res => {

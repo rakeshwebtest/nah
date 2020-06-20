@@ -1,25 +1,36 @@
 import { Injectable } from '@angular/core';
 import { AppHttpClient } from '../utils';
-
+import { Observable, BehaviorSubject } from 'rxjs';
+export interface Agenda {
+  name:string;
+  topics:any[];
+};
 @Injectable({
   providedIn: 'root'
 })
 export class AgendaService {
   agenda: any;
-  constructor(private http: AppHttpClient) {
 
+  agendaSubject = new BehaviorSubject<any>(null);
+  agenda$: Observable<Agenda>;
+
+  constructor(private http: AppHttpClient) {
+    this.agenda$ = this.agendaSubject.asObservable();
   }
- async getAgenda() {
-  await this.http.get('agenda/check').subscribe(res => {
+  async checkAgenda() {
+    await this.http.get('agenda/check').subscribe(res => {
       const data: any = res;
       if (data.data) {
         this.agenda = data.data;
         this.agenda.activeDays = this.getDays(this.agenda.startDate, null);
-        this.agenda.totalDays = this.getDays(this.agenda.startDate, this.agenda.endDate)+1;
+        this.agenda.totalDays = this.getDays(this.agenda.startDate, this.agenda.endDate) + 1;
         this.agenda.totalDaysArray = Array(this.agenda.totalDays).fill(0).map((x, i) => i + 1);
         if (this.agenda.activeDays > this.agenda.totalDays) {
           this.agenda.isLocked = true;
         }
+        this.setAgenda(this.agenda);
+      }else{
+        this.setAgenda(null);
       }
     });
     return this.agenda;
@@ -36,5 +47,8 @@ export class AgendaService {
     const diff = Math.abs(date1.getTime() - date2.getTime());
     const days = Math.ceil(diff / (1000 * 3600 * 24));
     return days;
+  }
+  setAgenda(data) {
+    this.agendaSubject.next(data);
   }
 }

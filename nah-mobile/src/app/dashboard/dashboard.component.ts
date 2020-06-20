@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { MeetingListService } from '../shared/meeting-list/meeting-list.service';
+import { AgendaService } from '../agenda/agenda.service';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthenticationService,
     private ms: MeetingListService,
     private activeRouter: ActivatedRoute,
+    private agendaService:AgendaService,
     private router: Router) {
       
      }
@@ -41,6 +43,7 @@ export class DashboardComponent implements OnInit {
     console.log('this.activeRouter.snapshot.params', this.activeRouter.snapshot.params);
     const userInfo: any = this.authService.isAuthenticated();
     this.googlePic = userInfo.user.imageUrl;
+    this.agendaService.checkAgenda();
   }
   meetingClick(meetingType) {
     this.router.navigate(['/meeting/type/' + meetingType]);

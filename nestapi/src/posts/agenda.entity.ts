@@ -7,12 +7,16 @@ export class AgendaEntity extends BaseEntity {
 
     @Column({ length: 100, default: 'draft' })
     status: string;
+    
 
-    @Column({ type: 'timestamp', name: 'startDate', default: () => 'CURRENT_TIMESTAMP' })
-    startDate: Date;
+    @Column({ length: 250, nullable: true })
+    title: string;
 
-    @Column({ type: 'timestamp', name: 'endDate', default: () => 'CURRENT_TIMESTAMP' })
-    endDate: Date;
+    // @Column({ type: 'timestamp', name: 'startDate', default: () => 'CURRENT_TIMESTAMP' })
+    // startDate: Date;
+
+    // @Column({ type: 'timestamp', name: 'endDate', default: () => 'CURRENT_TIMESTAMP' })
+    // endDate: Date;
 
     @OneToMany(type => AgendaTopicsEntity, topics => topics.agenda, { eager: true,cascade: true,onDelete: 'CASCADE' })
     topics: AgendaTopicsEntity[];
