@@ -21,13 +21,15 @@ steps:
   displayName: 'npm install and angular build'
 
 - script: |
+    ls
     ionic cordova platform add ios
   displayName: 'add ios platform'
 
 - script: |
+    ls
     ionic cordova build ios --release
   displayName: 'build ios release'
-  
+
 - script: |
     ls
   displayName: 'ls'
