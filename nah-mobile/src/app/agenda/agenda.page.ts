@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { AppHttpClient } from '../utils';
 import { Router } from '@angular/router';
+import { AgendaService } from './agenda.service';
 
 @Component({
   selector: 'app-agenda',
@@ -64,7 +65,7 @@ export class AgendaPage implements OnInit {
       }
     }
   ];
-  constructor(private http:AppHttpClient,private router:Router) { }
+  constructor(private http:AppHttpClient,private router:Router,private agendaService:AgendaService) { }
 
   ngOnInit() {
     // this.getUserAgenda();
@@ -84,12 +85,14 @@ export class AgendaPage implements OnInit {
     }else{
       this.model.isPublish = 0;
     }
-    console.log('this.model',this.model);
     this.http.post('agenda',this.model).subscribe(res=>{
       if(res.data){
         this.isPublish = res.data.isPublish;
         this.model = res.data;
         console.log(res.data);
+        if(saveType === 'publish'){
+          this.agendaService.checkAgenda();
+        }
         this.router.navigate(['/dashboard/posts/all']);
       }
     })
