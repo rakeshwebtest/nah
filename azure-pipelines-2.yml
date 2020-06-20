@@ -33,12 +33,13 @@ steps:
 
 - script: |
     ls
-    cd nah-mobile
+    cd nah-mobilec
     ionic cordova platform add ios --verbose
   displayName: 'add ios platform'
 
 
 - script: |
+    cd nah-mobile/platforms/ios
     ls
   displayName: 'ls'
 
@@ -46,7 +47,7 @@ steps:
 - task: Xcode@5
   inputs:
     actions: 'build'
-    xcWorkspacePath: 'nah-mobile/platforms/ios/NAH.xcworkspace'
+    xcWorkspacePath: 'nah-mobile/platforms/ios/*.xcworkspace'
     packageApp: false
     signingOption: 'auto'
     teamId: 'V798ATU9LP'
