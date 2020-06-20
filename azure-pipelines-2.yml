@@ -10,6 +10,17 @@ pool:
   vmImage: 'macOS-10.14'
 
 steps:
+- task: InstallAppleCertificate@2
+  inputs:
+    certSecureFile: '$(key.p12path)'
+    certPwd: '$(key.p12pswd)'
+    keychain: 'temp'
+
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+    provisioningProfileLocation: 'secureFiles'
+    provProfileSecureFile: '$(key.adhoc_provision)'
+    removeProfile: false
 - task: UseNode@1
   inputs:
     checkLatest: true
@@ -36,17 +47,25 @@ steps:
     ls
   displayName: 'ls'
 
-- task: CordovaBuild@1
+
+- task: Xcode@5
   inputs:
-    platform: 'ios'
-    configuration: '$(Configuration)'
-    cordovaVersion: '8.0.0'
-    p12: '$(key.p12path)'
-    p12pwd: '$(key.p12pswd)'
-    provProfile: '$(key.adhoc_provision)'
-    cwd: 'nah-mobile'
-    outputPattern: 'bin'
-    targetEmulator: true
+    actions: 'build'
+    xcWorkspacePath: 'nah-mobile/platforms/**/*.xcodeproj/project.xcworkspace'
+    packageApp: false
+    signingOption: 'auto'
+
+# - task: CordovaBuild@1
+#   inputs:
+#     platform: 'ios'
+#     configuration: '$(Configuration)'
+#     cordovaVersion: '8.0.0'
+#     p12: '$(key.p12path)'
+#     p12pwd: '$(key.p12pswd)'
+#     provProfile: '$(key.adhoc_provision)'
+#     cwd: 'nah-mobile'
+#     outputPattern: 'bin'
+#     targetEmulator: true
 
 
 
