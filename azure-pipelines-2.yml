@@ -47,10 +47,12 @@ steps:
 - task: Xcode@5
   inputs:
     actions: 'build'
-    xcWorkspacePath: 'nah-mobile/platforms/ios/*.xcworkspace'
+    xcWorkspacePath: 'NAH.xcodeproj'
     packageApp: false
     signingOption: 'auto'
     teamId: 'V798ATU9LP'
+    workingDirectory: 'nah-mobile/platforms/ios'
+    useXcpretty: false
 
 # - task: CordovaBuild@1
 #   inputs:
