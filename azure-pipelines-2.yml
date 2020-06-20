@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'VSTS'
+  vmImage: 'vsts-agent'
 
 steps:
 # - task: UseNode@1
