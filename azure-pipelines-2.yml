@@ -23,13 +23,13 @@ steps:
 - script: |
     ls
     cd nah-mobile
-    ionic cordova platform add ios
+    ionic cordova platform add ios --verbose
   displayName: 'add ios platform'
 
 - script: |
     ls
     cd nah-mobile
-    ionic cordova build ios --release
+    ionic cordova build ios --release --verbose
   displayName: 'build ios release'
 
 - script: |
