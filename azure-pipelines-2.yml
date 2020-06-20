@@ -7,25 +7,27 @@ trigger:
 - master
 
 pool:
-  vmImage: 'vsts-agent'
+  vmImage: 'macOS 10.13'
 
 steps:
-# - task: UseNode@1
-#   inputs:
-#     checkLatest: true
-# - script: |
-#     cd nah-mobile
-#     npm install -g ionic cordova
-#     npm install
-#   displayName: 'npm install and angular build'
+- task: UseNode@1
+  inputs:
+    checkLatest: true
 
-# - script: |
-#     cordova platform add ios
-#   displayName: 'add ios platform'
+- script: |
+    cd nah-mobile
+    npm install -g ionic cordova
+    npm install
+  displayName: 'npm install and angular build'
 
-# - script: |
-#     cordova build ios --release
-#   displayName: 'build ios release'
+- script: |
+    ionic cordova platform add ios
+  displayName: 'add ios platform'
+
+- script: |
+    ionic cordova build ios --release
+  displayName: 'build ios release'
+  
 - script: |
     ls
   displayName: 'ls'
