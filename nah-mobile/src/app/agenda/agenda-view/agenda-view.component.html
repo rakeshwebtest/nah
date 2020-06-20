@@ -6,7 +6,7 @@
 </div> -->
 <ion-card class="ion-no-margin custom-card"  *ngIf="(agendaS.agenda$ | async) && (agendaS.agenda$ | async) as agenda">
     <ion-card-header>
-    <ion-card-title class="card-title">AGENDA
+    <ion-card-title class="card-title">{{agenda.title}}
       <div class="bars-list">
         <span class="bar" [ngClass]="{'active': activeDays>=inx}" *ngFor="let inx of totalDaysArray;"></span>
         <!-- <span class="bar" [ngClass]="{'active': inx>=1}"></span>

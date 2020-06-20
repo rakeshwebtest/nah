@@ -12,12 +12,14 @@ export class MeetingsPage implements OnInit {
   title: any;
   noMeetingMsg: string;
   showList = false;
-  params = this.route.snapshot.params;
+  params = this.route.snapshot.data;
   queryParams = this.route.snapshot.queryParams;
   constructor(private authService: AuthenticationService, private route: ActivatedRoute) { }
   ionViewWillEnter() {
   }
   ngOnInit() {
+    console.log('route',this.route);
+    console.log('route',this.route.snapshot.data.type);
     const userInfo: any = this.authService.isAuthenticated();
     this.googlePic = userInfo.user.imageUrl;
 

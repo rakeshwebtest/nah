@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AppHttpClient } from '../utils';
 import { Observable, BehaviorSubject } from 'rxjs';
 export interface Agenda {
-  name:string;
+  title:string;
   topics:any[];
 };
 @Injectable({
