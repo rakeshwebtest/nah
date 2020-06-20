@@ -11,15 +11,14 @@
 </ion-header>
 
 <ion-content class="ion-padding-15">
-  <ng-container *ngIf="isPublish===0;else agendaView">
+
   <h5 class="heading">Topics</h5>
   <form [formGroup]="form">
     <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
   </form>
-</ng-container>
 </ion-content>
    
-<ion-footer *ngIf="isPublish===0">
+<ion-footer>
   <ion-toolbar class="ion-text-center">
     <ion-button color="danger" (click)="submit('draft')" [disabled]="(form.valid)?false:true">
       Save as draft
@@ -30,6 +29,6 @@
   </ion-toolbar>
 </ion-footer>
 
-<ng-template #agendaView>
+<!-- <ng-template #agendaView>
   <app-agenda-view></app-agenda-view>
-</ng-template>
+</ng-template> -->

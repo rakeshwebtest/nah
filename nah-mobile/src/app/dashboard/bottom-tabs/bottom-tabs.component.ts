@@ -27,6 +27,14 @@ export class BottomTabsComponent implements OnInit {
             this.presentGroupModal();
           }
         }, {
+          text: 'Agenda',
+          icon: 'send',
+          handler: () => {
+            this.router.navigate(['/agenda']);
+            console.log('Share clicked');
+          }
+        },
+        {
           text: 'Post',
           icon: 'send',
           handler: () => {

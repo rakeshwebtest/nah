@@ -21,6 +21,16 @@ export class AgendaPage implements OnInit {
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [
     {
+      key:'title',
+      type:'input',
+      wrappers: ['vertical'],
+      className: '',
+      templateOptions:{
+        label:'Title',
+        placeholder:'Entet Title'
+      }
+    },
+    {
       key: 'topics',
       type: 'repeat',
       templateOptions: {
@@ -57,7 +67,7 @@ export class AgendaPage implements OnInit {
   constructor(private http:AppHttpClient,private router:Router) { }
 
   ngOnInit() {
-    this.getUserAgenda();
+    // this.getUserAgenda();
   }
   // get user agenda if exist
   getUserAgenda(){
