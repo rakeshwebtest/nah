@@ -96,13 +96,13 @@ steps:
 
 - task: CordovaBuild@1
   inputs:
-    platform: 'ios'
+    platform: 'android'
     configuration: '$(Configuration)'
     cordovaVersion: '8.0.0'
+    antBuild: true
     p12: '$(p12Certificate.secureFilePath)'
     p12pwd: '$(key.p12pswd)'
     provProfile: '$(adhocProvision.secureFilePath)'
-    cordovaArgs: ''
     cwd: 'nah-mobile'
     outputPattern: 'bin'
     targetEmulator: false
