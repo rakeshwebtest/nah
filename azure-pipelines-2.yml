@@ -43,8 +43,11 @@ steps:
     cd nah-mobile
     npm install -g @ionic/cli cordova@8.0.0 @angular/cli@8.1.2 cordova-res
     npm install
-    ng build --prod
+    
   displayName: 'npm install and angular build'
+- script: |
+    cd nah-mobile && ng build --prod
+  displayName: 'npm build'
 - script: |
     cd nah-mobile && ionic cordova platform rm ios
   displayName: 'rm ios platform'
