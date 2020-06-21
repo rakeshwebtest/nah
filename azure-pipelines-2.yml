@@ -108,9 +108,16 @@ steps:
   displayName: 'copy'
   
 
+
 - script: |
-    ls
+    ls -R
+    mkdir www
+    npm i
   displayName: 'ls'
+
+
+
+
 
   
 - task: CordovaBuild@1
