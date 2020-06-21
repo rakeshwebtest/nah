@@ -93,7 +93,19 @@ steps:
 #     signingOption: 'auto'
 #     teamId: 'V798ATU9LP'
 #     useXcpretty: false
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'nah-mobile/**'
+    Contents: '**'
+    TargetFolder: '/**'
 
+- script: |
+    ls
+  displayName: 'ls'
+  
+- task: Bash@3
+  inputs:
+    filePath: 'ls'
 - task: CordovaBuild@1
   inputs:
     platform: 'android'
@@ -103,7 +115,6 @@ steps:
     p12: '$(p12Certificate.secureFilePath)'
     p12pwd: '$(key.p12pswd)'
     provProfile: '$(adhocProvision.secureFilePath)'
-    cwd: '$(system.defaultWorkingDirectory)/nah-mobile'
     outputPattern: 'bin'
     targetEmulator: false
 
