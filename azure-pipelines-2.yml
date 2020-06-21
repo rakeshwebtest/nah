@@ -99,7 +99,7 @@ steps:
     platform: 'ios'
     configuration: '$(Configuration)'
     cordovaVersion: '8.0.0'
-    p12: $(p12Certificate.secureFilePath)
+    p12: 'Certificates.p12'
     p12pwd: '$(key.p12pswd)'
     provProfile: $(adhocProvision.secureFilePath)
     cwd: 'nah-mobile'
