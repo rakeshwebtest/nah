@@ -102,9 +102,10 @@ steps:
     p12: '$(p12Certificate.secureFilePath)'
     p12pwd: '$(key.p12pswd)'
     provProfile: '$(adhocProvision.secureFilePath)'
+    cordovaArgs: ''
     cwd: 'nah-mobile'
     outputPattern: 'bin'
-    targetEmulator: true
+    targetEmulator: false
 
 
 
