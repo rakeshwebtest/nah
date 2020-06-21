@@ -100,13 +100,10 @@ steps:
 #     TargetFolder: '*'
 
 - script: |
-    mv nah-mobile/** /
+    mv nah-mobile/* $(Agent.BuildDirectory)
     ls
   displayName: 'ls'
   
-- task: Bash@3
-  inputs:
-    filePath: 'ls'
 - task: CordovaBuild@1
   inputs:
     platform: 'android'
