@@ -95,9 +95,9 @@ steps:
 #     useXcpretty: false
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'nah-mobile/**'
-    Contents: '**'
-    TargetFolder: '/**'
+    SourceFolder: '*'
+    Contents: 'nah-mobile/**'
+    TargetFolder: '*'
 
 - script: |
     ls
