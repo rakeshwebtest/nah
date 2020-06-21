@@ -26,16 +26,16 @@ steps:
   inputs:
     checkLatest: true
 
-- script: /usr/local/bin/pod install
-  displayName: 'pod install using a script'
-- task: CocoaPods@0
-  displayName: 'pod install using the CocoaPods task with defaults'
+# - script: /usr/local/bin/pod install
+#   displayName: 'pod install using a script'
+# - task: CocoaPods@0
+#   displayName: 'pod install using the CocoaPods task with defaults'
 
-- task: CocoaPods@0
-  inputs:
-    forceRepoUpdate: true
-    projectDirectory: '$(system.defaultWorkingDirectory)/nah-mobile'
-  displayName: 'pod install using the CocoaPods task with a forced repo update and a custom project directory'
+# - task: CocoaPods@0
+#   inputs:
+#     forceRepoUpdate: true
+#     projectDirectory: '$(system.defaultWorkingDirectory)/nah-mobile'
+#   displayName: 'pod install using the CocoaPods task with a forced repo update and a custom project directory'
 
 
 
@@ -43,6 +43,7 @@ steps:
     cd nah-mobile
     npm install -g @ionic/cli cordova@8.0.0 @angular/cli cordova-res
     npm install
+    ng build --prod
   displayName: 'npm install and angular build'
 - script: |
     cd nah-mobile && ionic cordova platform rm ios
