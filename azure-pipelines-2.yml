@@ -21,11 +21,23 @@ steps:
     provisioningProfileLocation: 'secureFiles'
     provProfileSecureFile: '$(key.adhoc_provision)'
     removeProfile: false
-- task: CocoaPods@0
-  displayName: 'pod install using the CocoaPods task with defaults'
+
 - task: UseNode@1
   inputs:
     checkLatest: true
+
+- script: /usr/local/bin/pod install
+  displayName: 'pod install using a script'
+- task: CocoaPods@0
+  displayName: 'pod install using the CocoaPods task with defaults'
+
+- task: CocoaPods@0
+  inputs:
+    forceRepoUpdate: true
+    projectDirectory: '$(system.defaultWorkingDirectory)/nah-mobile'
+  displayName: 'pod install using the CocoaPods task with a forced repo update and a custom project directory'
+
+
 
 - script: |
     cd nah-mobile
