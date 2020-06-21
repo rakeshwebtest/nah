@@ -23,10 +23,12 @@ steps:
 #     removeProfile: false
   
 - task: DownloadSecureFile@1
+  name: p12Certificate
   inputs:
     secureFile: '$(key.p12path)'
 
 - task: DownloadSecureFile@1
+  name: adhocProvision
   inputs:
     secureFile: '$(key.adhoc_provision)'
   
@@ -98,8 +100,8 @@ steps:
     configuration: '$(Configuration)'
     cordovaVersion: '8.0.0'
     p12: '$(key.p12path)'
-    p12pwd: '$(key.p12pswd)'
-    provProfile: '$(key.adhoc_provision)'
+    p12pwd: '$(p12Certificate.secureFilePath)'
+    provProfile: '$(adhocProvision.secureFilePath)'
     cwd: 'nah-mobile'
     outputPattern: 'bin'
     targetEmulator: true
