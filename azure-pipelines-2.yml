@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'macOS-10.14'
+  vmImage: 'macOS-10.15'
 
 steps:
 - task: InstallAppleCertificate@2
@@ -39,22 +39,22 @@ steps:
 
 
 
-- script: |
-    cd nah-mobile
-    npm install -g @ionic/cli@6.3.0 cordova@9.0.0 @angular/cli@8.1.2 cordova-res
-    npm install
+# - script: |
+#     cd nah-mobile
+#     npm install -g @ionic/cli@6.3.0 cordova@9.0.0 @angular/cli@8.1.2 cordova-res
+#     npm install
     
-  displayName: 'npm install and angular build'
-- script: |
-    cd nah-mobile && ng build --prod
-  displayName: 'npm build'
-- script: |
-    cd nah-mobile && ionic cordova platform rm ios
-  displayName: 'rm ios platform'
+#   displayName: 'npm install and angular build'
+# - script: |
+#     cd nah-mobile && ng build --prod
+#   displayName: 'npm build'
+# - script: |
+#     cd nah-mobile && ionic cordova platform rm ios
+#   displayName: 'rm ios platform'
 
-- script: |
-    cd nah-mobile && ionic cordova platform add ios --verbose
-  displayName: 'add ios platform'
+# - script: |
+#     cd nah-mobile && ionic cordova platform add ios --verbose
+#   displayName: 'add ios platform'
 
 
 
@@ -64,35 +64,35 @@ steps:
 #     ionic cordova prepare ios --no-interactive --confirm --verbose --no-build
 #   displayName: 'cordova prepare'
 
-- script: |
-    cd nah-mobile
-    ls
+# - script: |
+#     cd nah-mobile
+#     ls
 
-    cd platforms
-    ls
-  displayName: 'ls'
+#     cd platforms
+#     ls
+#   displayName: 'ls'
 
 
-- task: Xcode@5
-  inputs:
-    actions: 'build'
-    xcWorkspacePath: 'nah-mobile/platforms/ios/NAH.xcodeproj'
-    packageApp: false
-    signingOption: 'auto'
-    teamId: 'V798ATU9LP'
-    useXcpretty: false
-
-# - task: CordovaBuild@1
+# - task: Xcode@5
 #   inputs:
-#     platform: 'ios'
-#     configuration: '$(Configuration)'
-#     cordovaVersion: '8.0.0'
-#     p12: '$(key.p12path)'
-#     p12pwd: '$(key.p12pswd)'
-#     provProfile: '$(key.adhoc_provision)'
-#     cwd: 'nah-mobile'
-#     outputPattern: 'bin'
-#     targetEmulator: true
+#     actions: 'build'
+#     xcWorkspacePath: 'nah-mobile/platforms/ios/NAH.xcodeproj'
+#     packageApp: false
+#     signingOption: 'auto'
+#     teamId: 'V798ATU9LP'
+#     useXcpretty: false
+
+- task: CordovaBuild@1
+  inputs:
+    platform: 'ios'
+    configuration: '$(Configuration)'
+    cordovaVersion: '8.0.0'
+    p12: '$(key.p12path)'
+    p12pwd: '$(key.p12pswd)'
+    provProfile: '$(key.adhoc_provision)'
+    cwd: 'nah-mobile'
+    outputPattern: 'bin'
+    targetEmulator: true
 
 
 
