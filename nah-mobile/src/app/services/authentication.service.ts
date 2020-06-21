@@ -28,7 +28,7 @@ export class AuthenticationService {
     public toastController: ToastController
   ) {
     this.platform.ready().then(() => {
-      this.ifLoggedIn();
+      // this.ifLoggedIn();
     });
   }
 
@@ -55,11 +55,11 @@ export class AuthenticationService {
           this.router.navigate(['sign-in']);
         }
       }
-      
+
     });
   }
 
-    logout() {
+  logout() {
     this.storage.remove('USER_INFO').then(() => {
       this.router.navigate(['home']);
       this.authState.next(false);
@@ -69,7 +69,10 @@ export class AuthenticationService {
   isAuthenticated() {
     return this.authState.value;
   }
-  getUserInfo() :UserInfo {
+  checkUser(): any {
+    return this.storage.get('USER_INFO');
+  }
+  getUserInfo(): UserInfo {
     const userInfo: any = this.authState.value;
     return userInfo.user;
   }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { RouteReuseStrategy } from '@angular/router';
 import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
@@ -28,6 +28,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 //   name: '__nah',
 //   driverOrder: ['indexeddb', 'sqlite', 'websql','localstorage']
 // }),
+
 
 @NgModule({
   declarations: [AppComponent, AdminLayoutComponent, ChooseUserGroupsComponent, GroupCreateModalComponent],
@@ -59,7 +60,6 @@ import { DashboardModule } from './dashboard/dashboard.module';
     SplashScreen,
     GooglePlus,
     AuthGuard,
-    AuthenticationService,
     GoogleAnalytics,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LocationStrategy, useClass: HashLocationStrategy },

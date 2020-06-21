@@ -32,37 +32,40 @@ const routes: Routes = [
         loadChildren: () => import('./about/about.module').then(m => m.AboutPageModule)
       },
       {
-        path:'dashboard',
-        component:DashboardComponent,
+        path: 'dashboard',
+        component: DashboardComponent,
         children: [
           {
             path: 'meeting',
-            loadChildren: () => import('./meetings/meetings.module').then( m => m.MeetingsPageModule)
+            loadChildren: () => import('./meetings/meetings.module').then(m => m.MeetingsPageModule)
           },
           {
             path: 'posts',
-            loadChildren: () => import('./posts/posts.module').then( m => m.PostsPageModule)
+            loadChildren: () => import('./posts/posts.module').then(m => m.PostsPageModule)
           },
           {
             path: 'bookmark',
-            loadChildren: () => import('./bookmark/bookmark.module').then( m => m.BookmarkPageModule)
+            loadChildren: () => import('./bookmark/bookmark.module').then(m => m.BookmarkPageModule)
           },
           {
             path: 'notifications',
-            loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
+            loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsPageModule)
           }
         ]
       },
       {
         path: 'meeting',
-        loadChildren: () => import('./meetings/meetings.module').then( m => m.MeetingsPageModule)
+        loadChildren: () => import('./meetings/meetings.module').then(m => m.MeetingsPageModule)
       },
       {
         path: 'posts',
-        loadChildren: () => import('./posts/posts.module').then( m => m.PostsPageModule)
+        loadChildren: () => import('./posts/posts.module').then(m => m.PostsPageModule)
       },
-     
-      { path: 'user-profile', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) },
+
+      {
+        path: 'user-profile',
+        loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule)
+      },
       // {
       //   path: 'meeting',
       //   loadChildren: () => import('./meetings/meetings.module').then(m => m.MeetingsPageModule)
@@ -75,17 +78,18 @@ const routes: Routes = [
       {
         path: 'agenda',
         loadChildren: () => import('./agenda/agenda.module').then(m => m.AgendaPageModule)
+      },
+      {
+        path: 'pages',
+        loadChildren: () => import('./pages/pages.module').then(m => m.PagesPageModule)
+      },
+      {
+        path: 'profile-edit',
+        loadChildren: () => import('./profile-edit/profile-edit.module').then(m => m.ProfileEditPageModule)
       }
     ]
   },
-  {
-    path: 'pages',
-    loadChildren: () => import('./pages/pages.module').then(m => m.PagesPageModule)
-  },
-  {
-    path: 'profile-edit',
-    loadChildren: () => import('./profile-edit/profile-edit.module').then(m => m.ProfileEditPageModule)
-  }
+  
 
 
 ];
