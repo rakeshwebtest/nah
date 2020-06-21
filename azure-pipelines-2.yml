@@ -100,7 +100,7 @@ steps:
     configuration: '$(Configuration)'
     cordovaVersion: '8.0.0'
     p12: '$(p12Certificate.secureFilePath)'
-    p12pwd: '$(key.key.p12pswd)'
+    p12pwd: '$(key.p12pswd)'
     provProfile: '$(adhocProvision.secureFilePath)'
     cwd: 'nah-mobile'
     outputPattern: 'bin'
