@@ -22,15 +22,15 @@ steps:
 #     provProfileSecureFile: '$(key.adhoc_provision)'
 #     removeProfile: false
   
-- task: DownloadSecureFile@1
-  name: p12Certificate
-  inputs:
-    secureFile: 'Certificates.p12'
+# - task: DownloadSecureFile@1
+#   name: p12Certificate
+#   inputs:
+#     secureFile: 'Certificates.p12'
 
-- task: DownloadSecureFile@1
-  name: adhocProvision
-  inputs:
-    secureFile: 'Adhoc_profile.mobileprovision'
+# - task: DownloadSecureFile@1
+#   name: adhocProvision
+#   inputs:
+#     secureFile: 'Adhoc_profile.mobileprovision'
   
 
 
@@ -109,7 +109,7 @@ steps:
   
 
 - script: |
-    tree
+    ls
   displayName: 'ls'
 
   
