@@ -21,6 +21,16 @@ steps:
     provisioningProfileLocation: 'secureFiles'
     provProfileSecureFile: '$(key.adhoc_provision)'
     removeProfile: false
+  
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: '$(key.p12path)'
+
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: '$(key.adhoc_provision)'
+  
+
 
 - task: UseNode@1
   inputs:
@@ -87,9 +97,9 @@ steps:
     platform: 'ios'
     configuration: '$(Configuration)'
     cordovaVersion: '8.0.0'
-    p12: 'nah-mobile/keys/ios/$(key.p12path)'
+    p12: '$(key.p12path)'
     p12pwd: '$(key.p12pswd)'
-    provProfile: 'nah-mobile/keys/ios/$(key.adhoc_provision)'
+    provProfile: '$(key.adhoc_provision)'
     cwd: 'nah-mobile'
     outputPattern: 'bin'
     targetEmulator: true
