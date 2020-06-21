@@ -10,17 +10,17 @@ pool:
   vmImage: 'macOS-10.15'
 
 steps:
-- task: InstallAppleCertificate@2
-  inputs:
-    certSecureFile: '$(key.p12path)'
-    certPwd: '$(key.p12pswd)'
-    keychain: 'temp'
+# - task: InstallAppleCertificate@2
+#   inputs:
+#     certSecureFile: '$(key.p12path)'
+#     certPwd: '$(key.p12pswd)'
+#     keychain: 'temp'
 
-- task: InstallAppleProvisioningProfile@1
-  inputs:
-    provisioningProfileLocation: 'secureFiles'
-    provProfileSecureFile: '$(key.adhoc_provision)'
-    removeProfile: false
+# - task: InstallAppleProvisioningProfile@1
+#   inputs:
+#     provisioningProfileLocation: 'secureFiles'
+#     provProfileSecureFile: '$(key.adhoc_provision)'
+#     removeProfile: false
   
 - task: DownloadSecureFile@1
   inputs:
@@ -32,9 +32,9 @@ steps:
   
 
 
-- task: UseNode@1
-  inputs:
-    checkLatest: true
+# - task: UseNode@1
+#   inputs:
+#     checkLatest: true
 
 # - script: /usr/local/bin/pod install
 #   displayName: 'pod install using a script'
