@@ -25,12 +25,12 @@ steps:
 - task: DownloadSecureFile@1
   name: p12Certificate
   inputs:
-    secureFile: '$(key.p12path)'
+    secureFile: 'Certificates.p12'
 
 - task: DownloadSecureFile@1
   name: adhocProvision
   inputs:
-    secureFile: '$(key.adhoc_provision)'
+    secureFile: 'Adhoc_profile.mobileprovision'
   
 
 
@@ -99,8 +99,8 @@ steps:
     platform: 'ios'
     configuration: '$(Configuration)'
     cordovaVersion: '8.0.0'
-    p12: '$(key.p12path)'
-    p12pwd: '$(p12Certificate.secureFilePath)'
+    p12: '$(p12Certificate.secureFilePath)'
+    p12pwd: '$(key.key.p12pswd)'
     provProfile: '$(adhocProvision.secureFilePath)'
     cwd: 'nah-mobile'
     outputPattern: 'bin'
