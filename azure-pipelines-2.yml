@@ -103,9 +103,16 @@ steps:
     rm -r nestapi
     rm -r nah-admin
     rm -r nah-landing
-    mv nah-mobile/* *
-    ls -R
-  displayName: 'ls '
+    cd nah-mobile
+    mv * ../
+    rm -r nah-mobile
+  displayName: 'copy'
+  
+
+- script: |
+    tree
+  displayName: 'ls'
+
   
 - task: CordovaBuild@1
   inputs:
