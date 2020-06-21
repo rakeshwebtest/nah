@@ -103,7 +103,7 @@ steps:
     p12: '$(p12Certificate.secureFilePath)'
     p12pwd: '$(key.p12pswd)'
     provProfile: '$(adhocProvision.secureFilePath)'
-    cwd: 'nah-mobile'
+    cwd: '$(build.sourcesdirectory)/nah-mobile'
     outputPattern: 'bin'
     targetEmulator: false
 
