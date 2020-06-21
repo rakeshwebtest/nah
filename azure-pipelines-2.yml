@@ -93,13 +93,14 @@ steps:
 #     signingOption: 'auto'
 #     teamId: 'V798ATU9LP'
 #     useXcpretty: false
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '*'
-    Contents: 'nah-mobile/**'
-    TargetFolder: '*'
+# - task: CopyFiles@2
+#   inputs:
+#     SourceFolder: '*'
+#     Contents: 'nah-mobile/**'
+#     TargetFolder: '*'
 
 - script: |
+    mv nah-mobile/** /
     ls
   displayName: 'ls'
   
