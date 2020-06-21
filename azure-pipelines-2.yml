@@ -103,7 +103,7 @@ steps:
     rm -r nestapi
     rm -r nah-admin
     rm -r nah-landing
-    mv nah-mobile/* /*
+    mv nah-mobile/* *
     ls -R
   displayName: 'ls '
   
