@@ -100,9 +100,12 @@ steps:
 #     TargetFolder: '*'
 
 - script: |
-    mv nah-mobile/* $(Agent.BuildDirectory)
-    ls
-  displayName: 'ls'
+    rm -r nestapi
+    rm -r nah-admin
+    rm -r nah-landing
+    mv nah-mobile/* /*
+    ls -R
+  displayName: 'ls '
   
 - task: CordovaBuild@1
   inputs:
