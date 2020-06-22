@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm';
 import { BaseEntity } from '../shared/base.entity';
 import { UserEntity } from './../user/user.entity';
+import { AgendaTopicsEntity } from './agenda-topics.entity';
 import { PostCommentsEntity } from './post-comments.entity';
 import { PostPhotosEntity } from './post-photos.entity';
 import { PostVideosEntity } from './post-videos.entity';
@@ -13,17 +14,20 @@ export class PostEntity extends BaseEntity {
     @Column({ type: 'text', nullable: true })
     description: string;
 
-    @Column({ type: 'timestamp', name: 'postDate', default: () => 'LOCALTIMESTAMP' })
-    postDate: string;
-
-    @ManyToOne(type => UserEntity, user => user.posts)
-    createdBy: UserEntity;
+    @ManyToOne(type => AgendaTopicsEntity, topic => topic.posts)
+    topic: AgendaTopicsEntity;
 
     @OneToMany(type => PostPhotosEntity, pp => pp.post)
     photos: PostPhotosEntity[];
 
     @OneToMany(type => PostVideosEntity, pv => pv.post)
     videos: PostVideosEntity[];
+
+    @ManyToOne(type => UserEntity, user => user.posts)
+    createdBy: UserEntity;    
+
+    @Column({ type: 'timestamp', name: 'postDate', default: () => 'LOCALTIMESTAMP' })
+    postDate: string;
 
     @OneToMany(type => PostCommentsEntity, pc => pc.post)
     comments: PostCommentsEntity[];
