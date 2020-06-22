@@ -81,7 +81,7 @@ steps:
 #   displayName: 'cordova prepare'
 
 - script: |
-    cd nah-mobile && mkdir www && ls 
+    cd nah-mobile && mkdir www && cordova plugin search bar code && ls 
   displayName: 'create www dir'
 
 
