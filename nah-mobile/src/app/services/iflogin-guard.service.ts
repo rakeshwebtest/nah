@@ -12,20 +12,40 @@ export class IfLoginGuard implements CanActivate {
     private router: Router
   ) { }
 
-  canActivate(): boolean {
-    const _user: any = this.authenticationService.isAuthenticated();
-    if(_user){
-      if (_user.user.typeOfNoer) {
-        this.router.navigate(['/dashboard']);
-      } else {
-        this.router.navigate(['/sign-in']);
-      }
-      return false;
-    }else{
+  canActivate(): Promise<boolean> | boolean {
+    const data = this.authenticationService.checkUser();
+    return new Promise((resolve, reject) => {
+      data.then(res => {
+        if (res) {
+          this.authenticationService.authState.next(res);
+          if (res.user.typeOfNoer) {
+            this.router.navigate(['/dashboard/meeting/all']);
+          } else {
+            this.router.navigate(['/sign-in']);
+          }
+          resolve(false);
+        } else {
 
-      return true;
-    }
-  
+          resolve(true);
+        }
+      })
+    });
   }
+
+  // canActivate(): boolean {
+  //   const _user: any = this.authenticationService.isAuthenticated();
+  //   if(_user){
+  //     if (_user.user.typeOfNoer) {
+  //       this.router.navigate(['/dashboard']);
+  //     } else {
+  //       this.router.navigate(['/sign-in']);
+  //     }
+  //     return false;
+  //   }else{
+
+  //     return true;
+  //   }
+
+  // }
 
 }
