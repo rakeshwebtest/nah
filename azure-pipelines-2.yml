@@ -80,13 +80,10 @@ steps:
 #     ionic cordova prepare ios --no-interactive --confirm --verbose --no-build
 #   displayName: 'cordova prepare'
 
-# - script: |
-#     cd nah-mobile
-#     ls
-
-#     cd platforms
-#     ls
-#   displayName: 'ls'
+- script: |
+    cd nah-mobile
+    mkdir www
+  displayName: 'create www dir'
 
 
 # - task: Xcode@5
@@ -98,11 +95,11 @@ steps:
 #     teamId: 'V798ATU9LP'
 #     useXcpretty: false
 
-# - task: CopyFiles@2
-#   inputs:
-#     SourceFolder: '*'
-#     Contents: 'nah-mobile/**'
-#     TargetFolder: '*'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '*'
+    Contents: 'nah-mobile/**'
+    TargetFolder: '*'
 
 # - script: |
 #     rm -r nestapi
@@ -134,6 +131,7 @@ steps:
     p12: '$(p12Certificate.secureFilePath)'
     p12pwd: '$(key.p12pswd)'
     provProfile: '$(adhocProvision.secureFilePath)'
+    cwd: 'nah-mobile'
     outputPattern: 'bin'
     targetEmulator: false
 
