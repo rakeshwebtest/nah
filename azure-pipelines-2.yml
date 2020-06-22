@@ -61,7 +61,7 @@ steps:
 
 
 - script: |
-    cd nah-mobile && mkdir www && ionic cordova prepare ios --prod --no-confirm
+    cd nah-mobile && mkdir www && ionic cordova prepare ios --prod --no-interactive --confirm
   displayName: 'ios prepare'
 
 # - script: |
