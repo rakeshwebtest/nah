@@ -3,6 +3,7 @@ import { BaseEntity } from './../shared/base.entity';
 import { GroupEntity } from 'src/group/group.entity';
 import { GroupFollowEntity } from 'src/group/group-follows.entity';
 import { MeetingEntity } from 'src/meeting/meeting.entity';
+import { PostEntity } from 'src/posts/post.entity';
 import { CityEntity } from 'src/city/city.entity';
 import { MeetingCommentsEntity } from 'src/meeting/meeting-comments.entity';
 import { MeetingReportEntity } from 'src/meeting/meeting-report.entity';
@@ -65,6 +66,9 @@ export class UserEntity extends BaseEntity {
 
     @OneToMany(type => MeetingMembersEntity, mm => mm.user, { onDelete: 'CASCADE' })
     meetingMember: MeetingMembersEntity[];
+
+    @OneToMany(type => PostEntity, post => post.createdBy, { onDelete: 'CASCADE' })
+    posts: PostEntity[];
 
 
     @OneToMany(type => GroupEntity, group => group.createdBy, { onDelete: 'CASCADE' })
