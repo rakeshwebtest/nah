@@ -81,8 +81,7 @@ steps:
 #   displayName: 'cordova prepare'
 
 - script: |
-    cd nah-mobile
-    mkdir www
+    cd nah-mobile && mkdir www && ls 
   displayName: 'create www dir'
 
 
