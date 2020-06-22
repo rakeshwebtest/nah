@@ -30,6 +30,7 @@ export class AgendaService {
         }
         this.setAgenda(this.agenda);
       }else{
+        this.agenda = null;
         this.setAgenda(null);
       }
     });

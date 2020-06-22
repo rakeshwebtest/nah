@@ -1,7 +1,7 @@
 import { Controller, Get, Query, Req, Post, Body } from '@nestjs/common';
 import { AgendaService } from './agenda.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
-import { CreateAgendaDto } from './agendaDto';
+import { CreateAgendaDto, GetAgendasDto } from './agendaDto';
 
 @ApiTags('agenda')
 @ApiBearerAuth()
@@ -10,9 +10,14 @@ export class AgendaController {
     constructor(public service: AgendaService) { }
 
     @Get()
-    async getAgenda(@Body() agenda: any,@Query() query, @Req() req) {
+    async getAgenda(@Body() agenda: any,@Query() query:GetAgendasDto, @Req() req) {
         const sessionUser = req.sessionUser;
-        const data = await this.service.getAgenda(sessionUser.id);
+        let data:any;
+        if(query.agendaId){
+             data = await this.service.getAgendaById(query.agendaId);
+        }else{
+             data = await this.service.getAgendasByUser(sessionUser.id);
+        }
         return { message: false, data };
     }
     @Get('check')

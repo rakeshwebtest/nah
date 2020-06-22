@@ -21,7 +21,7 @@
         <ion-icon name="lock"></ion-icon>
       </div> -->
       <div>
-        <ion-button>Old Agenda's</ion-button>
+        <a [routerLink]="[ '/agenda/list']">Old Agenda's</a>
       </div>
     </ion-card-title>
     <!-- <ion-card-subtitle class="card-sub-title">
@@ -33,10 +33,6 @@
     <ion-row class="agenda-list" >
       <span>Say No To </span> <ion-badge color="danger" *ngFor="let topic of agenda.topics">{{topic.name | uppercase }}</ion-badge>
     </ion-row>
-    <ion-row>
-      Create Agenda
-    </ion-row>
-    
   </ion-card-content>
 </ion-card>
 

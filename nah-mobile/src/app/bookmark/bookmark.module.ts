@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { BookmarkPageRoutingModule } from './bookmark-routing.module';
 
 import { BookmarkPage } from './bookmark.page';
+import { PostListModule } from '../posts/post-list/post-list.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    PostListModule,
     BookmarkPageRoutingModule
   ],
   declarations: [BookmarkPage]
