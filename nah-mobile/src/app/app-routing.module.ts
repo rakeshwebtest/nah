@@ -6,6 +6,8 @@ import { IfLoginGuard } from './services/iflogin-guard.service';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CommunityTabComponent } from './dashboard/community-tab/community-tab.component';
+import { BottomTabsComponent } from './dashboard/bottom-tabs/bottom-tabs.component';
 
 const routes: Routes = [
   {
@@ -36,22 +38,40 @@ const routes: Routes = [
         component: DashboardComponent,
         children: [
           {
-            path: 'meeting',
-            loadChildren: () => import('./meetings/meetings.module').then(m => m.MeetingsPageModule)
+            path:'',
+            redirectTo:'community/meeting/all',
+            pathMatch:'full'
           },
           {
-            path: 'posts',
-            loadChildren: () => import('./posts/posts.module').then(m => m.PostsPageModule)
-          },
-          {
-            path: 'bookmark',
-            loadChildren: () => import('./bookmark/bookmark.module').then(m => m.BookmarkPageModule)
-          },
-          {
-            path: 'notifications',
-            loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsPageModule)
+            path: '',
+            component: BottomTabsComponent,
+            children: [
+              {
+                path: 'community',
+                component: CommunityTabComponent,
+                children: [
+                  {
+                    path: 'meeting',
+                    loadChildren: () => import('./meetings/meetings.module').then(m => m.MeetingsPageModule)
+                  }
+                ]
+              },
+              {
+                path: 'posts',
+                loadChildren: () => import('./posts/posts.module').then(m => m.PostsPageModule)
+              },
+              {
+                path: 'bookmark',
+                loadChildren: () => import('./bookmark/bookmark.module').then(m => m.BookmarkPageModule)
+              },
+              {
+                path: 'notifications',
+                loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsPageModule)
+              }
+            ]
           }
         ]
+
       },
       {
         path: 'meeting',
@@ -89,7 +109,7 @@ const routes: Routes = [
       }
     ]
   },
-  
+
 
 
 ];

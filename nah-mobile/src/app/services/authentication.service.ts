@@ -37,7 +37,7 @@ export class AuthenticationService {
       if (response) {
         this.authState.next(response);
         if (response.user.typeOfNoer) {
-          this.router.navigate(['/dashboard/meeting/all']);
+          this.router.navigate(['/dashboard']);
         } else {
           this.router.navigate(['/sign-in']);
         }
@@ -50,7 +50,7 @@ export class AuthenticationService {
         this.authState.next(user);
         console.log('response');
         if (response.user.typeOfNoer) {
-          this.router.navigate(['dashboard/meeting/all']);
+          this.router.navigate(['dashboard']);
         } else {
           this.router.navigate(['sign-in']);
         }

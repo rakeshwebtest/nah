@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
       this.ms.meetingReload();
 
     this.firstTimeEnter = true;
-    this.activeTab = 'type' + '/' + this.activeRouter.snapshot.children[0].params.type;
+  //  this.activeTab = 'type' + '/' + this.activeRouter.snapshot.children[0].params.type;
     console.log('this.activeTab', this.activeTab);
     console.log('this.activeRouter.snapshot.params', this.activeRouter.snapshot);
   }
