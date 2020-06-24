@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'macOS-10.15'
+  vmImage: 'vs2017-win2016'
 
 steps:
 # - task: InstallAppleCertificate@2
@@ -57,9 +57,13 @@ steps:
 #     npm install
     
 #   displayName: 'npm install and angular build'
+
+
+
 # - script: |
-#     cd nah-mobile && ng build --prod
-#   displayName: 'npm build'
+#     cd nah-mobile && mkdir www && ionic cordova prepare ios --prod --no-interactive --confirm
+#   displayName: 'ios prepare'
+
 # - script: |
 #     cd nah-mobile && ionic cordova platform rm ios
 #   displayName: 'rm ios platform'
@@ -76,13 +80,9 @@ steps:
 #     ionic cordova prepare ios --no-interactive --confirm --verbose --no-build
 #   displayName: 'cordova prepare'
 
-# - script: |
-#     cd nah-mobile
-#     ls
-
-#     cd platforms
-#     ls
-#   displayName: 'ls'
+- script: |
+    cd nah-mobile && mkdir www && cordova plugin search bar code && ls 
+  displayName: 'create www dir'
 
 
 # - task: Xcode@5
@@ -93,27 +93,28 @@ steps:
 #     signingOption: 'auto'
 #     teamId: 'V798ATU9LP'
 #     useXcpretty: false
+
 # - task: CopyFiles@2
 #   inputs:
 #     SourceFolder: '*'
 #     Contents: 'nah-mobile/**'
 #     TargetFolder: '*'
 
-- script: |
-    rm -r nestapi
-    rm -r nah-admin
-    rm -r nah-landing
-    cd nah-mobile
-    mv * ../
-  displayName: 'copy'
+# - script: |
+#     rm -r nestapi
+#     rm -r nah-admin
+#     rm -r nah-landing
+#     cd nah-mobile
+#     mv * ../
+#   displayName: 'copy'
   
 
 
-- script: |
-    ls -R
-    mkdir www
-    npm i
-  displayName: 'ls'
+# - script: |
+#     ls -R
+#     mkdir www
+#     npm i
+#   displayName: 'ls'
 
 
 
@@ -129,6 +130,7 @@ steps:
     p12: '$(p12Certificate.secureFilePath)'
     p12pwd: '$(key.p12pswd)'
     provProfile: '$(adhocProvision.secureFilePath)'
+    cwd: 'nah-mobile'
     outputPattern: 'bin'
     targetEmulator: false
 

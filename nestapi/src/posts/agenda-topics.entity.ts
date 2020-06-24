@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, OneToMany, JoinColum
 import { UserEntity } from 'src/user/user.entity';
 import { BaseEntity } from '../shared/base.entity'
 import { AgendaEntity } from './agenda.entity';
+import { PostEntity } from './post.entity';
 @Entity({ name: 'agenda_topics' })
 export class AgendaTopicsEntity extends BaseEntity {
 
@@ -10,6 +11,9 @@ export class AgendaTopicsEntity extends BaseEntity {
 
     @ManyToOne(type => AgendaEntity, agenda => agenda.topics, { onDelete: 'CASCADE' })
     agenda: AgendaEntity;
+
+    @OneToMany(type => PostEntity, post => post.topic)
+    posts: PostEntity[];
 
 
     @Column({ default: 0 })
