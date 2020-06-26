@@ -15,6 +15,16 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'dashboard/group',
+    redirectTo: '/dashboard/community/group/all',
+    pathMatch: 'full'
+  },
+  {
+    path: 'dashboard/meeting',
+    redirectTo: '/dashboard/community/meeting/all',
+    pathMatch: 'full'
+  },
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [IfLoginGuard] },
   {
     path: 'sign-in',
@@ -38,22 +48,32 @@ const routes: Routes = [
         component: DashboardComponent,
         children: [
           {
-            path:'',
-            redirectTo:'community/meeting/all',
-            pathMatch:'full'
-          },
-          {
             path: '',
             component: BottomTabsComponent,
             children: [
+              {
+                path: '',
+                redirectTo: 'community',
+                pathMatch: 'full'
+              },
               {
                 path: 'community',
                 component: CommunityTabComponent,
                 children: [
                   {
+                    path: '',
+                    redirectTo: 'meeting',
+                    pathMatch: 'full'
+                  },
+                  {
                     path: 'meeting',
                     loadChildren: () => import('./meetings/meetings.module').then(m => m.MeetingsPageModule)
+                  },
+                  {
+                    path: 'group',
+                    loadChildren: () => import('./group/group.module').then(m => m.GroupPageModule)
                   }
+
                 ]
               },
               {
