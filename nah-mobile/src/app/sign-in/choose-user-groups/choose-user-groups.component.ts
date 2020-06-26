@@ -74,7 +74,7 @@ export class ChooseUserGroupsComponent implements OnInit {
           this.nativeStorage.set('USER_INFO', user);
         });
         this.loadingService.hide();
-        this.router.navigate(['/dashboard/meeting/all']);
+        this.router.navigate(['/dashboard']);
       });
     }
   }
