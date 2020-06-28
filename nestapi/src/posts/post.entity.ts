@@ -24,10 +24,9 @@ export class PostEntity extends BaseEntity {
     videos: PostVideosEntity[];
 
     @ManyToOne(type => UserEntity, user => user.posts)
-    createdBy: UserEntity;    
+    createdBy: UserEntity;   
 
-    @Column({ type: 'timestamp', name: 'postDate', default: () => 'LOCALTIMESTAMP' })
-    postDate: string;
+  
 
     @OneToMany(type => PostCommentsEntity, pc => pc.post)
     comments: PostCommentsEntity[];
