@@ -426,13 +426,13 @@ ion-footer{
 }
 
 .bottom-tabs{
-    border-radius: 35px 35px 0 0;
-    background-color: #F04141;
+    // border-radius: 35px 35px 0 0;
+    // background-color: #F04141;
     .tab-has-label {
-        // color: #999999;
-        color: rgba(255,255,255, 0.5);
+        color: #999999;
+        // color: rgba(255,255,255, 0.5);
         font-size: 12px;
-        background-color: #F04141;
+        // background-color: #F04141;
         @media(max-width: 420px){
             font-size: 11px;
         }
@@ -441,8 +441,8 @@ ion-footer{
         }
         border-bottom: none;
         &.tab-selected{
-            // color: #FB0102;
-            color: #fff;
+            color: #FB0102;
+            // color: #fff;
         }
         ion-icon{
             font-size: 24px;
@@ -457,11 +457,11 @@ ion-footer{
         }
         &:hover{
             ion-icon{
-                // color: #FB0102 !important; 
-                color: #fff !important; 
+                color: #FB0102 !important; 
+                // color: #fff !important; 
             }
             ion-label{
-                color: #fff !important; 
+                // color: #fff !important; 
             }
         }
         &:host{
@@ -470,12 +470,12 @@ ion-footer{
                 padding: 0;
             }
         } 
-        &:first-child{
-            border-radius: 35px 0 0 0;
-        }
-        &:last-child{
-            border-radius: 0 35px 0 0;
-        }
+        // &:first-child{
+        //     border-radius: 35px 0 0 0;
+        // }
+        // &:last-child{
+        //     border-radius: 0 35px 0 0;
+        // }
     }
 }
 .tabs-45{
@@ -634,18 +634,20 @@ ion-tab-button {
     }
 }
 .new-inside-tabs{
-    ion-tab-bar{
-        background-color: #696969;
-        padding: 10px 5px;
+    >ion-tab-bar{
+        // background-color: #696969;
+        padding: 2px;
+        height: 30px;
         .tab-has-label {
             color: #696969;
             font-size: 14px;
-            border:1px solid #696969;
+            border:1px solid transparent;
             background-color: #fff;
             border-radius: 5px;
             flex: auto;
+            box-shadow: 0px 0px 6px #bdbdbd;
             &.tab-selected{
-                border-color: #fff;
+                // border-color: #fff;
                 color: #fff;
                 background-color: #f04141;
             }
