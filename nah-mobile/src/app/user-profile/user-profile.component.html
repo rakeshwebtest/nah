@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start" class="white-color">
-      <ion-back-button defaultHref="dashboard/meeting/all"></ion-back-button>
+      <ion-back-button defaultHref="dashboard"></ion-back-button>
       <ion-img class="ion-padding-r-10 header-logo" src="assets/svg/nah_logo_white.svg"></ion-img>
       <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
         Profile
@@ -11,7 +11,7 @@
       <ion-icon style="cursor: pointer;" name="md-more" color="light" (click)="presentPopover($event)"></ion-icon>
     </ion-row>
   </ion-toolbar>
-  
+
 </ion-header>
 
 <!-- fullscreen="true" slot="fixed" -->
@@ -45,22 +45,10 @@
         </h6> -->
     </ion-card-content>
   </ion-card>
-  <ion-tabs class="relative-tabs">
-    <ion-tab-bar >
-      <ion-tab-button tab="mygroups" [ngClass]="{'active': activeTab=='all'}" (click)="activeTab='all'">
-        <ion-label>My Noer Posts</ion-label>
-      </ion-tab-button>
-      <ion-tab-button  [ngClass]="{'active': activeTab=='all'}" (click)="activeTab='all'">
-        <ion-label>All Groups</ion-label>
-      </ion-tab-button>
-      <ion-tab-button  class="ion-margin-l-5" [ngClass]="{'active': activeTab=='myGroups'}" (click)="activeTab='myGroups'">
-        <ion-label>My Groups</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
-  <app-group-list *ngIf="activeTab=='myGroups'" #groupC type="mygroups"></app-group-list>
-  <app-group-list *ngIf="activeTab=='all'" #groupC type="all"></app-group-list>
+  <ion-row class="ion-align-items-center no-meetings">
+    <app-agenda-view></app-agenda-view>
+  </ion-row>
 </ion-content>
 <ion-footer>
- 
+
 </ion-footer>

@@ -11,6 +11,7 @@ import { GroupService } from './group.service';
 import { GroupListModule } from '../shared/group-list/group-list.module';
 import { PeoplesModule } from '../shared/peoples/peoples.module';
 import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
+import { GroupTabsComponent } from './group-tabs/group-tabs.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,6 @@ import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
     MeetingListModule
   ],
   providers: [GroupService],
-  declarations: [MyGroupComponent, GroupDetailsComponent]
+  declarations: [MyGroupComponent, GroupDetailsComponent, GroupTabsComponent]
 })
 export class GroupPageModule { }

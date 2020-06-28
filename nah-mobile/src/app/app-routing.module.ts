@@ -6,11 +6,23 @@ import { IfLoginGuard } from './services/iflogin-guard.service';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CommunityTabComponent } from './dashboard/community-tab/community-tab.component';
+import { BottomTabsComponent } from './dashboard/bottom-tabs/bottom-tabs.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'dashboard/group',
+    redirectTo: '/dashboard/community/group/all',
+    pathMatch: 'full'
+  },
+  {
+    path: 'dashboard/meeting',
+    redirectTo: '/dashboard/community/meeting/all',
     pathMatch: 'full'
   },
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [IfLoginGuard] },
@@ -36,22 +48,50 @@ const routes: Routes = [
         component: DashboardComponent,
         children: [
           {
-            path: 'meeting',
-            loadChildren: () => import('./meetings/meetings.module').then(m => m.MeetingsPageModule)
-          },
-          {
-            path: 'posts',
-            loadChildren: () => import('./posts/posts.module').then(m => m.PostsPageModule)
-          },
-          {
-            path: 'bookmark',
-            loadChildren: () => import('./bookmark/bookmark.module').then(m => m.BookmarkPageModule)
-          },
-          {
-            path: 'notifications',
-            loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsPageModule)
+            path: '',
+            component: BottomTabsComponent,
+            children: [
+              {
+                path: '',
+                redirectTo: 'community',
+                pathMatch: 'full'
+              },
+              {
+                path: 'community',
+                component: CommunityTabComponent,
+                children: [
+                  {
+                    path: '',
+                    redirectTo: 'meeting',
+                    pathMatch: 'full'
+                  },
+                  {
+                    path: 'meeting',
+                    loadChildren: () => import('./meetings/meetings.module').then(m => m.MeetingsPageModule)
+                  },
+                  {
+                    path: 'group',
+                    loadChildren: () => import('./group/group.module').then(m => m.GroupPageModule)
+                  }
+
+                ]
+              },
+              {
+                path: 'posts',
+                loadChildren: () => import('./posts/posts.module').then(m => m.PostsPageModule)
+              },
+              {
+                path: 'bookmark',
+                loadChildren: () => import('./bookmark/bookmark.module').then(m => m.BookmarkPageModule)
+              },
+              {
+                path: 'notifications',
+                loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsPageModule)
+              }
+            ]
           }
         ]
+
       },
       {
         path: 'meeting',
@@ -89,7 +129,7 @@ const routes: Routes = [
       }
     ]
   },
-  
+
 
 
 ];

@@ -19,7 +19,7 @@ export class IfLoginGuard implements CanActivate {
         if (res) {
           this.authenticationService.authState.next(res);
           if (res.user.typeOfNoer) {
-            this.router.navigate(['/dashboard/meeting/all']);
+            this.router.navigate(['/dashboard']);
           } else {
             this.router.navigate(['/sign-in']);
           }
