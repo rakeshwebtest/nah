@@ -77,6 +77,8 @@ export class AppComponent {
     });
   }
   startTracking() {
+    /**
+   
     this.router.events.subscribe(res => {
       if (res instanceof NavigationEnd) {
         this.ga.trackView(res.url)
@@ -94,5 +96,7 @@ export class AppComponent {
       }
 
     });
+      * 
+     */
   }
 }
