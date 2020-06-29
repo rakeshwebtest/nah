@@ -29,7 +29,7 @@ export class PostService {
         const db = getRepository(PostEntity)
             .createQueryBuilder('p')
             .leftJoin('p.createdBy', 'u')
-            .leftJoin('p.topic', 'agenda_topics');
+            .leftJoin('p.topic', 'topic');
 
         if (sessionUser.role === 'admin') {
 
@@ -57,7 +57,7 @@ export class PostService {
             const data: any = await db.getOne();
             return data;
         } else {
-            db.select(["p", "topic", "user"])
+            db.select(["p", "topic", "u"])
                 .orderBy({ "p.createdDate": "DESC" });
             db.take(take);
             db.skip(skip);

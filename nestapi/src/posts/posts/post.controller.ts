@@ -11,7 +11,7 @@ export class PostsController {
     async getPosts(@Query() query, @Req() req) {
         const sessionUser = req['sessionUser'];
         let data: any;
-        if (query.meetingId) {
+        if (query.postId) {
             data = await this.postService.getPosts(query, sessionUser);
             return { message: false, data, success: true };
         } else {
@@ -21,7 +21,7 @@ export class PostsController {
     }
 
     @Post()
-    async saveUpdatePost(@Body() post) {
+    async saveUpdatePost(@Body() post: any) {
         let msg = 'Created successfully';
         if (post.id) {
             msg = 'Updated successfully';
