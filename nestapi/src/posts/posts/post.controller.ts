@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Query, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, Req, Request, Param, Delete } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PostService } from './post.service';
 @ApiTags('posts')
@@ -7,20 +7,50 @@ export class PostsController {
 
     constructor(private postService: PostService) { }
 
-    @Get()
-    async getAgenda(@Body() agenda: any, @Query() query, @Req() req) {
-
-        return { message: false, data: [] };
+    @Get('list')
+    async getPosts(@Query() query, @Req() req) {
+        const sessionUser = req['sessionUser'];
+        let data: any;
+        if (query.meetingId) {
+            data = await this.postService.getPosts(query, sessionUser);
+            return { message: false, data, success: true };
+        } else {
+            data = await this.postService.getPosts(query, sessionUser);
+            return { message: false, success: true, ...data, query };
+        }
     }
 
-    async createPost(@Body() post) {
+    @Post()
+    async saveUpdatePost(@Body() post) {
         let msg = 'Created successfully';
         if (post.id) {
             msg = 'Updated successfully';
         }
-        const data = await this.postService.savePost(post);
+        const data = await this.postService.saveUpdatePost(post);
         return { message: msg, success: true, data };
 
+    }
+
+    /**
+  * post bookmark
+  */
+    @Post('bookmark')
+    async bookmarkPost(@Body() bookmark, @Request() req) {
+        return this.postService.bookmarkPost(bookmark);
+    }
+
+    @Post('comment')
+    async addComment(@Body() comment, @Request() req) {
+        return this.postService.addComment(comment);
+    }
+    /**
+     * 
+     * @param id 
+     */
+    @Delete('comment/:commentId')
+    async deleteComment(@Param('commentId') id: number) {
+        const data = await this.postService.deleteComment(id);
+        return { message: 'Deleted successfull', success: true, data };
     }
 
 }

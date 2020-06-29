@@ -12,9 +12,10 @@ import { PostCommentReplyEntity } from './post-comment-reply.entity';
 import { AgendaTopicsEntity } from './agenda-topics.entity';
 import { AgendaService } from './agenda/agenda.service';
 import { PostService } from './posts/post.service';
+import { PostBookmarksEntity } from './post-bookmarks.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([AgendaEntity, UserEntity, PostEntity, PostPhotosEntity, PostVideosEntity, PostCommentsEntity, PostCommentReplyEntity, AgendaTopicsEntity])],
+  imports: [TypeOrmModule.forFeature([AgendaEntity, UserEntity, PostEntity, PostPhotosEntity, PostVideosEntity, PostCommentsEntity, PostCommentReplyEntity, AgendaTopicsEntity, PostBookmarksEntity])],
   controllers: [PostsController, AgendaController],
   providers:[AgendaService, PostService]
 })
