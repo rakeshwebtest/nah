@@ -306,7 +306,7 @@ export class MeetingCreateComponent implements OnInit {
     };
     this.http.post('meeting', formData).subscribe(res => {
       if (res.success) {
-        this.router.navigate(['/dashboard/meeting/my-meeting'],{ queryParams: { reload: 'true' } });
+        this.router.navigate(['/dashboard/community/meeting/my-meeting'],{ queryParams: { reload: 'true' } });
         // window.location.reload();
         loading.dismiss();
       } else {
@@ -314,6 +314,7 @@ export class MeetingCreateComponent implements OnInit {
       }
     }, err => {
       loading.dismiss();
+      this.router.navigate(['/dashboard'],{ queryParams: { reload: 'true' } });
     });
   }
   async presentLoading(loading) {
