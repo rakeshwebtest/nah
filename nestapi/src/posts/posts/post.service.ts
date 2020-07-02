@@ -31,6 +31,8 @@ export class PostService {
             .leftJoin('p.createdBy', 'u')
             .leftJoin('p.topic', 'topic');
 
+            console.log('sessionUser', sessionUser);
+
         if (sessionUser.role === 'admin') {
 
         } else {

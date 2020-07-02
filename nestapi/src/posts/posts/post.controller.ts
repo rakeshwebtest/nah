@@ -12,6 +12,7 @@ export class PostsController {
     @Get('list')
     async getPosts(@Query() query: PostQueryDao, @Req() req) {
         const sessionUser = req['sessionUser'];
+        console.log('sessionUser -->', sessionUser);
         let data: any;
         if (query.postId) {
             data = await this.postService.getPosts(query, sessionUser);
