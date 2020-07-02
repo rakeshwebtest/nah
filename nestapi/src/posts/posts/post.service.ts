@@ -57,7 +57,7 @@ export class PostService {
             const data: any = await db.getOne();
             return data;
         } else {
-            db.select(["p", "topic", "u"])
+            db.select(["p", "u", "topic"])
                 .orderBy({ "p.createdDate": "DESC" });
             db.take(take);
             db.skip(skip);
@@ -79,12 +79,11 @@ export class PostService {
 
         // topic
         _post.topic = new AgendaTopicsEntity();
-        _post.topic.id = parseInt(post.topic);
+        _post.topic.id = parseInt(post.topicId);
         if (post.id)
             _post.id = parseInt(post.id);
 
         return this.postRepository.save(_post);
-
         // return data;
 
     }

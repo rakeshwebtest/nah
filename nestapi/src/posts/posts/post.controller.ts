@@ -1,6 +1,8 @@
 import { Controller, Get, Post, Body, Query, Req, Request, Param, Delete } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PostService } from './post.service';
+import { PostQueryDao, SavePostDto } from '../dto/post.dto';
+
 @ApiTags('posts')
 @Controller('posts')
 export class PostsController {
@@ -8,7 +10,7 @@ export class PostsController {
     constructor(private postService: PostService) { }
 
     @Get('list')
-    async getPosts(@Query() query, @Req() req) {
+    async getPosts(@Query() query: PostQueryDao, @Req() req) {
         const sessionUser = req['sessionUser'];
         let data: any;
         if (query.postId) {
@@ -21,7 +23,7 @@ export class PostsController {
     }
 
     @Post()
-    async saveUpdatePost(@Body() post: any) {
+    async saveUpdatePost(@Body() post: SavePostDto) {
         let msg = 'Created successfully';
         if (post.id) {
             msg = 'Updated successfully';
