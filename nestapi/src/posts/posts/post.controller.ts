@@ -1,8 +1,9 @@
 import { Controller, Get, Post, Body, Query, Req, Request, Param, Delete } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { PostService } from './post.service';
 import { PostQueryDao, SavePostDto } from '../dto/post.dto';
 
+@ApiBearerAuth()
 @ApiTags('posts')
 @Controller('posts')
 export class PostsController {

@@ -39,7 +39,7 @@ export class PostService {
             if (query.type && query.type === 'my-posts') {
                 db.andWhere('u.id = :id', { id: sessionUser.id })
             } else {
-                db.andWhere('(p.isPublished = 1 && p.isCanceled = 0)');
+                db.andWhere('(p.isPublished = 1)');
             }
         }
 
