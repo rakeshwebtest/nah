@@ -205,7 +205,7 @@
           <p>
             <!-- <ion-text class="text-agenda">{{m.group.name}}</ion-text> -->
             <ion-label class="meeting-sub-title" *ngIf="m.isPublished==0">Un-published</ion-label>
-            <ion-text>Say No To <span class="text-danger"># {{m.group.name}} #</span></ion-text>
+            <ion-text class="text-danger">Say No To <span class="text-danger"> {{m.group.name}} </span></ion-text>
             <ion-text color="danger" *ngIf="m.isSuspend">
               (Suspend)
             </ion-text>
