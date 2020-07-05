@@ -694,10 +694,18 @@ ion-tab-button {
 }
 ion-button {
     --border-radius: 20px;
-    min-height: 42px;
     margin-top: 0;
     margin-bottom: 0;
 }
+.custom-height {
+    min-height: 42px;
+}
 .text-justify, p{
     text-align: justify;
+}
+.mb-15 {
+    margin-bottom: 15px;
+} 
+.d-block{
+    display: block;
 }

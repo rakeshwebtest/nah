@@ -25,7 +25,7 @@ export class AgendaPage implements OnInit {
       key: 'title',
       type: 'input',
       wrappers: ['vertical'],
-      className: '',
+      className: 'mb-15 d-block',
       templateOptions: {
         label: 'Title',
         placeholder: 'Entet Title'
