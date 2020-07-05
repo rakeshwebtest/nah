@@ -45,6 +45,7 @@ export class AppModule {
         { path: 'group/*', method: RequestMethod.ALL },
         { path: 'meeting/*', method: RequestMethod.ALL },
         { path: 'agenda', method: RequestMethod.ALL },
+        { path: 'posts', method: RequestMethod.ALL },
         { path: 'posts/*', method: RequestMethod.ALL }
       );
   }
