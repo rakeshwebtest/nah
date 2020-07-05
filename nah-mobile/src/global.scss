@@ -371,6 +371,7 @@ ion-footer {
     display: flex;
     padding: 0 15px;
     margin-bottom: 15px;
+    align-items: flex-end;
     .flex-auto {
         flex: auto;
     }
@@ -692,7 +693,10 @@ ion-tab-button {
     border-radius: 0px;
 }
 ion-button {
-    --border-radius: 15px;
+    --border-radius: 20px;
+    min-height: 42px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .text-justify, p{
     text-align: justify;
