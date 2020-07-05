@@ -13,7 +13,6 @@ export class PostsController {
     @Get('list')
     async getPosts(@Query() query: PostQueryDao, @Req() req) {
         const sessionUser = req['sessionUser'];
-        console.log('sessionUser -->', sessionUser);
         let data: any;
         if (query.postId) {
             data = await this.postService.getPosts(query, sessionUser);
@@ -25,12 +24,14 @@ export class PostsController {
     }
 
     @Post()
-    async saveUpdatePost(@Body() post: SavePostDto) {
+    async saveUpdatePost(@Body() post: SavePostDto, @Req() req) {
+            const sessionUser = req.sessionUser;
         let msg = 'Created successfully';
         if (post.id) {
             msg = 'Updated successfully';
         }
-        const data = await this.postService.saveUpdatePost(post);
+        console.log('sessionUser',sessionUser,req);
+        const data = await this.postService.saveUpdatePost(post,sessionUser);
         return { message: msg, success: true, data };
 
     }

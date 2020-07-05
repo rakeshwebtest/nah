@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Router } from '@angular/router';
+import { AgendaService } from 'src/app/agenda/agenda.service';
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-post-create',
@@ -43,18 +45,13 @@ export class PostCreateComponent implements OnInit {
         label: 'Topic',
         placeholder: 'Select Topic',
         required: true,
-        itemValueField: 'value',
-        itemTextField: 'label',
-        options: [
-          {
-            label:'Topic 1',
-            value:1
-          },
-          {
-            label:'Topic 2',
-            value:2
-          }
-        ]
+        itemValueField: 'id',
+        itemTextField: 'name',
+      },
+      hooks: {
+        onInit: (f) => {
+          f.templateOptions.options = (this.agendaS.agenda) ? this.agendaS.agenda.topics : [];
+        }
       }
     },
     {
@@ -78,17 +75,26 @@ export class PostCreateComponent implements OnInit {
         pattern: /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/,
         label: 'Paste Youtube URL here',
         placeholder: 'Paste Youtube URL here',
-        required: true
+        required: false
       }
     }
 
   ];
   formShow = false;
-  constructor(private router:Router) { }
+  constructor(private router: Router, private agendaS: AgendaService, private postS: PostService) { }
 
-  ngOnInit() {}
-  submit(model,isPublish){
-    this.router.navigate(['/dashboard/posts/my-posts'])
+  ngOnInit() {
+
+    if (!this.agendaS.agenda) {
+      this.router.navigate(['/agenda/create'], { queryParams: { redirectUrl: 'post' } });
+    }
+  }
+  submit(model, isPublish) {
+
+    model.isPublished = (isPublish) ? 1 : 0;
+    this.postS.createUpdatePost(model).subscribe(res => {
+      this.router.navigate(['/dashboard/posts/my-posts']);
+    });
   }
 
 }

@@ -36,6 +36,14 @@ export class BottomTabsComponent implements OnInit {
           console.log('Share clicked');
         }
       },
+       {
+        text: 'Post',
+        icon: 'send',
+        handler: () => {
+          this.router.navigate(['/posts/create']);
+          console.log('Share clicked');
+        }
+      },
       {
         text: 'Meeting',
         role: 'destructive',
@@ -56,7 +64,7 @@ export class BottomTabsComponent implements OnInit {
           console.log('Share clicked');
         }
       };
-      buttons.splice(2,0,postItem)
+     // buttons.splice(2,0,postItem)
     }
 
     const actionSheet = await this.actionSheetController.create({

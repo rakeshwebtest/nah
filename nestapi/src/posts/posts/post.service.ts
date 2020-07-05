@@ -69,7 +69,7 @@ export class PostService {
 
     }
 
-    async saveUpdatePost(post): Promise<PostEntity> {
+    async saveUpdatePost(post,sessionUser): Promise<PostEntity> {
         const _post = new PostEntity();
         _post.title = post.title;
         _post.description = post.description;
@@ -77,7 +77,7 @@ export class PostService {
         const userId = parseInt(post.createdBy);
         // user 
         _post.createdBy = new UserEntity();
-        _post.createdBy.id = userId;
+        _post.createdBy.id = sessionUser.id;
 
         // topic
         _post.topic = new AgendaTopicsEntity();
@@ -85,7 +85,9 @@ export class PostService {
         if (post.id)
             _post.id = parseInt(post.id);
 
-        return this.postRepository.save(_post);
+        console.log('_post',_post);
+
+        return await this.postRepository.save(_post);
         // return data;
 
     }

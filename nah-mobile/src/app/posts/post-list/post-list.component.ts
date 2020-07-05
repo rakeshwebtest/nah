@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { PostService } from '../post.service';
+import { scan } from 'rxjs/operators';
 
 @Component({
   selector: 'app-post-list',
@@ -9,10 +11,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class PostListComponent implements OnInit {
   public postList = [];
   showAgendaView = false;
-  constructor(private router: Router, private activeRouter: ActivatedRoute) {
+  constructor(private router: Router, private activeRouter: ActivatedRoute, public postS: PostService) {
 
   }
-  ionViewDidLoad(){
+  ionViewDidLoad() {
     console.log('ionViewDidLoad');
   }
   // ionViewWillEnter(){
@@ -57,8 +59,18 @@ export class PostListComponent implements OnInit {
         imageUrl: 'https://i.ytimg.com/vi/caG9cKBf6Wg/maxresdefault.jpg'
       },
     ];
+    this.postS.list$ = this.postS.postBehavior.asObservable().pipe(
+      scan((acc, curr) => {
+        if (this.postS.offset === 0) {
+          return [...curr];
+        } else {
+          return [...acc, ...curr];
+        }
+      }, [])
+    );
+    this.postS.loadPosts();
   }
-  navDetails(){
+  navDetails() {
     this.router.navigate(['/posts/details']);
   }
 }
