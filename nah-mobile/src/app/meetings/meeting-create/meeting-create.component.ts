@@ -48,7 +48,7 @@ export class MeetingCreateComponent implements OnInit {
     key: 'contactMobile',
     type: 'input',
     wrappers: ['vertical'],
-    className: 'col-12 ion-padding-t-10',
+    className: 'col-12',
     templateOptions: {
       type: "number",
       label: 'Mobile Number',
@@ -60,7 +60,7 @@ export class MeetingCreateComponent implements OnInit {
     key: 'contactEmail',
     type: 'input',
     wrappers: ['vertical'],
-    className: 'col-12 ion-padding-t-10',
+    className: 'col-12',
     templateOptions: {
       label: 'Email',
       placeholder: 'Enter Email',
@@ -90,7 +90,7 @@ export class MeetingCreateComponent implements OnInit {
         templateOptions: {
           label: '',
           text: 'Add Group',
-          class: 'ion-color ion-color-danger',
+          class: 'ion-color ion-color-danger custom-height',
           btnType: 'info',
           type: 'button',
           onClick: ($event) => {
@@ -122,7 +122,7 @@ export class MeetingCreateComponent implements OnInit {
     key: 'location',
     type: 'input',
     wrappers: ['vertical'],
-    className: 'col-12 ion-padding-t-10',
+    className: 'col-12',
     templateOptions: {
       label: 'Location',
       placeholder: 'Enter Location',

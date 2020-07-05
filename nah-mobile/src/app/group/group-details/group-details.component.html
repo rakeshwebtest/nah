@@ -23,15 +23,15 @@
       <h4 class="country"><strong>Say No To</strong> {{ group.name }}</h4>
     </ion-card-content>
   </ion-card>
-  <ion-grid class="">
+  <ion-grid class="ion-no-padding">
     <ion-row class="">
       <ion-tabs class="relative-tabs"> 
         <ion-tab-bar>
          
-          <ion-tab-button [ngClass]="{'active': activeTab=='meetings'}" (click)="activeTab='meetings'">
+          <ion-tab-button [ngClass]="{'tab-selected': activeTab=='meetings'}" (click)="activeTab='meetings'">
             <ion-label>Meetings</ion-label>
           </ion-tab-button>
-          <ion-tab-button [ngClass]="{'active': activeTab=='followers'}" (click)="activeTab='followers'">
+          <ion-tab-button [ngClass]="{'tab-selected': activeTab=='followers'}" (click)="activeTab='followers'">
             <ion-label>Followers</ion-label>
           </ion-tab-button>
         </ion-tab-bar>
