@@ -7,10 +7,10 @@ import { strict } from 'assert';
 export class CustomDateCheck implements ValidatorConstraintInterface {
 
     validate(text: string, args: ValidationArguments) {
-      
+
         const myDate = new Date(text);
-        const currentDate =  new Date();
-        currentDate.setHours(0,0,0,0);
+        const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);
         return myDate >= currentDate; // for async validations you must return a Promise<boolean> here
     }
 
@@ -30,9 +30,9 @@ export class SavePostDto {
     @ApiProperty()
     description: string;
     @ApiProperty()
-    topicId: string;    
+    topicId: string;
     @ApiProperty()
-    isPublished: string;
+    isPublished: number;
     // @IsNotEmpty({ message: "Required Created By" })
     // readonly createBy: number;
 }
@@ -41,7 +41,7 @@ export class PostQueryDao {
     postId: number;
 
     @ApiProperty({ required: false, enum: ["all", "my-posts"] })
-    type: string;   
+    type: string;
 
     @ApiProperty({ required: false, default: 500 })
     take: number;

@@ -6,20 +6,16 @@ import { Observable, BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class PostService {
-  limit = 100;
-  offset = 0;
-  postBehavior = new BehaviorSubject<any[]>([]);
-  list$: Observable<any[]>;
+
   constructor(private http: AppHttpClient) { }
-  getPosts() {
-    return this.http.get('posts/list');
+  getPosts(payload: any) {
+    return this.http.get('posts/list', { params: payload });
   }
-  loadPosts() {
-    this.getPosts().subscribe(res => {
-      this.postBehavior.next(res.data);
-    });
-  }
+
   createUpdatePost(payload) {
     return this.http.post('posts', payload);
+  }
+  bookMark(payload) {
+    return this.http.post('posts/bookmark', payload);
   }
 }

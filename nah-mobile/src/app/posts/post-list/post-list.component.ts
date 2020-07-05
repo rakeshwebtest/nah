@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PostService } from '../post.service';
 import { scan } from 'rxjs/operators';
-
+import { Observable, BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss'],
 })
-export class PostListComponent implements OnInit {
+export class PostListComponent implements OnInit, OnDestroy {
   public postList = [];
   showAgendaView = false;
+  limit = 100;
+  offset = 0;
+  postBehavior = new BehaviorSubject<any[]>([]);
+  list$: Observable<any[]>;
+  defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
   constructor(private router: Router, private activeRouter: ActivatedRoute, public postS: PostService) {
 
   }
@@ -23,15 +28,12 @@ export class PostListComponent implements OnInit {
   ionViewWillEnter() {
     const params = this.activeRouter.snapshot.routeConfig.path;
     console.log('params', params);
-    this.showAgendaView = false;
-    if (params === 'my-posts') {
-      // this.showAgendaView = true;
-      setTimeout(() => {
-        this.showAgendaView = true;
-      }, 100);
-    }
+    this.offset = 0;
+    this.loadPosts({ type: this.activeRouter.snapshot.routeConfig.path });
+
   }
   ngOnInit() {
+    console.log('activeRouter', this.activeRouter.snapshot.params);
 
     this.postList = [
       {
@@ -59,18 +61,31 @@ export class PostListComponent implements OnInit {
         imageUrl: 'https://i.ytimg.com/vi/caG9cKBf6Wg/maxresdefault.jpg'
       },
     ];
-    this.postS.list$ = this.postS.postBehavior.asObservable().pipe(
+    this.list$ = this.postBehavior.asObservable().pipe(
       scan((acc, curr) => {
-        if (this.postS.offset === 0) {
+        if (this.offset === 0) {
           return [...curr];
         } else {
           return [...acc, ...curr];
         }
       }, [])
     );
-    this.postS.loadPosts();
+    this.loadPosts({ type: this.activeRouter.snapshot.routeConfig.path });
   }
-  navDetails() {
-    this.router.navigate(['/posts/details']);
+  loadPosts(payload = {}) {
+    this.postS.getPosts(payload).subscribe(res => {
+      this.postBehavior.next(res.data);
+    });
+  }
+  navDetails(post) {
+    this.router.navigate(['/posts/details/' + post.id]);
+  }
+
+  bookMark(post) {
+    post.isBookMark = !post.isBookMark;
+    this.postS.bookMark({ postId: post.id }).subscribe(res=>{});
+  }
+  ngOnDestroy(): void {
+    // this.list$.unsubscribe();
   }
 }

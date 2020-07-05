@@ -11,9 +11,9 @@ import { PostBookmarksEntity } from '../post-bookmarks.entity';
 @Injectable()
 export class PostService {
     constructor(@InjectRepository(PostEntity) private readonly postRepository: Repository<PostEntity>,
-    @InjectRepository(PostCommentsEntity) private readonly postCommentRepository: Repository<PostCommentsEntity>,
-    @InjectRepository(PostCommentReplyEntity) private readonly postCommentReplyRepository: Repository<PostCommentReplyEntity>,
-    @InjectRepository(PostBookmarksEntity) private readonly postBookmarksRepository: Repository<PostBookmarksEntity>,
+        @InjectRepository(PostCommentsEntity) private readonly postCommentRepository: Repository<PostCommentsEntity>,
+        @InjectRepository(PostCommentReplyEntity) private readonly postCommentReplyRepository: Repository<PostCommentReplyEntity>,
+        @InjectRepository(PostBookmarksEntity) private readonly postBookmarksRepository: Repository<PostBookmarksEntity>,
     ) {
 
     }
@@ -31,21 +31,21 @@ export class PostService {
             .leftJoin('p.createdBy', 'u')
             .leftJoin('p.topic', 'topic');
 
-            console.log('sessionUser', sessionUser);
+        console.log('sessionUser', sessionUser);
 
         if (sessionUser.role === 'admin') {
 
         } else {
             if (query.type && query.type === 'my-posts') {
-                db.andWhere('u.id = :id', { id: sessionUser.id })
+                db.andWhere('u.id = :id', { id: sessionUser.id });
             } else {
                 db.andWhere('(p.isPublished = 1)');
             }
         }
 
-        // get single post details   
-        if (query.postId) { 
-            db.select(["p", "u", "topc"]);
+        // get single post details
+        if (query.postId) {
+            db.select(["p", "u", "topic"]);
             db.leftJoin("p.comments", 'pc')
                 .leftJoin("pc.createdBy", 'pc_createdBy')
                 .leftJoin("pc.replys", 'pcr')
@@ -69,7 +69,7 @@ export class PostService {
 
     }
 
-    async saveUpdatePost(post,sessionUser): Promise<PostEntity> {
+    async saveUpdatePost(post, sessionUser): Promise<PostEntity> {
         const _post = new PostEntity();
         _post.title = post.title;
         _post.description = post.description;
@@ -85,9 +85,11 @@ export class PostService {
         if (post.id)
             _post.id = parseInt(post.id);
 
-        console.log('_post',_post);
+        if (post.isPublished)
+            _post.isPublished = post.isPublished;
 
-        return await this.postRepository.save(_post);
+
+        return this.postRepository.save(_post);
         // return data;
 
     }

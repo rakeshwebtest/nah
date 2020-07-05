@@ -2,8 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start" class="white-color">
       <ion-back-button></ion-back-button>
-      <ion-img class="ion-padding-r-10 header-logo"
-      src="assets/svg/nah_logo_white.svg"></ion-img>
+      <ion-img class="ion-padding-r-10 header-logo" src="assets/svg/nah_logo_white.svg"></ion-img>
       <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
         Post Details
       </ion-text>
@@ -13,17 +12,17 @@
 
 <ion-content class="ion-no-padding information">
   <ion-row class="post-widget">
-    <ion-card class="post-list" (click)="navDetails()"  *ngFor="let post of postDetails;">
+    <ion-card class="post-list" *ngIf="post">
       <ion-card-header>
         <ion-row>
           <ion-col size="auto" class="col-avatar">
             <ion-avatar class="post-avatar">
-              <img [src]="post.avatarUrl">
+              <img [src]="post.createdBy.imageUrl" />
             </ion-avatar>
           </ion-col>
           <ion-col class="col-avatar-right">
             <ion-label>
-              <ion-text class="text-name">{{post.name}}</ion-text>
+              <ion-text class="text-name">{{ post.createdBy.displayName }}</ion-text>
               <ion-text class="post-stars">
                 <ion-icon name="star" color="warning"></ion-icon>
                 <ion-icon name="star"></ion-icon>
@@ -31,29 +30,30 @@
                 <ion-icon name="star"></ion-icon>
                 <ion-icon name="star"></ion-icon>
               </ion-text>
-              <span class="date">{{post.createdDate}}</span>
+              <span class="date">{{ post.createdDate | date: "mediumDate" }}</span>
             </ion-label>
             <p>
               <ion-text class="text-agenda">AGENDA</ion-text>
-              <ion-text>Say No To <span class="text-danger">#Antisexualism#</span></ion-text>
+              <ion-text
+                >Say No To <span class="text-danger">#{{ post.topic.name }}#</span></ion-text
+              >
             </p>
           </ion-col>
         </ion-row>
         <ion-card-title>
-          <ion-text>[Anti]</ion-text>
-          <ion-label>Why we MUST encourage ppl have sex?</ion-label>
+          <ion-text>[{{ post.createdBy.typeOfNoer | titlecase }}]</ion-text>
+          <ion-label>{{ post.title }}</ion-label>
           <ion-icon class="custom-antie"></ion-icon>
         </ion-card-title>
-  
       </ion-card-header>
-  
       <ion-card-content>
         <ion-thumbnail class="post-image">
-          <ion-img [src]="post.imageUrl"></ion-img>
+          <ion-img [src]="defaultImg"></ion-img>
         </ion-thumbnail>
         <ion-text class="post-description" color="dark">
-          <p>Keep close to Nature's heart... and break clear away, once in awhile,
-            and climb a mountain or spend a week in the woods. Wash your spirit clean.</p>
+          <p>
+            {{ post.description }}
+          </p>
         </ion-text>
         <!-- <ion-text class="post-footer">
           <span>
@@ -106,15 +106,11 @@
       </ion-col>
     </ion-row>
   </ion-grid> -->
-  
 
-
-
-  <ion-row >
+  <ion-row>
     <h3 class="comments-title">COMMENTS(1)</h3>
 
-
-    <ion-list class="meeting-list meeting-list-d" >
+    <ion-list class="meeting-list meeting-list-d">
       <ion-grid class="meeting-item ion-no-padding">
         <ion-row class="ion-nowrap ion-align-items-center">
           <ion-col size="2" class="img-left ion-no-padding">
@@ -125,65 +121,62 @@
           <ion-col size="7" class="ion-no-padding">
             <!-- <ion-label class="meeting-title" style="display: block;color: #000;">Let's gather our barriors
             </ion-label> -->
-            <ion-label class="meeting-sub-title" style="font-weight: bold;">Raja Palleti
-            </ion-label>
-
-
-
+            <ion-label class="meeting-sub-title" style="font-weight: bold;">Raja Palleti </ion-label>
           </ion-col>
           <ion-col size="3" class="ion-no-padding ion-text-right">
             <label class="meeting-date">4 Hours ago</label>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col class="ion-no-padding" size="2">
-          </ion-col>
+          <ion-col class="ion-no-padding" size="2"> </ion-col>
           <ion-col class="ion-no-padding" size="10">
-
             <ion-label class="meeting-sub-title">Testing Comments</ion-label>
-
           </ion-col>
         </ion-row>
-        <ion-row class="reply-list meeting-item" >
+        <ion-row class="reply-list meeting-item">
           <label style="float: left;" class="meeting-date">2 Hours ago</label>
           <ion-chip class="custom-chip">
-
-            <ion-label class="meeting-sub-title" style="font-weight: bold;">Raja Palleti
-            </ion-label>
+            <ion-label class="meeting-sub-title" style="font-weight: bold;">Raja Palleti </ion-label>
             <ion-avatar>
               <img src="../../../assets/images/avatar.png" />
             </ion-avatar>
           </ion-chip>
-          <ion-col size="12" class="ion-text-right ion-padding-t-0"
-            style="display: flex;align-items: center;justify-content: flex-end;">
-
+          <ion-col
+            size="12"
+            class="ion-text-right ion-padding-t-0"
+            style="display: flex; align-items: center; justify-content: flex-end;"
+          >
             <ion-label class="meeting-sub-title">Testing comments</ion-label>
-            <ion-icon size="small" name="trash" color="danger"
-              (click)="deleteComment()" class="ion-padding-r-5" style="cursor: pointer;">
+            <ion-icon
+              size="small"
+              name="trash"
+              color="danger"
+              (click)="deleteComment()"
+              class="ion-padding-r-5"
+              style="cursor: pointer;"
+            >
             </ion-icon>
           </ion-col>
         </ion-row>
-        <ion-row >
+        <ion-row>
           <ion-col>
             <!-- <ion-icon size="small" name="trash" color="danger"
               (click)="deleteComment(meeting.comments,cInx,false)" class="ion-padding-r-5"
               style="cursor: pointer;"></ion-icon> -->
           </ion-col>
-          <ion-col (click)="replyComment()" size="4" class="ion-no-padding ion-text-right" style="color:#f00;">
+          <ion-col (click)="replyComment()" size="4" class="ion-no-padding ion-text-right" style="color: #f00;">
             <ion-icon name="repeat"></ion-icon>
             <label>Reply</label>
-
           </ion-col>
-
         </ion-row>
       </ion-grid>
     </ion-list>
   </ion-row>
 </ion-content>
-<ion-footer >
+<ion-footer>
   <ion-list class="meeting-list meeting-list-d">
     <ion-grid class="meeting-item ion-no-padding">
-      <ion-row >
+      <ion-row>
         <!-- <ion-chip>
 
           <ion-text color="dark" style="display: inline-block;text-overflow: ellipsis;
@@ -194,26 +187,31 @@
           <ion-icon  (click)="clearReply()" name="close-circle-outline"></ion-icon>
         </ion-chip> -->
       </ion-row>
-      <ion-row class="ion-nowrap ion-align-items-center" >
+      <ion-row class="ion-nowrap ion-align-items-center">
         <ion-col size="2" class="img-left">
           <ion-avatar class="avater" style="margin: 0 auto;">
             <img src="../../../assets/images/avatar.png" />
           </ion-avatar>
         </ion-col>
         <ion-col class="">
-          <ion-textarea class="border" style="margin: 0;" rows="1" maxlength="250" #commentMsgEle
-            [(ngModel)]="commentMsg" placeholder="Enter Comments">
+          <ion-textarea
+            class="border"
+            style="margin: 0;"
+            rows="1"
+            maxlength="250"
+            #commentMsgEle
+            [(ngModel)]="commentMsg"
+            placeholder="Enter Comments"
+          >
           </ion-textarea>
         </ion-col>
         <ion-col size="auto" class="ion-text-center">
           <!-- <ion-button size="small" color="danger" (click)="addComment(commentMsg)" [disabled]="!commentMsg">
             Send
           </ion-button> -->
-          <ion-icon size="large" color="danger" (click)="addComment(commentMsg)" name="send">
-          </ion-icon>
+          <ion-icon size="large" color="danger" (click)="addComment(commentMsg)" name="send"> </ion-icon>
         </ion-col>
       </ion-row>
     </ion-grid>
-
   </ion-list>
 </ion-footer>

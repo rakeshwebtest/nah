@@ -8,29 +8,29 @@ import { PostDetatilsComponent } from './post-detatils/post-detatils.component';
 
 const routes: Routes = [
   {
-    path:'',
-    redirectTo:'all',
-    pathMatch:'full'
+    path: '',
+    redirectTo: 'all',
+    pathMatch: 'full'
   },
   {
-    path:'create',
-    component:PostCreateComponent
+    path: 'create',
+    component: PostCreateComponent
   },
   {
-    path:'details',
-    component:PostDetatilsComponent
+    path: 'details/:postId',
+    component: PostDetatilsComponent
   },
   {
     path: '',
     component: PostsPage,
-    children:[
+    children: [
       {
-        path:'all',
-        component:PostListComponent
+        path: 'all',
+        component: PostListComponent
       },
       {
-        path:'my-posts',
-        component:PostListComponent
+        path: 'my-posts',
+        component: PostListComponent
       }
     ]
   }
@@ -40,4 +40,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PostsPageRoutingModule {}
+export class PostsPageRoutingModule { }

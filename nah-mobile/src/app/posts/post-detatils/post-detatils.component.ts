@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AppHttpClient } from 'src/app/utils';
+import { PostService } from '../post.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post-detatils',
@@ -8,7 +11,9 @@ import { Component, OnInit } from '@angular/core';
 export class PostDetatilsComponent implements OnInit {
   public postDetails = [];
   public commentMsg: any;
-  constructor() { }
+  post: any;
+  defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
+  constructor(private postS: PostService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.postDetails = [
@@ -19,18 +24,22 @@ export class PostDetatilsComponent implements OnInit {
         imageUrl: 'https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg'
       }
     ];
+    const postId: any = this.activeRoute.snapshot.params.postId;
+    this.postS.getPosts({ postId: postId }).subscribe(res => {
+      this.post = res.data;
+    });
   }
-  navDetails(){
+  navDetails() {
 
   }
-  replyComment(c?:any){
+  replyComment(c?: any) {
 
   }
-  deleteComment(){
+  deleteComment() {
 
   }
-  addComment(stg:string){
-    
+  addComment(stg: string) {
+
   }
 
 }

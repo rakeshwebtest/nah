@@ -24,9 +24,7 @@ export class PostEntity extends BaseEntity {
     videos: PostVideosEntity[];
 
     @ManyToOne(type => UserEntity, user => user.posts)
-    createdBy: UserEntity;   
-
-  
+    createdBy: UserEntity;
 
     @OneToMany(type => PostCommentsEntity, pc => pc.post)
     comments: PostCommentsEntity[];

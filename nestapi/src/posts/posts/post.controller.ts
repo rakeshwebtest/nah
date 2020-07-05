@@ -25,13 +25,13 @@ export class PostsController {
 
     @Post()
     async saveUpdatePost(@Body() post: SavePostDto, @Req() req) {
-            const sessionUser = req.sessionUser;
+        const sessionUser = req.sessionUser;
         let msg = 'Created successfully';
         if (post.id) {
             msg = 'Updated successfully';
         }
-        console.log('sessionUser',sessionUser,req);
-        const data = await this.postService.saveUpdatePost(post,sessionUser);
+        console.log('sessionUser', sessionUser, req);
+        const data = await this.postService.saveUpdatePost(post, sessionUser);
         return { message: msg, success: true, data };
 
     }
@@ -39,8 +39,11 @@ export class PostsController {
     /**
   * post bookmark
   */
+
     @Post('bookmark')
     async bookmarkPost(@Body() bookmark, @Request() req) {
+        const sessionUser = req.sessionUser;
+        bookmark.userId = sessionUser.id;
         return this.postService.bookmarkPost(bookmark);
     }
 
