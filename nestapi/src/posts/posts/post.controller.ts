@@ -1,7 +1,9 @@
+
 import { Controller, Get, Post, Body, Query, Req, Request, Param, Delete } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { PostService } from './post.service';
 import { PostQueryDao, SavePostDto } from '../dto/post.dto';
+import { diskStorage } from 'multer';
 
 @ApiBearerAuth()
 @ApiTags('posts')
@@ -11,7 +13,7 @@ export class PostsController {
     constructor(private postService: PostService) { }
 
     @Get('list')
-    async getPosts(@Query() query: PostQueryDao, @Req() req) {
+    async getPosts(@Query() query: PostQueryDao, @Req() req: any) {
         const sessionUser = req['sessionUser'];
         let data: any;
         if (query.postId) {
@@ -37,8 +39,9 @@ export class PostsController {
     }
 
     /**
-  * post bookmark
-  */
+    * 
+    *  post bookmark
+    */
 
     @Post('bookmark')
     async bookmarkPost(@Body() bookmark, @Request() req) {

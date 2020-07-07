@@ -136,6 +136,7 @@ export class MeetingCreateComponent implements OnInit {
     wrappers: ['vertical'],
     className: 'col-12',
     templateOptions: {
+      showTempPics:false,
       multiple: false,
       required: false,
       label: 'Image',

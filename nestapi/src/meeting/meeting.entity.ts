@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, ManyToMany, JoinTabl
 import { BaseEntity } from '../shared/base.entity';
 import { UserEntity } from './../user/user.entity';
 import { GroupEntity } from './../group/group.entity';
-import { MeetingMembersEntity } from './meeting-members.entity'
+import { MeetingMembersEntity } from './meeting-members.entity';
 import { CityEntity } from 'src/city/city.entity';
 import { MeetingCommentsEntity } from './meeting-comments.entity';
 import { MeetingPhotosEntity } from './meeting-photos.entity';
@@ -38,7 +38,7 @@ export class MeetingEntity extends BaseEntity {
     @Column({ type: 'timestamp', name: 'endTime', default: () => 'LOCALTIMESTAMP' })
     endTime: string;
 
-    @Column({ length: 1250, default:'uploads/logo.png' })
+    @Column({ length: 1250, default: 'uploads/logo.png' })
     imageUrl: string;
 
     @ManyToOne(type => CityEntity, city => city.meetings)
@@ -53,10 +53,10 @@ export class MeetingEntity extends BaseEntity {
     @OneToMany(type => MeetingMembersEntity, mm => mm.meeting)
     members: MeetingMembersEntity[];
 
-    @OneToMany(type => MeetingPhotosEntity, mm => mm.meeting)
+    @OneToMany(type => MeetingPhotosEntity, mp => mp.meeting)
     photos: MeetingPhotosEntity[];
 
-    @OneToMany(type => MeetingVideosEntity, mm => mm.meeting)
+    @OneToMany(type => MeetingVideosEntity, mv => mv.meeting)
     videos: MeetingPhotosEntity[];
 
     @OneToMany(type => MeetingCommentsEntity, mc => mc.meeting)

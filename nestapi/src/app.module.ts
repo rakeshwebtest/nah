@@ -13,6 +13,7 @@ import { AuthMiddleware } from './user/auth.middleware';
 import { UserService } from './user/user.service';
 import { UserEntity } from './user/user.entity';
 import { PostsModule } from './posts/posts.module';
+import { AssetsModule } from './assets/assets.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { PostsModule } from './posts/posts.module';
       dest: './uploads'
     }),
     CityModule,
-    PostsModule
+    PostsModule,
+    AssetsModule
   ],
   controllers: [AppController],
   providers: [AuthMiddleware, UserService],

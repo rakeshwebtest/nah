@@ -14,7 +14,7 @@ import { MeetingCommentReplyEntity } from './meeting-comment-reply.entity';
 import { MeetingReportCateogryEntity } from './meeting-report-category.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([MeetingEntity, MeetingMembersEntity, MeetingReportEntity,MeetingReportCateogryEntity,UserEntity, GroupEntity, MeetingCommentsEntity, MeetingCommentReplyEntity, MeetingPhotosEntity, MeetingVideosEntity])],
+  imports: [TypeOrmModule.forFeature([MeetingEntity, MeetingMembersEntity, MeetingReportEntity, MeetingReportCateogryEntity, UserEntity, GroupEntity, MeetingCommentsEntity, MeetingCommentReplyEntity, MeetingPhotosEntity, MeetingVideosEntity])],
   controllers: [MeetingController],
   providers: [MeetingService]
 })

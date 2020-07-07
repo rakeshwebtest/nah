@@ -66,6 +66,7 @@ export class UserEntity extends BaseEntity {
 
     @OneToMany(type => MeetingMembersEntity, mm => mm.user, { onDelete: 'CASCADE' })
     meetingMember: MeetingMembersEntity[];
+    
 
     @OneToMany(type => PostEntity, post => post.createdBy, { onDelete: 'CASCADE' })
     posts: PostEntity[];

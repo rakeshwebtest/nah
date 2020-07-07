@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef,Input } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
@@ -17,7 +17,7 @@ import { FieldType } from '@ngx-formly/core';
         <ion-img class="ion-text-center m-height-250"  [src]="previewUrl" style="height: 150px;padding:10px"></ion-img>
     </div>
     <div class='container multiple-image-list' *ngIf="previewUrls
-   && this.to.multiple">
+   && this.to.multiple && to.showTempPics">
         <div class="image-list-block" *ngFor="let url of previewUrls;let inx=index">
         <span class="img-delete" (click)="multipleImgDelete(inx)">
             <ion-icon name="trash"></ion-icon>
@@ -46,9 +46,13 @@ export class FieldFileComponent extends FieldType implements OnInit {
     previewUrls: any[] = [];
     ngOnInit() {
         console.log('te', this.model, this.field.key);
+        this.to.showTempPics = true;
         const path = this.model['imageUrl'];
         if (path) {
             this.previewUrl = path;
+        }
+        if(this.to.showTempPics == false){
+            this.to.showTempPics = false;
         }
     }
 
