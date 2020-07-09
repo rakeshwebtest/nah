@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PostService } from '../post.service';
 import { scan } from 'rxjs/operators';
@@ -10,13 +10,15 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class PostListComponent implements OnInit, OnDestroy {
   public postList = [];
+  @Input() type: any;
   showAgendaView = false;
   limit = 100;
   offset = 0;
-  postBehavior = new BehaviorSubject<any[]>([]);
+  postBehavior = new BehaviorSubject<{ opt: any, list: [] }>({ opt: 'list', list: [] });
   list$: Observable<any[]>;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
-  constructor(private router: Router, private activeRouter: ActivatedRoute, public postS: PostService) {
+  constructor(private router: Router, private activeRouter: ActivatedRoute,
+    public postS: PostService) {
 
   }
   ionViewDidLoad() {
@@ -29,7 +31,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     const params = this.activeRouter.snapshot.routeConfig.path;
     console.log('params', params);
     this.offset = 0;
-    this.loadPosts({ type: this.activeRouter.snapshot.routeConfig.path });
+    this.loadPosts({ type: this.type || this.activeRouter.snapshot.routeConfig.path });
 
   }
   ngOnInit() {
@@ -63,27 +65,48 @@ export class PostListComponent implements OnInit, OnDestroy {
     ];
     this.list$ = this.postBehavior.asObservable().pipe(
       scan((acc, curr) => {
-        if (this.offset === 0) {
-          return [...curr];
+        if (curr.opt && curr.opt.type === 'delete') {
+          let index = acc.findIndex((elt) => elt.id === curr.opt.id);
+          acc.splice(index, 1);
+          return [...acc];
         } else {
-          return [...acc, ...curr];
+          if (this.offset === 0) {
+            return [...curr.list];
+          } else {
+            return [...acc, ...curr.list];
+          }
         }
       }, [])
     );
-    this.loadPosts({ type: this.activeRouter.snapshot.routeConfig.path });
+    this.loadPosts({ type: this.type || this.activeRouter.snapshot.routeConfig.path });
   }
   loadPosts(payload = {}) {
     this.postS.getPosts(payload).subscribe(res => {
-      this.postBehavior.next(res.data);
+      this.postBehavior.next({ opt: 'list', list: res.data });
     });
   }
   navDetails(post) {
     this.router.navigate(['/posts/details/' + post.id]);
   }
 
-  bookMark(post) {
-    post.isBookMark = !post.isBookMark;
-    this.postS.bookMark({ postId: post.id }).subscribe(res=>{});
+  bookMark(post, index) {
+    // post.bookmark = !post.isBookMark;
+    if (post.bookmark) {
+      post.bookmark = null;
+      post.bookmarkCount = post.bookmarkCount - 1;
+    } else {
+      post.bookmark = {};
+      post.bookmarkCount = post.bookmarkCount + 1;
+    }
+    this.postS.bookMark({ postId: post.id }).subscribe(res => {
+      if (this.type === 'bookmarks') {
+        this.postBehavior.next({ opt: { type: 'delete', id: post.id }, list: [] });
+      }
+    });
+  }
+  reload() {
+    this.offset = 0;
+    this.loadPosts({ type: this.type || this.activeRouter.snapshot.routeConfig.path });
   }
   ngOnDestroy(): void {
     // this.list$.unsubscribe();

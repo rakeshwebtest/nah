@@ -7,13 +7,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PostCommentsEntity } from '../post-comments.entity';
 import { PostCommentReplyEntity } from '../post-comment-reply.entity';
 import { PostBookmarksEntity } from '../post-bookmarks.entity';
-
+import { mapImageFullPath } from 'src/shared/utility';
 @Injectable()
 export class PostService {
     constructor(@InjectRepository(PostEntity) private readonly postRepository: Repository<PostEntity>,
         @InjectRepository(PostCommentsEntity) private readonly postCommentRepository: Repository<PostCommentsEntity>,
         @InjectRepository(PostCommentReplyEntity) private readonly postCommentReplyRepository: Repository<PostCommentReplyEntity>,
-        @InjectRepository(PostBookmarksEntity) private readonly postBookmarksRepository: Repository<PostBookmarksEntity>,
+        @InjectRepository(PostBookmarksEntity) private readonly postBookmarksRepository: Repository<PostBookmarksEntity>
     ) {
 
     }
@@ -29,7 +29,13 @@ export class PostService {
         const db = getRepository(PostEntity)
             .createQueryBuilder('p')
             .leftJoin('p.createdBy', 'u')
-            .leftJoin('p.topic', 'topic');
+            .leftJoin('p.topic', 'topic')
+            .leftJoin('p.bookmark', 'bookmark')
+            .leftJoin('p.photos', 'photos')
+            .leftJoin('bookmark.user', 'bu')
+            .leftJoinAndMapOne("p.bookmark", PostBookmarksEntity, "isBookmark", "isBookmark.user.id = " + sessionUser.id + " && isBookmark.post.id = p.id");
+        // .innerJoin('messages.holders', 'holders', 'holders.id = :userId', {userId: currentUser.id})
+        // .leftJoinAndSelect('p.bookmark', 'author');
 
         console.log('sessionUser', sessionUser);
 
@@ -40,6 +46,10 @@ export class PostService {
                 db.andWhere('u.id = :id', { id: sessionUser.id });
             } else {
                 db.andWhere('(p.isPublished = 1)');
+            }
+
+            if (query.type && query.type === 'bookmarks') {
+                db.andWhere('(bu.id = :id )', { id: sessionUser.id });
             }
         }
 
@@ -59,11 +69,14 @@ export class PostService {
             const data: any = await db.getOne();
             return data;
         } else {
-            db.select(["p", "u", "topic"])
+            db.select(["p", "u", "topic", "isBookmark", 'photos'])
                 .orderBy({ "p.createdDate": "DESC" });
             db.take(take);
             db.skip(skip);
             const [result, total] = await db.getManyAndCount();
+            result.map(r => {
+                r.photos = mapImageFullPath(r.photos);
+            });
             return { data: result, total: total };
         }
 
@@ -85,6 +98,10 @@ export class PostService {
         if (post.id)
             _post.id = parseInt(post.id);
 
+        if (post.photos) {
+            _post.photos = post.photos;
+        }
+
         if (post.isPublished)
             _post.isPublished = post.isPublished;
 
@@ -100,16 +117,17 @@ export class PostService {
         bookmark.post.id = bookmarkDto.postId;
         bookmark.user = new UserEntity();
         bookmark.user.id = bookmarkDto.userId;
-
         const isBookmark = await this.postBookmarksRepository.findOne(bookmark);
         if (isBookmark) {
             await this.postBookmarksRepository.delete(isBookmark);
-            return { message: 'Successfully Updated', isBookmark };
+            return { message: 'Successfully Bookmark', isBookmark };
         } else {
             const data = await this.postBookmarksRepository.save(bookmark);
-            return { message: 'Successfully Updated', data };
+            return { message: 'Successfully Un Bookmark', data };
         }
     }
+
+
 
     async addComment(commentDto) {
         const comment = new PostCommentsEntity();

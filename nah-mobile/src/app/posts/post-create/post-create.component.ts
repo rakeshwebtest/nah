@@ -55,10 +55,11 @@ export class PostCreateComponent implements OnInit {
       }
     },
     {
-      key: 'image',
-      type: 'file',
+      key: 'photos',
+      type: 'lazy-upload',
       wrappers: ['vertical'],
       className: 'col-12',
+      defaultValue: [],
       templateOptions: {
         multiple: true,
         required: false,
@@ -86,7 +87,7 @@ export class PostCreateComponent implements OnInit {
   ngOnInit() {
 
     if (!this.agendaS.agenda) {
-      this.router.navigate(['/agenda/create'], { queryParams: { redirectUrl: 'post' } });
+      // this.router.navigate(['/agenda/create'], { queryParams: { redirectUrl: 'post' } });
     }
   }
   submit(model, isPublish) {

@@ -1,4 +1,4 @@
-import { Injectable, Inject, HttpException } from '@nestjs/common';
+import { Injectable, Inject, HttpException, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Like, getRepository } from 'typeorm';
 import { UserEntity } from './user.entity';
@@ -9,10 +9,23 @@ import { LoginUserDto } from './dto';
 import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
-export class UserService {
+export class UserService implements OnModuleInit {
 
     constructor(@InjectRepository(UserEntity) private readonly usersRepository: Repository<UserEntity>) { }
-
+    async onModuleInit() {
+        console.log('checking admin user');
+        const user = await this.usersRepository.findOne({ where: { email: 'admin@nah.com' } });
+        if (!user) {
+            console.log('Addmin user not there so create admin user');
+            const user: any = new UserEntity();
+            user.email = 'admin@nah.com';
+            user.password = 'nah@123';
+            user.displayName = 'NAH';
+            user.role = 'admin';
+            await this.createUser(user);
+            console.log('created user');
+        }
+    }
     async getUsers(query): Promise<UserEntity[]> {
         const take = query.take || 5000;
         const skip = query.skip || 0;
@@ -78,6 +91,9 @@ export class UserService {
     async deleteUser(user: UserEntity) {
         this.usersRepository.delete(user);
     }
+    async createUser(user: UserEntity) {
+        return this.usersRepository.save(user);
+    }
     async findById(id: number): Promise<any> {
         const user = await this.usersRepository.findOne({
             select: ['id', 'email', 'displayName', 'role', 'typeOfNoer', 'imageUrl', 'status'],
@@ -112,14 +128,14 @@ export class UserService {
     public getScore(data: any) {
         const { commentsCount, groupsCount, groupFollowingCount, meetingJoinCount, meetingsCount } = data;
         let score = 100; // Become a Noer
-        score += (groupsCount * 20); //create 1 group 20
-        score += (meetingJoinCount * 5); //join 1 meeting 5
-        score += (meetingsCount * 10); //create 1 meeting 10
-        score += (commentsCount * 1); //give 1 comment 1
-        score += (Math.trunc(groupsCount / 5) * 50); //When you created 5 group 50
-        score += (Math.trunc(meetingsCount / 10) * 50); //When you create 10 meetings 50
-        score += (Math.trunc(meetingJoinCount / 20) * 50); //when you joined 20 meetings 50
-        score += (Math.trunc(commentsCount / 30) * 50); //when you gave 30 comments 50
+        score += (groupsCount * 20); // create 1 group 20
+        score += (meetingJoinCount * 5); // join 1 meeting 5
+        score += (meetingsCount * 10); // create 1 meeting 10
+        score += (commentsCount * 1); // give 1 comment 1
+        score += (Math.trunc(groupsCount / 5) * 50); // When you created 5 group 50
+        score += (Math.trunc(meetingsCount / 10) * 50); // When you create 10 meetings 50
+        score += (Math.trunc(meetingJoinCount / 20) * 50); // when you joined 20 meetings 50
+        score += (Math.trunc(commentsCount / 30) * 50); // when you gave 30 comments 50
         return score;
     }
 }

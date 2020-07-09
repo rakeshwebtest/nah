@@ -5,7 +5,7 @@
 </ion-row>
 
 <ion-row class="post-widget">
-  <ion-card class="post-list"  *ngFor="let post of list$ | async">
+  <ion-card class="post-list" *ngFor="let post of list$ | async; let inx = index">
     <ion-card-header (click)="navDetails(post)">
       <ion-row>
         <ion-col size="auto" class="col-avatar">
@@ -41,9 +41,10 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-thumbnail class="post-image" (click)="navDetails(post)">
+      <app-post-image-view [images]="post.photos"></app-post-image-view>
+      <!-- <ion-thumbnail class="post-image" (click)="navDetails(post)">
         <ion-img [src]="defaultImg"></ion-img>
-      </ion-thumbnail>
+      </ion-thumbnail> -->
       <ion-text class="post-description" color="dark">
         <p>
           {{ post.description }}
@@ -53,7 +54,9 @@
         <span> <ion-icon name="thumbs-up"></ion-icon> 31 </span>
         <span> <ion-icon name="thumbs-down"></ion-icon> 55 </span>
         <span> <ion-icon name="chatbubbles"></ion-icon> 77 </span>
-        <span (click)="bookMark(post)"> <ion-icon name="star" [ngClass]="{'active': post.isBookMark}" ></ion-icon>Book Mark</span>
+        <span (click)="bookMark(post, inx)">
+          <ion-icon name="star" [ngClass]="{ active: post.bookmark }"></ion-icon>{{ post.bookmarkCount }}
+        </span>
       </ion-text>
     </ion-card-content>
   </ion-card>

@@ -24,7 +24,7 @@ export class SavePostDto {
     @ApiProperty()
     id: string;
     @ApiProperty({ type: 'string', format: 'binary' })
-    image: any;
+    photos: any[]
     @ApiProperty()
     title: string;
     @ApiProperty()
@@ -40,7 +40,7 @@ export class PostQueryDao {
     @ApiProperty({ required: false })
     postId: number;
 
-    @ApiProperty({ required: false, enum: ["all", "my-posts"] })
+    @ApiProperty({ required: false, enum: ["all", "my-posts", "bookmarks"] })
     type: string;
 
     @ApiProperty({ required: false, default: 500 })
@@ -54,3 +54,11 @@ export class GetReportDto {
     @ApiProperty({ required: false })
     search: string;
 }
+
+export class bookmarkDto {
+
+    @ApiProperty()
+    userId: number;
+    @ApiProperty()
+    postId: number;
+}   

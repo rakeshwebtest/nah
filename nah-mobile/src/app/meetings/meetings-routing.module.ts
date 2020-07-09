@@ -8,9 +8,9 @@ import { MeetingTabsComponent } from './meeting-tabs/meeting-tabs.component';
 
 const routes: Routes = [
   {
-    path:'',
-    redirectTo:'all',
-    pathMatch:'full'
+    path: '',
+    redirectTo: 'all',
+    pathMatch: 'full'
   },
   {
     path: '',
@@ -19,24 +19,24 @@ const routes: Routes = [
       {
         path: 'all',
         component: MeetingsPage,
-        data:{
-          type:"all"
+        data: {
+          type: "all"
         }
       },
       {
         path: 'my-meeting',
         component: MeetingsPage,
-        data:{
-          type:"my-meeting"
+        data: {
+          type: "my-meeting"
         }
       },
       {
         path: 'upcoming',
         component: MeetingsPage,
-        data:{
-          type:"upcoming"
+        data: {
+          type: "upcoming"
         }
-        
+
       }
     ]
   },

@@ -2,8 +2,9 @@
 import { Controller, Get, Post, Body, Query, Req, Request, Param, Delete } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { PostService } from './post.service';
-import { PostQueryDao, SavePostDto } from '../dto/post.dto';
+import { PostQueryDao, SavePostDto, bookmarkDto } from '../dto/post.dto';
 import { diskStorage } from 'multer';
+import { mapImageFullPath } from 'src/shared/utility';
 
 @ApiBearerAuth()
 @ApiTags('posts')
@@ -15,7 +16,7 @@ export class PostsController {
     @Get('list')
     async getPosts(@Query() query: PostQueryDao, @Req() req: any) {
         const sessionUser = req['sessionUser'];
-        let data: any;
+        let data: any = [];
         if (query.postId) {
             data = await this.postService.getPosts(query, sessionUser);
             return { message: false, data, success: true };
@@ -32,10 +33,8 @@ export class PostsController {
         if (post.id) {
             msg = 'Updated successfully';
         }
-        console.log('sessionUser', sessionUser, req);
         const data = await this.postService.saveUpdatePost(post, sessionUser);
         return { message: msg, success: true, data };
-
     }
 
     /**
@@ -44,7 +43,7 @@ export class PostsController {
     */
 
     @Post('bookmark')
-    async bookmarkPost(@Body() bookmark, @Request() req) {
+    async bookmarkPost(@Body() bookmark: bookmarkDto, @Request() req) {
         const sessionUser = req.sessionUser;
         bookmark.userId = sessionUser.id;
         return this.postService.bookmarkPost(bookmark);

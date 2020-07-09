@@ -6,7 +6,10 @@ import { BookmarkPage } from './bookmark.page';
 const routes: Routes = [
   {
     path: '',
-    component: BookmarkPage
+    component: BookmarkPage,
+    data: {
+      type: 'bookmarks'
+    }
   }
 ];
 
@@ -14,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class BookmarkPageRoutingModule {}
+export class BookmarkPageRoutingModule { }

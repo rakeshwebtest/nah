@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { PostListComponent } from '../posts/post-list/post-list.component';
 
 @Component({
   selector: 'app-bookmark',
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookmarkPage implements OnInit {
 
+
+  @ViewChild(PostListComponent, null)
+  postListC: PostListComponent;
+
   constructor() { }
+  ionViewDidEnter() {
+    console.log('loading bookmarks');
+    this.postListC.reload();
+  }
 
   ngOnInit() {
   }

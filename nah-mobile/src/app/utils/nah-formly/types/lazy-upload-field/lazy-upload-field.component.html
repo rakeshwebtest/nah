@@ -1,0 +1,18 @@
+<ion-input
+  #fileInput
+  type="file"
+  label="test"
+  [ngClass]="{ 'multiple-files': to.multiple }"
+  accept="image/x-png,image/gif,image/jpeg"
+  [multiple]="to.multiple"
+  (change)="onFileChange($event)"
+  [formControl]="formControl"
+></ion-input>
+<div class="container multiple-image-list" *ngIf="uploadedImages">
+  <div class="image-list-block" *ngFor="let img of formControl.value; let inx = index">
+    <span class="img-delete" (click)="deleteImg(inx)">
+      <ion-icon name="trash"></ion-icon>
+    </span>
+    <ion-img class="image-thumb" [src]="img.fullPath"></ion-img>
+  </div>
+</div>

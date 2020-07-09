@@ -1,10 +1,13 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany, JoinColumn, RelationCount } from 'typeorm';
 import { BaseEntity } from '../shared/base.entity';
 import { UserEntity } from './../user/user.entity';
 import { AgendaTopicsEntity } from './agenda-topics.entity';
 import { PostCommentsEntity } from './post-comments.entity';
 import { PostPhotosEntity } from './post-photos.entity';
 import { PostVideosEntity } from './post-videos.entity';
+import { AssetsEntity } from 'src/assets/assets.entity';
+import { assert } from 'console';
+import { PostBookmarksEntity } from './post-bookmarks.entity';
 @Entity({ name: 'post' })
 export class PostEntity extends BaseEntity {
 
@@ -17,8 +20,21 @@ export class PostEntity extends BaseEntity {
     @ManyToOne(type => AgendaTopicsEntity, topic => topic.posts)
     topic: AgendaTopicsEntity;
 
-    @OneToMany(type => PostPhotosEntity, pp => pp.post)
-    photos: PostPhotosEntity[];
+    // @OneToMany(type => PostPhotosEntity, pp => pp.post)
+    // photos: PostPhotosEntity[];
+
+    // @OneToMany(type => PostPhotosEntity, pp => pp.post)
+    // photos: PostPhotosEntity[];
+
+    @ManyToMany(type => AssetsEntity, assets => assets.id)
+    @JoinTable()
+    photos: AssetsEntity[];
+
+
+    // @OneToMany(type => AssetsEntity, assets => assets.post)
+    // @JoinColumn()
+    // photos: AssetsEntity[];
+
 
     @OneToMany(type => PostVideosEntity, pv => pv.post)
     videos: PostVideosEntity[];
@@ -35,6 +51,16 @@ export class PostEntity extends BaseEntity {
     @Column({ default: 0 })
     isDeleted: number;
 
+    @OneToMany(type => PostBookmarksEntity, pc => pc.post)
+    bookmark: PostBookmarksEntity[];
+
+    @RelationCount((post: PostEntity) => post.bookmark)
+    bookmarkCount: number;
+
+
+    @ManyToMany(type => UserEntity, assets => assets.id)
+    @JoinTable()
+    likes: UserEntity[];
 
     // members: UserEntity[];
     // @ManyToOne(type => UserEntity, user => user.groups)

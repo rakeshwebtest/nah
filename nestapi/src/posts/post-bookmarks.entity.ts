@@ -4,7 +4,7 @@ import { UserEntity } from 'src/user/user.entity';
 import { PostEntity } from './post.entity';
 @Entity({ name: 'post_bookmarks' })
 export class PostBookmarksEntity extends BaseEntity {
-  
+    
     @ManyToOne(type => PostEntity, post => post, { onDelete: 'CASCADE' })
     post: PostEntity;
 

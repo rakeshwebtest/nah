@@ -1,0 +1,25 @@
+<ion-grid [ngSwitch]="gridType">
+  <ion-row *ngSwitchCase="'g0'"> </ion-row>
+  <ion-row *ngSwitchCase="'g1'">
+    <ion-col>
+      <ion-img [src]="images[0].fullPath"></ion-img>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngSwitchCase="'g2'">
+    <ion-col>
+      <ion-img [src]="images[0].fullPath"></ion-img>
+    </ion-col>
+    <ion-col>
+      <ion-img [src]="images[1].fullPath"></ion-img>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngSwitchDefault>
+    <ion-col>
+      <ion-img [src]="images[0].fullPath"></ion-img>
+    </ion-col>
+    <ion-col>
+      <ion-row> <ion-img [src]="images[1].fullPath"></ion-img></ion-row>
+      <ion-row> <ion-img [src]="images[2].fullPath"></ion-img></ion-row>
+    </ion-col>
+  </ion-row>
+</ion-grid>

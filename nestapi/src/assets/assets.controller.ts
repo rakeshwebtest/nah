@@ -55,13 +55,14 @@ export class AssestsController {
         response.mimeType = file.mimetype;
         response.fileSize = file.size;
         response.source = file.path;
-        return this.assetS.saveFile(response);
+        const img = await this.assetS.saveFile(response);
+        return { message: false, success: true, data: img };
     }
     // multiple file upploads
     @ApiConsumes('multipart/form-data')
     @Post()
     @UseInterceptors(
-        FilesInterceptor('image', 20, {
+        FilesInterceptor('images[]', 20, {
             storage: diskStorage({
                 destination: './uploads',
                 filename: editFileName,
@@ -84,6 +85,10 @@ export class AssestsController {
             response.push(resFile);
         });
 
-        return this.assetS.saveFiles(response);
+        const images = await this.assetS.saveFiles(response);
+        console.log('files', files);
+        console.log('images', images);
+        console.log('response', response);
+        return { message: false, success: true, data: images };
     }
 }

@@ -4,14 +4,14 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-//   const cros_options = {
-//     "origin": "*",
-//     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-//     "preflightContinue": false,
-//     "credentials":true
-// }
-  const appOptions = {cors: true, };
-  const app = await NestFactory.create(AppModule,appOptions);
+  //   const cros_options = {
+  //     "origin": "*",
+  //     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  //     "preflightContinue": false,
+  //     "credentials":true
+  // }
+  const appOptions = { cors: true };
+  const app = await NestFactory.create(AppModule, appOptions);
   // app.enableCors(cros_options)
   app.setGlobalPrefix('api');
 

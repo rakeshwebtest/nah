@@ -21,12 +21,11 @@ export class CreateAgendaDto {
     @ApiProperty()
     @ValidateNested()
     createdBy: User;
-    
+
     @ApiProperty()
     @ValidateNested()
-    topics:Topic[]
+    topics: Topic[];
 }
-
 
 export class GetAgendasDto {
     @ApiProperty({ required: false })

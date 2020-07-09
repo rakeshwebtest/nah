@@ -18,7 +18,7 @@ export class AssetService {
     }
     getFullPath(files: any[]) {
         if (files && files.length > 0) {
-            files.map(f => f.fullPath = SERVERBASEPATH + f.source);
+            files.map(f => f.fullPath = SERVERBASEPATH + 'uploads/' + f.fileName);
         }
         return files;
     }
