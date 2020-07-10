@@ -2,7 +2,7 @@
 import { Controller, Get, Post, Body, Query, Req, Request, Param, Delete } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { PostService } from './post.service';
-import { PostQueryDao, SavePostDto, bookmarkDto } from '../dto/post.dto';
+import { PostQueryDao, SavePostDto, bookmarkDto, BookmarkLikeAndDislikeParamDto } from '../dto/post.dto';
 import { diskStorage } from 'multer';
 import { mapImageFullPath } from 'src/shared/utility';
 
@@ -39,14 +39,18 @@ export class PostsController {
 
     /**
     * 
-    *  post bookmark
+    *  get bookmark like and dislike post
     */
 
-    @Post('bookmark')
-    async bookmarkPost(@Body() bookmark: bookmarkDto, @Request() req) {
+    @Post('bookmarkLikeAndDislike')
+    async bookmarkPost(@Body() postData: BookmarkLikeAndDislikeParamDto, @Request() req) {
         const sessionUser = req.sessionUser;
-        bookmark.userId = sessionUser.id;
-        return this.postService.bookmarkPost(bookmark);
+        const params = {
+            userId: sessionUser.id,
+            type: postData.type,
+            postId: postData.postId
+        };
+        return this.postService.bookmarkPost(params);
     }
 
     @Post('comment')

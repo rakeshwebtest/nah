@@ -13,9 +13,12 @@ import { AgendaTopicsEntity } from './agenda-topics.entity';
 import { AgendaService } from './agenda/agenda.service';
 import { PostService } from './posts/post.service';
 import { PostBookmarksEntity } from './post-bookmarks.entity';
+import { PostLikeEntity } from './post-like.entity';
+import { PostDislikeEntity } from './post-dislike.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([AgendaEntity, UserEntity, PostEntity, PostPhotosEntity, PostVideosEntity, PostCommentsEntity, PostCommentReplyEntity, AgendaTopicsEntity, PostBookmarksEntity])],
+  imports: [TypeOrmModule.forFeature([AgendaEntity, UserEntity, PostEntity, PostPhotosEntity, PostVideosEntity, PostCommentsEntity,
+    PostCommentReplyEntity, AgendaTopicsEntity, PostBookmarksEntity, PostLikeEntity, PostDislikeEntity])],
   controllers: [PostsController, AgendaController],
   providers: [AgendaService, PostService]
 })

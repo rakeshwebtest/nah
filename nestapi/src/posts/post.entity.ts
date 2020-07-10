@@ -8,6 +8,8 @@ import { PostVideosEntity } from './post-videos.entity';
 import { AssetsEntity } from 'src/assets/assets.entity';
 import { assert } from 'console';
 import { PostBookmarksEntity } from './post-bookmarks.entity';
+import { PostLikeEntity } from './post-like.entity';
+import { PostDislikeEntity } from './post-dislike.entity';
 @Entity({ name: 'post' })
 export class PostEntity extends BaseEntity {
 
@@ -57,10 +59,20 @@ export class PostEntity extends BaseEntity {
     @RelationCount((post: PostEntity) => post.bookmark)
     bookmarkCount: number;
 
+    // @RelationCount((post: PostEntity) => post.likes)
+    // likeCount: number;
 
-    @ManyToMany(type => UserEntity, assets => assets.id)
-    @JoinTable()
-    likes: UserEntity[];
+    @OneToMany(type => PostLikeEntity, pld => pld.post)
+    like: PostLikeEntity[];
+
+    @OneToMany(type => PostDislikeEntity, pdld => pdld.post)
+    dislike: PostDislikeEntity[];
+
+    @RelationCount((post: PostEntity) => post.like)
+    likeCount: number;
+
+    @RelationCount((post: PostEntity) => post.dislike)
+    dislikeCount: number;
 
     // members: UserEntity[];
     // @ManyToOne(type => UserEntity, user => user.groups)

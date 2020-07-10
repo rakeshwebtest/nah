@@ -1,25 +1,35 @@
-<ion-grid [ngSwitch]="gridType">
+<ion-grid [ngSwitch]="gridType" class="post-image-privew">
   <ion-row *ngSwitchCase="'g0'"> </ion-row>
   <ion-row *ngSwitchCase="'g1'">
     <ion-col>
-      <ion-img [src]="images[0].fullPath"></ion-img>
+      <img class="h150" [src]="images[0].fullPath" />
     </ion-col>
   </ion-row>
   <ion-row *ngSwitchCase="'g2'">
     <ion-col>
-      <ion-img [src]="images[0].fullPath"></ion-img>
+      <img class="h150" [src]="images[0].fullPath" />
     </ion-col>
     <ion-col>
-      <ion-img [src]="images[1].fullPath"></ion-img>
+      <img class="h150" [src]="images[1].fullPath" />
+    </ion-col>
+  </ion-row>
+  <ion-row class="g3" *ngSwitchCase="'g3'">
+    <ion-col>
+      <img class="h150" [src]="images[0].fullPath" />
+    </ion-col>
+    <ion-col>
+      <ion-row> <img class="h75" [src]="images[1].fullPath" /></ion-row>
+      <ion-row> <img class="h75" [src]="images[2].fullPath" /></ion-row>
     </ion-col>
   </ion-row>
   <ion-row *ngSwitchDefault>
     <ion-col>
-      <ion-img [src]="images[0].fullPath"></ion-img>
+      <ion-row> <img class="h75" [src]="images[0].fullPath" /></ion-row>
+      <ion-row> <img class="h75" [src]="images[1].fullPath" /></ion-row>
     </ion-col>
     <ion-col>
-      <ion-row> <ion-img [src]="images[1].fullPath"></ion-img></ion-row>
-      <ion-row> <ion-img [src]="images[2].fullPath"></ion-img></ion-row>
+      <ion-row> <img class="h75" [src]="images[2].fullPath" /></ion-row>
+      <ion-row class="h75"> + {{ moreCount }}</ion-row>
     </ion-col>
   </ion-row>
 </ion-grid>

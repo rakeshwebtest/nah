@@ -1,0 +1,14 @@
+.post-image-privew {
+    height: 160px;
+    img {
+        object-fit: cover;
+        padding: 2px;
+    }
+
+    .h150 {
+        height: 150px;
+    }
+    .h75 {
+        height: 75px;
+    }
+}

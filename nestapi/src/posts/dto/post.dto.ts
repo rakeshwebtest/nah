@@ -61,4 +61,12 @@ export class bookmarkDto {
     userId: number;
     @ApiProperty()
     postId: number;
-}   
+}
+
+export class BookmarkLikeAndDislikeParamDto {
+    @ApiProperty({ required: false, enum: ["bookmark", "like", "dislike"] })
+    type: string;
+    @ApiProperty()
+    postId: number;
+
+}

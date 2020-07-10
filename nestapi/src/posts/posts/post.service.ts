@@ -8,12 +8,16 @@ import { PostCommentsEntity } from '../post-comments.entity';
 import { PostCommentReplyEntity } from '../post-comment-reply.entity';
 import { PostBookmarksEntity } from '../post-bookmarks.entity';
 import { mapImageFullPath } from 'src/shared/utility';
+import { PostLikeEntity } from '../post-like.entity';
+import { PostDislikeEntity } from '../post-dislike.entity';
 @Injectable()
 export class PostService {
     constructor(@InjectRepository(PostEntity) private readonly postRepository: Repository<PostEntity>,
         @InjectRepository(PostCommentsEntity) private readonly postCommentRepository: Repository<PostCommentsEntity>,
         @InjectRepository(PostCommentReplyEntity) private readonly postCommentReplyRepository: Repository<PostCommentReplyEntity>,
-        @InjectRepository(PostBookmarksEntity) private readonly postBookmarksRepository: Repository<PostBookmarksEntity>
+        @InjectRepository(PostBookmarksEntity) private readonly postBookmarksRepository: Repository<PostBookmarksEntity>,
+        @InjectRepository(PostLikeEntity) private readonly postLikeRepository: Repository<PostLikeEntity>,
+        @InjectRepository(PostDislikeEntity) private readonly postDislikeRepository: Repository<PostDislikeEntity>
     ) {
 
     }
@@ -33,7 +37,9 @@ export class PostService {
             .leftJoin('p.bookmark', 'bookmark')
             .leftJoin('p.photos', 'photos')
             .leftJoin('bookmark.user', 'bu')
-            .leftJoinAndMapOne("p.bookmark", PostBookmarksEntity, "isBookmark", "isBookmark.user.id = " + sessionUser.id + " && isBookmark.post.id = p.id");
+            .leftJoinAndMapOne("p.bookmark", PostBookmarksEntity, "isBookmarkUser", "isBookmarkUser.user.id = " + sessionUser.id + " && isBookmarkUser.post.id = p.id")
+            .leftJoinAndMapOne("p.like", PostLikeEntity, "isLikeUser", "isLikeUser.user.id = " + sessionUser.id + " && isLikeUser.post.id = p.id")
+            .leftJoinAndMapOne("p.dislike", PostDislikeEntity, "isDislikeUser", "isDislikeUser.user.id = " + sessionUser.id + " && isDislikeUser.post.id = p.id");
         // .innerJoin('messages.holders', 'holders', 'holders.id = :userId', {userId: currentUser.id})
         // .leftJoinAndSelect('p.bookmark', 'author');
 
@@ -69,7 +75,7 @@ export class PostService {
             const data: any = await db.getOne();
             return data;
         } else {
-            db.select(["p", "u", "topic", "isBookmark", 'photos'])
+            db.select(["p", "u", "topic", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos'])
                 .orderBy({ "p.createdDate": "DESC" });
             db.take(take);
             db.skip(skip);
@@ -110,20 +116,43 @@ export class PostService {
         // return data;
 
     }
-
-    async bookmarkPost(bookmarkDto: any) {
-        const bookmark = new PostBookmarksEntity();
-        bookmark.post = new PostEntity();
-        bookmark.post.id = bookmarkDto.postId;
-        bookmark.user = new UserEntity();
-        bookmark.user.id = bookmarkDto.userId;
-        const isBookmark = await this.postBookmarksRepository.findOne(bookmark);
-        if (isBookmark) {
-            await this.postBookmarksRepository.delete(isBookmark);
-            return { message: 'Successfully Bookmark', isBookmark };
+    // like dislike bookbark
+    async bookmarkPost(data: any) {
+        let _entity: any;
+        let msgS: string;
+        let msgF: string;
+        let _repo = this.postBookmarksRepository;
+        switch (data.type) {
+            case 'like':
+                msgS = 'I like this Post';
+                msgF = "I remove post form list post";
+                _entity = new PostLikeEntity();
+                _repo = this.postLikeRepository;
+                break;
+            case 'dislike':
+                msgS = 'I don\'t like this Post';
+                msgF = "I remove dislike form list post";
+                _entity = new PostDislikeEntity();
+                _repo = this.postDislikeRepository;
+                break;
+            default:
+                msgS = 'This post added to my Bookmark';
+                msgF = "I removed post form list";
+                _entity = new PostBookmarksEntity();
+                _repo = this.postBookmarksRepository;
+                break;
+        }
+        _entity.post = new PostEntity();
+        _entity.post.id = data.postId;
+        _entity.user = new UserEntity();
+        _entity.user.id = data.userId;
+        const isUser = await _repo.findOne(_entity);
+        if (isUser) {
+            await _repo.delete(isUser);
+            return { message: msgF, isUser };
         } else {
-            const data = await this.postBookmarksRepository.save(bookmark);
-            return { message: 'Successfully Un Bookmark', data };
+            const dataRes = await _repo.save(_entity);
+            return { message: msgS, data: dataRes };
         }
     }
 

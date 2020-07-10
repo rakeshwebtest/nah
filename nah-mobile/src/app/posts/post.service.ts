@@ -15,7 +15,7 @@ export class PostService {
   createUpdatePost(payload) {
     return this.http.post('posts', payload);
   }
-  bookMark(payload) {
-    return this.http.post('posts/bookmark', payload);
+  bookmarkLikeAndDislike(payload) {
+    return this.http.post('posts/bookmarkLikeAndDislike', payload);
   }
 }

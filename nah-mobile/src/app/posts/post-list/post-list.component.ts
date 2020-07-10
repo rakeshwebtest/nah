@@ -89,16 +89,16 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/posts/details/' + post.id]);
   }
 
-  bookMark(post, index) {
+  bookmarkLikeAndDislike(post, type = 'bookmark') {
     // post.bookmark = !post.isBookMark;
-    if (post.bookmark) {
-      post.bookmark = null;
-      post.bookmarkCount = post.bookmarkCount - 1;
+    if (post[type]) {
+      post[type] = null;
+      post[type + 'Count'] = post[type + 'Count'] - 1;
     } else {
-      post.bookmark = {};
-      post.bookmarkCount = post.bookmarkCount + 1;
+      post[type] = {};
+      post[type + 'Count'] = post[type + 'Count'] + 1;
     }
-    this.postS.bookMark({ postId: post.id }).subscribe(res => {
+    this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type }).subscribe(res => {
       if (this.type === 'bookmarks') {
         this.postBehavior.next({ opt: { type: 'delete', id: post.id }, list: [] });
       }

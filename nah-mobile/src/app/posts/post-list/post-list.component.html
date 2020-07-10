@@ -28,7 +28,7 @@
           <p>
             <ion-text class="text-agenda">AGENDA</ion-text>
             <ion-text
-              >Say No To <span class="text-danger">#{{ post.topic.name }}#</span></ion-text
+              >Say No To <span class="text-danger">{{ post.topic.name }}</span></ion-text
             >
           </p>
         </ion-col>
@@ -39,26 +39,28 @@
         <ion-icon class="custom-antie"></ion-icon>
       </ion-card-title>
     </ion-card-header>
-
+    <app-post-image-view *ngIf="post.photos && post.photos.length > 0" [images]="post.photos"></app-post-image-view>
+    <!-- <ion-card-header>
+      <ion-card-title>{{ post.title }}</ion-card-title>
+    </ion-card-header> -->
     <ion-card-content>
-      <app-post-image-view [images]="post.photos"></app-post-image-view>
-      <!-- <ion-thumbnail class="post-image" (click)="navDetails(post)">
-        <ion-img [src]="defaultImg"></ion-img>
-      </ion-thumbnail> -->
-      <ion-text class="post-description" color="dark">
-        <p>
-          {{ post.description }}
-        </p>
-      </ion-text>
+      {{ post.description }}
+    </ion-card-content>
+
+    <ion-footer>
       <ion-text class="post-footer">
-        <span> <ion-icon name="thumbs-up"></ion-icon> 31 </span>
-        <span> <ion-icon name="thumbs-down"></ion-icon> 55 </span>
+        <span (click)="bookmarkLikeAndDislike(post, 'like')">
+          <ion-icon [ngClass]="{ active: post.like }" name="thumbs-up"></ion-icon> {{ post.likeCount }}
+        </span>
+        <span (click)="bookmarkLikeAndDislike(post, 'dislike')">
+          <ion-icon [ngClass]="{ active: post.dislike }" name="thumbs-down"></ion-icon> {{ post.dislikeCount }}
+        </span>
         <span> <ion-icon name="chatbubbles"></ion-icon> 77 </span>
-        <span (click)="bookMark(post, inx)">
+        <span (click)="bookmarkLikeAndDislike(post, 'bookmark')">
           <ion-icon name="star" [ngClass]="{ active: post.bookmark }"></ion-icon>{{ post.bookmarkCount }}
         </span>
       </ion-text>
-    </ion-card-content>
+    </ion-footer>
   </ion-card>
 </ion-row>
 <!-- <ion-fab class="add-btn" vertical="end" horizontal="end" slot="fixed">

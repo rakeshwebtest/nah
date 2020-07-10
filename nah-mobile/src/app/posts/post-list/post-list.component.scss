@@ -1,89 +1,89 @@
-.post-widget{
+.post-widget {
     overflow-y: auto;
 }
-.post-image{
+.post-image {
     width: 100%;
     height: auto;
 }
-.post-avatar{
+.post-avatar {
     width: 40px;
     height: 40px;
     object-fit: cover;
 }
-.col-avatar{
+.col-avatar {
     padding-left: 0;
 }
-.col-avatar-right{
+.col-avatar-right {
     color: #000;
     padding-right: 0;
-    ion-label{
+    ion-label {
         display: flex;
         justify-content: space-between;
-        span{
+        span {
             font-size: 12px;
         }
     }
-    p{
+    p {
         margin: 5px 0;
     }
-    .text-name{
+    .text-name {
         padding-right: 5px;
         font-weight: 600;
     }
-    .text-agenda{
+    .text-agenda {
         padding-right: 5px;
-        border-right: 1px solid #FB0102;
+        border-right: 1px solid #fb0102;
         margin-right: 5px;
         font-weight: 600;
     }
-    .post-stars{
+    .post-stars {
         flex: auto;
-        ion-icon{
+        ion-icon {
             color: #999;
         }
     }
 }
-.post-list{
+.post-list {
     margin: 15px 0 0;
     // border-bottom: 15px solid #ccc;
     box-shadow: 0px 0px 6px #e2e2e2;
     border-radius: 5px;
-    ion-card-header{
+    ion-card-header {
         padding: 10px;
     }
-    ion-card-content{
+    ion-card-content {
         padding: 0 10px 10px;
     }
-    ion-card-title{
+    ion-card-title {
         font-size: 14px;
         font-weight: bold;
         margin-top: 0px;
-        ion-text{
+        ion-text {
             padding-right: 5px;
-            color: #FB0102;
+            color: #fb0102;
         }
-        ion-icon{
-            color: #FB0102;
+        ion-icon {
+            color: #fb0102;
             padding-left: 5px;
         }
     }
 }
-.post-description{
-    p{
+.post-description {
+    p {
         font-size: 12px;
         line-height: 16px;
         margin: 10px 0;
     }
 }
-.post-footer{
+.post-footer {
     display: flex;
     align-items: center;
-    span{
+    span {
         display: flex;
         align-items: center;
         padding-right: 10px;
         color: #333;
-        ion-icon{
+        ion-icon {
             width: 17px;
             height: 17px;
             border-radius: 50%;
@@ -91,8 +91,8 @@
             font-size: 12px;
             padding: 5px;
             margin-right: 3px;
-            &.active{
-                background-color: yellow;
+            &.active {
+                background-color: #f04141;
             }
         }
     }
