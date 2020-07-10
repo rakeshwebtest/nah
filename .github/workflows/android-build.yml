@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: working directory list
-        run: ls
+        run: ls && cd /home/runner/work/nah-mobile
         
       
       - uses: actions/checkout@v1
