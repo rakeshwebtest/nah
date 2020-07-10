@@ -4,7 +4,9 @@ import { PostListComponent } from './post-list.component';
 import { IonicModule } from '@ionic/angular';
 import { AgendaViewModule } from 'src/app/agenda/agenda-view/agenda-view.module';
 import { PostImageViewComponent } from '../post-image-view/post-image-view.component';
-
+import { GalleryModule } from '@ngx-gallery/core';
+import { LightboxModule } from '@ngx-gallery/lightbox';
+import { GallerizeModule } from '@ngx-gallery/gallerize';
 
 
 @NgModule({
@@ -12,7 +14,10 @@ import { PostImageViewComponent } from '../post-image-view/post-image-view.compo
   imports: [
     AgendaViewModule,
     CommonModule,
-    IonicModule
+    IonicModule,
+    GalleryModule,
+    LightboxModule,
+    GallerizeModule
   ],
   exports: [PostListComponent]
 })

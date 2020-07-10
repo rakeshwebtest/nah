@@ -22,7 +22,7 @@ export class MeetingDetailsComponent implements OnInit {
   commentMsg: string;
   form = new FormGroup({});
   imageModel: any = {};
-  activeTab: string = 'images';
+  activeTab = 'images';
   replyMsg: any = {};
   userInfo: any = {};
   fields: FormlyFieldConfig[] = [
@@ -34,6 +34,7 @@ export class MeetingDetailsComponent implements OnInit {
       templateOptions: {
         multiple: true,
         required: false,
+        showTempPics: false,
         label: '',
         placeholder: 'Upload Image',
       }
@@ -70,13 +71,13 @@ export class MeetingDetailsComponent implements OnInit {
         m.isSuspend = true;
 
       const d1 = new Date(m.endDate);
-      const time =  new Date(m.endTime);
+      const time = new Date(m.endTime);
       d1.setHours(time.getHours());
       d1.setMinutes(time.getMinutes());
       const today = new Date();
       if (d1.getTime() < today.getTime()) {
         m.isCompleted = true;
-      }else{
+      } else {
         m.isCompleted = false;
       }
 

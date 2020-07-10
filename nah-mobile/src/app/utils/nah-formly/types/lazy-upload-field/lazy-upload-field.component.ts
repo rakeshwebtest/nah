@@ -24,16 +24,6 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
   onFileChange(event) {
     if (this.to.multiple) {
       if (event.target.files.length > 0) {
-        // this.previewUrls = [];
-        // for (let index = 0; index < event.target.files.length; index++) {
-        //   const file = event.target.files[index];
-        //   const reader = new FileReader();
-        //   reader.readAsDataURL(file);
-        //   reader.onload = (_event) => {
-        //     // this.previewUrl = reader.result;
-        //     this.previewUrls.push(reader.result);
-        //   };
-        // }
         this.upload(event.target.files);
       }
     }
@@ -43,8 +33,8 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
       message: 'Please wait...'
     });
     const formData = new FormData();
-    for (let index = 0; index < files.length; index++) {
-      const file = files[index];
+
+    for (const file of files) {
       formData.append('images[]', file);
     }
     const HttpUploadOptions = {

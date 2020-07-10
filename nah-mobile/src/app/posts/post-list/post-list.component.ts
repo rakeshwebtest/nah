@@ -99,7 +99,7 @@ export class PostListComponent implements OnInit, OnDestroy {
       post[type + 'Count'] = post[type + 'Count'] + 1;
     }
     this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type }).subscribe(res => {
-      if (this.type === 'bookmarks') {
+      if (this.type === 'bookmarks' && type === 'bookmark') {
         this.postBehavior.next({ opt: { type: 'delete', id: post.id }, list: [] });
       }
     });

@@ -86,9 +86,6 @@ export class AssestsController {
         });
 
         const images = await this.assetS.saveFiles(response);
-        console.log('files', files);
-        console.log('images', images);
-        console.log('response', response);
         return { message: false, success: true, data: images };
     }
 }

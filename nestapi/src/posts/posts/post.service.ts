@@ -43,7 +43,6 @@ export class PostService {
         // .innerJoin('messages.holders', 'holders', 'holders.id = :userId', {userId: currentUser.id})
         // .leftJoinAndSelect('p.bookmark', 'author');
 
-        console.log('sessionUser', sessionUser);
 
         if (sessionUser.role === 'admin') {
 

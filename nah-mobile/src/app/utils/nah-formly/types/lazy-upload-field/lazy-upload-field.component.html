@@ -9,7 +9,7 @@
   [formControl]="formControl"
 ></ion-input>
 <div class="container multiple-image-list" *ngIf="uploadedImages">
-  <div class="image-list-block" *ngFor="let img of formControl.value; let inx = index">
+  <div class="image-list-block" *ngFor="let img of uploadedImages; let inx = index">
     <span class="img-delete" (click)="deleteImg(inx)">
       <ion-icon name="trash"></ion-icon>
     </span>

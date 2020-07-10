@@ -1,34 +1,41 @@
-.image-thumb{
+.image-thumb {
     width: 70px;
     height: 70px;
     margin: 5px;
     margin-left: 0;
     border-radius: 7px;
-    img{
+    img {
         border-radius: 7px;
         height: 70px;
         width: 70px;
     }
 }
 
-.image-list{
+.image-list {
     display: flex;
     flex-wrap: wrap;
-    .image-list-block{
+    .image-list-block {
         position: relative;
     }
 }
-.meeting-item{
-    .item-native{
-        padding: 0 ;
+.meeting-detail-tab {
+    ion-tabs {
+        position: initial;
+        z-index: 10;
+        margin-bottom: 55px;
     }
-    .img-left{
+}
+.meeting-item {
+    .item-native {
+        padding: 0;
+    }
+    .img-left {
         max-width: 50px;
     }
-    .avater{
+    .avater {
         width: 40px;
         height: 40px;
-        &.small{
+        &.small {
             width: 20px;
             height: 20px;
             background-color: #ccc;
@@ -39,45 +46,47 @@
             justify-content: center;
         }
     }
-    .meeting-title{
+    .meeting-title {
         widows: 100%;
         font-size: 14px;
         font-weight: bold;
     }
-    .meeting-sub-title{
+    .meeting-sub-title {
         // font-size: 12px;
         color: #000;
     }
-    .meeting-desc{
+    .meeting-desc {
         // font-size:10px;
-        color:#736d6d;
+        color: #736d6d;
     }
-    .meeting-date{
+    .meeting-date {
         font-size: 11px;
         padding-top: 5px;
-        color:#736d6d;
+        color: #736d6d;
     }
-    .fallowing-members{
+    .fallowing-members {
         font-size: 10px;
         color: #999;
         display: flex;
         align-items: center;
     }
-    .item-native{
+    .item-native {
         padding: 0 !important;
     }
 }
-.meeting-list{
+.meeting-list {
     width: 100%;
     border-bottom: 1px solid #ccc;
-    &:last-child{
+    &:last-child {
         border-bottom: none;
     }
 }
-.m-height-250 img{max-height: 250px;}
-.profile-settings{
+.m-height-250 img {
+    max-height: 250px;
+}
+.profile-settings {
     justify-content: flex-end;
-    ion-icon{
+    ion-icon {
         font-size: 27px;
         padding-right: 16px;
     }
@@ -90,11 +99,11 @@
     align-items: baseline;
     border-top: 1px solid #eaeaea;
 }
-.custom-chip{
+.custom-chip {
     background-color: transparent;
     margin: 0;
 }
-.comments-title{
+.comments-title {
     color: #000;
     font-weight: bold;
     width: 100%;

@@ -1,4 +1,4 @@
-<ion-grid [ngSwitch]="gridType" class="post-image-privew">
+<ion-grid [ngSwitch]="gridType" class="post-image-privew" [gallerize]="galleryId">
   <ion-row *ngSwitchCase="'g0'"> </ion-row>
   <ion-row *ngSwitchCase="'g1'">
     <ion-col>
@@ -22,6 +22,16 @@
       <ion-row> <img class="h75" [src]="images[2].fullPath" /></ion-row>
     </ion-col>
   </ion-row>
+  <ion-row *ngSwitchCase="'g4'">
+    <ion-col>
+      <ion-row> <img class="h75" [src]="images[0].fullPath" /></ion-row>
+      <ion-row> <img class="h75" [src]="images[1].fullPath" /></ion-row>
+    </ion-col>
+    <ion-col>
+      <ion-row> <img class="h75" [src]="images[2].fullPath" /></ion-row>
+      <ion-row> <img class="h75" [src]="images[3].fullPath" /></ion-row>
+    </ion-col>
+  </ion-row>
   <ion-row *ngSwitchDefault>
     <ion-col>
       <ion-row> <img class="h75" [src]="images[0].fullPath" /></ion-row>
@@ -29,7 +39,11 @@
     </ion-col>
     <ion-col>
       <ion-row> <img class="h75" [src]="images[2].fullPath" /></ion-row>
-      <ion-row class="h75"> + {{ moreCount }}</ion-row>
+      <ion-row class="h75">
+        <img class="h75 last-image" [src]="images[3].fullPath" /> <span class="image-count">+ {{ moreCount }} </span>
+      </ion-row>
     </ion-col>
   </ion-row>
 </ion-grid>
+
+<!-- <gallery [items]="images" thumbPosition="left" ></gallery> -->
