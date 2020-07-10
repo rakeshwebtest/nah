@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: working directory list
-        run: ls && cd nah-mobile
+        run: ls
         
       
       - uses: actions/checkout@v1
