@@ -14,49 +14,20 @@ export class AgendaViewComponent implements OnInit {
   activeDays = 1;
   totalDaysArray = [];
   totalDays = 0;
-  constructor(private http: AppHttpClient, private router: Router,public agendaS:AgendaService) { }
+  constructor(private http: AppHttpClient, private router: Router, public agendaS: AgendaService) { }
 
   ionViewDidEnter() {
     console.log('ionViewDidEnter');
   }
   ngOnInit() {
     // this.checkAgenda();
-    console.log("agenda$" ,this.agendaS.agenda$)
+    console.log("agenda$", this.agendaS.agenda$)
     this.agendaS.checkAgenda();
   }
-  checkAgenda() {
-    this.http.get('agenda/check').subscribe(res => {
-      const data: any = res;
-      if (data.data) {
-        this.agenda = data.data;
-        this.activeDays = this.getDays(this.agenda.startDate, null);
-        this.totalDays = this.getDays(this.agenda.startDate, this.agenda.endDate)+1;
-        this.totalDaysArray = Array(this.totalDays).fill(0).map((x, i) => i + 1);
-        if(this.activeDays>this.totalDays){
-          this.agenda.isLocked = true;
-          this.activeDays = this.totalDays;
-        }
-        
-      } else {
-        this.showCreateBtn = true;
-      }
-    })
-  }
+
   createAgenda() {
     this.router.navigate(['/agenda'])
   }
-  getDays(d1?: string, d2?: string) {
-    let date1 = new Date();
-    if (d1)
-      date1 = new Date(d1);
 
-    let date2 = new Date();
-    if (d2)
-      date2 = new Date(d2);
-
-    const diff = Math.abs(date1.getTime() - date2.getTime());
-    const days = Math.ceil(diff / (1000 * 3600 * 24));
-    return days;
-  }
 
 }

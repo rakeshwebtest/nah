@@ -129,9 +129,6 @@ export class PostCreateComponent implements OnInit {
 
   ngOnInit() {
 
-    if (!this.agendaS.agenda) {
-      this.router.navigate(['/agenda/create'], { queryParams: { redirectUrl: 'post' } });
-    }
   }
   submit(model, isPublish) {
     this.loadingService.show();

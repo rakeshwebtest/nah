@@ -39,7 +39,6 @@ export class PostsController {
         if (post.id) {
             msg = 'Updated successfully';
         }
-        console.log('post', post);
         const data = await this.postService.saveUpdatePost(post, sessionUser);
         return { message: msg, success: true, data };
     }

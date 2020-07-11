@@ -132,7 +132,7 @@ export class PostService {
                 }
             });
         }
-        console.log('_post', _post);
+        
 
         if (post.isPublished)
             _post.isPublished = post.isPublished;

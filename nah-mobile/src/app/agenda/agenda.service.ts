@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AppHttpClient } from '../utils';
 import { Observable, BehaviorSubject } from 'rxjs';
 export interface Agenda {
-  title:string;
-  topics:any[];
+  title: string;
+  topics: any[];
 };
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,23 @@ export class AgendaService {
   constructor(private http: AppHttpClient) {
     this.agenda$ = this.agendaSubject.asObservable();
   }
-  async checkAgenda() {
-    await this.http.get('agenda/check').subscribe(res => {
+  promiseCheckAgenda(): Promise<any> {
+    const promis = new Promise((resolve, reject) => {
+      return this.http.get('agenda/check').subscribe(res => {
+        const data: any = res;
+        if (res) {
+          this.setAgenda(res.data);
+          resolve(res.data);
+        } else {
+          this.setAgenda(null);
+          resolve(null);
+        }
+      });
+    });
+    return promis;
+  }
+  checkAgenda() {
+    this.http.get('agenda/check').subscribe(res => {
       const data: any = res;
       if (data.data) {
         this.agenda = data.data;
@@ -29,7 +44,7 @@ export class AgendaService {
           this.agenda.isLocked = true;
         }
         this.setAgenda(this.agenda);
-      }else{
+      } else {
         this.agenda = null;
         this.setAgenda(null);
       }
