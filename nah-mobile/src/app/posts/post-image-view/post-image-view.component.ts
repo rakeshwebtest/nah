@@ -13,7 +13,7 @@ export class PostImageViewComponent implements OnInit {
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
   galleryId: any;
   items: GalleryItem[];
-
+  remainingImg = [];
   constructor(public gallery: Gallery) { }
 
   ngOnInit() {
@@ -22,16 +22,20 @@ export class PostImageViewComponent implements OnInit {
     this.gridType = 'g' + this.images.length;
     if (this.images.length > 3) {
       this.moreCount = this.images.length - 3;
+      Object.assign(this.remainingImg, this.images);
+      this.remainingImg.splice(0, 4);
+      console.log('this.remainingImg', this.remainingImg);
     }
 
     const galleryRef = this.gallery.ref(this.galleryId);
     galleryRef.load(this.items);
 
-    this.images.map(img => {
-      img.src = img.fullPath;
-      img.thumb = img.fullPath;
-      // this.galleryItem.push(new ImageItem({ src: img.fullPath, thumb: img.fullPath }));
-    });
+    // this.images.map(img => {
+    //   img.src = img.fullPath;
+    //   img.thumb = img.fullPath;
+    //   // this.galleryItem.push(new ImageItem({ src: img.fullPath, thumb: img.fullPath }));
+    // });
+
   }
 
 }

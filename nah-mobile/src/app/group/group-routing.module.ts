@@ -7,26 +7,26 @@ import { GroupTabsComponent } from './group-tabs/group-tabs.component';
 
 const routes: Routes = [
   {
-    path:'',
-    redirectTo:'all',
-    pathMatch:'full'
+    path: '',
+    redirectTo: 'all',
+    pathMatch: 'full'
   },
   {
-    path:'',
-    component:GroupTabsComponent,
-    children:[
+    path: '',
+    component: GroupTabsComponent,
+    children: [
       {
-        path:'all',
+        path: 'all',
         component: MyGroupComponent,
-        data:{
-          type:'all'
+        data: {
+          type: 'all'
         }
       },
       {
-        path:'my-groups',
+        path: 'my-groups',
         component: MyGroupComponent,
-        data:{
-          type:'mygroups'
+        data: {
+          type: 'mygroups'
         }
       }
     ]

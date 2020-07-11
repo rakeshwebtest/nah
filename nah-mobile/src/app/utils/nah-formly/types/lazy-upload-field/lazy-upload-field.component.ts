@@ -40,6 +40,7 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
     const HttpUploadOptions = {
       headers: new HttpHeaders({ "Content-Type": "multipart/form-data" })
     };
+    this.presentLoading(loading);
     this.http.post('asset', formData).subscribe(res => {
       if (res.success) {
         if (res.data) {
@@ -60,6 +61,9 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
   }
   valueUpdate() {
     this.formControl.setValue(this.uploadedImages);
+  }
+  async presentLoading(loading) {
+    return await loading.present();
   }
 
 }

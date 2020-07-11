@@ -1,11 +1,15 @@
 <ion-refresher pullFactor="0.5" pullMin="100" pullMax="200" slot="fixed" (ionRefresh)="doRefresh($event)">
-  <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="none"
-    refreshingText="Refreshing...">
+  <ion-refresher-content
+    pullingIcon="arrow-dropdown"
+    pullingText="Pull to refresh"
+    refreshingSpinner="none"
+    refreshingText="Refreshing..."
+  >
   </ion-refresher-content>
 </ion-refresher>
 <ion-row class="ion-align-items-center no-meetings" *ngIf="showMeetingMsg">
-  <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
-    {{noMeetingMsg}}
+  <ion-col class="ion-justify-content-center" style="display: flex; align-items: center;">
+    {{ noMeetingMsg }}
   </ion-col>
 </ion-row>
 <!-- <ion-list class="meeting-list">
@@ -13,10 +17,10 @@
     <ion-grid class="ion-no-padding">
       <ion-row class="ion-nowrap ion-align-items-center ion-padding-b-5">
         <ion-col class="img-left ion-no-padding" (click)="clickMeeting(m)"> -->
-          <!-- <ion-avatar class="avater small">
+<!-- <ion-avatar class="avater small">
             <img [src]="m.imageUrl" />
           </ion-avatar> -->
-          <!-- <ion-thumbnail class="" style="display: flex;align-items: center;">
+<!-- <ion-thumbnail class="" style="display: flex;align-items: center;">
             <ion-img class="avatar" [src]="m.imageUrl"></ion-img>
           </ion-thumbnail>
 
@@ -31,8 +35,8 @@
               (Canceled)
             </ion-text>
           </ion-label> -->
-          <!-- <ion-label class="meeting-sub-title" *ngIf="m.isPublished==0">Un-published</ion-label> -->
-          <!-- <ion-label class="meeting-sub-title ion-padding-t-5">Say No To {{m.group.name}}
+<!-- <ion-label class="meeting-sub-title" *ngIf="m.isPublished==0">Un-published</ion-label> -->
+<!-- <ion-label class="meeting-sub-title ion-padding-t-5">Say No To {{m.group.name}}
             <ion-text color="danger" *ngIf="m.isSuspend">
               (Suspend)
             </ion-text>
@@ -40,19 +44,19 @@
         </ion-col>
         <ion-col size="auto" class="ion-text-end ion-padding-t-10 ion-padding-l-0 ion-padding-r-0 ion-padding-b-0"
           *ngIf="!m.isCreatedBy && !m.isSuspend"> -->
-          <!-- <ion-text class="text-medium" style="display: block;">{{m?.city?.name}}</ion-text> -->
-          <!-- <ion-button class="ion-no-margin button-small" size="small" color="medium" (click)="meetingJoin(m)"
+<!-- <ion-text class="text-medium" style="display: block;">{{m?.city?.name}}</ion-text> -->
+<!-- <ion-button class="ion-no-margin button-small" size="small" color="medium" (click)="meetingJoin(m)"
             *ngIf="m.isMember">
             Unjoin</ion-button>
           <ion-button class="ion-no-margin button-small" size="small" color="danger" (click)="meetingJoin(m)"
             *ngIf="!m.isMember">
             Join</ion-button>
         </ion-col> -->
-        <!-- <ion-col size="auto" class="ion-text-end" *ngIf="m.isCreatedBy">
+<!-- <ion-col size="auto" class="ion-text-end" *ngIf="m.isCreatedBy">
           <ion-icon color="medium" style="color: #737373;" size="large" name="trash" class="icon-big"
             (click)="deleteMeetingConfirm(m,mInx)"></ion-icon>
         </ion-col> -->
-      <!-- </ion-row>
+<!-- </ion-row>
       <ion-row (click)="clickMeeting(m)">
         <label class="meeting-desc ellipsas">
           {{m.agenda}}
@@ -64,10 +68,10 @@
             {{m.endDate | date:"mediumDate"}},
             {{m.startTime | date:'shortTime'}} - {{m.endTime | date:'shortTime'}} </label> -->
 
-          <!-- <ion-avatar class="avater small" *ngFor="let m of m.members">
+<!-- <ion-avatar class="avater small" *ngFor="let m of m.members">
               <img [src]="m.user.imageUrl" />
             </ion-avatar> -->
-        <!-- </ion-col>
+<!-- </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="ion-padding-l-0 ion-padding-r-0 ion-padding-b-0 ">
@@ -89,7 +93,7 @@
       </ion-row>
     </ion-grid>
   </ion-item> -->
-  <!-- <ion-item class="meeting-item">
+<!-- <ion-item class="meeting-item">
     <ion-grid>
       <ion-row class="ion-nowrap">
         <ion-col class="img-left">
@@ -175,24 +179,23 @@
   </ion-item> -->
 <!-- </ion-list> -->
 <ion-row class="ion-align-items-center" *ngIf="showLoading">
-  <ion-col class="ion-justify-content-center" style="display: flex;align-items: center;">
+  <ion-col class="ion-justify-content-center" style="display: flex; align-items: center;">
     <ion-spinner></ion-spinner>
   </ion-col>
 </ion-row>
 
-
 <ion-row class="post-widget">
-  <ion-card class="post-list"  *ngFor="let m of meetingList;let mInx = index;">
+  <ion-card class="post-list" *ngFor="let m of meetingList; let mInx = index">
     <ion-card-header>
       <ion-row>
-        <ion-col size="auto" class="col-avatar" (click)="clickMeeting(m)" >
+        <ion-col size="auto" class="col-avatar" (click)="clickMeeting(m)">
           <ion-avatar class="post-avatar">
-            <img [src]="m.imageUrl">
+            <img [src]="m.imageUrl" />
           </ion-avatar>
         </ion-col>
-        <ion-col class="col-avatar-right" (click)="clickMeeting(m)" >
-          <ion-label>
-            <ion-text class="text-name" >{{m.title}}</ion-text>
+        <ion-col class="col-avatar-right">
+          <ion-label (click)="clickMeeting(m)">
+            <ion-text class="text-name">{{ m.title }}</ion-text>
             <!-- <ion-text class="post-stars">
               <ion-icon name="star" color="warning"></ion-icon>
               <ion-icon name="star"></ion-icon>
@@ -202,43 +205,60 @@
             </ion-text> -->
             <!-- <span class="date">{{post.createdDate}}</span> -->
           </ion-label>
-          <p>
+          <p (click)="gotoGroupPage(m.group)">
             <!-- <ion-text class="text-agenda">{{m.group.name}}</ion-text> -->
-            <ion-label class="meeting-sub-title" *ngIf="m.isPublished==0">Un-published</ion-label>
-            <ion-text class="text-danger">Say No To <span class="text-danger"> {{m.group.name}} </span></ion-text>
+            <ion-label class="meeting-sub-title" *ngIf="m.isPublished == 0">Un-published</ion-label>
+            <ion-text class="text-danger">
+              Say No To <span class="text-danger"> {{ m.group.name }} </span>
+            </ion-text>
             <ion-text color="danger" *ngIf="m.isSuspend">
               (Suspend)
             </ion-text>
           </p>
         </ion-col>
-        <ion-col size="auto" class="ion-text-end ion-padding-t-10 ion-padding-l-0 ion-padding-r-0 ion-padding-b-0"
-          *ngIf="!m.isCreatedBy && !m.isSuspend && !m.isCompleted">
+        <ion-col
+          size="auto"
+          class="ion-text-end ion-padding-t-10 ion-padding-l-0 ion-padding-r-0 ion-padding-b-0"
+          *ngIf="!m.isCreatedBy && !m.isSuspend && !m.isCompleted"
+        >
           <!-- <ion-text class="text-medium" style="display: block;">{{m?.city?.name}}</ion-text> -->
-          <ion-button class="ion-no-margin button-small" size="small" color="medium" (click)="meetingJoin(m)"
-            *ngIf="m.isMember">
-            Unjoin</ion-button>
-          <ion-button class="ion-no-margin button-small" size="small" color="danger" (click)="meetingJoin(m)"
-            *ngIf="!m.isMember">
-            Join</ion-button>
+          <ion-button
+            class="ion-no-margin button-small"
+            size="small"
+            color="medium"
+            (click)="meetingJoin(m)"
+            *ngIf="m.isMember"
+          >
+            Unjoin</ion-button
+          >
+          <ion-button
+            class="ion-no-margin button-small"
+            size="small"
+            color="danger"
+            (click)="meetingJoin(m)"
+            *ngIf="!m.isMember"
+          >
+            Join</ion-button
+          >
         </ion-col>
       </ion-row>
-      <ion-card-title (click)="clickMeeting(m)" >
+      <ion-card-title (click)="clickMeeting(m)">
         <!-- <ion-text>[Anti]</ion-text> -->
-        <ion-label>{{m.city.name}}</ion-label>
+        <ion-label>{{ m.city.name }}</ion-label>
         <!-- <ion-icon class="custom-antie"></ion-icon> -->
       </ion-card-title>
-
     </ion-card-header>
 
-    <ion-card-content (click)="clickMeeting(m)" >
+    <ion-card-content (click)="clickMeeting(m)">
       <!-- <ion-thumbnail class="post-image">
         <ion-img [src]="post.imageUrl"></ion-img>
       </ion-thumbnail> -->
-      <ion-row (click)="clickMeeting(m)" class="ion-nowrap row-last ion-align-items-center ">
-        <ion-col class="ion-no-padding ">
-          <label class="meeting-date" style="display: block;">{{m.meetingDate | date:"mediumDate"}} -
-            {{m.endDate | date:"mediumDate"}},
-            {{m.startTime | date:'shortTime'}} - {{m.endTime | date:'shortTime'}} </label>
+      <ion-row (click)="clickMeeting(m)" class="ion-nowrap row-last ion-align-items-center">
+        <ion-col class="ion-no-padding">
+          <label class="meeting-date" style="display: block;"
+            >{{ m.meetingDate | date: "mediumDate" }} - {{ m.endDate | date: "mediumDate" }},
+            {{ m.startTime | date: "shortTime" }} - {{ m.endTime | date: "shortTime" }}
+          </label>
 
           <!-- <ion-avatar class="avater small" *ngFor="let m of m.members">
               <img [src]="m.user.imageUrl" />
@@ -246,15 +266,14 @@
         </ion-col>
       </ion-row>
       <ion-text class="post-description" color="dark">
-        <p>{{m.agenda}}</p>
+        <p>{{ m.agenda }}</p>
       </ion-text>
-      <ion-row class="ion-padding-b-5 ">
+      <ion-row class="ion-padding-b-5">
         <app-peoples-icons [peoples]="m.members" label="People are going"></app-peoples-icons>
       </ion-row>
     </ion-card-content>
   </ion-card>
 </ion-row>
 <ion-infinite-scroll threshold="100px" (ionInfinite)="getMeetings($event)">
-  <ion-infinite-scroll-content loadingSpinner="none" loadingText="Loading more data...">
-  </ion-infinite-scroll-content>
+  <ion-infinite-scroll-content loadingSpinner="none" loadingText="Loading more data..."> </ion-infinite-scroll-content>
 </ion-infinite-scroll>

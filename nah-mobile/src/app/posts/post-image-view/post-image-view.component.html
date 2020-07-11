@@ -40,8 +40,11 @@
     <ion-col>
       <ion-row> <img class="h75" [src]="images[2].fullPath" /></ion-row>
       <ion-row class="h75">
-        <img class="h75 last-image" [src]="images[3].fullPath" /> <span class="image-count">+ {{ moreCount }} </span>
+        <img class="h75 last-image" [src]="images[3].fullPath" />
+        <img class="h75 last-image ion-hide" [src]="img.fullPath" *ngFor="let img of remainingImg" />
+        <span class="image-count">+ {{ moreCount }} </span>
       </ion-row>
+     
     </ion-col>
   </ion-row>
 </ion-grid>

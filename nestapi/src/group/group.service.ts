@@ -17,8 +17,8 @@ export class GroupService {
     ) { }
 
     async getGroups(query, sessionUser): Promise<any> {
-        const take = query.take || 100
-        const skip = query.skip || 0
+        const take = query.take || 100;
+        const skip = query.skip || 0;
 
         const db = getRepository(GroupEntity)
             .createQueryBuilder('group')
@@ -37,7 +37,7 @@ export class GroupService {
         } else {
             if (sessionUser.id && query.createdBy) {
                 db.andWhere('group.createdBy = :id', { id: sessionUser.id });
-            }else{
+            } else {
                 db.where('group.isDeleted != 1');
             }
             if (sessionUser.id && query.notCreatedBy) {
@@ -64,8 +64,7 @@ export class GroupService {
         }
 
     }
-
-    async getGroupById(userId): Promise<any[]> {
+    async getGroupsByUserId(userId): Promise<any[]> {
         let data = await <any>getRepository(GroupEntity)
             .createQueryBuilder('group')
             .select(["group", "gf", "gm", "user"])
@@ -83,6 +82,21 @@ export class GroupService {
             });
         });
         return data;
+
+    }
+
+    async getGroupById(groupId): Promise<any[]> {
+        const db = getRepository(GroupEntity)
+            .createQueryBuilder('group')
+            .select(["group", "gf", "gm", "createdBy", "user"])
+            .leftJoin('group.createdBy', 'createdBy')
+            .leftJoin('group.followers', 'gf')
+            .leftJoin('group.meetings', 'gm')
+            .loadRelationCountAndMap('group.followersCount', 'group.followers', 'gf')
+            .leftJoin('gf.user', 'user').where('group.id = :id', { id: groupId });
+
+        const data = await db.getOne();
+        return this.bindFileBasePath(data);
 
     }
     async getMembersByGroupId(groupId) {

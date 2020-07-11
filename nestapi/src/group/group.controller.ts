@@ -19,10 +19,22 @@ export class GroupController {
         // urse:req.sessionUser
         return { message: false, ...data };
     }
+    /**
+     * 
+     * @param params userId
+     *  get user groups
+     * @param query
+     */
     @Get('list/:id')
-    async getGroupById(@Param() params: any, @Query() query) {
+    async getGroupsByUserId(@Param() params: any, @Query() query) {
 
-        const data: any = await this.service.getGroupById(params.id);
+        const data: any = await this.service.getGroupsByUserId(params.id);
+        return { message: false, data, success: true };
+    }
+    @Get(':id')
+    async getGroupById(@Param('id') id: number, @Query() query) {
+
+        const data: any = await this.service.getGroupById(id);
         return { message: false, data, success: true };
     }
     @UsePipes(new ValidationPipe())

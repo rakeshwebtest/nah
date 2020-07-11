@@ -233,7 +233,7 @@ export class MeetingCreateComponent implements OnInit {
             value: item.id
           };
           return group;
-        })
+        });
       }
       this.fields[4].fieldGroup[0].templateOptions.options = this.groupList || [];
     });

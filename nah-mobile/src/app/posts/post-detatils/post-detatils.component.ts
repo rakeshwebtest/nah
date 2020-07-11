@@ -25,7 +25,7 @@ export class PostDetatilsComponent implements OnInit {
       }
     ];
     const postId: any = this.activeRoute.snapshot.params.postId;
-    this.postS.getPosts({ postId: postId }).subscribe(res => {
+    this.postS.getPostById(postId).subscribe(res => {
       this.post = res.data;
     });
   }

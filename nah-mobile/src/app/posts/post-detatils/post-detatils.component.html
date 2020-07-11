@@ -46,10 +46,8 @@
           <ion-icon class="custom-antie"></ion-icon>
         </ion-card-title>
       </ion-card-header>
+      <app-post-image-view *ngIf="post.photos && post.photos.length > 0" [images]="post.photos"></app-post-image-view>
       <ion-card-content>
-        <ion-thumbnail class="post-image">
-          <ion-img [src]="defaultImg"></ion-img>
-        </ion-thumbnail>
         <ion-text class="post-description" color="dark">
           <p>
             {{ post.description }}

@@ -86,6 +86,23 @@ export class PostService {
         }
 
     }
+    async getPostId(postId: number, sessionUser) {
+        const db = getRepository(PostEntity)
+            .createQueryBuilder('p')
+            .leftJoin('p.createdBy', 'u')
+            .leftJoin('p.topic', 'topic')
+            .leftJoin('p.bookmark', 'bookmark')
+            .leftJoin('p.photos', 'photos')
+            .leftJoin('bookmark.user', 'bu')
+            .leftJoinAndMapOne("p.bookmark", PostBookmarksEntity, "isBookmarkUser", "isBookmarkUser.user.id = " + sessionUser.id + " && isBookmarkUser.post.id = p.id")
+            .leftJoinAndMapOne("p.like", PostLikeEntity, "isLikeUser", "isLikeUser.user.id = " + sessionUser.id + " && isLikeUser.post.id = p.id")
+            .leftJoinAndMapOne("p.dislike", PostDislikeEntity, "isDislikeUser", "isDislikeUser.user.id = " + sessionUser.id + " && isDislikeUser.post.id = p.id");
+        db.where('p.id = :postId', { postId: postId });
+        db.select(["p", "u", "topic", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos']);
+        const data: any = await db.getOne();
+        data.photos = mapImageFullPath(data.photos);
+        return data;
+    }
 
     async saveUpdatePost(post, sessionUser): Promise<PostEntity> {
         const _post = new PostEntity();

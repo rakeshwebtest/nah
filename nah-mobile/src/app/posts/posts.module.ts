@@ -11,6 +11,7 @@ import { PostDetatilsComponent } from './post-detatils/post-detatils.component';
 import { PostCreateComponent } from './post-create/post-create.component';
 import { NahFormlyModule } from '../utils/nah-formly/nah-formly.module';
 import { PostListModule } from './post-list/post-list.module';
+import { PostImageViewModule } from './post-image-view/post-image-view.module';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { PostListModule } from './post-list/post-list.module';
     IonicModule,
     NahFormlyModule,
     PostsPageRoutingModule,
-    PostListModule
+    PostListModule,
+    PostImageViewModule
   ],
   declarations: [PostsPage, PostDetatilsComponent, PostCreateComponent]
 })

@@ -25,6 +25,12 @@ export class PostsController {
             return { message: false, success: true, ...data, query };
         }
     }
+    @Get(':id')
+    async getPostId(@Param('id') id: number, @Req() req: any) {
+        const sessionUser = req['sessionUser'];
+        const data = await this.postService.getPostId(id, sessionUser);
+        return { message: false, data, success: true };
+    }
 
     @Post()
     async saveUpdatePost(@Body() post: SavePostDto, @Req() req) {

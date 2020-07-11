@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { AlertController } from '@ionic/angular';
 import { MeetingListService } from './meeting-list.service';
 import { Subscription } from 'rxjs';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-meeting-list',
@@ -26,6 +27,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
   take = 20;
   msSubscription: Subscription;
   constructor(private authService: AuthenticationService,
+    private storage: Storage,
     private router: Router,
     private alertCtrl: AlertController,
     private activeRouter: ActivatedRoute,
@@ -47,7 +49,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
     if (reload) {
       this.meetingList = [];
     }
-    console.log('reload',reload);
+    console.log('reload', reload);
     const params = this.activeRouter.snapshot.params;
     const userInfo: any = this.authService.getUserInfo();
     this.googlePic = userInfo.imageUrl;
@@ -71,19 +73,19 @@ export class MeetingListComponent implements OnInit, OnDestroy {
         if (m.createdBy.id === userInfo.id)
           m.isCreatedBy = true;
 
-        if (m.group.isDeleted==1)
+        if (m.group.isDeleted == 1)
           m.isSuspend = true;
 
-          const d1 = new Date(m.endDate);
-          const time =  new Date(m.endTime);
-          d1.setHours(time.getHours());
-          d1.setMinutes(time.getMinutes());
-          const today = new Date();
-          if (d1.getTime() < today.getTime()) {
-            m.isCompleted = true;
-          }else{
-            m.isCompleted = false;
-          }
+        const d1 = new Date(m.endDate);
+        const time = new Date(m.endTime);
+        d1.setHours(time.getHours());
+        d1.setMinutes(time.getMinutes());
+        const today = new Date();
+        if (d1.getTime() < today.getTime()) {
+          m.isCompleted = true;
+        } else {
+          m.isCompleted = false;
+        }
 
         const isUser = m.members.find(u => u.user.id == userInfo.id);
         if (isUser) {
@@ -176,6 +178,9 @@ export class MeetingListComponent implements OnInit, OnDestroy {
       // this.meetingList.splice(index, 1);
     });
 
+  }
+  gotoGroupPage(group) {
+    this.router.navigate(['/group/details/' + group.id]);
   }
   ngOnDestroy() {
     this.msSubscription.unsubscribe();

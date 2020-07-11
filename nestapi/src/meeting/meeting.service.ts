@@ -36,8 +36,8 @@ export class MeetingService {
 
     async getMeetings(query: MeetingQueryDao, sessionUser): Promise<MeetingEntity | { data: MeetingEntity[], total: number }> {
 
-        let take = 500
-        let skip = 0
+        let take = 500;
+        let skip = 0;
         if (query.skip)
             skip = query.skip;
         if (query.take)
@@ -80,7 +80,7 @@ export class MeetingService {
             db.where("m.title like :name", { name: '%' + query.search + '%' })
         }
 
-        // get one meeting details   
+        // get one meeting details 
         if (query.meetingId) { // single meeting
             db.select(["m", "group", "u", "mm", "mp",
                 "user", "city",
@@ -93,8 +93,7 @@ export class MeetingService {
                 .leftJoin("m.photos", 'mp')
                 .leftJoin("mp.createdBy", 'mp_createBy')
                 .leftJoin("m.videos", 'mv')
-                .leftJoin("mv.createdBy", 'mv_createBy')
-                .orderBy({ "m.createdDate": "DESC", "mc.createdDate": "DESC" });
+                .leftJoin("mv.createdBy", 'mv_createBy');
             db.where('m.id = :meetingId', { meetingId: query.meetingId });
             const data: any = await db.getOne();
             // data.imageUrl = SERVERBASEPATH + data.imageUrl;

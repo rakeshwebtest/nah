@@ -11,6 +11,9 @@ export class PostService {
   getPosts(payload: any) {
     return this.http.get('posts/list', { params: payload });
   }
+  getPostById(postId: any) {
+    return this.http.get('posts/' + postId);
+  }
 
   createUpdatePost(payload) {
     return this.http.post('posts', payload);

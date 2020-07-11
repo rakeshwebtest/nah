@@ -3,21 +3,16 @@ import { CommonModule } from '@angular/common';
 import { PostListComponent } from './post-list.component';
 import { IonicModule } from '@ionic/angular';
 import { AgendaViewModule } from 'src/app/agenda/agenda-view/agenda-view.module';
-import { PostImageViewComponent } from '../post-image-view/post-image-view.component';
-import { GalleryModule } from '@ngx-gallery/core';
-import { LightboxModule } from '@ngx-gallery/lightbox';
-import { GallerizeModule } from '@ngx-gallery/gallerize';
+import { PostImageViewModule } from '../post-image-view/post-image-view.module';
 
 
 @NgModule({
-  declarations: [PostListComponent, PostImageViewComponent],
+  declarations: [PostListComponent],
   imports: [
     AgendaViewModule,
     CommonModule,
     IonicModule,
-    GalleryModule,
-    LightboxModule,
-    GallerizeModule
+    PostImageViewModule
   ],
   exports: [PostListComponent]
 })
