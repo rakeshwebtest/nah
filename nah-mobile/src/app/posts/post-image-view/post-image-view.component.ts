@@ -8,6 +8,7 @@ import { GalleryItem, ImageItem, Gallery } from '@ngx-gallery/core';
 })
 export class PostImageViewComponent implements OnInit {
   @Input() images: any = [];
+  @Input() showAll = false;
   gridType: any;
   moreCount = 0;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";

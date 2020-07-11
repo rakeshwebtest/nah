@@ -23,13 +23,8 @@
     </ion-col>
   </ion-row>
   <ion-row *ngSwitchCase="'g4'">
-    <ion-col>
-      <ion-row> <img class="h75" [src]="images[0].fullPath" /></ion-row>
-      <ion-row> <img class="h75" [src]="images[1].fullPath" /></ion-row>
-    </ion-col>
-    <ion-col>
-      <ion-row> <img class="h75" [src]="images[2].fullPath" /></ion-row>
-      <ion-row> <img class="h75" [src]="images[3].fullPath" /></ion-row>
+    <ion-col size="6" *ngFor="let img of images">
+      <img class="h75" [src]="img.fullPath" />
     </ion-col>
   </ion-row>
   <ion-row *ngSwitchDefault>
@@ -40,12 +35,15 @@
     <ion-col>
       <ion-row> <img class="h75" [src]="images[2].fullPath" /></ion-row>
       <ion-row class="h75">
-        <img class="h75 last-image" [src]="images[3].fullPath" />
-        <img class="h75 last-image ion-hide" [src]="img.fullPath" *ngFor="let img of remainingImg" />
-        <span class="image-count">+ {{ moreCount }} </span>
+        <img class="h75 last-image" [ngClass]="{'last-image': !showAll}" [src]="images[3].fullPath" />
+        <span class="image-count" *ngIf="!showAll">+ {{ moreCount }} </span>
       </ion-row>
-     
     </ion-col>
+    <ion-row [ngClass]="{'ion-hide': !showAll}">
+      <ion-col size="6" *ngFor="let img of remainingImg">
+        <img class="h75" [src]="img.fullPath" />
+      </ion-col>
+    </ion-row>
   </ion-row>
 </ion-grid>
 

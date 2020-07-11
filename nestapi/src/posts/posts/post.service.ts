@@ -7,7 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PostCommentsEntity } from '../post-comments.entity';
 import { PostCommentReplyEntity } from '../post-comment-reply.entity';
 import { PostBookmarksEntity } from '../post-bookmarks.entity';
-import { mapImageFullPath } from 'src/shared/utility';
+import { mapImageFullPath, youtubeUrl2EmbedUrl } from 'src/shared/utility';
 import { PostLikeEntity } from '../post-like.entity';
 import { PostDislikeEntity } from '../post-dislike.entity';
 @Injectable()
@@ -93,12 +93,13 @@ export class PostService {
             .leftJoin('p.topic', 'topic')
             .leftJoin('p.bookmark', 'bookmark')
             .leftJoin('p.photos', 'photos')
+            .leftJoin('p.videos', 'videos')
             .leftJoin('bookmark.user', 'bu')
             .leftJoinAndMapOne("p.bookmark", PostBookmarksEntity, "isBookmarkUser", "isBookmarkUser.user.id = " + sessionUser.id + " && isBookmarkUser.post.id = p.id")
             .leftJoinAndMapOne("p.like", PostLikeEntity, "isLikeUser", "isLikeUser.user.id = " + sessionUser.id + " && isLikeUser.post.id = p.id")
             .leftJoinAndMapOne("p.dislike", PostDislikeEntity, "isDislikeUser", "isDislikeUser.user.id = " + sessionUser.id + " && isDislikeUser.post.id = p.id");
         db.where('p.id = :postId', { postId: postId });
-        db.select(["p", "u", "topic", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos']);
+        db.select(["p", "u", "topic", "videos", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos']);
         const data: any = await db.getOne();
         data.photos = mapImageFullPath(data.photos);
         return data;
@@ -109,20 +110,29 @@ export class PostService {
         _post.title = post.title;
         _post.description = post.description;
 
-        const userId = parseInt(post.createdBy);
+        const userId = post.createdBy;
         // user 
         _post.createdBy = new UserEntity();
         _post.createdBy.id = sessionUser.id;
 
         // topic
         _post.topic = new AgendaTopicsEntity();
-        _post.topic.id = parseInt(post.topicId);
+        _post.topic.id = post.topicId;
         if (post.id)
-            _post.id = parseInt(post.id);
+            _post.id = post.id;
 
         if (post.photos) {
             _post.photos = post.photos;
         }
+        if (post.videos) {
+            _post.videos = post.videos.map(v => {
+                if (v.videoPath) {
+                    v.videoPath = youtubeUrl2EmbedUrl(v.videoPath);
+                    return v;
+                }
+            });
+        }
+        console.log('_post', _post);
 
         if (post.isPublished)
             _post.isPublished = post.isPublished;

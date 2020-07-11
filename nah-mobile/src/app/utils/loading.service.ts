@@ -14,8 +14,9 @@ export class LoadingService {
     this.loading.present();
   }
   hide() {
-    if (this.loading)
+    if (this.loading) {
       this.loading.dismiss();
+    }
   }
   async presentLoading(loading) {
     return await loading.present();

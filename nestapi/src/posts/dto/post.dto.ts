@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsDate, Validate, ValidateIf, ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsDate, Validate, ValidateIf, ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments, ValidateNested } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { timer } from 'rxjs';
 import { strict } from 'assert';
@@ -19,6 +19,11 @@ export class CustomDateCheck implements ValidatorConstraintInterface {
     }
 
 }
+class Video {
+    @ApiProperty()
+    @IsNotEmpty({ message: "Video Path Required" })
+    videoPath: string;
+}
 export class SavePostDto {
 
     @ApiProperty()
@@ -26,13 +31,20 @@ export class SavePostDto {
     @ApiProperty({ type: 'string', format: 'binary' })
     photos: any[]
     @ApiProperty()
+    @IsNotEmpty({ message: "Title name Required" })
     title: string;
     @ApiProperty()
     description: string;
     @ApiProperty()
+    @IsNotEmpty({ message: "Topic name Required" })
     topicId: string;
     @ApiProperty()
     isPublished: number;
+
+    @ApiProperty()
+    @ValidateNested()
+    videos: Video[];
+    
     // @IsNotEmpty({ message: "Required Created By" })
     // readonly createBy: number;
 }

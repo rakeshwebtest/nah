@@ -38,7 +38,7 @@ export class PostEntity extends BaseEntity {
     // photos: AssetsEntity[];
 
 
-    @OneToMany(type => PostVideosEntity, pv => pv.post)
+    @OneToMany(type => PostVideosEntity, pv => pv.post, { eager: true, cascade: true, onDelete: 'CASCADE' })
     videos: PostVideosEntity[];
 
     @ManyToOne(type => UserEntity, user => user.posts)

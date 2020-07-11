@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start" class="white-color">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="dashboard"></ion-back-button>
       <ion-img class="ion-padding-r-10 header-logo" src="assets/svg/nah_logo_white.svg"></ion-img>
       <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
         Post Details
@@ -34,9 +34,7 @@
             </ion-label>
             <p>
               <ion-text class="text-agenda">AGENDA</ion-text>
-              <ion-text
-                >Say No To <span class="text-danger">#{{ post.topic.name }}#</span></ion-text
-              >
+              <ion-text class="text-danger">Say No To {{ post.topic.name }}</ion-text>
             </p>
           </ion-col>
         </ion-row>
@@ -46,7 +44,14 @@
           <ion-icon class="custom-antie"></ion-icon>
         </ion-card-title>
       </ion-card-header>
-      <app-post-image-view *ngIf="post.photos && post.photos.length > 0" [images]="post.photos"></app-post-image-view>
+      <app-post-image-view
+        showAll="true"
+        *ngIf="post.photos && post.photos.length > 0"
+        [images]="post.photos"
+      ></app-post-image-view>
+      <ion-text *ngIf="post.videos && post.videos.length > 0">Videos</ion-text>
+      <app-youtube-videos-list [videos]="post.videos" *ngIf="post.videos && post.videos.length > 0">
+      </app-youtube-videos-list>
       <ion-card-content>
         <ion-text class="post-description" color="dark">
           <p>

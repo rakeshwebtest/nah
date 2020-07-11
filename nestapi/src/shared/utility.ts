@@ -6,3 +6,13 @@ export function mapImageFullPath(files) {
     }
     return files;
 }
+
+export function youtubeUrl2EmbedUrl(url: string) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+
+    const urlId = (match && match[2].length === 11)
+        ? match[2]
+        : null;
+    return 'https://www.youtube.com/embed/' + urlId;
+}

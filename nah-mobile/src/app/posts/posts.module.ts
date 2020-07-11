@@ -12,6 +12,7 @@ import { PostCreateComponent } from './post-create/post-create.component';
 import { NahFormlyModule } from '../utils/nah-formly/nah-formly.module';
 import { PostListModule } from './post-list/post-list.module';
 import { PostImageViewModule } from './post-image-view/post-image-view.module';
+import { YoutubeVideosListModule } from '../shared/youtube-videos-list/youtube-videos-list.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { PostImageViewModule } from './post-image-view/post-image-view.module';
     NahFormlyModule,
     PostsPageRoutingModule,
     PostListModule,
-    PostImageViewModule
+    PostImageViewModule,
+    YoutubeVideosListModule
   ],
   declarations: [PostsPage, PostDetatilsComponent, PostCreateComponent]
 })
