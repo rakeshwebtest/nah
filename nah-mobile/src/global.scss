@@ -588,6 +588,9 @@ ion-tab-button {
 .text-danger {
     color: #fb0102;
 }
+.text-primary{
+    color: #3880ff;
+}
 .action-sheet-title {
     font-size: 21px !important;
     font-weight: bold;
@@ -653,7 +656,7 @@ ion-tab-button {
 .new-inside-tabs {
     > ion-tab-bar {
         // background-color: #696969;
-        padding: 2px 5px;
+        padding: 7px 5px;
         height: 30px;
         .tab-has-label {
             color: #696969;
@@ -708,4 +711,32 @@ ion-button {
 } 
 .d-block{
     display: block;
+}
+.gallery-images{
+    padding: 0px;
+}
+.count-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.video-title{
+    padding: 5px 5px;
+    font-size: 16px;
+    color: #000;
+    font-weight: 600;
+}
+.main-title{
+    font-size: 16px;
+    color: #000;
+    font-weight: 600;
+    margin: 5px 0 10px;
+}
+.custom-link{
+    color: #fff;
+    text-decoration: none;
+}
+app-agenda-view{
+    width: 100%;
 }

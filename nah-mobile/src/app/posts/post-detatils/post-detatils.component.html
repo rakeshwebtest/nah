@@ -34,7 +34,7 @@
             </ion-label>
             <p>
               <ion-text class="text-agenda">AGENDA</ion-text>
-              <ion-text class="text-danger">Say No To {{ post.topic.name }}</ion-text>
+              <ion-text class="text-primary">Say No To {{ post.topic.name }}</ion-text>
             </p>
           </ion-col>
         </ion-row>
@@ -44,35 +44,38 @@
           <ion-icon class="custom-antie"></ion-icon>
         </ion-card-title>
       </ion-card-header>
-      <app-post-image-view
-        showAll="true"
-        *ngIf="post.photos && post.photos.length > 0"
-        [images]="post.photos"
-      ></app-post-image-view>
-      <ion-text *ngIf="post.videos && post.videos.length > 0">Videos</ion-text>
-      <app-youtube-videos-list [videos]="post.videos" *ngIf="post.videos && post.videos.length > 0">
-      </app-youtube-videos-list>
       <ion-card-content>
         <ion-text class="post-description" color="dark">
           <p>
             {{ post.description }}
           </p>
         </ion-text>
-        <!-- <ion-text class="post-footer">
-          <span>
-            <ion-icon name="thumbs-up"></ion-icon> 31
-          </span>
-          <span>
-            <ion-icon name="thumbs-down"></ion-icon> 55
-          </span>
-          <span>
-            <ion-icon name="chatbubbles"></ion-icon> 77
-          </span>
-          <span>
-            <ion-icon name="star"></ion-icon> 0
-          </span>
-        </ion-text> -->
+        
       </ion-card-content>
+      <app-post-image-view
+        showAll="true"
+        *ngIf="post.photos && post.photos.length > 0"
+        [images]="post.photos"
+      ></app-post-image-view>
+      <ion-text *ngIf="post.videos && post.videos.length > 0" class="video-title">Videos</ion-text>
+      <app-youtube-videos-list [videos]="post.videos" *ngIf="post.videos && post.videos.length > 0">
+      </app-youtube-videos-list>
+      <ion-footer>
+        <ion-text class="post-footer">
+            <span>
+              <ion-icon name="thumbs-up"></ion-icon> 31
+            </span>
+            <span>
+              <ion-icon name="thumbs-down"></ion-icon> 55
+            </span>
+            <span>
+              <ion-icon name="chatbubbles"></ion-icon> 77
+            </span>
+            <span>
+              <ion-icon name="star"></ion-icon> 0
+            </span>
+          </ion-text>
+      </ion-footer>
     </ion-card>
   </ion-row>
 
@@ -110,7 +113,7 @@
     </ion-row>
   </ion-grid> -->
 
-  <ion-row>
+  <ion-row class="comments-widget">
     <h3 class="comments-title">COMMENTS(1)</h3>
 
     <ion-list class="meeting-list meeting-list-d">

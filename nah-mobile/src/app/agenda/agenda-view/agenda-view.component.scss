@@ -1,8 +1,13 @@
 .agenda-list{
     margin-bottom: 5px;
     color: #333;
+    margin-top: 10px;
     span{
         padding-right: 5px;
+        display: flex;
+        ion-badge{
+            margin: 0 5px;
+        }
     }
 }
 .sub-title-info1{
@@ -45,7 +50,7 @@
     font-size: 21px;
 }
 .card-title{
-    font-size: 21px;
+    font-size: 16px;
     font-weight: bold;
     display: flex;
 }

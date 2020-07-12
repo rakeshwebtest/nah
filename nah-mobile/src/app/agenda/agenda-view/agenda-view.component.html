@@ -6,6 +6,7 @@
 </div> -->
 <ion-card class="ion-no-margin custom-card"  *ngIf="(agendaS.agenda$ | async) && (agendaS.agenda$ | async) as agenda">
     <ion-card-header>
+      <h3 class="main-title">Agenda</h3>
     <ion-card-title class="card-title">{{agenda.title}}
       <div class="bars-list">
         <span class="bar" [ngClass]="{'active': activeDays>=inx}" *ngFor="let inx of totalDaysArray;"></span>
@@ -21,7 +22,9 @@
         <ion-icon name="lock"></ion-icon>
       </div> -->
       <div>
-        <a [routerLink]="[ '/agenda/list']">Old Agenda's</a>
+        <ion-badge color="danger">
+          <a class="custom-link" [routerLink]="[ '/agenda/list']">Old Agenda's</a>
+        </ion-badge>
       </div>
     </ion-card-title>
     <!-- <ion-card-subtitle class="card-sub-title">
@@ -31,7 +34,7 @@
   </ion-card-header>
   <ion-card-content>
     <ion-row class="agenda-list" >
-      <span>Say No To </span> <ion-badge color="danger" *ngFor="let topic of agenda.topics">{{topic.name | uppercase }}</ion-badge>
+      <span *ngFor="let topic of agenda.topics;let last = last;">Say No To  <ion-badge color="danger" >{{topic.name | uppercase }} </ion-badge>{{last?' ': '-'}}</span>
     </ion-row>
   </ion-card-content>
 </ion-card>

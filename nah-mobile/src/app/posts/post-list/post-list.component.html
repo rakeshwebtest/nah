@@ -27,8 +27,8 @@
           </ion-label>
           <p>
             <ion-text class="text-agenda">AGENDA</ion-text>
-            <ion-text
-              >Say No To <span class="text-danger">{{ post.topic.name }}</span></ion-text
+            <ion-text class="text-primary"
+              >Say No To <span class="">{{ post.topic.name }}</span></ion-text
             >
           </p>
         </ion-col>
@@ -39,13 +39,14 @@
         <ion-icon class="custom-antie"></ion-icon>
       </ion-card-title>
     </ion-card-header>
+    <ion-card-content>
+      {{ post.description }}
+    </ion-card-content>
     <app-post-image-view *ngIf="post.photos && post.photos.length > 0" [images]="post.photos"></app-post-image-view>
     <!-- <ion-card-header>
       <ion-card-title>{{ post.title }}</ion-card-title>
     </ion-card-header> -->
-    <ion-card-content>
-      {{ post.description }}
-    </ion-card-content>
+
 
     <ion-footer>
       <ion-text class="post-footer">

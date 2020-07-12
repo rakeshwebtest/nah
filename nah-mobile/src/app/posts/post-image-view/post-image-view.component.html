@@ -1,46 +1,46 @@
 <ion-grid [ngSwitch]="gridType" class="post-image-privew" [gallerize]="galleryId">
   <ion-row *ngSwitchCase="'g0'"> </ion-row>
   <ion-row *ngSwitchCase="'g1'">
-    <ion-col>
+    <ion-col class="gallery-images">
       <img class="h150" [src]="images[0].fullPath" />
     </ion-col>
   </ion-row>
   <ion-row *ngSwitchCase="'g2'">
-    <ion-col>
+    <ion-col class="gallery-images">
       <img class="h150" [src]="images[0].fullPath" />
     </ion-col>
-    <ion-col>
+    <ion-col class="gallery-images">
       <img class="h150" [src]="images[1].fullPath" />
     </ion-col>
   </ion-row>
   <ion-row class="g3" *ngSwitchCase="'g3'">
-    <ion-col>
+    <ion-col class="gallery-images">
       <img class="h150" [src]="images[0].fullPath" />
     </ion-col>
-    <ion-col>
+    <ion-col class="gallery-images">
       <ion-row> <img class="h75" [src]="images[1].fullPath" /></ion-row>
       <ion-row> <img class="h75" [src]="images[2].fullPath" /></ion-row>
     </ion-col>
   </ion-row>
   <ion-row *ngSwitchCase="'g4'">
-    <ion-col size="6" *ngFor="let img of images">
+    <ion-col class="gallery-images" size="6" *ngFor="let img of images">
       <img class="h75" [src]="img.fullPath" />
     </ion-col>
   </ion-row>
   <ion-row *ngSwitchDefault>
-    <ion-col>
+    <ion-col class="gallery-images">
       <ion-row> <img class="h75" [src]="images[0].fullPath" /></ion-row>
       <ion-row> <img class="h75" [src]="images[1].fullPath" /></ion-row>
     </ion-col>
-    <ion-col>
+    <ion-col class="gallery-images">
       <ion-row> <img class="h75" [src]="images[2].fullPath" /></ion-row>
-      <ion-row class="h75">
+      <ion-row class="h75 count-center">
         <img class="h75 last-image" [ngClass]="{'last-image': !showAll}" [src]="images[3].fullPath" />
-        <span class="image-count" *ngIf="!showAll">+ {{ moreCount }} </span>
+        <span class="image-count" *ngIf="!showAll">+{{ moreCount }} </span>
       </ion-row>
     </ion-col>
     <ion-row [ngClass]="{'ion-hide': !showAll}">
-      <ion-col size="6" *ngFor="let img of remainingImg">
+      <ion-col class="gallery-images" size="6" *ngFor="let img of remainingImg">
         <img class="h75" [src]="img.fullPath" />
       </ion-col>
     </ion-row>
