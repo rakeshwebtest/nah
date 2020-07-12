@@ -60,6 +60,9 @@
         <span (click)="bookmarkLikeAndDislike(post, 'bookmark')">
           <ion-icon name="star" [ngClass]="{ active: post.bookmark }"></ion-icon>{{ post.bookmarkCount }}
         </span>
+        <span >
+          <ion-icon name="share" [ngClass]="{ active: post.bookmark }"></ion-icon>0
+        </span>
       </ion-text>
     </ion-footer>
   </ion-card>
