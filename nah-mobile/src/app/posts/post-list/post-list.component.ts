@@ -91,11 +91,11 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/posts/details/' + post.id]);
   }
 
-  bookmarkLikeAndDislike(post, type = 'bookmark') {
+  bookmarkLikeAndDislike(post: any, type = 'bookmark') {
     // post.bookmark = !post.isBookMark;
 
     const postBookmareService = this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type });
-    if (post['bookmark']) {
+    if (type === 'bookmark' && post['bookmark']) {
       this.alertS.presentConfirm('', 'Do you want to Remove bookmark from list?').then(res => {
         if (res) {
           if (post[type]) {
@@ -119,6 +119,19 @@ export class PostListComponent implements OnInit, OnDestroy {
       } else {
         post[type] = {};
         post[type + 'Count'] = post[type + 'Count'] + 1;
+      }
+
+      if (type === 'like') {
+        if (post.dislike) {
+          post.dislikeCount = post.dislikeCount - 1;
+        }
+        post.dislike = null;
+
+      } else if (type === 'dislike') {
+        if (post.like) {
+          post.likeCount = post.likeCount - 1;
+        }
+        post.like = null;
       }
       postBookmareService.subscribe();
 

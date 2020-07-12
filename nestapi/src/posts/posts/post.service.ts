@@ -132,7 +132,7 @@ export class PostService {
                 }
             });
         }
-        
+
 
         if (post.isPublished)
             _post.isPublished = post.isPublished;
@@ -140,7 +140,6 @@ export class PostService {
 
         return this.postRepository.save(_post);
         // return data;
-
     }
     // like dislike bookbark
     async bookmarkPost(data: any) {
@@ -148,16 +147,19 @@ export class PostService {
         let msgS: string;
         let msgF: string;
         let _repo = this.postBookmarksRepository;
+
         switch (data.type) {
             case 'like':
                 msgS = 'I like this Post';
                 msgF = "I remove post form list post";
+                await this.postDislikeRepository.delete({ post: { id: data.postId }, user: { id: data.userId } }); // delete dislike if exit
                 _entity = new PostLikeEntity();
                 _repo = this.postLikeRepository;
                 break;
             case 'dislike':
                 msgS = 'I don\'t like this Post';
                 msgF = "I remove dislike form list post";
+                await this.postLikeRepository.delete({ post: { id: data.postId }, user: { id: data.userId } }); // delete dislike if exit
                 _entity = new PostDislikeEntity();
                 _repo = this.postDislikeRepository;
                 break;

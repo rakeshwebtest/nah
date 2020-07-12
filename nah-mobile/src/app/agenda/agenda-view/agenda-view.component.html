@@ -1,15 +1,15 @@
-
 <!-- <div *ngIf="(agendaS.agenda$ | async) && (agendaS.agenda$ | async) as agenda3">
   asfd
   {{agenda3 | json}}
   {{agenda3.name}}
 </div> -->
-<ion-card class="ion-no-margin custom-card"  *ngIf="(agendaS.agenda$ | async) && (agendaS.agenda$ | async) as agenda">
-    <ion-card-header>
-      <h3 class="main-title">Agenda</h3>
-    <ion-card-title class="card-title">{{agenda.title}}
+<ion-card class="ion-no-margin custom-card" *ngIf="(agendaS.agenda$ | async) && (agendaS.agenda$ | async) as agenda">
+  <ion-card-header>
+    <h3 class="main-title">Agenda</h3>
+    <ion-card-title class="card-title"
+      >{{ agenda.title }}
       <div class="bars-list">
-        <span class="bar" [ngClass]="{'active': activeDays>=inx}" *ngFor="let inx of totalDaysArray;"></span>
+        <span class="bar" [ngClass]="{ active: activeDays >= inx }" *ngFor="let inx of totalDaysArray"></span>
         <!-- <span class="bar" [ngClass]="{'active': inx>=1}"></span>
         <span class="bar" [ngClass]="{'active': day>=2}"></span>
         <span class="bar " [ngClass]="{'active': day>=3}"></span>
@@ -23,7 +23,7 @@
       </div> -->
       <div>
         <ion-badge color="danger">
-          <a class="custom-link" [routerLink]="[ '/agenda/list']">Old Agenda's</a>
+          <a class="custom-link" [routerLink]="['/agenda/list']">Old Agenda's</a>
         </ion-badge>
       </div>
     </ion-card-title>
@@ -33,8 +33,11 @@
        </ion-card-subtitle> -->
   </ion-card-header>
   <ion-card-content>
-    <ion-row class="agenda-list" >
-      <span *ngFor="let topic of agenda.topics;let last = last;">Say No To  <ion-badge color="danger" >{{topic.name | uppercase }} </ion-badge>{{last?' ': '-'}}</span>
+    <ion-row class="agenda-list text-center">
+      <span *ngFor="let topic of agenda.topics; let last = last">
+        <ion-text class="text-primary">Say No To {{ topic.name | uppercase }} </ion-text>
+        <div class="bars-list" *ngIf="!last"></div>
+      </span>
     </ion-row>
   </ion-card-content>
 </ion-card>
