@@ -50,7 +50,6 @@
             {{ post.description }}
           </p>
         </ion-text>
-        
       </ion-card-content>
       <app-post-image-view
         showAll="true"
@@ -62,22 +61,18 @@
       </app-youtube-videos-list>
       <ion-footer>
         <ion-text class="post-footer">
-            <span>
-              <ion-icon name="thumbs-up"></ion-icon> 31
-            </span>
-            <span>
-              <ion-icon name="thumbs-down"></ion-icon> 55
-            </span>
-            <span>
-              <ion-icon name="chatbubbles"></ion-icon> 77
-            </span>
-            <span>
-              <ion-icon name="star"></ion-icon> 0
-            </span>
-            <span >
-              <ion-icon name="share" ></ion-icon>0
-            </span>
-          </ion-text>
+          <span (click)="bookmarkLikeAndDislike(post, 'like')">
+            <ion-icon [ngClass]="{ active: post.like }" name="thumbs-up"></ion-icon> {{ post.likeCount }}
+          </span>
+          <span (click)="bookmarkLikeAndDislike(post, 'dislike')">
+            <ion-icon [ngClass]="{ active: post.dislike }" name="thumbs-down"></ion-icon> {{ post.dislikeCount }}
+          </span>
+          <span> <ion-icon name="chatbubbles"></ion-icon> 77 </span>
+          <span (click)="bookmarkLikeAndDislike(post, 'bookmark')">
+            <ion-icon name="star" [ngClass]="{ active: post.bookmark }"></ion-icon>{{ post.bookmarkCount }}
+          </span>
+          <span> <ion-icon name="share" [ngClass]="{ active: post.bookmark }"></ion-icon>0 </span>
+        </ion-text>
       </ion-footer>
     </ion-card>
   </ion-row>

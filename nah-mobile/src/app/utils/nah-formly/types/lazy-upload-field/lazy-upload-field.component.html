@@ -9,6 +9,7 @@
     (change)="onFileChange($event)"
     (click)="fileInput.value = null"
     [formControl]="formControl"
+    [name]="fieldInputName"
   ></ion-input>
 </ion-row>
 <div class="container multiple-image-list" *ngIf="uploadedImages">

@@ -65,6 +65,7 @@ export class AgendaService {
     return days;
   }
   setAgenda(data) {
+    this.agenda = data;
     this.agendaSubject.next(data);
   }
 }

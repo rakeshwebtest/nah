@@ -53,7 +53,7 @@ const routes: Routes = [
             children: [
               {
                 path: '',
-                redirectTo: 'community',
+                redirectTo: 'posts',
                 pathMatch: 'full'
               },
               {
@@ -83,6 +83,10 @@ const routes: Routes = [
               {
                 path: 'bookmark',
                 loadChildren: () => import('./bookmark/bookmark.module').then(m => m.BookmarkPageModule)
+              },
+              {
+                path: 'search',
+                loadChildren: () => import('./search/search.module').then(m => m.SearchPageModule)
               },
               {
                 path: 'notifications',
@@ -129,6 +133,8 @@ const routes: Routes = [
       }
     ]
   },
+
+
 
 
 

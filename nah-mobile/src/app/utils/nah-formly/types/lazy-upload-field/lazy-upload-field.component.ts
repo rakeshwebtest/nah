@@ -14,11 +14,15 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
   previewUrl = null;
   previewUrls: any[] = [];
   uploadedImages = [];
+  fieldInputName = 'images[]';
   constructor(private http: AppHttpClient, public loadingController: LoadingController) {
     super();
   }
   ngOnInit() {
     this.to.showTempPics = true;
+    if (!this.to.multiple) {
+      this.fieldInputName = 'images';
+    }
   }
 
   onFileChange(event) {

@@ -29,6 +29,19 @@ export class PostDetatilsComponent implements OnInit {
       this.post = res.data;
     });
   }
+  bookmarkLikeAndDislike(post, type = 'bookmark') {
+    // post.bookmark = !post.isBookMark;
+    if (post[type]) {
+      post[type] = null;
+      post[type + 'Count'] = post[type + 'Count'] - 1;
+    } else {
+      post[type] = {};
+      post[type + 'Count'] = post[type + 'Count'] + 1;
+    }
+    this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type }).subscribe(res => {
+
+    });
+  }
   navDetails() {
 
   }
