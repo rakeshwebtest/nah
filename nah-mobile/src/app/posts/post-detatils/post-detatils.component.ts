@@ -54,6 +54,19 @@ export class PostDetatilsComponent implements OnInit {
         post[type] = {};
         post[type + 'Count'] = post[type + 'Count'] + 1;
       }
+
+      if (type === 'like') {
+        if (post.dislike) {
+          post.dislikeCount = post.dislikeCount - 1;
+        }
+        post.dislike = null;
+
+      } else if (type === 'dislike') {
+        if (post.like) {
+          post.likeCount = post.likeCount - 1;
+        }
+        post.like = null;
+      }
       postBookmareService.subscribe();
 
     }

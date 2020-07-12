@@ -39,7 +39,7 @@
         <ion-icon class="custom-antie"></ion-icon>
       </ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content (click)="navDetails(post)">
       {{ post.description }}
     </ion-card-content>
     <app-post-image-view *ngIf="post.photos && post.photos.length > 0" [images]="post.photos"></app-post-image-view>

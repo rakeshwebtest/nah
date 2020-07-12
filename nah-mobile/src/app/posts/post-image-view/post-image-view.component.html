@@ -1,4 +1,4 @@
-<ion-grid [ngSwitch]="gridType" class="post-image-privew" [gallerize]="galleryId">
+<ion-grid [ngSwitch]="gridType" class="post-image-privew" [gallerize]="galleryId" *ngIf="!showAll">
   <ion-row *ngSwitchCase="'g0'"> </ion-row>
   <ion-row *ngSwitchCase="'g1'">
     <ion-col class="gallery-images">
@@ -44,6 +44,11 @@
         <img class="h75" [src]="img.fullPath" />
       </ion-col>
     </ion-row>
+  </ion-row>
+</ion-grid>
+<ion-grid [ngSwitch]="gridType" class="post-image-privew" [gallerize]="galleryId" *ngIf="showAll">
+  <ion-row *ngFor="let img of images">
+    <img [src]="img.fullPath" width="100%"/>
   </ion-row>
 </ion-grid>
 
