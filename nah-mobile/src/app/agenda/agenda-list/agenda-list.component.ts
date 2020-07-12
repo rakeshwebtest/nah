@@ -8,11 +8,11 @@ import { AppHttpClient } from 'src/app/utils';
 })
 export class AgendaListComponent implements OnInit {
   agendaList = [];
-  constructor(private http:AppHttpClient) { }
+  constructor(private http: AppHttpClient) { }
 
   ngOnInit() {
-    this.http.get('agenda').subscribe(res=>{
-      if(res.data){
+    this.http.get('agenda').subscribe(res => {
+      if (res.data) {
         this.agendaList = res.data;
       }
     })
