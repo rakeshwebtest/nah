@@ -33,7 +33,7 @@ export class PostDetatilsComponent implements OnInit {
   bookmarkLikeAndDislike(post, type = 'bookmark') {
     const postBookmareService = this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type });
     if (post['bookmark']) {
-      this.alertS.presentConfirm('', 'Do you want to Remove bookmark form list?').then(res => {
+      this.alertS.presentConfirm('', 'Do you want to Remove bookmark from list?').then(res => {
         if (res) {
           if (post[type]) {
             post[type] = null;
