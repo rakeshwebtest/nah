@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PostService } from '../post.service';
 import { scan } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { AlertController } from '@ionic/angular';
+import { AppAlertService } from 'src/app/utils/app-alert.service';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
@@ -18,7 +20,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   list$: Observable<any[]>;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
   constructor(private router: Router, private activeRouter: ActivatedRoute,
-    public postS: PostService) {
+    public postS: PostService, private alertCtrl: AlertController, private alertS: AppAlertService) {
 
   }
   ionViewDidLoad() {
@@ -91,18 +93,63 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   bookmarkLikeAndDislike(post, type = 'bookmark') {
     // post.bookmark = !post.isBookMark;
-    if (post[type]) {
-      post[type] = null;
-      post[type + 'Count'] = post[type + 'Count'] - 1;
+
+    const postBookmareService = this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type });
+    if (post['bookmark']) {
+      this.alertS.presentConfirm('', 'Do you want to Remove bookmark form list?').then(res => {
+        if (res) {
+          if (post[type]) {
+            post[type] = null;
+            post[type + 'Count'] = post[type + 'Count'] - 1;
+          } else {
+            post[type] = {};
+            post[type + 'Count'] = post[type + 'Count'] + 1;
+          }
+          postBookmareService.subscribe(data => {
+            if (this.type === 'bookmarks' && type === 'bookmark') {
+              this.postBehavior.next({ opt: { type: 'delete', id: post.id }, list: [] });
+            }
+          });
+        }
+      });
     } else {
-      post[type] = {};
-      post[type + 'Count'] = post[type + 'Count'] + 1;
-    }
-    this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type }).subscribe(res => {
-      if (this.type === 'bookmarks' && type === 'bookmark') {
-        this.postBehavior.next({ opt: { type: 'delete', id: post.id }, list: [] });
+      if (post[type]) {
+        post[type] = null;
+        post[type + 'Count'] = post[type + 'Count'] - 1;
+      } else {
+        post[type] = {};
+        post[type + 'Count'] = post[type + 'Count'] + 1;
       }
+      postBookmareService.subscribe();
+
+    }
+
+    // this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type }).subscribe(res => {
+
+    // });
+  }
+  async unBookmark(items: any[], inx, reply) {
+    let alert = await this.alertCtrl.create({
+      message: 'Do you want to Remove bookmark form list?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            alert.dismiss(false);
+            return false;
+          }
+        },
+        {
+          text: 'Okay',
+          handler: () => {
+            alert.dismiss(true);
+            return false;
+          }
+        }
+      ]
     });
+    return alert;
   }
   reload() {
     this.offset = 0;

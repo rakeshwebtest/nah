@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppHttpClient } from 'src/app/utils';
 import { PostService } from '../post.service';
 import { ActivatedRoute } from '@angular/router';
+import { AppAlertService } from 'src/app/utils/app-alert.service';
 
 @Component({
   selector: 'app-post-detatils',
@@ -13,7 +14,7 @@ export class PostDetatilsComponent implements OnInit {
   public commentMsg: any;
   post: any;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
-  constructor(private postS: PostService, private activeRoute: ActivatedRoute) { }
+  constructor(private postS: PostService, private activeRoute: ActivatedRoute, private alertS: AppAlertService) { }
 
   ngOnInit() {
     this.postDetails = [
@@ -30,17 +31,32 @@ export class PostDetatilsComponent implements OnInit {
     });
   }
   bookmarkLikeAndDislike(post, type = 'bookmark') {
-    // post.bookmark = !post.isBookMark;
-    if (post[type]) {
-      post[type] = null;
-      post[type + 'Count'] = post[type + 'Count'] - 1;
+    const postBookmareService = this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type });
+    if (post['bookmark']) {
+      this.alertS.presentConfirm('', 'Do you want to Remove bookmark form list?').then(res => {
+        if (res) {
+          if (post[type]) {
+            post[type] = null;
+            post[type + 'Count'] = post[type + 'Count'] - 1;
+          } else {
+            post[type] = {};
+            post[type + 'Count'] = post[type + 'Count'] + 1;
+          }
+          postBookmareService.subscribe(data => {
+          });
+        }
+      });
     } else {
-      post[type] = {};
-      post[type + 'Count'] = post[type + 'Count'] + 1;
-    }
-    this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type }).subscribe(res => {
+      if (post[type]) {
+        post[type] = null;
+        post[type + 'Count'] = post[type + 'Count'] - 1;
+      } else {
+        post[type] = {};
+        post[type + 'Count'] = post[type + 'Count'] + 1;
+      }
+      postBookmareService.subscribe();
 
-    });
+    }
   }
   navDetails() {
 
