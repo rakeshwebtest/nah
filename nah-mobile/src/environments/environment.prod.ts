@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://nah.theapp.in/api/'
+  apiUrl: 'http://nah.theapp.in'
 };

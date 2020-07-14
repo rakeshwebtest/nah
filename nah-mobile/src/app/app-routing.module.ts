@@ -130,13 +130,13 @@ const routes: Routes = [
       {
         path: 'profile-edit',
         loadChildren: () => import('./profile-edit/profile-edit.module').then(m => m.ProfileEditPageModule)
+      },
+      {
+        path: 'live-chat',
+        loadChildren: () => import('./live-chat/live-chat.module').then(m => m.LiveChatPageModule)
       }
     ]
-  },
-
-
-
-
+  }
 
 ];
 

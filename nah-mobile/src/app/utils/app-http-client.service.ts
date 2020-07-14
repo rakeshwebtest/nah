@@ -19,7 +19,7 @@ export interface IRequestOptions {
 })
 export class AppHttpClient {
 
-    private api = environment.apiUrl;
+    private api = environment.apiUrl + '/api/';
     // private api: any = 'http://192.168.0.39:3000/api/';
     _isLoader = true;
 

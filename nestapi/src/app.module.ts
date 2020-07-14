@@ -14,6 +14,7 @@ import { UserService } from './user/user.service';
 import { UserEntity } from './user/user.entity';
 import { PostsModule } from './posts/posts.module';
 import { AssetsModule } from './assets/assets.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { AssetsModule } from './assets/assets.module';
     }),
     CityModule,
     PostsModule,
-    AssetsModule
+    AssetsModule,
+    ChatModule
   ],
   controllers: [AppController],
   providers: [AuthMiddleware, UserService],
