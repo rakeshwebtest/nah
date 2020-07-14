@@ -11,7 +11,6 @@
       <ion-icon style="cursor: pointer;" name="md-more" color="light" (click)="presentPopover($event)"></ion-icon>
     </ion-row>
   </ion-toolbar>
-
 </ion-header>
 
 <!-- fullscreen="true" slot="fixed" -->
@@ -39,6 +38,7 @@
       </ion-text>
       <h5 class="country">{{ userInfo?.city?.name }}</h5>
       <h5 class="country">{{ userInfo.typeOfNoer }}</h5>
+      <ion-button [routerLink]="['/live-chat']">Live Group Chat</ion-button>
       <!-- <h6 class="followes">Followes: <ion-chip>
             <ion-label>2</ion-label>
           </ion-chip>
@@ -51,6 +51,4 @@
     </ion-row>
   </ion-grid>
 </ion-content>
-<ion-footer>
-
-</ion-footer>
+<ion-footer> </ion-footer>
