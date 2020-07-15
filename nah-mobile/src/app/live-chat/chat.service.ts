@@ -18,7 +18,15 @@ export class ChatService {
     return this.socket.fromEvent('chat');
   }
 
+  getMessages() {
+    return this.socket.fromEvent('message');
+  }
+
   getUsers() {
     return this.socket.fromEvent('users');
+  }
+
+  getCientData() {
+    return this.socket.fromEvent('data');
   }
 }
