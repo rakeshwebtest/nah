@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AppHttpClient } from 'src/app/utils';
 import { PostService } from '../post.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppAlertService } from 'src/app/utils/app-alert.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-post-detatils',
@@ -13,8 +14,12 @@ export class PostDetatilsComponent implements OnInit {
   public postDetails = [];
   public commentMsg: any;
   post: any;
+  replyMsg: any = {};
+  userInfo: any = {};
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
-  constructor(private postS: PostService, private activeRoute: ActivatedRoute, private alertS: AppAlertService) { }
+  constructor(private postS: PostService, private activeRoute: ActivatedRoute, private http: AppHttpClient,
+    private alertS: AppAlertService,
+    private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.postDetails = [
@@ -74,13 +79,57 @@ export class PostDetatilsComponent implements OnInit {
   navDetails() {
 
   }
-  replyComment(c?: any) {
+  addComment(comment) {
 
+    const postId = this.post.id;
+    const userInfo: any = this.authService.getUserInfo();
+    let payLoad = {
+
+    }
+    if (this.replyMsg.id) {
+      payLoad = {
+        postCommentId: this.replyMsg.id,
+        comment: comment,
+        userId: userInfo.id
+      };
+      this.http.post('posts/comment-reply', payLoad).subscribe(res => {
+        if (res.data) {
+          const _comment = res.data;
+          _comment.createdBy = userInfo;
+          this.replyMsg.replys.push(_comment);
+          this.commentMsg = null;
+        }
+        this.replyMsg = {};
+      });
+
+    } else {
+      payLoad = {
+        comment: comment,
+        postId: postId,
+        userId: userInfo.id
+      };
+      this.http.post('posts/comment', payLoad).subscribe(res => {
+        if (res.data) {
+          const _comment = res.data;
+          _comment.createdBy = userInfo;
+          _comment.replys = [];
+          this.post.comments.unshift(_comment);
+
+          this.commentMsg = null;
+        }
+      });
+    }
+
+    // this.meeting.comments.push();
+
+  }
+  replyComment(c) {
+    this.replyMsg = c;
   }
   deleteComment() {
 
   }
-  addComment(stg: string) {
+  clearReply() {
 
   }
 

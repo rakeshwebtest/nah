@@ -63,6 +63,11 @@ export class PostsController {
     async addComment(@Body() comment, @Request() req) {
         return this.postService.addComment(comment);
     }
+
+    @Post('comment-reply')
+    async addCommentReplay(@Body() commentReply, @Request() req) {
+        return this.postService.addCommentReply(commentReply);
+    }
     /**
      * 
      * @param id 

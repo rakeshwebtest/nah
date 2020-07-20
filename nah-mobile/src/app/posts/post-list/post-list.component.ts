@@ -14,8 +14,9 @@ export class PostListComponent implements OnInit, OnDestroy {
   public postList = [];
   @Input() type: any;
   showAgendaView = false;
-  limit = 100;
+  limit = 5;
   offset = 0;
+  
   postBehavior = new BehaviorSubject<{ opt: any, list: [] }>({ opt: 'list', list: [] });
   list$: Observable<any[]>;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
@@ -33,7 +34,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     const params = this.activeRouter.snapshot.routeConfig.path;
     console.log('params', params);
     this.offset = 0;
-    this.loadPosts({ type: this.type || this.activeRouter.snapshot.routeConfig.path });
+    this.loadPosts();
 
   }
   ngOnInit() {
@@ -80,11 +81,25 @@ export class PostListComponent implements OnInit, OnDestroy {
         }
       }, [])
     );
-    this.loadPosts({ type: this.type || this.activeRouter.snapshot.routeConfig.path });
+    this.loadPosts();
   }
-  loadPosts(payload = {}) {
+  loadPosts(infiniteScroll?: any, reload?: any) {
+    if (infiniteScroll) {
+      this.offset = this.offset + this.limit;
+    }
+    const payload: any = {};
+    payload.type = this.type || this.activeRouter.snapshot.routeConfig.path;
+    payload.skip = this.offset;
+    payload.take = this.limit;
     this.postS.getPosts(payload).subscribe(res => {
       this.postBehavior.next({ opt: 'list', list: res.data });
+      if (infiniteScroll) {
+        infiniteScroll.target.complete();
+      }
+      if (reload && reload.target) {
+        reload.target.complete();
+        reload.target.disabled = false;
+      }
     });
   }
   navDetails(post) {
@@ -164,9 +179,14 @@ export class PostListComponent implements OnInit, OnDestroy {
     });
     return alert;
   }
+
   reload() {
     this.offset = 0;
-    this.loadPosts({ type: this.type || this.activeRouter.snapshot.routeConfig.path });
+    this.loadPosts();
+  }
+  doRefresh(reload) {
+    this.offset = 0;
+    this.loadPosts(null, reload);
   }
   ngOnDestroy(): void {
     // this.list$.unsubscribe();

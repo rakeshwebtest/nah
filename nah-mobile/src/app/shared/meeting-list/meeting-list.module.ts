@@ -11,6 +11,6 @@ import { PeoplesModule } from '../peoples/peoples.module';
     IonicModule,
     PeoplesModule
   ],
-  exports:[MeetingListComponent]
+  exports: [MeetingListComponent]
 })
 export class MeetingListModule { }

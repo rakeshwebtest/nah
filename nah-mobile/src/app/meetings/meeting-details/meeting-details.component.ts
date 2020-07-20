@@ -198,7 +198,6 @@ export class MeetingDetailsComponent implements OnInit {
   }
   replyComment(c) {
     this.replyMsg = c;
-
   }
   clearReply() {
     this.replyMsg = {};

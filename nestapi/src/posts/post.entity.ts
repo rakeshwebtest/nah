@@ -58,6 +58,9 @@ export class PostEntity extends BaseEntity {
 
     @RelationCount((post: PostEntity) => post.bookmark)
     bookmarkCount: number;
+    
+    @RelationCount((post: PostEntity) => post.comments)
+    commentCount: number;
 
     // @RelationCount((post: PostEntity) => post.likes)
     // likeCount: number;

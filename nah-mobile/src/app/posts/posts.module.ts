@@ -13,6 +13,7 @@ import { NahFormlyModule } from '../utils/nah-formly/nah-formly.module';
 import { PostListModule } from './post-list/post-list.module';
 import { PostImageViewModule } from './post-image-view/post-image-view.module';
 import { YoutubeVideosListModule } from '../shared/youtube-videos-list/youtube-videos-list.module';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { YoutubeVideosListModule } from '../shared/youtube-videos-list/youtube-v
     PostsPageRoutingModule,
     PostListModule,
     PostImageViewModule,
-    YoutubeVideosListModule
+    YoutubeVideosListModule,
+    TimeagoModule
   ],
   declarations: [PostsPage, PostDetatilsComponent, PostCreateComponent]
 })

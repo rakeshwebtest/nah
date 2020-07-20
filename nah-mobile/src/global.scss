@@ -29,6 +29,11 @@
 // body{
 //     --ion-background-color: #ff3700;
 // }
+
+ion-toast {
+    margin-top: -50px;
+}
+
 ion-header {
     --ion-toolbar-background: var(--ion-color-danger);
     color: #ffffff;
@@ -226,7 +231,8 @@ vertical-field {
 .text-large {
     font-size: 16px;
 }
-formly-field-file ion-input,app-lazy-upload-field ion-input {
+formly-field-file ion-input,
+app-lazy-upload-field ion-input {
     width: 100% !important;
     height: 35px;
     // background-color: #ccc;
@@ -588,7 +594,7 @@ ion-tab-button {
 .text-danger {
     color: #fb0102;
 }
-.text-primary{
+.text-primary {
     color: #3880ff;
 }
 .action-sheet-title {
@@ -703,40 +709,41 @@ ion-button {
 .custom-height {
     min-height: 42px;
 }
-.text-justify, p{
+.text-justify,
+p {
     text-align: justify;
 }
 .mb-15 {
     margin-bottom: 15px;
-} 
-.d-block{
+}
+.d-block {
     display: block;
 }
-.gallery-images{
+.gallery-images {
     padding: 0px;
 }
-.count-center{
+.count-center {
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
-.video-title{
+.video-title {
     padding: 5px 5px;
     font-size: 16px;
     color: #000;
     font-weight: 600;
 }
-.main-title{
+.main-title {
     font-size: 16px;
     color: #000;
     font-weight: 600;
     margin: 5px 0 10px;
 }
-.custom-link{
+.custom-link {
     color: #fff;
     text-decoration: none;
 }
-app-agenda-view{
+app-agenda-view {
     width: 100%;
 }

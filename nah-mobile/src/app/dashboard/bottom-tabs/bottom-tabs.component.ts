@@ -13,31 +13,31 @@ export class BottomTabsComponent implements OnInit {
 
   constructor(public actionSheetController: ActionSheetController,
     private modalController: ModalController,
-    private agendaS:AgendaService,
+    private agendaS: AgendaService,
     private router: Router) { }
 
   ngOnInit() { }
   async presentActionSheet() {
-    console.log('this.agendaS.agenda$',this.agendaS.agenda$);
+    console.log('this.agendaS.agenda$', this.agendaS.agenda$);
 
     let buttons = [
       {
-        text: 'Group',
+        text: 'Crate Group',
         icon: 'people',
         handler: () => {
           this.presentGroupModal();
         }
       },
       {
-        text: 'Agenda',
+        text: 'Crate Agenda',
         icon: 'send',
         handler: () => {
           this.router.navigate(['/agenda/create']);
           console.log('Share clicked');
         }
       },
-       {
-        text: 'Post',
+      {
+        text: 'Crate Post',
         icon: 'send',
         handler: () => {
           this.router.navigate(['/posts/create']);
@@ -45,7 +45,7 @@ export class BottomTabsComponent implements OnInit {
         }
       },
       {
-        text: 'Meeting',
+        text: 'Crate Meeting',
         role: 'destructive',
         icon: 'people',
         handler: () => {
@@ -55,8 +55,8 @@ export class BottomTabsComponent implements OnInit {
       }
     ];
 
-    if(this.agendaS.agenda){
-      const postItem =  {
+    if (this.agendaS.agenda) {
+      const postItem = {
         text: 'Post',
         icon: 'send',
         handler: () => {
@@ -64,11 +64,11 @@ export class BottomTabsComponent implements OnInit {
           console.log('Share clicked');
         }
       };
-     // buttons.splice(2,0,postItem)
+      // buttons.splice(2,0,postItem)
     }
 
     const actionSheet = await this.actionSheetController.create({
-      header: 'Create New',
+      header: ' ',
       cssClass: 'my-custom-class',
       buttons: buttons
     });

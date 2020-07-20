@@ -23,8 +23,8 @@ export class PostService {
     }
 
     async getPosts(query, sessionUser): Promise<PostEntity | { data: PostEntity[], total: number }> {
-        let take = 500
-        let skip = 0
+        let take = 500;
+        let skip = 0;
         if (query.skip)
             skip = query.skip;
         if (query.take)
@@ -59,31 +59,16 @@ export class PostService {
         }
 
         // get single post details
-        if (query.postId) {
-            db.select(["p", "u", "topic"]);
-            db.leftJoin("p.comments", 'pc')
-                .leftJoin("pc.createdBy", 'pc_createdBy')
-                .leftJoin("pc.replys", 'pcr')
-                .leftJoin("pcr.createdBy", 'pcr_createdBy')
-                .leftJoin("p.photos", 'pp')
-                .leftJoin("pp.createdBy", 'pp_createBy')
-                .leftJoin("p.videos", 'pv')
-                .leftJoin("pv.createdBy", 'pv_createBy')
-                .orderBy({ "p.createdDate": "DESC", "pc.createdDate": "DESC" });
-            db.where('p.id = :postId', { postId: query.postId });
-            const data: any = await db.getOne();
-            return data;
-        } else {
-            db.select(["p", "u", "topic", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos'])
-                .orderBy({ "p.createdDate": "DESC" });
-            db.take(take);
-            db.skip(skip);
-            const [result, total] = await db.getManyAndCount();
-            result.map(r => {
-                r.photos = mapImageFullPath(r.photos);
-            });
-            return { data: result, total: total };
-        }
+        db.select(["p", "u", "topic", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos'])
+            .orderBy({ "p.createdDate": "DESC" });
+        db.take(take);
+        db.skip(skip);
+        const [result, total] = await db.getManyAndCount();
+        result.map(r => {
+            r.photos = mapImageFullPath(r.photos);
+        });
+        return { data: result, total: total };
+
 
     }
     async getPostId(postId: number, sessionUser) {
@@ -95,11 +80,15 @@ export class PostService {
             .leftJoin('p.photos', 'photos')
             .leftJoin('p.videos', 'videos')
             .leftJoin('bookmark.user', 'bu')
+            .leftJoin("p.comments", 'pc')
+            .leftJoin("pc.createdBy", 'pc_createdBy')
+            .leftJoin("pc.replys", 'pcr')
+            .leftJoin("pcr.createdBy", 'pcr_createdBy')
             .leftJoinAndMapOne("p.bookmark", PostBookmarksEntity, "isBookmarkUser", "isBookmarkUser.user.id = " + sessionUser.id + " && isBookmarkUser.post.id = p.id")
             .leftJoinAndMapOne("p.like", PostLikeEntity, "isLikeUser", "isLikeUser.user.id = " + sessionUser.id + " && isLikeUser.post.id = p.id")
             .leftJoinAndMapOne("p.dislike", PostDislikeEntity, "isDislikeUser", "isDislikeUser.user.id = " + sessionUser.id + " && isDislikeUser.post.id = p.id");
         db.where('p.id = :postId', { postId: postId });
-        db.select(["p", "u", "topic", "videos", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos']);
+        db.select(["p", "u", "pc", "pc_createdBy", "pcr_createdBy", "pcr", "topic", "videos", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos']);
         const data: any = await db.getOne();
         data.photos = mapImageFullPath(data.photos);
         return data;
@@ -195,6 +184,17 @@ export class PostService {
         comment.comment = commentDto.comment;
         const data = await this.postCommentRepository.save(comment);
         return { message: 'Added Comment Successfully', data };
+    }
+
+    async addCommentReply(commentDto: any) {
+        const comment = new PostCommentReplyEntity();
+        comment.createdBy = new UserEntity();
+        comment.postComment = new PostCommentsEntity();
+        comment.postComment.id = commentDto.postCommentId;
+        comment.createdBy.id = commentDto.userId;
+        comment.comment = commentDto.comment;
+        const data = await this.postCommentReplyRepository.save(comment);
+        return { message: 'replay Comment Successfully', data };
     }
 
     async deleteComment(commentId?: number, replyCommentId?: number): Promise<any> {
