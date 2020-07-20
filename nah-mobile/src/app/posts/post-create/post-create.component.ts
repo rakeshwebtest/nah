@@ -51,7 +51,7 @@ export class PostCreateComponent implements OnInit {
       },
       hooks: {
         onInit: (f) => {
-          console.log('this.agendaS.agenda',this.agendaS.agenda);
+          console.log('this.agendaS.agenda', this.agendaS.agenda);
           f.templateOptions.options = (this.agendaS.agenda) ? this.agendaS.agenda.topics : [];
         }
       }
@@ -75,7 +75,7 @@ export class PostCreateComponent implements OnInit {
         <b>To copy YouTube videos, you'll need to know just 3 steps:</b>
         <ol class="ion-no-margin ion-no-padding">
           <li>
-            Navigate to <a href="https://www.youtube.com/" target="_blank">https://www.youtube.com/</a> 
+            Navigate to <a >https://www.youtube.com/</a>
           </li>
           <li>
             Upload your video to YouTube Chanel (or) copy the link/URL for the video you want to insert from existing youtube video. 
@@ -141,6 +141,9 @@ export class PostCreateComponent implements OnInit {
     }, error => {
       this.loadingService.hide();
     });
+  }
+  openWeb() {
+    alert('o');
   }
 
 }

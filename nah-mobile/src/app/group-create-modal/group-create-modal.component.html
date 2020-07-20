@@ -19,6 +19,7 @@
 
     </ion-row>
     <ion-row class="ion-justify-content-center">
+      
       <ion-col size="12">
         <ion-item class="border border-b-none">
           <ion-label><strong>Say No To</strong></ion-label>
@@ -27,16 +28,20 @@
           </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col size="4">
-        <ion-button color="danger" type="submit" [disabled]="!newGroupName">
+    </ion-row>
+    <ion-row>
+      <ion-toolbar class="ion-text-center">
+        <ion-button  type="submit" color="danger" [disabled]="!newGroupName">
           Add Group
         </ion-button>
-      </ion-col>
-      <ion-col size="3">
-        <ion-button color="light" (click)="dismiss()">
+        <ion-button color="danger"  (click)="dismiss()">
           Close
         </ion-button>
-      </ion-col>
+        <!-- <ion-button color="light" (click)="signInWithGoogleTest()">
+               <ion-img class="ion-padding-r-10" style="width:30px;" src="assets/images/google.png"></ion-img>
+          Continu without Google Test
+        </ion-button> -->
+      </ion-toolbar>
     </ion-row>
   </form>
 </ion-content>

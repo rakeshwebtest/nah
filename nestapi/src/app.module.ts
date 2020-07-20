@@ -15,7 +15,6 @@ import { UserEntity } from './user/user.entity';
 import { PostsModule } from './posts/posts.module';
 import { AssetsModule } from './assets/assets.module';
 import { ChatModule } from './chat/chat.module';
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({ ...DB, entities: [path.join(__dirname, '**/*.entity{.ts,.js}')] }),

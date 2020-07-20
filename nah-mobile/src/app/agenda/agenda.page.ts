@@ -36,6 +36,7 @@ export class AgendaPage implements OnInit {
       type: 'repeat',
       templateOptions: {
         addText: 'Add another topic',
+        min: 1,
         max: 2
       },
       validators: {

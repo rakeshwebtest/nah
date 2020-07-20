@@ -1,8 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" class="white-color">
-      <ion-back-button  defaultHref="dashboard"></ion-back-button>
-      <ion-img class="ion-padding-r-10 header-logo" src="assets/svg/nah_logo_white.svg"></ion-img>
+    <ion-buttons slot="start"
+      class="white-color">
+      <ion-back-button defaultHref="dashboard"></ion-back-button>
+      <ion-img class="ion-padding-r-10 header-logo"
+        src="assets/svg/nah_logo_white.svg"></ion-img>
       <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
         Agenda
       </ion-text>
@@ -14,16 +16,33 @@
 
   <h5 class="heading">Topics</h5>
   <form [formGroup]="form">
-    <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+    <ion-row>
+      <ion-col size="12"
+        class="ion-text-center">
+        <ion-chip> Now, think about </ion-chip>
+      </ion-col>
+      <ul style="margin-top: 0px;font-size: 14px;">
+        <li>What do you against topic the most?</li>
+        <li>What do you hate topic the most</li>
+      </ul>
+
+    </ion-row>
+    <formly-form [form]="form"
+      [fields]="fields"
+      [model]="model"></formly-form>
   </form>
 </ion-content>
-   
+
 <ion-footer>
   <ion-toolbar class="ion-text-center">
-    <ion-button color="danger" (click)="submit('draft')" [disabled]="(form.valid)?false:true">
+    <ion-button color="danger"
+      (click)="submit('draft')"
+      [disabled]="(form.valid)?false:true">
       Save as draft
     </ion-button>
-    <ion-button color="danger" (click)="submit('publish')" [disabled]="(form.valid)?false:true">
+    <ion-button color="danger"
+      (click)="submit('publish')"
+      [disabled]="(form.valid)?false:true">
       Save & Publish
     </ion-button>
   </ion-toolbar>
