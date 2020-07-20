@@ -5,10 +5,17 @@ import { scan } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AlertController } from '@ionic/angular';
 import { AppAlertService } from 'src/app/utils/app-alert.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.scss'],
+  styleUrls: ['./post-list.component.scss']
 })
 export class PostListComponent implements OnInit, OnDestroy {
   public postList = [];
@@ -16,7 +23,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   showAgendaView = false;
   limit = 5;
   offset = 0;
-  
+
   postBehavior = new BehaviorSubject<{ opt: any, list: [] }>({ opt: 'list', list: [] });
   list$: Observable<any[]>;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";

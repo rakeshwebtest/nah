@@ -4,6 +4,7 @@ import { PostService } from '../post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppAlertService } from 'src/app/utils/app-alert.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-post-detatils',
@@ -18,7 +19,7 @@ export class PostDetatilsComponent implements OnInit {
   userInfo: any = {};
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
   constructor(private postS: PostService, private activeRoute: ActivatedRoute, private http: AppHttpClient,
-    private alertS: AppAlertService,
+    private alertS: AppAlertService, private alertCtrl: AlertController,
     private authService: AuthenticationService) { }
 
   ngOnInit() {
@@ -126,11 +127,42 @@ export class PostDetatilsComponent implements OnInit {
   replyComment(c) {
     this.replyMsg = c;
   }
-  deleteComment() {
+  async deleteComment(items: any[], inx, reply) {
+    let alert = await this.alertCtrl.create({
+      message: 'Do you want to delete this Comment?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Okay',
+          handler: () => {
+            const comment = items[inx];
+            let _url = 'posts/comment/';
+            if (reply) {
+              _url += 'reply/' + comment.id;
 
+            } else {
+              _url += comment.id;
+            }
+
+            this.http.delete(_url).subscribe(res => {
+
+            });
+            items.splice(inx, 1);
+
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
   clearReply() {
-
+    this.replyMsg = {};
   }
 
 }

@@ -15,7 +15,7 @@ export const getIonPageElement = (element: HTMLElement) => {
     // idk, return the original element so at least something animates and we don't have a null pointer
     return element;
 };
-export const fancyAnimation = (_: HTMLElement, opts: any) => {
+export function fancyAnimation(_: HTMLElement, opts: any) {
     const backDirection = opts.direction === 'back';
     const enteringEl = opts.enteringEl;
     const leavingEl = opts.leavingEl;
@@ -94,3 +94,4 @@ export const modalEnterAnimation = (baseEl: any) => {
 export const modalLeaveAnimation = (baseEl: any) => {
     return modalEnterAnimation(baseEl).direction('reverse');
 };
+
