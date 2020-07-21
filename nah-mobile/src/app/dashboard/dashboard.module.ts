@@ -18,10 +18,11 @@ import { CommunityTabComponent } from './community-tab/community-tab.component';
   ],
   imports: [
     MeetingsPageModule,
+    RouterModule,
     CommonModule,
     IonicModule,
     MeetingListModule
   ],
-  exports:[DashboardComponent,BottomTabsComponent,CommunityTabComponent]
+  exports: [DashboardComponent, BottomTabsComponent, CommunityTabComponent]
 })
 export class DashboardModule { }

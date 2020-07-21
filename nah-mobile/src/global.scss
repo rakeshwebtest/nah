@@ -221,7 +221,9 @@ vertical-field {
     font-size: 16px !important;
     border-radius: 12px;
     padding: 3px 0px;
+    
 }
+
 .text-small {
     font-size: 12px;
 }
@@ -231,6 +233,7 @@ vertical-field {
 .text-large {
     font-size: 16px;
 }
+
 formly-field-file ion-input,
 app-lazy-upload-field ion-input {
     width: 100% !important;
@@ -705,6 +708,7 @@ ion-button {
     --border-radius: 20px;
     margin-top: 0;
     margin-bottom: 0;
+    text-transform: capitalize;
 }
 .custom-height {
     min-height: 42px;

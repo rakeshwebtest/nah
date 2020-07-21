@@ -85,10 +85,6 @@ const routes: Routes = [
                 loadChildren: () => import('./bookmark/bookmark.module').then(m => m.BookmarkPageModule)
               },
               {
-                path: 'search',
-                loadChildren: () => import('./search/search.module').then(m => m.SearchPageModule)
-              },
-              {
                 path: 'notifications',
                 loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsPageModule)
               }
@@ -134,9 +130,14 @@ const routes: Routes = [
       {
         path: 'live-chat',
         loadChildren: () => import('./live-chat/live-chat.module').then(m => m.LiveChatPageModule)
+      },
+      {
+        path: 'search',
+        loadChildren: () => import('./search/search.module').then(m => m.SearchPageModule)
       }
     ]
   }
+
 
 ];
 
