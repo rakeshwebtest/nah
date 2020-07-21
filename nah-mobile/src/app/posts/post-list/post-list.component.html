@@ -1,4 +1,15 @@
 <ion-content>
+  <ion-refresher pullFactor="0.5"
+  pullMin="100"
+  pullMax="200"
+  slot="fixed"
+  (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content pullingIcon="arrow-dropdown"
+    pullingText="Pull to refresh"
+    refreshingSpinner="none"
+    refreshingText="Refreshing...">
+  </ion-refresher-content>
+</ion-refresher>
   <ion-grid>
     <ion-row class="ion-align-items-center no-meetings"
       *ngIf="(list$ | async).length == 0">
