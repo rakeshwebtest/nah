@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000',
-  apiUrl1: 'http://nah.theapp.in'
+  apiUrl1: 'http://localhost:3000',
+  apiUrl: 'http://nah.theapp.in'
 };
 
 /*

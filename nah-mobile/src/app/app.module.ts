@@ -22,7 +22,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedProfileEditModule } from './shared/shared-profile-edit.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { fancyAnimation } from './animations';
+import { myTransitionAnimation } from './animations';
 
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 // IonicStorageModule.forRoot({
@@ -45,7 +45,7 @@ import { fancyAnimation } from './animations';
     IonicModule.forRoot(
       {
         backButtonText: '',
-        navAnimation: fancyAnimation
+        navAnimation: myTransitionAnimation
       }
     ),
     IonicSelectableModule,
