@@ -118,8 +118,7 @@
       "cordova-plugin-nativestorage": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-statusbar": {},
-      "cordova-plugin-google-analytics": {},
-      "cordova-plugin-firebase": {}
+      "cordova-plugin-google-analytics": {}
     }
   }
 }
