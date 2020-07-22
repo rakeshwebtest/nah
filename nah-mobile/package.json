@@ -40,6 +40,8 @@
     "@ngx-gallery/core": "^5.0.0-beta.0",
     "@ngx-gallery/gallerize": "^5.0.0-beta.0",
     "@ngx-gallery/lightbox": "^5.0.0-beta.0",
+    "cordova-android": "8.1.0",
+    "cordova-browser": "5.0.4",
     "cordova-plugin-browsersync": "^1.1.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-google-analytics": "^1.8.6",
@@ -57,6 +59,7 @@
     "ionic-selectable": "4.5.1",
     "ionicons": "^4.6.4-1",
     "ngx-ionic-image-viewer": "^0.4.0",
+    "ngx-socket-io": "^3.2.0",
     "ngx-timeago": "^1.0.3",
     "node-sass": "^4.14.1",
     "rxjs": "~6.5.1",
@@ -74,8 +77,8 @@
     "@angular/compiler-cli": "~8.1.2",
     "@angular/language-service": "~8.1.2",
     "@babel/compat-data": "7.8.0",
-    "@ionic/angular-toolkit": "2.1.1",
-    "@ionic/app-scripts": "3.2.2",
+    "@ionic/angular-toolkit": "^2.1.1",
+    "@ionic/app-scripts": "^3.2.2",
     "@ionic/lab": "2.0.17",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
@@ -98,8 +101,9 @@
   "description": "An Ionic project",
   "cordova": {
     "platforms": [
-      "ios",
-      "browser"
+      "browser",
+      "android",
+      "ios"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
@@ -108,6 +112,7 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.196016802810-uuir6evcgcbl9lvr2ger7s1qdfj9iehr",
+        "WEB_APPLICATION_CLIENT_ID": "196016802810-lnb3pk45vliiddoqokmgd7jfk33mb36c.apps.googleusercontent.com",
         "PLAY_SERVICES_VERSION": "15.0.1"
       },
       "cordova-plugin-nativestorage": {},

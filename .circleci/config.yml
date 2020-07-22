@@ -29,10 +29,6 @@ jobs:
             command: |
               cd nah-mobile
       - run:
-            name: "npm cache clear "
-            command: |
-              cd nah-mobile && npm uninstall cordova ionic && npm cache clean -f
-      - run:
             name: "Install ionic and cordova"
             command: |
               sudo npm install -g ionic cordova
