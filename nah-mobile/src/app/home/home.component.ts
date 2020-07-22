@@ -5,6 +5,8 @@ import { Route, Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { UserConfigService } from '../utils/user-config.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'theapp-home',
@@ -25,7 +27,8 @@ export class HomeComponent {
     public loadingController: LoadingController,
     private platform: Platform,
     public alertController: AlertController,
-    private userConfigService: UserConfigService
+    private userConfigService: UserConfigService,
+    private fireAuth: AngularFireAuth
   ) {
   }
 
@@ -52,10 +55,26 @@ export class HomeComponent {
       message: 'Please wait...'
     });
     this.presentLoading(loading);
-    this.googlePlus.login({
-      offline: true
-    }).then(user => {
+    let params;
+    console.log('this.platform', this.platform.is('cordova'));
+    if (this.platform.is('android')) {
+      params = {
+        webClientId: '196016802810-lnb3pk45vliiddoqokmgd7jfk33mb36c.apps.googleusercontent.com',
+        offline: true
+      };
+    } else if (this.platform.is('cordova')) {
+      params = {
+        webClientId: '196016802810-lnb3pk45vliiddoqokmgd7jfk33mb36c.apps.googleusercontent.com',
+        offline: true
+      };
+    }
+
+
+
+    this.googlePlus.login(params).then(user => {
       this.login(user);
+      const { idToken, accessToken } = user;
+      this.onLoginSuccess(idToken, accessToken);
       loading.dismiss();
     }, err => {
       console.log(err);
@@ -84,6 +103,17 @@ export class HomeComponent {
     });
 
     await alert.present();
+  }
+
+  onLoginSuccess(accessToken, accessSecret) {
+    const credential = accessSecret ? firebase.auth.GoogleAuthProvider
+      .credential(accessToken, accessSecret) : firebase.auth.GoogleAuthProvider
+        .credential(accessToken);
+    this.fireAuth.signInWithCredential(credential)
+      .then((response) => {
+
+      });
+
   }
 
 
