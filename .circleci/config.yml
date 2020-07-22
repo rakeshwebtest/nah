@@ -29,12 +29,16 @@ jobs:
             command: |
               cd nah-mobile
       - run:
-            name: "Install ionic and cordova"
+            name: "npm change clear"
             command: |
-              sudo npm install -g ionic cordova
+              cd nah-mobile && sudo npm cache clean -f
       - run:
             name: "Install npm packages"
-            command: |
+            command: | 
+              cd nah-mobile && yarn install
+      - run:
+            name: "Install npm packages"
+            command: | 
               cd nah-mobile && yarn install
       - run:
             name: "Install Cordova plugins and add android platform"
