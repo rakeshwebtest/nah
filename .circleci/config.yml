@@ -28,10 +28,11 @@ jobs:
             name: "move nah mobile folder"
             command: |
               cd nah-mobile
+			   
       - run:
             name: "Install ionic and cordova"
             command: |
-              sudo npm install -g ionic cordova
+              sudo npm install -g ionic cordova node-gyp
       - run:
             name: "Install npm packages"
             command: |

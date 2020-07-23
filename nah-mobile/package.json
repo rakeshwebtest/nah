@@ -101,8 +101,7 @@
   "cordova": {
     "platforms": [
       "browser",
-      "ios",
-      "android"
+      "ios"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
