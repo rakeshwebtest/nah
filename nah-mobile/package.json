@@ -39,6 +39,7 @@
     "@ngx-gallery/core": "^5.0.0-beta.0",
     "@ngx-gallery/gallerize": "^5.0.0-beta.0",
     "@ngx-gallery/lightbox": "^5.0.0-beta.0",
+    "cordova-android": "^8.1.0",
     "cordova-android-play-services-gradle-release": "4.0.0",
     "cordova-browser": "5.0.4",
     "cordova-plugin-browsersync": "^1.1.0",
@@ -103,7 +104,8 @@
   "cordova": {
     "platforms": [
       "browser",
-      "ios"
+      "ios",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
@@ -120,6 +122,12 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-google-analytics": {
         "GMS_VERSION": "11.0.1"
+      },
+      "cordova-plugin-fcm-with-dependecy-updated": {
+        "FCM_VERSION": "19.0.0",
+        "GRADLE_TOOLS_VERSION": "3.5.3",
+        "GOOGLE_SERVICES_VERSION": "4.3.3",
+        "SUPPORT_LIBRARY_VERSION": "28.0.0"
       },
       "cordova-android-play-services-gradle-release": {
         "PLAY_SERVICES_VERSION": "16.+",
@@ -175,8 +183,7 @@
         "PLAY-SERVICES-VISION-IMAGE-LABEL": "18.0.0",
         "PLAY-SERVICES-WALLET": "17.0.0",
         "PLAY-SERVICES-WEARABLE": "17.0.0"
-      },
-      "cordova-plugin-firebase-lib": {}
+      }
     }
   }
 }
