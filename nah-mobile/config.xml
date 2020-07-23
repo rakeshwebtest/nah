@@ -120,4 +120,7 @@
         <variable name="ANDROID_GOOGLE_SERVICES_VERSION" value="4.3.3" />
         <variable name="ANDROID_DEFAULT_NOTIFICATION_ICON" value="@mipmap/notification_icon" />
     </plugin>
+    <engine name="browser" spec="5.0.4" />
+    <engine name="ios" spec="~5.0.1" />
+    <engine name="android" spec="~8.0.0" />
 </widget>
