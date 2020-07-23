@@ -122,10 +122,6 @@
         "GMS_VERSION": "11.0.1"
       },
       "cordova-plugin-fcm-with-dependecy-updated": {
-        "ANDROID_FCM_VERSION": "19.0.0",
-        "ANDROID_GRADLE_TOOLS_VERSION": "5.4.1",
-        "ANDROID_GOOGLE_SERVICES_VERSION": "4.3.3",
-        "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/notification_icon",
         "FCM_VERSION": "19.0.0",
         "GRADLE_TOOLS_VERSION": "3.5.3",
         "GOOGLE_SERVICES_VERSION": "4.3.3",
