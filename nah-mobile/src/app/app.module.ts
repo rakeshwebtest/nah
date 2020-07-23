@@ -23,8 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedProfileEditModule } from './shared/shared-profile-edit.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { myTransitionAnimation } from './animations';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireModule } from '@angular/fire';
+// import { AngularFireAuthModule } from '@angular/fire/auth';
+// import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
@@ -45,8 +45,8 @@ import { environment } from 'src/environments/environment';
     CommonModule,
     SharedProfileEditModule,
     DashboardModule,
-    AngularFireModule.initializeApp(environment.fbConfig),
-    AngularFireAuthModule,
+    // AngularFireModule.initializeApp(environment.fbConfig),
+    // AngularFireAuthModule,
     IonicModule.forRoot(
       {
         backButtonText: '',

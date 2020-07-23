@@ -115,4 +115,10 @@
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+    <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^6.4.3">
+        <variable name="ANDROID_FCM_VERSION" value="19.0.0" />
+        <variable name="ANDROID_GRADLE_TOOLS_VERSION" value="5.4.1" />
+        <variable name="ANDROID_GOOGLE_SERVICES_VERSION" value="4.3.3" />
+        <variable name="ANDROID_DEFAULT_NOTIFICATION_ICON" value="@mipmap/notification_icon" />
+    </plugin>
 </widget>

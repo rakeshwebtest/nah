@@ -5,7 +5,7 @@ import { Route, Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { UserConfigService } from '../utils/user-config.service';
 import { AuthenticationService } from '../services/authentication.service';
-import { AngularFireAuth } from '@angular/fire/auth';
+// import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 
 @Component({
@@ -27,9 +27,10 @@ export class HomeComponent {
     public loadingController: LoadingController,
     private platform: Platform,
     public alertController: AlertController,
-    private userConfigService: UserConfigService,
-    private fireAuth: AngularFireAuth
+    private userConfigService: UserConfigService
+
   ) {
+    //     private fireAuth: AngularFireAuth
   }
 
   signInWithGoogleTest(): void {
@@ -106,13 +107,13 @@ export class HomeComponent {
   }
 
   onLoginSuccess(accessToken, accessSecret) {
-    const credential = accessSecret ? firebase.auth.GoogleAuthProvider
-      .credential(accessToken, accessSecret) : firebase.auth.GoogleAuthProvider
-        .credential(accessToken);
-    this.fireAuth.signInWithCredential(credential)
-      .then((response) => {
+    // const credential = accessSecret ? firebase.auth.GoogleAuthProvider
+    //   .credential(accessToken, accessSecret) : firebase.auth.GoogleAuthProvider
+    //     .credential(accessToken);
+    // this.fireAuth.signInWithCredential(credential)
+    //   .then((response) => {
 
-      });
+    //   });
 
   }
 
