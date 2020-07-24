@@ -128,10 +128,6 @@ const routes: Routes = [
         loadChildren: () => import('./profile-edit/profile-edit.module').then(m => m.ProfileEditPageModule)
       },
       {
-        path: 'live-chat',
-        loadChildren: () => import('./live-chat/live-chat.module').then(m => m.LiveChatPageModule)
-      },
-      {
         path: 'search',
         loadChildren: () => import('./search/search.module').then(m => m.SearchPageModule)
       }

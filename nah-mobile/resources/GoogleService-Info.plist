@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>196016802810-uuir6evcgcbl9lvr2ger7s1qdfj9iehr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.196016802810-uuir6evcgcbl9lvr2ger7s1qdfj9iehr</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC6w-PutHaNfBew7r4-6h2rU_lD90HGir0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>196016802810</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.nah.mobile</string>
+	<key>PROJECT_ID</key>
+	<string>nah-mobile-a6ab8</string>
+	<key>STORAGE_BUCKET</key>
+	<string>nah-mobile-a6ab8.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:196016802810:ios:c9a9b2509436bcc89db243</string>
+	<key>DATABASE_URL</key>
+	<string>https://nah-mobile-a6ab8.firebaseio.com</string>
+</dict>
+</plist>
