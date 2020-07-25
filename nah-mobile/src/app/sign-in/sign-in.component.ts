@@ -6,7 +6,7 @@ import { LoadingController, AlertController } from '@ionic/angular';
 import { LoadingService } from '../utils/loading.service';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { Subscription, Observable } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { map } from 'rxjs/operators';
 export interface City {
   id: number;
   name: string;

@@ -7,6 +7,7 @@ import { UserConfigService } from '../utils/user-config.service';
 import { AuthenticationService } from '../services/authentication.service';
 // import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
+import { MessagingService } from '../utils/messaging.service';
 
 @Component({
   selector: 'theapp-home',
@@ -27,7 +28,8 @@ export class HomeComponent {
     public loadingController: LoadingController,
     private platform: Platform,
     public alertController: AlertController,
-    private userConfigService: UserConfigService
+    private userConfigService: UserConfigService,
+    private fcmService: MessagingService
 
   ) {
     //     private fireAuth: AngularFireAuth
@@ -86,6 +88,10 @@ export class HomeComponent {
     });
   }
   async login(user) {
+    if (this.fcmService.fcmToken) {
+      user.fcmToken = this.fcmService.fcmToken;
+    }
+    console.log('user',user);
     this.http.post('user/login', user).subscribe(res => {
       if (res.success) {
         const _resUser: any = res.data;

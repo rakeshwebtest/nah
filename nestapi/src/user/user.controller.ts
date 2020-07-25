@@ -116,6 +116,9 @@ export class UsersController {
             } else {
                 _user = <any>user;
             }
+            if (user.fcmToken) {
+                _user.fcmToken = user.fcmToken;
+            }
             _user = await this.service.updateUser(_user);
         }
 
