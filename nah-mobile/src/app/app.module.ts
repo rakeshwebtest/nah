@@ -28,7 +28,8 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { MessagingService } from './utils/messaging.service';
-
+// FCM
+import { FCM } from '@ionic-native/fcm/ngx';
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 // IonicStorageModule.forRoot({
 //   name: '__nah',
@@ -72,6 +73,7 @@ import { MessagingService } from './utils/messaging.service';
     AuthGuard,
     MessagingService,
     GoogleAnalytics,
+    FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {
