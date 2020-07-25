@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { BehaviorSubject } from 'rxjs';
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MessagingService {
 
   currentMessage = new BehaviorSubject(null);
+  fcmToken: any;
   constructor(private angularFireMessaging: AngularFireMessaging) {
     // this.angularFireMessaging.messaging.subscribe(
     //   (_messaging) => {
@@ -16,6 +19,7 @@ export class MessagingService {
   requestPermission() {
     this.angularFireMessaging.requestToken.subscribe(
       (token) => {
+        this.fcmToken = token;
         console.log(token);
       },
       (err) => {
