@@ -24,8 +24,10 @@ import { SharedProfileEditModule } from './shared/shared-profile-edit.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { myTransitionAnimation } from './animations';
 // import { AngularFireAuthModule } from '@angular/fire/auth';
-// import { AngularFireModule } from '@angular/fire';
+import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { MessagingService } from './utils/messaging.service';
 
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 // IonicStorageModule.forRoot({
@@ -45,7 +47,8 @@ import { environment } from 'src/environments/environment';
     CommonModule,
     SharedProfileEditModule,
     DashboardModule,
-    // AngularFireModule.initializeApp(environment.fbConfig),
+    AngularFireMessagingModule,
+    AngularFireModule.initializeApp(environment.fbConfig),
     // AngularFireAuthModule,
     IonicModule.forRoot(
       {
@@ -67,6 +70,7 @@ import { environment } from 'src/environments/environment';
     SplashScreen,
     GooglePlus,
     AuthGuard,
+    MessagingService,
     GoogleAnalytics,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LocationStrategy, useClass: HashLocationStrategy },

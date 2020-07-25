@@ -4,8 +4,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Platform } from '@ionic/angular';
 import { Router, NavigationEnd } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AuthenticationService } from './services/authentication.service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { MessagingService } from './utils/messaging.service';
 @Component({
   selector: 'theapp-root',
   templateUrl: './app.component.html',
@@ -25,13 +25,14 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private router: Router,
     private ga: GoogleAnalytics,
-    private authenticationService: AuthenticationService
+    private messagingService: MessagingService
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.messagingService.requestPermission();
       this.ga.startTrackerWithId('UA-158946994-1')
         .then(() => {
           this.startTracking();
@@ -70,8 +71,6 @@ export class AppComponent {
       //     this.router.navigate(['home']);
       //   }
       // });
-
-
       this.splashScreen.hide();
       this.statusBar.styleDefault();
     });
