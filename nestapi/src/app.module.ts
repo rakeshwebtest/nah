@@ -15,6 +15,8 @@ import { UserEntity } from './user/user.entity';
 import { PostsModule } from './posts/posts.module';
 import { AssetsModule } from './assets/assets.module';
 import { ChatModule } from './chat/chat.module';
+import { NotificationsModule } from './notifications/notifications.module';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({ ...DB, entities: [path.join(__dirname, '**/*.entity{.ts,.js}')] }),
@@ -28,7 +30,8 @@ import { ChatModule } from './chat/chat.module';
     CityModule,
     PostsModule,
     AssetsModule,
-    ChatModule
+    ChatModule,
+    NotificationsModule
   ],
   controllers: [AppController],
   providers: [AuthMiddleware, UserService],

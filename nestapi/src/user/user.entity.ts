@@ -39,9 +39,11 @@ export class UserEntity extends BaseEntity {
     @Column({ type: 'text', nullable: true, select: false })
     idToken: string;
 
+    @Column({ type: 'text', nullable: true, select: false })
+    fcmToken: string; // fcmToken
+
     @Column({ length: 25, nullable: true })
     typeOfNoer: string;
-
 
     // @Column({ length: 25, default: '' })
     // country: string;
@@ -66,11 +68,9 @@ export class UserEntity extends BaseEntity {
 
     @OneToMany(type => MeetingMembersEntity, mm => mm.user, { onDelete: 'CASCADE' })
     meetingMember: MeetingMembersEntity[];
-    
 
     @OneToMany(type => PostEntity, post => post.createdBy, { onDelete: 'CASCADE' })
     posts: PostEntity[];
-
 
     @OneToMany(type => GroupEntity, group => group.createdBy, { onDelete: 'CASCADE' })
     groups: GroupEntity[];

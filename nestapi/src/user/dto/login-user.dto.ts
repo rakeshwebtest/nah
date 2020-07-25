@@ -12,4 +12,5 @@ export class LoginUserDto {
   readonly password: string;
   id: number;
   updatedDate: Date;
+  fcmToken: string;
 }
