@@ -431,7 +431,7 @@ ion-footer {
             right: 15px;
         }
         .searchbar-clear-button.sc-ion-searchbar-md {
-            right: 40px;
+            right: 50px;
         }
     }
 }
@@ -713,8 +713,7 @@ ion-button {
 .custom-height {
     min-height: 42px;
 }
-.text-justify,
-p {
+.text-justify {
     text-align: justify;
 }
 .mb-15 {
@@ -750,4 +749,39 @@ p {
 }
 app-agenda-view {
     width: 100%;
+}
+.searchbar-input-container{
+    .searchbar-input{
+        border-radius: 25px;
+        background: #fff !important;
+        color: #000;
+        padding-left: 15px;
+        padding-right: 75px;
+    }
+    .searchbar-search-icon{
+        right: 9px;
+        left: inherit;
+        background-color: #f00;
+        color: #fff;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: block;
+        padding: 5px;
+        top: 6px;
+    }
+}
+.searchbar-has-value{
+    .searchbar-clear-button{
+        right: 40px;
+        left: inherit;
+        background-color: #f00;
+        color: #fff;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: block;
+        padding: 5px;
+        top: 6px;
+    }
 }
