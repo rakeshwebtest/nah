@@ -16,6 +16,6 @@ export interface UserConfig {
 })
 export class UserConfigService {
   user: UserConfig;
-  updateProfile:any;
+  updateProfile: any;
   constructor() { }
 }

@@ -14,3 +14,15 @@ export class LoginUserDto {
   updatedDate: Date;
   fcmToken: string;
 }
+
+export class FollowDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  followingId: Number;
+}
+
+export class ProfileBlockDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  userId: Number;
+}

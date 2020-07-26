@@ -21,9 +21,9 @@
     <ion-row class="post-widget"
       *ngFor="let post of list$ | async; let inx = index">
       <ion-card class="post-list">
-        <ion-card-header (click)="navDetails(post)">
+        <ion-card-header >
           <ion-row>
-            <ion-col size="auto"
+            <ion-col size="auto" (click)="navProfile(post.createdBy)"
               class="col-avatar">
               <ion-avatar class="post-avatar">
                 <img [src]="post.createdBy.imageUrl" />

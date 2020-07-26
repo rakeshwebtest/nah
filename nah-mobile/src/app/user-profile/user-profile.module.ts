@@ -12,14 +12,18 @@ const routes: Routes = [
   {
     path: '',
     component: UserProfileComponent,
-    children: [
-      {
-        path: ':type',
-        component: GroupListComponent
-      }
-    ]
+    // children: [
+    //   {
+    //     path: ':type',
+    //     component: GroupListComponent
+    //   }
+    // ]
+  },
+  {
+    path: ':id',
+    component: UserProfileComponent
   }
-]
+];
 
 @NgModule({
   declarations: [

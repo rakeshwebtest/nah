@@ -4,7 +4,7 @@ import { AppHttpClient } from '../utils';
 import { AuthenticationService } from '../services/authentication.service';
 import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
 import { GroupCreateModalComponent } from '../group-create-modal/group-create-modal.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { GroupListComponent } from '../shared/group-list/group-list.component';
 
 @Component({
@@ -20,6 +20,8 @@ export class UserProfileComponent implements OnInit {
   rating = 1;
   points = 100;
   showLoading = false;
+  isOtherProfile = false;
+  sessionUser: any;
   @ViewChild(GroupListComponent, { static: false }) groupC: GroupListComponent;
 
   customColors = ['#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000'];
@@ -28,34 +30,57 @@ export class UserProfileComponent implements OnInit {
     private modalController: ModalController,
     private alertCtrl: AlertController,
     private router: Router,
+    private activeRouter: ActivatedRoute,
     private http: AppHttpClient) { }
 
   ngOnInit() {
     const userInfo: any = this.authService.isAuthenticated();
-    this.userInfo = userInfo.user;
-    this.googlePic = userInfo.user.imageUrl;   
+    this.sessionUser = userInfo.user;
+    this.isOtherProfile = (this.activeRouter.snapshot.params.id && this.activeRouter.snapshot.params.id != this.sessionUser.id) ? true : false;
     this.getUserRating();
   }
   getUserRating() {
-    let url = 'user/' + this.userInfo.id;
+    const profileId = this.activeRouter.snapshot.params.id || this.sessionUser.id;
+    const url = 'user/' + profileId;
     this.showLoading = true;
     this.http.get(url).subscribe(res => {
       this.userInfo = res.data;
-      if(res.data && res.data.score) {
+      if (res.data && res.data.score) {
         this.points = res.data.score;
       }
+      this.googlePic = res.data.imageUrl;
       this.getRating();
-      this.showLoading = false;      
+      this.showLoading = false;
+    });
+  }
+  following() {
+    this.http.post('user/follow', { followingId: this.activeRouter.snapshot.params.id }).subscribe(res => {
+      this.userInfo.following = res;
+    });
+  }
+  unfollowing() {
+    this.http.post('user/unfollow', { followingId: this.activeRouter.snapshot.params.id }).subscribe(res => {
+      this.userInfo.following = null;
+    });
+  }
+  block() {
+    this.http.post('user/profileBlock', { userId: this.activeRouter.snapshot.params.id }).subscribe(res => {
+      this.userInfo.blocked = res;
+    });
+  }
+  unblock() {
+    this.http.post('user/profileUnblock', { userId: this.activeRouter.snapshot.params.id }).subscribe(res => {
+      this.userInfo.blocked = null;
     });
   }
   getRating() {
-    if(this.points < 250) {
+    if (this.points < 250) {
       this.rating = 1;
-    } else if(this.points < 600) {
+    } else if (this.points < 600) {
       this.rating = 2;
-    } else if(this.points < 1300) {
+    } else if (this.points < 1300) {
       this.rating = 3;
-    } else if(this.points < 3000) {
+    } else if (this.points < 3000) {
       this.rating = 4;
     } else {
       this.rating = 5;

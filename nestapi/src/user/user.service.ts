@@ -1,6 +1,6 @@
 import { Injectable, Inject, HttpException, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Like, getRepository } from 'typeorm';
+import { Repository, Like, getRepository, getConnection } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { SECRET } from '../config';
 const jwt = require('jsonwebtoken');
@@ -47,16 +47,22 @@ export class UserService implements OnModuleInit {
             where: [{ id: _id }]
         });
     }
-    async getUser(_id: number): Promise<any> {
+    async getUser(_id: number, sessionUser?: any): Promise<any> {
         const db = getRepository(UserEntity)
             .createQueryBuilder("u");
-        db.select(["u", "c"]);
+        db.select(["u", "c", "followers"]);
         db.leftJoin('u.city', 'c');
         db.loadRelationCountAndMap('u.commentsCount', 'u.comments', 'commentsCount');
         db.loadRelationCountAndMap('u.groupsCount', 'u.groups', 'groups');
         db.loadRelationCountAndMap('u.groupFollowingCount', 'u.following', 'followingCount');
         db.loadRelationCountAndMap('u.meetingsCount', 'u.meetings', 'mc', qb => qb.where('mc.isPublished = 1 && mc.isCanceled = 0'));
-        db.loadRelationCountAndMap('u.meetingJoinCount', 'u.meetingMember', 'meetingsjoin');
+        db.loadRelationCountAndMap('u.meetingJoinCount', 'u.meetingMember', 'meetingsjoin')
+            .leftJoin("u.followers", 'followers');
+        if (sessionUser && sessionUser.id) {
+            db.leftJoinAndMapOne("u.following", "u.following", "isFollowing", "isFollowing.id=" + sessionUser.id);
+            db.leftJoinAndMapOne("u.blocked", "u.blocked", "isBlocked", "isFollowing.id=" + sessionUser.id);
+        }
+
         db.where('u.id=:id', { id: _id });
         const data: any = await db.getOne();
         data.score = this.getScore(data);
@@ -124,6 +130,42 @@ export class UserService implements OnModuleInit {
         };
 
         return { user: userRO };
+    }
+    async follow(userId, followingId) {
+
+        return getConnection()
+            .createQueryBuilder()
+            .relation(UserEntity, "following")
+            .of(followingId)
+            .add(userId);
+
+    }
+    async unfollow(userId, followingId) {
+
+        return getConnection()
+            .createQueryBuilder()
+            .relation(UserEntity, "following")
+            .of(followingId)
+            .remove(userId);
+
+    }
+    async profileBlock(userId, profileId) {
+
+        return getConnection()
+            .createQueryBuilder()
+            .relation(UserEntity, "blocked")
+            .of(profileId)
+            .add(userId);
+
+    }
+    async profileUnblock(userId, profileId) {
+
+        return getConnection()
+            .createQueryBuilder()
+            .relation(UserEntity, "blocked")
+            .of(profileId)
+            .remove(userId);
+
     }
     public getScore(data: any) {
         const { commentsCount, groupsCount, groupFollowingCount, meetingJoinCount, meetingsCount } = data;
