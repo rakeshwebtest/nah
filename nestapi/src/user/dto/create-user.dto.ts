@@ -20,6 +20,13 @@ export class UserLIstQuery {
     search: string;
     @ApiProperty({ required: false, enum: ["active", "block"] })
     status: string;
+
+    @ApiProperty({ required: false, enum: ["following", "followers", "blocked"] })
+    type: string;
+
+    @ApiProperty({ required: false })
+    userId: string;
+
     @ApiProperty({ required: false, name: 'take', default: 1000 })
     take: number;
     @ApiProperty({ required: false, name: 'skip', default: 0 })

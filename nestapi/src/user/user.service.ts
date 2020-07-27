@@ -6,7 +6,7 @@ import { SECRET } from '../config';
 const jwt = require('jsonwebtoken');
 import { UserRO } from './user.interface';
 import { LoginUserDto } from './dto';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, UserLIstQuery } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService implements OnModuleInit {
@@ -26,12 +26,33 @@ export class UserService implements OnModuleInit {
             console.log('created user');
         }
     }
-    async getUsers(query): Promise<UserEntity[]> {
+    async getUsers(query: UserLIstQuery): Promise<UserEntity[]> {
         const take = query.take || 5000;
         const skip = query.skip || 0;
+
         const db = getRepository(UserEntity)
             .createQueryBuilder("u").select(["u", "c"]);
         db.leftJoin('u.city', 'c');
+
+
+        switch (query.type) {
+            case 'following':
+                db.leftJoinAndSelect('u.following', 'followers');
+                db.andWhere('followers.id=:id', { id: query.userId });
+                break;
+            case 'followers':
+                db.leftJoin('u.followers', 'followers');
+                db.andWhere('followers.id=:id', { id: query.userId });
+                break;
+            case 'blocked':
+                db.leftJoin('u.blocked', 'blocked');
+                db.andWhere('blocked.id=:id', { id: query.userId });
+                break;
+
+            default:
+                break;
+        }
+
         if (query.search)
             db.where("(u.email like :name or u.displayName like :name)", { name: '%' + query.search + '%' })
         if (query.status)
