@@ -455,7 +455,7 @@ ion-footer {
     // border-radius: 35px 35px 0 0;
     // background-color: #F04141;
     .tab-has-label {
-        color: #999999;
+        color: #333;
         // color: rgba(255,255,255, 0.5);
         font-size: 12px;
         // background-color: #F04141;
@@ -463,7 +463,7 @@ ion-footer {
             font-size: 11px;
         }
         @media (max-width: 400px) {
-            max-width: 19%;
+            // max-width: 19%;
         }
         border-bottom: none;
         &.tab-selected {
