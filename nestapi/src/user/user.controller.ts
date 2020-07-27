@@ -13,6 +13,7 @@ import { CreateUserDto, UserLIstQuery, ChangePassword } from './dto/create-user.
 import { GroupService } from 'src/group/group.service';
 import { CreateGroupDto } from 'src/group/dto/create-group.dto';
 import { CityEntity } from 'src/city/city.entity';
+import { FollowDto, ProfileBlockDto } from './dto/login-user.dto';
 
 @ApiTags('Users')
 @Controller('user')
@@ -74,8 +75,9 @@ export class UsersController {
 
     @ApiBearerAuth()
     @Get(':userId')
-    async get(@Param('userId') id: number) {
-        const data: any = await this.service.getUser(id);
+    async get(@Param('userId') id: number, @Request() req) {
+        const sessionUser: any = req['sessionUser'];
+        const data: any = await this.service.getUser(id, sessionUser);
         return { message: false, data, success: true };
     }
     // @Post('users/login')
@@ -125,6 +127,34 @@ export class UsersController {
         token = await this.service.generateJWT(_user);
 
         return { message: false, success: true, data: { user: _user || user, token } };
+    }
+
+    @Post('follow')
+    async follow(@Body() follower: FollowDto, @Req() req) {
+        const sessionUser = req.sessionUser;
+        const data = await this.service.follow(sessionUser.id, follower.followingId);
+        return { message: 'Successfully Follow', success: true, data };
+    }
+
+    @Post('unfollow')
+    async unfollow(@Body() follower: FollowDto, @Req() req) {
+        const sessionUser = req.sessionUser;
+        const data: any = await this.service.unfollow(sessionUser.id, follower.followingId);
+        return { message: 'Successfully unFollow', success: true, data };
+    }
+
+    @Post('profileBlock')
+    async profileBlock(@Body() profileUser: ProfileBlockDto, @Req() req) {
+        const sessionUser = req.sessionUser;
+        const data = await this.service.profileBlock(sessionUser.id, profileUser.userId);
+        return { message: 'Successfully blocked profile', success: true, data };
+    }
+
+    @Post('profileUnblock')
+    async profileUnblock(@Body() profileUser: ProfileBlockDto, @Req() req) {
+        const sessionUser = req.sessionUser;
+        const data: any = await this.service.profileUnblock(sessionUser.id, profileUser.userId);
+        return { message: 'Successfully Unblocked profile', success: true, data };
     }
 
     @ApiBearerAuth()

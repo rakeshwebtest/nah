@@ -34,7 +34,7 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      if (this.platform.is('android')) {
+      if (this.platform.is('android') && this.fcm) {
         // get FCM token
         this.fcm.getToken().then(token => {
           this.messagingService.fcmToken = token;

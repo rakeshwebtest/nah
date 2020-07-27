@@ -13,7 +13,7 @@ export class GroupFollowEntity extends BaseEntity {
     // @Column()
     // userId: number;
 
-    @ManyToOne(type => UserEntity, user => user.following, { onDelete: 'CASCADE' })
+    @ManyToOne(type => UserEntity, user => user.groupFollowing, { onDelete: 'CASCADE' })
     user: UserEntity;
 
 }

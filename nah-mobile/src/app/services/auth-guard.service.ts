@@ -21,11 +21,11 @@ export class AuthGuard implements CanActivate {
           this.authenticationService.authState.next(res);
           resolve(true);
         } else {
-          //this.router.parseUrl("/home");
+          // this.router.parseUrl("/home");
           this.router.navigate(['/home']);
           resolve(false);
         }
-      })
+      });
     });
     // return data.then(res => {
     //   if (res) {

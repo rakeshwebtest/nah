@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToOne, ManyToMany, Index } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToOne, ManyToMany, Index, JoinTable, RelationCount, JoinColumn } from 'typeorm';
 import { BaseEntity } from './../shared/base.entity';
 import { GroupEntity } from 'src/group/group.entity';
 import { GroupFollowEntity } from 'src/group/group-follows.entity';
@@ -45,17 +45,11 @@ export class UserEntity extends BaseEntity {
     @Column({ length: 25, nullable: true })
     typeOfNoer: string;
 
-    // @Column({ length: 25, default: '' })
-    // country: string;
-
     @ManyToOne(type => CityEntity, city => city.users, { onDelete: 'CASCADE' })
     city: CityEntity;
 
-    // @OneToMany(type => GroupEntity, group => group.createBy)
-    // groups: GroupEntity[];
-
     @OneToMany(type => GroupFollowEntity, gf => gf.user, { onDelete: 'CASCADE' })
-    following: GroupFollowEntity[];
+    groupFollowing: GroupFollowEntity[];
 
     @OneToMany(type => MeetingEntity, meeting => meeting.createdBy, { onDelete: 'CASCADE' })
     meetings: MeetingEntity[];
@@ -83,5 +77,23 @@ export class UserEntity extends BaseEntity {
 
     @OneToMany(type => MeetingReportEntity, mr => mr.createdBy, { onDelete: 'CASCADE' })
     reports: MeetingReportEntity[];
+
+    @ManyToMany(type => UserEntity, user => user.following)
+    @JoinTable()
+    followers: UserEntity[];
+
+    @ManyToMany(type => UserEntity, user => user.followers)
+    following: UserEntity[];
+
+    @RelationCount((user: UserEntity) => user.followers)
+    followersCount: number;
+
+    @RelationCount((user: UserEntity) => user.following)
+    followingCount: number;
+
+    @ManyToMany(type => UserEntity, user => user.id)
+    @JoinTable()
+    blocked: UserEntity[];
+
 
 }
