@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   showList = false;
   activeTab = 'type/all';
   firstTimeEnter = false;
+  userInfo: any;
   constructor(private authService: AuthenticationService,
     private ms: MeetingListService,
     private activeRouter: ActivatedRoute,
@@ -28,8 +29,8 @@ export class DashboardComponent implements OnInit {
   //   // await this.modalController.dismiss();
   // }
   ionViewDidEnter() {
-    const userInfo: any = this.authService.getUserInfo();
-    this.googlePic = userInfo.imageUrl;
+    this.userInfo = this.authService.getUserInfo();
+    this.googlePic = this.userInfo.imageUrl;
     console.log('ionViewWillEnter');
     if (this.firstTimeEnter)
       this.ms.meetingReload();
@@ -49,6 +50,6 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/meeting/type/' + meetingType]);
   }
   navProfile() {
-    this.router.navigate(['/user-profile']);
+    this.router.navigate(['/user-profile/' + this.userInfo.id]);
   }
 }

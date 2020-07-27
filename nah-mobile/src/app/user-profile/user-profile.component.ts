@@ -22,6 +22,7 @@ export class UserProfileComponent implements OnInit {
   showLoading = false;
   isOtherProfile = false;
   sessionUser: any;
+  profileId: any;
   @ViewChild(GroupListComponent, { static: false }) groupC: GroupListComponent;
 
   customColors = ['#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000'];
@@ -37,6 +38,7 @@ export class UserProfileComponent implements OnInit {
     const userInfo: any = this.authService.isAuthenticated();
     this.sessionUser = userInfo.user;
     this.isOtherProfile = (this.activeRouter.snapshot.params.id && this.activeRouter.snapshot.params.id != this.sessionUser.id) ? true : false;
+    this.profileId = this.activeRouter.snapshot.params.id || this.sessionUser.id;
     this.getUserRating();
   }
   getUserRating() {

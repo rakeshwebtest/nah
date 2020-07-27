@@ -19,42 +19,48 @@
 //     --color: #fff;
 // }
 
-.add-btn{
-    bottom: 5%;
+ion-tabs {
+  top: 150px;
 }
-.icon-big{
-    font-size: 20px;
-    padding: 7px;
-    cursor: pointer;
+.add-btn {
+  bottom: 5%;
 }
-.image-center{
-    margin:0 auto;
-    }
-.card {
-    margin: 0 auto;
-    background-color: #ed3833;
-    border-radius: 0px;
-    .card-body {
-        overflow: hidden;
-        color: white;
-        .username {
-            font-size: 24px;
-            font-weight: 600;
-        }
-        .country {
-            font-size: 90%;
-            
-            text-transform: capitalize;
-            margin: 0 auto;
-        }
-    }
+.icon-big {
+  font-size: 20px;
+  padding: 7px;
+  cursor: pointer;
+}
+.image-center {
+  margin: 0 auto;
+}
+.col-avatar-right {
+  color: black;
+}
 
+.card {
+  margin: 0 auto;
+  background-color: #ed3833;
+  border-radius: 0px;
+  .card-body {
+    overflow: hidden;
+    color: black;
+    .username {
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .country {
+      font-size: 90%;
+
+      text-transform: capitalize;
+      margin: 0 auto;
+    }
+  }
 }
-.group-tabs{
-    // bottom: auto;
-    // top: auto;
-    position: relative;
-    contain: inherit;
+.group-tabs {
+  // bottom: auto;
+  // top: auto;
+  position: relative;
+  contain: inherit;
 }
 
 // [_nghost-mev-c4] {
@@ -70,10 +76,10 @@
 //     contain: inherit;
 //     z-index: inherit;
 // }
-.profile-settings{
-    justify-content: flex-end;
-    ion-icon{
-        font-size: 27px;
-        padding-right: 16px;
-    }
+.profile-settings {
+  justify-content: flex-end;
+  ion-icon {
+    font-size: 27px;
+    padding-right: 16px;
+  }
 }

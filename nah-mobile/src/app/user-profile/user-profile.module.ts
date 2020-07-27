@@ -7,6 +7,8 @@ import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
 import { GroupListModule } from '../shared/group-list/group-list.module';
 import { GroupListComponent } from '../shared/group-list/group-list.component';
 import { AgendaViewModule } from '../agenda/agenda-view/agenda-view.module';
+import { UserListModule } from '../shared/user-list/user-list.module';
+import { UserListComponent } from '../shared/user-list/user-list.component';
 
 const routes: Routes = [
   {
@@ -21,7 +23,18 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: UserProfileComponent
+    component: UserProfileComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'following',
+        pathMatch: 'full'
+      },
+      {
+        path: ':type',
+        component: UserListComponent
+      }
+    ]
   }
 ];
 
@@ -36,7 +49,8 @@ const routes: Routes = [
     CommonModule,
     IonicModule,
     GroupListModule,
-    AgendaViewModule
+    AgendaViewModule,
+    UserListModule
   ]
 })
 export class UserProfileModule { }
