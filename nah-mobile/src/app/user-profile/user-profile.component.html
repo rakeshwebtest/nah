@@ -88,8 +88,17 @@
       <ion-label>Follower</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="blocked">
+    <ion-tab-button tab="blocked" *ngIf="!isOtherProfile">
       <ion-label>Blocked</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="posts" *ngIf="isOtherProfile">
+      <ion-label>Posts</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="groups" *ngIf="isOtherProfile">
+      <ion-label>Groups</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="meetings" *ngIf="isOtherProfile">
+      <ion-label>Meetings</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

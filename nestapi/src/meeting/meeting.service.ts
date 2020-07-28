@@ -43,6 +43,8 @@ export class MeetingService {
         if (query.take)
             take = query.take;
 
+        const userId = (query.userId) ? query.userId : sessionUser.id
+
         const db = getRepository(MeetingEntity)
             .createQueryBuilder('m')
             .leftJoin('m.createdBy', 'u')
@@ -61,7 +63,7 @@ export class MeetingService {
             if (query.groupId) {
                 db.andWhere('group.id= :id', { id: query.groupId });
             } else {
-                db.andWhere('(gf_user.id= :id OR group.createdBy= :id)', { id: sessionUser.id });
+                db.andWhere('(gf_user.id= :id OR group.createdBy= :id)', { id: userId });
             }
 
             if (query.type && query.type === 'upcoming') {
@@ -69,7 +71,12 @@ export class MeetingService {
             }
 
             if (query.type && query.type === 'my-meeting') {
-                db.andWhere('u.id = :id', { id: sessionUser.id })
+                if (userId == sessionUser.id) {
+                    db.andWhere('u.id = :id', { id: userId });
+                } else {
+                    db.andWhere('gf_user.id= :sessionId && u.id = :id && m.isPublished = 1 && m.isCanceled = 0', { id: userId,sessionId:sessionUser.id });
+                }
+
             } else {
                 db.andWhere('(m.isPublished = 1 && m.isCanceled = 0)');
             }
@@ -84,7 +91,7 @@ export class MeetingService {
         if (query.meetingId) { // single meeting
             db.select(["m", "group", "u", "mm", "mp",
                 "user", "city",
-                "mc","mp_createBy", "mv","mv_createBy", "mcr", "mcr_createdBy", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"]);
+                "mc", "mp_createBy", "mv", "mv_createBy", "mcr", "mcr_createdBy", "mc_createdBy.id", "mc_createdBy.imageUrl", "mc_createdBy.displayName"]);
 
             db.leftJoin("m.comments", 'mc')
                 .leftJoin("mc.createdBy", 'mc_createdBy')

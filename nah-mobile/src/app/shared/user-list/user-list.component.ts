@@ -32,12 +32,12 @@ export class UserListComponent implements OnInit, OnDestroy {
   //   console.log('ionViewDidEnter');
   // }
   ionViewWillEnter() {
-    if (this.activeRouter.snapshot.params.type) {
-      this.type = this.activeRouter.snapshot.params.type;
-    }
-    if (this.activeRouter.snapshot.parent.params.id) {
-      this.userId = this.activeRouter.snapshot.parent.params.id;
-    }
+    // if (this.activeRouter.snapshot.params.type) {
+    //   this.type = this.activeRouter.snapshot.params.type;
+    // }
+    // if (this.activeRouter.snapshot.parent.params.id) {
+    //   this.userId = this.activeRouter.snapshot.parent.params.id;
+    // }
 
     this.offset = 0;
     this.loadData();

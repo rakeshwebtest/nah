@@ -30,6 +30,8 @@ export class PostService {
         if (query.take)
             take = query.take;
 
+        const userId = (query.userId) ? query.userId : sessionUser.id;
+
         const db = getRepository(PostEntity)
             .createQueryBuilder('p')
             .leftJoin('p.createdBy', 'u')
@@ -48,7 +50,11 @@ export class PostService {
 
         } else {
             if (query.type && query.type === 'my-posts') {
-                db.andWhere('u.id = :id', { id: sessionUser.id });
+                if (userId == sessionUser.id) {
+                    db.andWhere('u.id = :id', { id: userId });
+                } else {
+                    db.andWhere('u.id = :id && p.isPublished = 1', { id: userId });
+                }
             } else {
                 db.andWhere('(p.isPublished = 1)');
             }

@@ -60,6 +60,12 @@ export class PostQueryDao {
 
     @ApiProperty({ required: false, default: 0 })
     skip: number;
+
+    @ApiProperty({ required: false, default: 0 })
+    userId: number;
+
+    
+
 }
 
 export class GetReportDto {

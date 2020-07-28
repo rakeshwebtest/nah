@@ -24,6 +24,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
   @Input() noMeetingMsg = 'Hmm, seems like they are no meetings.'
   @Input() type = 'all';
   @Input() groupId: any;
+  @Input() userId: any;
   take = 20;
   msSubscription: Subscription;
   constructor(private authService: AuthenticationService,
@@ -50,11 +51,13 @@ export class MeetingListComponent implements OnInit, OnDestroy {
       this.meetingList = [];
     }
     console.log('reload', reload);
+    
     const params = this.activeRouter.snapshot.params;
     const userInfo: any = this.authService.getUserInfo();
+    const _userId = this.userId || userInfo.id;
     this.googlePic = userInfo.imageUrl;
     let queryString = '?type=' + this.type;
-    queryString += '&userId=' + userInfo.id;
+    queryString += '&userId=' + _userId;
     if (this.groupId)
       queryString += '&groupId=' + this.groupId;
     // if (params.type === 'my-meeting') {
