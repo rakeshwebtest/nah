@@ -36,8 +36,9 @@ export class GroupListComponent implements OnInit {
     this.getGroups();
   }
   getGroups(infiniteScroll?: any) {
+    const _userId = (this.userId) ? this.userId : this.userInfo.id;
 
-    let url = 'group/list?userId=' + this.userId || this.userInfo.id;
+    let url = 'group/list?userId=' + _userId;
     if (this.type === 'mygroups') {
       url += '&createdBy=true';
     } else {

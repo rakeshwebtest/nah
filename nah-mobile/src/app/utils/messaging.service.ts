@@ -8,7 +8,9 @@ export class MessagingService {
 
   currentMessage = new BehaviorSubject(null);
   fcmToken: any;
-  constructor(private angularFireMessaging: AngularFireMessaging) {
+  constructor(
+    
+    private angularFireMessaging: AngularFireMessaging) {
     // this.angularFireMessaging.messaging.subscribe(
     //   (_messaging) => {
     //     _messaging.onMessage = _messaging.onMessage.bind(_messaging);

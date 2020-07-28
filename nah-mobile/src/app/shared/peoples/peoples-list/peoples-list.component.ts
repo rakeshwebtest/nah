@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-peoples-list',
@@ -9,7 +10,7 @@ import { ModalController } from '@ionic/angular';
 export class PeoplesListComponent implements OnInit {
   @Input() peoples: any[] = [];
   @Input() label: string;
-  constructor(public modalController: ModalController) { }
+  constructor(public modalController: ModalController, private router: Router) { }
 
   ngOnInit() { }
   dismiss() {
@@ -18,6 +19,11 @@ export class PeoplesListComponent implements OnInit {
     this.modalController.dismiss({
       'dismissed': true
     });
+  }
+  navProfile(user) {
+    if (user.user.id) {
+      this.router.navigate(['/user-profile/' + user.user.id]);
+    }
   }
 
 
