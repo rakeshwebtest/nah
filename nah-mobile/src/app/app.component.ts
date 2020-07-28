@@ -40,6 +40,8 @@ export class AppComponent {
           this.messagingService.fcmToken = token;
           console.log('toka', token);
         });
+          // this.messagingService.requestPermission();
+          // this.messagingService.receiveMessage();
 
         this.fcm.onNotification().subscribe(data => {
           console.log(data);
