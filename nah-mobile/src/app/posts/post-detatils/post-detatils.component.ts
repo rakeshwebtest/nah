@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AppHttpClient } from 'src/app/utils';
 import { PostService } from '../post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppAlertService } from 'src/app/utils/app-alert.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AlertController } from '@ionic/angular';
+import { FcmProviderService } from 'src/app/utils/fcm-provider.service';
 
 @Component({
   selector: 'app-post-detatils',
   templateUrl: './post-detatils.component.html',
   styleUrls: ['./post-detatils.component.scss'],
 })
-export class PostDetatilsComponent implements OnInit {
+export class PostDetatilsComponent implements OnInit, OnDestroy {
   public postDetails = [];
   public commentMsg: any;
   post: any;
@@ -20,9 +21,13 @@ export class PostDetatilsComponent implements OnInit {
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
   constructor(private postS: PostService, private activeRoute: ActivatedRoute, private http: AppHttpClient,
     private alertS: AppAlertService, private alertCtrl: AlertController,
-    private authService: AuthenticationService) { }
+    private authService: AuthenticationService, private fcm: FcmProviderService) { }
 
   ngOnInit() {
+    this.fcm.fcmSubscribeToTopic('post-details').then(data => {
+      console.log('fuck detaiol', data);
+    });
+
     this.postDetails = [
       {
         name: 'UZ 16LAB@anties',
@@ -81,7 +86,6 @@ export class PostDetatilsComponent implements OnInit {
 
   }
   addComment(comment) {
-
     const postId = this.post.id;
     const userInfo: any = this.authService.getUserInfo();
     let payLoad = {
@@ -163,6 +167,11 @@ export class PostDetatilsComponent implements OnInit {
   }
   clearReply() {
     this.replyMsg = {};
+  }
+  ngOnDestroy() {
+    this.fcm.fcmUnsubscribeFromTopic('post-details').then(res => {
+      console.log('res leave', res);
+    });
   }
 
 }

@@ -27,9 +27,9 @@ import { myTransitionAnimation } from './animations';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
-import { MessagingService } from './utils/messaging.service';
 // FCM
 import { FCM } from '@ionic-native/fcm/ngx';
+import { FcmProviderService } from './utils/fcm-provider.service';
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 // IonicStorageModule.forRoot({
 //   name: '__nah',
@@ -71,7 +71,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
     SplashScreen,
     GooglePlus,
     AuthGuard,
-    MessagingService,
+    FcmProviderService,
     GoogleAnalytics,
     FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
