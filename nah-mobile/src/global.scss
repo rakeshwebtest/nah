@@ -513,8 +513,8 @@ ion-footer {
     color: #999999;
     font-size: 14px;
     border-bottom: 5px solid transparent;
-    @media (max-width: 400px) {
-        // font-size: 12px;
+    @media (max-width: 359px) {
+        font-size: 13px;
     }
     a {
         padding: 0 5px !important;
@@ -784,4 +784,29 @@ app-agenda-view {
         padding: 5px;
         top: 6px;
     }
+}
+ion-text.format-text{
+    text-transform: lowercase;
+    &::first-letter{
+        --text-transform: uppercase !important;
+    }
+}
+.format-text{
+    text-transform: lowercase;
+}
+.format-text::first-letter{
+    text-transform: uppercase !important;
+    --text-transform: uppercase !important;
+}
+.action-sheet-title{
+    display: none;
+}
+ion-tab-button{
+    text-transform: lowercase;
+}
+ion-tab-button::first-letter,
+ion-label::first-letter,
+p::first-letter{
+    text-transform: uppercase !important;
+    --text-transform: uppercase !important;
 }

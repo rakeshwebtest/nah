@@ -48,12 +48,12 @@
               </p>
             </ion-col>
           </ion-row>
-          <ion-card-title>
-            <ion-label>{{ post.title }}</ion-label>
+          <ion-card-title class="format-text ptserif-font">
+            <ion-label >{{ post.title }}</ion-label>
           </ion-card-title>
         </ion-card-header>
         <ion-card-content (click)="navDetails(post)"
-          class="ion-text-justify">
+          class="ion-text-justify format-text times-font">
           {{ post.description }}
         </ion-card-content>
         <app-post-image-view *ngIf="post.photos && post.photos.length > 0"

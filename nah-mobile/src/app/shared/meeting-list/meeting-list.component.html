@@ -11,8 +11,8 @@
     </ion-refresher-content>
   </ion-refresher>
   <ion-row class="ion-align-items-center no-meetings"
-    *ngIf="showMeetingMsg">
-    <ion-col class="ion-justify-content-center"
+    *ngIf="showMeetingMsg"> 
+    <ion-col class="ion-justify-content-center "
       style="display: flex; align-items: center;">
       {{ noMeetingMsg }}
     </ion-col>
@@ -40,7 +40,7 @@
             </ion-col>
             <ion-col class="col-avatar-right">
               <ion-label (click)="clickMeeting(m)">
-                <ion-text class="text-name">{{ m.title }}</ion-text>
+                <ion-text class="text-name format-text">{{ m.title }}</ion-text>
                 <!-- <ion-text class="post-stars">
                 <ion-icon name="star" color="warning"></ion-icon>
                 <ion-icon name="star"></ion-icon>
@@ -81,9 +81,9 @@
                 Join</ion-button>
             </ion-col>
           </ion-row>
-          <ion-card-title (click)="clickMeeting(m)">
+          <ion-card-title class="format-text" (click)="clickMeeting(m)">
             <!-- <ion-text>[Anti]</ion-text> -->
-            <ion-label>{{ m.city.name }}</ion-label>
+            <ion-label class="ptserif-font">{{ m.city.name }}</ion-label>
             <!-- <ion-icon class="custom-antie"></ion-icon> -->
           </ion-card-title>
         </ion-card-header>
@@ -105,7 +105,7 @@
               </ion-avatar> -->
             </ion-col>
           </ion-row>
-          <ion-text class="post-description"
+          <ion-text class="post-description times-font format-text"
             color="dark">
             <p>{{ m.agenda }}</p>
           </ion-text>
