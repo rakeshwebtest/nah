@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { FcmSendDto } from './notification.dto';
 import { FcmService } from 'nestjs-fcm';
-import * as admin from 'firebase-admin';
+// import * as admin from 'firebase-admin';
 
 @Injectable()
 export class NotificationsService {
