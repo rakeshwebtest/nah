@@ -9,6 +9,9 @@ import { GroupListComponent } from '../shared/group-list/group-list.component';
 import { AgendaViewModule } from '../agenda/agenda-view/agenda-view.module';
 import { UserListModule } from '../shared/user-list/user-list.module';
 import { UserListComponent } from '../shared/user-list/user-list.component';
+import { UserProfileTabListComponent } from './user-profile-tab-list/user-profile-tab-list.component';
+import { PostListModule } from '../posts/post-list/post-list.module';
+import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
 
 const routes: Routes = [
   {
@@ -32,7 +35,7 @@ const routes: Routes = [
       },
       {
         path: ':type',
-        component: UserListComponent
+        component: UserProfileTabListComponent
       }
     ]
   }
@@ -41,6 +44,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     UserProfileComponent,
+    UserProfileTabListComponent,
     PopoverMenuComponent
   ],
   entryComponents: [PopoverMenuComponent],
@@ -50,7 +54,9 @@ const routes: Routes = [
     IonicModule,
     GroupListModule,
     AgendaViewModule,
-    UserListModule
+    UserListModule,
+    PostListModule,
+    MeetingListModule
   ]
 })
 export class UserProfileModule { }

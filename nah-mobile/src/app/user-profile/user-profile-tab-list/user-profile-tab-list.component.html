@@ -1,0 +1,9 @@
+<ng-container [ngSwitch]="type">
+    <app-user-list *ngSwitchCase="'following'" [userId]="userId" [type]="type"></app-user-list>
+    <app-user-list *ngSwitchCase="'followers'" [userId]="userId" [type]="type"></app-user-list>
+    <app-user-list *ngSwitchCase="'blocked'" [userId]="userId" [type]="type"></app-user-list>
+    <app-group-list *ngSwitchCase="'groups'" type="mygroups" [userId]="userId"></app-group-list>
+    <app-post-list *ngSwitchCase="'posts'" type="my-posts" [userId]="userId"></app-post-list>
+<app-meeting-list *ngSwitchCase="'meetings'" type="my-meeting" [userId]="userId"></app-meeting-list>
+  <div *ngSwitchDefault>Sorry Worng place</div>
+</ng-container>

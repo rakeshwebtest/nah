@@ -28,6 +28,7 @@
     "@angular/router": "8.1.2",
     "@ionic-native/core": "5.0.0",
     "@ionic-native/fcm": "^5.27.0",
+    "@ionic-native/firebase": "^5.27.0",
     "@ionic-native/google-analytics": "^5.21.6",
     "@ionic-native/google-plus": "5.17.1",
     "@ionic-native/http": "5.18.0",

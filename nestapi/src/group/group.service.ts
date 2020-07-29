@@ -19,6 +19,7 @@ export class GroupService {
     async getGroups(query, sessionUser): Promise<any> {
         const take = query.take || 100;
         const skip = query.skip || 0;
+        const userId = (query.userId) ? query.userId : sessionUser.id;
 
         const db = getRepository(GroupEntity)
             .createQueryBuilder('group')
@@ -35,17 +36,17 @@ export class GroupService {
             // get user 
 
         } else {
-            if (sessionUser.id && query.createdBy) {
-                db.andWhere('group.createdBy = :id', { id: sessionUser.id });
+            if (userId && query.createdBy) {
+                db.andWhere('group.createdBy = :id', { id: userId });
             } else {
                 db.where('group.isDeleted != 1');
             }
-            if (sessionUser.id && query.notCreatedBy) {
-                db.where('createdBy.id != :id', { id: sessionUser.id });
+            if (userId && query.notCreatedBy) {
+                db.where('createdBy.id != :id', { id: userId });
             }
         }
         if (query.search) {
-            db.andWhere("group.name like :name", { name: '%' + query.search + '%' })
+            db.andWhere("group.name like :name", { name: '%' + query.search + '%' });
         }
 
         db.take(take);

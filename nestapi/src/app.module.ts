@@ -16,11 +16,14 @@ import { PostsModule } from './posts/posts.module';
 import { AssetsModule } from './assets/assets.module';
 import { ChatModule } from './chat/chat.module';
 import { NotificationsModule } from './notifications/notifications.module';
-
+import { FcmModule } from 'nestjs-fcm';
 @Module({
   imports: [
     TypeOrmModule.forRoot({ ...DB, entities: [path.join(__dirname, '**/*.entity{.ts,.js}')] }),
     TypeOrmModule.forFeature([UserEntity]),
+    FcmModule.forRoot({
+      firebaseSpecsPath: path.join(__dirname, '../fairbase.json')
+    }),
     UserModule,
     GroupModule,
     MeetingModule,

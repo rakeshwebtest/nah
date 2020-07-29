@@ -13,6 +13,7 @@ export class GroupListComponent implements OnInit {
   // @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
 
   @Input() type: 'mygroups' | 'all';
+  @Input() userId: any;
   googlePic: String;
   searchKey = null;
   showLoading = false;
@@ -35,8 +36,9 @@ export class GroupListComponent implements OnInit {
     this.getGroups();
   }
   getGroups(infiniteScroll?: any) {
+    const _userId = (this.userId) ? this.userId : this.userInfo.id;
 
-    let url = 'group/list?userId=' + this.userInfo.id;
+    let url = 'group/list?userId=' + _userId;
     if (this.type === 'mygroups') {
       url += '&createdBy=true';
     } else {
@@ -99,7 +101,7 @@ export class GroupListComponent implements OnInit {
     });
   }
 
-  async deleteGroupConfirm(group: any, index,event) {
+  async deleteGroupConfirm(group: any, index, event) {
     event.stopPropagation();
     let alert = await this.alertCtrl.create({
       message: 'Do you want to Suspend the Group?',

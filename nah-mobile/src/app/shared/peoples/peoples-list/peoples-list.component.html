@@ -14,7 +14,7 @@
 </ion-header>
 <ion-content>
   <ion-list class="meeting-list">
-    <ion-item class="meeting-item" *ngFor="let f of peoples">
+    <ion-item class="meeting-item" (click)="navProfile(f)" *ngFor="let f of peoples">
       <ion-grid class="ion-no-padding" >
         <ion-row class="ion-nowrap ion-align-items-center">
           <ion-col class="img-left ion-no-padding">
