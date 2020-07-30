@@ -190,9 +190,40 @@ ion-content{
   font-weight: 400;
   src: url('../assets/fonts/Times-New-Roman-400.ttf');
 }
+@font-face {
+  font-family: 'Georgia';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/georgia.ttf');
+}
+@font-face {
+  font-family: 'Helvetica-Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/Helvetica-Regular.ttf');
+}
+@font-face {
+  font-family: 'Helvetica-bold';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../assets/fonts/Helvetica-Bold-Font.ttf');
+}
 .ptserif-font {
-  font-family: 'PT Serif', serif;
+  font-family: 'Georgia';
+}
+.georgia-font {
+  font-family: 'Georgia';
+}
+.hel-regular-font {
+  font-family: 'Helvetica-Regular';
+}
+.hel-bold-font {
+  font-family: 'Helvetica-bold';
 }
 .times-font {
   font-family: 'Times New Roman';
+}
+ion-header ion-text{
+  font-family: 'Helvetica-bold';
+  --font-family: 'Helvetica-bold';
 }
