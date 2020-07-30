@@ -5,8 +5,8 @@ import { Platform } from '@ionic/angular';
 import { Router, NavigationEnd } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
-import { MessagingService } from './utils/messaging.service';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { FcmProviderService } from './utils/fcm-provider.service';
 @Component({
   selector: 'theapp-root',
   templateUrl: './app.component.html',
@@ -26,7 +26,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private router: Router,
     private ga: GoogleAnalytics,
-    private messagingService: MessagingService,
+    private fcmProviderService: FcmProviderService,
     private fcm: FCM
   ) {
     this.initializeApp();
@@ -34,26 +34,8 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      if (this.platform.is('android') && this.fcm) {
-        // get FCM token
-        this.fcm.getToken().then(token => {
-          this.messagingService.fcmToken = token;
-          console.log('toka', token);
-        });
-          // this.messagingService.requestPermission();
-          // this.messagingService.receiveMessage();
+      this.fcmProviderService.setToken(); // set token and on notifications
 
-        this.fcm.onNotification().subscribe(data => {
-          console.log(data);
-          if (data.wasTapped) {
-            console.log('Received in background');
-          } else {
-            console.log('Received in foreground');
-          }
-        });
-      } else {
-        this.messagingService.requestPermission();
-      }
       this.ga.startTrackerWithId('UA-158946994-1')
         .then(() => {
           this.startTracking();

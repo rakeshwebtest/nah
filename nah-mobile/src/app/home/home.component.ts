@@ -6,8 +6,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { UserConfigService } from '../utils/user-config.service';
 import { AuthenticationService } from '../services/authentication.service';
 // import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase';
-import { MessagingService } from '../utils/messaging.service';
+import { FcmProviderService } from '../utils/fcm-provider.service';
 
 @Component({
   selector: 'theapp-home',
@@ -29,7 +28,7 @@ export class HomeComponent {
     private platform: Platform,
     public alertController: AlertController,
     private userConfigService: UserConfigService,
-    private fcmService: MessagingService
+    private fcmService: FcmProviderService
 
   ) {
     //     private fireAuth: AngularFireAuth
@@ -59,7 +58,6 @@ export class HomeComponent {
     });
     this.presentLoading(loading);
     let params;
-    console.log('this.platform', this.platform.is('cordova'));
     if (this.platform.is('android')) {
       params = {
         webClientId: '196016802810-lnb3pk45vliiddoqokmgd7jfk33mb36c.apps.googleusercontent.com',
@@ -71,16 +69,13 @@ export class HomeComponent {
         offline: true
       };
     }
-
-
-
     this.googlePlus.login(params).then(user => {
       this.login(user);
       const { idToken, accessToken } = user;
       this.onLoginSuccess(idToken, accessToken);
       loading.dismiss();
     }, err => {
-      console.log(err);
+      console.log('google sign error', err);
       if (!this.platform.is('cordova')) {
         this.presentAlert();
       }
@@ -91,7 +86,7 @@ export class HomeComponent {
     if (this.fcmService.fcmToken) {
       user.fcmToken = this.fcmService.fcmToken;
     }
-    console.log('user',user);
+    console.log('user', user);
     this.http.post('user/login', user).subscribe(res => {
       if (res.success) {
         const _resUser: any = res.data;
