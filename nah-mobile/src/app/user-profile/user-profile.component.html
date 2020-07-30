@@ -30,6 +30,9 @@
               <ion-icon name="star"></ion-icon>
             </ion-text>
           </ion-label>
+          <ion-row class="ion-align-items-center" *ngIf="!isOtherProfile">
+            <app-agenda-view></app-agenda-view>
+          </ion-row>
           <ion-row *ngIf="isOtherProfile">
             <ion-toolbar color="white">
               <ion-button (click)="following()" *ngIf="!userInfo.following">Follow</ion-button>
