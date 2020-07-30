@@ -436,7 +436,7 @@ ion-footer {
     }
 }
 .bg-red {
-    background-color: #ed3833;
+    background-color: #f04141;
 }
 .white-color {
     color: #ffffff;
@@ -467,7 +467,7 @@ ion-footer {
         }
         border-bottom: none;
         &.tab-selected {
-            color: #fb0102;
+            color: #f04141;
             // color: #fff;
         }
         ion-icon {
@@ -483,7 +483,7 @@ ion-footer {
         }
         &:hover {
             ion-icon {
-                color: #fb0102 !important;
+                color: #f04141 !important;
                 // color: #fff !important;
             }
             ion-label {
@@ -520,19 +520,19 @@ ion-footer {
         padding: 0 5px !important;
     }
     &.tab-selected {
-        border-color: #fb0102;
-        color: #fb0102;
+        border-color: #f04141;
+        color: #f04141;
     }
     &:hover {
-        color: #fb0102;
+        color: #f04141;
         a {
-            color: #fb0102;
+            color: #f04141;
             &:hover {
-                color: #fb0102 !important;
+                color: #f04141 !important;
             }
         }
         ion-label {
-            color: #fb0102 !important;
+            color: #f04141 !important;
         }
     }
 }
@@ -570,7 +570,7 @@ ion-footer {
     margin: 8px 0;
 }
 .text-red {
-    color: #fb0102;
+    color: #f04141;
 }
 .text-date {
     color: #484848;
@@ -595,7 +595,7 @@ ion-tab-button {
     --padding-end: 2px;
 }
 .text-danger {
-    color: #fb0102;
+    color: #f04141;
 }
 .text-primary {
     color: #3880ff;
@@ -809,4 +809,26 @@ ion-label::first-letter,
 p::first-letter{
     text-transform: uppercase !important;
     --text-transform: uppercase !important;
+}
+.say-no-list {
+    border-left: 3px solid #f00;
+    padding: 0 0 0 7px;
+    margin-left: 7px;
+    ion-text{
+        --display: block;
+    }
+    p{
+        margin: 0;
+    }
+}
+.say-no-list-left {
+    ion-text{
+        justify-content: flex-end;
+    }
+}
+.agenda-card{
+    box-shadow: 0px 0px 6px #e2e2e2;
+    .agenda-row{
+        align-items: center;
+    }
 }
