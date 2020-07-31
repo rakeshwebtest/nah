@@ -95,6 +95,7 @@ ion-tabs {
   }
   ion-col{
     --padding: 0 5px !important;
+    white-space: nowrap;
     flex: 0;
     width: auto;
     ion-label{
