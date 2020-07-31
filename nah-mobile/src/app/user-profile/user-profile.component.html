@@ -40,6 +40,14 @@
         <ion-button class="ion-margin-l-0" color="medium" size="small" (click)="block()" *ngIf="!userInfo.blocked">Block</ion-button>
         <ion-button class="ion-margin-l-0" size="small" (click)="unblock()" *ngIf="userInfo.blocked">Unblock</ion-button>
       </div>
+      <ion-row *ngIf="isOtherProfile">
+        <ion-toolbar color="white">
+          <ion-button class="ion-margin-l-0" size="small" (click)="following()" *ngIf="!userInfo.following">Follow</ion-button>
+          <ion-button class="ion-margin-l-0" size="small" (click)="unfollowing()" *ngIf="userInfo.following">Unfollow</ion-button>
+          <ion-button class="ion-margin-l-0" color="medium" size="small" (click)="block()" *ngIf="!userInfo.blocked">Block</ion-button>
+          <ion-button class="ion-margin-l-0" size="small" (click)="unblock()" *ngIf="userInfo.blocked">Unblock</ion-button>
+        </ion-toolbar>
+      </ion-row>
     </ion-col>
   </ion-row>
   <!-- <ion-card class="card" *ngIf="userInfo">
@@ -73,17 +81,11 @@
     </ion-card-content>
   </ion-card> -->
 </ion-header>
+
 <ion-row class="ion-align-items-center" *ngIf="!isOtherProfile">
   <app-agenda-view></app-agenda-view>
 </ion-row>
-<ion-row *ngIf="isOtherProfile">
-  <ion-toolbar color="white">
-    <ion-button (click)="following()" *ngIf="!userInfo.following">Follow</ion-button>
-    <ion-button (click)="unfollowing()" *ngIf="userInfo.following">Unfollow</ion-button>
-    <ion-button (click)="block()" *ngIf="!userInfo.blocked">Block</ion-button>
-    <ion-button (click)="unblock()" *ngIf="userInfo.blocked">Unblock</ion-button>
-  </ion-toolbar>
-</ion-row>
+
 <ion-tabs>
   <ion-tab-bar slot="top">
     <ion-tab-button tab="following">
