@@ -31,19 +31,17 @@ export class DashboardComponent implements OnInit {
   ionViewDidEnter() {
     this.userInfo = this.authService.getUserInfo();
     this.googlePic = this.userInfo.imageUrl;
-    console.log('ionViewWillEnter');
-    if (this.firstTimeEnter)
+    if (this.firstTimeEnter) {
       this.ms.meetingReload();
-
+    }
     this.firstTimeEnter = true;
-    //  this.activeTab = 'type' + '/' + this.activeRouter.snapshot.children[0].params.type;
-    console.log('this.activeTab', this.activeTab);
-    console.log('this.activeRouter.snapshot.params', this.activeRouter.snapshot);
   }
   ngOnInit() {
-    console.log('this.activeRouter.snapshot.params', this.activeRouter.snapshot.params);
-    const userInfo: any = this.authService.isAuthenticated();
-    this.googlePic = userInfo.user.imageUrl;
+    this.authService.checkUser().then(res => {
+      this.userInfo = res;
+      this.googlePic = this.userInfo.user.imageUrl;
+    })
+
     this.agendaService.checkAgenda();
   }
   meetingClick(meetingType) {

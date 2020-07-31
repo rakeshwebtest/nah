@@ -189,7 +189,7 @@ export class PostService {
         } else {
             if (data.type === 'like') {
                 // send notifications
-                this.notification.send(data.userId, postDetails.createBy.id, 'post-like', postDetails);
+                this.notification.send(data.userId, postDetails.createdBy.id, 'post-like', postDetails);
             }
             const dataRes = await _repo.save(_entity);
             return { message: msgS, data: dataRes };

@@ -96,10 +96,10 @@ export class UserEntity extends BaseEntity {
     @JoinTable()
     blocked: UserEntity[];
 
-    @ManyToMany(type => NotificationEntity, n => n.recipient, { onDelete: 'CASCADE' })
+    @OneToMany(type => NotificationEntity, n => n.recipient, { onDelete: 'CASCADE' })
     recipientNotifications: NotificationEntity[];
 
-    @ManyToMany(type => NotificationEntity, n => n.sender, { onDelete: 'CASCADE' })
+    @OneToMany(type => NotificationEntity, n => n.sender, { onDelete: 'CASCADE' })
     senderNotifications: NotificationEntity[];
 
 }

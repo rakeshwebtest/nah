@@ -1,13 +1,14 @@
-import { BaseEntity, Entity, ManyToOne, Column, ManyToMany } from "typeorm";
+import { Entity, ManyToOne, Column, ManyToMany } from "typeorm";
 import { UserEntity } from "src/user/user.entity";
+import { BaseEntity } from "src/shared/base.entity";
 
-@Entity({ name: 'notification' })
+@Entity({ name: 'user_notification' })
 export class NotificationEntity extends BaseEntity {
 
-    @ManyToMany(type => UserEntity, user => user.id)
+    @ManyToOne(type => UserEntity, user => user.recipientNotifications)
     recipient: UserEntity;
 
-    @ManyToMany(type => UserEntity, user => user.id)
+    @ManyToOne(type => UserEntity, user => user.senderNotifications)
     sender: UserEntity;
 
     @Column({ type: 'text', nullable: true })
@@ -18,5 +19,5 @@ export class NotificationEntity extends BaseEntity {
 
     @Column({ default: 0 })
     isRead: Number;
-    
+
 }

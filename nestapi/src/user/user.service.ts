@@ -96,9 +96,9 @@ export class UserService implements OnModuleInit {
     async getUserBasicInfo(_id: number[]) {
         const db = getRepository(UserEntity)
             .createQueryBuilder("u");
-        db.select(["u", "c"]);
+        db.select(["u", "u.fcmToken"]);
         db.where('u.id IN (:id)', { id: _id });
-        const data: any = await db.getOne();
+        const data: any = await db.getMany();
         return data;
     }
     async checkUser(_email: string, password?: string): Promise<UserEntity> {

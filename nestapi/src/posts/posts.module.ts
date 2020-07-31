@@ -15,11 +15,15 @@ import { PostService } from './posts/post.service';
 import { PostBookmarksEntity } from './post-bookmarks.entity';
 import { PostLikeEntity } from './post-like.entity';
 import { PostDislikeEntity } from './post-dislike.entity';
+import { NotificationsModule } from 'src/notifications/notifications.module';
+import { NotificationsService } from 'src/notifications/notifications.service';
+import { NotificationEntity } from 'src/notifications/notification.entity';
+import { UserService } from 'src/user/user.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([AgendaEntity, UserEntity, PostEntity, PostPhotosEntity, PostVideosEntity, PostCommentsEntity,
-    PostCommentReplyEntity, AgendaTopicsEntity, PostBookmarksEntity, PostLikeEntity, PostDislikeEntity])],
+    PostCommentReplyEntity, AgendaTopicsEntity, PostBookmarksEntity, PostLikeEntity, PostDislikeEntity, NotificationEntity]), NotificationsModule],
   controllers: [PostsController, AgendaController],
-  providers: [AgendaService, PostService]
+  providers: [AgendaService, PostService, NotificationsService, UserService]
 })
 export class PostsModule { }
