@@ -9,18 +9,18 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-card class="card">
+<ion-card class="header-card">
   <ion-card-header class="ion-align-items-center ion-text-center">
     <ion-text class="circle">
       {{ group.name.charAt(0) }}
     </ion-text>
   </ion-card-header>
   <ion-card-content class="card-body ion-text-center">
-    <h4 class="country"><strong>Say No To</strong> {{ group.name }}</h4>
+    <h4 class="country white-color"><strong>Say No To</strong> {{ group.name }}</h4>
   </ion-card-content>
 </ion-card>
-<ion-tabs class="relative-tabs">
-  <ion-tab-bar>
+<ion-tabs class="relative-tabs2">
+  <ion-tab-bar >
     <ion-tab-button [ngClass]="{ 'tab-selected': activeTab == 'meetings' }" (click)="activeTab = 'meetings'">
       <ion-label>Meetings</ion-label>
     </ion-tab-button>
