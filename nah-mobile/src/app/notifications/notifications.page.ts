@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-notifications',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notifications.page.scss'],
 })
 export class NotificationsPage implements OnInit {
-
-  constructor() { }
+  userInfo: any;
+  constructor(private userAuth: AuthenticationService) { }
 
   ngOnInit() {
+    this.userInfo = this.userAuth.getUserInfo();
   }
 
 }

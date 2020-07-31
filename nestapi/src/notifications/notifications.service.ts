@@ -20,7 +20,6 @@ export class NotificationsService {
 
         let senderInfo: any;
         let reciverInfo: any;
-
         if (users && users[0] && users[1]) {
             if (users[0].id === senderId) {
                 senderInfo = users[0];
@@ -29,49 +28,38 @@ export class NotificationsService {
                 senderInfo = users[1];
                 reciverInfo = users[0];
             }
-        }
-        switch (type) {
-            case 'post-like':
-                const _entity = new NotificationEntity();
-                _entity.sender.id = senderInfo.id;
-                _entity.recipient.id = reciverInfo.id;
-                _entity.message = senderInfo.displayName + ' Like the your post';
-                _entity.data = data;
-                if (reciverInfo.fcmToken) {
-                    // send push notifications
-                    this.sendFCM(reciverInfo.fcmToken, 'Post', _entity.message, { data, type: 'post-like' });
-                }
-                const d = await this.notificationRepository.save(_entity);
-                console.log('d', d);
-                break;
-            default:
-                break;
-        }
+            switch (type) {
+                case 'post-like':
+                    const _entity: any = new NotificationEntity();
+                    _entity.sender = { id: senderInfo.id };
+                    _entity.recipient = { id: reciverInfo.id };
+                    _entity.message = senderInfo.displayName + ' Like the your post';
+                    _entity.data = data;
+                    if (reciverInfo.fcmToken) {
+                        // send push notifications
+                        console.log('reciverInfo.fcmToken', reciverInfo);
+                        this.sendFCM(reciverInfo.fcmToken, 'Post', _entity.message, { data, type: 'post-like' });
+                    }
+                    const d = await this.notificationRepository.save(_entity);
+                    console.log('d', d);
+                    break;
+                default:
+                    break;
+            }
 
-        const payload = {
-            data: {
-                cpeMac: '000000000000',
-                type: 'malware'
-            },
-            notification: {
-                title: body.title || 'NAH',
-                body: body.body,
-                icon: 'ic_notification',
-                color: '#18d821',
-                sound: 'default'
-            },
-
-        };
+        }
 
         //  const data = await admin.messaging().sendToTopic('post-details', payload);
         // const data = await this.notificationS.send(notification);
         // return result;
     }
 
-    async sendFCM(fcmToken, title: string, msg: string, data) {
+    async sendFCM(fcmToken, title: string, msg: string, data: any = {}) {
 
-        const payload = {
-            data,
+        const payload: any = {
+            data: {
+                type: data.type || 'normal'
+            },
             notification: {
                 title: title || 'NAH',
                 body: msg,

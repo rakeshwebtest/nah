@@ -49,7 +49,7 @@ export class UserService implements OnModuleInit {
                 db.andWhere('blocked.id=:id', { id: query.userId });
                 break;
             case 'notifications':
-                db.leftJoin('u.recipientNotifications', 'recipientNotifications');
+                db.leftJoinAndSelect('u.recipientNotifications', 'recipientNotifications');
                 db.andWhere('recipientNotifications.id=:id', { id: query.userId });
                 break;
 
@@ -98,8 +98,8 @@ export class UserService implements OnModuleInit {
             .createQueryBuilder("u");
         db.select(["u", "u.fcmToken"]);
         db.where('u.id IN (:id)', { id: _id });
-        const data: any = await db.getMany();
-        return data;
+        // const data: any = await db.getMany();
+        return db.getMany();
     }
     async checkUser(_email: string, password?: string): Promise<UserEntity> {
         // select: ['id', 'displayName','typeOfNeor'],
