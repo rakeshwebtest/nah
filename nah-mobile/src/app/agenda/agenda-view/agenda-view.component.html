@@ -36,13 +36,20 @@
         <ion-text class="card-title">
           {{ agenda.title }}
         </ion-text>
-        <ion-badge color="danger">
-          <a class="custom-link" [routerLink]="['/agenda/list']">Old Agenda's</a>
-        </ion-badge>
+        
       </ion-col>
       <ion-col class="say-no-list">
-        <p *ngFor="let topic of agenda.topics; let last = last" class="text-primary text-center">Say No To {{ topic.name | uppercase }} </p>
-        <!-- <div class="bars-list" *ngIf="!last"></div> -->
+        <ion-row>
+          <ion-col class="ion-no-padding">
+            <p *ngFor="let topic of agenda.topics; let last = last" class="text-primary text-center">Say No To {{ topic.name | uppercase }} </p>
+          </ion-col>
+          <ion-col class="ion-no-padding old-agenda" size="auto">
+            <ion-badge color="danger">
+              <a class="custom-link" [routerLink]="['/agenda/list']">Old Agenda's</a>
+            </ion-badge>
+            <!-- <div class="bars-list" *ngIf="!last"></div> -->
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
   </ion-card-content>

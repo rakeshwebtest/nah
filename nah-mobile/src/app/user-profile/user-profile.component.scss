@@ -87,12 +87,18 @@ ion-tabs {
 .user-profile{
   background-color: #f04141;
   align-items: center;
-  padding: 10px;
+  padding: 0 10px 10px;
+  justify-content: center;
   .text-name{
     color: #fff;
     padding-right: 5px;
   }
   ion-col{
     --padding: 0 5px !important;
+    flex: 0;
+    width: auto;
+    ion-label{
+      white-space: nowrap;
+    }
   }
 }

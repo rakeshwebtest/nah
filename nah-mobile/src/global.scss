@@ -44,6 +44,12 @@ ion-header {
 .font-24 {
     font-size: 24px;
 }
+.font-14 {
+    font-size: 14px;
+}
+.font-12 {
+    font-size: 12px;
+}
 .pad-r {
     padding-right: var(padding-end);
 }
@@ -218,7 +224,7 @@ vertical-field {
     }
 }
 .button-small {
-    font-size: 16px !important;
+    font-size: 14px !important;
     border-radius: 12px;
     padding: 3px 0px;
     
@@ -449,6 +455,9 @@ ion-footer {
 .relative-tabs {
     position: relative !important;
     height: 50px !important;
+}
+.relative-tabs2 {
+    position: relative !important;
 }
 
 .bottom-tabs {
@@ -831,4 +840,17 @@ p::first-letter{
     .agenda-row{
         align-items: center;
     }
+    ion-card-content{
+        padding: 10px !important;
+    }
 }
+.header-card{
+    background-color: #f04141;
+    margin: 0;
+    border-radius: 0px;
+    height: auto;
+    overflow: visible;
+}
+// app-group-details{
+//     justify-content: flex-start !important;
+// }
