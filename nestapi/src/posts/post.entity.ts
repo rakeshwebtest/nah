@@ -32,11 +32,9 @@ export class PostEntity extends BaseEntity {
     @JoinTable()
     photos: AssetsEntity[];
 
-
     // @OneToMany(type => AssetsEntity, assets => assets.post)
     // @JoinColumn()
     // photos: AssetsEntity[];
-
 
     @OneToMany(type => PostVideosEntity, pv => pv.post, { eager: true, cascade: true, onDelete: 'CASCADE' })
     videos: PostVideosEntity[];
@@ -58,7 +56,7 @@ export class PostEntity extends BaseEntity {
 
     @RelationCount((post: PostEntity) => post.bookmark)
     bookmarkCount: number;
-    
+
     @RelationCount((post: PostEntity) => post.comments)
     commentCount: number;
 

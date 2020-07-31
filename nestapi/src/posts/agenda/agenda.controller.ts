@@ -10,13 +10,13 @@ export class AgendaController {
     constructor(public service: AgendaService) { }
 
     @Get()
-    async getAgenda(@Body() agenda: any,@Query() query:GetAgendasDto, @Req() req) {
+    async getAgenda(@Body() agenda: any, @Query() query: GetAgendasDto, @Req() req) {
         const sessionUser = req.sessionUser;
-        let data:any;
-        if(query.agendaId){
-             data = await this.service.getAgendaById(query.agendaId);
-        }else{
-             data = await this.service.getAgendasByUser(sessionUser.id);
+        let data: any;
+        if (query.agendaId) {
+            data = await this.service.getAgendaById(query.agendaId);
+        } else {
+            data = await this.service.getAgendasByUser(sessionUser.id);
         }
         return { message: false, data };
     }
@@ -24,13 +24,13 @@ export class AgendaController {
     async check(@Query() query, @Req() req) {
         const sessionUser = req.sessionUser;
         const data = await this.service.check(sessionUser.id);
-        return { message: false, data:data || false };
+        return { message: false, data: data || false };
     }
 
     @Post()
     async createAgendas(@Body() agenda: CreateAgendaDto, @Req() req) {
         const sessionUser = req.sessionUser;
-        const data = await this.service.saveUpdate(agenda,sessionUser);
+        const data = await this.service.saveUpdate(agenda, sessionUser);
         return { message: 'Save successfully', success: true, agenda, data }
 
     }

@@ -1,13 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { FcmSendDto } from './notification.dto';
 import { FcmService } from 'nestjs-fcm';
+import { UserService } from 'src/user/user.service';
+import { PostService } from 'src/posts/posts/post.service';
 // import * as admin from 'firebase-admin';
 
 @Injectable()
 export class NotificationsService {
-    constructor(private readonly fcm: FcmService) {
+    constructor(private readonly fcm: FcmService,
+        private readonly userService: UserService) {
     }
-    async send(senderId, reciverId, body: FcmSendDto) {
+    async send(senderId?: any, reciverId?: any, type?: string, data?: any, body?: FcmSendDto) {
+
+        const users = await this.userService.getUserBasicInfo([senderId, reciverId]);
+
+        switch (type) {
+            case 'post-like':
+                
+                break;
+
+            default:
+                break;
+        }
 
         const payload = {
             data: {
@@ -23,10 +37,10 @@ export class NotificationsService {
             },
 
         };
-        const data = await this.fcm.sendNotification([body.fcmToken], payload, false);
-      //  const data = await admin.messaging().sendToTopic('post-details', payload);
+        const result = await this.fcm.sendNotification([body.fcmToken], payload, false);
+        //  const data = await admin.messaging().sendToTopic('post-details', payload);
         // const data = await this.notificationS.send(notification);
-        return data;
+        return result;
     }
     send2(notification: FcmSendDto) {
 

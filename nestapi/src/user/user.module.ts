@@ -8,9 +8,10 @@ import { GroupEntity } from 'src/group/group.entity';
 import { GroupFollowEntity } from 'src/group/group-follows.entity';
 import { MeetingEntity } from 'src/meeting/meeting.entity';
 import { AgendaEntity } from 'src/posts/agenda.entity';
+import { NotificationEntity } from 'src/notifications/notification.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity, GroupEntity, GroupFollowEntity, MeetingEntity,AgendaEntity])],
+  imports: [TypeOrmModule.forFeature([UserEntity, GroupEntity, GroupFollowEntity, MeetingEntity, AgendaEntity, NotificationEntity])],
   providers: [UserService, GroupService],
   controllers: [UsersController]
 })

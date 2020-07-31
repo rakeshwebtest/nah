@@ -10,9 +10,12 @@ import { PostBookmarksEntity } from '../post-bookmarks.entity';
 import { mapImageFullPath, youtubeUrl2EmbedUrl } from 'src/shared/utility';
 import { PostLikeEntity } from '../post-like.entity';
 import { PostDislikeEntity } from '../post-dislike.entity';
+import { NotificationsService } from 'src/notifications/notifications.service';
 @Injectable()
 export class PostService {
-    constructor(@InjectRepository(PostEntity) private readonly postRepository: Repository<PostEntity>,
+    constructor(
+        private readonly notification: NotificationsService,
+        @InjectRepository(PostEntity) private readonly postRepository: Repository<PostEntity>,
         @InjectRepository(PostCommentsEntity) private readonly postCommentRepository: Repository<PostCommentsEntity>,
         @InjectRepository(PostCommentReplyEntity) private readonly postCommentReplyRepository: Repository<PostCommentReplyEntity>,
         @InjectRepository(PostBookmarksEntity) private readonly postBookmarksRepository: Repository<PostBookmarksEntity>,
@@ -99,6 +102,15 @@ export class PostService {
         data.photos = mapImageFullPath(data.photos);
         return data;
     }
+    async getPostIdBasic(postId: number) {
+        const db = getRepository(PostEntity)
+            .createQueryBuilder('p')
+            .leftJoin('p.createdBy', 'u')
+            .where('p.id = :postId', { postId });
+        db.select(["p", "u"]);
+        const data: any = await db.getOne();
+        return data;
+    }
 
     async saveUpdatePost(post, sessionUser): Promise<PostEntity> {
         const _post = new PostEntity();
@@ -142,7 +154,7 @@ export class PostService {
         let msgS: string;
         let msgF: string;
         let _repo = this.postBookmarksRepository;
-
+        const postDetails: any = await this.getPostIdBasic(data.postId);
         switch (data.type) {
             case 'like':
                 msgS = 'I like this Post';
@@ -165,6 +177,7 @@ export class PostService {
                 _repo = this.postBookmarksRepository;
                 break;
         }
+
         _entity.post = new PostEntity();
         _entity.post.id = data.postId;
         _entity.user = new UserEntity();
@@ -174,12 +187,14 @@ export class PostService {
             await _repo.delete(isUser);
             return { message: msgF, isUser };
         } else {
+            if (data.type === 'like') {
+                // send notifications
+                this.notification.send(data.userId, postDetails.createBy.id, 'post-like', postDetails);
+            }
             const dataRes = await _repo.save(_entity);
             return { message: msgS, data: dataRes };
         }
     }
-
-
 
     async addComment(commentDto) {
         const comment = new PostCommentsEntity();

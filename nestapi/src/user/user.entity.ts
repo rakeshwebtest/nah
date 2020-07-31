@@ -11,6 +11,7 @@ import { MeetingMembersEntity } from 'src/meeting/meeting-members.entity';
 import { MeetingVideosEntity } from 'src/meeting/meeting-videos.entity';
 import { MeetingPhotosEntity } from 'src/meeting/meeting-photos.entity';
 import { AgendaEntity } from 'src/posts/agenda.entity';
+import { NotificationEntity } from 'src/notifications/notification.entity';
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
 
@@ -95,5 +96,10 @@ export class UserEntity extends BaseEntity {
     @JoinTable()
     blocked: UserEntity[];
 
+    @ManyToMany(type => NotificationEntity, n => n.recipient, { onDelete: 'CASCADE' })
+    recipientNotifications: NotificationEntity[];
+
+    @ManyToMany(type => NotificationEntity, n => n.sender, { onDelete: 'CASCADE' })
+    senderNotifications: NotificationEntity[];
 
 }

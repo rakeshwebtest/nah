@@ -12,7 +12,7 @@ export class NotificationsController {
     }
     @Post()
     async sendFCMNotification(@Body() notification: FcmSendDto) {
-        const data = await this.fcmS.send(1, 2, notification);
+        const data = ''; // await this.fcmS.send(1, 2, notification);
         // const data = await this.notificationS.send(notification);
         return { message: 'send successfully', success: true, data };
     }

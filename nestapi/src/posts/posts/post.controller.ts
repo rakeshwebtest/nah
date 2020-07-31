@@ -69,8 +69,8 @@ export class PostsController {
         return this.postService.addCommentReply(commentReply);
     }
     /**
-     * 
-     * @param id 
+     *
+     * @param id
      */
     @Delete('comment/:commentId')
     async deleteComment(@Param('commentId') id: number) {

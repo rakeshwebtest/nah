@@ -21,7 +21,7 @@ export class UserLIstQuery {
     @ApiProperty({ required: false, enum: ["active", "block"] })
     status: string;
 
-    @ApiProperty({ required: false, enum: ["following", "followers", "blocked"] })
+    @ApiProperty({ required: false, enum: ["following", "followers", "blocked", "notifications"] })
     type: string;
 
     @ApiProperty({ required: false })
