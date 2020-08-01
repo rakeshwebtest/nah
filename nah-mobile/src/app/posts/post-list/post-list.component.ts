@@ -21,8 +21,9 @@ export class PostListComponent implements OnInit, OnDestroy {
   @Input() type: any; // my-posts all
   @Input() userId: any;
   showAgendaView = false;
-  limit = 5;
+  limit = 20;
   offset = 0;
+  loading = false;
 
   postBehavior = new BehaviorSubject<{ opt: any, list: [] }>({ opt: 'list', list: [] });
   list$: Observable<any[]>;
@@ -39,7 +40,6 @@ export class PostListComponent implements OnInit, OnDestroy {
   // }
   ionViewWillEnter() {
     const params = this.activeRouter.snapshot.routeConfig.path;
-    console.log('params', params);
     this.offset = 0;
     this.loadPosts();
 
@@ -65,6 +65,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.loadPosts();
   }
   loadPosts(infiniteScroll?: any, reload?: any) {
+    this.loading = true;
     if (infiniteScroll) {
       this.offset = this.offset + this.limit;
     }
@@ -76,6 +77,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     payload.skip = this.offset;
     payload.take = this.limit;
     this.postS.getPosts(payload).subscribe(res => {
+      this.loading = false;
       this.postBehavior.next({ opt: 'list', list: res.data });
       if (infiniteScroll) {
         infiniteScroll.target.complete();

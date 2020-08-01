@@ -1,5 +1,5 @@
-import { Controller, Body, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Controller, Body, Post, Get, Request, Query } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { FcmSendDto } from './notification.dto';
 import { NotificationsService } from './notifications.service';
 import { FcmService } from 'nestjs-fcm';
@@ -9,6 +9,14 @@ import { FcmService } from 'nestjs-fcm';
 export class NotificationsController {
     constructor(private readonly fcmS: NotificationsService) {
 
+    }
+    @ApiBearerAuth()
+    @Get()
+    async getNotification(@Request() req, @Query() query: any) {
+        const userInfo = req['sessionUser'];
+        console.log('userInfo', userInfo);
+        const data = await this.fcmS.getNotifications(userInfo.id, query);
+        return { message: false, success: true, data };
     }
     @Post()
     async sendFCMNotification(@Body() notification: FcmSendDto) {

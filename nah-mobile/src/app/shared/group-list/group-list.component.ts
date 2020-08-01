@@ -139,9 +139,8 @@ export class GroupListComponent implements OnInit {
 
   }
   navGroupDetails(g) {
-    console.log('g', g);
     this.storage.set('groupDetails', g).then(res => {
-      this.router.navigate(['/group/details/' + g.id]);
+      this.router.navigate(['/group/details/' + g.id + '/meetings']);
     });
 
   }

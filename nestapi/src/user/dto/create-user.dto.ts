@@ -21,11 +21,17 @@ export class UserLIstQuery {
     @ApiProperty({ required: false, enum: ["active", "block"] })
     status: string;
 
-    @ApiProperty({ required: false, enum: ["following", "followers", "blocked", "notifications"] })
+    @ApiProperty({ required: false, enum: ["following", "followers", "blocked", "meeting-members", "group-followers"] })
     type: string;
 
     @ApiProperty({ required: false })
     userId: string;
+
+    @ApiProperty({ required: false })
+    meetingId: string; // if type meeting-members
+
+    @ApiProperty({ required: false })
+    groupId: string; // if type group-followers
 
     @ApiProperty({ required: false, name: 'take', default: 1000 })
     take: number;

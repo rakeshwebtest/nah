@@ -37,20 +37,20 @@
         <ion-text class="hel-regular-font">{{ userInfo?.followingCount}} Following</ion-text>
       </p>
       <p class="country ion-margin-b-0 ion-margin-t-5 font-14 white-color">{{ userInfo?.city?.name }}</p>
-      <div class="ion-margin-t-5" *ngIf="!isOtherProfile">
+      <div class="ion-margin-t-5" *ngIf="isOtherProfile">
         <ion-button class="ion-margin-l-0" size="small" (click)="following()" *ngIf="!userInfo.following">Follow</ion-button>
         <ion-button class="ion-margin-l-0" size="small" (click)="unfollowing()" *ngIf="userInfo.following">Unfollow</ion-button>
         <ion-button class="ion-margin-l-0" color="medium" size="small" (click)="block()" *ngIf="!userInfo.blocked">Block</ion-button>
         <ion-button class="ion-margin-l-0" size="small" (click)="unblock()" *ngIf="userInfo.blocked">Unblock</ion-button>
       </div>
-      <ion-row *ngIf="isOtherProfile">
+      <!-- <ion-row *ngIf="isOtherProfile">
         <ion-toolbar color="white">
           <ion-button class="ion-margin-l-0" size="small" (click)="following()" *ngIf="!userInfo.following">Follow</ion-button>
           <ion-button class="ion-margin-l-0" size="small" (click)="unfollowing()" *ngIf="userInfo.following">Unfollow</ion-button>
           <ion-button class="ion-margin-l-0" color="medium" size="small" (click)="block()" *ngIf="!userInfo.blocked">Block</ion-button>
           <ion-button class="ion-margin-l-0" size="small" (click)="unblock()" *ngIf="userInfo.blocked">Unblock</ion-button>
         </ion-toolbar>
-      </ion-row>
+      </ion-row> -->
     </ion-col>
   </ion-row>
   <!-- <ion-card class="card" *ngIf="userInfo">

@@ -24,6 +24,7 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
     private authService: AuthenticationService, private fcm: FcmProviderService) { }
 
   ngOnInit() {
+    this.userInfo = this.authService.getUserInfo();
     this.fcm.fcmSubscribeToTopic('post-details').then(data => {
       console.log('fuck detaiol', data);
     });

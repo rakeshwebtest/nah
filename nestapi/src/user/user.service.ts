@@ -33,8 +33,7 @@ export class UserService implements OnModuleInit {
         const db = getRepository(UserEntity)
             .createQueryBuilder("u").select(["u", "c"]);
         db.leftJoin('u.city', 'c');
-
-
+        
         switch (query.type) {
             case 'following':
                 db.leftJoinAndSelect('u.following', 'followers');
@@ -48,9 +47,14 @@ export class UserService implements OnModuleInit {
                 db.leftJoin('u.blocked', 'blocked');
                 db.andWhere('blocked.id=:id', { id: query.userId });
                 break;
-            case 'notifications':
-                db.leftJoinAndSelect('u.recipientNotifications', 'recipientNotifications');
-                db.andWhere('recipientNotifications.id=:id', { id: query.userId });
+            case 'meeting-members':
+                db.leftJoinAndSelect('u.meetingMember', 'meetingMember');
+                db.andWhere('meetingMember.meetings.id=:id', { id: query.meetingId });
+                break;
+            case 'group-followers':
+                console.log('group followers');
+                db.leftJoin('u.groupFollowing', 'groupFollowing');
+                db.andWhere('groupFollowing.group.id=:id', { id: query.groupId });
                 break;
 
             default:

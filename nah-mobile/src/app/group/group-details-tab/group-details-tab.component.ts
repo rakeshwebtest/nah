@@ -2,24 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { AppHttpClient } from 'src/app/utils';
 import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+
 @Component({
-  selector: 'app-group-details',
-  templateUrl: './group-details.component.html',
-  styleUrls: ['./group-details.component.scss'],
+  selector: 'app-group-details-tab',
+  templateUrl: './group-details-tab.component.html',
+  styleUrls: ['./group-details-tab.component.scss'],
 })
-export class GroupDetailsComponent implements OnInit {
-  groupId = this.router.snapshot.parent.params.id;
-  type = this.router.snapshot.params.type;
+export class GroupDetailsTabComponent implements OnInit {
+
+  group: any = {
+    name: '',
+    followers: [],
+    meetings: [],
+    id: null
+  };
+  followersList = [];
+  meetingsList = [];
+  activeTab = 'meetings';
   customColors = ['#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000'];
   constructor(private storage: Storage, private http: AppHttpClient, private router: ActivatedRoute) { }
 
   ngOnInit() {
-    // console.log('this.router.snapshot.params.id', this.router.snapshot.params.type, this.router.snapshot.parent.params);
 
     // if (this.group.id != this.router.snapshot.params.id) {
     //   this.getGroupDetails();
     // }
-    // this.getGroupDetails();
+    this.getGroupDetails();
 
     // this.storage.get('groupDetails').then(res => {
     //   this.group = res;
@@ -31,12 +39,10 @@ export class GroupDetailsComponent implements OnInit {
 
   }
   getGroupDetails() {
-
-    // this.http.get('group/' + this.router.snapshot.params.id).subscribe(res => {
-    //   this.group = res.data;
-    //   this.followersList = this.group.followers;
-    //   this.meetingsList = this.group.meetings;
-    // });
+    this.http.get('group/' + this.router.snapshot.params.id).subscribe(res => {
+      this.group = res.data;
+      this.followersList = this.group.followers;
+      this.meetingsList = this.group.meetings;
+    });
   }
-
 }

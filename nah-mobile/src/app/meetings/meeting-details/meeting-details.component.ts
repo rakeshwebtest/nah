@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AppHttpClient } from 'src/app/utils';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Meeting } from './../meeting';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -44,7 +44,8 @@ export class MeetingDetailsComponent implements OnInit {
   constructor(private authService: AuthenticationService,
     private alertCtrl: AlertController,
     private popoverController: PopoverController,
-    private router: ActivatedRoute, private http: AppHttpClient) { }
+    private router: Router,
+    private activeRouter: ActivatedRoute, private http: AppHttpClient) { }
 
   ngOnInit() {
 
@@ -58,7 +59,7 @@ export class MeetingDetailsComponent implements OnInit {
       { 'url': 'assets/images/default-user.png' },
       { 'url': 'assets/images/user-2.jpg' }
     ];
-    const meetingId = this.router.snapshot.params.id;
+    const meetingId = this.activeRouter.snapshot.params.id;
     this.http.get('meeting/list?meetingId=' + meetingId).pipe(map(res => {
       let m: Meeting = <Meeting>res.data;
       m.isCreatedBy = false;
@@ -100,7 +101,7 @@ export class MeetingDetailsComponent implements OnInit {
   }
   addComment(comment) {
 
-    const meetingId = this.router.snapshot.params.id;
+    const meetingId = this.activeRouter.snapshot.params.id;
     const userInfo: any = this.authService.getUserInfo();
     let payLoad = {
 
@@ -280,5 +281,7 @@ export class MeetingDetailsComponent implements OnInit {
     });
     await alert.present();
   }
-
+  gotoGroupDetails(group) {
+    this.router.navigate(['group/details/' + group.id + '/meetings']);
+  }
 }

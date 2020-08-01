@@ -8,6 +8,8 @@ import { MeetingsPageModule } from '../meetings/meetings.module';
 import { MeetingsPage } from '../meetings/meetings.page';
 import { BottomTabsComponent } from './bottom-tabs/bottom-tabs.component';
 import { CommunityTabComponent } from './community-tab/community-tab.component';
+import { AgendaPageModule } from '../agenda/agenda.module';
+import { AgendaViewModule } from '../agenda/agenda-view/agenda-view.module';
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { CommunityTabComponent } from './community-tab/community-tab.component';
     RouterModule,
     CommonModule,
     IonicModule,
-    MeetingListModule
+    MeetingListModule,
+    AgendaViewModule
   ],
   exports: [DashboardComponent, BottomTabsComponent, CommunityTabComponent]
 })

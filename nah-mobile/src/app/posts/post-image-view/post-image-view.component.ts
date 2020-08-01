@@ -18,14 +18,12 @@ export class PostImageViewComponent implements OnInit {
   constructor(public gallery: Gallery) { }
 
   ngOnInit() {
-    console.log('images', this.images);
     this.galleryId = 'myLightbox_' + this.images[0].id;
     this.gridType = 'g' + this.images.length;
     if (this.images.length > 3) {
       this.moreCount = this.images.length - 3;
       Object.assign(this.remainingImg, this.images);
       this.remainingImg.splice(0, 4);
-      console.log('this.remainingImg', this.remainingImg);
     }
 
     const galleryRef = this.gallery.ref(this.galleryId);

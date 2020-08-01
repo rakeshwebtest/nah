@@ -60,7 +60,8 @@ export class AppModule {
         { path: 'meeting/*', method: RequestMethod.ALL },
         { path: 'agenda', method: RequestMethod.ALL },
         { path: 'posts', method: RequestMethod.ALL },
-        { path: 'posts/*', method: RequestMethod.ALL }
+        { path: 'posts/*', method: RequestMethod.ALL },
+        { path: 'notifications', method: RequestMethod.GET }
       );
   }
 }

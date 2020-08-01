@@ -4,28 +4,26 @@ import { scan } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AlertController } from '@ionic/angular';
 import { AppAlertService } from 'src/app/utils/app-alert.service';
-import { UserService } from './user.service';
+import { UserNotificationsService } from './user-notifications.service';
 
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
+  selector: 'app-user-notifications',
+  templateUrl: './user-notifications.component.html',
+  styleUrls: ['./user-notifications.component.scss'],
 })
-export class UserListComponent implements OnInit, OnDestroy {
+export class UserNotificationsComponent implements OnInit, OnDestroy {
   @Input() type: any; // following follower blocked
   @Input() userId: any;
-  @Input() groupId: any; // if type group-followers
-  @Input() meetingId: any; // if type meting-members
-  @Input() emptyMsg = 'No users';
-  loading = false;
+
   showAgendaView = false;
-  limit = 20;
+  limit = 5;
   offset = 0;
+  loading = false;
 
   postBehavior = new BehaviorSubject<{ opt: any, list: [] }>({ opt: 'list', list: [] });
   list$: Observable<any[]>;
   constructor(private router: Router, private activeRouter: ActivatedRoute,
-    public userS: UserService, private alertCtrl: AlertController, private alertS: AppAlertService) {
+    public notification: UserNotificationsService, private alertCtrl: AlertController, private alertS: AppAlertService) {
 
   }
   ionViewDidLoad() {
@@ -71,18 +69,12 @@ export class UserListComponent implements OnInit, OnDestroy {
       this.offset = this.offset + this.limit;
     }
     const payload: any = {};
-    if (this.meetingId) {
-      payload.meetingId = this.meetingId;
-    }
-    if (this.groupId) {
-      payload.groupId = this.groupId;
-    }
-    payload.type = this.type;
-    payload.userId = this.userId;
+    // payload.type = this.type;
+    // payload.userId = this.userId;
     payload.skip = this.offset;
     payload.take = this.limit;
     this.loading = true;
-    this.userS.getUsers(payload).subscribe(res => {
+    this.notification.getNotification(payload).subscribe(res => {
       this.loading = false;
       this.postBehavior.next({ opt: 'list', list: res.data });
       if (infiniteScroll) {
@@ -110,4 +102,3 @@ export class UserListComponent implements OnInit, OnDestroy {
     // this.list$.unsubscribe();
   }
 }
-

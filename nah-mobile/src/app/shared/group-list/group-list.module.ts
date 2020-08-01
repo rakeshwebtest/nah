@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { GroupListComponent } from './group-list.component';
 import { PeoplesModule } from '../peoples/peoples.module';
+import { LoadSkeletonModule } from '../load-skeleton/load-skeleton.module';
 
 
 
@@ -11,7 +12,8 @@ import { PeoplesModule } from '../peoples/peoples.module';
   imports: [
     CommonModule,
     IonicModule,
-    PeoplesModule
+    PeoplesModule,
+    LoadSkeletonModule
   ],
   providers:[],
   exports: [GroupListComponent]

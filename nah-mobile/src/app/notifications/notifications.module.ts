@@ -8,6 +8,7 @@ import { NotificationsPageRoutingModule } from './notifications-routing.module';
 
 import { NotificationsPage } from './notifications.page';
 import { UserListModule } from '../shared/user-list/user-list.module';
+import { UserNotificationsModule } from '../shared/user-notifications/user-notifications.module';
 
 @NgModule({
   imports: [
@@ -15,8 +16,8 @@ import { UserListModule } from '../shared/user-list/user-list.module';
     FormsModule,
     IonicModule,
     NotificationsPageRoutingModule,
-    UserListModule
+    UserNotificationsModule
   ],
   declarations: [NotificationsPage]
 })
-export class NotificationsPageModule {}
+export class NotificationsPageModule { }

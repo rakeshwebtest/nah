@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MyGroupComponent } from './my-group/my-group.component';
 import { GroupDetailsComponent } from './group-details/group-details.component';
 import { GroupTabsComponent } from './group-tabs/group-tabs.component';
+import { GroupDetailsTabComponent } from './group-details-tab/group-details-tab.component';
 
 
 const routes: Routes = [
@@ -37,7 +38,18 @@ const routes: Routes = [
   },
   {
     path: 'details/:id',
-    component: GroupDetailsComponent
+    component: GroupDetailsTabComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'meetings',
+        pathMatch: 'full'
+      },
+      {
+        path: ':type',
+        component: GroupDetailsComponent
+      }
+    ]
   }
 ];
 

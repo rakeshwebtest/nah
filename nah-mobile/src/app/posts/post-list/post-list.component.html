@@ -1,30 +1,14 @@
 <ion-content>
-  <ion-refresher pullFactor="0.5"
-  pullMin="100"
-  pullMax="200"
-  slot="fixed"
-  (ionRefresh)="doRefresh($event)">
-  <ion-refresher-content pullingIcon="arrow-dropdown"
-    pullingText="Pull to refresh"
-    refreshingSpinner="none"
-    refreshingText="Refreshing...">
-  </ion-refresher-content>
-</ion-refresher>
+  <ion-refresher pullFactor="0.5" pullMin="100" pullMax="200" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="none" refreshingText="Refreshing...">
+     </ion-refresher-content>
+  </ion-refresher>
   <ion-grid>
-    <ion-row class="ion-align-items-center no-meetings"
-      *ngIf="(list$ | async).length == 0">
-      <ion-col class="ion-justify-content-center"
-        style="display: flex; align-items: center;">
-        No Posts Available
-      </ion-col>
-    </ion-row>
-    <ion-row class="post-widget"
-      *ngFor="let post of list$ | async; let inx = index">
+    <ion-row class="post-widget" *ngFor="let post of list$ | async; let inx = index">
       <ion-card class="post-list">
-        <ion-card-header >
+        <ion-card-header>
           <ion-row>
-            <ion-col size="auto" (click)="navProfile(post.createdBy)"
-              class="col-avatar">
+            <ion-col size="auto" (click)="navProfile(post.createdBy)" class="col-avatar">
               <ion-avatar class="post-avatar">
                 <img [src]="post.createdBy.imageUrl" />
               </ion-avatar>
@@ -33,8 +17,7 @@
               <ion-label>
                 <ion-text class="text-name">{{ post.createdBy.displayName }}</ion-text>
                 <ion-text class="post-stars">
-                  <ion-icon name="star"
-                    color="warning"></ion-icon>
+                  <ion-icon name="star" color="warning"></ion-icon>
                   <ion-icon name="star"></ion-icon>
                   <ion-icon name="star"></ion-icon>
                   <ion-icon name="star"></ion-icon>
@@ -44,55 +27,45 @@
               </ion-label>
               <p>
                 <!-- <ion-text class="text-agenda">AGENDA</ion-text> -->
-                <ion-text class="text-primary">Say No To <span class="">{{ post.topic.name }}</span></ion-text>
+                <ion-text class="text-primary"
+                  >Say No To <span class="">{{ post.topic.name }}</span></ion-text
+                >
               </p>
             </ion-col>
           </ion-row>
           <ion-card-title class="format-text hel-bold-font">
-            <ion-label >{{ post.title }}</ion-label>
+            <ion-label>{{ post.title }}</ion-label>
           </ion-card-title>
         </ion-card-header>
-        <ion-card-content (click)="navDetails(post)"
-          class="ion-text-justify format-text hel-regular-font">
+        <ion-card-content (click)="navDetails(post)" class="ion-text-justify format-text hel-regular-font">
           {{ post.description }}
         </ion-card-content>
-        <app-post-image-view *ngIf="post.photos && post.photos.length > 0"
-          [images]="post.photos"></app-post-image-view>
+        <app-post-image-view *ngIf="post.photos && post.photos.length > 0" [images]="post.photos"></app-post-image-view>
         <!-- <ion-card-header>
       <ion-card-title>{{ post.title }}</ion-card-title>
     </ion-card-header> -->
 
         <ion-footer>
           <ion-text class="post-footer">
-            <span (click)="bookmarkLikeAndDislike(post, 'like')">
-              <ion-icon [ngClass]="{ active: post.like }"
-                name="thumbs-up"></ion-icon> {{ post.likeCount }}
-            </span>
-            <span (click)="bookmarkLikeAndDislike(post, 'dislike')">
-              <ion-icon [ngClass]="{ active: post.dislike }"
-                name="thumbs-down"></ion-icon> {{ post.dislikeCount }}
-            </span>
-            <span (click)="navDetails(post)">
-              <ion-icon name="chatbubbles"></ion-icon> {{ post.commentCount }}
-            </span>
-            <span (click)="bookmarkLikeAndDislike(post, 'bookmark')">
-              <ion-icon name="star"
-                [ngClass]="{ active: post.bookmark }"></ion-icon>{{ post.bookmarkCount }}
-            </span>
-            <span>
-              <ion-icon name="share"></ion-icon>0
-            </span>
+            <span (click)="bookmarkLikeAndDislike(post, 'like')"> <ion-icon [ngClass]="{ active: post.like }" name="thumbs-up"></ion-icon> {{ post.likeCount }} </span>
+            <span (click)="bookmarkLikeAndDislike(post, 'dislike')"> <ion-icon [ngClass]="{ active: post.dislike }" name="thumbs-down"></ion-icon> {{ post.dislikeCount }} </span>
+            <span (click)="navDetails(post)"> <ion-icon name="chatbubbles"></ion-icon> {{ post.commentCount }} </span>
+            <span (click)="bookmarkLikeAndDislike(post, 'bookmark')"> <ion-icon name="star" [ngClass]="{ active: post.bookmark }"></ion-icon>{{ post.bookmarkCount }} </span>
+            <span> <ion-icon name="share"></ion-icon>0 </span>
           </ion-text>
         </ion-footer>
       </ion-card>
     </ion-row>
+    <app-load-skeleton *ngIf="loading"></app-load-skeleton>
+    <ion-row class="ion-align-items-center no-meetings" *ngIf="(list$ | async).length == 0 && !loading">
+      <ion-col class="ion-justify-content-center" style="display: flex; align-items: center;">
+        No Posts Available
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
-  <ion-infinite-scroll threshold="100px"
-    (ionInfinite)="loadPosts($event)">
-    <ion-infinite-scroll-content loadingSpinner="none"
-      loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
+  <ion-infinite-scroll threshold="50px" (ionInfinite)="loadPosts($event)">
+    <ion-infinite-scroll-content loadingSpinner="none" loadingText="Loading more data..."> </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
 

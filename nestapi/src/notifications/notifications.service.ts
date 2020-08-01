@@ -3,7 +3,7 @@ import { FcmSendDto } from './notification.dto';
 import { FcmService } from 'nestjs-fcm';
 import { UserService } from 'src/user/user.service';
 import { NotificationEntity } from './notification.entity';
-import { Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 // import * as admin from 'firebase-admin';
 
@@ -70,6 +70,21 @@ export class NotificationsService {
 
         };
         const result = await this.fcm.sendNotification([fcmToken], payload, false);
+    }
+
+    getNotifications(userId, query) {
+        const take = query.take || 5000;
+        const skip = query.skip || 0;
+
+        const db = getRepository(NotificationEntity)
+            .createQueryBuilder("u")
+            .leftJoinAndSelect('u.recipient', 'recipient')
+            .leftJoinAndSelect('u.sender', 'sender')
+            .andWhere('u.recipient.id=:id', { id: userId });
+
+        db.take(take);
+        db.skip(skip);
+        return db.getMany();
     }
     send2(notification: FcmSendDto) {
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserListComponent } from './user-list.component';
 import { IonicModule } from '@ionic/angular';
+import { LoadSkeletonModule } from '../load-skeleton/load-skeleton.module';
 
 
 
@@ -9,7 +10,8 @@ import { IonicModule } from '@ionic/angular';
   declarations: [UserListComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    LoadSkeletonModule
   ],
   exports: [UserListComponent]
 })

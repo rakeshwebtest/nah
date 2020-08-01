@@ -12,6 +12,8 @@ import { GroupListModule } from '../shared/group-list/group-list.module';
 import { PeoplesModule } from '../shared/peoples/peoples.module';
 import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
 import { GroupTabsComponent } from './group-tabs/group-tabs.component';
+import { GroupDetailsTabComponent } from './group-details-tab/group-details-tab.component';
+import { UserListModule } from '../shared/user-list/user-list.module';
 
 @NgModule({
   imports: [
@@ -21,9 +23,10 @@ import { GroupTabsComponent } from './group-tabs/group-tabs.component';
     GroupPageRoutingModule,
     GroupListModule,
     PeoplesModule,
-    MeetingListModule
+    MeetingListModule,
+    UserListModule
   ],
   providers: [GroupService],
-  declarations: [MyGroupComponent, GroupDetailsComponent, GroupTabsComponent]
+  declarations: [MyGroupComponent, GroupDetailsTabComponent, GroupDetailsComponent, GroupTabsComponent]
 })
 export class GroupPageModule { }

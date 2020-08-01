@@ -51,7 +51,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
       this.meetingList = [];
     }
     console.log('reload', reload);
-    
+
     const params = this.activeRouter.snapshot.params;
     const userInfo: any = this.authService.getUserInfo();
     const _userId = this.userId || userInfo.id;
@@ -183,7 +183,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
 
   }
   gotoGroupPage(group) {
-    this.router.navigate(['/group/details/' + group.id]);
+    this.router.navigate(['/group/details/' + group.id + '/meetings']);
   }
   ngOnDestroy() {
     this.msSubscription.unsubscribe();

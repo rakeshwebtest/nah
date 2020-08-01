@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="white-color">
+      <ion-back-button defaultHref="dashboard"></ion-back-button>
+      <ion-img class="ion-padding-r-10 header-logo" src="assets/svg/nah_logo_white.svg"></ion-img>
+      <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
+        Group Info
+      </ion-text>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-card class="header-card">
+    <ion-card-header class="ion-align-items-center ion-text-center">
+      <ion-text class="circle">
+        {{ group.name.charAt(0) }}
+      </ion-text>
+    </ion-card-header>
+    <ion-card-content class="card-body ion-text-center">
+      <h4 class="country white-color"><strong>Say No To</strong> {{ group.name }}</h4>
+    </ion-card-content>
+  </ion-card>
+</ion-header>
+
+<ion-tabs>
+  <ion-tab-bar slot="top">
+    <ion-tab-button tab="meetings">
+      <ion-label>Meetings</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="following">
+      <ion-label>Followers</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

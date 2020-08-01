@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MeetingListComponent } from './meeting-list.component';
+import { UserNotificationsComponent } from './user-notifications.component';
 import { IonicModule } from '@ionic/angular';
-import { PeoplesModule } from '../peoples/peoples.module';
 import { LoadSkeletonModule } from '../load-skeleton/load-skeleton.module';
 
+
+
 @NgModule({
-  declarations: [MeetingListComponent],
+  declarations: [UserNotificationsComponent],
   imports: [
     CommonModule,
     IonicModule,
-    PeoplesModule,
     LoadSkeletonModule
   ],
-  exports: [MeetingListComponent]
+  exports: [UserNotificationsComponent]
 })
-export class MeetingListModule { }
+export class UserNotificationsModule { }
