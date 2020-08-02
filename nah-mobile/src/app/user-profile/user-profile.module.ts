@@ -12,7 +12,7 @@ import { UserListComponent } from '../shared/user-list/user-list.component';
 import { UserProfileTabListComponent } from './user-profile-tab-list/user-profile-tab-list.component';
 import { PostListModule } from '../posts/post-list/post-list.module';
 import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
-
+import { SuperTabsModule } from '@ionic-super-tabs/angular';
 const routes: Routes = [
   {
     path: '',
@@ -50,6 +50,7 @@ const routes: Routes = [
   entryComponents: [PopoverMenuComponent],
   imports: [
     RouterModule.forChild(routes),
+    SuperTabsModule,
     CommonModule,
     IonicModule,
     GroupListModule,

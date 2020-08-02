@@ -67,6 +67,13 @@ export class PostService {
             }
         }
 
+        if (query.search) {
+            db.where("p.title like :name", { name: '%' + query.search + '%' });
+        }
+
+        db.andWhere("p.isDeleted != 1");
+
+
         // get single post details
         db.select(["p", "u", "topic", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos'])
             .orderBy({ "p.createdDate": "DESC" });
@@ -130,6 +137,10 @@ export class PostService {
 
         if (post.photos) {
             _post.photos = post.photos;
+        }
+
+        if (post.isDeleted === 1) {
+            _post.isDeleted = 1;
         }
         if (post.videos) {
             _post.videos = post.videos.map(v => {

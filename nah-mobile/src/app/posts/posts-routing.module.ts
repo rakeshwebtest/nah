@@ -19,6 +19,11 @@ const routes: Routes = [
     component: PostCreateComponent
   },
   {
+    path: 'create/:postId',
+    canActivate: [AgendaCheckGuardService],
+    component: PostCreateComponent
+  },
+  {
     path: 'details/:postId',
     component: PostDetatilsComponent
   },

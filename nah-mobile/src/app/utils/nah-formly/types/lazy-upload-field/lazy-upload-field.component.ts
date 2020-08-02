@@ -23,6 +23,11 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
     if (!this.to.multiple) {
       this.fieldInputName = 'images';
     }
+    this.formControl.valueChanges.subscribe(res => {
+      if (res && res.length > 0 && this.uploadedImages.length === 0) {
+        this.uploadedImages = res || [];
+      }
+    });
   }
 
   onFileChange(event) {

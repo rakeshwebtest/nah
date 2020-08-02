@@ -30,6 +30,7 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 // FCM
 import { FCM } from '@ionic-native/fcm/ngx';
 import { FcmProviderService } from './utils/fcm-provider.service';
+import { SuperTabsModule } from '@ionic-super-tabs/angular';
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 // IonicStorageModule.forRoot({
 //   name: '__nah',
@@ -50,6 +51,7 @@ import { FcmProviderService } from './utils/fcm-provider.service';
     DashboardModule,
     AngularFireMessagingModule,
     AngularFireModule.initializeApp(environment.fbConfig),
+    SuperTabsModule.forRoot(),
     // AngularFireAuthModule,
     IonicModule.forRoot(
       {

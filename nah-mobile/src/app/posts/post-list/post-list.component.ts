@@ -12,6 +12,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
@@ -20,15 +21,17 @@ import {
 export class PostListComponent implements OnInit, OnDestroy {
   @Input() type: any; // my-posts all
   @Input() userId: any;
+  @Input() searchKey: any;
   showAgendaView = false;
   limit = 20;
   offset = 0;
   loading = false;
+  userInfo: any;
 
   postBehavior = new BehaviorSubject<{ opt: any, list: [] }>({ opt: 'list', list: [] });
   list$: Observable<any[]>;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
-  constructor(private router: Router, private activeRouter: ActivatedRoute,
+  constructor(private router: Router, private activeRouter: ActivatedRoute, private authS: AuthenticationService,
     public postS: PostService, private alertCtrl: AlertController, private alertS: AppAlertService) {
 
   }
@@ -39,13 +42,27 @@ export class PostListComponent implements OnInit, OnDestroy {
   //   console.log('ionViewDidEnter');
   // }
   ionViewWillEnter() {
+    console.log('ionViewWillEnter');
     const params = this.activeRouter.snapshot.routeConfig.path;
     this.offset = 0;
     this.loadPosts();
 
   }
+  ionViewWillLeave() {
+    console.log('ionViewWillLeave')
+  }
+  ionViewDidLeave() {
+    console.log('ionViewDidLeave')
+  }
+  ionViewWillUnload() {
+    console.log('ionViewWillUnload')
+  }
+  ionViewDidEnter() {
+    console.log('ionViewDidEnter');
+  }
   ngOnInit() {
     console.log('activeRouter', this.activeRouter.snapshot.params);
+    this.userInfo = this.authS.getUserInfo();
 
     this.list$ = this.postBehavior.asObservable().pipe(
       scan((acc, curr) => {
@@ -73,6 +90,9 @@ export class PostListComponent implements OnInit, OnDestroy {
     if (this.userId) {
       payload.userId = this.userId;
     }
+    if (this.searchKey) {
+      payload.search = this.searchKey;
+    }
     payload.type = this.type || this.activeRouter.snapshot.routeConfig.path;
     payload.skip = this.offset;
     payload.take = this.limit;
@@ -97,7 +117,9 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   bookmarkLikeAndDislike(post: any, type = 'bookmark') {
     // post.bookmark = !post.isBookMark;
-
+    if (post.createdBy.id === this.userInfo.id && type !== 'bookmark') {
+      return;
+    }
     const postBookmareService = this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type });
     if (type === 'bookmark' && post['bookmark']) {
       this.alertS.presentConfirm('', 'Do you want to Remove bookmark from list?').then(res => {

@@ -44,7 +44,10 @@ export class SavePostDto {
     @ApiProperty()
     @ValidateNested()
     videos: Video[];
-    
+
+    @ApiProperty()
+    isDeleted: number;
+
     // @IsNotEmpty({ message: "Required Created By" })
     // readonly createBy: number;
 }
@@ -64,7 +67,7 @@ export class PostQueryDao {
     @ApiProperty({ required: false, default: 0 })
     userId: number;
 
-    
+
 
 }
 

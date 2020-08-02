@@ -14,6 +14,7 @@ export class GroupListComponent implements OnInit {
 
   @Input() type: 'mygroups' | 'all';
   @Input() userId: any;
+  @Input() showSearch = true;
   googlePic: String;
   searchKey = null;
   showLoading = false;
@@ -159,6 +160,10 @@ export class GroupListComponent implements OnInit {
   }
   toggleInfiniteScroll() {
     // this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
+  reload() {
+    this.groupList = [];
+    this.getGroups();
   }
   searchFilter(event) {
     this.searchKey = (event.target.value) ? event.target.value : null;

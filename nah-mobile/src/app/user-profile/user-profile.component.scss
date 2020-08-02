@@ -19,6 +19,7 @@
 //     --color: #fff;
 // }
 
+
 ion-tabs {
   top: 0;
   position: relative;
@@ -84,21 +85,21 @@ ion-tabs {
     padding-right: 16px;
   }
 }
-.user-profile{
+.user-profile {
   background-color: #f04141;
   align-items: center;
   padding: 0 10px 10px;
   justify-content: center;
-  .text-name{
+  .text-name {
     color: #fff;
     padding-right: 5px;
   }
-  ion-col{
+  ion-col {
     --padding: 0 5px !important;
     white-space: nowrap;
     flex: 0;
     width: auto;
-    ion-label{
+    ion-label {
       white-space: nowrap;
     }
   }

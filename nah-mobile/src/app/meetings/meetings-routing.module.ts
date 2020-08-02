@@ -20,21 +20,21 @@ const routes: Routes = [
         path: 'all',
         component: MeetingsPage,
         data: {
-          type: "all"
+          type: 'all'
         }
       },
       {
         path: 'my-meeting',
         component: MeetingsPage,
         data: {
-          type: "my-meeting"
+          type: 'my-meeting'
         }
       },
       {
         path: 'upcoming',
         component: MeetingsPage,
         data: {
-          type: "upcoming"
+          type: 'upcoming'
         }
 
       }

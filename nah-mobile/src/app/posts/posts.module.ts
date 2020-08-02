@@ -14,6 +14,7 @@ import { PostListModule } from './post-list/post-list.module';
 import { PostImageViewModule } from './post-image-view/post-image-view.module';
 import { YoutubeVideosListModule } from '../shared/youtube-videos-list/youtube-videos-list.module';
 import { TimeagoModule } from 'ngx-timeago';
+import { LoadSkeletonModule } from '../shared/load-skeleton/load-skeleton.module';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { TimeagoModule } from 'ngx-timeago';
     PostListModule,
     PostImageViewModule,
     YoutubeVideosListModule,
-    TimeagoModule
+    TimeagoModule,
+    LoadSkeletonModule
   ],
   declarations: [PostsPage, PostDetatilsComponent, PostCreateComponent]
 })

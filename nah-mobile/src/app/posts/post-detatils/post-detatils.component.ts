@@ -6,7 +6,7 @@ import { AppAlertService } from 'src/app/utils/app-alert.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AlertController } from '@ionic/angular';
 import { FcmProviderService } from 'src/app/utils/fcm-provider.service';
-
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-post-detatils',
   templateUrl: './post-detatils.component.html',
@@ -18,16 +18,20 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
   post: any;
   replyMsg: any = {};
   userInfo: any = {};
+  loading = false;
+  isOwner: boolean;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
   constructor(private postS: PostService, private activeRoute: ActivatedRoute, private http: AppHttpClient,
+    private router: Router,
+    private storage: Storage,
     private alertS: AppAlertService, private alertCtrl: AlertController,
     private authService: AuthenticationService, private fcm: FcmProviderService) { }
 
   ngOnInit() {
     this.userInfo = this.authService.getUserInfo();
-    this.fcm.fcmSubscribeToTopic('post-details').then(data => {
-      console.log('fuck detaiol', data);
-    });
+    // this.fcm.fcmSubscribeToTopic('post-details').then(data => {
+    //   console.log('fuck detaiol', data);
+    // });
 
     this.postDetails = [
       {
@@ -38,11 +42,19 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
       }
     ];
     const postId: any = this.activeRoute.snapshot.params.postId;
+    this.loading = true;
     this.postS.getPostById(postId).subscribe(res => {
       this.post = res.data;
+      if (this.post && this.post.createdBy.id === this.userInfo.id) {
+        this.isOwner = true;
+      }
+      this.loading = false;
     });
   }
   bookmarkLikeAndDislike(post, type = 'bookmark') {
+    if (post.createdBy.id === this.userInfo.id && type !== 'bookmark') {
+      return;
+    }
     const postBookmareService = this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type });
     if (type === 'bookmark' && post['bookmark']) {
       this.alertS.presentConfirm('', 'Do you want to Remove bookmark from list?').then(res => {
@@ -82,6 +94,24 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
       postBookmareService.subscribe();
 
     }
+  }
+  editPost(post) {
+    this.storage.set('postDetails', this.post).then(res => {
+      this.router.navigate(['/posts/create/' + post.id]);
+    });
+  }
+  deletePost(post) {
+    this.alertS.presentConfirm(null, 'Are you sure delete this post').then(res => {
+      if (res) {
+        console.log(res);
+        post.isDeleted = 1;
+        this.postS.createUpdatePost(post).subscribe(resData => {
+          this.router.navigate(['/dashboard/posts/my-posts']);
+        }, error => {
+
+        });
+      }
+    });
   }
   navDetails() {
 
@@ -170,9 +200,9 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
     this.replyMsg = {};
   }
   ngOnDestroy() {
-    this.fcm.fcmUnsubscribeFromTopic('post-details').then(res => {
-      console.log('res leave', res);
-    });
+    // this.fcm.fcmUnsubscribeFromTopic('post-details').then(res => {
+    //   console.log('res leave', res);
+    // });
   }
 
 }

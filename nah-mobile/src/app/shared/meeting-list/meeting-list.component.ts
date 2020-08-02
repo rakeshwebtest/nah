@@ -25,6 +25,7 @@ export class MeetingListComponent implements OnInit, OnDestroy {
   @Input() type = 'all';
   @Input() groupId: any;
   @Input() userId: any;
+  @Input() searchKey: any;
   take = 20;
   msSubscription: Subscription;
   constructor(private authService: AuthenticationService,
@@ -50,7 +51,6 @@ export class MeetingListComponent implements OnInit, OnDestroy {
     if (reload) {
       this.meetingList = [];
     }
-    console.log('reload', reload);
 
     const params = this.activeRouter.snapshot.params;
     const userInfo: any = this.authService.getUserInfo();
@@ -58,8 +58,13 @@ export class MeetingListComponent implements OnInit, OnDestroy {
     this.googlePic = userInfo.imageUrl;
     let queryString = '?type=' + this.type;
     queryString += '&userId=' + _userId;
-    if (this.groupId)
+    if (this.groupId) {
       queryString += '&groupId=' + this.groupId;
+    }
+
+    if (this.searchKey) {
+      queryString += '&search=' + this.searchKey;
+    }
     // if (params.type === 'my-meeting') {
     //   queryString += '&userId=' + userInfo.id;
     // }
@@ -151,6 +156,10 @@ export class MeetingListComponent implements OnInit, OnDestroy {
   }
   async doRefresh(event) {
     this.getMeetings(null, event);
+  }
+  reload() {
+    this.meetingList = [];
+    this.getMeetings(null, true);
   }
 
   async deleteMeetingConfirm(meeting: any, index) {

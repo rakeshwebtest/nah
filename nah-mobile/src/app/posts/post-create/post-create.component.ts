@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AgendaService } from 'src/app/agenda/agenda.service';
 import { PostService } from '../post.service';
 import { LoadingService } from '../../utils/loading.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-post-create',
@@ -14,6 +15,7 @@ import { LoadingService } from '../../utils/loading.service';
 export class PostCreateComponent implements OnInit {
   form = new FormGroup({});
   model: any = {};
+  showForm = true;
   fields: FormlyFieldConfig[] = [
     {
       key: 'title',
@@ -125,11 +127,23 @@ export class PostCreateComponent implements OnInit {
   formShow = false;
   constructor(private router: Router,
     private agendaS: AgendaService,
+    private activatedRoute: ActivatedRoute,
     private postS: PostService,
+    private storage: Storage,
     private loadingService: LoadingService) { }
 
   ngOnInit() {
-
+    if (this.activatedRoute.snapshot.params.postId) {
+      this.storage.get('postDetails').then(res => {
+        if (this.activatedRoute.snapshot.params.postId == res.id) {
+          console.log('this.model', res);
+          this.model = res;
+          if (res.topic) {
+            this.model.topicId = res.topic.id;
+          }
+        }
+      });
+    }
   }
   submit(model, isPublish) {
     this.loadingService.show();

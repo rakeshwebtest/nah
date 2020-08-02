@@ -1,14 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start"
-      class="white-color">
+    <ion-buttons slot="start" class="white-color">
       <ion-back-button defaultHref="dashboard"></ion-back-button>
       <ion-title>search</ion-title>
     </ion-buttons>
   </ion-toolbar>
+  <ion-searchbar color="danger" showCancelButton="true" (ionInput)="search($event)"></ion-searchbar>
 </ion-header>
-
-<ion-content>
-  <ion-searchbar color="danger"></ion-searchbar>
-
-</ion-content>
+<super-tabs>
+  <super-tabs-toolbar slot="top">
+    <super-tab-button>
+      <ion-label>Posts</ion-label>
+    </super-tab-button>
+    <super-tab-button>
+      <ion-label>Groups</ion-label>
+    </super-tab-button>
+    <super-tab-button>
+      <ion-label>Meetings</ion-label>
+    </super-tab-button>
+  </super-tabs-toolbar>
+  <super-tabs-container>
+    <super-tab>
+      <app-post-list type="all" [userId]="userId" #postList></app-post-list>
+    </super-tab>
+    <super-tab>
+      <app-group-list type="all" [userId]="userId" [showSearch]="false" #group></app-group-list>
+    </super-tab>
+    <super-tab>
+      <app-meeting-list type="all" [userId]="userId" #meetingList></app-meeting-list>
+    </super-tab>
+  </super-tabs-container>
+</super-tabs>
