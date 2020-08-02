@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AppHttpClient } from 'src/app/utils';
 import { Router } from '@angular/router';
 import { AgendaService } from '../agenda.service';
@@ -12,6 +12,7 @@ export class AgendaViewComponent implements OnInit {
   agenda: any;
   showCreateBtn: boolean;
   activeDays = 1;
+  @Input() showCreateMsg = false;
   totalDaysArray = [];
   totalDays = 0;
   constructor(private http: AppHttpClient, private router: Router, public agendaS: AgendaService) { }
@@ -21,12 +22,11 @@ export class AgendaViewComponent implements OnInit {
   }
   ngOnInit() {
     // this.checkAgenda();
-    console.log("agenda$", this.agendaS.agenda$)
     this.agendaS.checkAgenda();
   }
 
   createAgenda() {
-    this.router.navigate(['/agenda'])
+    this.router.navigate(['/agenda/create']);
   }
 
 

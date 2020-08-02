@@ -1,7 +1,10 @@
-.ios :host{
-    top:70px !important;
+.ios :host {
+  top: 70px !important;
 }
 
-.md :host{
-    top:56px !important;
+.md :host {
+  top: 56px !important;
+}
+ion-tabs {
+  top: 70px;
 }

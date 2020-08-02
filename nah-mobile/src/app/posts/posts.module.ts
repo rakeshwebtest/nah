@@ -15,6 +15,7 @@ import { PostImageViewModule } from './post-image-view/post-image-view.module';
 import { YoutubeVideosListModule } from '../shared/youtube-videos-list/youtube-videos-list.module';
 import { TimeagoModule } from 'ngx-timeago';
 import { LoadSkeletonModule } from '../shared/load-skeleton/load-skeleton.module';
+import { AgendaViewModule } from '../agenda/agenda-view/agenda-view.module';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { LoadSkeletonModule } from '../shared/load-skeleton/load-skeleton.module
     PostImageViewModule,
     YoutubeVideosListModule,
     TimeagoModule,
-    LoadSkeletonModule
+    LoadSkeletonModule,
+    AgendaViewModule
   ],
   declarations: [PostsPage, PostDetatilsComponent, PostCreateComponent]
 })
