@@ -29,7 +29,6 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
       }
     });
   }
-
   onFileChange(event) {
     if (this.to.multiple) {
       if (event.target.files.length > 0) {
