@@ -31,7 +31,7 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { FcmProviderService } from './utils/fcm-provider.service';
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
-import { AppRouterNavigateService, AppRouterCreator } from './utils/app-router-navigate.service';
+import { AppRouterNavigateService } from './utils/app-router-navigate.service';
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 // IonicStorageModule.forRoot({
 //   name: '__nah',
@@ -77,7 +77,6 @@ import { AppRouterNavigateService, AppRouterCreator } from './utils/app-router-n
     FcmProviderService,
     GoogleAnalytics,
     FCM,
-    { provide: AppRouterNavigateService, useFactory: AppRouterCreator, deps: [Storage, Router] },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {
