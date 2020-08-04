@@ -12,6 +12,7 @@ import { GroupListComponent } from '../shared/group-list/group-list.component';
 export class SearchPage implements OnInit {
   userInfo: any;
   userId: any;
+  searchKey: any;
   @ViewChild(PostListComponent, null) postList: PostListComponent;
   @ViewChild(MeetingListComponent, null) meetingList: MeetingListComponent;
   @ViewChild(GroupListComponent, null) groupList: GroupListComponent;
@@ -22,6 +23,7 @@ export class SearchPage implements OnInit {
     this.userId = this.userInfo.id;
   }
   search(event) {
+    this.searchKey = event.target.value;
     // load posts
     this.postList.searchKey = event.target.value;
     this.postList.reload();

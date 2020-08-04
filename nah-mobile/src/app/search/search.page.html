@@ -2,10 +2,9 @@
   <ion-toolbar>
     <ion-buttons slot="start" class="white-color">
       <ion-back-button defaultHref="dashboard"></ion-back-button>
-      <ion-title>search</ion-title>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar color="danger" showCancelButton="true" (ionInput)="search($event)"></ion-searchbar>
+  <ion-searchbar color="danger" (ionInput)="search($event)"></ion-searchbar>
 </ion-header>
 <super-tabs>
   <super-tabs-toolbar slot="top">
@@ -21,13 +20,28 @@
   </super-tabs-toolbar>
   <super-tabs-container>
     <super-tab>
-      <app-post-list type="all" [userId]="userId" #postList></app-post-list>
+      <app-post-list type="all" [userId]="userId" #postList *ngIf="searchKey"></app-post-list>
+      <ion-row class="ion-align-items-center no-meetings" *ngIf="!searchKey">
+        <ion-col class="ion-justify-content-center" style="display: flex; align-items: center;">
+          No Search Posts
+        </ion-col>
+      </ion-row>
     </super-tab>
     <super-tab>
-      <app-group-list type="all" [userId]="userId" [showSearch]="false" #group></app-group-list>
+      <app-group-list type="all" [userId]="userId" [showSearch]="false" #group *ngIf="searchKey"></app-group-list>
+      <ion-row class="ion-align-items-center no-meetings" *ngIf="!searchKey">
+        <ion-col class="ion-justify-content-center" style="display: flex; align-items: center;">
+          No Search Groups
+        </ion-col>
+      </ion-row>
     </super-tab>
     <super-tab>
-      <app-meeting-list type="all" [userId]="userId" #meetingList></app-meeting-list>
+      <app-meeting-list type="all" [userId]="userId" #meetingList *ngIf="searchKey"></app-meeting-list>
+      <ion-row class="ion-align-items-center no-meetings" *ngIf="!searchKey">
+        <ion-col class="ion-justify-content-center" style="display: flex; align-items: center;">
+          No Search Meetings
+        </ion-col>
+      </ion-row>
     </super-tab>
   </super-tabs-container>
 </super-tabs>
