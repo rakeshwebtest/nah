@@ -13,6 +13,8 @@ export class AgendaViewComponent implements OnInit {
   showCreateBtn: boolean;
   activeDays = 1;
   @Input() showCreateMsg = false;
+  @Input() showShowOldAgenda = true;
+  @Input() agendaTitle = 'Agenda';
   totalDaysArray = [];
   totalDays = 0;
   constructor(private http: AppHttpClient, private router: Router, public agendaS: AgendaService) { }

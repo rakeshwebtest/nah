@@ -38,6 +38,18 @@ ion-header {
   --ion-toolbar-background: var(--ion-color-danger);
   color: #ffffff;
 }
+// super-tabs{
+//   super-tabs-toolbar {
+//     background-color: #fff;
+//     box-shadow: none !important;
+//     super-tab-button {
+//       color: #000;
+//       &.active{
+//         color: #f04141
+//       }
+//     }
+//   }
+// }
 super-tabs-toolbar {
   background-color: #f04141;
   super-tab-button {
@@ -818,9 +830,11 @@ ion-text.format-text {
 .action-sheet-title {
   display: none;
 }
+super-tab-button ion-label,
 ion-tab-button {
   text-transform: lowercase;
 }
+super-tab-button ion-label::first-letter,
 ion-tab-button::first-letter,
 ion-label::first-letter,
 p::first-letter {
@@ -836,6 +850,26 @@ p::first-letter {
   }
   p {
     margin: 0;
+
+    &:nth-child(2){
+      padding-top: 5px;
+      ion-label{
+        position: relative;
+        &::before{
+          content: "...";
+          position: absolute;
+          left: 50%;
+          width: 20px;
+          height: 10px;
+          margin-left: -10px;
+          z-index: 9999;
+          color: #f04141;
+          top: -27px;
+          font-size: 21px;
+          font-weight: bold;
+        }
+      }
+    }
   }
 }
 .say-no-list-left {
@@ -845,6 +879,7 @@ p::first-letter {
 }
 .agenda-card {
   box-shadow: 0px 0px 6px #e2e2e2;
+  background-color: #ffffff;
   .agenda-row {
     align-items: center;
   }
@@ -862,3 +897,9 @@ p::first-letter {
 // app-group-details{
 //     justify-content: flex-start !important;
 // }
+.ion-ellipsis{
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
