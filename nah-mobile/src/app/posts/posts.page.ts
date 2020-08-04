@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./posts.page.scss'],
 })
 export class PostsPage implements OnInit {
-
+  agendaTitle = 'Your Agenda';
   constructor() { }
 
   ngOnInit() {
