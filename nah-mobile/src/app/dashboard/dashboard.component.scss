@@ -1,26 +1,29 @@
-.image-avater{
-    width: 30px;
-    height: 30px;
-    float: right;
-    margin-right: 17px;
+.image-avater {
+  width: 30px;
+  height: 30px;
+  float: right;
+  margin-right: 17px;
 }
-.icon-search{
-    padding-right: 10px;
+.icon-search {
+  padding-right: 10px;
 }
-.header{
-    background-color: #f00;
+.header {
+  background-color: #f00;
 }
 .add-btn {
-    bottom: 5%;
+  bottom: 5%;
+}
+:host ion-router-outlet {
+  top: 80px;
 }
 // .meeting-list{
 
 // }
 .ion-activatable {
-    &.active{
-        .avatar{
-            background: #f00;
-            color: #fff;
-        }
+  &.active {
+    .avatar {
+      background: #f00;
+      color: #fff;
     }
+  }
 }
