@@ -14,13 +14,18 @@ const routes: Routes = [
     component: AgendaPage
   },
   {
-    path:'list',
-    component:AgendaListComponent
+    path: 'list',
+    component: AgendaListComponent
+  },
+  {
+    path: 'topic-detatils',
+    loadChildren: () => import('./topic-detatils/topic-detatils.module').then(m => m.TopicDetatilsPageModule)
   }
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AgendaPageRoutingModule {}
+export class AgendaPageRoutingModule { }

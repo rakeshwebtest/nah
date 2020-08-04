@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppHttpClient } from 'src/app/utils';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 import { AgendaService } from '../agenda.service';
+import { AppRouterNavigateService } from 'src/app/utils/app-router-navigate.service';
 
 @Component({
   selector: 'app-agenda-view',
@@ -15,7 +17,9 @@ export class AgendaViewComponent implements OnInit {
   @Input() showCreateMsg = false;
   totalDaysArray = [];
   totalDays = 0;
-  constructor(private http: AppHttpClient, private router: Router, public agendaS: AgendaService) { }
+  constructor(
+    private http: AppHttpClient, private storage: Storage,
+    public appRouter: AppRouterNavigateService, private router: Router, public agendaS: AgendaService) { }
 
   ionViewDidEnter() {
     console.log('ionViewDidEnter');
@@ -27,6 +31,9 @@ export class AgendaViewComponent implements OnInit {
 
   createAgenda() {
     this.router.navigate(['/agenda/create']);
+  }
+  topicDetails(topic) {
+    this.appRouter.goToTopicDetails(topic);
   }
 
 

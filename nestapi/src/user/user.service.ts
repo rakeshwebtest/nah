@@ -2,7 +2,7 @@ import { Injectable, Inject, HttpException, OnModuleInit } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Like, getRepository, getConnection } from 'typeorm';
 import { UserEntity } from './user.entity';
-import { SECRET } from '../config';
+import { APP_CONFIG } from '../config';
 const jwt = require('jsonwebtoken');
 import { UserRO } from './user.interface';
 import { LoginUserDto } from './dto';
@@ -154,7 +154,7 @@ export class UserService implements OnModuleInit {
         const exp = new Date(today);
         exp.setDate(today.getDate() + 60);
 
-        return jwt.sign(user.id, SECRET);
+        return jwt.sign(user.id, APP_CONFIG.SECRET);
     }
 
     private buildUserRO(user: UserEntity) {

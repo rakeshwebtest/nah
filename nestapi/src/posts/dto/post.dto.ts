@@ -67,6 +67,9 @@ export class PostQueryDao {
     @ApiProperty({ required: false, default: 0 })
     userId: number;
 
+    @ApiProperty({ required: false, default: 0 })
+    topicId: number; // if type topic
+
 
 
 }

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy, Router } from '@angular/router';
 import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -12,7 +12,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { GroupCreateModalComponent } from './group-create-modal/group-create-modal.component';
-import { IonicStorageModule } from '@ionic/storage';
+import { IonicStorageModule, Storage } from '@ionic/storage';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +31,7 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { FcmProviderService } from './utils/fcm-provider.service';
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
+import { AppRouterNavigateService, AppRouterCreator } from './utils/app-router-navigate.service';
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 // IonicStorageModule.forRoot({
 //   name: '__nah',
@@ -76,6 +77,7 @@ import { SuperTabsModule } from '@ionic-super-tabs/angular';
     FcmProviderService,
     GoogleAnalytics,
     FCM,
+    { provide: AppRouterNavigateService, useFactory: AppRouterCreator, deps: [Storage, Router] },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {

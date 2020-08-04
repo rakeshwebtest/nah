@@ -2,7 +2,7 @@ import { HttpException } from '@nestjs/common/exceptions/http.exception';
 import { NestMiddleware, HttpStatus, Injectable } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
-import { SECRET } from '../config';
+import { APP_CONFIG } from '../config';
 import { UserService } from './user.service';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class AuthMiddleware implements NestMiddleware {
     try {
       if (authHeaders && (authHeaders as string).split(' ')[1]) {
         const token = (authHeaders as string).split(' ')[1];
-        const userId: any = jwt.verify(token, SECRET);
+        const userId: any = jwt.verify(token, APP_CONFIG.SECRET);
         const user = await this.userService.findById(userId);
 
         if (!user) {

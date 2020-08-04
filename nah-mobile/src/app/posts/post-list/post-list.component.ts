@@ -13,15 +13,17 @@ import {
   transition
 } from '@angular/animations';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AppRouterNavigateService } from 'src/app/utils/app-router-navigate.service';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss']
 })
 export class PostListComponent implements OnInit, OnDestroy {
-  @Input() type: any; // my-posts all
+  @Input() type: any; // my-posts all topic
   @Input() userId: any;
   @Input() searchKey: any;
+  @Input() topicId: any; // if type topic
   showAgendaView = false;
   limit = 20;
   offset = 0;
@@ -31,7 +33,9 @@ export class PostListComponent implements OnInit, OnDestroy {
   postBehavior = new BehaviorSubject<{ opt: any, list: [] }>({ opt: 'list', list: [] });
   list$: Observable<any[]>;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
-  constructor(private router: Router, private activeRouter: ActivatedRoute, private authS: AuthenticationService,
+  constructor(private router: Router,
+    public appRouter: AppRouterNavigateService,
+    private activeRouter: ActivatedRoute, private authS: AuthenticationService,
     public postS: PostService, private alertCtrl: AlertController, private alertS: AppAlertService) {
 
   }
@@ -89,6 +93,9 @@ export class PostListComponent implements OnInit, OnDestroy {
     const payload: any = {};
     if (this.userId) {
       payload.userId = this.userId;
+    }
+    if (this.topicId) {
+      payload.topicId = this.topicId;
     }
     if (this.searchKey) {
       payload.search = this.searchKey;

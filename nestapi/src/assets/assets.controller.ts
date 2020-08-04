@@ -1,4 +1,4 @@
-import { Controller, UseInterceptors, Post, UploadedFile, UploadedFiles, Body } from '@nestjs/common';
+import { Controller, UseInterceptors, Post, UploadedFile, UploadedFiles, Body, Req, Res } from '@nestjs/common';
 import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -60,7 +60,6 @@ export class AssestsController {
     }
     // multiple file upploads
     @ApiConsumes('multipart/form-data')
-    @Post()
     @UseInterceptors(
         FilesInterceptor('images[]', 20, {
             storage: diskStorage({
@@ -87,5 +86,24 @@ export class AssestsController {
 
         const images = await this.assetS.saveFiles(response);
         return { message: false, success: true, data: images };
+    }
+
+    // @Post()
+    // async create(@Req() request, @Res() response) {
+    //     try {
+    //         await this.imageUploadService.fileupload(request, response);
+    //     } catch (error) {
+    //         return response
+    //             .status(500)
+    //             .json(`Failed to upload image file: ${error.message}`);
+    //     }
+    // }
+
+    @Post('s3')
+    @UseInterceptors(FilesInterceptor('images[]'))
+    async upload(@UploadedFiles() files) {
+        console.log('files', files);
+        // const data = await this.imageUploadService.upload(files);
+       // return data;
     }
 }

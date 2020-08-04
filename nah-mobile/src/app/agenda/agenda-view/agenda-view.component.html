@@ -40,7 +40,7 @@
       <ion-col class="say-no-list">
         <ion-row>
           <ion-col class="ion-no-padding">
-            <p *ngFor="let topic of agenda.topics; let last = last" class="text-primary text-center">Say No To {{ topic.name | uppercase }}</p>
+            <p *ngFor="let topic of agenda.topics; let last = last" (click)="topicDetails(topic)" class="text-primary text-center">Say No To {{ topic.name | uppercase }}</p>
           </ion-col>
           <ion-col class="ion-no-padding old-agenda" size="auto">
             <ion-badge color="danger">

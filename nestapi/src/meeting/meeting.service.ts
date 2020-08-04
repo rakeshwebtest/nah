@@ -6,7 +6,7 @@ import { CreateMeetingDto, MeetingQueryDao } from './dto/create-meeting.dto';
 import { UserEntity } from 'src/user/user.entity';
 import { GroupEntity } from 'src/group/group.entity';
 import { MeetingMembersEntity } from './meeting-members.entity';
-import { SERVERBASEPATH } from 'src/config';
+import { APP_CONFIG } from 'src/config';
 import { CityEntity } from 'src/city/city.entity';
 import { MeetingCommentsEntity } from './meeting-comments.entity';
 import { CommentDto } from './dto/comment.dto';
@@ -124,11 +124,11 @@ export class MeetingService {
     bindFileBasePath(meeting) {
         if (meeting) {
             if (meeting.imageUrl)
-                meeting.imageUrl = SERVERBASEPATH + meeting.imageUrl;
+                meeting.imageUrl = APP_CONFIG.SERVERBASEPATH + meeting.imageUrl;
             if (meeting.photos) {
                 meeting.photos.map(p => {
                     if (p.imagePath)
-                        p.imagePath = SERVERBASEPATH + p.imagePath;
+                        p.imagePath = APP_CONFIG.SERVERBASEPATH + p.imagePath;
                 });
             }
 
@@ -259,7 +259,7 @@ export class MeetingService {
             .execute();
         imagesList.map(meeting => {
             if (meeting.imagePath)
-                meeting.imagePath = SERVERBASEPATH + meeting.imagePath;
+                meeting.imagePath = APP_CONFIG.SERVERBASEPATH + meeting.imagePath;
         });
         return imagesList;
 

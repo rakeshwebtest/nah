@@ -38,7 +38,7 @@
               <span class="date">{{ post.createdDate | date: "mediumDate" }}</span>
             </ion-label>
             <p>
-              <ion-text class="text-primary">Say No To {{ post.topic.name }}</ion-text>
+              <ion-text class="text-primary" (click)="appRouter.goToTopicDetails(post.topic)">Say No To {{ post.topic.name }}</ion-text>
             </p>
           </ion-col>
         </ion-row>

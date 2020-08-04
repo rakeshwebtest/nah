@@ -1,5 +1,6 @@
-import { SECRET } from '../config';
+
 import * as jwt from 'jsonwebtoken';
+import { APP_CONFIG } from 'src/config';
 
 export class BaseController {
 
@@ -9,7 +10,7 @@ export class BaseController {
     if (!authorization) return null;
 
     const token = authorization.split(' ')[1];
-    const decoded: any = jwt.verify(token, SECRET);
+    const decoded: any = jwt.verify(token, APP_CONFIG.SECRET);
     return decoded.id;
   }
 }

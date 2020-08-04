@@ -62,6 +62,10 @@ export class PostService {
                 db.andWhere('(p.isPublished = 1)');
             }
 
+            if (query.topicId) {
+                db.andWhere('( topic.id = :id)', { id: query.topicId });
+            }
+
             if (query.type && query.type === 'bookmarks') {
                 db.andWhere('(bu.id = :id )', { id: sessionUser.id });
             }

@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AlertController } from '@ionic/angular';
 import { FcmProviderService } from 'src/app/utils/fcm-provider.service';
 import { Storage } from '@ionic/storage';
+import { AppRouterNavigateService } from 'src/app/utils/app-router-navigate.service';
 @Component({
   selector: 'app-post-detatils',
   templateUrl: './post-detatils.component.html',
@@ -22,6 +23,7 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
   isOwner: boolean;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
   constructor(private postS: PostService, private activeRoute: ActivatedRoute, private http: AppHttpClient,
+    public appRouter: AppRouterNavigateService,
     private router: Router,
     private storage: Storage,
     private alertS: AppAlertService, private alertCtrl: AlertController,

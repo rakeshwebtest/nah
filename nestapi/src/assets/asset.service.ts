@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AssetsEntity } from './assets.entity';
 import { Repository } from 'typeorm';
-import { SERVERBASEPATH } from 'src/config';
+import { APP_CONFIG } from 'src/config';
 @Injectable()
 export class AssetService {
 
@@ -18,7 +18,7 @@ export class AssetService {
     }
     getFullPath(files: any[]) {
         if (files && files.length > 0) {
-            files.map(f => f.fullPath = SERVERBASEPATH + 'uploads/' + f.fileName);
+            files.map(f => f.fullPath = APP_CONFIG.SERVERBASEPATH + 'uploads/' + f.fileName);
         }
         return files;
     }

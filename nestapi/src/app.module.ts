@@ -8,7 +8,7 @@ import { MeetingModule } from './meeting/meeting.module';
 import * as path from 'path';
 import { MulterModule } from '@nestjs/platform-express';
 import { CityModule } from './city/city.module';
-import { DB } from './config';
+import { APP_CONFIG } from './config';
 import { AuthMiddleware } from './user/auth.middleware';
 import { UserService } from './user/user.service';
 import { UserEntity } from './user/user.entity';
@@ -19,7 +19,7 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { FcmModule } from 'nestjs-fcm';
 @Module({
   imports: [
-    TypeOrmModule.forRoot({ ...DB, entities: [path.join(__dirname, '**/*.entity{.ts,.js}')] }),
+    TypeOrmModule.forRoot({ ...APP_CONFIG.DB, entities: [path.join(__dirname, '**/*.entity{.ts,.js}')] }),
     TypeOrmModule.forFeature([UserEntity]),
     FcmModule.forRoot({
       firebaseSpecsPath: path.join(__dirname, '../fairbase.json')

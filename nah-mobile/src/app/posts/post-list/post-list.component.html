@@ -26,16 +26,15 @@
               </ion-label>
               <p>
                 <!-- <ion-text class="text-agenda">AGENDA</ion-text> -->
-                <ion-text class="text-primary">
+                <ion-text class="text-primary" (click)="appRouter.goToTopicDetails(post.topic)">
                   Say No To
                   <span class="">{{ post.topic.name }}</span>
                 </ion-text>
-              
               </p>
             </ion-col>
           </ion-row>
           <ion-card-title (click)="navDetails(post)" class="format-text hel-bold-font">
-            <ion-label>{{ post.title }}   <ion-text class="text-danger mr-2" *ngIf="post.isPublished==0">(Draft)</ion-text></ion-label>
+            <ion-label>{{ post.title }} <ion-text class="text-danger mr-2" *ngIf="post.isPublished == 0">(Draft)</ion-text></ion-label>
           </ion-card-title>
         </ion-card-header>
         <ion-card-content (click)="navDetails(post)" class="ion-text-justify format-text hel-regular-font">

@@ -6,7 +6,7 @@ import { Repository, getConnection, getRepository } from 'typeorm';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { GroupFollowDto } from './dto/group-follow.dto';
 import { UserEntity } from 'src/user/user.entity';
-import { SERVERBASEPATH } from 'src/config';
+import { APP_CONFIG } from 'src/config';
 import { User } from 'src/user/user.decorator';
 @Injectable()
 export class GroupService {
@@ -172,11 +172,11 @@ export class GroupService {
     bindFileBasePath(meeting) {
         if (meeting) {
             if (meeting.imageUrl)
-                meeting.imageUrl = SERVERBASEPATH + meeting.imageUrl;
+                meeting.imageUrl = APP_CONFIG.SERVERBASEPATH + meeting.imageUrl;
             if (meeting.photos) {
                 meeting.photos.map(p => {
                     if (p.imagePath)
-                        p.imagePath = SERVERBASEPATH + p.imagePath;
+                        p.imagePath = APP_CONFIG.SERVERBASEPATH + p.imagePath;
                 });
             }
 
