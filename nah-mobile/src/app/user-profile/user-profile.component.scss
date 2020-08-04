@@ -18,7 +18,9 @@
 //     --background: #9dc912;
 //     --color: #fff;
 // }
-
+:host .buttons-container {
+  padding-left: 5px !important;
+}
 
 ion-tabs {
   top: 0;

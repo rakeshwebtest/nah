@@ -22,14 +22,14 @@ export class BottomTabsComponent implements OnInit {
 
     let buttons = [
       {
-        text: 'Crate Group',
+        text: 'Create Group',
         icon: 'people',
         handler: () => {
           this.presentGroupModal();
         }
       },
       {
-        text: 'Crate Agenda',
+        text: 'Create Agenda',
         icon: 'send',
         handler: () => {
           this.router.navigate(['/agenda/create']);
@@ -37,7 +37,7 @@ export class BottomTabsComponent implements OnInit {
         }
       },
       {
-        text: 'Crate Post',
+        text: 'Create Post',
         icon: 'send',
         handler: () => {
           this.router.navigate(['/posts/create']);
@@ -45,7 +45,7 @@ export class BottomTabsComponent implements OnInit {
         }
       },
       {
-        text: 'Crate Meeting',
+        text: 'Create Meeting',
         role: 'destructive',
         icon: 'people',
         handler: () => {
