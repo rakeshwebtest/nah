@@ -1,17 +1,22 @@
 {
-  "db": {
+  "DB": {
     "type": "mysql",
     "host": "localhost",
     "port": 3306,
-    "username": "root",
+    "username": "Username",
     "password": "password",
-    "database": "nah",
+    "database": "nah_new",
     "entities": [
       "src/**/**.entity{.ts,.js}"
     ],
     "synchronize": true
   },
-  "secret": "the-app",
-  "serverBasePath":"http://nah.theapp.in/api/",
-   "uploadPath":"./uploads"
+  "SECRET": "the-app",
+  "SERVERBASE_PATH":"http://localhost:3000/api/",
+   "UPLOAD_PATH":"./uploads",
+   "S3":{
+     "AWS_ACCESS_KEY_ID":"AKIAI5WU63MM4LEL74ZQ",
+     "AWS_SECRET_ACCESS_KEY":"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",
+     "AWS_S3_BUCKET_NAME":"theappin"
+   }
 }

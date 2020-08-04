@@ -172,22 +172,22 @@ export class PostService {
         const postDetails: any = await this.getPostIdBasic(data.postId);
         switch (data.type) {
             case 'like':
-                msgS = 'I like this Post';
-                msgF = "I remove post form list post";
+                msgS = 'liked';
+                msgF = "Removed post";
                 await this.postDislikeRepository.delete({ post: { id: data.postId }, user: { id: data.userId } }); // delete dislike if exit
                 _entity = new PostLikeEntity();
                 _repo = this.postLikeRepository;
                 break;
             case 'dislike':
-                msgS = 'I don\'t like this Post';
-                msgF = "I remove dislike form list post";
+                msgS = 'Disliked ';
+                msgF = "Removed disliked";
                 await this.postLikeRepository.delete({ post: { id: data.postId }, user: { id: data.userId } }); // delete dislike if exit
                 _entity = new PostDislikeEntity();
                 _repo = this.postDislikeRepository;
                 break;
             default:
-                msgS = 'This post added to my Bookmark';
-                msgF = "I removed post form list";
+                msgS = 'Added to bookmarks';
+                msgF = "Removed post";
                 _entity = new PostBookmarksEntity();
                 _repo = this.postBookmarksRepository;
                 break;

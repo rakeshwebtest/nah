@@ -204,6 +204,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
   doRefresh(reload) {
     this.offset = 0;
+    this.postBehavior.next({ opt: 'list', list: [] });
     this.loadPosts(null, reload);
   }
   ngOnDestroy(): void {
