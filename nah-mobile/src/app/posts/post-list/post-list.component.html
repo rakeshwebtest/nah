@@ -45,7 +45,7 @@
       <ion-card-title>{{ post.title }}</ion-card-title>
     </ion-card-header> -->
 
-        <ion-footer>
+        <ion-footer class="social-info">
           <ion-text class="post-footer">
             <span (click)="bookmarkLikeAndDislike(post, 'like')"> <ion-icon [ngClass]="{ active: post.like }" name="thumbs-up"></ion-icon> {{ post.likeCount }} </span>
             <span (click)="bookmarkLikeAndDislike(post, 'dislike')"> <ion-icon [ngClass]="{ active: post.dislike }" name="thumbs-down"></ion-icon> {{ post.dislikeCount }} </span>

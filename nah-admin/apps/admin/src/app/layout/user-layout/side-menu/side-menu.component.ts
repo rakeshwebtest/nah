@@ -156,7 +156,7 @@ export class SideMenuComponent implements OnInit {
             'type': 'custom'
           }
         ]
-      },      
+      },
       {
         'label': 'Meetings',
         'code': 'meetings',
@@ -209,6 +209,26 @@ export class SideMenuComponent implements OnInit {
             'label': 'Reports',
             'code': 'reports/list',
             'icon': 'fa fa-copy',
+            'type': 'custom'
+          }
+        ]
+      },
+      {
+        'label': 'Users',
+        'code': 'user',
+        'icon': 'fa fa-user',
+        'app': 'zc-core',
+        'childs': [
+          {
+            'label': 'Users',
+            'code': 'user/list',
+            'icon': 'fa fa-phone',
+            'type': 'custom'
+          },
+          {
+            'label': 'Users',
+            'code': 'user/list',
+            'icon': 'fa fa-phone',
             'type': 'custom'
           }
         ]

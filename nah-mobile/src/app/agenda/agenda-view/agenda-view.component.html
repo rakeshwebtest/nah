@@ -58,9 +58,9 @@
 </ion-row>
 
 <ng-template #showCreateMsgDiv>
-  <ion-row class="ion-text-center" *ngIf="showCreateMsg" (click)="createAgenda()">
-    <ion-chip style="margin: auto; margin-top: 5px;">
-      <ion-label>You Don't have any Agend Please Create</ion-label>
+  <ion-row class="ion-text-center no-agendas" (click)="createAgenda()">
+    <ion-chip style="margin: 0px auto;">
+      <ion-label>You Don't have any Agenda Please Create</ion-label>
     </ion-chip>
   </ion-row>
 </ng-template>

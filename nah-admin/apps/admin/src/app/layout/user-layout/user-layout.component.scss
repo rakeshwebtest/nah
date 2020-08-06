@@ -1,5 +1,5 @@
-@import '../../../styles';
-header{
+@import "../../../styles";
+header {
     position: fixed;
     top: 0;
     z-index: 99;
@@ -9,7 +9,7 @@ header{
     padding-left: 70px;
     transition: all 0.3s;
     width: 100%;
-    .header-widget{
+    .header-widget {
         display: flex;
         align-items: center;
         padding: 0 10px 0 0;
@@ -20,33 +20,31 @@ header{
             // flex-direction: column;
             // align-items: flex-start;
         }
-        .header-left{
+        .header-left {
             flex: 1;
             display: flex;
             align-items: center;
-            .logo{
-                width: 100%;
-                background: #e11f273d;
+            .logo {
+                // background: #e11f273d;
                 border-radius: 0;
                 height: 60px;
                 transition: all 0.3s;
                 display: flex;
                 text-align: center;
-                width: 100%;
                 align-items: center;
                 justify-content: center;
                 padding: 5px;
-                img{
+                img {
                     height: 49px;
                     width: auto;
                 }
             }
-            .sidebar-toggle{
+            .sidebar-toggle {
                 font-size: $fontSize26;
                 padding: $padding0 $padding15 $padding0 $padding15;
                 text-align: center;
                 color: $toggle-icon-color;
-                &:hover{
+                &:hover {
                     color: $toggle-icon-color-hover;
                 }
                 @media (max-width: 991px) {
@@ -59,25 +57,25 @@ header{
                 color: blue;
             }
         }
-        .header-right{
+        .header-right {
             @media (max-width: 991px) {
                 width: 100%;
                 justify-content: flex-end;
                 display: flex;
             }
-            >ul.menu{
+            > ul.menu {
                 list-style: none;
                 display: flex;
                 align-items: center;
-                >li{
+                > li {
                     padding: $padding15;
                     @media (max-width: 991px) {
                         padding: $padding0 $padding5;
                     }
-                    &:hover{
-                        background-color: #D9DEE4;
+                    &:hover {
+                        background-color: #d9dee4;
                     }
-                    &:first-child{
+                    &:first-child {
                         @media (max-width: 360px) {
                             display: none;
                         }
@@ -85,87 +83,89 @@ header{
                 }
             }
             .user-details {
-                >a{
+                > a {
                     padding: $padding15;
-                    @media(max-width: 767px){
+                    @media (max-width: 767px) {
                         padding: $padding5;
                     }
                 }
                 .user-menu {
                     padding: 0;
-                   ul {
-                      width: 100%;
-                      padding: 0;
-
-                      li {
+                    border-radius: 10px;
+                    border-color: #999;
+                    ul {
+                        width: 100%;
                         padding: 0;
-                        border-bottom: 1px solid #dcdcdc;
-                        .user-info {
-                            padding: 10px;
-                        }
-                        span {
-                            color: #232C36;
-                            display: block;
-                            font-size: 14px;
-                            font-weight: 600;
-                        }
-                        label {
-                        color: #757575;
-                        display: block;
-                        font-size: 14px;
-                        }
-                        a {
-                            // text-align: right;
-                            padding: 7px 15px;
-                            background-color: #ffffff;
-                            color: #000;
-                            display: block;
-                            font-size: 12px;
-                            &:hover {
-                                background-color: #f5f5f5;
+
+                        li {
+                            padding: 0;
+                            border-bottom: 1px solid #dcdcdc;
+                            .user-info {
+                                padding: 10px;
+                            }
+                            span {
+                                color: #232c36;
+                                display: block;
+                                font-size: 14px;
+                                font-weight: 600;
+                            }
+                            label {
+                                color: #757575;
+                                display: block;
+                                font-size: 14px;
+                            }
+                            a {
+                                // text-align: right;
+                                padding: 7px 15px;
+                                background-color: #ffffff;
+                                color: #000;
+                                display: block;
+                                font-size: 12px;
+                                border-radius: 10px;
+                                &:hover {
+                                    background-color: #f5f5f5;
+                                }
+                            }
+                            &:last-child {
+                                border-bottom: 0px;
                             }
                         }
-                        &:last-child {
-                            border-bottom: 0px;
+                        &:before {
+                            color: #7f7f7f;
+                            content: "";
+                            display: block;
+                            position: absolute;
+                            border-left: 10px solid transparent;
+                            border-right: 10px solid transparent;
+                            border-bottom: 10px solid #999;
+                            right: 15px;
+                            top: -11px;
                         }
-                    }
-                    &:before {
-                        color: #7f7f7f;
-                        content: '';
-                        display: block;
-                        position: absolute;
-                        border-left: 10px solid transparent;
-                        border-right: 10px solid transparent;
-                        border-bottom: 10px solid #ccc;
-                        right: 15px;
-                        top: -11px;
-                    }
-                    &:after {
-                        color: #7f7f7f;
-                        content: '';
-                        display: block;
-                        position: absolute;
-                        border-left: 10px solid transparent;
-                        border-right: 10px solid transparent;
-                        border-bottom: 10px solid #fff;
-                        right: 15px;
-                        top: -10px;
+                        &:after {
+                            color: #7f7f7f;
+                            content: "";
+                            display: block;
+                            position: absolute;
+                            border-left: 10px solid transparent;
+                            border-right: 10px solid transparent;
+                            border-bottom: 10px solid #fff;
+                            right: 15px;
+                            top: -10px;
+                        }
                     }
                 }
             }
-                
-            } 
         }
     }
 }
-.breadcrumb{
+.breadcrumb {
     position: sticky;
     top: 60px;
     z-index: 10;
     margin: 0;
     background-color: #ccc;
     min-height: 40px;
-    .sidebar-toggle{
+    .sidebar-toggle {
         background-color: $toggle-icon-bg;
         font-size: $sideMenuIcon-font-size;
         padding: $toggle-icon-padding;
@@ -174,23 +174,23 @@ header{
         color: $toggle-icon-color;
     }
 }
-.left-menu{
-    .logo{
+.left-menu {
+    .logo {
         width: 100%;
-                background: #e11f273d;
-                border-radius: 0;
-                height: 60px;
-                transition: all 0.3s;
-                display: flex;
-                text-align: center;
-                width: 100%;
-                align-items: center;
-                justify-content: center;
-                padding: 5px;
-        img{
+        background: #e11f273d;
+        border-radius: 0;
+        height: 60px;
+        transition: all 0.3s;
+        display: flex;
+        text-align: center;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        img {
             height: 49px;
             width: auto;
-            transition: all .3s;
+            transition: all 0.3s;
         }
     }
     height: 100%;
@@ -200,21 +200,21 @@ header{
     z-index: 99;
     left: 0;
     // transform: translate(0%);
-    transition: all .3s;
+    transition: all 0.3s;
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
 }
-.submenu{
-    padding:0;
+.submenu {
+    padding: 0;
     font-size: 14px;
-    li{
-        margin:0;
+    li {
+        margin: 0;
         border-bottom: 1px solid #ccc;
-        a{
+        a {
             padding: 7px 10px;
             border-radius: 0px;
         }
-        &:last-child{
+        &:last-child {
             border-bottom: none;
         }
     }
@@ -236,27 +236,27 @@ header{
 //     max-height: 400px;
 //     opacity: 1;
 // }
-.main{
+.main {
     min-height: calc(100vh - 141px);
-    transition: all .3s;
+    transition: all 0.3s;
     padding-top: 60px;
 }
-footer{
+footer {
     background-color: #212529;
     color: #4e4e4e;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    .footer-right{
-        a{
+    .footer-right {
+        a {
             padding: 10px;
             color: #4e4e4e;
         }
     }
 }
-.welcome{
-    @media(max-width: 576px){
+.welcome {
+    @media (max-width: 576px) {
         display: none;
     }
 }

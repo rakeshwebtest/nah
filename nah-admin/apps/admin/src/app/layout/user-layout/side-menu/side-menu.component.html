@@ -4,9 +4,9 @@
       <!--(click)="addAnimation()"-->
       <a *ngIf="m.childs &&  m.childs.length>1" class="nav-link nav-dropdown-toggle" routerLinkActive="active"
         appNavDropdownToggle>
-        <span class="fa fa-angle-down dp-arrow"></span>
         <i class="{{m.icon}}"></i>
         <span class="nav-link-text">{{m.label}}</span>
+        <span class="fa fa-angle-down dp-arrow"></span>
       </a>
       <a [routerLink]="[m.childs[0].code]" *ngIf="!m.childs || (m.childs && m.childs.length==1)" routerLinkActive="active"
         class="nav-link" appNavDropdownToggle (click)="menuClose()">

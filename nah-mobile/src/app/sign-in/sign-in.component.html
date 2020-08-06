@@ -2,7 +2,7 @@
   <ion-grid style="height: 100%;align-items: center;justify-content: center;display: flex;flex-direction: column;padding: 0;">
     <ion-row class="ion-align-items-center">
       <ion-col class="ion-text-center">
-        <ion-button color="light">
+        <ion-button color="light" class="no-ripple-effeect">
           <ion-label> Hey, Let us know about your Noer</ion-label>
         </ion-button>
       </ion-col>
@@ -22,7 +22,7 @@
         <ion-label class="ion-padding-t-5">Antie's</ion-label>
         <ion-label class="ion-text-center ion-padding-t-5" style="font-size: small; opacity: 0.5;"> What are you apposed to ?
         </ion-label>
-        <ion-ripple-effect></ion-ripple-effect>
+        <!-- <ion-ripple-effect></ion-ripple-effect> -->
       </ion-col>
       <ion-col class="ion-text-center align-center ion-activatable ion-no-padding" (click)="noerSelection('rejection')">
         <ion-avatar class="avatar ion-align-items-center" [ngClass]="{ active: profile.typeOfNoer == 'rejection' }">
@@ -32,7 +32,7 @@
         <ion-label class="ion-padding-t-5">Rejector</ion-label>
         <ion-label class="ion-text-center ion-padding-t-5" style="font-size: small; opacity: 0.5;">What you refuse to accept ?
         </ion-label>
-        <ion-ripple-effect></ion-ripple-effect>
+        <!-- <ion-ripple-effect></ion-ripple-effect> -->
       </ion-col>
       <ion-col class="ion-text-center align-center ion-activatable" (click)="noerSelection('hater')">
         <ion-avatar class="avatar ion-align-items-center" [ngClass]="{ active: profile.typeOfNoer == 'hater' }">
@@ -42,7 +42,7 @@
         <ion-label class="ion-padding-t-5">Hater</ion-label>
         <ion-label class="ion-text-center ion-padding-t-5" style="font-size: small; opacity: 0.5;">What  passionate you to  dislike someone ?
         </ion-label>
-        <ion-ripple-effect></ion-ripple-effect>
+        <!-- <ion-ripple-effect></ion-ripple-effect> -->
       </ion-col>
     </ion-row>
     <ion-row class="ion-margin-top margin-top-40">

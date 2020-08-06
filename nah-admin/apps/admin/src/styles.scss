@@ -22,9 +22,9 @@ $sideMenu-width: 230px;
 $sideMenuIcon-width: 0px;
 $sideMenuIcon-height: 40px;
 $sideMenuIcon-font-size: 18px;
-$sideMenu-bg: #f7f7f7;
-$subMenu-bg: #fff;
-$subMenu-textColor: #000;
+$sideMenu-bg: #f04141;
+$subMenu-bg: #f04141;
+$subMenu-textColor: #fff;
 $navitem-border: #d8d8d8;
 
 //Colors
@@ -39,6 +39,7 @@ $modal-header: #026084;
 $ternaryLight: #20b892;
 $secondaryLight: #fabb42;
 $black: #000000;
+$white: #ffffff;
 
 // Font size
 $fontSizeXS: 9px;
@@ -349,7 +350,7 @@ body .ui-buttonset.ui-button-success > .ui-button.ui-state-default:enabled:focus
     width: 40px !important;
   }
   .side-menu ul.nav li.nav-item a.nav-link .nav-link-text {
-    margin-left: 40px !important;
+    // margin-left: 40px !important;
   }
 }
 .hide-menu {
@@ -858,4 +859,22 @@ input::placeholder,
   font-size:12px !important;
   color:#999 !important;
   line-height: 26px;
+}
+.customScroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.customScroll::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+.customScroll::-webkit-scrollbar-thumb {
+  background: #962126; 
+}
+
+/* Handle on hover */
+.customScroll::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

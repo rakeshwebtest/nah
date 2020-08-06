@@ -9,6 +9,7 @@
     // width: 100%;
     transition: all ease 0.3s;
     z-index: 1;
+    padding-top: 50px;
     ul.nav{
         padding-left: 0px;
         height: 100%;
@@ -17,14 +18,14 @@
         margin: 0;
         border-right: 1px solid $navitem-border;
         li.nav-item{
-            border-bottom: 1px solid $navitem-border;
+            // border-bottom: 1px solid $navitem-border;
             .dp-arrow{
-                position: absolute;
+                // position: absolute;
                 transition: all .3s;
                 right: 8px;
                 top: 21px;
                 font-size: 18px;
-                border: 1px solid #d8d8d8;
+                // border: 1px solid #d8d8d8;
                 padding: 0 5px;
             }
             a.nav-link{
@@ -35,8 +36,10 @@
                 height: $sideMenuIcon-height;
                 line-height: $sideMenuIcon-height;
                 outline: none !important;
+                text-align: center;
+                font-size: 18px;
                 &.active{
-                    color: $primary;
+                    color: $white;
                     &::before{
                         border-top: 7px solid transparent;
                         border-bottom: 7px solid transparent;
@@ -46,6 +49,10 @@
                         content: "";
                         position: absolute;
                         right: 0;
+                        display: none;
+                    }
+                    .nav-link-text{
+                        text-shadow: 3px 3px 6px #000;
                     }
                 }
                 i{
@@ -58,25 +65,26 @@
                     width: $sideMenuIcon-width;
                     left: 0;
                     top: 0;
+                    display: none;
                 }
                 .nav-link-text{
-                    padding-right: 21px;
-                    margin-left: $sideMenuIcon-width;
-                    display: block;
+                    // padding-right: 21px;
+                    margin-left: 0; // $sideMenuIcon-width;
+                    // display: block;
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     overflow: hidden;
                 }
                 &:hover{
-                    background-color: $white;
-                    color: $primary;
+                    background-color: $sideMenu-bg;
+                    color: $white;
                     >.nav-link-text, >.dp-arrow, >i{
-                        color: $primary;
+                        color: $white;
                     }
                 }
             }
             &:hover{
-                background-color: $white;
+                background-color: $sideMenu-bg;
             }
             .nav-dropdown-items{
                 padding: 0;
@@ -109,15 +117,15 @@
                 &.open{
                     
                     .nav-dropdown-toggle{
-                        background-color: #2F4457;
-                        color: #CADB23;
+                        background-color: #f04141;
+                        color: #fff;
                         >.nav-link-text, >.dp-arrow, >i{
                             color: #fff;
                         }
                         &:hover{
-                            color: #CADB23;
+                            color: #fff;
                             >.nav-link-text, >.dp-arrow, >i{
-                                color: #CADB23;
+                                color: #fff;
                             }
                         }
                     }
@@ -129,7 +137,7 @@
                         // }
                     .nav-dropdown-items{
                         /* display: block; */
-                        background-color: #EEEEEE;  
+                        background-color: #f04141;  
                         transition: max-height .5s ease;
                         max-height: 500px;
                         -webkit-transition:max-height .5s ease;
@@ -141,11 +149,12 @@
                             height: $sideMenuIcon-height;
                             transition: height .5s ease;
                             .nav-link{
+                                font-size: 14px;
                                 i{
                                     font-size: 10px;
                                 }
                                 span{
-                                    padding-left: 40px;
+                                    // padding-left: 40px;
                                     display: block;
                                     text-overflow: ellipsis;
                                     white-space: nowrap;

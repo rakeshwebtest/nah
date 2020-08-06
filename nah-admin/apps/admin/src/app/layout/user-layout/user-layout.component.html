@@ -1,14 +1,15 @@
 <header>
   <div class="header-widget">
     <div class="header-left">
-      <!-- <a class="logo">
-        <img src="assets/images/logo.png" alt="logo" />
-      </a> -->
+      
       <a
         href="javascript:;"
         class="fa fa-bars sidebar-toggle"
         (click)="toggleMenu()"
       ></a>
+      <a [routerLink]="['/admin/users/list']" class="logo">
+        <img src="assets/images/logo.png" alt="logo" />
+      </a>
       <!-- <span class="marquee">
         <marquee
           >Cricket News Update-> The Ashes 2019 Start From 1stAugust2019, India
@@ -59,9 +60,9 @@
   <mc-breadcrumbs></mc-breadcrumbs>
 </div> -->
 <div class="left-menu">
-  <a [routerLink]="['/admin/users/list']" class="logo">
+  <!-- <a [routerLink]="['/admin/users/list']" class="logo">
     <img src="assets/images/logo.png" alt="logo" />
-  </a>
+  </a> -->
   <app-side-menu></app-side-menu>
 </div>
 <div class="main">
