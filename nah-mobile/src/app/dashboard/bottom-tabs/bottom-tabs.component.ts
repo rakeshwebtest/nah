@@ -23,14 +23,14 @@ export class BottomTabsComponent implements OnInit {
     let buttons = [
       {
         text: 'Create Group',
-        icon: 'people',
+        icon: 'contacts',
         handler: () => {
           this.presentGroupModal();
         }
       },
       {
         text: 'Create Agenda',
-        icon: 'send',
+        icon: 'create',
         handler: () => {
           this.router.navigate(['/agenda/create']);
           console.log('Share clicked');
@@ -38,7 +38,7 @@ export class BottomTabsComponent implements OnInit {
       },
       {
         text: 'Create Post',
-        icon: 'send',
+        icon: 'document',
         handler: () => {
           this.router.navigate(['/posts/create']);
           console.log('Share clicked');

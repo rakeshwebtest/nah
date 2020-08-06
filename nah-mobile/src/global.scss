@@ -859,15 +859,15 @@ p::first-letter {
           content: "";
           position: absolute;
           left: 50%;
-          width: 35%;
+          width: 50%;
           height: 2px;
-          margin-left: -17%;
+          margin-left: -25%;
           z-index: 9999;
           color: #f04141;
           top: -6px;
           font-size: 21px;
           font-weight: bold;
-          background-color: #f04141;
+          background-color: #ccc;
         }
       }
     }
@@ -914,4 +914,14 @@ p::first-letter {
   // .post-footer{
   //   border-bottom: 1px solid #ccc;
   // }
+}
+.no-border{
+  border-bottom: none !important;
+}
+.custom-text-btn{
+  background-color: #e0dddd;
+  padding: 10px 15px;
+  border-radius: 20px;
+  box-shadow: 1px 5px 6px #999;
+  display: block;
 }
