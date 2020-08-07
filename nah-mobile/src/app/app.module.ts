@@ -23,10 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedProfileEditModule } from './shared/shared-profile-edit.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { myTransitionAnimation } from './animations';
-// import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
-import { AngularFireMessagingModule } from '@angular/fire/messaging';
 // FCM
 import { FCM } from '@ionic-native/fcm/ngx';
 import { FcmProviderService } from './utils/fcm-provider.service';
@@ -50,8 +47,6 @@ import { AppRouterNavigateService } from './utils/app-router-navigate.service';
     CommonModule,
     SharedProfileEditModule,
     DashboardModule,
-    AngularFireMessagingModule,
-    AngularFireModule.initializeApp(environment.fbConfig),
     SuperTabsModule.forRoot(),
     // AngularFireAuthModule,
     IonicModule.forRoot(

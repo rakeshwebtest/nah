@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Platform } from '@ionic/angular';
 import { FCM } from '@ionic-native/fcm/ngx';
-import { AngularFireMessaging } from '@angular/fire/messaging';
 import { BehaviorSubject } from 'rxjs';
 import { AppToasterService } from './app-toaster.service';
 @Injectable({
@@ -11,7 +10,7 @@ import { AppToasterService } from './app-toaster.service';
 export class FcmProviderService {
   fcmToken: any;
   currentMessage = new BehaviorSubject(null);
-  constructor(public fcm: FCM, private platform: Platform, private toaster: AppToasterService, private angularFireMessaging: AngularFireMessaging) { }
+  constructor(public fcm: Firebase, private platform: Platform, private toaster: AppToasterService) { }
   public setToken() {
     if (this.platform.is('android')) {
       this.fcm.getToken().then(token => {
@@ -37,7 +36,7 @@ export class FcmProviderService {
   }
   // nagative notification subscribe
   fcmNotificationsOn() {
-    this.fcm.onNotification().subscribe(data => {
+    this.fcm.onNotificationOpen().subscribe(data => {
       if (data.wasTapped) {
         console.log("Received in background");
       } else {
@@ -48,30 +47,17 @@ export class FcmProviderService {
   }
 
   fcmSubscribeToTopic(topic) {
-    return this.fcm.subscribeToTopic(topic);
+   // return this.fcm.subscribeToTopic(topic);
     // return this.fcm.onNotification();
   }
   fcmUnsubscribeFromTopic(topic) {
-    return this.fcm.unsubscribeFromTopic(topic);
+   //  return this.fcm.unsubscribeFromTopic(topic);
   }
 
   // for web application notification request
   requestPermission() {
-    this.angularFireMessaging.requestToken.subscribe(
-      (token) => {
-        this.fcmToken = token;
-        console.log(token);
-      },
-      (err) => {
-        console.error('Unable to get permission to notify.', err);
-      }
-    );
+
   }
   receiveMessage() {
-    this.angularFireMessaging.messages.subscribe(
-      (payload) => {
-        console.log("new message received. ", payload);
-        this.currentMessage.next(payload);
-      });
   }
 }
