@@ -37,7 +37,7 @@ jobs:
             command: |
               cd nah-mobile && yarn install
       - run:
-            name: "Install Cordova plugins and add android platform"
+            name: "Install Cordova plugins and add android@^8.0.0 platform"
             command: |
               cd nah-mobile && ionic cordova platform add android  --noresources --verbose
               ionic config set -g telemetry true
