@@ -4,7 +4,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Platform } from '@ionic/angular';
 import { Router, NavigationEnd } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { FcmProviderService } from './utils/fcm-provider.service';
 @Component({
@@ -25,7 +24,6 @@ export class AppComponent {
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     private router: Router,
-    private ga: GoogleAnalytics,
     private fcmProviderService: FcmProviderService,
     private fcm: FCM
   ) {
@@ -35,11 +33,6 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.fcmProviderService.setToken(); // set token and on notifications
-
-      this.ga.startTrackerWithId('UA-158946994-1')
-        .then(() => {
-          this.startTracking();
-        }).catch(e => alert('Error starting GoogleAnalytics == ' + e));
 
       // Here we will check if the user is already logged in
       // because we don't want to ask users to log in each time they open the app

@@ -18,7 +18,6 @@ import { AuthenticationService } from './services/authentication.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { IonicSelectableModule } from 'ionic-selectable';
-import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedProfileEditModule } from './shared/shared-profile-edit.module';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -68,7 +67,6 @@ import { AppRouterNavigateService } from './utils/app-router-navigate.service';
     GooglePlus,
     AuthGuard,
     FcmProviderService,
-    GoogleAnalytics,
     FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
