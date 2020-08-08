@@ -9,7 +9,7 @@ import { PostListComponent } from '../posts/post-list/post-list.component';
 export class BookmarkPage implements OnInit {
 
 
-  @ViewChild(PostListComponent, null)
+  @ViewChild(PostListComponent)
   postListC: PostListComponent;
 
   constructor() { }

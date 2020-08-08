@@ -18,7 +18,7 @@ export class HomeComponent {
   slideOpts = {
 
   };
-  @ViewChild(IonRouterOutlet, null) routerOutlet: IonRouterOutlet;
+  @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
   constructor(
     private http: AppHttpClient,
     private router: Router,

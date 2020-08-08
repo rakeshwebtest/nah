@@ -13,9 +13,9 @@ export class SearchPage implements OnInit {
   userInfo: any;
   userId: any;
   searchKey: any;
-  @ViewChild(PostListComponent, null) postList: PostListComponent;
-  @ViewChild(MeetingListComponent, null) meetingList: MeetingListComponent;
-  @ViewChild(GroupListComponent, null) groupList: GroupListComponent;
+  @ViewChild(PostListComponent) postList: PostListComponent;
+  @ViewChild(MeetingListComponent) meetingList: MeetingListComponent;
+  @ViewChild(GroupListComponent) groupList: GroupListComponent;
   constructor(private authS: AuthenticationService) { }
 
   ngOnInit() {

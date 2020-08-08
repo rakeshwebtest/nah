@@ -10,7 +10,7 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./lazy-upload-field.component.scss'],
 })
 export class LazyUploadFieldComponent extends FieldType implements OnInit {
-  @ViewChild('fileInput', null) fileInput: ElementRef;
+  @ViewChild('fileInput') fileInput: ElementRef;
   previewUrl = null;
   previewUrls: any[] = [];
   uploadedImages = [];

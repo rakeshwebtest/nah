@@ -42,7 +42,7 @@ import { FieldType } from '@ngx-formly/core';
  `]
 })
 export class FieldFileComponent extends FieldType implements OnInit {
-    @ViewChild('fileInput', null) fileInput: ElementRef;
+    @ViewChild('fileInput') fileInput: ElementRef;
     previewUrl = null;
     previewUrls: any[] = [];
     ngOnInit() {
