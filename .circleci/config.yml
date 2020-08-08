@@ -32,12 +32,7 @@ jobs:
       - run:
             name: 'Set env'
             command: echo 'export NG_CLI_ANALYTICS=ci' >> $BASH_ENV
-      
-      - run:
-            name: "Install  angular cli"
-            command: |
-               sudo npm install -g @angular/cli
-              
+    
       - run:
             name: "Install ionic and cordova"
             command: |
