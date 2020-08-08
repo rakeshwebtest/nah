@@ -30,9 +30,9 @@ jobs:
               cd nah-mobile
 
       - run:
-            name: "stop angular cli analytics"
+            name: "stop angular cli analytics off"
             command: |
-              export NG_CLI_ANALYTICS=ci
+              export NG_CLI_ANALYTICS=off off
               
       - run:
             name: "Install ionic and cordova"
