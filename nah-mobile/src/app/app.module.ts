@@ -22,7 +22,6 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedProfileEditModule } from './shared/shared-profile-edit.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { myTransitionAnimation } from './animations';
 import { environment } from 'src/environments/environment';
 // FCM
 import { FCM } from '@ionic-native/fcm/ngx';
@@ -51,8 +50,7 @@ import { AppRouterNavigateService } from './utils/app-router-navigate.service';
     // AngularFireAuthModule,
     IonicModule.forRoot(
       {
-        backButtonText: '',
-        navAnimation: myTransitionAnimation
+        backButtonText: ''
       }
     ),
     IonicSelectableModule,
