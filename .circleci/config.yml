@@ -30,9 +30,8 @@ jobs:
               cd nah-mobile
 
       - run:
-            name: "stop angular cli analytics off"
-            command: |
-              export NG_CLI_ANALYTICS=off off
+            name: 'Set env'
+            command: echo 'export NG_CLI_ANALYTICS=ci' >> $BASH_ENV
               
       - run:
             name: "Install ionic and cordova"
