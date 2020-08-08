@@ -28,6 +28,12 @@ jobs:
             name: "move nah mobile folder"
             command: |
               cd nah-mobile
+
+      - run:
+            name: "stop angular cli analytics"
+            command: |
+              export NG_CLI_ANALYTICS=ci
+              
       - run:
             name: "Install ionic and cordova"
             command: |
