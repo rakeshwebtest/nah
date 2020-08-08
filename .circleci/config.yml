@@ -41,7 +41,7 @@ jobs:
       - run:
             name: "Install npm packages"
             command: |
-              cd nah-mobile && yarn install
+              cd nah-mobile && yarn install && ng analytics off
       - run:
             name: "Install Cordova plugins and add android platform"
             command: |
