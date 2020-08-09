@@ -172,7 +172,7 @@ export class PostService {
         const postDetails: any = await this.getPostIdBasic(data.postId);
         switch (data.type) {
             case 'like':
-                msgS = 'liked';
+                msgS = 'Liked';
                 msgF = "Removed post";
                 await this.postDislikeRepository.delete({ post: { id: data.postId }, user: { id: data.userId } }); // delete dislike if exit
                 _entity = new PostLikeEntity();
