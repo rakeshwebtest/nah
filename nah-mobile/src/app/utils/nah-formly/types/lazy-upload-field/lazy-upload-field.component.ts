@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 import { AppHttpClient } from 'src/app/utils/app-http-client.service';
 import { HttpHeaders } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
+import { FileUploader, FileLikeObject, FileItem } from 'ng2-file-upload';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-lazy-upload-field',
@@ -15,35 +17,55 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
   previewUrls: any[] = [];
   uploadedImages = [];
   fieldInputName = 'images[]';
+  uploader: FileUploader = new FileUploader({
+    url: environment.apiUrl + '/api/asset',
+    method: 'post',
+    disableMultipart: false,
+    autoUpload: false,
+    itemAlias: 'images',
+    allowedFileType: ['image']
+
+
+  });
   constructor(private http: AppHttpClient, public loadingController: LoadingController) {
     super();
   }
   ngOnInit() {
     this.to.showTempPics = true;
     if (!this.to.multiple) {
-      this.fieldInputName = 'images';
+      this.fieldInputName = 'images[]';
     }
     this.formControl.valueChanges.subscribe(res => {
       if (res && res.length > 0 && this.uploadedImages.length === 0) {
         this.uploadedImages = res || [];
       }
     });
+    this.uploader.onAfterAddingFile = (fileItem: FileItem) => this.onAfterAddingFile(fileItem)
   }
-  onFileChange(event) {
-    if (this.to.multiple) {
-      if (event.target.files.length > 0) {
-        this.upload(event.target.files);
-      }
-    }
+
+  // onFileChange(event: EventEmitter<File[]>) {
+  //   console.log('eve', event);
+  //   const file: File[] = event;
+  //   if (this.to.multiple) {
+  //     if (file.length > 0) {
+  //       this.upload(file);
+  //     }
+  //   }
+  // }
+  onAfterAddingFile(fileItem: FileItem) {
+    let latestFile = this.uploader.queue[this.uploader.queue.length - 1];
+    this.uploader.queue = [];
+    this.uploader.queue.push(latestFile);
+    this.onFileSelected();
   }
-  async upload(files) {
+  async onFileSelected() {
+    const files: FileItem[] = this.uploader.queue;
     const loading = await this.loadingController.create({
       message: 'Please wait...'
     });
     const formData = new FormData();
-
-    for (const file of files) {
-      formData.append('images[]', file);
+    for (const f of files) {
+      formData.append('images[]', f.file.rawFile, f.file.name);
     }
     const HttpUploadOptions = {
       headers: new HttpHeaders({ "Content-Type": "multipart/form-data" })

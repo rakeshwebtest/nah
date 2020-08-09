@@ -1,69 +1,73 @@
-.agenda-list{
-    margin-bottom: 5px;
-    color: #333;
-    margin-top: 10px;
-    span{
-        padding-right: 5px;
-        display: flex;
-        ion-badge{
-            margin: 0 5px;
-        }
+.agenda-list {
+  margin-bottom: 5px;
+  color: #333;
+  margin-top: 10px;
+  span {
+    padding-right: 5px;
+    display: flex;
+    ion-badge {
+      margin: 0 5px;
     }
+  }
 }
-.sub-title-info1{
-    text-transform: uppercase;
-    color:#1E1E1E;
-    font-weight: bold;
-    font-size: 15px;
+.custom-card {
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
-.sub-title-info2{
-    padding-left: 20px;
-    font-size: 12px;
-    @media(max-width: 400px){
-        padding-left: 10px;
-        font-size: 11px;
+.sub-title-info1 {
+  text-transform: uppercase;
+  color: #1e1e1e;
+  font-weight: bold;
+  font-size: 15px;
+}
+.sub-title-info2 {
+  padding-left: 20px;
+  font-size: 12px;
+  @media (max-width: 400px) {
+    padding-left: 10px;
+    font-size: 11px;
+  }
+}
+.bars-list {
+  display: flex;
+  padding: 0 15px;
+  border-left: 3px solid #fb0102;
+  margin-left: 15px;
+  span {
+    width: 7px;
+    margin-right: 3px;
+    background-color: #b3b3b3;
+    &.active {
+      background-color: #fb0102;
     }
+  }
 }
-.bars-list{
-    display: flex;
-    padding: 0 15px;
-    border-left: 3px solid #FB0102;
-    margin-left: 15px;
-    span{
-        width: 7px;
-        margin-right: 3px;
-        background-color: #B3B3B3;
-        &.active{
-            background-color: #FB0102;
-        }
-    }
+.lock {
+  background-color: #2e2e2e;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  justify-content: center;
+  flex: auto;
+  position: relative;
+  padding: 3px;
+  font-size: 21px;
 }
-.lock{
-    background-color: #2E2E2E;
-    display: flex;
-    align-items: center;
-    color: #fff;
-    justify-content: center;
-    flex:auto;
-    position: relative;
-    padding: 3px;
-    font-size: 21px;
+.card-title {
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
 }
-.card-title{
-    font-size: 16px;
-    font-weight: bold;
-    display: flex;
+ion-badge {
+  padding-top: 5px;
+  background-color: #f04141 !important;
 }
-ion-badge{
-    padding-top: 5px;
-    background-color: #f04141 !important;
+.old-agenda {
+  display: flex;
+  align-items: center;
 }
-.old-agenda{
-    display: flex;
-    align-items: center;
-}
-.no-agendas{
-    min-height: 87px;
-    display: flex;
-    align-items: center;
+.no-agendas {
+  min-height: 87px;
+  display: flex;
+  align-items: center;
 }

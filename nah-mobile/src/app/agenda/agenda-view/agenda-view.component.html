@@ -3,7 +3,7 @@
   {{agenda3 | json}}
   {{agenda3.name}}
 </div> -->
-<ion-card class="custom-card1 agenda-card"
+<ion-card class="custom-card agenda-card"
   *ngIf="(agendaS.agenda$ | async) && (agendaS.agenda$ | async) as agenda; else showCreateMsgDiv">
   <!-- <h3 class="main-title1 ion-margin">Agenda</h3> -->
   <!-- <ion-card-header class="text-center">

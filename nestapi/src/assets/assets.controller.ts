@@ -47,6 +47,7 @@ export class AssestsController {
             fileFilter: imageFileFilter,
         }),
     )
+
     async uploadedFile(@UploadedFile() file, @Body() data: ImageDto) {
         const response: AssetsEntity = new AssetsEntity();
         response.originalName = file.originalname;
@@ -59,6 +60,7 @@ export class AssestsController {
         return { message: false, success: true, data: img };
     }
     // multiple file upploads
+    @Post()
     @ApiConsumes('multipart/form-data')
     @UseInterceptors(
         FilesInterceptor('images[]', 20, {

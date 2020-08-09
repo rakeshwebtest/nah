@@ -1,11 +1,13 @@
-<app-agenda-view [agendaTitle]="agendaTitle" [showShowOldAgenda]="false" [showCreateMsg]="true"></app-agenda-view>
-<ion-tabs class="new-inside-tabs">
-  <ion-tab-bar slot="top">
-    <ion-tab-button routerLinkActive="tab-selected" routerLink="/dashboard/posts/all"  >
-      <ion-label class="format-text">All Noer Posts</ion-label>
-    </ion-tab-button>
-    <ion-tab-button routerLinkActive="tab-selected" routerLink="/dashboard/posts/my-posts"  >
-      <ion-label class="format-text">My Noer Posts</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+<ion-content>
+  <app-agenda-view [agendaTitle]="agendaTitle" [showShowOldAgenda]="false" [showCreateMsg]="true"></app-agenda-view>
+  <ion-tabs class="new-inside-post-tabs">
+    <ion-tab-bar slot="top">
+      <ion-tab-button routerLinkActive="tab-selected" routerLink="/dashboard/posts/all">
+        <ion-label class="format-text">All Noer Posts</ion-label>
+      </ion-tab-button>
+      <ion-tab-button routerLinkActive="tab-selected" routerLink="/dashboard/posts/my-posts">
+        <ion-label class="format-text">My Noer Posts</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

@@ -64,6 +64,7 @@
     "hammerjs": "^2.0.8",
     "ionic-selectable": "4.5.1",
     "ionicons": "^4.6.4-1",
+    "ng2-file-upload": "^1.4.0",
     "ngx-ionic-image-viewer": "^0.4.0",
     "ngx-socket-io": "^3.2.0",
     "ngx-timeago": "^1.0.3",
@@ -114,7 +115,9 @@
     "plugins": {
       "cordova-plugin-whitelist": {},
       "cordova-plugin-device": {},
-      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.196016802810-uuir6evcgcbl9lvr2ger7s1qdfj9iehr",
@@ -131,7 +134,8 @@
         "FCM_VERSION": "19.0.0",
         "GRADLE_TOOLS_VERSION": "3.5.3",
         "GOOGLE_SERVICES_VERSION": "4.3.3",
-        "SUPPORT_LIBRARY_VERSION": "28.0.0"
+        "SUPPORT_LIBRARY_VERSION": "28.0.0",
+        "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/ic_launcher"
       },
       "cordova-android-play-services-gradle-release": {
         "PLAY_SERVICES_VERSION": "16.+",
