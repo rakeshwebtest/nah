@@ -11,7 +11,7 @@ export interface Agenda {
 export class AgendaService {
   agenda: any;
 
-  agendaSubject = new BehaviorSubject<any>(null);
+  agendaSubject = new BehaviorSubject<Agenda>(null);
   agenda$: Observable<Agenda>;
 
   constructor(private http: AppHttpClient) {
