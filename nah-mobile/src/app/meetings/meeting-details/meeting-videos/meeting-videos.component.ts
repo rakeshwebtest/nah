@@ -65,14 +65,14 @@ export class MeetingVideosComponent implements OnInit {
       message: 'Do you want to delete v?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'No',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Okay',
+          text: 'Yes',
           handler: () => {
             const video = videos[inx];
             this.http.delete('meeting/video/' + video.id).subscribe(res => {

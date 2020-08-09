@@ -108,14 +108,14 @@ export class GroupListComponent implements OnInit {
       message: 'Do you want to Suspend the Group?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'No',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Okay',
+          text: 'Yes',
           handler: () => {
             this.deleteGroup(group, index);
           }

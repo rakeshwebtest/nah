@@ -179,7 +179,7 @@ export class PostListComponent implements OnInit, OnDestroy {
       message: 'Do you want to Remove bookmark form list?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'No',
           role: 'cancel',
           handler: () => {
             alert.dismiss(false);
@@ -187,7 +187,7 @@ export class PostListComponent implements OnInit, OnDestroy {
           }
         },
         {
-          text: 'Okay',
+          text: 'Yes',
           handler: () => {
             alert.dismiss(true);
             return false;

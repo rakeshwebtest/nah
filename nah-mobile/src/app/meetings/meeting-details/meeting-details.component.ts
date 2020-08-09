@@ -208,14 +208,14 @@ export class MeetingDetailsComponent implements OnInit {
       message: 'Do you want to delete this Comment?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'No',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Okay',
+          text: 'Yes',
           handler: () => {
             const comment = items[inx];
             let _url = 'meeting/comment/';
@@ -257,17 +257,17 @@ export class MeetingDetailsComponent implements OnInit {
   }
   async deleteImg(photos, inx) {
     let alert = await this.alertCtrl.create({
-      message: 'Do you want to delete Image?',
+      message: 'Do you want to delete image?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'No',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Okay',
+          text: 'Yes',
           handler: () => {
             const photo = photos[inx];
             this.http.delete('meeting/photo/' + photo.id).subscribe(res => {
