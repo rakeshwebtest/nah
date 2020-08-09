@@ -257,6 +257,13 @@ vertical-field {
   font-size: 16px;
 }
 
+app-lazy-upload-field {
+  input{
+    &::before{
+      background-color: #fff;
+    }
+  }
+}
 formly-field-file ion-input,
 app-lazy-upload-field input {
   width: 100% !important;
@@ -925,4 +932,7 @@ p::first-letter {
   border-radius: 20px;
   box-shadow: 1px 5px 6px #999;
   display: block;
+}
+.mw-50{
+  min-width: 50px;
 }

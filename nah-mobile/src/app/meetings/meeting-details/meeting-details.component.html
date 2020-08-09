@@ -153,7 +153,7 @@
             <ion-list class="meeting-list meeting-list-d" *ngFor="let c of meeting.comments;let cInx=index;">
               <ion-grid class="meeting-item ion-no-padding">
                 <ion-row class="ion-nowrap ion-align-items-center">
-                  <ion-col size="2" class="img-left ion-no-padding">
+                  <ion-col size="auto" class="img-left ion-no-padding">
                     <ion-avatar class="avater">
                       <img [src]="c.createdBy.imageUrl" />
                     </ion-avatar>
@@ -172,7 +172,7 @@
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col class="ion-no-padding" size="2">
+                  <ion-col class="ion-no-padding mw-50" size="auto">
                   </ion-col>
                   <ion-col class="ion-no-padding" size="10">
 
