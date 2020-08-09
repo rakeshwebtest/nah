@@ -31,9 +31,11 @@ export class FieldSelectableComponent extends FieldType implements OnInit {
   }
   ngOnInit() {
     if (this.to.type == 'city') {
+      this.cityList = [];
       this.getCities();
     }
   }
+
   searchCitites(event: {
     component: IonicSelectableComponent,
     text: string
@@ -57,7 +59,7 @@ export class FieldSelectableComponent extends FieldType implements OnInit {
       take: take
     };
     if (infinity && infinity.text) {
-      console.log(infinity.text);
+      this.cityList = [];
       const searchText = infinity.text.trim().toLowerCase();
       params.search = searchText;
     }
