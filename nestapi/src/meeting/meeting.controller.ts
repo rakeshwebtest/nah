@@ -67,9 +67,9 @@ export class MeetingController {
   }))
   @Post()
   async createMeeting(@UploadedFile() image, @Body() meetingDto: CreateMeetingDto, @Request() req) {
-    let msg = 'Created successfully';
+    let msg = 'Meeting Created successfully.';
     if (meetingDto.id) {
-      msg = 'Updated successfully';
+      msg = 'Meeting Updated successfully.';
     }
     const data = await this.meetingService.createMeeting(meetingDto, image);
 
@@ -188,7 +188,7 @@ export class MeetingController {
     const sessionUser = req['sessionUser'];
     const data = await this.meetingService.uploadMeetingImages(images, params.meetingId,sessionUser);
 
-    return { message: "Images are added successfully", success: true, data };
+    return { message: "Image added successfully.", success: true, data };
 
   }
   /**

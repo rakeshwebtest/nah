@@ -219,7 +219,7 @@ export class PostService {
         comment.createdBy.id = commentDto.userId;
         comment.comment = commentDto.comment;
         const data = await this.postCommentRepository.save(comment);
-        return { message: 'Added Comment Successfully', data };
+        return { message: 'Comment added successfully', data };
     }
 
     async addCommentReply(commentDto: any) {
@@ -230,7 +230,7 @@ export class PostService {
         comment.createdBy.id = commentDto.userId;
         comment.comment = commentDto.comment;
         const data = await this.postCommentReplyRepository.save(comment);
-        return { message: 'replay Comment Successfully', data };
+        return { message: 'Reply comment added successfully.', data };
     }
 
     async deleteComment(commentId?: number, replyCommentId?: number): Promise<any> {
