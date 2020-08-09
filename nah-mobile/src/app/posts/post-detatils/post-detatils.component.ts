@@ -61,9 +61,9 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
   bookmarkLikeAndDislike(post, type = 'bookmark') {
-    if (post.createdBy.id === this.userInfo.id && type !== 'bookmark') {
-      return;
-    }
+    // if (post.createdBy.id === this.userInfo.id && type !== 'bookmark') {
+    //   return;
+    // }
     const postBookmareService = this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type });
     if (type === 'bookmark' && post['bookmark']) {
       this.alertS.presentConfirm('', 'Do you want to Remove bookmark from list?').then(res => {
