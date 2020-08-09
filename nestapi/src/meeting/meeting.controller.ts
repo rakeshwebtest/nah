@@ -152,7 +152,7 @@ export class MeetingController {
   @Delete('photo/:photoId')
   async deletePhoto(@Param('photoId') photoId: number) {
     const data = await this.meetingService.deletePhoto(photoId);
-    return { message: 'Deleted successfully', success: true, data };
+    return { message: 'Image deleted successfully.', success: true, data };
   }
 
   @Get('publish/:meetingId')
@@ -229,6 +229,6 @@ export class MeetingController {
   @Delete(':meetingId')
   async deleteGruop(@Param() params: any) {
     const data = await this.meetingService.deleteMeeting(params.meetingId);
-    return { message: 'Deleted Successfully', success: true, data };
+    return { message: 'Deleted successfully', success: true, data };
   }
 }

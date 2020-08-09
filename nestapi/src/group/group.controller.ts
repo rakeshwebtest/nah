@@ -80,7 +80,7 @@ export class GroupController {
     @Delete(':id')
     async deleteGruop(@Param() params: any) {
         const data = await this.service.deleteGroup(params.id);
-        return { message: 'Deleted Successfully', data, success: true };
+        return { message: 'Deleted successfully', data, success: true };
     }
 
 }

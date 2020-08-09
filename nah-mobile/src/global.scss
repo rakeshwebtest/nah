@@ -915,6 +915,13 @@ p::first-letter {
 .no-ripple-effeect {
   --ripple-color: transparent;
 }
+.no-focus-effect {
+  --background-activated: transparent;
+  --background-focused: transparent;
+  --background-focused-opacity: 0;
+  --background-hover: #000;
+  --ripple-color: #333;
+}
 .social-info {
   &::before {
     height: 1px !important;

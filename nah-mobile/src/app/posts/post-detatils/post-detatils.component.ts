@@ -169,14 +169,14 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
       message: 'Do you want to delete this Comment?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'No',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Okay',
+          text: 'Yes',
           handler: () => {
             const comment = items[inx];
             let _url = 'posts/comment/';
