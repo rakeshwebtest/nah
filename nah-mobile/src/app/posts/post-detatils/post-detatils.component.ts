@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { AppHttpClient } from 'src/app/utils';
 import { PostService } from '../post.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { AppRouterNavigateService } from 'src/app/utils/app-router-navigate.serv
   templateUrl: './post-detatils.component.html',
   styleUrls: ['./post-detatils.component.scss'],
 })
-export class PostDetatilsComponent implements OnInit, OnDestroy {
+export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(IonContent, { static: false }) content: IonContent;
   public postDetails = [];
   public commentMsg: any;
@@ -23,7 +23,8 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
   loading = false;
   isOwner: boolean;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
-  constructor(private postS: PostService, private activeRoute: ActivatedRoute, private http: AppHttpClient,
+  constructor(
+    private postS: PostService, private activeRoute: ActivatedRoute, private http: AppHttpClient,
     public appRouter: AppRouterNavigateService,
     private router: Router,
     private storage: Storage,
@@ -53,6 +54,11 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
       }
       this.loading = false;
     });
+  }
+  ngAfterViewInit() {
+    if (this.activeRoute.snapshot.queryParams.comments) {
+      this.scrollToCommentBox();
+    }
   }
   bookmarkLikeAndDislike(post, type = 'bookmark') {
     if (post.createdBy.id === this.userInfo.id && type !== 'bookmark') {
@@ -149,7 +155,7 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
       };
       this.http.post('posts/comment', payLoad).subscribe(res => {
         if (res.data) {
-          this.scrollTo('comment-box');
+          this.scrollToCommentBox('comment-box');
           const _comment = res.data;
           _comment.createdBy = userInfo;
           _comment.replys = [];
@@ -200,7 +206,7 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
     });
     await alert.present();
   }
-  scrollTo(elementId: string) {
+  scrollToCommentBox(elementId = 'comment-box') {
     const y = document.getElementById(elementId).offsetTop;
     this.content.scrollToPoint(0, y);
   }

@@ -44,8 +44,7 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
     });
     this.uploader.onWhenAddingFileFailed = (item, filter, options) => this.onWhenAddingFileFailed(item, filter, options);
     this.uploader.onAfterAddingFile = (fileItem: FileItem) => this.onAfterAddingFile(fileItem);
-    this.uploader.onBeforeUploadItem = (fileItem: FileItem) => this.onBeforeUploadItem(fileItem);
-
+ 
   }
 
   onWhenAddingFileFailed(item: FileLikeObject, filter: any, options: any) {
@@ -83,13 +82,6 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
     // this.uploader.queue.push(latestFile);
     console.log(';this.uploader.queue', this.uploader.queue);
     this.onFileSelected();
-  }
-  onBeforeUploadItem(fileItem: FileItem) {
-    console.log('onBeforeUploadItem', FileItem);
-  }
-  dropped(event) {
-    console.log('dropped', event.target.files);
-
   }
   async onFileSelected() {
     const files: FileItem[] = this.uploader.queue;
