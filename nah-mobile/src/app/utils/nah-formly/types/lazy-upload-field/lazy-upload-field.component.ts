@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 import { FileUploader, FileLikeObject, FileItem } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
+import { AppToasterService } from 'src/app/utils/app-toaster.service';
 
 @Component({
   selector: 'app-lazy-upload-field',
@@ -13,6 +14,8 @@ import { environment } from 'src/environments/environment';
 })
 export class LazyUploadFieldComponent extends FieldType implements OnInit {
   @ViewChild('fileInput', null) fileInput: ElementRef;
+  allowedMimeType = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
+  maxFileSize = 10 * 1024 * 1024;
   previewUrl = null;
   previewUrls: any[] = [];
   uploadedImages = [];
@@ -23,11 +26,10 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
     disableMultipart: false,
     autoUpload: false,
     itemAlias: 'images',
-    allowedFileType: ['image']
-
-
+    allowedMimeType: this.allowedMimeType,
+    maxFileSize: this.maxFileSize
   });
-  constructor(private http: AppHttpClient, public loadingController: LoadingController) {
+  constructor(private http: AppHttpClient, private toaster: AppToasterService, public loadingController: LoadingController) {
     super();
   }
   ngOnInit() {
@@ -40,7 +42,29 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
         this.uploadedImages = res || [];
       }
     });
-    this.uploader.onAfterAddingFile = (fileItem: FileItem) => this.onAfterAddingFile(fileItem)
+    this.uploader.onWhenAddingFileFailed = (item, filter, options) => this.onWhenAddingFileFailed(item, filter, options);
+    this.uploader.onAfterAddingFile = (fileItem: FileItem) => this.onAfterAddingFile(fileItem);
+    this.uploader.onBeforeUploadItem = (fileItem: FileItem) => this.onBeforeUploadItem(fileItem);
+
+  }
+
+  onWhenAddingFileFailed(item: FileLikeObject, filter: any, options: any) {
+    let errorMessage: string;
+    switch (filter.name) {
+      case 'fileSize':
+        errorMessage = `Maximum upload size exceeded (${item.size} of ${this.maxFileSize} allowed)`;
+        break;
+      case 'mimeType':
+        const allowedTypes = this.allowedMimeType.join();
+        // errorMessage = `Type "${item.type} is not allowed. Allowed types: "${allowedTypes}"`;
+        errorMessage = `Type "${item.type}" is not allowed.`;
+        break;
+      default:
+        errorMessage = `Unknown error(filter is ${filter.name})`;
+    }
+    if (errorMessage) {
+      this.toaster.presentToast(errorMessage);
+    }
   }
 
   // onFileChange(event: EventEmitter<File[]>) {
@@ -53,10 +77,19 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
   //   }
   // }
   onAfterAddingFile(fileItem: FileItem) {
-    let latestFile = this.uploader.queue[this.uploader.queue.length - 1];
-    this.uploader.queue = [];
-    this.uploader.queue.push(latestFile);
+    // let latestFile = this.uploader.queue[this.uploader.queue.length - 1];
+    // this.uploader.queue = [];
+    // console.log('this.uploader.queue');
+    // this.uploader.queue.push(latestFile);
+    console.log(';this.uploader.queue', this.uploader.queue);
     this.onFileSelected();
+  }
+  onBeforeUploadItem(fileItem: FileItem) {
+    console.log('onBeforeUploadItem', FileItem);
+  }
+  dropped(event) {
+    console.log('dropped', event.target.files);
+
   }
   async onFileSelected() {
     const files: FileItem[] = this.uploader.queue;
@@ -70,9 +103,11 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
     const HttpUploadOptions = {
       headers: new HttpHeaders({ "Content-Type": "multipart/form-data" })
     };
+    this.uploader.clearQueue();
     this.presentLoading(loading);
     this.http.post('asset', formData).subscribe(res => {
       if (res.success) {
+        this.fileInput.nativeElement.value = '';
         if (res.data) {
           this.uploadedImages = [...res.data, ... this.uploadedImages];
           this.valueUpdate();
@@ -86,6 +121,7 @@ export class LazyUploadFieldComponent extends FieldType implements OnInit {
     });
   }
   deleteImg(inx) {
+    // this.http.delete('asset', this.uploadedImages[inx]).subscribe();
     this.uploadedImages.splice(inx, 1);
     this.valueUpdate();
   }
