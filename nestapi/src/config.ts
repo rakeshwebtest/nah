@@ -7,6 +7,12 @@ export interface AppConfig {
         AWS_SECRET_ACCESS_KEY: string;
         AWS_S3_BUCKET_NAME: string;
     };
+    REDIS: {
+        name?: string;
+        url?: string;
+        port?: number;
+        host?: string;
+    };
 }
 
 export const APP_CONFIG: AppConfig = require('./../nah-config.json');
