@@ -53,12 +53,16 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.isOwner = true;
       }
       this.loading = false;
+      if (this.activeRoute.snapshot.queryParams.comments) {
+        setTimeout(() => {
+          this.scrollToCommentBox();
+        }, 500);
+
+      }
     });
   }
   ngAfterViewInit() {
-    if (this.activeRoute.snapshot.queryParams.comments) {
-      this.scrollToCommentBox();
-    }
+
   }
   bookmarkLikeAndDislike(post, type = 'bookmark') {
     // if (post.createdBy.id === this.userInfo.id && type !== 'bookmark') {

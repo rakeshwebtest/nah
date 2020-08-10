@@ -108,7 +108,8 @@ export class PostService {
             .leftJoinAndMapOne("p.like", PostLikeEntity, "isLikeUser", "isLikeUser.user.id = " + sessionUser.id + " && isLikeUser.post.id = p.id")
             .leftJoinAndMapOne("p.dislike", PostDislikeEntity, "isDislikeUser", "isDislikeUser.user.id = " + sessionUser.id + " && isDislikeUser.post.id = p.id");
         db.where('p.id = :postId', { postId: postId });
-        db.select(["p", "u", "pc", "pc_createdBy", "pcr_createdBy", "pcr", "topic", "videos", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos']);
+        db.select(["p", "u", "pc", "pc_createdBy", "pcr_createdBy", "pcr", "topic", "videos", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos'])
+        .orderBy({ "pc.createdDate": "DESC" });
         const data: any = await db.getOne();
         data.photos = mapImageFullPath(data.photos);
         return data;
