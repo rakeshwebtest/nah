@@ -74,13 +74,13 @@
     </super-tabs-toolbar>
     <super-tabs-container>
       <super-tab>
-        <app-user-list [userId]="profileId" type="following"></app-user-list>
+        <app-user-list [userId]="profileId" type="following" emptyMsg="No following"></app-user-list>
       </super-tab>
       <super-tab>
-        <app-user-list [userId]="profileId" type="followers"></app-user-list>
+        <app-user-list [userId]="profileId" type="followers" emptyMsg="No followers"></app-user-list>
       </super-tab>
       <super-tab *ngIf="!isOtherProfile">
-        <app-user-list [userId]="profileId" type="blocked"></app-user-list>
+        <app-user-list [userId]="profileId" type="blocked" emptyMsg="No blocked users"></app-user-list>
       </super-tab>
       <super-tab *ngIf="isOtherProfile">
         <app-group-list type="mygroups" [userId]="profileId"></app-group-list>

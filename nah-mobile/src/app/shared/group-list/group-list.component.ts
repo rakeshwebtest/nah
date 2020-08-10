@@ -15,6 +15,7 @@ export class GroupListComponent implements OnInit {
   @Input() type: 'mygroups' | 'all';
   @Input() userId: any;
   @Input() showSearch = true;
+  @Input() emptyMsg = "";
   googlePic: String;
   searchKey = null;
   showLoading = false;
