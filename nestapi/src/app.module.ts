@@ -17,13 +17,13 @@ import { AssetsModule } from './assets/assets.module';
 import { ChatModule } from './chat/chat.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { FcmModule } from 'nestjs-fcm';
-import { RedisModule } from 'nestjs-redis';
-import { QueueMngModule } from './queue-mng/queue-mng.module';
+// import { RedisModule } from 'nestjs-redis';
+// import { QueueMngModule } from './queue-mng/queue-mng.module';
+// RedisModule.register(APP_CONFIG.REDIS),
 @Module({
   imports: [
     TypeOrmModule.forRoot({ ...APP_CONFIG.DB, entities: [path.join(__dirname, '**/*.entity{.ts,.js}')] }),
     TypeOrmModule.forFeature([UserEntity]),
-    RedisModule.register(APP_CONFIG.REDIS),
     FcmModule.forRoot({
       firebaseSpecsPath: path.join(__dirname, '../fairbase.json')
     }),
