@@ -13,6 +13,16 @@ export interface AppConfig {
         port?: number;
         host?: string;
     };
+    SMTP: {
+        host: string;
+        port: any;
+        ignoreTLS: string;
+        secure: string;
+        auth: {
+            user: string;
+            pass: string;
+        }
+    };
 }
 
 export const APP_CONFIG: AppConfig = require('./../nah-config.json');

@@ -19,6 +19,7 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { FcmModule } from 'nestjs-fcm';
 // import { RedisModule } from 'nestjs-redis';
 // import { QueueMngModule } from './queue-mng/queue-mng.module';
+import { AppMailerModule } from './app-mailer/app-mailer.module';
 // RedisModule.register(APP_CONFIG.REDIS),
 @Module({
   imports: [
@@ -37,7 +38,8 @@ import { FcmModule } from 'nestjs-fcm';
     PostsModule,
     AssetsModule,
     ChatModule,
-    NotificationsModule
+    NotificationsModule,
+    AppMailerModule
   ],
   controllers: [AppController],
   providers: [AuthMiddleware, UserService],
