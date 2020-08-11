@@ -138,7 +138,7 @@
         "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/ic_launcher"
       },
       "cordova-android-play-services-gradle-release": {
-        "PLAY_SERVICES_VERSION": "16.+",
+        "PLAY_SERVICES_VERSION": "17.+",
         "PLAY-SERVICES-ADS": "18.0.0",
         "PLAY-SERVICES-ADS-IDENTIFIER": "17.0.0",
         "PLAY-SERVICES-ADS-LITE": "18.0.0",
@@ -192,7 +192,6 @@
         "PLAY-SERVICES-WALLET": "17.0.0",
         "PLAY-SERVICES-WEARABLE": "17.0.0"
       },
-      "cordova-support-google-services": {},
       "cordova-plugin-firebase-analytics": {
         "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true"
       }
