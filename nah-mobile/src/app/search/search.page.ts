@@ -23,17 +23,23 @@ export class SearchPage implements OnInit {
     this.userId = this.userInfo.id;
   }
   search(event) {
-    this.searchKey = event.target.value;
-    // load posts
-    this.postList.searchKey = event.target.value;
-    this.postList.reload();
-    // load meeting
-    this.meetingList.searchKey = event.target.value;
-    this.meetingList.reload();
+    if (event && event.detail && event.detail.value) {
 
-    // load groups
-    this.groupList.searchKey = event.target.value;
-    this.groupList.reload();
+      this.searchKey = event.detail.value;
+      // load posts
+      this.postList.searchKey =  this.searchKey;
+      this.postList.reload();
+      // load meeting
+      this.meetingList.searchKey =  this.searchKey;
+      this.meetingList.reload();
+
+      // load groups
+      this.groupList.searchKey =  this.searchKey;
+      this.groupList.reload();
+    } else {
+      this.searchKey = null;
+    }
+
   }
 
 }

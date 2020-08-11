@@ -3,8 +3,7 @@
   {{agenda3 | json}}
   {{agenda3.name}}
 </div> -->
-<ion-card class="custom-card agenda-card"
-  *ngIf="(agendaS.agenda$ | async) && (agendaS.agenda$ | async) as agenda; else showCreateMsgDiv">
+<ion-card class="custom-card agenda-card" *ngIf="(agendaS.agenda$ | async) && (agendaS.agenda$ | async) as agenda; else showCreateMsgDiv">
   <!-- <h3 class="main-title1 ion-margin">Agenda</h3> -->
   <!-- <ion-card-header class="text-center">
     <ion-card-title class="card-title"
@@ -32,22 +31,21 @@
        </ion-card-subtitle> -->
   <!-- </ion-card-header> -->
   <ion-card-content>
-      <ion-row class="agenda-row">
-        <ion-col size="auto" class="ion-no-padding say-no-list-left">
-          <ion-text class="card-title">
-            {{agendaTitle}}
-          </ion-text>
-        </ion-col>
-        <ion-col class="say-no-list">
-          <p *ngFor="let topic of agenda.topics; let last = last" class="text-primary text-center ion-ellipsis" (click)="topicDetails(topic)">
-          <ion-label>Say No To {{ topic.name | uppercase }} </ion-label>
+    <ion-row class="agenda-row">
+      <ion-col size="auto" class="ion-no-padding say-no-list-left">
+        <ion-text class="card-title">
+          {{ agendaTitle }}
+        </ion-text>
+      </ion-col>
+      <ion-col class="say-no-list">
+        <p *ngFor="let topic of agenda.topics; let last = last" class="text-primary text-center ion-ellipsis" (click)="topicDetails(topic)">
+          <ion-label>Say No To {{ topic.name | titlecase }} </ion-label>
         </p>
-
-        </ion-col>
-      </ion-row>
+      </ion-col>
+    </ion-row>
     <ion-col size="12" class="old-agenda ion-justify-content-center ion-padding-b-0" *ngIf="showShowOldAgenda">
       <ion-badge color="danger">
-        <a class="custom-link" [routerLink]="['/agenda/list']">Old Agenda's</a>
+        <a class="custom-link" [routerLink]="['/agenda/list']">All Agenda's</a>
       </ion-badge>
     </ion-col>
   </ion-card-content>

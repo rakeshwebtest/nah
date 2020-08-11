@@ -5,44 +5,46 @@
       <ion-title>Search</ion-title>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar color="danger" (ionInput)="search($event)"></ion-searchbar>
 </ion-header>
-<super-tabs>
-  <super-tabs-toolbar slot="top">
-    <super-tab-button>
-      <ion-label>Posts</ion-label>
-    </super-tab-button>
-    <super-tab-button>
-      <ion-label>Groups</ion-label>
-    </super-tab-button>
-    <super-tab-button>
-      <ion-label>Meetings</ion-label>
-    </super-tab-button>
-  </super-tabs-toolbar>
-  <super-tabs-container>
-    <super-tab>
-      <app-post-list type="all" [userId]="userId" #postList *ngIf="searchKey"></app-post-list>
-      <ion-row class="ion-align-items-center no-meetings" *ngIf="!searchKey">
-        <ion-col class="ion-justify-content-center" style="display: flex; align-items: center;">
-          No Search Posts
-        </ion-col>
-      </ion-row>
-    </super-tab>
-    <super-tab>
-      <app-group-list type="all" [userId]="userId" [showSearch]="false" #group *ngIf="searchKey"></app-group-list>
-      <ion-row class="ion-align-items-center no-meetings" *ngIf="!searchKey">
-        <ion-col class="ion-justify-content-center" style="display: flex; align-items: center;">
-          No Search Groups
-        </ion-col>
-      </ion-row>
-    </super-tab>
-    <super-tab>
-      <app-meeting-list type="all" [userId]="userId" #meetingList *ngIf="searchKey"></app-meeting-list>
-      <ion-row class="ion-align-items-center no-meetings" *ngIf="!searchKey">
-        <ion-col class="ion-justify-content-center" style="display: flex; align-items: center;">
-          No Search Meetings
-        </ion-col>
-      </ion-row>
-    </super-tab>
-  </super-tabs-container>
-</super-tabs>
+<ion-content>
+  <ion-searchbar color="danger" debounce=300 (ionChange)="search($event)"></ion-searchbar>
+  <super-tabs>
+    <super-tabs-toolbar slot="top">
+      <super-tab-button>
+        <ion-label>Posts</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label>Groups</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label>Meetings</ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+    <super-tabs-container>
+      <super-tab>
+        <app-post-list type="all" [userId]="userId" #postList *ngIf="searchKey"></app-post-list>
+        <ion-row class="ion-align-items-center no-meetings" *ngIf="!searchKey">
+          <ion-col class="ion-justify-content-center" style="display: flex; align-items: center;">
+            No Search Posts
+          </ion-col>
+        </ion-row>
+      </super-tab>
+      <super-tab>
+        <app-group-list type="all" [userId]="userId" [showSearch]="false" #group *ngIf="searchKey"></app-group-list>
+        <ion-row class="ion-align-items-center no-meetings" *ngIf="!searchKey">
+          <ion-col class="ion-justify-content-center" style="display: flex; align-items: center;">
+            No Search Groups
+          </ion-col>
+        </ion-row>
+      </super-tab>
+      <super-tab>
+        <app-meeting-list type="all" [userId]="userId" #meetingList *ngIf="searchKey"></app-meeting-list>
+        <ion-row class="ion-align-items-center no-meetings" *ngIf="!searchKey">
+          <ion-col class="ion-justify-content-center" style="display: flex; align-items: center;">
+            No Search Meetings
+          </ion-col>
+        </ion-row>
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
+</ion-content>

@@ -48,8 +48,10 @@ export class GroupListComponent implements OnInit {
     }
     url += '&skip=' + this.groupList.length;
     url += '&take=' + this.take;
-    if (this.searchKey)
+    if (this.searchKey) {
       url += '&search=' + this.searchKey;
+    }
+
 
     this.showLoading = true;
     this.http.get(url).subscribe(res => {
@@ -65,12 +67,17 @@ export class GroupListComponent implements OnInit {
         }
 
       });
+      console.log('_groupList', _groupList);
+      if (this.searchKey) {
+        this.groupList = _groupList;
+      } else {
+        this.groupList = [...this.groupList, ..._groupList];
+      }
 
-
-      this.groupList = [...this.groupList, ..._groupList];
-
-      if (infiniteScroll)
+      if (infiniteScroll) {
         infiniteScroll.target.complete();
+      }
+
 
       if (this.groupList.length == 0) {
         this.noGroupMsg = true;

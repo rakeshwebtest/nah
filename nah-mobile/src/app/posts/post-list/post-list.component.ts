@@ -115,8 +115,13 @@ export class PostListComponent implements OnInit, OnDestroy {
       }
     });
   }
-  navDetails(post) {
-    this.router.navigate(['/posts/details/' + post.id], { queryParams: { comments: 'true' } });
+  navDetails(post, navToComments?: boolean) {
+    if (navToComments) {
+      this.router.navigate(['/posts/details/' + post.id], { queryParams: { comments: 'true' } });
+    } else {
+      this.router.navigate(['/posts/details/' + post.id]);
+    }
+
   }
   navProfile(user) {
     this.router.navigate(['/user-profile/' + user.id]);

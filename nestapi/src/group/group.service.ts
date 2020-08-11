@@ -39,14 +39,16 @@ export class GroupService {
             if (userId && query.createdBy) {
                 db.andWhere('group.createdBy = :id', { id: userId });
             } else {
-                db.where('group.isDeleted != 1');
+                db.where('(group.isDeleted != 1)');
             }
-            if (userId && query.notCreatedBy) {
-                db.where('createdBy.id != :id', { id: userId });
-            }
+
         }
         if (query.search) {
-            db.andWhere("group.name like :name", { name: '%' + query.search + '%' });
+            db.andWhere("(group.name like :name)", { name: '%' + query.search + '%' });
+        } else {
+            if (userId && query.notCreatedBy) {
+                db.where('(createdBy.id != :id)', { id: userId });
+            }
         }
 
         db.take(take);
