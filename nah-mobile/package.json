@@ -191,6 +191,11 @@
         "PLAY-SERVICES-VISION-IMAGE-LABEL": "18.0.0",
         "PLAY-SERVICES-WALLET": "17.0.0",
         "PLAY-SERVICES-WEARABLE": "17.0.0"
+      },
+      "cordova-support-google-services": {},
+      "cordova-plugin-firebase-analytics": {
+        "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true",
+        "FIREBASE_ANALYTICS_VERSION": "17.4.+"
       }
     }
   }
