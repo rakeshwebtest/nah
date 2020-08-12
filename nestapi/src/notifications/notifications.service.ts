@@ -33,15 +33,14 @@ export class NotificationsService {
                     const _entity: any = new NotificationEntity();
                     _entity.sender = { id: senderInfo.id };
                     _entity.recipient = { id: reciverInfo.id };
-                    _entity.message = senderInfo.displayName + ' Like the your post';
+                    _entity.type = type;
+                    _entity.message = senderInfo.displayName + ' Liked your post';
                     _entity.data = data;
                     if (reciverInfo.fcmToken) {
                         // send push notifications
-                        console.log('reciverInfo.fcmToken', reciverInfo);
                         this.sendFCM(reciverInfo.fcmToken, 'Post', _entity.message, { data, type: 'post-like' });
                     }
                     const d = await this.notificationRepository.save(_entity);
-                    console.log('d', d);
                     break;
                 default:
                     break;
