@@ -1,7 +1,17 @@
 export interface AppConfig {
     SECRET: string;
     SERVERBASEPATH: string;
-    DB: any;
+    DB?: {
+        type?: string;
+        host?: any;
+        port?: any;
+        username?: any;
+        password?: any;
+        database?: any;
+        entities?: any;
+        synchanyronize?: any;
+    };
+    SERVER_PORT: number;
     S3: {
         AWS_ACCESS_KEY_ID: string;
         AWS_SECRET_ACCESS_KEY: string;
