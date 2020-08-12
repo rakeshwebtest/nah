@@ -41,6 +41,13 @@ const routes: Routes = [
         }
       },
       {
+        path: 'posts',
+        loadChildren: '../../modules/posts/posts.module#PostsModule',
+        data: {
+          breadcrumbs: 'Posts'
+        }
+      },
+      {
         path: 'city',
         loadChildren: '../../modules/city/city.module#CityModule',
         data: {

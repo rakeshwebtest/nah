@@ -129,6 +129,26 @@ export class SideMenuComponent implements OnInit {
           }
         ]
       },
+      // {
+      //   'label': 'Users',
+      //   'code': 'users',
+      //   'icon': 'fa fa-user',
+      //   'app': 'zc-core',
+      //   'childs': [
+      //     {
+      //       'label': 'Active Users',
+      //       'code': 'active',
+      //       'icon': 'fa fa-phone',
+      //       'type': 'custom'
+      //     },
+      //     {
+      //       'label': 'Blocked Users',
+      //       'code': 'blocked',
+      //       'icon': 'fa fa-phone',
+      //       'type': 'custom'
+      //     }
+      //   ]
+      // },
       {
         'label': 'Active Users',
         'code': 'user',
@@ -166,6 +186,20 @@ export class SideMenuComponent implements OnInit {
           {
             'label': 'Groups',
             'code': 'meetings/list',
+            'icon': 'fa fa-phone',
+            'type': 'custom'
+          }
+        ]
+      },
+      {
+        'label': 'Posts',
+        'code': 'posts',
+        'icon': 'fa fa-handshake-o',
+        'app': 'zc-core',
+        'childs': [
+          {
+            'label': 'Posts',
+            'code': 'posts/list',
             'icon': 'fa fa-phone',
             'type': 'custom'
           }
@@ -212,27 +246,8 @@ export class SideMenuComponent implements OnInit {
             'type': 'custom'
           }
         ]
-      },
-      {
-        'label': 'Users',
-        'code': 'user',
-        'icon': 'fa fa-user',
-        'app': 'zc-core',
-        'childs': [
-          {
-            'label': 'Users',
-            'code': 'user/list',
-            'icon': 'fa fa-phone',
-            'type': 'custom'
-          },
-          {
-            'label': 'Users',
-            'code': 'user/list',
-            'icon': 'fa fa-phone',
-            'type': 'custom'
-          }
-        ]
       }
+      
     ];
   }
   // Check if element has class
