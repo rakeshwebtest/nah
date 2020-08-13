@@ -129,54 +129,54 @@ export class SideMenuComponent implements OnInit {
           }
         ]
       },
+      {
+        'label': 'Users',
+        'code': 'users',
+        'icon': 'fa fa-user',
+        'app': 'zc-core',
+        'childs': [
+          {
+            'label': 'Active Users',
+            'code': 'active',
+            'icon': 'fa fa-phone',
+            'type': 'custom'
+          },
+          {
+            'label': 'Blocked Users',
+            'code': 'blocked',
+            'icon': 'fa fa-phone',
+            'type': 'custom'
+          }
+        ]
+      },
       // {
-      //   'label': 'Users',
-      //   'code': 'users',
-      //   'icon': 'fa fa-user',
+      //   'label': 'Active Users',
+      //   'code': 'user',
+      //   'icon': 'fa fa-users',
       //   'app': 'zc-core',
       //   'childs': [
       //     {
       //       'label': 'Active Users',
-      //       'code': 'active',
-      //       'icon': 'fa fa-phone',
-      //       'type': 'custom'
-      //     },
-      //     {
-      //       'label': 'Blocked Users',
-      //       'code': 'blocked',
+      //       'code': 'users/active',
       //       'icon': 'fa fa-phone',
       //       'type': 'custom'
       //     }
       //   ]
       // },
-      {
-        'label': 'Active Users',
-        'code': 'user',
-        'icon': 'fa fa-users',
-        'app': 'zc-core',
-        'childs': [
-          {
-            'label': 'Active Users',
-            'code': 'users/active',
-            'icon': 'fa fa-phone',
-            'type': 'custom'
-          }
-        ]
-      },
-      {
-        'label': 'Blocked Users',
-        'code': 'user',
-        'icon': 'fa fa-users',
-        'app': 'zc-core',
-        'childs': [
-          {
-            'label': 'Blocked Users',
-            'code': 'users/blocked',
-            'icon': 'fa fa-phone',
-            'type': 'custom'
-          }
-        ]
-      },
+      // {
+      //   'label': 'Blocked Users',
+      //   'code': 'user',
+      //   'icon': 'fa fa-users',
+      //   'app': 'zc-core',
+      //   'childs': [
+      //     {
+      //       'label': 'Blocked Users',
+      //       'code': 'users/blocked',
+      //       'icon': 'fa fa-phone',
+      //       'type': 'custom'
+      //     }
+      //   ]
+      // },
       {
         'label': 'Meetings',
         'code': 'meetings',

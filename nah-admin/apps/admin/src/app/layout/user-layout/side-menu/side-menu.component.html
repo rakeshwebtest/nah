@@ -20,7 +20,7 @@
             <span class="nav-link-text">{{s.label}}</span>
             <!-- <span class="fa fa-angle-right dp-arrow"></span> -->
           </a>
-          <a *ngIf="!s.childs" [routerLink]="['/zc-admin/'+m.code+'/'+s.code]" class="nav-link" routerLinkActive="active"
+          <a *ngIf="!s.childs" [routerLink]="['/admin/'+m.code+'/'+s.code]" class="nav-link" routerLinkActive="active"
             appNavDropdownToggle (click)="menuClose()">
             <i class="{{s.icon}}"></i>
             <span>{{s.label}}</span>
