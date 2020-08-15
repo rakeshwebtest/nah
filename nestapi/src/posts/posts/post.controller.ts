@@ -7,7 +7,7 @@ import { diskStorage } from 'multer';
 import { mapImageFullPath } from 'src/shared/utility';
 
 @ApiBearerAuth()
-@ApiTags('posts')
+@ApiTags('Post')
 @Controller('posts')
 export class PostsController {
 
