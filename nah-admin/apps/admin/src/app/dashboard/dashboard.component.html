@@ -3,15 +3,71 @@
     <!-- <div class="col-12 col-md-6 p-1 shadow">
       <p-chart type="bar" [data]="barData"></p-chart>
     </div> -->
-    <div class="col-12 col-md-6 mt-3 mt-md-0 p-1 shadow">
+    <!-- <div class="col-12 col-md-6 mt-3 mt-md-0 p-1 shadow">
       <p-chart type="pie" [data]="cityWiseUsersData" [options]="cityWiseUsersOptions"></p-chart>
     </div>
     <div class="col-12 col-md-6 mt-3 mt-md-0 p-1 shadow">
       <p-chart type="pie" [data]="cityWiseMeetingsData" [options]="cityWiseMeetingsOptions"></p-chart>
+    </div> -->
+  </div>
+  <!-- <div class="col-12 col-md-12 mt-3 mt-md-0 p-1 shadow">
+    <p-chart type="pie" [data]="categoryWiseReportData" [height]="300" [options]="categoryWiseReportOptions"></p-chart>
+  </div> -->
+  <div class="row m-0">
+    <div class="col-6 search-dp pl-0">
+      <p-dropdown [options]="cities" [(ngModel)]="selectedCity1" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
+    </div>
+    <div class="col-6 pl-0">
+      <button class="btn btn-primary" type="button" >Search</button>
     </div>
   </div>
-  <div class="col-12 col-md-12 mt-3 mt-md-0 p-1 shadow">
-    <p-chart type="pie" [data]="categoryWiseReportData" [height]="300" [options]="categoryWiseReportOptions"></p-chart>
+  <div class="row m-0">
+    <div class="dashboard-cards">
+      <div class="dashboard-card">
+        <div class="dashboard-card-left">
+          <i class="fa fa-building-o"></i>
+        </div>
+        <div class="dashboard-card-right">
+          <span>Cities</span>
+          <h3>21</h3> 
+        </div>
+      </div>
+      <div class="dashboard-card">
+        <div class="dashboard-card-left">
+          <i class="fa fa-users"></i>
+        </div>
+        <div class="dashboard-card-right">
+          <span>Meetings</span>
+          <h3>41</h3> 
+        </div>
+      </div>
+      <div class="dashboard-card">
+        <div class="dashboard-card-left">
+          <i class="fa fa-object-group"></i>
+        </div>
+        <div class="dashboard-card-right">
+          <span>Groups</span>
+          <h3>21</h3> 
+        </div>
+      </div>
+      <div class="dashboard-card">
+        <div class="dashboard-card-left">
+          <i class="fa fa-files-o"></i>
+        </div>
+        <div class="dashboard-card-right">
+          <span>Posts</span>
+          <h3>212</h3> 
+        </div>
+      </div>
+      <div class="dashboard-card">
+        <div class="dashboard-card-left">
+          <i class="fa fa-file-o"></i>
+        </div>
+        <div class="dashboard-card-right">
+          <span>Reports</span>
+          <h3>02</h3> 
+        </div>
+      </div>
+    </div>
   </div>
-  
 </div>
