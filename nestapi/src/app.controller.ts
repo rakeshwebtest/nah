@@ -2,7 +2,6 @@ import { Controller, Get, Param, Res, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import * as sharp from 'sharp';
 import { ImageResizeOptionsDto } from './assets/asset.dto';
-import { AssetService } from './assets/asset.service';
 
 @ApiTags('App')
 @Controller()
