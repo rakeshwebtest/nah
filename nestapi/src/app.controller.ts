@@ -1,5 +1,8 @@
-import { Controller, Get, Param, Res } from '@nestjs/common';
+import { Controller, Get, Param, Res, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import * as sharp from 'sharp';
+import { ImageResizeOptionsDto } from './assets/asset.dto';
+
 @ApiTags('App')
 @Controller()
 export class AppController {
@@ -10,8 +13,27 @@ export class AppController {
     return { message: "ok" };
   }
   @Get('uploads/:imgpath')
-  seeUploadedFile(@Param('imgpath') image, @Res() res) {
-    const file = res.sendFile(image, { root: './uploads' });
-    return file;
+  async seeUploadedFile(@Param('imgpath') image, @Res() res, @Query() query: ImageResizeOptionsDto) {
+    let width: any;
+    let height: any;
+    if (query.w) {
+      width = parseInt(query.w, null);
+    }
+    if (query.h) {
+      height = parseInt(query.h, null);
+    }
+    const imagePath = await sharp('./uploads/' + image)
+      .rotate()
+      .resize(width, height, query.fit)
+      .toBuffer()
+      .then(data => {
+        return data;
+      })
+      .catch(err => {
+        return err;
+      });
+    // const file = res.sendFile(image, { root: './uploads' });
+    // return file;
+    return res.end(imagePath, 'binary');
   }
 }
