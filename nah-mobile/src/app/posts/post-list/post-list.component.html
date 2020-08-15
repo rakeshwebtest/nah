@@ -23,6 +23,7 @@
                   <ion-icon name="star"></ion-icon>
                 </ion-text>
                 <span class="date">{{ post.createdDate | date: "mediumDate" }}</span>
+                <ion-icon name="more" *ngIf="post.createdBy.id === userInfo.id" (click)="presentActionSheet(post)"></ion-icon>
               </ion-label>
               <p>
                 <!-- <ion-text class="text-agenda">AGENDA</ion-text> -->
