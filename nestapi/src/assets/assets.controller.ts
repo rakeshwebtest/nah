@@ -2,7 +2,7 @@ import { Controller, UseInterceptors, Post, UploadedFile, UploadedFiles, Body, R
 import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { ApiConsumes, ApiProperty } from '@nestjs/swagger';
+import { ApiConsumes, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { AssetService } from './asset.service';
 import { AssetsEntity } from './assets.entity';
 
@@ -14,7 +14,6 @@ export class ImagesDto {
     @ApiProperty({ type: 'file' })
     image: any;
 }
-
 export const imageFileFilter = (req, file, callback) => {
     console.log('file', file);
     if (!file.originalname.match(/\.(jpg|jpeg|JPG|JPEG|Jpeg|png|PNG|gif)$/)) {
@@ -35,7 +34,7 @@ export const editFileName = (req, file, callback) => {
         .join('');
     callback(null, `${name}-${randomName}${fileExtName}`);
 };
-
+@ApiTags('Asset')
 @Controller('asset')
 export class AssestsController {
     constructor(public assetS: AssetService) {
