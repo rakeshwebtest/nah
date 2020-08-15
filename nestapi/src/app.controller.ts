@@ -14,18 +14,21 @@ export class AppController {
   }
   @Get('uploads/:imgpath')
   async seeUploadedFile(@Param('imgpath') image, @Res() res, @Query() query: ImageResizeOptionsDto) {
-    // let width: any;
-    // let height: any;
-    // if (query.w) {
-    //   width = parseInt(query.w, null);
-    // }
-    // if (query.h) {
-    //   height = parseInt(query.h, null);
-    // }
-    // const imagePath = await sharp('./uploads/' + image)
-    //   .resize(width, height, query.fit)
-    //   .toBuffer();
-   //   return res.end(imagePath);
+    let width: any;
+    let height: any;
+    if (query.w) {
+      width = parseInt(query.w, null);
+    }
+    if (query.h) {
+      height = parseInt(query.h, null);
+    }
+    if (width || height || true) {
+      const resizeImage = await sharp('./uploads/' + image)
+        .rotate()
+        .resize(width, height, query.fit)
+        .toFormat('jpg').toBuffer();
+      return res.end(resizeImage);
+    }
     const file = res.sendFile(image, { root: './uploads' });
     return file;
   }
