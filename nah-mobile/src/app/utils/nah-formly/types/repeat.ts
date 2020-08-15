@@ -11,7 +11,7 @@ import { FieldArrayType } from '@ngx-formly/core';
       </div>
     </ion-row>
     <ion-row style="margin:30px 0;display: flex;justify-content: center;" *ngIf="checkLength()">
-      <ion-button class="btn btn-primary" type="button" (click)="add()">{{ to.addText }}</ion-button>
+      <ion-button  [color]="to.color" type="button" (click)="add()">{{ to.addText }}</ion-button>
     </ion-row>
   `,
 })
