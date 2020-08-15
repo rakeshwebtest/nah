@@ -9,6 +9,7 @@ export class AppController {
   }
   @Get('uploads/:imgpath')
   seeUploadedFile(@Param('imgpath') image, @Res() res) {
-    return res.sendFile(image, { root: './uploads' });
+    const file = res.sendFile(image, { root: './uploads' });
+    return file;
   }
 }

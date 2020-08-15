@@ -14,6 +14,9 @@ export class NotificationEntity extends BaseEntity {
     @Column({ type: 'text', nullable: true })
     message: string;
 
+    @Column({ type: 'text' })
+    type: string;
+
     @Column("simple-json")
     data: any;
 

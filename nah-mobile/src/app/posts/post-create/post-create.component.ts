@@ -94,7 +94,8 @@ export class PostCreateComponent implements OnInit {
       className: 'col-12',
       defaultValue: [{}],
       templateOptions: {
-        addText: 'Add videos'
+        addText: 'Add videos',
+        color: 'light',
       },
       // validators: {
       //   required: {

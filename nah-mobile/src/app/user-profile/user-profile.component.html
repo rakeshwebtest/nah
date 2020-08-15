@@ -42,94 +42,56 @@
         <ion-button class="ion-margin-l-0" color="medium" size="small" (click)="block()" *ngIf="!userInfo.blocked">Block</ion-button>
         <ion-button class="ion-margin-l-0" size="small" (click)="unblock()" *ngIf="userInfo.blocked">Unblock</ion-button>
       </div>
-      <!-- <ion-row *ngIf="isOtherProfile">
-        <ion-toolbar color="white">
-          <ion-button class="ion-margin-l-0" size="small" (click)="following()" *ngIf="!userInfo.following">Follow</ion-button>
-          <ion-button class="ion-margin-l-0" size="small" (click)="unfollowing()" *ngIf="userInfo.following">Unfollow</ion-button>
-          <ion-button class="ion-margin-l-0" color="medium" size="small" (click)="block()" *ngIf="!userInfo.blocked">Block</ion-button>
-          <ion-button class="ion-margin-l-0" size="small" (click)="unblock()" *ngIf="userInfo.blocked">Unblock</ion-button>
-        </ion-toolbar>
-      </ion-row> -->
     </ion-col>
   </ion-row>
-  <!-- <ion-card class="card" *ngIf="userInfo">
-    <ion-card-header>
-      <ion-avatar class="image-avater image-center ion-activatable">
-        <img [src]="googlePic" />
-      </ion-avatar>
-    </ion-card-header>
-    <ion-card-content class="card-body ion-text-center">
-      <h3 class="username">{{ userInfo.displayName }}</h3>
-      <ion-text>
-        <ion-icon size="small" [style.color]="rating >= 1 ? 'yellow' : ''" name="star"></ion-icon>
-        <ion-icon size="small" [style.color]="rating >= 2 ? 'yellow' : ''" name="star"></ion-icon>
-        <ion-icon size="small" [style.color]="rating >= 3 ? 'yellow' : ''" name="star"></ion-icon>
-        <ion-icon size="small" [style.color]="rating >= 4 ? 'yellow' : ''" name="star"></ion-icon>
-        <ion-icon size="small" [style.color]="rating >= 5 ? 'yellow' : ''" name="star"></ion-icon>
-      </ion-text>
-      <h5 class="country">{{ userInfo?.city?.name }}</h5>
-      <h5 class="country">{{ userInfo.typeOfNoer }}</h5>
-      <div *ngIf="isOtherProfile">
-        <ion-button (click)="following()" *ngIf="!userInfo.following">Follow</ion-button>
-        <ion-button (click)="unfollowing()" *ngIf="userInfo.following">Unfollow</ion-button>
-        <ion-button (click)="block()" *ngIf="!userInfo.blocked">Block</ion-button>
-        <ion-button (click)="unblock()" *ngIf="userInfo.blocked">Unblock</ion-button>
-      </div>
-      <ion-grid>
-        <ion-row class="ion-align-items-center">
-          <app-agenda-view></app-agenda-view>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card> -->
+</ion-header>
+<ion-content>
   <ion-row class="ion-align-items-center" *ngIf="!isOtherProfile">
     <app-agenda-view></app-agenda-view>
   </ion-row>
-</ion-header>
-
-<super-tabs>
-  <super-tabs-toolbar slot="top" [scrollable]="isOtherProfile">
-    <super-tab-button>
-      <!-- <ion-icon name="home"></ion-icon> -->
-      <ion-label>Following</ion-label>
-    </super-tab-button>
-    <super-tab-button>
-      <!-- <ion-icon name="home"></ion-icon> -->
-      <ion-label>Followers</ion-label>
-    </super-tab-button>
-    <super-tab-button *ngIf="!isOtherProfile">
-      <ion-label>Blocked</ion-label>
-    </super-tab-button>
-    <super-tab-button  *ngIf="isOtherProfile">
-      <ion-label>Groups</ion-label>
-    </super-tab-button>
-    <super-tab-button *ngIf="isOtherProfile">
-      <ion-label>Posts</ion-label>
-    </super-tab-button>
-    <super-tab-button *ngIf="isOtherProfile">
-      <ion-label>Meetings</ion-label>
-    </super-tab-button>
-  </super-tabs-toolbar>
-  <super-tabs-container>
-    <super-tab>
-      <app-user-list [userId]="profileId" type="following"></app-user-list>
-    </super-tab>
-    <super-tab>
-      <app-user-list [userId]="profileId" type="followers"></app-user-list>
-    </super-tab>
-    <super-tab *ngIf="!isOtherProfile">
-        <app-user-list [userId]="profileId" type="blocked"></app-user-list>
-    </super-tab>
-    <super-tab *ngIf="isOtherProfile">
+  <super-tabs>
+    <super-tabs-toolbar slot="top" [scrollable]="isOtherProfile">
+      <super-tab-button>
+        <!-- <ion-icon name="home"></ion-icon> -->
+        <ion-label>Following</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <!-- <ion-icon name="home"></ion-icon> -->
+        <ion-label>Followers</ion-label>
+      </super-tab-button>
+      <super-tab-button *ngIf="!isOtherProfile">
+        <ion-label>Blocked</ion-label>
+      </super-tab-button>
+      <super-tab-button *ngIf="isOtherProfile">
+        <ion-label>Groups</ion-label>
+      </super-tab-button>
+      <super-tab-button *ngIf="isOtherProfile">
+        <ion-label>Posts</ion-label>
+      </super-tab-button>
+      <super-tab-button *ngIf="isOtherProfile">
+        <ion-label>Meetings</ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+    <super-tabs-container>
+      <super-tab>
+        <app-user-list [userId]="profileId" type="following" emptyMsg="No following"></app-user-list>
+      </super-tab>
+      <super-tab>
+        <app-user-list [userId]="profileId" type="followers" emptyMsg="No followers"></app-user-list>
+      </super-tab>
+      <super-tab *ngIf="!isOtherProfile">
+        <app-user-list [userId]="profileId" type="blocked" emptyMsg="No blocked users"></app-user-list>
+      </super-tab>
+      <super-tab *ngIf="isOtherProfile">
         <app-group-list type="mygroups" [userId]="profileId"></app-group-list>
-    </super-tab>
-    <super-tab *ngIf="isOtherProfile">
+      </super-tab>
+      <super-tab *ngIf="isOtherProfile">
         <app-post-list type="my-posts" [userId]="profileId"></app-post-list>
-    </super-tab>
-    <super-tab *ngIf="isOtherProfile">
-      <app-meeting-list type="my-meeting" [userId]="profileId"></app-meeting-list>
-    </super-tab>
-  </super-tabs-container>
-</super-tabs>
-
+      </super-tab>
+      <super-tab *ngIf="isOtherProfile">
+        <app-meeting-list type="my-meeting" [userId]="profileId"></app-meeting-list>
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
+</ion-content>
 <!-- <app-user-list style="height: 100%;" type="following" [userId]="profileId"></app-user-list> -->

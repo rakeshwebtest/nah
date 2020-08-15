@@ -39,14 +39,16 @@ export class GroupService {
             if (userId && query.createdBy) {
                 db.andWhere('group.createdBy = :id', { id: userId });
             } else {
-                db.where('group.isDeleted != 1');
+                db.where('(group.isDeleted != 1)');
             }
-            if (userId && query.notCreatedBy) {
-                db.where('createdBy.id != :id', { id: userId });
-            }
+
         }
         if (query.search) {
-            db.andWhere("group.name like :name", { name: '%' + query.search + '%' });
+            db.andWhere("(group.name like :name)", { name: '%' + query.search + '%' });
+        } else {
+            if (userId && query.notCreatedBy) {
+                db.where('(createdBy.id != :id)', { id: userId });
+            }
         }
 
         db.take(take);
@@ -140,10 +142,10 @@ export class GroupService {
         const isFollower = await this.isFollower(followMember);
         if (isFollower) {
             await this.groupFollowRepository.delete(isFollower);
-            return { message: 'UnFollowed Successfully', success: true, isFollower };
+            return { message: 'Followed', success: true, isFollower };
         } else {
             const data = await this.groupFollowRepository.save(followMember);
-            return { message: 'Followed Successfully', success: true, data };
+            return { message: 'Unfollowed', success: true, data };
         }
     }
     async unFollow(id: number) {

@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { APP_CONFIG } from './config';
 
 async function bootstrap() {
   //   const cros_options = {
@@ -24,7 +25,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('/docs', app, document);
 
-  const port = process.env.port || 3000;
+  const port = APP_CONFIG.SERVER_PORT || 3000;
   await app.listen(port, () => {
     // tslint:disable-next-line:no-console
     console.log(`Listening at http://localhost:${port}/api`);

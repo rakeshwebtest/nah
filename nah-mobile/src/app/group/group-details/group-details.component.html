@@ -1,3 +1,3 @@
-<app-user-list type="group-followers" *ngIf="type == 'following'" [groupId]="groupId"></app-user-list>
+<app-user-list type="group-followers" emptyMsg="No group followers" *ngIf="type == 'following'" [groupId]="groupId"></app-user-list>
 
-<app-meeting-list style="height: 100%;" *ngIf="type == 'meetings'" type="group" [groupId]="groupId"></app-meeting-list>
+<app-meeting-list style="height: 100%;"  *ngIf="type == 'meetings'" type="group" [groupId]="groupId"></app-meeting-list>

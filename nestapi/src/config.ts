@@ -2,10 +2,27 @@ export interface AppConfig {
     SECRET: string;
     SERVERBASEPATH: string;
     DB: any;
+    SERVER_PORT: number;
     S3: {
         AWS_ACCESS_KEY_ID: string;
         AWS_SECRET_ACCESS_KEY: string;
         AWS_S3_BUCKET_NAME: string;
+    };
+    REDIS: {
+        name?: string;
+        url?: string;
+        port?: number;
+        host?: string;
+    };
+    SMTP: {
+        host: string;
+        port: any;
+        ignoreTLS: string;
+        secure: string;
+        auth: {
+            user: string;
+            pass: string;
+        }
     };
 }
 

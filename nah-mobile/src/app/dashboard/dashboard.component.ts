@@ -35,14 +35,13 @@ export class DashboardComponent implements OnInit {
       this.ms.meetingReload();
     }
     this.firstTimeEnter = true;
+    this.agendaService.checkAgenda();
   }
   ngOnInit() {
     this.authService.checkUser().then(res => {
       this.userInfo = res;
       this.googlePic = this.userInfo.user.imageUrl;
-    })
-
-    this.agendaService.checkAgenda();
+    });
   }
   meetingClick(meetingType) {
     this.router.navigate(['/meeting/type/' + meetingType]);

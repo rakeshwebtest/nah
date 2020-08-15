@@ -1,12 +1,14 @@
-<app-agenda-view agendaTitle="Your Agenda" [showShowOldAgenda]="false" [showCreateMsg]="true"></app-agenda-view>
+<ion-content overflow-scroll="false">
+  <app-agenda-view agendaTitle="Your Agenda" [showShowOldAgenda]="false" [showCreateMsg]="true"></app-agenda-view>
 
-<ion-tabs class="new-inside-tabs">
-  <ion-tab-bar slot="top">
-    <ion-tab-button tab="meeting">
-      <ion-label class="format-text">Meetings</ion-label>
-    </ion-tab-button>
-    <ion-tab-button tab="group" >
-      <ion-label class="format-text">Groups</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+  <ion-tabs class="new-inside-tabs">
+    <ion-tab-bar slot="top">
+      <ion-tab-button tab="meeting">
+        <ion-label class="format-text">Meetings</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="group">
+        <ion-label class="format-text">Groups</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

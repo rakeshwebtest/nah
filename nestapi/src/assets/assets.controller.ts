@@ -1,4 +1,4 @@
-import { Controller, UseInterceptors, Post, UploadedFile, UploadedFiles, Body, Req, Res } from '@nestjs/common';
+import { Controller, UseInterceptors, Post, UploadedFile, UploadedFiles, Body, Req, Res, HttpException, HttpStatus } from '@nestjs/common';
 import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -16,8 +16,13 @@ export class ImagesDto {
 }
 
 export const imageFileFilter = (req, file, callback) => {
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-        return callback(new Error('Only image files are allowed!'), false);
+    console.log('file', file);
+    if (!file.originalname.match(/\.(jpg|jpeg|JPG|JPEG|Jpeg|png|PNG|gif)$/)) {
+        return callback(new HttpException({
+            status: HttpStatus.BAD_REQUEST,
+            message: 'Only image files are allowed!'
+        }, HttpStatus.BAD_REQUEST), false);
+        // return callback({ message: "Only image files are allowed!" }, false);
     }
     callback(null, true);
 };
@@ -47,6 +52,7 @@ export class AssestsController {
             fileFilter: imageFileFilter,
         }),
     )
+
     async uploadedFile(@UploadedFile() file, @Body() data: ImageDto) {
         const response: AssetsEntity = new AssetsEntity();
         response.originalName = file.originalname;
@@ -59,6 +65,7 @@ export class AssestsController {
         return { message: false, success: true, data: img };
     }
     // multiple file upploads
+    @Post()
     @ApiConsumes('multipart/form-data')
     @UseInterceptors(
         FilesInterceptor('images[]', 20, {
@@ -84,8 +91,14 @@ export class AssestsController {
             response.push(resFile);
         });
 
-        const images = await this.assetS.saveFiles(response);
-        return { message: false, success: true, data: images };
+
+        try {
+            const images = await this.assetS.saveFiles(response);
+            return { message: false, success: true, data: images };
+        } catch (error) {
+            return { message: "Only image files are allowed!" };
+        }
+
     }
 
     // @Post()
@@ -104,6 +117,6 @@ export class AssestsController {
     async upload(@UploadedFiles() files) {
         console.log('files', files);
         // const data = await this.imageUploadService.upload(files);
-       // return data;
+        // return data;
     }
 }

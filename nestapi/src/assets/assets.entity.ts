@@ -5,7 +5,6 @@ import { PostEntity } from 'src/posts/post.entity';
 @Entity({ name: 'asset' })
 export class AssetsEntity extends BaseEntity {
 
-
     @Column() originalName: string;
     @Column() fileName: string;
     @Column('varchar') type: string;
@@ -15,6 +14,5 @@ export class AssetsEntity extends BaseEntity {
 
     @ManyToOne(type => PostEntity, post => post.photos, { onDelete: 'CASCADE' })
     post: PostEntity;
-
 
 }

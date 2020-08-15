@@ -115,8 +115,13 @@ export class PostListComponent implements OnInit, OnDestroy {
       }
     });
   }
-  navDetails(post) {
-    this.router.navigate(['/posts/details/' + post.id]);
+  navDetails(post, navToComments?: boolean) {
+    if (navToComments) {
+      this.router.navigate(['/posts/details/' + post.id], { queryParams: { comments: 'true' } });
+    } else {
+      this.router.navigate(['/posts/details/' + post.id]);
+    }
+
   }
   navProfile(user) {
     this.router.navigate(['/user-profile/' + user.id]);
@@ -124,9 +129,9 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   bookmarkLikeAndDislike(post: any, type = 'bookmark') {
     // post.bookmark = !post.isBookMark;
-    if (post.createdBy.id === this.userInfo.id && type !== 'bookmark') {
-      return;
-    }
+    // if (post.createdBy.id === this.userInfo.id && type !== 'bookmark') {
+    //   return;
+    // }
     const postBookmareService = this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type });
     if (type === 'bookmark' && post['bookmark']) {
       this.alertS.presentConfirm('', 'Do you want to Remove bookmark from list?').then(res => {
@@ -179,7 +184,7 @@ export class PostListComponent implements OnInit, OnDestroy {
       message: 'Do you want to Remove bookmark form list?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'No',
           role: 'cancel',
           handler: () => {
             alert.dismiss(false);
@@ -187,7 +192,7 @@ export class PostListComponent implements OnInit, OnDestroy {
           }
         },
         {
-          text: 'Okay',
+          text: 'Yes',
           handler: () => {
             alert.dismiss(true);
             return false;

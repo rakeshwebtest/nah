@@ -108,7 +108,8 @@ export class PostService {
             .leftJoinAndMapOne("p.like", PostLikeEntity, "isLikeUser", "isLikeUser.user.id = " + sessionUser.id + " && isLikeUser.post.id = p.id")
             .leftJoinAndMapOne("p.dislike", PostDislikeEntity, "isDislikeUser", "isDislikeUser.user.id = " + sessionUser.id + " && isDislikeUser.post.id = p.id");
         db.where('p.id = :postId', { postId: postId });
-        db.select(["p", "u", "pc", "pc_createdBy", "pcr_createdBy", "pcr", "topic", "videos", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos']);
+        db.select(["p", "u", "pc", "pc_createdBy", "pcr_createdBy", "pcr", "topic", "videos", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos'])
+        .orderBy({ "pc.createdDate": "DESC" });
         const data: any = await db.getOne();
         data.photos = mapImageFullPath(data.photos);
         return data;
@@ -172,7 +173,7 @@ export class PostService {
         const postDetails: any = await this.getPostIdBasic(data.postId);
         switch (data.type) {
             case 'like':
-                msgS = 'liked';
+                msgS = 'Liked';
                 msgF = "Removed post";
                 await this.postDislikeRepository.delete({ post: { id: data.postId }, user: { id: data.userId } }); // delete dislike if exit
                 _entity = new PostLikeEntity();
@@ -219,7 +220,7 @@ export class PostService {
         comment.createdBy.id = commentDto.userId;
         comment.comment = commentDto.comment;
         const data = await this.postCommentRepository.save(comment);
-        return { message: 'Added Comment Successfully', data };
+        return { message: 'Comment added successfully', data };
     }
 
     async addCommentReply(commentDto: any) {
@@ -230,7 +231,7 @@ export class PostService {
         comment.createdBy.id = commentDto.userId;
         comment.comment = commentDto.comment;
         const data = await this.postCommentReplyRepository.save(comment);
-        return { message: 'replay Comment Successfully', data };
+        return { message: 'Reply comment added successfully.', data };
     }
 
     async deleteComment(commentId?: number, replyCommentId?: number): Promise<any> {

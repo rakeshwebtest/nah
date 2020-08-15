@@ -14,14 +14,14 @@ export class AppAlertService {
         message: message,
         buttons: [
           {
-            text: cancelText || 'Cancel',
+            text: cancelText || 'No',
             role: 'cancel',
             cssClass: 'secondary',
             handler: (cancel) => {
               resolve(false);
             }
           }, {
-            text: okText || 'Okay',
+            text: okText || 'Yes',
             handler: (ok) => {
               resolve(true);
             }

@@ -167,14 +167,14 @@ export class MeetingListComponent implements OnInit, OnDestroy {
       message: 'Do you want to delete this Meeting?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'No',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Okay',
+          text: 'Yes',
           handler: () => {
             this.deleteMeeting(meeting, index);
           }

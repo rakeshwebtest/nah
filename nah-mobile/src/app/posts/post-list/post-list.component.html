@@ -49,9 +49,9 @@
           <ion-text class="post-footer">
             <span (click)="bookmarkLikeAndDislike(post, 'like')"> <ion-icon [ngClass]="{ active: post.like }" name="thumbs-up"></ion-icon> {{ post.likeCount }} </span>
             <span (click)="bookmarkLikeAndDislike(post, 'dislike')"> <ion-icon [ngClass]="{ active: post.dislike }" name="thumbs-down"></ion-icon> {{ post.dislikeCount }} </span>
-            <span (click)="navDetails(post)"> <ion-icon name="chatbubbles"></ion-icon> {{ post.commentCount }} </span>
+            <span (click)="navDetails(post, true)"> <ion-icon name="chatbubbles"></ion-icon> {{ post.commentCount }} </span>
             <span (click)="bookmarkLikeAndDislike(post, 'bookmark')"> <ion-icon name="star" [ngClass]="{ active: post.bookmark }"></ion-icon>{{ post.bookmarkCount }} </span>
-            <span> <ion-icon name="share"></ion-icon>0 </span>
+            <span> <ion-icon name="share"></ion-icon></span>
           </ion-text>
         </ion-footer>
       </ion-card>

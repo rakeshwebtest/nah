@@ -21,6 +21,7 @@ export class PeoplesListComponent implements OnInit {
     });
   }
   navProfile(user) {
+    this.dismiss();
     if (user.user.id) {
       this.router.navigate(['/user-profile/' + user.user.id]);
     }

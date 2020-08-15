@@ -37,7 +37,8 @@ export class AgendaPage implements OnInit {
       templateOptions: {
         addText: 'Add another topic',
         min: 1,
-        max: 2
+        max: 2,
+        color: 'light'
       },
       validators: {
         required: {

@@ -1,15 +1,12 @@
 <ion-row>
-  <ion-input
+  <input 
     #fileInput
     type="file"
-    label="test"
     [ngClass]="{ 'multiple-files': to.multiple }"
-    accept="image/x-png,image/gif,image/jpeg"
     [multiple]="to.multiple"
-    (change)="onFileChange($event)"
-    (click)="fileInput.value = null"
-    [name]="fieldInputName"
-  ></ion-input>
+    ng2FileSelect
+    [uploader]="uploader"
+  />
 </ion-row>
 <div class="container multiple-image-list" *ngIf="uploadedImages">
   <div class="image-list-block" *ngFor="let img of uploadedImages; let inx = index">

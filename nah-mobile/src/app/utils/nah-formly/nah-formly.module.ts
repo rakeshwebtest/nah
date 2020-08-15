@@ -13,6 +13,7 @@ import { FieldDatetime } from './types/datetime'
 import { RepeatTypeComponent } from './types/repeat';
 import { FieldYoutubVideoUrlComponent } from './types/field-youtub-video-url/field-youtub-video-url.component';
 import { LazyUploadFieldModule } from './types/lazy-upload-field/lazy-upload-field.module';
+import { FileUploadModule } from 'ng2-file-upload';
 @NgModule({
   declarations: [
     VerticalFieldComponent,
@@ -31,6 +32,7 @@ import { LazyUploadFieldModule } from './types/lazy-upload-field/lazy-upload-fie
     FormlyIonicModule,
     IonicSelectableModule,
     LazyUploadFieldModule,
+    FileUploadModule,
     FormlyModule.forRoot({
       wrappers: [{ name: 'vertical', component: VerticalFieldComponent }],
       types: [

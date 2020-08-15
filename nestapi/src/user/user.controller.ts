@@ -14,12 +14,13 @@ import { GroupService } from 'src/group/group.service';
 import { CreateGroupDto } from 'src/group/dto/create-group.dto';
 import { CityEntity } from 'src/city/city.entity';
 import { FollowDto, ProfileBlockDto } from './dto/login-user.dto';
+import { AppMailerService } from 'src/app-mailer/app-mailer.service';
 
 @ApiTags('Users')
 @Controller('user')
 export class UsersController {
 
-    constructor(public service: UserService, public groupService: GroupService) { }
+    constructor(public service: UserService, public groupService: GroupService, public appMailerService: AppMailerService) { }
     @ApiBearerAuth()
     @Get('list')
     async getUser(@Request() req, @Query() query: UserLIstQuery) {
@@ -117,10 +118,12 @@ export class UsersController {
                 user.updatedDate = new Date();
             } else {
                 _user = <any>user;
+                this.appMailerService.send(user.email, 'welcome', _user);
             }
             if (user.fcmToken) {
                 _user.fcmToken = user.fcmToken;
             }
+
             _user = await this.service.updateUser(_user);
         }
 

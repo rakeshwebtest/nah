@@ -257,8 +257,15 @@ vertical-field {
   font-size: 16px;
 }
 
+app-lazy-upload-field {
+  input{
+    &::before{
+      background-color: #fff;
+    }
+  }
+}
 formly-field-file ion-input,
-app-lazy-upload-field ion-input {
+app-lazy-upload-field input {
   width: 100% !important;
   height: 35px;
   // background-color: #ccc;
@@ -266,7 +273,8 @@ app-lazy-upload-field ion-input {
   border-radius: 0px;
   position: relative;
   border-radius: 8px;
-  .native-input {
+  .native-input,
+  input {
     opacity: 0;
   }
   &::before {
@@ -904,24 +912,34 @@ p::first-letter {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.no-ripple-effeect{
+.no-ripple-effeect {
   --ripple-color: transparent;
 }
-.social-info{
-  &::before{
+.no-focus-effect {
+  --background-activated: transparent;
+  --background-focused: transparent;
+  --background-focused-opacity: 0;
+  --background-hover: #000;
+  --ripple-color: #333;
+}
+.social-info {
+  &::before {
     height: 1px !important;
   }
   // .post-footer{
   //   border-bottom: 1px solid #ccc;
   // }
 }
-.no-border{
+.no-border {
   border-bottom: none !important;
 }
-.custom-text-btn{
+.custom-text-btn {
   background-color: #e0dddd;
   padding: 10px 15px;
   border-radius: 20px;
   box-shadow: 1px 5px 6px #999;
   display: block;
+}
+.mw-50{
+  min-width: 50px;
 }

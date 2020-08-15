@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { AppHttpClient } from 'src/app/utils';
 import { PostService } from '../post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppAlertService } from 'src/app/utils/app-alert.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonContent } from '@ionic/angular';
 import { FcmProviderService } from 'src/app/utils/fcm-provider.service';
 import { Storage } from '@ionic/storage';
 import { AppRouterNavigateService } from 'src/app/utils/app-router-navigate.service';
@@ -13,7 +13,8 @@ import { AppRouterNavigateService } from 'src/app/utils/app-router-navigate.serv
   templateUrl: './post-detatils.component.html',
   styleUrls: ['./post-detatils.component.scss'],
 })
-export class PostDetatilsComponent implements OnInit, OnDestroy {
+export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild(IonContent, { static: false }) content: IonContent;
   public postDetails = [];
   public commentMsg: any;
   post: any;
@@ -22,7 +23,8 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
   loading = false;
   isOwner: boolean;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
-  constructor(private postS: PostService, private activeRoute: ActivatedRoute, private http: AppHttpClient,
+  constructor(
+    private postS: PostService, private activeRoute: ActivatedRoute, private http: AppHttpClient,
     public appRouter: AppRouterNavigateService,
     private router: Router,
     private storage: Storage,
@@ -51,12 +53,21 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
         this.isOwner = true;
       }
       this.loading = false;
+      if (this.activeRoute.snapshot.queryParams.comments) {
+        setTimeout(() => {
+          this.scrollToCommentBox();
+        }, 500);
+
+      }
     });
   }
+  ngAfterViewInit() {
+
+  }
   bookmarkLikeAndDislike(post, type = 'bookmark') {
-    if (post.createdBy.id === this.userInfo.id && type !== 'bookmark') {
-      return;
-    }
+    // if (post.createdBy.id === this.userInfo.id && type !== 'bookmark') {
+    //   return;
+    // }
     const postBookmareService = this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type });
     if (type === 'bookmark' && post['bookmark']) {
       this.alertS.presentConfirm('', 'Do you want to Remove bookmark from list?').then(res => {
@@ -148,6 +159,7 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
       };
       this.http.post('posts/comment', payLoad).subscribe(res => {
         if (res.data) {
+          this.scrollToCommentBox('comment-box');
           const _comment = res.data;
           _comment.createdBy = userInfo;
           _comment.replys = [];
@@ -169,14 +181,14 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
       message: 'Do you want to delete this Comment?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'No',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Okay',
+          text: 'Yes',
           handler: () => {
             const comment = items[inx];
             let _url = 'posts/comment/';
@@ -197,6 +209,10 @@ export class PostDetatilsComponent implements OnInit, OnDestroy {
       ]
     });
     await alert.present();
+  }
+  scrollToCommentBox(elementId = 'comment-box') {
+    const y = document.getElementById(elementId).offsetTop;
+    this.content.scrollToPoint(0, y);
   }
   clearReply() {
     this.replyMsg = {};

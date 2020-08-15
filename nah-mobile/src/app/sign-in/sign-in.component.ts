@@ -61,6 +61,7 @@ export class SignInComponent implements OnInit {
     };
     if (infinity && infinity.text) {
       console.log(infinity.text);
+      this.cityList = [];
       const searchText = infinity.text.trim().toLowerCase();
       params.search = searchText;
     }
@@ -68,13 +69,12 @@ export class SignInComponent implements OnInit {
 
     this.http.get('city/list', { params: params }).subscribe(res => {
       const result = <City[]>res.data;
-      if (infinity) {
+      if (infinity && !params.search) {
         this.cityList = [...this.cityList, ...result];
         infinity.component.endInfiniteScroll();
       } else {
         this.cityList = result;
       }
-
     });
 
   }

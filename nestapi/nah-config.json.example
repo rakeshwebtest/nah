@@ -11,6 +11,7 @@
     ],
     "synchronize": true
   },
+  "SERVER_PORT":3005,
   "SECRET": "the-app",
   "SERVERBASE_PATH":"http://localhost:3000/api/",
    "UPLOAD_PATH":"./uploads",
