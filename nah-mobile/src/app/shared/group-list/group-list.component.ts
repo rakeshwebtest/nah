@@ -174,7 +174,7 @@ export class GroupListComponent implements OnInit {
     this.getGroups();
   }
   searchFilter(event) {
-    this.searchKey = (event.target.value) ? event.target.value : null;
+    this.searchKey = (event.detail.value) ? event.detail.value : null;
     this.groupList = [];
     this.getGroups();
   }

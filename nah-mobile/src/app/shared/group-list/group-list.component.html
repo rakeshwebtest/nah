@@ -6,7 +6,7 @@
     </ion-col> -->
       <ion-col class="custom-search">
         <ion-text><strong>Say No To</strong></ion-text>
-        <ion-searchbar (ionInput)="searchFilter($event)" (ionBlur)="searchFilter($event)"> </ion-searchbar>
+        <ion-searchbar debounce=300 (ionChange)="searchFilter($event)"> </ion-searchbar>
       </ion-col>
     </ion-row>
 
