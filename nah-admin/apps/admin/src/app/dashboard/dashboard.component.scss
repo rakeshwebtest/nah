@@ -45,14 +45,7 @@
         margin: 0px;
     }
     .dashboard-card {
-        box-shadow: 0px 0px 6px #404040;
-        border-radius: 10px;
-        padding: 15px;
-        flex: 1 1 auto;
-        margin: 15px 15px 15px 0;
-        display: flex;
-        align-items: center;
-        background-color: #fba8a8;
+        flex: 0 0 33.33%;
         &:last-child{
             margin-right: 0;
         }
@@ -77,6 +70,18 @@
         h3{
             margin: 0;
             font-size: 32px;
+        }
+        .dashboard-card-info{
+            margin: 15px 15px 0px 0;
+            display: flex;
+            align-items: center;
+            background-color: #fba8a8;
+            box-shadow: 0px 0px 6px #404040;
+            border-radius: 10px;
+            padding: 15px;
+            @media(max-width: 767px) {
+                margin: 0px;
+            }
         }
     }
 }
