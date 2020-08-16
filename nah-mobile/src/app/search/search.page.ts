@@ -12,7 +12,7 @@ import { GroupListComponent } from '../shared/group-list/group-list.component';
 export class SearchPage implements OnInit {
   userInfo: any;
   userId: any;
-  searchKey: any;
+  searchKey = '';
   @ViewChild(PostListComponent, null) postList: PostListComponent;
   @ViewChild(MeetingListComponent, null) meetingList: MeetingListComponent;
   @ViewChild(GroupListComponent, null) groupList: GroupListComponent;
@@ -27,15 +27,22 @@ export class SearchPage implements OnInit {
 
       this.searchKey = event.detail.value;
       // load posts
-      this.postList.searchKey =  this.searchKey;
-      this.postList.reload();
-      // load meeting
-      this.meetingList.searchKey =  this.searchKey;
-      this.meetingList.reload();
+      if (this.postList) {
+        this.postList.searchKey = this.searchKey;
+        this.postList.reload();
+      }
 
+      // load meeting
+      if (this.meetingList) {
+        this.meetingList.searchKey = this.searchKey;
+        this.meetingList.reload();
+      }
       // load groups
-      this.groupList.searchKey =  this.searchKey;
-      this.groupList.reload();
+      if (this.groupList) {
+        this.groupList.searchKey = this.searchKey;
+        this.groupList.reload();
+      }
+
     } else {
       this.searchKey = null;
     }

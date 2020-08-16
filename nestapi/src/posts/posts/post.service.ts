@@ -72,7 +72,7 @@ export class PostService {
         }
 
         if (query.search) {
-            db.where("p.title like :name", { name: '%' + query.search + '%' });
+            db.where("(p.title like :name or topic.name like :name  or p.description like :name)", { name: '%' + query.search + '%' });
         }
 
         db.andWhere("p.isDeleted != 1");

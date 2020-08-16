@@ -84,7 +84,7 @@ export class MeetingService {
         }
 
         if (query.search) {
-            db.where("m.title like :name", { name: '%' + query.search + '%' })
+            db.where("(m.title like :name or group.name like :name or city.name like :name)", { name: '%' + query.search + '%' })
         }
 
         // get one meeting details 
