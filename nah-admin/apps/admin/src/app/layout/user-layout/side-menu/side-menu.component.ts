@@ -198,7 +198,7 @@ export class SideMenuComponent implements OnInit {
         'app': 'zc-core',
         'childs': [
           {
-            'label': 'Posts',
+            'label': 'Noer Posts',
             'code': 'posts/list',
             'icon': 'fa fa-phone',
             'type': 'custom'

@@ -11,41 +11,31 @@ import { AppHttpClient } from '../../../utils/app-http-client.service';
 export class PostListComponent implements OnInit {
   selectedMeetings: any;
   cols = [];
-  cityList = [];
-  selectedCity: any;
-  meetingList = [];
-  modalTitle: string;
-  form = new FormGroup({});
-  amoutType: string;
+  postList = [];
   search: string;
   model: any = {};
-  sessionInfo: any = {};
-  users: any = [];
-  userInfo: any = {};
-  
-  constructor(private appHttp: AppHttpClient, 
-        private router: Router,
+
+  constructor(private appHttp: AppHttpClient,
+    private router: Router,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.cols = [
-      { field: 'meetingName', header: 'Meeting Title' },
+      { field: 'meetingName', header: 'Post Title' },
       { field: 'meetingDate', header: 'Date' },
       { field: 'meetingTime', header: 'Time' },
       { field: 'meetingVenue', header: 'Location' },
       { field: 'city', header: 'City' }
     ];
-    this.meetingList = [     
-    ];
-
-    this.getMeetings();
+    this.postList = [];
+    this.getPosts();
   }
 
-  getMeetings() {
+  getPosts() {
     const payload: any = {};
-    this.appHttp.get('meeting/list').subscribe(res => {
+    this.appHttp.get('posts/list').subscribe(res => {
       if (res.data) {
-        this.meetingList = res.data;
+        this.postList = res.data;
       }
     });
   }
@@ -62,8 +52,8 @@ export class PostListComponent implements OnInit {
     this.router.navigate(['details/' + meeting.id], { relativeTo: this.activatedRoute.parent })
   }
   searchList() {
-    this.appHttp.get('meeting/list?search='+this.search).subscribe(res => {
-      if(res.data) {
+    this.appHttp.get('meeting/list?search=' + this.search).subscribe(res => {
+      if (res.data) {
         this.meetingList = res.data;
       }
     });

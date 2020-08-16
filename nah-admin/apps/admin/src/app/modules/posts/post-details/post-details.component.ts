@@ -12,16 +12,14 @@ export class PostDetailsComponent implements OnInit {
   imgList = [];
   videoList = [];
   commentsList = [];
-  meetingId = 0;
-  meeting: any = {};
+  postId = 0;
+  post: any = {};
   constructor(private appHttp: AppHttpClient, 
     private activeRouter: ActivatedRoute,
     private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
-
-    this.meetingId = this.activeRouter.snapshot.params.id;
-    console.log('meetingId -->', this.meetingId);
+    this.postId = this.activeRouter.snapshot.params.id;
     this.imgList = [     
     ];
     this.videoList = [    
@@ -29,24 +27,25 @@ export class PostDetailsComponent implements OnInit {
     this.commentsList = [
       
     ];
-    this.getMeetingDetails();
+    this.getPostDetails();
   }
 
-  getMeetingDetails() {
-    const payload: any = { id: this.meetingId };
-    this.appHttp.get('meeting/list?meetingId='+this.meetingId).subscribe(res => {
+  getPostDetails() {
+    const payload: any = { id: this.postId };
+    this.appHttp.get('posts/'+this.postId).subscribe(res => {
       if(res.data) {
-        this.meeting = res.data;
+        this.post = res.data;
       }
+      console.log('this.post --->', this.post);
     });
   }
   deleteImage(id) {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to perform this action?',
       accept: () => {
-        this.appHttp.delete('meeting/photo/'+id).subscribe(res => {
+        this.appHttp.delete('posts/photo/'+id).subscribe(res => {
           //if(res.data) {
-            this.getMeetingDetails();
+            this.getPostDetails();
           // }
         });
       }
@@ -56,9 +55,9 @@ export class PostDetailsComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to perform this action?',
       accept: () => {
-        this.appHttp.delete('meeting/video/'+id).subscribe(res => {
+        this.appHttp.delete('posts/video/'+id).subscribe(res => {
           //if(res.data) {
-            this.getMeetingDetails();
+            this.getPostDetails();
           // }
         });
       }
@@ -68,9 +67,9 @@ export class PostDetailsComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to perform this action?',
       accept: () => {
-        this.appHttp.delete('meeting/comment/'+id).subscribe(res => {
+        this.appHttp.delete('posts/comment/'+id).subscribe(res => {
           // if(res.data) {
-            this.getMeetingDetails();
+            this.getPostDetails();
           // }
         });
       }

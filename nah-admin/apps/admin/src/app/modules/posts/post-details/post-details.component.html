@@ -1,40 +1,31 @@
 <div class="p-contain">
     <div class="row m-0 box">
-        <div class="col-12 col-md-3">
+        <!-- <div class="col-12 col-md-3">
             <label class="custom-label">Image</label>
             <div class="label-value">
                 <img width="100%" [src]="meeting.imageUrl" alt="">
             </div>
-        </div>
-        <div class="col-12 col-md-9 row align-items-center">            
+        </div> -->
+        <div class="col-12 col-md-12 row align-items-center">            
             <div class="col-12 col-md-4">
-                <label class="custom-label">Meeting Title</label>
-                <div class="label-value"> {{ meeting.title}} </div>
+                <label class="custom-label">Post Title</label>
+                <div class="label-value"> {{ post.title }} </div>
             </div>
             <div class="col-12 col-md-4">
                 <label class="custom-label">Date</label>
-                <div class="label-value">{{ meeting.meetingDate | date}} </div>
+                <div class="label-value">{{ post.createdDate | date}} </div>
             </div>
             <div class="col-12 col-md-4">
-                <label class="custom-label">Time</label>
-                <div class="label-value">{{ meeting.startTime | date : 'shortTime' }} To {{ meeting.endTime | date : 'shortTime' }} </div>
-            </div>
-            <div class="col-12 col-md-4">
-                <label class="custom-label">Location</label>
-                <div class="label-value">{{ meeting.location }} </div>
-            </div>
-           
-            <div class="col-12 col-md-4">
-                <label class="custom-label">Group</label>
-                <div class="label-value">Say No To {{ meeting.group?.name }} </div>
+                <label class="custom-label">User</label>
+                <div class="label-value">{{ post?.createdBy?.displayName }} </div>
             </div>
             <div class="col-12">
-                <label class="custom-label">Contact Details</label>
-                <div class="label-value">{{ meeting.contactMobile }}, {{ meeting.contactEmail }}</div>
+                <label class="custom-label">Topic</label>
+                <div class="label-value">{{ post?.topic?.name }}</div>
             </div>
             <div class="col-12">
                 <label class="custom-label">Description</label>
-                <div class="label-value">{{ meeting.agenda }} </div>
+                <div class="label-value">{{ post.description }} </div>
             </div>
         </div>
     </div>
@@ -42,30 +33,30 @@
         <mat-tab-group>
             <mat-tab label="Images">
                 <ul class="images-list">
-                    <li *ngFor="let item of meeting?.photos">
-                        <img [src]="item.imagePath" alt="">
+                    <li *ngFor="let item of post?.photos">
+                        <img [src]="item?.fullPath" alt="">
                         <i class="fa fa-trash" (click)="deleteImage(item.id)"></i>
                     </li>
-                    <li *ngIf="meeting.photos && meeting.photos.length < 1">
+                    <li *ngIf="post?.photos && post?.photos.length < 1">
                         No images found
                     </li>
                 </ul>
             </mat-tab>
             <mat-tab label="Videos"> 
                 <ul class="images-list">
-                <li *ngFor="let video of meeting?.videos;">
+                <li *ngFor="let video of post?.videos;">
                     <iframe width="200" height="180" [src]="video.videoPath | safe"></iframe>
                     <!-- <i class="fa fa-times-circle"></i> -->
                     <i class="fa fa-times-circle" (click)="deleteVideo(video.id)"></i>
                 </li>
-                <li *ngIf="meeting.videos && meeting.videos.length < 1">
+                <li *ngIf="post.videos && post.videos.length < 1">
                     No videos found
                 </li>
                 </ul>
         </mat-tab>
             <mat-tab label="Comments">
                 <ul class="comments-list">
-                    <li  *ngFor="let comment of meeting.comments;">
+                    <li  *ngFor="let comment of post.comments;">
                         <div class="comment">
                             <img [src]="comment.createdBy.imageUrl" alt="">
                             <p style="font-weight: bold;">{{comment.createdBy.displayName}}</p>
@@ -73,7 +64,7 @@
                         <p class="comment-info">{{comment.comment}}</p>
                         <i class="fa fa-times-circle" (click)="deleteComment(comment.id)"></i>
                     </li>
-                    <li *ngIf="meeting.comments && meeting.comments.length < 1">
+                    <li *ngIf="post.comments && post.comments.length < 1">
                         No comments found
                     </li>
                 </ul>
