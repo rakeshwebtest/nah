@@ -14,7 +14,7 @@ export class PostListComponent implements OnInit {
   postList = [];
   search: string;
   model: any = {};
-
+  meetingList: any;
   constructor(private appHttp: AppHttpClient,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }

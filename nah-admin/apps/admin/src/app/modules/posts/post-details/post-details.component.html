@@ -59,7 +59,7 @@
                     <li  *ngFor="let comment of post.comments;">
                         <div class="comment">
                             <img [src]="comment.createdBy.imageUrl" alt="">
-                            <p style="font-weight: bold;">{{comment.createdBy.displayName}}</p>
+                            <p style="font-weight: 500;">{{comment.createdBy.displayName}}</p>
                         </div>
                         <p class="comment-info">{{comment.comment}}</p>
                         <i class="fa fa-times-circle" (click)="deleteComment(comment.id)"></i>

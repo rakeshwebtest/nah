@@ -10,7 +10,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SafePipe } from '../meetings/safe.pipe';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [PostListComponent, PostDetailsComponent, SafePipe],
@@ -22,7 +22,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ReactiveFormsModule,
     FormsModule,
     MatTabsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    NgbModule
   ],
   exports: [
     SafePipe

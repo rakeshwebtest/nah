@@ -7,6 +7,8 @@
         position: relative;
         img{
             width: 150px;
+            height: 100px;
+            object-fit: cover;
         }
         i{
             font-size: 18px;
