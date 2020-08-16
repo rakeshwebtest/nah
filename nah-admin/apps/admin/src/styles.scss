@@ -878,3 +878,8 @@ input::placeholder,
 .customScroll::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+.search-dp{
+  .ui-dropdown-label{
+    min-height: 38px;
+  }
+}

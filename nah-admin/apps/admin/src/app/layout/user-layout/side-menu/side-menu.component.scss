@@ -40,6 +40,7 @@
                 font-size: 18px;
                 &.active{
                     color: $white;
+                    text-shadow: 3px 3px 6px #000;
                     &::before{
                         border-top: 7px solid transparent;
                         border-bottom: 7px solid transparent;
@@ -137,7 +138,7 @@
                         // }
                     .nav-dropdown-items{
                         /* display: block; */
-                        background-color: #f04141;  
+                        background-color: #ff6a6a;  
                         transition: max-height .5s ease;
                         max-height: 500px;
                         -webkit-transition:max-height .5s ease;
@@ -161,7 +162,7 @@
                                     overflow: hidden;
                                 }
                                 &:hover{
-                                    background-color: $subMenu-bg;
+                                    background-color: #ff6a6a;
                                 }
                             }
                         }

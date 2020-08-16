@@ -32,11 +32,19 @@ export class DashboardComponent implements OnInit {
     }
   };
   categoryWiseReportData: any;
+  public cities = [];
   constructor(private router: Router, private appHttp: AppHttpClient) { }
 
   ngOnInit() {
     this.getCityData();
     this.getReportData();
+    this.cities = [
+      {name: 'New York', code: 'NY'},
+      {name: 'Rome', code: 'RM'},
+      {name: 'London', code: 'LDN'},
+      {name: 'Istanbul', code: 'IST'},
+      {name: 'Paris', code: 'PRS'}
+  ];
   }
   getCityData() {
     this.cityWiseUsersOptions = {

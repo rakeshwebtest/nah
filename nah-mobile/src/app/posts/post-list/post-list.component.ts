@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PostService } from '../post.service';
 import { scan } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ActionSheetController } from '@ionic/angular';
 import { AppAlertService } from 'src/app/utils/app-alert.service';
 import {
   trigger,
@@ -14,6 +14,8 @@ import {
 } from '@angular/animations';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AppRouterNavigateService } from 'src/app/utils/app-router-navigate.service';
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
@@ -33,7 +35,10 @@ export class PostListComponent implements OnInit, OnDestroy {
   postBehavior = new BehaviorSubject<{ opt: any, list: [] }>({ opt: 'list', list: [] });
   list$: Observable<any[]>;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
-  constructor(private router: Router,
+  constructor(
+    private storage: Storage,
+    public actionSheetController: ActionSheetController,
+    private router: Router,
     public appRouter: AppRouterNavigateService,
     private activeRouter: ActivatedRoute, private authS: AuthenticationService,
     public postS: PostService, private alertCtrl: AlertController, private alertS: AppAlertService) {
@@ -67,7 +72,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     console.log('activeRouter', this.activeRouter.snapshot.params);
     this.userInfo = this.authS.getUserInfo();
-
+    console.log('this.userInfo', this.userInfo);
     this.list$ = this.postBehavior.asObservable().pipe(
       scan((acc, curr) => {
         if (curr.opt && curr.opt.type === 'delete') {
@@ -211,6 +216,48 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.offset = 0;
     this.postBehavior.next({ opt: 'list', list: [] });
     this.loadPosts(null, reload);
+  }
+  async presentActionSheet(post) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Albums',
+      cssClass: 'my-custom-class',
+      buttons: [
+        {
+          text: 'Edit',
+          icon: 'create',
+          handler: () => {
+            this.editPost(post);
+          }
+        },
+        {
+          text: 'Delete',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            this.deletePost(post);
+          }
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
+  editPost(post) {
+    this.storage.set('postDetails', post).then(res => {
+      this.router.navigate(['/posts/create/' + post.id]);
+    });
+  }
+  deletePost(post) {
+    this.alertS.presentConfirm(null, 'Are you sure delete this post').then(res => {
+      if (res) {
+        console.log(res);
+        post.isDeleted = 1;
+        this.postS.createUpdatePost(post).subscribe(resData => {
+          this.postBehavior.next({ opt: { type: 'delete', id: post.id }, list: [] });
+        }, error => {
+
+        });
+      }
+    });
   }
   ngOnDestroy(): void {
     // this.list$.unsubscribe();

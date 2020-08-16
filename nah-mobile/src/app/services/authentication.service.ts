@@ -48,7 +48,6 @@ export class AuthenticationService {
     this.storage.set('USER_INFO', user).then((response) => {
       if (response) {
         this.authState.next(user);
-        console.log('response');
         if (response.user.typeOfNoer) {
           this.router.navigate(['dashboard']);
         } else {
@@ -60,9 +59,9 @@ export class AuthenticationService {
   }
 
   logout() {
-    this.storage.remove('USER_INFO').then(() => {
-      this.router.navigate(['home']);
+    this.storage.clear().then(() => {
       this.authState.next(false);
+      this.router.navigate(['home']);
     });
   }
 

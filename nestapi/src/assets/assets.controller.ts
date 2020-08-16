@@ -2,7 +2,7 @@ import { Controller, UseInterceptors, Post, UploadedFile, UploadedFiles, Body, R
 import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { ApiConsumes, ApiProperty } from '@nestjs/swagger';
+import { ApiConsumes, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { AssetService } from './asset.service';
 import { AssetsEntity } from './assets.entity';
 
@@ -14,7 +14,6 @@ export class ImagesDto {
     @ApiProperty({ type: 'file' })
     image: any;
 }
-
 export const imageFileFilter = (req, file, callback) => {
     console.log('file', file);
     if (!file.originalname.match(/\.(jpg|jpeg|JPG|JPEG|Jpeg|png|PNG|gif)$/)) {
@@ -29,13 +28,14 @@ export const imageFileFilter = (req, file, callback) => {
 export const editFileName = (req, file, callback) => {
     const name = file.originalname.split('.')[0];
     const fileExtName = extname(file.originalname);
-    const randomName = Array(4)
+    const timeStapm = new Date().getTime();
+    const randomName = Array(32)
         .fill(null)
         .map(() => Math.round(Math.random() * 16).toString(16))
         .join('');
-    callback(null, `${name}-${randomName}${fileExtName}`);
+    callback(null, `post-${timeStapm}-${randomName}${fileExtName}`);
 };
-
+@ApiTags('Asset')
 @Controller('asset')
 export class AssestsController {
     constructor(public assetS: AssetService) {
@@ -73,7 +73,7 @@ export class AssestsController {
                 destination: './uploads',
                 filename: editFileName,
             }),
-            fileFilter: imageFileFilter,
+            fileFilter: imageFileFilter
         }),
     )
     async uploadMultipleFiles(@UploadedFiles() files, @Body() data: ImagesDto) {

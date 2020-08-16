@@ -3,7 +3,7 @@ import { AgendaService } from './agenda.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { CreateAgendaDto, GetAgendasDto } from './agendaDto';
 
-@ApiTags('agenda')
+@ApiTags('Agenda')
 @ApiBearerAuth()
 @Controller('agenda')
 export class AgendaController {

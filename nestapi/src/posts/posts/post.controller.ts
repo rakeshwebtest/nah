@@ -7,7 +7,7 @@ import { diskStorage } from 'multer';
 import { mapImageFullPath } from 'src/shared/utility';
 
 @ApiBearerAuth()
-@ApiTags('posts')
+@ApiTags('Post')
 @Controller('posts')
 export class PostsController {
 
@@ -37,7 +37,11 @@ export class PostsController {
         const sessionUser = req.sessionUser;
         let msg = 'Post created successfully.';
         if (post.id) {
-            msg = 'Updated successfully';
+            if (post.isDeleted === 1) {
+                msg = 'Deleted successfully';
+            } else {
+                msg = 'Updated successfully';
+            }
         }
         const data = await this.postService.saveUpdatePost(post, sessionUser);
         return { message: msg, success: true, data };

@@ -28,7 +28,8 @@ export class MeetingListComponent implements OnInit, OnDestroy {
   @Input() searchKey: any;
   take = 20;
   msSubscription: Subscription;
-  constructor(private authService: AuthenticationService,
+  constructor(
+    private authService: AuthenticationService,
     private storage: Storage,
     private router: Router,
     private alertCtrl: AlertController,
