@@ -22,7 +22,7 @@ export class AppController {
     if (query.h) {
       height = parseInt(query.h, null);
     }
-    if (width || height || true) {
+    if (width || height) {
       const resizeImage = await sharp('./uploads/' + image)
         .rotate()
         .resize(width, height, query.fit)
