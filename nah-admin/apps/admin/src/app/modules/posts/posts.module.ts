@@ -4,13 +4,28 @@ import { CommonModule } from '@angular/common';
 import { PostsRoutingModule } from './posts-routing.module';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
+import { SafePipe } from '../meetings/safe.pipe';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 @NgModule({
-  declarations: [PostListComponent, PostDetailsComponent],
+  declarations: [PostListComponent, PostDetailsComponent, SafePipe],
   imports: [
     CommonModule,
-    PostsRoutingModule
+    PostsRoutingModule,
+    TableModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatTabsModule,
+    ConfirmDialogModule
+  ],
+  exports: [
+    SafePipe
   ]
 })
 export class PostsModule { }

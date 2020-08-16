@@ -45,18 +45,7 @@ export class MeetingListComponent implements OnInit {
       { field: 'meetingVenue', header: 'Location' },
       { field: 'city', header: 'City' }
     ];
-    this.meetingList = [
-      {
-        'city': 'New York', 'meetingName': 'Meeting 1', 'meetingDate': '05-01-2020', 'meetingTime': '10:00 To 11:00', 'meetingVenue': 'New York', 'createdBy': 'Mohan Babu'
-      },
-      {
-        'city': 'Los Angeles', 'meetingName': 'Meeting 2', 'meetingDate': '04-01-2020', 'meetingTime': '10:00 To 11:00', 'meetingVenue': 'Los Angeles', 'createdBy': 'prasad duggirala'
-      },
-      {
-        'city': 'Chicago', 'meetingName': 'Meeting 3', 'meetingDate': '03-01-2020', 'meetingTime': '10:00 To 11:00', 'meetingVenue': 'Chicago', 'createdBy': 'UZ 16LAB'
-      }
-    ];
-
+    this.meetingList = [];
     this.getMeetings();
   }
 

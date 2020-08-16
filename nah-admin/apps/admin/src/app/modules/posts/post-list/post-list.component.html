@@ -1,1 +1,79 @@
-<p>post-list works!</p>
+<div class="p-contain">
+    <!-- <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-sm btn-danger" (click)="onAdd(addMeeting)">Add</button>
+    </div> -->
+    <div class="row m-0 filters-widget">
+      <div class="col col-md-4 mb-1 p-0 ">
+        <input type="text" pInputText placeholder="Search" [(ngModel)]="search" (keyup)="searchList()">
+      </div>
+      <!-- <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
+        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
+      </div> -->
+      <!-- <div class="col-12 col-md-4 mb-1 p-0 pr-md-3">
+        <p-dropdown [options]="meetingList" [(ngModel)]="selectedCity" placeholder="Select Meeting" optionLabel="name" [showClear]="true"></p-dropdown>
+      </div> -->
+      <!-- <div class="col-12 col-md-4 mb-1 p-0">
+        <input type="text" pInputText placeholder="Search">
+      </div> -->
+      </div>
+  <p-table  [columns]="cols" [value]="meetingList" [responsive]="true" selectionMode="single">
+    <ng-template pTemplate="header" let-columns>
+      <tr >
+        <th *ngFor="let col of columns">
+          {{ col.header }}
+        </th>
+        <th class="actions-th">Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-meeting let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td>          
+          {{ meeting.title }}
+        </td>
+        <td>          
+          {{ meeting.meetingDate | date}}
+        </td>
+        <td>          
+          {{ meeting.startTime | date : 'shortTime' }} To {{ meeting.endTime | date : 'shortTime' }}
+        </td>
+        <td>          
+          {{ meeting.location }}
+        </td>
+        <td>          
+          {{ meeting.city.name }}
+        </td>
+        <td>
+          <div
+            class="actions-dp"
+            ngbDropdown
+            placement="bottom-right"
+            container="body"
+          >
+            <a class="fa fa-ellipsis-v" ngbDropdownToggle></a>
+            <div
+              class="actions-dropdown-menu"
+              ngbDropdownMenu
+              aria-labelledby="dropdownBasic1"
+            >              
+              <li>
+                <a
+                  class="dropdown-item"
+                  (click)="onView(meeting)"
+                  >View Meeting</a
+                >
+              </li>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td class="text-center" colspan="6">
+          No records found
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
