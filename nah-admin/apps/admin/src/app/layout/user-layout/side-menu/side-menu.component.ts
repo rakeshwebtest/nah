@@ -128,9 +128,29 @@ export class SideMenuComponent implements OnInit {
             'type': 'custom'
           }
         ]
-      },
+      },     
       {
-        'label': 'Users',
+        'label': 'Noer Page',
+        'code': 'posts',
+        'icon': 'fa fa-user',
+        'app': 'zc-core',
+        'childs': [
+          {
+            'label': 'Posts',
+            'code': 'list',
+            'icon': 'fa fa-phone',
+            'type': 'custom'
+          },
+          {
+            'label': 'Topics',
+            'code': 'topics',
+            'icon': 'fa fa-phone',
+            'type': 'custom'
+          }
+        ]
+      }, 
+      {
+        'label': 'Profile',
         'code': 'users',
         'icon': 'fa fa-user',
         'app': 'zc-core',
@@ -148,86 +168,28 @@ export class SideMenuComponent implements OnInit {
             'type': 'custom'
           }
         ]
-      },
-      // {
-      //   'label': 'Active Users',
-      //   'code': 'user',
-      //   'icon': 'fa fa-users',
-      //   'app': 'zc-core',
-      //   'childs': [
-      //     {
-      //       'label': 'Active Users',
-      //       'code': 'users/active',
-      //       'icon': 'fa fa-phone',
-      //       'type': 'custom'
-      //     }
-      //   ]
-      // },
-      // {
-      //   'label': 'Blocked Users',
-      //   'code': 'user',
-      //   'icon': 'fa fa-users',
-      //   'app': 'zc-core',
-      //   'childs': [
-      //     {
-      //       'label': 'Blocked Users',
-      //       'code': 'users/blocked',
-      //       'icon': 'fa fa-phone',
-      //       'type': 'custom'
-      //     }
-      //   ]
-      // },
+      }, 
       {
-        'label': 'Meetings',
-        'code': 'meetings',
-        'icon': 'fa fa-handshake-o',
+        'label': 'Community',
+        'code': '',
+        'icon': 'fa fa-user',
         'app': 'zc-core',
         'childs': [
           {
-            'label': 'Groups',
+            'label': 'Meetings',
             'code': 'meetings/list',
             'icon': 'fa fa-phone',
             'type': 'custom'
-          }
-        ]
-      },
-      {
-        'label': 'Posts',
-        'code': 'posts',
-        'icon': 'fa fa-handshake-o',
-        'app': 'zc-core',
-        'childs': [
-          {
-            'label': 'Noer Posts',
-            'code': 'posts/list',
-            'icon': 'fa fa-phone',
-            'type': 'custom'
-          }
-        ]
-      },
-      {
-        'label': 'City',
-        'code': 'city',
-        'icon': 'fa fa-building',
-        'app': 'zc-core',
-        'childs': [
-          {
-            'label': 'City',
-            'code': 'city/list',
-            'icon': 'fa fa-phone',
-            'type': 'custom'
-          }
-        ]
-      },
-      {
-        'label': 'Groups',
-        'code': 'groups',
-        'icon': 'fa fa-object-group',
-        'app': 'zc-core',
-        'childs': [
+          },
           {
             'label': 'Groups',
             'code': 'groups/list',
+            'icon': 'fa fa-phone',
+            'type': 'custom'
+          },
+          {
+            'label': 'Cities',
+            'code': 'city/list',
             'icon': 'fa fa-phone',
             'type': 'custom'
           }

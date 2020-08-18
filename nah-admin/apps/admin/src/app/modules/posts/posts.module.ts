@@ -11,9 +11,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SafePipe } from '../meetings/safe.pipe';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TopicListComponent } from './topic-list/topic-list.component';
 
 @NgModule({
-  declarations: [PostListComponent, PostDetailsComponent, SafePipe],
+  declarations: [PostListComponent, PostDetailsComponent, SafePipe, TopicListComponent],
   imports: [
     CommonModule,
     PostsRoutingModule,
