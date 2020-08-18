@@ -32,6 +32,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
 import { FcmProviderService } from './utils/fcm-provider.service';
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
 import { AppRouterNavigateService } from './utils/app-router-navigate.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 // IonicStorageModule.forRoot({
 //   name: '__nah',
@@ -70,6 +71,7 @@ import { AppRouterNavigateService } from './utils/app-router-navigate.service';
   ],
   entryComponents: [GroupCreateModalComponent],
   providers: [
+    InAppBrowser,
     StatusBar,
     SplashScreen,
     GooglePlus,

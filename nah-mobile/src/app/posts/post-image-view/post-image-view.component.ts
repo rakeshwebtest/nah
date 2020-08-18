@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GalleryItem, ImageItem, Gallery } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-post-image-view',
@@ -16,7 +17,14 @@ export class PostImageViewComponent implements OnInit {
   galleryId: any;
   items: GalleryItem[];
   remainingImg = [];
-  constructor(public gallery: Gallery, public lightbox: Lightbox) { }
+  constructor(public gallery: Gallery, public lightbox: Lightbox, private platform: Platform) {
+
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      if (this.lightbox) {
+        this.lightbox.close();
+      }
+    });
+  }
 
   ngOnInit() {
     this.images.map(m => {
@@ -37,6 +45,8 @@ export class PostImageViewComponent implements OnInit {
     const lightboxRef = this.gallery.ref(this.galleryId);
     lightboxRef.load(this.items);
 
+
+
     // this.images.map(img => {
     //   img.src = img.fullPath;
     //   img.thumb = img.fullPath;
@@ -44,6 +54,5 @@ export class PostImageViewComponent implements OnInit {
     // });
 
   }
-  
 
 }

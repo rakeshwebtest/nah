@@ -643,6 +643,13 @@
   dependencies:
     "@types/cordova" latest
 
+"@ionic-native/in-app-browser@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@ionic-native/in-app-browser/-/in-app-browser-5.0.0.tgz#a0dbbf8ccb050876c73b16488bdd04caa6907f27"
+  integrity sha512-T0gJwZIYtxWYeB2Gq9h6b1SDPN955wHKMb0yqL5uRvRvEVmyQEbTXnXDxvYcNNz/Q9JwXRULKDKlOlOnB+xC9A==
+  dependencies:
+    "@types/cordova" latest
+
 "@ionic-native/native-storage@5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/native-storage/-/native-storage-5.0.0.tgz#4cbb58734f5b43c6a2df0268843810d24405c61b"
@@ -1377,10 +1384,6 @@ ansi-html@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/ansi-html/-/ansi-html-0.0.7.tgz#813584021962a9e9e6fd039f940d12f56ca7859e"
 
-ansi-regex@*, ansi-regex@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.0.tgz#388539f55179bf39339c81af30a654d69f87cb75"
-
 ansi-regex@2.1.1, ansi-regex@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df"
@@ -1392,6 +1395,10 @@ ansi-regex@^3.0.0:
 ansi-regex@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-4.1.0.tgz#8b9f8f08cf1acb843756a839ca8c7e3168c51997"
+
+ansi-regex@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.0.tgz#388539f55179bf39339c81af30a654d69f87cb75"
 
 ansi-styles@2.2.1, ansi-styles@^2.2.1:
   version "2.2.1"
@@ -5269,7 +5276,7 @@ import-local@^2.0.0:
     pkg-dir "^3.0.0"
     resolve-cwd "^2.0.0"
 
-imurmurhash@*, imurmurhash@^0.1.4:
+imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
 

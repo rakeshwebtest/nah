@@ -2,8 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start" class="white-color">
       <ion-back-button defaultHref="dashboard"></ion-back-button>
-      <ion-img class="ion-padding-r-10 header-logo"
-      src="assets/svg/nah_logo_white.svg"></ion-img>
+      <ion-img class="ion-padding-r-10 header-logo" src="assets/svg/nah_logo_white.svg"></ion-img>
       <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
         Create Post
       </ion-text>
@@ -11,13 +10,26 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-  <form [formGroup]="form" >
+  <form [formGroup]="form">
     <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-    <!-- <div class="col-12">
-      <button type="submit" class="btn btn-default">Submit</button>
-    </div> -->
+    <div>
+      <div class="col-12">
+        <b>To copy YouTube videos, you'll need to know just 3 steps:</b>
+      </div>
+      <div class="col-12" style="margin:15px">
+        <ol class="ion-no-margin ion-no-padding">
+          <li>Navigate to <a (click)="openWeb()" target="_system">https://www.youtube.com</a></li>
+          <li>
+            Upload your video to YouTube Chanel (or) copy the link/URL for the video you want to insert from existing youtube video.
+          </li>
+          <li>
+            Return to Nah app and Paste the link/URL. Then click "Insert”.
+          </li>
+        </ol>
+      </div>
+    </div>
+    <formly-form [form]="form" [fields]="fields2" [model]="model"></formly-form>
   </form>
 </ion-content>
 <ion-footer>
@@ -25,10 +37,10 @@
     <h3 class="red-color font-24">A new way to hate...!</h3>
   </ion-row> -->
   <ion-toolbar class="ion-text-center">
-    <ion-button color="danger" (click)="submit(model,false)" [disabled]="(form.valid)?false:true">
+    <ion-button color="danger" (click)="submit(model, false)" [disabled]="form.valid ? false : true">
       Save as draft
     </ion-button>
-    <ion-button color="danger" (click)="submit(model,true)" [disabled]="(form.valid)?false:true">
+    <ion-button color="danger" (click)="submit(model, true)" [disabled]="form.valid ? false : true">
       Save & Publish
     </ion-button>
     <!-- <ion-button color="light" (click)="signInWithGoogleTest()">

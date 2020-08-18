@@ -6,13 +6,16 @@ import { AgendaService } from 'src/app/agenda/agenda.service';
 import { PostService } from '../post.service';
 import { LoadingService } from '../../utils/loading.service';
 import { Storage } from '@ionic/storage';
-
+import { Platform } from '@ionic/angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 @Component({
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
   styleUrls: ['./post-create.component.scss'],
 })
 export class PostCreateComponent implements OnInit {
+
+  browser: any;
   form = new FormGroup({});
   model: any = {};
   showForm = true;
@@ -70,24 +73,9 @@ export class PostCreateComponent implements OnInit {
         label: 'Image',
         placeholder: 'Upload Image',
       }
-    },
-    {
-      className: 'col-12 ion-margin',
-      template: `  
-        <b>To copy YouTube videos, you'll need to know just 3 steps:</b>
-        <ol class="ion-no-margin ion-no-padding">
-          <li>
-            Navigate to <a >https://www.youtube.com/</a>
-          </li>
-          <li>
-            Upload your video to YouTube Chanel (or) copy the link/URL for the video you want to insert from existing youtube video. 
-          </li>
-          <li>
-            Return to Nah app and Paste the link/URL. Then click "Insert”.
-          </li>
-        </ol>
-       `
-    },
+    }
+  ];
+  fields2: FormlyFieldConfig[] = [
     {
       key: 'videos',
       type: 'repeat',
@@ -123,15 +111,24 @@ export class PostCreateComponent implements OnInit {
         ]
       }
     }
-
   ];
   formShow = false;
-  constructor(private router: Router,
+  constructor(
+    private iab: InAppBrowser,
+    private router: Router,
     private agendaS: AgendaService,
     private activatedRoute: ActivatedRoute,
     private postS: PostService,
     private storage: Storage,
-    private loadingService: LoadingService) { }
+    private platform: Platform,
+    private loadingService: LoadingService) {
+
+    // this.platform.backButton.subscribeWithPriority(10, () => {
+    //   if (this.browser) {
+    //     this.browser.close();
+    //   }
+    // });
+  }
 
   ngOnInit() {
     if (this.activatedRoute.snapshot.params.postId) {
@@ -146,6 +143,7 @@ export class PostCreateComponent implements OnInit {
       });
     }
   }
+
   submit(model, isPublish) {
     this.loadingService.show();
     model.isPublished = (isPublish) ? 1 : 0;
@@ -158,7 +156,9 @@ export class PostCreateComponent implements OnInit {
     });
   }
   openWeb() {
-    alert('o');
+    // window.open('https://www.youtube.com/', '_blank');
+    this.browser = this.iab.create('https://www.youtube.com/', '_system', { location: 'yes', hardwareback: 'yes', toolbar: 'yes' });
+    this.browser.show();
   }
 
 }

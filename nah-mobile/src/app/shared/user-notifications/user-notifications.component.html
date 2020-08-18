@@ -10,7 +10,7 @@
             <img [src]="n.sender.imageUrl" />
           </ion-avatar>
         </ion-col>
-        <ion-col class="col-avatar-right">
+        <ion-col class="col-avatar-right" (click)="navNotification(n)">
           <ion-label>
             <ion-text class="text-name">{{ n.sender.displayName }}</ion-text>
           </ion-label>
