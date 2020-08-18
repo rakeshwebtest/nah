@@ -7,7 +7,6 @@ import { PostService } from '../post.service';
 import { LoadingService } from '../../utils/loading.service';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 @Component({
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
@@ -114,7 +113,6 @@ export class PostCreateComponent implements OnInit {
   ];
   formShow = false;
   constructor(
-    private iab: InAppBrowser,
     private router: Router,
     private agendaS: AgendaService,
     private activatedRoute: ActivatedRoute,
@@ -157,8 +155,8 @@ export class PostCreateComponent implements OnInit {
   }
   openWeb() {
     // window.open('https://www.youtube.com/', '_blank');
-    this.browser = this.iab.create('https://www.youtube.com/', '_system', { location: 'yes', hardwareback: 'yes', toolbar: 'yes' });
-    this.browser.show();
+    // this.browser = this.iab.create('https://www.youtube.com/', '_system', { location: 'yes', hardwareback: 'yes', toolbar: 'yes' });
+    // this.browser.show();
   }
 
 }

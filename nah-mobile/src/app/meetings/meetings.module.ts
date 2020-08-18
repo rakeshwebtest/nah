@@ -23,7 +23,6 @@ import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
 import { GallerizeModule } from '@ngx-gallery/gallerize';
 import { MeetingTabsComponent } from './meeting-tabs/meeting-tabs.component';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 @NgModule({
   imports: [
     CommonModule,
@@ -40,7 +39,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     LightboxModule,
     GallerizeModule
   ],
-  providers: [InAppBrowser],
   declarations: [MeetingsPage, MeetingTabsComponent, MeetingDetailsActionsComponent, MeetingVideosComponent, MeetingDetailsComponent, MeetingCreateComponent, MeetingAddVideoPopupComponent],
   entryComponents: [MeetingDetailsActionsComponent, ReportComponent, MeetingAddVideoPopupComponent]
 })

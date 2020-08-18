@@ -4,7 +4,6 @@ import { AppHttpClient } from 'src/app/utils';
 import { ModalController } from '@ionic/angular';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-meeting-add-video-popup',
@@ -33,7 +32,7 @@ export class MeetingAddVideoPopupComponent implements OnInit {
     }
   }];
 
-  constructor(private iab: InAppBrowser, private modalCtrl: ModalController, private http: AppHttpClient) { }
+  constructor(private modalCtrl: ModalController, private http: AppHttpClient) { }
 
   ngOnInit() { }
   addVideo() {
@@ -67,8 +66,8 @@ export class MeetingAddVideoPopupComponent implements OnInit {
   }
   openWeb() {
     // window.open('https://www.youtube.com/', '_blank');
-    const browser = this.iab.create('https://www.youtube.com/', '_system', { location: 'yes', hardwareback: 'yes', toolbar: 'yes' });
-    browser.show();
+    // const browser = this.iab.create('https://www.youtube.com/', '_system', { location: 'yes', hardwareback: 'yes', toolbar: 'yes' });
+    // browser.show();
   }
 
 
