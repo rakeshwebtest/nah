@@ -124,7 +124,7 @@ export class SideMenuComponent implements OnInit {
           {
             'label': 'Dashboard',
             'code': 'dashboard',
-            'icon': 'fa fa-dashboard',
+            'icon': 'fa fa-minus',
             'type': 'custom'
           }
         ]
@@ -138,13 +138,13 @@ export class SideMenuComponent implements OnInit {
           {
             'label': 'Posts',
             'code': 'list',
-            'icon': 'fa fa-phone',
+            'icon': 'fa fa-minus',
             'type': 'custom'
           },
           {
             'label': 'Topics',
             'code': 'topics',
-            'icon': 'fa fa-phone',
+            'icon': 'fa fa-minus',
             'type': 'custom'
           }
         ]
@@ -158,13 +158,13 @@ export class SideMenuComponent implements OnInit {
           {
             'label': 'Active Users',
             'code': 'active',
-            'icon': 'fa fa-phone',
+            'icon': 'fa fa-minus',
             'type': 'custom'
           },
           {
             'label': 'Blocked Users',
             'code': 'blocked',
-            'icon': 'fa fa-phone',
+            'icon': 'fa fa-minus',
             'type': 'custom'
           }
         ]
@@ -178,19 +178,19 @@ export class SideMenuComponent implements OnInit {
           {
             'label': 'Meetings',
             'code': 'meetings/list',
-            'icon': 'fa fa-phone',
+            'icon': 'fa fa-minus',
             'type': 'custom'
           },
           {
             'label': 'Groups',
             'code': 'groups/list',
-            'icon': 'fa fa-phone',
+            'icon': 'fa fa-minus',
             'type': 'custom'
           },
           {
             'label': 'Cities',
             'code': 'city/list',
-            'icon': 'fa fa-phone',
+            'icon': 'fa fa-minus',
             'type': 'custom'
           }
         ]
@@ -198,13 +198,13 @@ export class SideMenuComponent implements OnInit {
       {
         'label': 'Reports',
         'code': 'reports',
-        'icon': 'fa fa-copy',
+        'icon': 'fa fa-minus',
         'app': 'zc-core',
         'childs': [
           {
             'label': 'Reports',
             'code': 'reports/list',
-            'icon': 'fa fa-copy',
+            'icon': 'fa fa-minus',
             'type': 'custom'
           }
         ]

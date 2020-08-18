@@ -15,7 +15,7 @@
   </div> -->
   <div class="row m-0">
     <div class="col-6 search-dp pl-0">
-      <p-dropdown [options]="cities" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
+      <p-dropdown [options]="cities" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name" [showClear]="true" [filter]="true"></p-dropdown>
     </div>
     <div class="col-6 pl-0">
       <button class="btn btn-primary" type="button" >Search</button>
