@@ -52,8 +52,8 @@ export class MeetingVideosComponent implements OnInit {
     });
     modal.onDidDismiss().then(arg => {
       if (arg.data) {
+        this.meeting.videos.push(arg.data);
         const data = this.selfUrl(arg.data);
-        console.log('self url', data);
         this.videoPaths.unshift(data);
       }
     });

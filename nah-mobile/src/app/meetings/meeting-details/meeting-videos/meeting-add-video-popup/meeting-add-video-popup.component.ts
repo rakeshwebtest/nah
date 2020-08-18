@@ -4,11 +4,12 @@ import { AppHttpClient } from 'src/app/utils';
 import { ModalController } from '@ionic/angular';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-meeting-add-video-popup',
   templateUrl: './meeting-add-video-popup.component.html',
-  styleUrls: ['./meeting-add-video-popup.component.scss'],
+  styleUrls: ['./meeting-add-video-popup.component.scss']
 })
 export class MeetingAddVideoPopupComponent implements OnInit {
   @Input() meetingId: any;
@@ -32,7 +33,7 @@ export class MeetingAddVideoPopupComponent implements OnInit {
     }
   }];
 
-  constructor(private modalCtrl: ModalController, private http: AppHttpClient) { }
+  constructor(private iab: InAppBrowser, private modalCtrl: ModalController, private http: AppHttpClient) { }
 
   ngOnInit() { }
   addVideo() {
@@ -41,10 +42,10 @@ export class MeetingAddVideoPopupComponent implements OnInit {
     const payload = {
       meetingId: this.meetingId,
       videoPath: embedPath
-    }
+    };
     this.http.post('meeting/video', payload).subscribe(res => {
       this.modelVideoPath = null;
-      this.dismiss(res)
+      this.dismiss(res);
     });
   }
   dismiss(data?: any) {
@@ -63,6 +64,11 @@ export class MeetingAddVideoPopupComponent implements OnInit {
     return (match && match[2].length === 11)
       ? match[2]
       : null;
+  }
+  openWeb() {
+    // window.open('https://www.youtube.com/', '_blank');
+    const browser = this.iab.create('https://www.youtube.com/', '_system', { location: 'yes', hardwareback: 'yes', toolbar: 'yes' });
+    browser.show();
   }
 
 

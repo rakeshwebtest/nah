@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { IonicModule } from '@ionic/angular';
 
 import { PostsPageRoutingModule } from './posts-routing.module';
@@ -31,6 +31,7 @@ import { AgendaViewModule } from '../agenda/agenda-view/agenda-view.module';
     LoadSkeletonModule,
     AgendaViewModule
   ],
+  providers: [InAppBrowser],
   declarations: [PostsPage, PostDetatilsComponent, PostCreateComponent]
 })
 export class PostsPageModule { }

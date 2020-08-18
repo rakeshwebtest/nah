@@ -10,6 +10,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <ion-searchbar class="sticky-search" (ionInput)="searchFilter($event)"></ion-searchbar>
   <ion-card *ngFor="let agenda of agendaList">
     <ion-card-header>
       <ion-card-title> {{ agenda.title }} [{{ agenda.status | uppercase }}] <ion-icon name="create" *ngIf="agenda.status == 'draft'" [routerLink]="['/agenda/create/' + agenda.id]"></ion-icon></ion-card-title>

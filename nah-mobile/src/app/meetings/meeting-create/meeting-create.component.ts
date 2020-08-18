@@ -53,7 +53,7 @@ export class MeetingCreateComponent implements OnInit {
       type: "number",
       label: 'Mobile Number',
       placeholder: 'Enter Mobile Number',
-      required: true,
+      required: false,
     }
   },
   {
@@ -160,6 +160,19 @@ export class MeetingCreateComponent implements OnInit {
         }
       },
       {
+        key: 'startTime',
+        type: 'datetime',
+        wrappers: ['vertical'],
+        className: 'col-6',
+        templateOptions: {
+          required: true,
+          label: 'Start Time',
+          placeholder: 'Choose Time',
+          displayFormat: 'hh mm A',
+          pickerFormat: 'hh mm A'
+        }
+      },
+      {
         key: 'endDate',
         type: 'datetime',
         wrappers: ['vertical'],
@@ -182,19 +195,6 @@ export class MeetingCreateComponent implements OnInit {
               field.formControl.setValue(null)
             });
           }
-        }
-      },
-      {
-        key: 'startTime',
-        type: 'datetime',
-        wrappers: ['vertical'],
-        className: 'col-6',
-        templateOptions: {
-          required: true,
-          label: 'Start Time',
-          placeholder: 'Choose Time',
-          displayFormat: 'hh mm A',
-          pickerFormat: 'hh mm A'
         }
       },
       {

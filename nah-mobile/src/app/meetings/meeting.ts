@@ -13,18 +13,18 @@ export interface Meeting {
     group: {
         name: string;
         isDeleted: number;
-    }
+    };
     location: string;
     city: {
         name: string;
-    }
+    };
     createdBy: {
         id: number;
         displayName: string;
         imageUrl: string;
         typeOfNoer: string;
 
-    }
+    };
     comments?: any[];
     members?: Member[];
     photos?: Photo[];
@@ -34,7 +34,7 @@ export interface Meeting {
     isPublished?: number;
     isCanceled?: number;
     isSuspend?: boolean;
-    isCompleted?:boolean;
+    isCompleted?: boolean;
 }
 interface Photo {
     imagePath: string;
@@ -48,7 +48,7 @@ interface Photo {
     }
 
 }
-interface Video{
+interface Video {
     videoPath: string;
     id: number;
     createdBy: {
@@ -58,7 +58,7 @@ interface Video{
         typeOfNoer: string;
 
     }
-    
+
 }
 interface Member {
     id: number;

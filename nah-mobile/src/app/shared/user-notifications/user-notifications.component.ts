@@ -89,6 +89,9 @@ export class UserNotificationsComponent implements OnInit, OnDestroy {
   navProfile(user) {
     this.router.navigate(['/user-profile/' + user.id]);
   }
+  navNotification(notification) {
+    console.log('notification', notification);
+  }
 
   reload() {
     this.offset = 0;
