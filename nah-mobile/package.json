@@ -193,8 +193,7 @@
         "PLAY-SERVICES-VISION-IMAGE-LABEL": "18.0.0",
         "PLAY-SERVICES-WALLET": "17.0.0",
         "PLAY-SERVICES-WEARABLE": "17.0.0"
-      },
-      "cordova-plugin-inappbrowser": {}
+      }
     }
   }
 }
