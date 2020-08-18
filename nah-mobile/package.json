@@ -54,7 +54,6 @@
     "cordova-plugin-googleplus": "^8.2.1",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.1.3",
-    "cordova-plugin-inappbrowser": "^3.2.0",
     "cordova-plugin-nativestorage": "^2.3.2",
     "cordova-plugin-splashscreen": "^5.0.3",
     "cordova-plugin-statusbar": "^2.4.3",
@@ -119,7 +118,6 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-inappbrowser": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.196016802810-uuir6evcgcbl9lvr2ger7s1qdfj9iehr",
