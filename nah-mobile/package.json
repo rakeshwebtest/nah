@@ -13,7 +13,8 @@
     "browser": "ionic serve --cordova --platform browser --port 8100",
     "android": "ionic cordova run android --device --livereload",
     "ios-live": "ionic cordova run ios --device --livereload",
-    "android:build": "ionic cordova build android --verbose"
+    "android:build": "ionic cordova build android --verbose",
+    "android:release": "ionic cordova build --prod  android  --verbose -- --keystore=keys/android/nah.keystore --storePassword=nahnah --alias=key0 --password=nahnah"
   },
   "private": true,
   "dependencies": {
@@ -192,7 +193,8 @@
         "PLAY-SERVICES-VISION-IMAGE-LABEL": "18.0.0",
         "PLAY-SERVICES-WALLET": "17.0.0",
         "PLAY-SERVICES-WEARABLE": "17.0.0"
-      }
+      },
+      "cordova-plugin-inappbrowser": {}
     }
   }
 }
