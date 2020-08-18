@@ -33,14 +33,15 @@
                 display: block;
                 padding: 0px 0px 0px 0px;
                 position: relative;
-                height: $sideMenuIcon-height;
-                line-height: $sideMenuIcon-height;
+                height: $sideMenuIcon-height + 10;
+                line-height: $sideMenuIcon-height + 10;
                 outline: none !important;
                 text-align: center;
-                font-size: 18px;
+                font-size: 21px;
                 &.active{
                     color: $white;
                     text-shadow: 3px 3px 6px #000;
+                    font-weight: 500;
                     &::before{
                         border-top: 7px solid transparent;
                         border-bottom: 7px solid transparent;
@@ -61,7 +62,7 @@
                     font-size: $sideMenuIcon-font-size;
                     // padding: 12px 0px;
                     height: 100%;
-                    line-height: $sideMenuIcon-height;
+                    line-height: $sideMenuIcon-height + 10;
                     text-align: center;
                     width: $sideMenuIcon-width;
                     left: 0;
@@ -129,6 +130,13 @@
                                 color: #fff;
                             }
                         }
+                        &.active{
+                            >.nav-link-text, >.dp-arrow, >i{
+                                color: #fff;
+                                text-shadow: 3px 3px 6px #000;
+                                font-weight: 500;
+                            }
+                        }
                     }
                    
                     // transition: all .3s;
@@ -138,7 +146,7 @@
                         // }
                     .nav-dropdown-items{
                         /* display: block; */
-                        background-color: #ff6a6a;  
+                        background-color: #f04141;  
                         transition: max-height .5s ease;
                         max-height: 500px;
                         -webkit-transition:max-height .5s ease;
@@ -151,8 +159,17 @@
                             transition: height .5s ease;
                             .nav-link{
                                 font-size: 14px;
+                                display: flex;
+                                justify-content: center;
                                 i{
                                     font-size: 10px;
+                                    display: flex;
+                                    position: relative !important;
+                                    justify-content: flex-end;
+                                    padding-right: 5px;
+                                    font-size: 6px;
+                                    color: #555;
+                                    width: auto !important;
                                 }
                                 span{
                                     // padding-left: 40px;
@@ -162,7 +179,12 @@
                                     overflow: hidden;
                                 }
                                 &:hover{
-                                    background-color: #ff6a6a;
+                                    background-color: #f04141;
+                                }
+                                &.active{
+                                    i{
+                                        color: #fff;
+                                    }
                                 }
                             }
                         }
