@@ -115,5 +115,4 @@
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^6.4.3" />
-    <allow-navigation href="http://localhost:8100" sessionid="d41fa539" />
 </widget>
