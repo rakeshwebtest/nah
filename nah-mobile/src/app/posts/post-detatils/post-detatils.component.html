@@ -93,7 +93,7 @@
           </ion-row>
           <ion-row>
             <ion-col class="ion-no-padding mw-50" size="auto"> </ion-col>
-            <ion-col class="ion-no-padding d-flex" size="10">
+            <ion-col class="ion-no-padding d-flex" >
               <ion-label class="meeting-sub-title">{{ c.comment }}</ion-label>
               <ion-icon size="small" color="danger" *ngIf="userInfo.id === c.createdBy.id" name="trash" (click)="deleteComment(post.comments, cInx, false)" class="ion-padding-r-5" style="cursor: pointer;"></ion-icon>
             </ion-col>
