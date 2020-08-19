@@ -11,14 +11,21 @@
 </ion-header>
 <ion-content>
   <ion-searchbar class="sticky-search" (ionInput)="searchFilter($event)"></ion-searchbar>
-  <ion-card *ngFor="let agenda of agendaList">
+  <ion-card class="post-list" *ngFor="let agenda of agendaList">
     <ion-card-header>
-      <ion-card-title> {{ agenda.title }} [{{ agenda.status | uppercase }}] <ion-icon name="create" *ngIf="agenda.status == 'draft'" [routerLink]="['/agenda/create/' + agenda.id]"></ion-icon></ion-card-title>
+      <ion-card-title> {{ agenda.title }} [{{ agenda.status | titlecase }}] <ion-icon name="create" *ngIf="agenda.status == 'draft'" [routerLink]="['/agenda/create/' + agenda.id]"></ion-icon></ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-row class="text-center" *ngFor="let topic of agenda.topics; let last = last">
+      <!-- <ion-row class="text-center" *ngFor="let topic of agenda.topics; let last = last">
         <ion-text class="text-primary text-center" (click)="appNav.goToTopicDetails(topic)">Say No To {{ topic.name | titlecase }} </ion-text>
-        <!-- <div class="bars-list" *ngIf="!last"></div> -->
+      </ion-row> -->
+      <!-- <div class="bars-list" *ngIf="!last"></div> -->
+      <ion-row>
+        <ion-col class="say-no-list no-red-border">
+          <p *ngFor="let topic of agenda.topics; let last = last" class="text-primary text-center ion-ellipsis" (click)="topicDetails(topic)">
+            <ion-label>Say No To {{ topic.name | titlecase }} </ion-label>
+          </p>
+        </ion-col>
       </ion-row>
     </ion-card-content>
   </ion-card>
