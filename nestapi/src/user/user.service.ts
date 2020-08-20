@@ -88,7 +88,7 @@ export class UserService implements OnModuleInit {
             .leftJoin("u.followers", 'followers');
         if (sessionUser && sessionUser.id) {
             db.leftJoinAndMapOne("u.following", "u.following", "isFollowing", "isFollowing.id=" + sessionUser.id);
-            db.leftJoinAndMapOne("u.blocked", "u.blocked", "isBlocked", "isFollowing.id=" + sessionUser.id);
+            db.leftJoinAndMapOne("u.blocked", "u.blocked", "isBlocked", "isBlocked.id=" + sessionUser.id);
         }
 
         db.where('u.id=:id', { id: _id });

@@ -35,6 +35,7 @@ export class PostService {
 
         const userId = (query.userId) ? query.userId : sessionUser.id;
 
+
         const db = getRepository(PostEntity)
             .createQueryBuilder('p')
             .leftJoin('p.createdBy', 'u')
@@ -77,6 +78,17 @@ export class PostService {
 
         db.andWhere("p.isDeleted != 1");
 
+        // conditions blocked user
+
+        db.andWhere(qb => {
+            const subQuery = qb.subQuery()
+                .select("ub.id")
+                .from(UserEntity, "ub")
+                .leftJoin('ub.blocked', 'blocked')
+                .where('blocked.id=:id', { id: userId })
+                .getQuery();
+            return "p.createdBy.id NOT IN " + subQuery;
+        });
 
         // get single post details
         db.select(["p", "u", "topic", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos'])
@@ -109,7 +121,7 @@ export class PostService {
             .leftJoinAndMapOne("p.dislike", PostDislikeEntity, "isDislikeUser", "isDislikeUser.user.id = " + sessionUser.id + " && isDislikeUser.post.id = p.id");
         db.where('p.id = :postId', { postId: postId });
         db.select(["p", "u", "pc", "pc_createdBy", "pcr_createdBy", "pcr", "topic", "videos", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos'])
-        .orderBy({ "pc.createdDate": "DESC" });
+            .orderBy({ "pc.createdDate": "DESC" });
         const data: any = await db.getOne();
         data.photos = mapImageFullPath(data.photos);
         return data;

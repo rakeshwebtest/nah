@@ -6,6 +6,7 @@ import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
 import { GroupCreateModalComponent } from '../group-create-modal/group-create-modal.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GroupListComponent } from '../shared/group-list/group-list.component';
+import { UserListComponent } from '../shared/user-list/user-list.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -24,16 +25,21 @@ export class UserProfileComponent implements OnInit {
   sessionUser: any;
   profileId: any;
   @ViewChild(GroupListComponent, { static: false }) groupC: GroupListComponent;
+  @ViewChild(UserListComponent, { static: false }) userFollowing: UserListComponent;
 
   customColors = ['#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000'];
-  constructor(private authService: AuthenticationService,
+  constructor(
+    private authService: AuthenticationService,
     private popoverController: PopoverController,
     private modalController: ModalController,
     private alertCtrl: AlertController,
     private router: Router,
     private activeRouter: ActivatedRoute,
     private http: AppHttpClient) { }
-
+  ionViewWillEnter() {
+    console.log('reload profile');
+    this.userFollowing.reload();
+  }
   ngOnInit() {
     const userInfo: any = this.authService.isAuthenticated();
     this.sessionUser = userInfo.user;

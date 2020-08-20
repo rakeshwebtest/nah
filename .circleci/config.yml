@@ -2,7 +2,7 @@ version: 2
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/android:api-29-node
+    - image: circleci/android:api-28-node
   environment:
     JVM_OPTS: -Xmx3200m
 
