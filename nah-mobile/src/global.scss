@@ -520,11 +520,11 @@ ion-footer {
     }
     &:hover {
       ion-icon {
-        color: #f04141 !important;
+        color: #333 !important;
         // color: #fff !important;
       }
       ion-label {
-        // color: #fff !important;
+        color: #333 !important;
       }
     }
     &:host {
@@ -880,6 +880,11 @@ p::first-letter {
       }
     }
   }
+  &.no-red-border{
+    border-left: none;
+    padding: 0px;
+    margin-left: 0px;
+  }
 }
 .say-no-list-left {
   ion-text {
@@ -942,4 +947,10 @@ p::first-letter {
 }
 .mw-50{
   min-width: 50px;
+}
+.date{
+  font-size: 12px;
+}
+ion-back-button button{
+  padding: 0 !important;
 }

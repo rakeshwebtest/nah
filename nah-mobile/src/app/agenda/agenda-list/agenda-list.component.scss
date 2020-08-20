@@ -1,0 +1,103 @@
+.post-widget {
+    overflow-y: auto;
+}
+.post-image {
+    width: 100%;
+    height: auto;
+}
+.post-avatar {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+}
+.col-avatar {
+    padding-left: 0;
+}
+.col-avatar-right {
+    color: #000;
+    padding-right: 0;
+    ion-label {
+        display: flex;
+        justify-content: space-between;
+        span {
+            font-size: 12px;
+        }
+    }
+    p {
+        margin: 5px 0;
+    }
+    .text-name {
+        padding-right: 5px;
+        font-weight: 600;
+    }
+    .text-agenda {
+        padding-right: 5px;
+        border-right: 1px solid #fb0102;
+        margin-right: 5px;
+        font-weight: 600;
+    }
+    .post-stars {
+        flex: auto;
+        ion-icon {
+            color: #999;
+        }
+    }
+}
+.post-list {
+    margin: 15px 0 2px;
+    // border-bottom: 15px solid #ccc;
+    box-shadow: 0px 0px 6px #e2e2e2;
+    border-radius: 5px;
+    width: 100%;
+    ion-card-header {
+        padding: 10px 10px 5px;
+    }
+    ion-card-content {
+        padding: 0 10px 5px;
+    }
+    ion-card-title {
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 0px;
+        ion-text {
+            padding-right: 5px;
+            color: #fb0102;
+        }
+        ion-icon {
+            color: #fb0102;
+            padding-left: 5px;
+        }
+    }
+}
+.post-description {
+    p {
+        font-size: 12px;
+        line-height: 16px;
+        margin: 10px 0;
+    }
+}
+.post-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 5px 0;
+    span {
+        display: flex;
+        align-items: center;
+        padding-right: 10px;
+        color: #333;
+        ion-icon {
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            background-color: #ccc;
+            font-size: 12px;
+            padding: 5px;
+            margin-right: 3px;
+            &.active {
+                background-color: #f04141;
+                color: #fff;
+            }
+        }
+    }
+}

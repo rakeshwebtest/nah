@@ -87,14 +87,15 @@
               </ion-label> -->
               <ion-label class="meeting-sub-title" style="font-weight: bold;">{{ c.createdBy.displayName }} </ion-label>
             </ion-col>
-            <ion-col size="3" class="ion-no-padding ion-text-right">
+            <ion-col size="auto" class="ion-no-padding ion-text-right">
               <label class="meeting-date" timeago [date]="c.updatedDate"></label>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col class="ion-no-padding mw-50" size="auto"> </ion-col>
-            <ion-col class="ion-no-padding" size="10">
+            <ion-col class="ion-no-padding d-flex" >
               <ion-label class="meeting-sub-title">{{ c.comment }}</ion-label>
+              <ion-icon size="small" color="danger" *ngIf="userInfo.id === c.createdBy.id" name="trash" (click)="deleteComment(post.comments, cInx, false)" class="ion-padding-r-5" style="cursor: pointer;"></ion-icon>
             </ion-col>
           </ion-row>
           <ion-row class="reply-list meeting-item" *ngFor="let rc of c.replys; let inx = index">
@@ -107,14 +108,14 @@
             </ion-chip>
             <ion-col size="12" class="ion-text-right ion-padding-t-0" style="display: flex; align-items: center; justify-content: flex-end;">
               <ion-label class="meeting-sub-title">{{ rc.comment }}</ion-label>
-              <ion-icon size="small" name="trash" *ngIf="userInfo.id === rc.createdBy.id" (click)="deleteComment(c.replys, inx, true)" class="ion-padding-r-5" style="cursor: pointer;"> </ion-icon>
+              <ion-icon color="danger" size="small" name="trash" *ngIf="userInfo.id === rc.createdBy.id" (click)="deleteComment(c.replys, inx, true)" class="ion-padding-r-5" style="cursor: pointer;"> </ion-icon>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>
-              <ion-icon size="small" *ngIf="userInfo.id === c.createdBy.id" name="trash" (click)="deleteComment(post.comments, cInx, false)" class="ion-padding-r-5" style="cursor: pointer;"></ion-icon>
-            </ion-col>
-            <ion-col (click)="replyComment(c)" size="4" class="ion-no-padding ion-text-right" style="color: #f00;">
+            <!-- <ion-col>
+              <ion-icon size="small" color="danger" *ngIf="userInfo.id === c.createdBy.id" name="trash" (click)="deleteComment(post.comments, cInx, false)" class="ion-padding-r-5" style="cursor: pointer;"></ion-icon>
+            </ion-col> -->
+            <ion-col (click)="replyComment(c)" class="ion-text-right" style="color: #f00;">
               <ion-icon name="repeat"></ion-icon>
               <label>Reply</label>
             </ion-col>
