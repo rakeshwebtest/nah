@@ -12,6 +12,7 @@ import { MeetingVideosEntity } from 'src/meeting/meeting-videos.entity';
 import { MeetingPhotosEntity } from 'src/meeting/meeting-photos.entity';
 import { AgendaEntity } from 'src/posts/agenda.entity';
 import { NotificationEntity } from 'src/notifications/notification.entity';
+import { AgendaTopicsEntity } from 'src/posts/agenda-topics.entity';
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
 
@@ -72,6 +73,9 @@ export class UserEntity extends BaseEntity {
 
     @OneToMany(type => AgendaEntity, agenda => agenda.createdBy, { onDelete: 'CASCADE' })
     agenda: AgendaEntity[];
+
+    @OneToMany(type => AgendaTopicsEntity, topic => topic.createdBy, { onDelete: 'CASCADE' })
+    topic: AgendaEntity[];
 
     @OneToMany(type => MeetingCommentsEntity, mc => mc.createdBy, { onDelete: 'CASCADE' })
     comments: MeetingCommentsEntity[];

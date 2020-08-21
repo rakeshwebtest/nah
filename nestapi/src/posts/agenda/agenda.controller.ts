@@ -20,6 +20,15 @@ export class AgendaController {
         }
         return { message: false, data };
     }
+
+    @Get('topics')
+    async getTopics(@Query() query, @Req() req) {
+        const sessionUser = req.sessionUser;
+        const data: any = await this.service.getTopics(query, sessionUser);
+        // urse:req.sessionUser
+        return { message: false, ...data };
+    }
+    
     @Get('check')
     async check(@Query() query, @Req() req) {
         const sessionUser = req.sessionUser;
