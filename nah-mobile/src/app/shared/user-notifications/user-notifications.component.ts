@@ -91,6 +91,11 @@ export class UserNotificationsComponent implements OnInit, OnDestroy {
   }
   navNotification(notification) {
     console.log('notification', notification);
+    if (notification.data) {
+      if (notification.data.id) {
+        this.router.navigate(['/posts/details/' + notification.data.id]);
+      }
+    }
   }
 
   reload() {
