@@ -10,21 +10,21 @@
   <p-table [columns]="cols" [value]="topicList" [responsive]="true">
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th>Group</th>
+        <th>Topic</th>
         <th>Total Posts</th>
         <th>Created By</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-user let-columns="columns">
+    <ng-template pTemplate="body" let-topic let-columns="columns">
       <tr>
         <td>
-           {{ user.name }}
+           {{ topic.name }}
         </td>
         <td>
-          {{ user.followersCount}}
+          {{ topic.followersCount}}
         </td>
         <td>
-          {{ user.createdBy.displayName }}
+          {{ topic.createdBy.displayName }}
         </td>
       </tr>    
     </ng-template>

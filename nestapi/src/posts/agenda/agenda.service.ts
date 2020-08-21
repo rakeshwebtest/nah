@@ -2,10 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, getRepository } from 'typeorm';
 import { AgendaEntity } from '../agenda.entity';
+import { AgendaTopicsEntity } from '../agenda-topics.entity';
 
 @Injectable()
 export class AgendaService {
-    constructor(@InjectRepository(AgendaEntity) private readonly agendaRepository: Repository<AgendaEntity>) {
+    constructor(@InjectRepository(AgendaEntity) private readonly agendaRepository: Repository<AgendaEntity>,@InjectRepository(AgendaTopicsEntity) private readonly agendaTopicsRepository: Repository<AgendaTopicsEntity>) {
 
     }
     async getAgendasByUser(id) {
