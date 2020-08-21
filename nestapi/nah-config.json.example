@@ -19,5 +19,15 @@
      "AWS_ACCESS_KEY_ID":"AKIAI5WU63MM4LEL74ZQ",
      "AWS_SECRET_ACCESS_KEY":"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",
      "AWS_S3_BUCKET_NAME":"theappin"
+   },
+    "SMTP":{
+    "host": "smtp.sendgrid.net",
+    "port": 465,
+    "ignoreTLS": true,
+    "secure": true,
+    "auth": {
+      "user": "apikey",
+      "pass": "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"
+    }
    }
 }
