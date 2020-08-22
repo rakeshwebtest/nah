@@ -274,7 +274,7 @@ export class PostListComponent implements OnInit, OnDestroy {
         icon: 'logo-facebook',
         handler: () => {
           console.log('post details', post);
-          this.socialSharing.shareViaFacebook(post.title).then((res) => {
+          this.socialSharing.shareViaFacebook(post.title, null).then((res) => {
             // Success
 
           }).catch((e) => {
@@ -286,7 +286,7 @@ export class PostListComponent implements OnInit, OnDestroy {
         icon: 'logo-twitter',
         handler: () => {
           console.log('post details', post);
-          this.socialSharing.shareViaTwitter(post.title).then((res) => {
+          this.socialSharing.shareViaTwitter(post.title, null).then((res) => {
             // Success
           }).catch((e) => {
             // Error!
@@ -297,7 +297,7 @@ export class PostListComponent implements OnInit, OnDestroy {
         icon: 'logo-whatsapp',
         handler: () => {
           console.log('post details', post);
-          this.socialSharing.shareViaWhatsApp(post.title).then((res) => {
+          this.socialSharing.shareViaWhatsApp(post.title, null).then((res) => {
             // Success
           }).catch((e) => {
             // Error!
@@ -310,7 +310,7 @@ export class PostListComponent implements OnInit, OnDestroy {
         role: 'cancel',
         handler: () => {
           console.log('post details', post);
-          this.socialSharing.shareViaInstagram(post.title).then((res) => {
+          this.socialSharing.shareViaInstagram(post.title, null).then((res) => {
             // Success
           }).catch((e) => {
             // Error!
@@ -319,12 +319,5 @@ export class PostListComponent implements OnInit, OnDestroy {
       }]
     });
     await actionSheet.present();
-  }
-  shareViaFacebook() {
-    this.socialSharing.shareViaFacebook('hi').then((res) => {
-      // Success
-    }).catch((e) => {
-      // Error!
-    });
   }
 }
