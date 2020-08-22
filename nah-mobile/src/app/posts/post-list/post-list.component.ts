@@ -269,6 +269,7 @@ export class PostListComponent implements OnInit, OnDestroy {
       cssClass: 'my-custom-class share-icons',
       buttons: [
         {
+        text: 'Facebook',  
         role: 'destructive',
         icon: 'logo-facebook',
         handler: () => {
@@ -281,6 +282,7 @@ export class PostListComponent implements OnInit, OnDestroy {
           });
         }
       }, {
+        text: 'Twitter',
         icon: 'logo-twitter',
         handler: () => {
           console.log('post details', post);
@@ -291,6 +293,7 @@ export class PostListComponent implements OnInit, OnDestroy {
           });
         }
       }, {
+        text: 'Whatsapp',
         icon: 'logo-whatsapp',
         handler: () => {
           console.log('post details', post);
@@ -302,6 +305,7 @@ export class PostListComponent implements OnInit, OnDestroy {
         }
       },
       {
+        text: 'Instagram',
         icon: 'logo-instagram',
         role: 'cancel',
         handler: () => {
