@@ -21,16 +21,16 @@
            {{ topic.name }}
         </td>
         <td>
-          {{ topic.followersCount}}
+          {{ topic.postCount}}
         </td>
         <td>
-          {{ topic.createdBy.displayName }}
+          {{ topic?.agenda?.createdBy?.displayName }}
         </td>
       </tr>    
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
       <tr>
-        <td class="text-center" colspan="2">
+        <td class="text-center" colspan="3">
           No records found
         </td>
       </tr>

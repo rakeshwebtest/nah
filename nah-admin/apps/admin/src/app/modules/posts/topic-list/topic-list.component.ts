@@ -16,21 +16,21 @@ export class TopicListComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'name', header: 'Group Name' },
+      { field: 'name', header: 'Topic' },
       { field: 'createdBy.displayName', header: 'Created By' }
     ];   
     this.getTopics();
   }
   getTopics() {
     const payload: any = {};
-    this.appHttp.get('group/list').subscribe(res => {
+    this.appHttp.get('agenda/topics').subscribe(res => {
       if(res.data) {
         this.topicList = res.data;
       }
     });
   }  
   searchList() {
-    this.appHttp.get('group/list?search='+this.search).subscribe(res => {
+    this.appHttp.get('agenda/topics?search='+this.search).subscribe(res => {
       if(res.data) {
         this.topicList = res.data;
       }
