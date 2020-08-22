@@ -10,12 +10,12 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { TableModule } from 'primeng/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatTabsModule} from '@angular/material/tabs';
-import { SafePipe } from './safe.pipe';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { AppSharedModuleModule } from '../app-shared-module/app-shared-module.module';
 @NgModule({
-  declarations: [MeetingListComponent, MeetingDetailsComponent, SafePipe],
+  declarations: [MeetingListComponent, MeetingDetailsComponent],
   imports: [
     CommonModule,
     MeetingsRoutingModule,
@@ -31,10 +31,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     DropdownModule,
     InputTextModule,
     FormsModule,
-    ConfirmDialogModule
-  ],
-  exports: [
-    SafePipe
+    ConfirmDialogModule,
+    AppSharedModuleModule
   ]
 })
 export class MeetingsModule { }

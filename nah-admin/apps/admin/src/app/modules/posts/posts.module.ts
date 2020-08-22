@@ -8,13 +8,14 @@ import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
-import { SafePipe } from '../meetings/safe.pipe';
+
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TopicListComponent } from './topic-list/topic-list.component';
+import { AppSharedModuleModule } from '../app-shared-module/app-shared-module.module';
 
 @NgModule({
-  declarations: [PostListComponent, PostDetailsComponent, SafePipe, TopicListComponent],
+  declarations: [PostListComponent, PostDetailsComponent, TopicListComponent],
   imports: [
     CommonModule,
     PostsRoutingModule,
@@ -24,10 +25,8 @@ import { TopicListComponent } from './topic-list/topic-list.component';
     FormsModule,
     MatTabsModule,
     ConfirmDialogModule,
-    NgbModule
-  ],
-  exports: [
-    SafePipe
+    NgbModule,
+    AppSharedModuleModule
   ]
 })
 export class PostsModule { }
