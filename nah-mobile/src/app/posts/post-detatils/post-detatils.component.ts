@@ -4,10 +4,11 @@ import { PostService } from '../post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppAlertService } from 'src/app/utils/app-alert.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { AlertController, IonContent } from '@ionic/angular';
+import { AlertController, IonContent, ActionSheetController } from '@ionic/angular';
 import { FcmProviderService } from 'src/app/utils/fcm-provider.service';
 import { Storage } from '@ionic/storage';
 import { AppRouterNavigateService } from 'src/app/utils/app-router-navigate.service';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 @Component({
   selector: 'app-post-detatils',
   templateUrl: './post-detatils.component.html',
@@ -29,7 +30,9 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
     private router: Router,
     private storage: Storage,
     private alertS: AppAlertService, private alertCtrl: AlertController,
-    private authService: AuthenticationService, private fcm: FcmProviderService) { }
+    private authService: AuthenticationService, private fcm: FcmProviderService,
+    public actionSheetController: ActionSheetController,
+    private socialSharing: SocialSharing) { }
 
   ngOnInit() {
     this.userInfo = this.authService.getUserInfo();
@@ -222,5 +225,57 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
     //   console.log('res leave', res);
     // });
   }
+  async shareSocialMedia(post) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Albums',
+      cssClass: 'my-custom-class share-icons',
+      buttons: [
+        {
+        role: 'destructive',
+        icon: 'logo-facebook',
+        handler: () => {
+          console.log('post details', post);
+          this.socialSharing.shareViaFacebook(post.title).then((res) => {
+            // Success
 
+          }).catch((e) => {
+            // Error!
+          });
+        }
+      }, {
+        icon: 'logo-twitter',
+        handler: () => {
+          console.log('post details', post);
+          this.socialSharing.shareViaTwitter(post.title).then((res) => {
+            // Success
+          }).catch((e) => {
+            // Error!
+          });
+        }
+      }, {
+        icon: 'logo-whatsapp',
+        handler: () => {
+          console.log('post details', post);
+          this.socialSharing.shareViaWhatsApp(post.title).then((res) => {
+            // Success
+          }).catch((e) => {
+            // Error!
+          });
+        }
+      },
+      {
+        icon: 'logo-instagram',
+        role: 'cancel',
+        handler: () => {
+          console.log('post details', post);
+          this.socialSharing.shareViaInstagram(post.title).then((res) => {
+            // Success
+          }).catch((e) => {
+            // Error!
+          });
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
 }

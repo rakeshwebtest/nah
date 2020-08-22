@@ -15,7 +15,7 @@ import {
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AppRouterNavigateService } from 'src/app/utils/app-router-navigate.service';
 import { Storage } from '@ionic/storage';
-
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
@@ -41,7 +41,8 @@ export class PostListComponent implements OnInit, OnDestroy {
     private router: Router,
     public appRouter: AppRouterNavigateService,
     private activeRouter: ActivatedRoute, private authS: AuthenticationService,
-    public postS: PostService, private alertCtrl: AlertController, private alertS: AppAlertService) {
+    public postS: PostService, private alertCtrl: AlertController, private alertS: AppAlertService,
+    private socialSharing: SocialSharing) {
 
   }
   ionViewDidLoad() {
@@ -261,5 +262,65 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     // this.list$.unsubscribe();
+  }
+  async shareSocialMedia(post) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Albums',
+      cssClass: 'my-custom-class share-icons',
+      buttons: [
+        {
+        role: 'destructive',
+        icon: 'logo-facebook',
+        handler: () => {
+          console.log('post details', post);
+          this.socialSharing.shareViaFacebook(post.title).then((res) => {
+            // Success
+
+          }).catch((e) => {
+            // Error!
+          });
+        }
+      }, {
+        icon: 'logo-twitter',
+        handler: () => {
+          console.log('post details', post);
+          this.socialSharing.shareViaTwitter(post.title).then((res) => {
+            // Success
+          }).catch((e) => {
+            // Error!
+          });
+        }
+      }, {
+        icon: 'logo-whatsapp',
+        handler: () => {
+          console.log('post details', post);
+          this.socialSharing.shareViaWhatsApp(post.title).then((res) => {
+            // Success
+          }).catch((e) => {
+            // Error!
+          });
+        }
+      },
+      {
+        icon: 'logo-instagram',
+        role: 'cancel',
+        handler: () => {
+          console.log('post details', post);
+          this.socialSharing.shareViaInstagram(post.title).then((res) => {
+            // Success
+          }).catch((e) => {
+            // Error!
+          });
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+  shareViaFacebook() {
+    this.socialSharing.shareViaFacebook('hi').then((res) => {
+      // Success
+    }).catch((e) => {
+      // Error!
+    });
   }
 }

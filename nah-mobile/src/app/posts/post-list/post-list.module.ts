@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { AgendaViewModule } from 'src/app/agenda/agenda-view/agenda-view.module';
 import { PostImageViewModule } from '../post-image-view/post-image-view.module';
 import { LoadSkeletonModule } from 'src/app/shared/load-skeleton/load-skeleton.module';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { LoadSkeletonModule } from 'src/app/shared/load-skeleton/load-skeleton.m
     PostImageViewModule,
     LoadSkeletonModule
   ],
-  exports: [PostListComponent]
+  exports: [PostListComponent],
+  providers: [SocialSharing]
 })
 export class PostListModule { }
