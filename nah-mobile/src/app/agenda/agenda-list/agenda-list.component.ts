@@ -21,6 +21,9 @@ export class AgendaListComponent implements OnInit {
       }
     });
   }
+  topicDetails(topic) {
+    console.log('topic details -->', topic);
+  }
   searchFilter(event) {
     this.searchKey = event.target.value;
     // this.getGroups();
