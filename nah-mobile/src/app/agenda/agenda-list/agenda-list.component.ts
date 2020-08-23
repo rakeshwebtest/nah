@@ -32,7 +32,9 @@ export class AgendaListComponent implements OnInit {
           isItem = true;
         }
       });
-      if (isItem) {
+
+      const titleResult = (item.title.toLowerCase().indexOf(this.searchKey.toLowerCase()) > -1);
+      if (isItem || titleResult) {
         return item;
       }
     });

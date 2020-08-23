@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { GalleryItem, ImageItem, Gallery } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
 import { Platform } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-post-image-view',
@@ -17,13 +18,34 @@ export class PostImageViewComponent implements OnInit {
   galleryId: any;
   items: GalleryItem[];
   remainingImg = [];
+  private backButtonSub: Subscription;
   constructor(public gallery: Gallery, public lightbox: Lightbox, private platform: Platform) {
 
-    this.platform.backButton.subscribeWithPriority(10, () => {
-      if (this.lightbox) {
-        this.lightbox.close();
+    // this.platform.backButton.subscribeWithPriority(10, () => {
+    //   if (this.lightbox) {
+    //     this.lightbox.close();
+    //   }
+    // });
+  }
+
+  ionViewDidEnter() {
+    this.backButtonSub = this.platform.backButton.subscribeWithPriority(
+      10000,
+      () => {
+        this.onBack();
+        return;
       }
-    });
+    );
+  }
+  ionViewWillLeave() {
+    this.backButtonSub.unsubscribe();
+  }
+
+  onBack() {
+    if (this.lightbox) {
+      this.lightbox.close();
+
+    }
   }
 
   ngOnInit() {
@@ -41,7 +63,6 @@ export class PostImageViewComponent implements OnInit {
     }
     this.items = this.images.map(item => new ImageItem({ src: item.previewUrl, thumb: item.fullPath }));
 
-    console.log('this.items', this.items);
     const lightboxRef = this.gallery.ref(this.galleryId);
     lightboxRef.load(this.items);
 

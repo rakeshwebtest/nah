@@ -5,7 +5,25 @@
 .md :host {
   top: 56px !important;
 }
-.new-inside-post-tabs{
+.new-inside-post-tabs {
   top: 80px;
   max-height: calc(100vh - 193px);
+}
+:host {
+  --ion-color-primary-contrast: #f04141 !important;
+}
+super-tabs-toolbar {
+  background-color: #ffffff;
+  super-tab-button {
+    color: #999999;
+    &.active {
+      color: #f04141;
+      ion-icon {
+        color: #f04141; // change color of selected tab icon
+      }
+      span:not(.badge) {
+        color: #f04141; // change color of selected tab label (without modifying the badge color)
+      }
+    }
+  }
 }

@@ -19,6 +19,7 @@ export class PostCreateComponent implements OnInit {
   form = new FormGroup({});
   model: any = {};
   showForm = true;
+  headerTitle = 'Create Post';
   fields: FormlyFieldConfig[] = [
     {
       key: 'title',
@@ -132,6 +133,7 @@ export class PostCreateComponent implements OnInit {
 
   ngOnInit() {
     if (this.activatedRoute.snapshot.params.postId) {
+      this.headerTitle = 'Edit Post';
       this.storage.get('postDetails').then(res => {
         if (this.activatedRoute.snapshot.params.postId == res.id) {
           console.log('this.model', res);
@@ -149,8 +151,9 @@ export class PostCreateComponent implements OnInit {
     model.isPublished = (isPublish) ? 1 : 0;
     this.postS.createUpdatePost(model).subscribe(res => {
       this.loadingService.hide();
-      this.router.navigate(['/dashboard/posts/my-posts']);
-
+      this.router.navigateByUrl('/dashboard/posts');
+      this.postS.postReload();
+      // this.router.navigate(['/dashboard/posts'], { queryParams: { postReload: true } });
     }, error => {
       this.loadingService.hide();
     });

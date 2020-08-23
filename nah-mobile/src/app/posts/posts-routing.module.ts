@@ -10,8 +10,7 @@ import { AgendaCheckGuardService } from '../services/agenda-check-guard.service'
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'all',
-    pathMatch: 'full'
+    component: PostsPage
   },
   {
     path: 'create',
@@ -29,17 +28,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: PostsPage,
-    children: [
-      {
-        path: 'all',
-        component: PostListComponent
-      },
-      {
-        path: 'my-posts',
-        component: PostListComponent
-      }
-    ]
+    component: PostsPage
   }
 ];
 

@@ -99,7 +99,7 @@ export class AgendaPage implements OnInit {
         if (saveType === 'publish') {
           this.agendaService.checkAgenda();
         }
-        this.router.navigate(['/dashboard/posts/all']);
+        this.router.navigate(['/dashboard/posts']);
       }
     })
   }

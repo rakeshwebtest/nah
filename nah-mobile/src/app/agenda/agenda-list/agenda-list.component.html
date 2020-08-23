@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start" class="white-color">
-      <ion-back-button defaultHref="/dashboard/posts/my-posts"></ion-back-button>
+      <ion-back-button defaultHref="/dashboard/posts"></ion-back-button>
       <ion-img class="ion-padding-r-10 header-logo" src="assets/svg/nah_logo_white.svg"></ion-img>
       <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
         Agendas
@@ -22,7 +22,7 @@
       <!-- <div class="bars-list" *ngIf="!last"></div> -->
       <ion-row>
         <ion-col class="say-no-list no-red-border">
-          <p *ngFor="let topic of agenda.topics; let last = last" class="text-primary text-center ion-ellipsis" (click)="topicDetails(topic)">
+          <p *ngFor="let topic of agenda.topics; let last = last" class="text-primary text-center ion-ellipsis" (click)="appNav.goToTopicDetails(topic)">
             <ion-label>Say No To {{ topic.name | titlecase }} </ion-label>
           </p>
         </ion-col>

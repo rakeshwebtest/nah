@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PostService } from '../post.service';
 import { scan } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { AlertController, ActionSheetController } from '@ionic/angular';
 import { AppAlertService } from 'src/app/utils/app-alert.service';
 import {
@@ -31,9 +31,10 @@ export class PostListComponent implements OnInit, OnDestroy {
   offset = 0;
   loading = false;
   userInfo: any;
-
+  profileId: any;
   postBehavior = new BehaviorSubject<{ opt: any, list: [] }>({ opt: 'list', list: [] });
   list$: Observable<any[]>;
+  msSubscription: Subscription;
   defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
   constructor(
     private storage: Storage,
@@ -43,32 +44,11 @@ export class PostListComponent implements OnInit, OnDestroy {
     private activeRouter: ActivatedRoute, private authS: AuthenticationService,
     public postS: PostService, private alertCtrl: AlertController, private alertS: AppAlertService,
     private socialSharing: SocialSharing) {
-
-  }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad');
-  }
-  // ionViewWillEnter(){
-  //   console.log('ionViewDidEnter');
-  // }
-  ionViewWillEnter() {
-    console.log('ionViewWillEnter');
-    const params = this.activeRouter.snapshot.routeConfig.path;
-    this.offset = 0;
-    this.loadPosts();
-
-  }
-  ionViewWillLeave() {
-    console.log('ionViewWillLeave')
-  }
-  ionViewDidLeave() {
-    console.log('ionViewDidLeave')
-  }
-  ionViewWillUnload() {
-    console.log('ionViewWillUnload')
-  }
-  ionViewDidEnter() {
-    console.log('ionViewDidEnter');
+    this.msSubscription = this.postS.getChanges().subscribe(message => {
+      if (message) {
+        this.reload();
+      }
+    });
   }
   ngOnInit() {
     console.log('activeRouter', this.activeRouter.snapshot.params);
@@ -260,64 +240,66 @@ export class PostListComponent implements OnInit, OnDestroy {
       }
     });
   }
-  ngOnDestroy(): void {
-    // this.list$.unsubscribe();
-  }
   async shareSocialMedia(post) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Albums',
       cssClass: 'my-custom-class share-icons',
       buttons: [
         {
-        text: 'Facebook',  
-        role: 'destructive',
-        icon: 'logo-facebook',
-        handler: () => {
-          console.log('post details', post);
-          this.socialSharing.shareViaFacebook(post.title, null).then((res) => {
-            // Success
+          text: 'Facebook',
+          role: 'destructive',
+          icon: 'logo-facebook',
+          handler: () => {
+            console.log('post details', post);
+            this.socialSharing.shareViaFacebook(post.title, null).then((res) => {
+              // Success
 
-          }).catch((e) => {
-            // Error!
-          });
-        }
-      }, {
-        text: 'Twitter',
-        icon: 'logo-twitter',
-        handler: () => {
-          console.log('post details', post);
-          this.socialSharing.shareViaTwitter(post.title, null).then((res) => {
-            // Success
-          }).catch((e) => {
-            // Error!
-          });
-        }
-      }, {
-        text: 'Whatsapp',
-        icon: 'logo-whatsapp',
-        handler: () => {
-          console.log('post details', post);
-          this.socialSharing.shareViaWhatsApp(post.title, null).then((res) => {
-            // Success
-          }).catch((e) => {
-            // Error!
-          });
-        }
-      },
-      {
-        text: 'Instagram',
-        icon: 'logo-instagram',
-        role: 'cancel',
-        handler: () => {
-          console.log('post details', post);
-          this.socialSharing.shareViaInstagram(post.title, null).then((res) => {
-            // Success
-          }).catch((e) => {
-            // Error!
-          });
-        }
-      }]
+            }).catch((e) => {
+              // Error!
+            });
+          }
+        }, {
+          text: 'Twitter',
+          icon: 'logo-twitter',
+          handler: () => {
+            console.log('post details', post);
+            this.socialSharing.shareViaTwitter(post.title, null).then((res) => {
+              // Success
+            }).catch((e) => {
+              // Error!
+            });
+          }
+        }, {
+          text: 'Whatsapp',
+          icon: 'logo-whatsapp',
+          handler: () => {
+            console.log('post details', post);
+            this.socialSharing.shareViaWhatsApp(post.title, null).then((res) => {
+              // Success
+            }).catch((e) => {
+              // Error!
+            });
+          }
+        },
+        {
+          text: 'Instagram',
+          icon: 'logo-instagram',
+          role: 'cancel',
+          handler: () => {
+            console.log('post details', post);
+            this.socialSharing.shareViaInstagram(post.title, null).then((res) => {
+              // Success
+            }).catch((e) => {
+              // Error!
+            });
+          }
+        }]
     });
     await actionSheet.present();
   }
+
+  ngOnDestroy() {
+    this.msSubscription.unsubscribe();
+  }
+
 }

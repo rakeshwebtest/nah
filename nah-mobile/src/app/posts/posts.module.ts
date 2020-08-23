@@ -16,7 +16,7 @@ import { YoutubeVideosListModule } from '../shared/youtube-videos-list/youtube-v
 import { TimeagoModule } from 'ngx-timeago';
 import { LoadSkeletonModule } from '../shared/load-skeleton/load-skeleton.module';
 import { AgendaViewModule } from '../agenda/agenda-view/agenda-view.module';
-
+import { SuperTabsModule } from '@ionic-super-tabs/angular';
 @NgModule({
   imports: [
     CommonModule,
@@ -29,7 +29,8 @@ import { AgendaViewModule } from '../agenda/agenda-view/agenda-view.module';
     YoutubeVideosListModule,
     TimeagoModule,
     LoadSkeletonModule,
-    AgendaViewModule
+    AgendaViewModule,
+    SuperTabsModule
   ],
   providers: [InAppBrowser],
   declarations: [PostsPage, PostDetatilsComponent, PostCreateComponent]

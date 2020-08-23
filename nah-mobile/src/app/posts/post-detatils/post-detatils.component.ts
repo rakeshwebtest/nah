@@ -122,7 +122,7 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log(res);
         post.isDeleted = 1;
         this.postS.createUpdatePost(post).subscribe(resData => {
-          this.router.navigate(['/dashboard/posts/my-posts']);
+          this.router.navigate(['/dashboard/posts']);
         }, error => {
 
         });
@@ -138,40 +138,43 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
     let payLoad = {
 
     }
-    if (this.replyMsg.id) {
-      payLoad = {
-        postCommentId: this.replyMsg.id,
-        comment: comment,
-        userId: userInfo.id
-      };
-      this.http.post('posts/comment-reply', payLoad).subscribe(res => {
-        if (res.data) {
-          const _comment = res.data;
-          _comment.createdBy = userInfo;
-          this.replyMsg.replys.push(_comment);
-          this.commentMsg = null;
-        }
-        this.replyMsg = {};
-      });
+    if (comment) {
+      if (this.replyMsg.id) {
+        payLoad = {
+          postCommentId: this.replyMsg.id,
+          comment: comment,
+          userId: userInfo.id
+        };
+        this.http.post('posts/comment-reply', payLoad).subscribe(res => {
+          if (res.data) {
+            const _comment = res.data;
+            _comment.createdBy = userInfo;
+            this.replyMsg.replys.push(_comment);
+            this.commentMsg = null;
+          }
+          this.replyMsg = {};
+        });
 
-    } else {
-      payLoad = {
-        comment: comment,
-        postId: postId,
-        userId: userInfo.id
-      };
-      this.http.post('posts/comment', payLoad).subscribe(res => {
-        if (res.data) {
-          this.scrollToCommentBox('comment-box');
-          const _comment = res.data;
-          _comment.createdBy = userInfo;
-          _comment.replys = [];
-          this.post.comments.unshift(_comment);
+      } else {
+        payLoad = {
+          comment: comment,
+          postId: postId,
+          userId: userInfo.id
+        };
+        this.http.post('posts/comment', payLoad).subscribe(res => {
+          if (res.data) {
+            this.scrollToCommentBox('comment-box');
+            const _comment = res.data;
+            _comment.createdBy = userInfo;
+            _comment.replys = [];
+            this.post.comments.unshift(_comment);
 
-          this.commentMsg = null;
-        }
-      });
+            this.commentMsg = null;
+          }
+        });
+      }
     }
+
 
     // this.meeting.comments.push();
 
@@ -231,54 +234,54 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
       cssClass: 'my-custom-class share-icons',
       buttons: [
         {
-        text: 'Facebook',
-        role: 'destructive',
-        icon: 'logo-facebook',
-        handler: () => {
-          console.log('post details', post);
-          this.socialSharing.shareViaFacebook(post.title, null).then((res) => {
-            // Success
+          text: 'Facebook',
+          role: 'destructive',
+          icon: 'logo-facebook',
+          handler: () => {
+            console.log('post details', post);
+            this.socialSharing.shareViaFacebook(post.title, null).then((res) => {
+              // Success
 
-          }).catch((e) => {
-            // Error!
-          });
-        }
-      }, {
-        text: 'Twitter',
-        icon: 'logo-twitter',
-        handler: () => {
-          console.log('post details', post);
-          this.socialSharing.shareViaTwitter(post.title, null).then((res) => {
-            // Success
-          }).catch((e) => {
-            // Error!
-          });
-        }
-      }, {
-        text: 'Whatsapp',
-        icon: 'logo-whatsapp',
-        handler: () => {
-          console.log('post details', post);
-          this.socialSharing.shareViaWhatsApp(post.title, null).then((res) => {
-            // Success
-          }).catch((e) => {
-            // Error!
-          });
-        }
-      },
-      {
-        text: 'Instagram',
-        icon: 'logo-instagram',
-        role: 'cancel',
-        handler: () => {
-          console.log('post details', post);
-          this.socialSharing.shareViaInstagram(post.title, null).then((res) => {
-            // Success
-          }).catch((e) => {
-            // Error!
-          });
-        }
-      }]
+            }).catch((e) => {
+              // Error!
+            });
+          }
+        }, {
+          text: 'Twitter',
+          icon: 'logo-twitter',
+          handler: () => {
+            console.log('post details', post);
+            this.socialSharing.shareViaTwitter(post.title, null).then((res) => {
+              // Success
+            }).catch((e) => {
+              // Error!
+            });
+          }
+        }, {
+          text: 'Whatsapp',
+          icon: 'logo-whatsapp',
+          handler: () => {
+            console.log('post details', post);
+            this.socialSharing.shareViaWhatsApp(post.title, null).then((res) => {
+              // Success
+            }).catch((e) => {
+              // Error!
+            });
+          }
+        },
+        {
+          text: 'Instagram',
+          icon: 'logo-instagram',
+          role: 'cancel',
+          handler: () => {
+            console.log('post details', post);
+            this.socialSharing.shareViaInstagram(post.title, null).then((res) => {
+              // Success
+            }).catch((e) => {
+              // Error!
+            });
+          }
+        }]
     });
     await actionSheet.present();
   }

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AppHttpClient } from '../utils';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
-
+  private subject = new Subject<any>();
   constructor(private http: AppHttpClient) { }
   getPosts(payload: any) {
     return this.http.get('posts/list', { params: payload });
@@ -20,5 +20,12 @@ export class PostService {
   }
   bookmarkLikeAndDislike(payload) {
     return this.http.post('posts/bookmarkLikeAndDislike', payload);
+  }
+
+  postReload() {
+    this.subject.next('reload');
+  }
+  getChanges(): Observable<any> {
+    return this.subject.asObservable();
   }
 }

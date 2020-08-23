@@ -132,7 +132,7 @@
       <ion-row *ngIf="replyMsg.id">
         <ion-chip>
           <ion-text color="dark" style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
-            reply Msg comment
+           {{replyMsg.comment}}
           </ion-text>
           <ion-icon (click)="clearReply()" name="close-circle-outline"></ion-icon>
         </ion-chip>

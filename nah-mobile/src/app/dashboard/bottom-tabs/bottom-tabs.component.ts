@@ -18,7 +18,7 @@ export class BottomTabsComponent implements OnInit {
 
   ngOnInit() { }
   async presentActionSheet() {
-    console.log('this.agendaS.agenda$', this.agendaS.agenda$);
+    // console.log('this.agendaS.agenda$', this.agendaS.agenda$);
 
     let buttons = [
       {

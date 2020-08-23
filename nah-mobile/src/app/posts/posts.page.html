@@ -1,6 +1,30 @@
 <ion-content>
   <app-agenda-view [agendaTitle]="agendaTitle" [showShowOldAgenda]="false" [showCreateMsg]="true"></app-agenda-view>
-  <ion-tabs class="new-inside-post-tabs">
+  
+  <super-tabs>
+    <super-tabs-toolbar slot="top">
+      <super-tab-button>
+        <!-- <ion-icon name="home"></ion-icon> -->
+        <ion-label>All Noer Posts</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <!-- <ion-icon name="home"></ion-icon> -->
+        <ion-label>My Noer Posts</ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+    <super-tabs-container>
+      <super-tab>
+        <app-post-list #allPost  [userId]="profileId" type="all" ></app-post-list>
+      </super-tab>
+      <super-tab>
+        <app-post-list #myPost [userId]="profileId" type="my-posts"></app-post-list>
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
+  
+  
+  
+  <!-- <ion-tabs class="new-inside-post-tabs">
     <ion-tab-bar slot="top">
       <ion-tab-button routerLinkActive="tab-selected" routerLink="/dashboard/posts/all">
         <ion-label class="format-text">All Noer Posts</ion-label>
@@ -9,5 +33,5 @@
         <ion-label class="format-text">My Noer Posts</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
-  </ion-tabs>
+  </ion-tabs> -->
 </ion-content>
