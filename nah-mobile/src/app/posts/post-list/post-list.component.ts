@@ -246,54 +246,67 @@ export class PostListComponent implements OnInit, OnDestroy {
       cssClass: 'my-custom-class share-icons',
       buttons: [
         {
-          text: 'Facebook',
-          role: 'destructive',
-          icon: 'logo-facebook',
-          handler: () => {
-            console.log('post details', post);
-            this.socialSharing.shareViaFacebook(post.title, null).then((res) => {
-              // Success
+        text: 'Facebook',  
+        role: 'destructive',
+        icon: 'logo-facebook',
+        handler: () => {
+          let images = post.photos.map(image => {return image.fullPath});
+          if(images.length === 0) {
+            images = null;
+          }
+          this.socialSharing.shareViaFacebook(post.title, images ).then((res) => {
+           console.log('facebook share success -->');
 
-            }).catch((e) => {
-              // Error!
-            });
+          }).catch((e) => {
+            console.log('facebook share failure -->', e);
+          });
+        }
+      }, {
+        text: 'Twitter',
+        icon: 'logo-twitter',
+        handler: () => {
+          let images = post.photos.map(image => {return image.fullPath});
+          if(images.length === 0) {
+            images = null;
           }
-        }, {
-          text: 'Twitter',
-          icon: 'logo-twitter',
-          handler: () => {
-            console.log('post details', post);
-            this.socialSharing.shareViaTwitter(post.title, null).then((res) => {
-              // Success
-            }).catch((e) => {
-              // Error!
-            });
+          this.socialSharing.shareViaTwitter(post.title, images).then((res) => {
+            console.log('twitter share success -->');
+          }).catch((e) => {
+            console.log('twitter share failure -->', e);
+          });
+        }
+      }, {
+        text: 'Whatsapp',
+        icon: 'logo-whatsapp',
+        handler: () => {
+          let images = post.photos.map(image => {return image.fullPath});
+          if(images.length === 0) {
+            images = null;
           }
-        }, {
-          text: 'Whatsapp',
-          icon: 'logo-whatsapp',
-          handler: () => {
-            console.log('post details', post);
-            this.socialSharing.shareViaWhatsApp(post.title, null).then((res) => {
-              // Success
-            }).catch((e) => {
-              // Error!
-            });
+          console.log('images -->', images);
+          this.socialSharing.shareViaWhatsApp(post.title, images).then((res) => {
+            console.log('Whatsapp share success -->');
+          }).catch((e) => {
+            console.log('Whatsapp share failure -->', e);
+          });
+        }
+      },
+      {
+        text: 'Instagram',
+        icon: 'logo-instagram',
+        role: 'cancel',
+        handler: () => {
+          let images = post.photos.map(image => {return image.fullPath});
+          if(images.length === 0) {
+            images = null;
           }
-        },
-        {
-          text: 'Instagram',
-          icon: 'logo-instagram',
-          role: 'cancel',
-          handler: () => {
-            console.log('post details', post);
-            this.socialSharing.shareViaInstagram(post.title, null).then((res) => {
-              // Success
-            }).catch((e) => {
-              // Error!
-            });
-          }
-        }]
+          this.socialSharing.shareViaInstagram(post.title, images).then((res) => {
+            console.log('Instagram share success -->');
+          }).catch((e) => {
+            console.log('Instagram share failure -->', e);
+          });
+        }
+      }]
     });
     await actionSheet.present();
   }
