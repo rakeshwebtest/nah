@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
     meetingsCount: 0,
     postsCount: 0
   };
-  selectedCity: any = '';
+  selectedCity: any = null;
   constructor(private router: Router, private appHttp: AppHttpClient) { }
 
   ngOnInit() {
