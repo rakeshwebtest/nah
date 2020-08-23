@@ -13,7 +13,7 @@
   <ion-searchbar class="sticky-search" (ionInput)="searchFilter($event)"></ion-searchbar>
   <ion-card class="post-list" *ngFor="let agenda of agendaList">
     <ion-card-header>
-      <ion-card-title> {{ agenda.title }} [{{ agenda.status | titlecase }}] <ion-icon name="create" *ngIf="agenda.status == 'draft'" [routerLink]="['/agenda/create/' + agenda.id]"></ion-icon></ion-card-title>
+      <ion-card-title> {{ agenda.title }} [{{ agenda.status + 'ed' | titlecase }}] <ion-icon name="create" *ngIf="agenda.status == 'draft'" [routerLink]="['/agenda/create/' + agenda.id]"></ion-icon></ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <!-- <ion-row class="text-center" *ngFor="let topic of agenda.topics; let last = last">
