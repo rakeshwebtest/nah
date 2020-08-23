@@ -235,34 +235,44 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
         role: 'destructive',
         icon: 'logo-facebook',
         handler: () => {
-          console.log('post details', post);
-          this.socialSharing.shareViaFacebook(post.title, null).then((res) => {
-            // Success
+          let images = post.photos.map(image => {return image.fullPath});
+          if(images.length === 0) {
+            images = null;
+          }
+          this.socialSharing.shareViaFacebook(post.title, images ).then((res) => {
+           console.log('facebook share success -->');
 
           }).catch((e) => {
-            // Error!
+            console.log('facebook share failure -->', e);
           });
         }
       }, {
         text: 'Twitter',
         icon: 'logo-twitter',
         handler: () => {
-          console.log('post details', post);
-          this.socialSharing.shareViaTwitter(post.title, null).then((res) => {
-            // Success
+          let images = post.photos.map(image => {return image.fullPath});
+          if(images.length === 0) {
+            images = null;
+          }
+          this.socialSharing.shareViaTwitter(post.title, images).then((res) => {
+            console.log('twitter share success -->');
           }).catch((e) => {
-            // Error!
+            console.log('twitter share failure -->', e);
           });
         }
       }, {
         text: 'Whatsapp',
         icon: 'logo-whatsapp',
         handler: () => {
-          console.log('post details', post);
-          this.socialSharing.shareViaWhatsApp(post.title, null).then((res) => {
-            // Success
+          let images = post.photos.map(image => {return image.fullPath});
+          if(images.length === 0) {
+            images = null;
+          }
+          console.log('images -->', images);
+          this.socialSharing.shareViaWhatsApp(post.title, images).then((res) => {
+            console.log('Whatsapp share success -->');
           }).catch((e) => {
-            // Error!
+            console.log('Whatsapp share failure -->', e);
           });
         }
       },
@@ -271,11 +281,14 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
         icon: 'logo-instagram',
         role: 'cancel',
         handler: () => {
-          console.log('post details', post);
-          this.socialSharing.shareViaInstagram(post.title, null).then((res) => {
-            // Success
+          let images = post.photos.map(image => {return image.fullPath});
+          if(images.length === 0) {
+            images = null;
+          }
+          this.socialSharing.shareViaInstagram(post.title, images).then((res) => {
+            console.log('Instagram share success -->');
           }).catch((e) => {
-            // Error!
+            console.log('Instagram share failure -->', e);
           });
         }
       }]
