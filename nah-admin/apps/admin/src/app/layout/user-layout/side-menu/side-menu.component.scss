@@ -123,6 +123,8 @@
                         color: #fff;
                         >.nav-link-text, >.dp-arrow, >i{
                             color: #fff;
+                            transform: rotate(180deg);
+                            text-shadow: 3px 3px 6px #000;
                         }
                         &:hover{
                             color: #fff;
