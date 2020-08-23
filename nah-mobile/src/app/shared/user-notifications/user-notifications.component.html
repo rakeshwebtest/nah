@@ -2,23 +2,21 @@
   <ion-refresher pullFactor="0.5" pullMin="100" pullMax="200" slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="none" refreshingText="Refreshing..."> </ion-refresher-content>
   </ion-refresher>
-  <ion-grid>
-    <ion-row class="post-widget" *ngFor="let n of list$ | async; let inx = index">
-      <ion-row>
-        <ion-col size="auto" *ngIf="n.sender" (click)="navProfile(n.sender)" class="col-avatar">
-          <ion-avatar class="post-avatar">
-            <img [src]="n.sender.imageUrl" />
-          </ion-avatar>
-        </ion-col>
-        <ion-col class="col-avatar-right" (click)="navNotification(n)">
-          <ion-label>
-            <ion-text class="text-name">{{ n.sender.displayName }}</ion-text>
-          </ion-label>
-          <ion-row>
-            <ion-text>{{ n.message }}</ion-text>
-          </ion-row>
-        </ion-col>
-      </ion-row>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="post-widget notifications" *ngFor="let n of list$ | async; let inx = index">
+      <ion-col size="auto" *ngIf="n.sender" (click)="navProfile(n.sender)" class="col-avatar">
+        <ion-avatar class="post-avatar">
+          <img [src]="n.sender.imageUrl" />
+        </ion-avatar>
+      </ion-col>
+      <ion-col class="col-avatar-right" (click)="navNotification(n)">
+        <ion-label>
+          <ion-text class="text-name hel-bold-font">{{ n.sender.displayName }}</ion-text>
+        </ion-label>
+        <ion-row>
+          <ion-text>{{ n.message }}</ion-text>
+        </ion-row>
+      </ion-col>
     </ion-row>
     <ion-row class="ion-align-items-center no-meetings" *ngIf="(list$ | async).length == 0 && !loading">
       <ion-col class="ion-justify-content-center" style="display: flex; align-items: center;">
