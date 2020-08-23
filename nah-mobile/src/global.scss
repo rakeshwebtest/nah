@@ -503,10 +503,6 @@ ion-footer {
       // max-width: 19%;
     }
     border-bottom: none;
-    &.tab-selected {
-      color: #f04141;
-      // color: #fff;
-    }
     ion-icon {
       font-size: 24px;
       @media (max-width: 420px) {
@@ -520,11 +516,11 @@ ion-footer {
     }
     &:hover {
       ion-icon {
-        color: #333 !important;
+        // color: #333 !important;
         // color: #fff !important;
       }
       ion-label {
-        color: #333 !important;
+        // color: #333 !important;
       }
     }
     &:host {
@@ -539,6 +535,26 @@ ion-footer {
     // &:last-child{
     //     border-radius: 0 35px 0 0;
     // }
+  }
+  .tab-selected {
+    color: #f04141 !important;
+  }
+  .no-tab-select {
+    color: #333 !important;
+    ion-icon {
+      color: #333 !important;
+    }
+    ion-label {
+      color: #333 !important;
+    }
+    &:hover,&:focus{
+      ion-icon {
+        color: #333 !important;
+      }
+      ion-label {
+        color: #333 !important;
+      }
+    }
   }
 }
 .tabs-45 {
