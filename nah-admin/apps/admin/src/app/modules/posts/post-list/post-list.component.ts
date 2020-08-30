@@ -52,9 +52,9 @@ export class PostListComponent implements OnInit {
     this.router.navigate(['details/' + meeting.id], { relativeTo: this.activatedRoute.parent })
   }
   searchList() {
-    this.appHttp.get('meeting/list?search=' + this.search).subscribe(res => {
+    this.appHttp.get('posts/list?search=' + this.search).subscribe(res => {
       if (res.data) {
-        this.meetingList = res.data;
+        this.postList = res.data;
       }
     });
   }
