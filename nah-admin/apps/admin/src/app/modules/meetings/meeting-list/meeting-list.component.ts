@@ -4,11 +4,13 @@ import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppHttpClient } from '../../../utils/app-http-client.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'theapp-meeting-list',
   templateUrl: './meeting-list.component.html',
-  styleUrls: ['./meeting-list.component.scss']
+  styleUrls: ['./meeting-list.component.scss'],
+  providers: [ConfirmationService]
 })
 export class MeetingListComponent implements OnInit {
   selectedMeetings: any;
@@ -35,7 +37,8 @@ export class MeetingListComponent implements OnInit {
 
   constructor(private appHttp: AppHttpClient, private modalService: NgbModal,
     private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
     this.cols = [
@@ -69,9 +72,19 @@ export class MeetingListComponent implements OnInit {
     console.log('meeting', meeting);
     this.router.navigate(['details/' + meeting.id], { relativeTo: this.activatedRoute.parent })
   }
+  onDelete(meeting) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete meeting?',
+      accept: () => {
+        this.appHttp.delete('meeting/' + meeting.id).subscribe(res => {
+          this.getMeetings();
+        });
+      }
+    })
+  }
   searchList() {
-    this.appHttp.get('meeting/list?search='+this.search).subscribe(res => {
-      if(res.data) {
+    this.appHttp.get('meeting/list?search=' + this.search).subscribe(res => {
+      if (res.data) {
         this.meetingList = res.data;
       }
     });

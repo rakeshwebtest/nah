@@ -36,6 +36,10 @@
                 <label class="custom-label">Description</label>
                 <div class="label-value">{{ meeting.agenda }} </div>
             </div>
+            <div class="col-12">
+                <label class="custom-label">Created By</label>
+                <div class="label-value">{{ meeting?.createdBy?.displayName }}, {{ meeting?.createdBy?.email }}, {{ meeting?.createdBy?.typeOfNoer }} </div>
+            </div>
         </div>
     </div>
     <div>
