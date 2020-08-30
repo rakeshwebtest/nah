@@ -50,6 +50,9 @@
               <li>
                 <a class="dropdown-item"  (click)="onView(row)" >View Post</a>
               </li>
+              <li>
+                <a class="dropdown-item"  (click)="deletePost(row)" >Delete Post</a>
+              </li>
             </div>
           </div>
         </td>
@@ -64,4 +67,6 @@
     </ng-template>
   </p-table>
 </div>
+
+<p-confirmDialog [style]="{width: '500px'}"></p-confirmDialog>
 

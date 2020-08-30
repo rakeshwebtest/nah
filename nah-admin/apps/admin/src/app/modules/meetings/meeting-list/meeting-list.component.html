@@ -62,6 +62,13 @@
                   >View Meeting</a
                 >
               </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  (click)="onDelete(meeting)"
+                  >Delete Meeting</a
+                >
+              </li>
             </div>
           </div>
         </td>
@@ -76,4 +83,5 @@
     </ng-template>
   </p-table>
 </div>
+<p-confirmDialog [style]="{width: '500px'}"></p-confirmDialog>
 
