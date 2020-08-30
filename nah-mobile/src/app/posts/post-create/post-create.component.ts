@@ -41,6 +41,7 @@ export class PostCreateComponent implements OnInit {
         label: 'Description',
         placeholder: 'What\'s on your mind',
         required: true,
+        rows: 5
       }
     },
     {

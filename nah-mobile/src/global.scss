@@ -824,9 +824,14 @@ app-agenda-view {
     top: 6px;
   }
 }
+    .searchbar-has-value{
+      .searchbar-search-icon {
+        display: none !important;
+      }
+    }
 .searchbar-has-value {
   .searchbar-clear-button {
-    right: 40px;
+    right: 9px;
     left: inherit;
     background-color: #f04141;
     color: #fff;
@@ -969,4 +974,7 @@ p::first-letter {
 }
 ion-back-button button{
   padding: 0 !important;
+}
+.youtube-helptext{
+  font-size: 14px;
 }
