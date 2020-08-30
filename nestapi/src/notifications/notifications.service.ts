@@ -28,9 +28,9 @@ export class NotificationsService {
                 senderInfo = users[1];
                 reciverInfo = users[0];
             }
+            const _entity: any = new NotificationEntity();
             switch (type) {
                 case 'post-like':
-                    const _entity: any = new NotificationEntity();
                     _entity.sender = { id: senderInfo.id };
                     _entity.recipient = { id: reciverInfo.id };
                     _entity.type = type;
@@ -41,6 +41,27 @@ export class NotificationsService {
                         this.sendFCM(reciverInfo.fcmToken, 'Post', _entity.message, { data, type: 'post-like' });
                     }
                     const d = await this.notificationRepository.save(_entity);
+                    break;
+                case 'post-new':
+                    // create a new post send to following members
+                    const query: any = { type: 'following', userId: 1 };
+                    const followingMembers: any = this.userService.getUsers(query);
+                    console.log('followingMembers', followingMembers);
+
+                    
+                    break;
+                case 'post-comment':
+                case 'post-reply-comment':
+                    _entity.sender = { id: senderInfo.id };
+                    _entity.recipient = { id: reciverInfo.id };
+                    _entity.type = type;
+                    _entity.message = senderInfo.displayName + ' Comment your post';
+                    _entity.data = data;
+                    if (reciverInfo.fcmToken) {
+                        // send push notifications
+                        this.sendFCM(reciverInfo.fcmToken, 'Post', _entity.message, { data, type: 'post-comment' });
+                    }
+                    const a = await this.notificationRepository.save(_entity);
                     break;
                 default:
                     break;
@@ -76,10 +97,11 @@ export class NotificationsService {
         const skip = query.skip || 0;
 
         const db = getRepository(NotificationEntity)
-            .createQueryBuilder("u")
-            .leftJoinAndSelect('u.recipient', 'recipient')
-            .leftJoinAndSelect('u.sender', 'sender')
-            .andWhere('u.recipient.id=:id', { id: userId });
+            .createQueryBuilder("n")
+            .leftJoinAndSelect('n.recipient', 'recipient')
+            .leftJoinAndSelect('n.sender', 'sender')
+            .andWhere('n.recipient.id=:id', { id: userId })
+            .orderBy({ "n.createdDate": "DESC" });
 
         db.take(take);
         db.skip(skip);

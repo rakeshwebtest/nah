@@ -232,6 +232,9 @@ export class PostService {
         comment.createdBy.id = commentDto.userId;
         comment.comment = commentDto.comment;
         const data = await this.postCommentRepository.save(comment);
+        const postDetails: any = await this.getPostIdBasic(commentDto.postId);
+        if (commentDto.userId !== postDetails.createdBy.id)
+            this.notification.send(commentDto.userId, postDetails.createdBy.id, 'post-comment', postDetails);
         return { message: 'Comment added successfully', data };
     }
 
@@ -243,6 +246,9 @@ export class PostService {
         comment.createdBy.id = commentDto.userId;
         comment.comment = commentDto.comment;
         const data = await this.postCommentReplyRepository.save(comment);
+        // const postDetails: any = await this.getPostIdBasic(commentDto.postId);
+        // if (commentDto.userId !== postDetails.createdBy.id)
+        //     this.notification.send(commentDto.userId, postDetails.createdBy.id, 'post-reply-comment', postDetails);
         return { message: 'Reply comment added successfully', data };
     }
 

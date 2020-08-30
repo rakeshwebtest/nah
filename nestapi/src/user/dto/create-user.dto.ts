@@ -25,7 +25,7 @@ export class UserLIstQuery {
     type: string;
 
     @ApiProperty({ required: false })
-    userId: string;
+    userId: any;
 
     @ApiProperty({ required: false })
     meetingId: string; // if type meeting-members
