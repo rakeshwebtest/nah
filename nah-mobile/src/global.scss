@@ -978,3 +978,6 @@ ion-back-button button{
 .youtube-helptext{
   font-size: 14px;
 }
+.adjust-scroll{
+  max-height: calc(100vh - 195px) !important;
+}
