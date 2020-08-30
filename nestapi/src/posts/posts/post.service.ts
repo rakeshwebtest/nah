@@ -172,8 +172,14 @@ export class PostService {
         if (post.isPublished)
             _post.isPublished = post.isPublished;
 
-
-        return this.postRepository.save(_post);
+        const postDetails = await this.postRepository.save(_post);
+        // notification send to following memebers
+        console.log('post.isPublished', post.isPublished, post.id, (!post.id && post.isPublished === 1));
+        console.log('notification sedding');
+        if (!post.id && post.isPublished === 1)
+            this.notification.send(_post.createdBy.id, null, 'post-create', postDetails);
+        
+        return postDetails;
         // return data;
     }
     // like dislike bookbark

@@ -3,7 +3,7 @@ import { FcmSendDto } from './notification.dto';
 import { FcmService } from 'nestjs-fcm';
 import { UserService } from 'src/user/user.service';
 import { NotificationEntity } from './notification.entity';
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, getConnection } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 // import * as admin from 'firebase-admin';
 
@@ -20,13 +20,17 @@ export class NotificationsService {
 
         let senderInfo: any;
         let reciverInfo: any;
-        if (users && users[0] && users[1]) {
+        if (users && users[0]) {
             if (users[0].id === senderId) {
-                senderInfo = users[0];
-                reciverInfo = users[1];
+                if (users[0])
+                    senderInfo = users[0];
+                if (users[1])
+                    reciverInfo = users[1];
             } else {
-                senderInfo = users[1];
-                reciverInfo = users[0];
+                if (users[1])
+                    senderInfo = users[1];
+                if (users[0])
+                    reciverInfo = users[0];
             }
             const _entity: any = new NotificationEntity();
             switch (type) {
@@ -42,13 +46,32 @@ export class NotificationsService {
                     }
                     const d = await this.notificationRepository.save(_entity);
                     break;
-                case 'post-new':
+                case 'post-create':
                     // create a new post send to following members
-                    const query: any = { type: 'following', userId: 1 };
-                    const followingMembers: any = this.userService.getUsers(query);
-                    console.log('followingMembers', followingMembers);
+                    const query: any = { type: 'following', userId: senderId };
+                    const followingMembers: any = await this.userService.getUsers(query);
+                    const bulkNotifications = [];
+                    for (const followingMember of followingMembers) {
+                        const notificationMsg = {
+                            sender: { id: senderInfo.id },
+                            recipient: { id: followingMember.id },
+                            type,
+                            message: senderInfo.displayName + ' create new post',
+                            data
+                        };
+                        bulkNotifications.push(notificationMsg);
+                        if (followingMember.fcmToken)
+                            this.sendFCM(followingMember.fcmToken, 'Post', notificationMsg.message, { data, type: 'post-create' });
 
-                    
+                    }
+                    await getConnection()
+                        .createQueryBuilder()
+                        .insert()
+                        .into(NotificationEntity)
+                        .values(bulkNotifications)
+                        .execute();
+
+                    console.log('done notification');
                     break;
                 case 'post-comment':
                 case 'post-reply-comment':

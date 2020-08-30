@@ -31,9 +31,10 @@ export class UserService implements OnModuleInit {
         const skip = query.skip || 0;
 
         const db = getRepository(UserEntity)
-            .createQueryBuilder("u").select(["u", "c"]);
+            .createQueryBuilder("u").select(["u", "u.fcmToken", "c"]);
         db.leftJoin('u.city', 'c');
 
+        
         switch (query.type) {
             case 'following':
                 db.leftJoinAndSelect('u.following', 'followers');
