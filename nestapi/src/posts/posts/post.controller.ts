@@ -35,7 +35,7 @@ export class PostsController {
     @Post()
     async saveUpdatePost(@Body() post: SavePostDto, @Req() req) {
         const sessionUser = req.sessionUser;
-        let msg = 'Post created successfully.';
+        let msg = 'Post created successfully';
         if (post.id) {
             if (post.isDeleted === 1) {
                 msg = 'Deleted successfully';

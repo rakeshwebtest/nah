@@ -186,13 +186,13 @@ export class PostService {
         switch (data.type) {
             case 'like':
                 msgS = 'Liked';
-                msgF = "Removed post";
+                msgF = "Disliked";
                 await this.postDislikeRepository.delete({ post: { id: data.postId }, user: { id: data.userId } }); // delete dislike if exit
                 _entity = new PostLikeEntity();
                 _repo = this.postLikeRepository;
                 break;
             case 'dislike':
-                msgS = 'Disliked ';
+                msgS = 'Disliked';
                 msgF = "Removed disliked";
                 await this.postLikeRepository.delete({ post: { id: data.postId }, user: { id: data.userId } }); // delete dislike if exit
                 _entity = new PostDislikeEntity();
@@ -243,7 +243,7 @@ export class PostService {
         comment.createdBy.id = commentDto.userId;
         comment.comment = commentDto.comment;
         const data = await this.postCommentReplyRepository.save(comment);
-        return { message: 'Reply comment added successfully.', data };
+        return { message: 'Reply comment added successfully', data };
     }
 
     async deleteComment(commentId?: number, replyCommentId?: number): Promise<any> {

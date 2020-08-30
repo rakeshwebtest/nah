@@ -149,6 +149,7 @@ export class UsersController {
     @Post('profileBlock')
     async profileBlock(@Body() profileUser: ProfileBlockDto, @Req() req) {
         const sessionUser = req.sessionUser;
+        const unfollow: any = await this.service.unfollow(sessionUser.id, profileUser.userId);
         const data = await this.service.profileBlock(sessionUser.id, profileUser.userId);
         return { message: 'Successfully blocked profile', success: true, data };
     }

@@ -48,7 +48,7 @@ export class GroupController {
         } else {
             const data: any = await this.service.updateGroup(group, sessionUser);
             data.followers = [];
-            return { message: 'Group created', data };
+            return { message: 'New group created successfully', data };
         }
     }
 
@@ -80,7 +80,7 @@ export class GroupController {
     @Delete(':id')
     async deleteGruop(@Param() params: any) {
         const data = await this.service.deleteGroup(params.id);
-        return { message: 'Group deleted', data, success: true };
+        return { message: 'Group suspended successfully', data, success: true };
     }
 
 }
