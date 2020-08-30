@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppHttpClient } from '../../../utils/app-http-client.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'theapp-post-list',
   templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.scss']
+  styleUrls: ['./post-list.component.scss'],
+  providers: [ConfirmationService]
 })
 export class PostListComponent implements OnInit {
   selectedMeetings: any;
@@ -17,7 +19,8 @@ export class PostListComponent implements OnInit {
   meetingList: any;
   constructor(private appHttp: AppHttpClient,
     private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
     this.cols = [
@@ -47,9 +50,21 @@ export class PostListComponent implements OnInit {
     console.log('event', event);
     this.router.navigate(['details'], { relativeTo: this.activatedRoute.parent })
   }
-  onView(meeting) {
-    console.log('meeting', meeting);
-    this.router.navigate(['details/' + meeting.id], { relativeTo: this.activatedRoute.parent })
+  onView(post) {
+    this.router.navigate(['details/' + post.id], { relativeTo: this.activatedRoute.parent })
+  }
+  deletePost(post) {
+    //   this.appHttp.delete('posts/'+id).subscribe(res => {
+    //     this.getPosts();
+    // });
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete post?',
+      accept: () => {
+        this.appHttp.delete('posts/' + post.id).subscribe(res => {
+          this.getPosts();
+        });
+      }
+    })
   }
   searchList() {
     this.appHttp.get('posts/list?search=' + this.search).subscribe(res => {

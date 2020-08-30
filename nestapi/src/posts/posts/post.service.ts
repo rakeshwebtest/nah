@@ -258,5 +258,11 @@ export class PostService {
         }
     }
 
+    async deletePost(id) {
+        const post = new PostEntity();
+        post.isDeleted = 1;
+        return await this.postRepository.update(id, post);
+    }
+
 
 }

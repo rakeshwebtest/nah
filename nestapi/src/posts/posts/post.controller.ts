@@ -82,4 +82,10 @@ export class PostsController {
         return { message: 'Deleted successfull', success: true, data };
     }
 
+    @Delete(':id')
+    async deletePost(@Param('id') id: any) {
+      const data = await this.postService.deletePost(id);
+      return { message: 'Post deleted successfully', success: true, data };
+    }
+
 }
