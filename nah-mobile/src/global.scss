@@ -514,9 +514,9 @@ ion-footer {
       width: 100%;
       white-space: pre;
     }
-    &:hover {
+    &:hover,&:focus {
       ion-icon {
-        // color: #333 !important;
+        color: #f04141 !important;
         // color: #fff !important;
       }
       ion-label {
