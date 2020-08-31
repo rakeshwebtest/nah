@@ -37,10 +37,14 @@ export class AgendaController {
     }
 
     @Post()
-    async createAgendas(@Body() agenda: CreateAgendaDto, @Req() req) {
+    async createAgendas(@Body() agenda, @Req() req) {
+        let msg = 'Agenda created successfully';
         const sessionUser = req.sessionUser;
         const data = await this.service.saveUpdate(agenda, sessionUser);
-        return { message: 'Save successfully', success: true, agenda, data }
+        if(!agenda.isPublish) {
+            msg = "Agenda drafted successfully";
+        }
+        return { message: msg, success: true, agenda, data }
 
     }
 

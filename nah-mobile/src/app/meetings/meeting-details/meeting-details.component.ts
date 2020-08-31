@@ -257,7 +257,7 @@ export class MeetingDetailsComponent implements OnInit {
   }
   async deleteImg(photos, inx) {
     let alert = await this.alertCtrl.create({
-      message: 'Do you want to delete image?',
+      message: 'Do you want to delete the image?',
       buttons: [
         {
           text: 'No',

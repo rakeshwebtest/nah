@@ -255,7 +255,7 @@ export class PostService {
         // const postDetails: any = await this.getPostIdBasic(commentDto.postId);
         // if (commentDto.userId !== postDetails.createdBy.id)
         //     this.notification.send(commentDto.userId, postDetails.createdBy.id, 'post-reply-comment', postDetails);
-        return { message: 'Reply comment added successfully', data };
+        return { message: 'Comment reply added successfully', data };
     }
 
     async deleteComment(commentId?: number, replyCommentId?: number): Promise<any> {

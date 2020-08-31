@@ -28,7 +28,7 @@ export class PostCreateComponent implements OnInit {
       className: 'col-12 ion-padding-t-10',
       templateOptions: {
         label: 'Post Title',
-        placeholder: 'Type Post Title',
+        placeholder: 'Enter post title',
         required: true,
       }
     },
@@ -39,7 +39,7 @@ export class PostCreateComponent implements OnInit {
       className: 'col-12 ion-padding-t-10',
       templateOptions: {
         label: 'Description',
-        placeholder: 'What\'s on your mind',
+        placeholder: 'What\'s on your mind?',
         required: true,
         rows: 5
       }

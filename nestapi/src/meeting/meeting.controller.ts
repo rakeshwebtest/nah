@@ -67,9 +67,11 @@ export class MeetingController {
   }))
   @Post()
   async createMeeting(@UploadedFile() image, @Body() meetingDto: CreateMeetingDto, @Request() req) {
-    let msg = 'Meeting Created successfully.';
+    let msg = 'Meeting created successfully';
     if (meetingDto.id) {
-      msg = 'Meeting Updated successfully.';
+      msg = 'Meeting Updated successfully';
+    } else if(!meetingDto.isPublished) {
+      msg = "Meeting draft saved successfully";
     }
     const data = await this.meetingService.createMeeting(meetingDto, image);
 
@@ -152,7 +154,7 @@ export class MeetingController {
   @Delete('photo/:photoId')
   async deletePhoto(@Param('photoId') photoId: number) {
     const data = await this.meetingService.deletePhoto(photoId);
-    return { message: 'Image deleted successfully.', success: true, data };
+    return { message: 'Image deleted successfully', success: true, data };
   }
 
   @Get('publish/:meetingId')
@@ -188,7 +190,7 @@ export class MeetingController {
     const sessionUser = req['sessionUser'];
     const data = await this.meetingService.uploadMeetingImages(images, params.meetingId,sessionUser);
 
-    return { message: "Image added successfully.", success: true, data };
+    return { message: "Image added successfully", success: true, data };
 
   }
   /**

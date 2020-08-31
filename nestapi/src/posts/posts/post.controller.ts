@@ -42,6 +42,8 @@ export class PostsController {
             } else {
                 msg = 'Updated successfully';
             }
+        } else if(!post.isPublished) {
+            msg = 'Draft saved successfully';
         }
         const data = await this.postService.saveUpdatePost(post, sessionUser);
         return { message: msg, success: true, data };
