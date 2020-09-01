@@ -56,7 +56,7 @@ export class NotificationsService {
                             sender: { id: senderInfo.id },
                             recipient: { id: followingMember.id },
                             type,
-                            message: senderInfo.displayName + ' created new post',
+                            message: senderInfo.displayName + ' created a new post',
                             data
                         };
                         bulkNotifications.push(notificationMsg);
@@ -78,7 +78,7 @@ export class NotificationsService {
                     _entity.sender = { id: senderInfo.id };
                     _entity.recipient = { id: reciverInfo.id };
                     _entity.type = type;
-                    _entity.message = senderInfo.displayName + ' Commented on your post';
+                    _entity.message = senderInfo.displayName + ' commented on your post';
                     _entity.data = data;
                     if (reciverInfo.fcmToken) {
                         // send push notifications
