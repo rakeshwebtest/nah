@@ -49,7 +49,6 @@ export class PostService {
         // .innerJoin('messages.holders', 'holders', 'holders.id = :userId', {userId: currentUser.id})
         // .leftJoinAndSelect('p.bookmark', 'author');
 
-
         if (sessionUser.role === 'admin') {
 
         } else {
@@ -62,9 +61,8 @@ export class PostService {
             } else {
                 db.andWhere('(p.isPublished = 1)');
             }
-
             if (query.topicId) {
-                db.andWhere('( topic.id = :id)', { id: query.topicId });
+                db.andWhere('(topic.id = :topicId)', { topicId: query.topicId });
             }
 
             if (query.type && query.type === 'bookmarks') {
@@ -178,7 +176,7 @@ export class PostService {
         console.log('notification sedding');
         if (!post.id && post.isPublished === 1)
             this.notification.send(_post.createdBy.id, null, 'post-create', postDetails);
-        
+
         return postDetails;
         // return data;
     }
