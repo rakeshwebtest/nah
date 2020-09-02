@@ -26,8 +26,10 @@ export class UserProfileComponent implements OnInit {
   profileId: any;
   @ViewChild(GroupListComponent, { static: false }) groupC: GroupListComponent;
   @ViewChild(UserListComponent, { static: false }) userFollowing: UserListComponent;
-
+  @ViewChild(UserListComponent, { static: false }) userFollowers: UserListComponent;
+  @ViewChild(UserListComponent, { static: false }) userBlocked: UserListComponent;
   customColors = ['#f00', '#0f0', '#00f', '#800000', '#6b8e23', '#6050dc', '#2d4436', '#003480', '#351d63', '#000000'];
+  showTab = false;
   constructor(
     private authService: AuthenticationService,
     private popoverController: PopoverController,
@@ -38,7 +40,10 @@ export class UserProfileComponent implements OnInit {
     private http: AppHttpClient) { }
   ionViewWillEnter() {
     console.log('reload profile');
-    this.userFollowing.reload();
+    this.showTab = false;
+    setTimeout(() => {
+      this.showTab = true;
+    }, 300);
   }
   ngOnInit() {
     const userInfo: any = this.authService.isAuthenticated();

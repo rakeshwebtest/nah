@@ -981,3 +981,32 @@ ion-back-button button{
 .adjust-scroll{
   max-height: calc(100vh - 195px) !important;
 }
+.action-sheet-destructive.sc-ion-action-sheet-ios {
+ color: #333 !important;
+}
+.action-sheet-button.sc-ion-action-sheet-ios {
+  color: #333 !important;
+}
+.action-sheet-button-inner.sc-ion-action-sheet-ios {
+  justify-content: flex-start !important;
+}
+.searchbar-input-container.sc-ion-searchbar-ios{
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  border-radius: 50px;
+}
+.searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios {
+  top: 3px;
+  right: 3px;
+}
+.ion-color.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios, .ion-color.sc-ion-searchbar-ios-h .searchbar-clear-button.sc-ion-searchbar-ios, .ion-color.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios {
+  color: inherit;
+  right: 3px;
+  top: 3px;
+}
+.agenda-p-title{
+  display: flex;
+  justify-content: space-between;
+}
+.text-orange{
+  color: #ff8c00;
+}

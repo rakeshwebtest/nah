@@ -49,7 +49,7 @@
   <ion-row class="ion-align-items-center" *ngIf="!isOtherProfile">
     <app-agenda-view></app-agenda-view>
   </ion-row>
-  <super-tabs>
+  <super-tabs *ngIf="showTab">
     <super-tabs-toolbar slot="top" [scrollable]="isOtherProfile">
       <super-tab-button>
         <!-- <ion-icon name="home"></ion-icon> -->
@@ -77,10 +77,10 @@
         <app-user-list #userFollowing [userId]="profileId" type="following" emptyMsg="No following"></app-user-list>
       </super-tab>
       <super-tab>
-        <app-user-list [userId]="profileId" type="followers" emptyMsg="No followers"></app-user-list>
+        <app-user-list #userFollowers [userId]="profileId" type="followers" emptyMsg="No followers"></app-user-list>
       </super-tab>
       <super-tab *ngIf="!isOtherProfile">
-        <app-user-list [userId]="profileId" type="blocked" emptyMsg="No blocked users"></app-user-list>
+        <app-user-list #userBlocked [userId]="profileId" type="blocked" emptyMsg="No blocked users"></app-user-list>
       </super-tab>
       <super-tab *ngIf="isOtherProfile">
         <app-group-list type="mygroups" [userId]="profileId"></app-group-list>

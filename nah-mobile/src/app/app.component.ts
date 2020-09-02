@@ -39,7 +39,7 @@ export class AppComponent {
       this.ga.startTrackerWithId('UA-158946994-1')
         .then(() => {
           this.startTracking();
-        }).catch(e => alert('Error starting GoogleAnalytics == ' + e));
+        }).catch(e => console.log('Error starting GoogleAnalytics == ' + e));
 
       // Here we will check if the user is already logged in
       // because we don't want to ask users to log in each time they open the app
