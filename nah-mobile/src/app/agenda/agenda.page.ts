@@ -29,7 +29,7 @@ export class AgendaPage implements OnInit {
       templateOptions: {
         label: 'Title',
         placeholder: 'Enter agenda title',
-        required: true
+        required: false
       }
     },
     {
@@ -61,7 +61,7 @@ export class AgendaPage implements OnInit {
             type: 'input',
             key: 'name',
             templateOptions: {
-              label: 'Say To No',
+              label: 'Say No To',
               required: true,
             }
           }
