@@ -69,8 +69,10 @@ export class MeetingController {
   async createMeeting(@UploadedFile() image, @Body() meetingDto: CreateMeetingDto, @Request() req) {
     let msg = 'Meeting created successfully';
     if (meetingDto.id) {
-      msg = 'Meeting Updated successfully';
-    } else if(!meetingDto.isPublished) {
+      msg = 'Meeting updated successfully';
+    }
+    console.log('meetingDto.isPublished -->', meetingDto.isPublished);
+    if(!meetingDto.isPublished || meetingDto.isPublished == 0 || meetingDto.isPublished == '0' || meetingDto.isPublished === 0) {
       msg = "Meeting draft saved successfully";
     }
     const data = await this.meetingService.createMeeting(meetingDto, image);
@@ -189,8 +191,13 @@ export class MeetingController {
   async meetingImages(@UploadedFiles() images, @Body() fileDto: any, @Param() params: any, @Request() req) {
     const sessionUser = req['sessionUser'];
     const data = await this.meetingService.uploadMeetingImages(images, params.meetingId,sessionUser);
+    let succMsg = 'Image added successfully';
+    if(images.length > 1 ) {
+      succMsg = 'Images added successfully';
+    }
+    console.log('images -->', images.length); 
 
-    return { message: "Image added successfully", success: true, data };
+    return { message: succMsg, success: true, data };
 
   }
   /**
