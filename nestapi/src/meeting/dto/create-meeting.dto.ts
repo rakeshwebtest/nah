@@ -35,7 +35,7 @@ export class CreateMeetingDto {
     @IsNotEmpty({ message: "Required Contact Email" })
     contactEmail: string;
     @ApiProperty()
-    @IsNotEmpty({ message: "Required Contact Mobile" })
+    // @IsNotEmpty({ message: "Required Contact Mobile" })
     contactMobile: string;
     @ApiProperty()
     @IsNotEmpty({ message: "Required CreateBy" })
@@ -62,7 +62,7 @@ export class CreateMeetingDto {
     endTime: string;
     imageUrl: string;
     @ApiProperty()
-    isPublished: string;
+    isPublished: any;
     // @IsNotEmpty({ message: "Required Created By" })
     // readonly createBy: number;
 }

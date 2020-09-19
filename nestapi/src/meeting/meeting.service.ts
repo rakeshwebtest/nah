@@ -208,7 +208,7 @@ export class MeetingService {
         comment.createdBy.id = commentDto.userId;
         comment.comment = commentDto.comment;
         const data = await this.meetingCommentRepository.save(comment);
-        return { message: 'Comment added', data };
+        return { message: 'Comment added successfully', data };
     }
     async addCommentReply(commentDto: CommentReplyDto) {
         const comment = new MeetingCommentReplyEntity();
@@ -218,7 +218,7 @@ export class MeetingService {
         comment.createdBy.id = commentDto.userId;
         comment.comment = commentDto.comment;
         const data = await this.meetingCommentReplyRepository.save(comment);
-        return { message: 'Reply comment added', data };
+        return { message: 'Reply comment added successfully', data };
     }
     async addVideo(videoDto: VideoDto, sessionUser) {
         const video = new MeetingVideosEntity();
@@ -229,7 +229,7 @@ export class MeetingService {
         user.id = sessionUser.id;
         video.createdBy = user;
         const data = await this.meetingVideoRepository.save(video);
-        return { message: 'Added Video Successfully', data };
+        return { message: 'Added video successfully', data };
     }
     async deleteVideo(videoId: number) {
         const video = new MeetingVideosEntity();

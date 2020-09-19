@@ -136,14 +136,14 @@ export class UsersController {
     async follow(@Body() follower: FollowDto, @Req() req) {
         const sessionUser = req.sessionUser;
         const data = await this.service.follow(sessionUser.id, follower.followingId);
-        return { message: 'Successfully Follow', success: true, data };
+        return { message: 'Followed successfully', success: true, data };
     }
 
     @Post('unfollow')
     async unfollow(@Body() follower: FollowDto, @Req() req) {
         const sessionUser = req.sessionUser;
         const data: any = await this.service.unfollow(sessionUser.id, follower.followingId);
-        return { message: 'Successfully unFollow', success: true, data };
+        return { message: 'Unfollowed successfully', success: true, data };
     }
 
     @Post('profileBlock')
@@ -151,14 +151,14 @@ export class UsersController {
         const sessionUser = req.sessionUser;
         const unfollow: any = await this.service.unfollow(sessionUser.id, profileUser.userId);
         const data = await this.service.profileBlock(sessionUser.id, profileUser.userId);
-        return { message: 'Successfully blocked profile', success: true, data };
+        return { message: 'Profile blocked successfully', success: true, data };
     }
 
     @Post('profileUnblock')
     async profileUnblock(@Body() profileUser: ProfileBlockDto, @Req() req) {
         const sessionUser = req.sessionUser;
         const data: any = await this.service.profileUnblock(sessionUser.id, profileUser.userId);
-        return { message: 'Successfully Unblocked profile', success: true, data };
+        return { message: 'Profile unblocked successfully', success: true, data };
     }
 
     @ApiBearerAuth()
@@ -190,7 +190,7 @@ export class UsersController {
         _userEntity.id = user.id;
         const data = await this.service.updateUser(_userEntity);
         const userInfo: any = await this.service.getUser(data.id);
-        return { message: 'Updated Succussfully', data: userInfo };
+        return { message: 'Profile updated successfully', data: userInfo };
     }
 
     @Delete(':id')

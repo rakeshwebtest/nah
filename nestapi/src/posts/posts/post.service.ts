@@ -203,7 +203,7 @@ export class PostService {
                 _repo = this.postDislikeRepository;
                 break;
             default:
-                msgS = 'Added to bookmarks';
+                msgS = 'Added to bookmark successfully';
                 msgF = "Removed post";
                 _entity = new PostBookmarksEntity();
                 _repo = this.postBookmarksRepository;
