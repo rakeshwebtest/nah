@@ -111,9 +111,9 @@
   "description": "An Ionic project",
   "cordova": {
     "platforms": [
-      "ios",
       "android",
-      "browser"
+      "browser",
+      "ios"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},

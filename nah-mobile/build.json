@@ -18,13 +18,13 @@
     "ios": {
         "debug": {
           "codeSignIdentity": "iPhone Developer",
-          "provisioningProfile": "Adhoc_profile",
-          "developmentTeam": "V798ATU9LP",
+          "provisioningProfile": "nah_ad_hoc",
+          "developmentTeam": "7UBQ684V68",
           "packageType": "development"
         },
         "release": {
           "codeSignIdentity": "iPhone Distribution",
-          "provisioningProfile": "Adhoc_profile",
+          "provisioningProfile": "nah_ad_hoc",
           "developmentTeam": "V798ATU9LP",
           "packageType": "ad-hoc"
         }
