@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://nah.theapp.in',
+  apiUrl: 'http://sayno.mobi',
   fbConfig: {
     apiKey: "AIzaSyC0aBUUlu03W0E6gEu_sZOGUgzXVr50yFo",
     authDomain: "nah-mobile-a6ab8.firebaseapp.com",
