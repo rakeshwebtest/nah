@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>196016802810-uuir6evcgcbl9lvr2ger7s1qdfj9iehr.apps.googleusercontent.com</string>
+	<string>196016802810-kfcai6u57ueqph428s5j52jt5pgtun00.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.196016802810-uuir6evcgcbl9lvr2ger7s1qdfj9iehr</string>
+	<string>com.googleusercontent.apps.196016802810-kfcai6u57ueqph428s5j52jt5pgtun00</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>196016802810-rb1ldlor2h7imkavq83au62g7jn9dcrp.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyC6w-PutHaNfBew7r4-6h2rU_lD90HGir0</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.nah.mobile</string>
+	<string>com.sayno.nah</string>
 	<key>PROJECT_ID</key>
 	<string>nah-mobile-a6ab8</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:196016802810:ios:c9a9b2509436bcc89db243</string>
+	<string>1:196016802810:ios:ba1b7b57890af6dd9db243</string>
 	<key>DATABASE_URL</key>
 	<string>https://nah-mobile-a6ab8.firebaseio.com</string>
 </dict>
