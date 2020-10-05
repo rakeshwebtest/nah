@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { IonicModule } from '@ionic/angular'; 
+import { SignInWithApple } from '@ionic-native/sign-in-with-apple/ngx';
 
 
 const routes: Routes = [
@@ -19,6 +20,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
   ],
-  providers: []
+  providers: [SignInWithApple]
 })
 export class HomeModule { }
