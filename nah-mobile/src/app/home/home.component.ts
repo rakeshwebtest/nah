@@ -5,10 +5,10 @@ import { Route, Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { UserConfigService } from '../utils/user-config.service';
 import { AuthenticationService } from '../services/authentication.service';
-// import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { FcmProviderService } from '../utils/fcm-provider.service';
 import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@ionic-native/sign-in-with-apple/ngx';
-
+import * as firebase from 'firebase';
 @Component({
   selector: 'theapp-home',
   templateUrl: './home.component.html',
@@ -32,7 +32,8 @@ export class HomeComponent implements OnInit{
     public alertController: AlertController,
     private userConfigService: UserConfigService,
     private fcmService: FcmProviderService,
-    private signInWithApple: SignInWithApple
+    private signInWithApple: SignInWithApple,
+    private fireAuth: AngularFireAuth
 
   ) {
     //     private fireAuth: AngularFireAuth
@@ -79,8 +80,8 @@ export class HomeComponent implements OnInit{
     }
     this.googlePlus.login(params).then(user => {
       this.login(user);
-      // const { idToken, accessToken } = user;
-      // this.onLoginSuccess(idToken, accessToken);
+       const { idToken, accessToken } = user;
+      this.onLoginSuccess(idToken, accessToken);
       // this.loading.dismiss();
     }, err => {
       console.log('google sign error', err);
@@ -102,8 +103,11 @@ export class HomeComponent implements OnInit{
         console.log('_resUser', _resUser);
         // save user data on the native storage
         this.authenticationService.login(_resUser);
-        this.loading.dismiss();
+        
       }
+      this.loading.dismiss();
+    },err=>{
+      this.loading.dismiss();
     });
   }
 
@@ -116,15 +120,20 @@ export class HomeComponent implements OnInit{
     await alert.present();
   }
   async signInWithAppleBtn(){
-    this.signInWithApple.signin({
-      requestedScopes: [
-        ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,
-        ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail
-      ]
-    })
-    .then((res: AppleSignInResponse) => {
-      // https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user
-      const data:any = res;
+
+    try {
+      const appleCredential: AppleSignInResponse = await this.signInWithApple.signin({
+        requestedScopes: [
+          ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,
+          ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail
+        ]
+      });
+      const credential = new firebase.auth.OAuthProvider('apple.com').credential(
+        appleCredential.identityToken
+      );
+      const response = await this.fireAuth.signInWithCredential(credential);
+      console.log('Login successful', response);
+      const data:any = response;
       if(data.fullName){
         data.displayName = data.fullName.givenName;
       }
@@ -134,21 +143,45 @@ export class HomeComponent implements OnInit{
         alert('Email required');
       }
       this.login(data);
-    })
-    .catch((error: AppleSignInErrorResponse) => {
-      // alert(error.code + ' ' + error.localizedDescription);
-      console.error(error);
-    });
+    } catch (error) {
+      console.log(error);
+    }
+
+
+
+    // this.signInWithApple.signin({
+    //   requestedScopes: [
+    //     ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,
+    //     ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail
+    //   ]
+    // })
+    // .then((res: AppleSignInResponse) => {
+    //   // https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user
+    //   const data:any = res;
+    //   if(data.fullName){
+    //     data.displayName = data.fullName.givenName;
+    //   }
+    //   data.type = 'ios';
+    //   data.idToken = data.identityToken;
+    //   if(!data.email){
+    //     alert('Email required');
+    //   }
+    //   this.login(data);
+    // })
+    // .catch((error: AppleSignInErrorResponse) => {
+    //   // alert(error.code + ' ' + error.localizedDescription);
+    //   console.error(error);
+    // });
   }
 
   onLoginSuccess(accessToken, accessSecret) {
-    // const credential = accessSecret ? firebase.auth.GoogleAuthProvider
-    //   .credential(accessToken, accessSecret) : firebase.auth.GoogleAuthProvider
-    //     .credential(accessToken);
-    // this.fireAuth.signInWithCredential(credential)
-    //   .then((response) => {
-
-    //   });
+    const credential = accessSecret ? firebase.auth.GoogleAuthProvider
+      .credential(accessToken, accessSecret) : firebase.auth.GoogleAuthProvider
+        .credential(accessToken);
+    this.fireAuth.signInWithCredential(credential)
+      .then((response) => {
+        console.log('fireresponse',response);
+      });
 
   }
 
