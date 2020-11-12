@@ -9,6 +9,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { FcmProviderService } from '../utils/fcm-provider.service';
 import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@ionic-native/sign-in-with-apple/ngx';
 import * as firebase from 'firebase';
+import { Plugins } from '@capacitor/core';
 @Component({
   selector: 'theapp-home',
   templateUrl: './home.component.html',
@@ -122,18 +123,15 @@ export class HomeComponent implements OnInit{
   async signInWithAppleBtn(){
 
     try {
-      const appleCredential: AppleSignInResponse = await this.signInWithApple.signin({
-        requestedScopes: [
-          ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,
-          ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail
-        ]
-      });
+      const { SignInWithApple } = Plugins;
+     
+      const appleCredential: AppleSignInResponse = await  SignInWithApple.Authorize();
       const credential = new firebase.auth.OAuthProvider('apple.com').credential(
         appleCredential.identityToken
       );
       const response = await this.fireAuth.signInWithCredential(credential);
       console.log('Login successful', response);
-      const data:any = response;
+      const data:any = credential;
       if(data.fullName){
         data.displayName = data.fullName.givenName;
       }

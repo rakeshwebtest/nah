@@ -27,6 +27,8 @@
     "@angular/platform-browser": "8.1.2",
     "@angular/platform-browser-dynamic": "8.1.2",
     "@angular/router": "8.1.2",
+    "@capacitor/cli": "^2.4.2",
+    "@capacitor/core": "^2.4.2",
     "@ionic-native/core": "5.0.0",
     "@ionic-native/fcm": "^5.27.0",
     "@ionic-native/firebase": "^5.27.0",
@@ -48,6 +50,7 @@
     "@ngx-gallery/core": "^5.0.0-beta.0",
     "@ngx-gallery/gallerize": "^5.0.0-beta.0",
     "@ngx-gallery/lightbox": "^5.0.0-beta.0",
+    "capacitor-apple-login": "git+https://github.com/rlfrahm/capacitor-apple-login.git",
     "cordova-android": "^8.1.0",
     "cordova-android-play-services-gradle-release": "4.0.0",
     "cordova-plugin-browsersync": "^1.1.0",
@@ -112,8 +115,7 @@
   "cordova": {
     "platforms": [
       "android",
-      "browser",
-      "ios"
+      "browser"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
