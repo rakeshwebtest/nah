@@ -12,10 +12,9 @@ export class ImageDto {
 }
 export class ImagesDto {
     @ApiProperty({ type: 'file' })
-    image: any;
+    images: any;
 }
 export const imageFileFilter = (req, file, callback) => {
-    console.log('file', file);
     if (!file.originalname.match(/\.(jpg|jpeg|JPG|JPEG|Jpeg|png|PNG|gif)$/)) {
         return callback(new HttpException({
             status: HttpStatus.BAD_REQUEST,
@@ -25,7 +24,9 @@ export const imageFileFilter = (req, file, callback) => {
     }
     callback(null, true);
 };
+export const maxFileSize = 10*1000*1000;
 export const editFileName = (req, file, callback) => {
+    console.log('file',file.size);
     const name = file.originalname.split('.')[0];
     const fileExtName = extname(file.originalname);
     const timeStapm = new Date().getTime();
@@ -49,6 +50,7 @@ export class AssestsController {
                 destination: './uploads/posts',
                 filename: editFileName,
             }),
+            limits: {fileSize:maxFileSize },
             fileFilter: imageFileFilter,
         }),
     )
@@ -73,6 +75,7 @@ export class AssestsController {
                 destination: './uploads',
                 filename: editFileName,
             }),
+            limits: {fileSize:maxFileSize},
             fileFilter: imageFileFilter
         }),
     )

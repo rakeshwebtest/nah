@@ -62,10 +62,7 @@ export class HomeComponent implements OnInit{
   }
 
   async signInWithGoogle() {
-    this.loading = await this.loadingController.create({
-      message: 'Please wait...'
-    });
-    this.presentLoading(this.loading);
+
     let params;
     if (this.platform.is('android')) {
       params = {
@@ -92,10 +89,13 @@ export class HomeComponent implements OnInit{
     });
   }
   async login(user) {
+    this.loading = await this.loadingController.create({
+      message: 'Please wait...'
+    });
+    this.presentLoading(this.loading);
     if (this.fcmService.fcmToken) {
       user.fcmToken = this.fcmService.fcmToken;
     }
-    console.log('user', user);
     this.http.post('user/login', user).subscribe(res => {
       if (res.success) {
         const _resUser: any = res.data;
@@ -123,24 +123,24 @@ export class HomeComponent implements OnInit{
 
     try {
       const appleCredential: AppleSignInResponse = await this.signInWithApple.signin({
-        requestedScopes: [
-          ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,
-          ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail
-        ]
+        requestedScopes: [0,0]
       });
       const credential = new firebase.auth.OAuthProvider('apple.com').credential(
         appleCredential.identityToken
       );
-      const response = await this.fireAuth.signInWithCredential(credential);
-      console.log('Login successful', response);
-      const data:any = response;
+      const userCredential:firebase.auth.UserCredential = await this.fireAuth.signInWithCredential(credential);
+      console.log('firebase UserCredential', userCredential.user.email);
+      console.log('appleCredential', appleCredential);
+      const data:any = appleCredential;
       if(data.fullName){
         data.displayName = data.fullName.givenName;
       }
       data.type = 'ios';
       data.idToken = data.identityToken;
-      if(!data.email){
+      if(!userCredential.user.email){
         alert('Email required');
+      }else{
+        data.email = userCredential.user.email;
       }
       this.login(data);
     } catch (error) {

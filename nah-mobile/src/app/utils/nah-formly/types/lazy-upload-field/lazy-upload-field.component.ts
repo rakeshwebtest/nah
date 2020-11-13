@@ -14,7 +14,7 @@ import { AppToasterService } from 'src/app/utils/app-toaster.service';
 })
 export class LazyUploadFieldComponent extends FieldType implements OnInit {
   @ViewChild('fileInput', null) fileInput: ElementRef;
-  allowedMimeType = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
+  allowedMimeType = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif','image/PNG','image/JPEG','image/JPG'];
   maxFileSize = 10 * 1024 * 1024;
   previewUrl = null;
   previewUrls: any[] = [];

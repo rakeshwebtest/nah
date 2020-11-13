@@ -5,7 +5,7 @@ import { FieldType } from '@ngx-formly/core';
     selector: 'formly-field-file',
     template: `
   <ion-input #fileInput  type="file" label="test" [ngClass]="{'multiple-files':to.multiple}"
-  accept="image/x-png,image/gif,image/jpeg"
+  accept="image/x-png,image/gif,image/jpeg,image/jpg,image/png,image/PNG,image/JPEG,image/JPG"
    [multiple]="to.multiple"
   (change)="onFileChange($event)"
    [formControl]="formControl" [ionFormlyAttributes]="field"></ion-input>
