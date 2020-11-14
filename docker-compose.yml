@@ -1,23 +1,24 @@
-version: '3.5' # We use version 3.5 syntax
-services: # Here we define our service(s)
-    angular-service: # The name of the service
-      container_name: angularcontainer  # Container name
-      build: . # Location of our Dockerfile
-      volumes: # Volume binding
-        - './nah-mobile:/usr/src/app',
-        - /usr/src/app/node_modules
-      ports: 
-        - '4200:4200' # Port mapping
-        - '3005:3005'
-      command: > 
-        bash -c "ng serve --host 0.0.0.0 --port 4200"
-    nest-service: # The name of the service
-      container_name: nestjs-contianr  # Container name
-      build: . # Location of our Dockerfile
-      volumes: # Volume binding
-        - './nestapi:/usr/src/app' 
-      ports: 
-        - '4200:4200' # Port mapping
-        - '3005:3005'
-      command: > 
-        bash -c "npm run start:dev"
+version: '3'
+services:
+  nestjs-server:
+    build:
+      context: ./nestapi
+      dockerfile: Dockerfile-dev
+    ports:
+      - "3005:3005"
+    container_name: nestjs-api
+    volumes:
+       - ./nestapi:/usr/src/app/nestapi
+       - /usr/src/app/nestapi/node_modules
+  angular-ui:
+    build:
+      context: ./nah-mobile
+      dockerfile: Dockerfile-dev
+    ports:
+      - "4200:4200"
+    container_name: mobile-ui
+    volumes:
+       - ./nah-mobile:/usr/src/app/nah-mobile
+       - /usr/src/app/nah-mobile/node_modules
+
+
