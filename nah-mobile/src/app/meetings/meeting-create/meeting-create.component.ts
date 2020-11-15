@@ -22,6 +22,41 @@ export class MeetingCreateComponent implements OnInit {
   maxDate: any = (new Date()).getFullYear() + 3;
   fields: FormlyFieldConfig[] = [
     {
+      fieldGroupClassName: 'row side-by-side-flex',
+      fieldGroup: [
+        {
+          key: 'groupId',
+          type: 'selectable',
+          wrappers: ['vertical'],
+          className: 'flex-auto pr-0 ion-padding-t-10',
+          templateOptions: {
+            label: 'Group',
+            placeholder: 'Select Group',
+            required: true,
+            itemValueField: 'value',
+            itemTextField: 'label',
+            options: []
+          }
+        },
+        {
+          type: 'button',
+          className: 'flex ion-text-right ion-padding-t-10',
+          templateOptions: {
+            label: '',
+            text: 'Add Group',
+            class: 'ion-color ion-color-danger custom-height',
+            btnType: 'info',
+            type: 'button',
+            onClick: ($event) => {
+              // this.form.get('someInput').setValue('clicked!');
+              this.openGroupModel();
+            },
+            description: 'These can have labels and stuff too if you want....',
+          },
+        }
+      ]
+    },
+    {
     key: 'title',
     type: 'input',
     wrappers: ['vertical'],
@@ -67,41 +102,7 @@ export class MeetingCreateComponent implements OnInit {
       required: true,
     }
   },
-  {
-    fieldGroupClassName: 'row side-by-side-flex',
-    fieldGroup: [
-      {
-        key: 'groupId',
-        type: 'selectable',
-        wrappers: ['vertical'],
-        className: 'flex-auto pr-0',
-        templateOptions: {
-          label: 'Group',
-          placeholder: 'Select Group',
-          required: true,
-          itemValueField: 'value',
-          itemTextField: 'label',
-          options: []
-        }
-      },
-      {
-        type: 'button',
-        className: 'flex ion-text-right ion-padding-t-10',
-        templateOptions: {
-          label: '',
-          text: 'Add Group',
-          class: 'ion-color ion-color-danger custom-height',
-          btnType: 'info',
-          type: 'button',
-          onClick: ($event) => {
-            // this.form.get('someInput').setValue('clicked!');
-            this.openGroupModel();
-          },
-          description: 'These can have labels and stuff too if you want....',
-        },
-      }
-    ]
-  },
+
 
   {
     key: 'city',
@@ -235,7 +236,7 @@ export class MeetingCreateComponent implements OnInit {
           return group;
         });
       }
-      this.fields[4].fieldGroup[0].templateOptions.options = this.groupList || [];
+      this.fields[0].fieldGroup[0].templateOptions.options = this.groupList || [];
     });
     if (this.activeRoute.snapshot.params.meetingId) {
 

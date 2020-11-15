@@ -135,7 +135,7 @@ export class HomeComponent implements OnInit{
       if(data.fullName){
         data.displayName = data.fullName.givenName;
       }
-      data.type = 'ios';
+      data.provider = 'ios';
       data.idToken = data.identityToken;
       if(!userCredential.user.email){
         alert('Email required');

@@ -22,33 +22,10 @@ export class PostCreateComponent implements OnInit {
   headerTitle = 'Create Post';
   fields: FormlyFieldConfig[] = [
     {
-      key: 'title',
-      type: 'input',
-      wrappers: ['vertical'],
-      className: 'col-12 ion-padding-t-10',
-      templateOptions: {
-        label: 'Post Title',
-        placeholder: 'Enter post title',
-        required: true,
-      }
-    },
-    {
-      key: 'description',
-      type: 'textarea',
-      wrappers: ['vertical'],
-      className: 'col-12 ion-padding-t-10',
-      templateOptions: {
-        label: 'Description',
-        placeholder: 'What\'s on your mind?',
-        required: true,
-        rows: 5
-      }
-    },
-    {
       key: 'topicId',
       type: 'selectable',
       wrappers: ['vertical'],
-      className: 'col-12',
+      className: 'col-12 ion-padding-t-10',
       templateOptions: {
         label: 'Topic',
         placeholder: 'Select Topic',
@@ -63,6 +40,31 @@ export class PostCreateComponent implements OnInit {
         }
       }
     },
+    {
+      key: 'title',
+      type: 'input',
+      wrappers: ['vertical'],
+      className: 'col-12 ion-padding-t-10',
+      templateOptions: {
+        label: 'Post Title',
+        placeholder: 'Enter post title',
+        required: true,
+      }
+    },
+
+    {
+      key: 'description',
+      type: 'textarea',
+      wrappers: ['vertical'],
+      className: 'col-12 ion-padding-t-10',
+      templateOptions: {
+        label: 'Description',
+        placeholder: 'What\'s on your mind?',
+        required: true,
+        rows: 5
+      }
+    },
+ 
     {
       key: 'photos',
       type: 'lazy-upload',

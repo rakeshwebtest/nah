@@ -51,6 +51,16 @@
   </ion-row>
   <super-tabs *ngIf="showTab">
     <super-tabs-toolbar slot="top" [scrollable]="isOtherProfile">
+    
+      <super-tab-button *ngIf="isOtherProfile">
+        <ion-label>Groups</ion-label>
+      </super-tab-button>
+      <super-tab-button *ngIf="isOtherProfile">
+        <ion-label>Posts</ion-label>
+      </super-tab-button>
+      <super-tab-button *ngIf="isOtherProfile">
+        <ion-label>Meetings</ion-label>
+      </super-tab-button>
       <super-tab-button>
         <!-- <ion-icon name="home"></ion-icon> -->
         <ion-label>Following</ion-label>
@@ -61,15 +71,6 @@
       </super-tab-button>
       <super-tab-button *ngIf="!isOtherProfile">
         <ion-label>Blocked</ion-label>
-      </super-tab-button>
-      <super-tab-button *ngIf="isOtherProfile">
-        <ion-label>Groups</ion-label>
-      </super-tab-button>
-      <super-tab-button *ngIf="isOtherProfile">
-        <ion-label>Posts</ion-label>
-      </super-tab-button>
-      <super-tab-button *ngIf="isOtherProfile">
-        <ion-label>Meetings</ion-label>
       </super-tab-button>
     </super-tabs-toolbar>
     <super-tabs-container>

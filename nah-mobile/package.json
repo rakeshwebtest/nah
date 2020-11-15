@@ -197,7 +197,10 @@
       },
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-x-socialsharing": {},
-      "cordova-plugin-sign-in-with-apple": {}
+      "cordova-plugin-sign-in-with-apple": {},
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      }
     }
   }
 }
