@@ -194,10 +194,10 @@ export class MeetingService {
         const isMember = await this.meetingMembersRepository.findOne(meetingMember);
         if (isMember) {
             await this.meetingMembersRepository.delete(isMember);
-            return { message: 'Successfully Un-join Member', isMember };
+            return { message: 'Successfully Un-join Meeting', isMember };
         } else {
             const data = await this.meetingMembersRepository.save(meetingMember);
-            return { message: 'Successfully Join Member', data };
+            return { message: 'Successfully Join Meeting', data };
         }
     }
     async addComment(commentDto: CommentDto) {

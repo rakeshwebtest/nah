@@ -35,6 +35,10 @@ const routes: Routes = [
     component: ChooseUserGroupsComponent,
   },
   {
+    path: 'pages',
+    loadChildren: () => import('./pages/pages.module').then(m => m.PagesPageModule)
+  },
+  {
     path: '',
     component: AdminLayoutComponent,
     canActivate: [AuthGuard],
@@ -119,10 +123,7 @@ const routes: Routes = [
         path: 'agenda',
         loadChildren: () => import('./agenda/agenda.module').then(m => m.AgendaPageModule)
       },
-      {
-        path: 'pages',
-        loadChildren: () => import('./pages/pages.module').then(m => m.PagesPageModule)
-      },
+      
       {
         path: 'profile-edit',
         loadChildren: () => import('./profile-edit/profile-edit.module').then(m => m.ProfileEditPageModule)

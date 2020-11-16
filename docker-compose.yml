@@ -1,0 +1,24 @@
+version: '3'
+services:
+  nestjs-server:
+    build:
+      context: ./nestapi
+      dockerfile: Dockerfile-dev
+    ports:
+      - "3005:3005"
+    container_name: nestjs-api
+    volumes:
+       - ./nestapi:/usr/src/app/nestapi
+       - /usr/src/app/nestapi/node_modules
+  angular-ui:
+    build:
+      context: ./nah-mobile
+      dockerfile: Dockerfile-dev
+    ports:
+      - "4200:4200"
+    container_name: mobile-ui
+    volumes:
+       - ./nah-mobile:/usr/src/app/nah-mobile
+       - /usr/src/app/nah-mobile/node_modules
+
+

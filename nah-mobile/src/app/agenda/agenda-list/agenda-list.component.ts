@@ -16,6 +16,13 @@ export class AgendaListComponent implements OnInit {
   ngOnInit() {
     this.http.get('agenda').subscribe(res => {
       if (res.data) {
+        res.data.map(item=>{
+          item.topics.map(t=>{
+            t.name = 'Say No To '+ t.name;
+            return t;
+          });
+          return item;
+        })
         this.agendaList = res.data;
         this.cloneAgendaList = res.data;
       }

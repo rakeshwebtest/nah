@@ -1,0 +1,12 @@
+
+FROM node:12.18.3
+
+WORKDIR /usr/src/app/nah-mobile
+
+COPY package*.json ./
+
+RUN npm install -g @angular/cli @angular-devkit/build-angular && npm install
+
+EXPOSE 4200
+
+CMD ["npm", "start"]

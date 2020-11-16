@@ -12,11 +12,11 @@ import { VideoDto } from './dto/video.dto';
 import * as path from 'path';
 import { ReportDto } from './dto/report.dto';
 import { CommentReplyDto } from './dto/comment-reply.dto';
-
+export const maxFileSize = 10*1000*1000;
 const imageFilter = (req, file, callback) => {
   let ext = path.extname(file.originalname);
-
-  if (ext === '.png' || ext === '.jpeg' || ext === '.jpg') {
+  console.log('maxFileSize',maxFileSize,file);
+  if (ext === '.png' || ext === '.jpeg' || ext === '.jpg' || ext === '.jpg') {
     return callback(null, true);
   } else {
     req.fileValidationError = 'Invalid file type';
@@ -63,7 +63,8 @@ export class MeetingController {
         const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
         return cb(null, `${randomName}${extname(image.originalname)}`)
       }
-    })
+    }),
+    limits: {fileSize: maxFileSize },
   }))
   @Post()
   async createMeeting(@UploadedFile() image, @Body() meetingDto: CreateMeetingDto, @Request() req) {
@@ -186,7 +187,8 @@ export class MeetingController {
         const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
         return cb(null, `${randomName}${extname(image.originalname)}`)
       }
-    })
+    }),
+    limits: {fileSize: maxFileSize }
   }))
   async meetingImages(@UploadedFiles() images, @Body() fileDto: any, @Param() params: any, @Request() req) {
     const sessionUser = req['sessionUser'];

@@ -23,7 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedProfileEditModule } from './shared/shared-profile-edit.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { myTransitionAnimation } from './animations';
-// import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
@@ -53,7 +53,7 @@ import { AppRouterNavigateService } from './utils/app-router-navigate.service';
     AngularFireMessagingModule,
     AngularFireModule.initializeApp(environment.fbConfig),
     SuperTabsModule.forRoot(),
-    // AngularFireAuthModule,
+    AngularFireAuthModule,
     IonicModule.forRoot(
       {
         backButtonText: '',
