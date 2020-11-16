@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   localStorageKey:"lc",
-  apiUrl:"http://nah.theapp.in/api/"
+  apiUrl:"http://sayno.mobi/api/"
 };
