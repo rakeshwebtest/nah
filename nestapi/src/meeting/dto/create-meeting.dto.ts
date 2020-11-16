@@ -11,6 +11,7 @@ export class CustomDateCheck implements ValidatorConstraintInterface {
         const myDate = new Date(text);
         const currentDate = new Date();
         currentDate.setHours(0, 0, 0, 0);
+        myDate.setHours(0,0,0,0);
         return myDate >= currentDate; // for async validations you must return a Promise<boolean> here
     }
 

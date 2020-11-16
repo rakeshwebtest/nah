@@ -65,9 +65,10 @@ export class MeetingService {
             } else {
                 db.andWhere('(gf_user.id= :id OR group.createdBy= :id)', { id: userId });
             }
+            
 
             if (query.type && query.type === 'upcoming') {
-                db.andWhere('m.meetingDate >= DATE(NOW())');
+                db.andWhere('m.meetingDate >= NOW()');
             }
 
             if (query.type && query.type === 'my-meeting') {
@@ -150,6 +151,17 @@ export class MeetingService {
         _meeting.contactEmail = meeting.contactEmail;
         _meeting.contactMobile = meeting.contactMobile;
         _meeting.isPublished = parseInt(meeting.isPublished);
+        
+        console.log('fss',meeting.startTime);
+        const meetingDate =new Date(meeting.meetingDate);
+        const meetingStartTime  = new Date(meeting.startTime);
+        meetingDate.setHours(meetingStartTime.getHours());
+        meetingDate.setMinutes(meetingStartTime.getMinutes());
+        meetingDate.setSeconds(meetingStartTime.getSeconds());
+        const convertStartDate :any = meetingStartTime;
+        _meeting.meetingDate  = convertStartDate;
+        //console.log('_meeting',new Date(_meeting.startTime).setDate(new Date(meeting.meetingDate).getDay()).toString());
+
         if (_meeting.isPublished === 1)
             _meeting.isCanceled = 0;
 
