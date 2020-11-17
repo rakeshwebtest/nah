@@ -39,6 +39,10 @@ jobs:
             name: "Install npm packages"
             command: |
               cd nah-mobile && yarn install
+       - run:
+            name: "versions"
+            command: |
+              ionic --version && cordova --version && gradle --version
       - run:
             name: "Install Cordova plugins and add android platform"
             command: |
