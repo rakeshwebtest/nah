@@ -11,6 +11,9 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "	e0:f1:4e:cf:33:92:dd:d4:2a:4e:0f:de:fb:11:d6:08"
       - run:
             name: "Setup Environment Variables"
             command: |
