@@ -5,6 +5,8 @@ defaults: &defaults
     - image: dmastag/alpine-node-openjdk-android-cordova
   environment:
     JVM_OPTS: -Xmx3200m
+    GRADLE_VERSION: 6.5.1
+    CORDOVA_VERSION: 9.0.0
 
 jobs:
   build:
@@ -16,14 +18,7 @@ jobs:
             command: |
               echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
               echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
-      - run: 
-          name: "Install gradle"
-          command: |
-              wget https://services.gradle.org/distributions/gradle-6.5.1-bin.zip -P /tmp
-              sudo unzip -d /opt/gradle /tmp/gradle-*.zip
-              echo 'export GRADLE_HOME=/opt/gradle/gradle-6.5.1' >> $BASH_ENV
-              echo 'export PATH=$PATH:/opt/gradle/gradle-6.5.1/bin' >> $BASH_ENV
-              source $BASH_ENV
+
       - run:
             name: "move nah mobile folder"
             command: |
@@ -31,7 +26,7 @@ jobs:
       - run:
             name: "Install ionic and cordova"
             command: |
-              sudo npm install -g ionic cordova node-gyp
+              sudo npm install -g ionic node-gyp
       - run:
             name: "Install npm packages"
             command: |
