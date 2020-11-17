@@ -15,9 +15,6 @@
     <allow-intent href="geo:*" />
     <allow-navigation href="*" />
     <allow-navigation href="data:*" />
-    <preference name="ScrollEnabled" value="false" />
-    <preference name="android-minSdkVersion" value="19" />
-    <preference name="android-targetSdkVersion" value="29" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
@@ -25,7 +22,6 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
-        <preference name="android-targetSdkVersion" value="29" />
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
             <application android:usesCleartextTraffic="true" />
             <application android:debuggable="false" />
@@ -117,10 +113,8 @@
     <plugin name="cordova-plugin-googleplus" spec="^8.2.1">
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.196016802810-uuir6evcgcbl9lvr2ger7s1qdfj9iehr" />
         <variable name="WEB_APPLICATION_CLIENT_ID" value="196016802810-lnb3pk45vliiddoqokmgd7jfk33mb36c.apps.googleusercontent.com" />
-        <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
     </plugin>
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
-    <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^6.4.3" />
 </widget>
