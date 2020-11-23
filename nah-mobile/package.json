@@ -14,7 +14,8 @@
     "android": "ionic cordova run android --device --livereload",
     "ios-live": "ionic cordova run ios --device --livereload",
     "android:build": "ionic cordova build android --verbose",
-    "android:release": "ionic cordova build --prod  android  --verbose -- --keystore=keys/android/nah.keystore --storePassword=nahnah --alias=key0 --password=nahnah"
+    "android:buildConfg": "ionic cordova build android --prod --release --buildConfig=build.json",
+    "android:release": "ionic cordova build android --prod --release  --verbose -- --keystore=keys/android/nah.keystore --storePassword=nahnah --alias=key0 --password=nahnah"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +31,7 @@
     "@ionic-native/core": "5.0.0",
     "@ionic-native/fcm": "^5.27.0",
     "@ionic-native/firebase": "^5.27.0",
+    "@ionic-native/firebase-x": "^5.29.0",
     "@ionic-native/google-analytics": "^5.21.6",
     "@ionic-native/google-plus": "5.17.1",
     "@ionic-native/http": "5.18.0",
@@ -74,7 +76,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.801.2",
-    "@angular-devkit/build-angular": "~0.801.2",
+    "@angular-devkit/build-angular": "^0.1100.2",
     "@angular-devkit/build-ng-packagr": "~0.803.26",
     "@angular-devkit/core": "~8.1.2",
     "@angular-devkit/schematics": "~8.1.2",
@@ -90,7 +92,11 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
-    "cordova-android": "^9.0.0",
+    "cordova-android-play-services-gradle-release": "^4.0.0",
+    "cordova-ios": "^6.1.1",
+    "cordova-plugin-androidx": "^3.0.0",
+    "cordova-plugin-androidx-adapter": "^1.1.3",
+    "cordova-plugin-firebasex": "^11.0.3",
     "cordova-plugin-inappbrowser": "^4.0.0",
     "cordova-plugin-sign-in-with-apple": "^0.1.2",
     "cordova-plugin-x-socialsharing": "^6.0.2",
@@ -111,28 +117,44 @@
   },
   "description": "An Ionic project",
   "cordova": {
-    "platforms": [
-      "android"
-    ],
+    "platforms": ["ios"],
     "plugins": {
       "cordova-plugin-whitelist": {},
       "cordova-plugin-device": {},
-      "cordova-plugin-ionic-webview": {
-        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
-      },
+      "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.196016802810-uuir6evcgcbl9lvr2ger7s1qdfj9iehr",
-        "WEB_APPLICATION_CLIENT_ID": "196016802810-lnb3pk45vliiddoqokmgd7jfk33mb36c.apps.googleusercontent.com",
-        "PLAY_SERVICES_VERSION": "15.0.1"
+        "WEB_APPLICATION_CLIENT_ID": "196016802810-lnb3pk45vliiddoqokmgd7jfk33mb36c.apps.googleusercontent.com"
       },
       "cordova-plugin-nativestorage": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-inappbrowser": {},
-      "cordova-plugin-x-socialsharing": {},
+      "cordova-plugin-x-socialsharing": {
+        "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
+      },
       "cordova-plugin-sign-in-with-apple": {},
-      "cordova-plugin-androidx-adapter": {}
+      "cordova-plugin-androidx-adapter": {},
+      "cordova-plugin-firebasex": {
+        "ANDROID_FIREBASE_ANALYTICS_VERSION": "17.0.0",
+        "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true",
+        "FIREBASE_PERFORMANCE_COLLECTION_ENABLED": "true",
+        "FIREBASE_CRASHLYTICS_COLLECTION_ENABLED": "true",
+        "ANDROID_ICON_ACCENT": "#FF00FFFF",
+        "ANDROID_PLAY_SERVICES_TAGMANAGER_VERSION": "17.0.0",
+        "ANDROID_PLAY_SERVICES_AUTH_VERSION": "18.1.0",
+        "ANDROID_FIREBASE_MESSAGING_VERSION": "20.2.4",
+        "ANDROID_FIREBASE_CONFIG_VERSION": "19.2.0",
+        "ANDROID_FIREBASE_PERF_VERSION": "19.0.8",
+        "ANDROID_FIREBASE_AUTH_VERSION": "19.4.0",
+        "ANDROID_FIREBASE_INAPPMESSAGING_VERSION": "19.1.1",
+        "ANDROID_FIREBASE_FIRESTORE_VERSION": "21.6.0",
+        "ANDROID_FIREBASE_CRASHLYTICS_VERSION": "17.2.1",
+        "ANDROID_FIREBASE_CRASHLYTICS_NDK_VERSION": "17.2.1",
+        "ANDROID_GSON_VERSION": "2.8.6"
+      }
     }
   }
 }

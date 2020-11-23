@@ -22,11 +22,6 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
-        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
-            <application android:usesCleartextTraffic="true" />
-            <application android:debuggable="false" />
-        </edit-config>
-        <resource-file src="resources/android/xml/network_security_config.xml" target="app/src/main/res/xml/network_security_config.xml" />
         <allow-intent href="market:*" />
         <preference name="GradlePluginKotlinEnabled" value="true" />
         <preference name="AndroidXEnabled" value="true" />
@@ -117,6 +112,9 @@
     <plugin name="cordova-plugin-googleplus" spec="^8.2.1">
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.196016802810-uuir6evcgcbl9lvr2ger7s1qdfj9iehr" />
         <variable name="WEB_APPLICATION_CLIENT_ID" value="196016802810-lnb3pk45vliiddoqokmgd7jfk33mb36c.apps.googleusercontent.com" />
+    </plugin>
+    <plugin name="cordova-plugin-firebasex" spec="11.0.0">
+        <variable name="ANDROID_FIREBASE_ANALYTICS_VERSION" value="17.0.0" />
     </plugin>
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />

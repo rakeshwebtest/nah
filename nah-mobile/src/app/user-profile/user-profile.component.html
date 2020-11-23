@@ -74,15 +74,6 @@
       </super-tab-button>
     </super-tabs-toolbar>
     <super-tabs-container>
-      <super-tab>
-        <app-user-list #userFollowing [userId]="profileId" type="following" emptyMsg="No following"></app-user-list>
-      </super-tab>
-      <super-tab>
-        <app-user-list #userFollowers [userId]="profileId" type="followers" emptyMsg="No followers"></app-user-list>
-      </super-tab>
-      <super-tab *ngIf="!isOtherProfile">
-        <app-user-list #userBlocked [userId]="profileId" type="blocked" emptyMsg="No blocked users"></app-user-list>
-      </super-tab>
       <super-tab *ngIf="isOtherProfile">
         <app-group-list type="mygroups" [userId]="profileId"></app-group-list>
       </super-tab>
@@ -91,6 +82,15 @@
       </super-tab>
       <super-tab *ngIf="isOtherProfile">
         <app-meeting-list type="my-meeting" [userId]="profileId"></app-meeting-list>
+      </super-tab>
+      <super-tab>
+        <app-user-list #userFollowing [userId]="profileId" type="following" emptyMsg="No following"></app-user-list>
+      </super-tab>
+      <super-tab>
+        <app-user-list #userFollowers [userId]="profileId" type="followers" emptyMsg="No followers"></app-user-list>
+      </super-tab>
+      <super-tab *ngIf="!isOtherProfile">
+        <app-user-list #userBlocked [userId]="profileId" type="blocked" emptyMsg="No blocked users"></app-user-list>
       </super-tab>
     </super-tabs-container>
   </super-tabs>

@@ -32,6 +32,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
 import { FcmProviderService } from './utils/fcm-provider.service';
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
 import { AppRouterNavigateService } from './utils/app-router-navigate.service';
+import { FirebaseX } from "@ionic-native/firebase-x/ngx";
 // driverOrder: ['indexeddb', 'sqlite', 'websql']
 // IonicStorageModule.forRoot({
 //   name: '__nah',
@@ -77,6 +78,7 @@ import { AppRouterNavigateService } from './utils/app-router-navigate.service';
     FcmProviderService,
     GoogleAnalytics,
     FCM,
+    FirebaseX,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {
