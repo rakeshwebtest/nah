@@ -48,7 +48,7 @@ export class UserNotificationsComponent implements OnInit, OnDestroy {
     console.log('activeRouter', this.activeRouter.snapshot.params);
 
     this.list$ = this.postBehavior.asObservable().pipe(
-      scan((acc, curr) => {
+      scan((acc, curr:any) => {
         if (curr.opt && curr.opt.type === 'delete') {
           let index = acc.findIndex((elt) => elt.id === curr.opt.id);
           acc.splice(index, 1);

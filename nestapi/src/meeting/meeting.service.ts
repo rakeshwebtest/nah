@@ -158,7 +158,7 @@ export class MeetingService {
         meetingDate.setHours(meetingStartTime.getHours());
         meetingDate.setMinutes(meetingStartTime.getMinutes());
         meetingDate.setSeconds(meetingStartTime.getSeconds());
-        const convertStartDate :any = meetingStartTime;
+        const convertStartDate :any = meetingDate;
         _meeting.meetingDate  = convertStartDate;
         //console.log('_meeting',new Date(_meeting.startTime).setDate(new Date(meeting.meetingDate).getDay()).toString());
 
