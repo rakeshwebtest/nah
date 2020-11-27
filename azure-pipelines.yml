@@ -15,8 +15,14 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 - script: |
+    cd nah-mobile
+    npm -g @angular/cli ionic cordova node-gyp 
+    npm install
+    npm run android:release
+  displayName: 'android build'
+- script: |
     cd nestapi
-    npm @nestjs/cli
+    npm @nestjs/cli  
     npm install
     npm run build
   displayName: 'npm install and api build'
