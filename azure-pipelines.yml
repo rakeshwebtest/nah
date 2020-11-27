@@ -18,6 +18,7 @@ steps:
     cd nah-mobile
     npm -g @angular/cli ionic cordova node-gyp 
     npm install
+    ionic cordova platform add android
     npm run android:release
   displayName: 'android build'
 - script: |
