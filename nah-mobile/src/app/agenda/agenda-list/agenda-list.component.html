@@ -17,8 +17,8 @@
         <ion-label *ngIf="agenda.title">{{ agenda.title }}</ion-label> 
         <ion-label *ngIf="!agenda.title">No title</ion-label> 
         <ion-label color="success" *ngIf="agenda.status == 'publish'">{{ agenda.status + 'ed' | titlecase }}</ion-label> 
-        <ion-label class="text-orange" *ngIf="agenda.status == 'draft'">{{ agenda.status + 'ed' | titlecase }}
-          <ion-icon name="create" *ngIf="agenda.status == 'draft'" [routerLink]="['/agenda/create/' + agenda.id]"></ion-icon>
+        <ion-label [routerLink]="['/agenda/create/' + agenda.id]" class="text-orange" *ngIf="agenda.status == 'draft'">{{ agenda.status + 'ed' | titlecase }}
+          <ion-icon name="create" *ngIf="agenda.status == 'draft'" ></ion-icon>
         </ion-label> 
       </ion-card-title>
     </ion-card-header>

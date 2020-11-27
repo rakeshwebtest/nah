@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppHttpClient } from 'src/app/utils';
 import { AppRouterNavigateService } from 'src/app/utils/app-router-navigate.service';
 import { NgControlStatus } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agenda-list',
@@ -10,7 +11,7 @@ import { NgControlStatus } from '@angular/forms';
 })
 export class AgendaListComponent implements OnInit {
   agendaList = [];
-  constructor(private http: AppHttpClient, public appNav: AppRouterNavigateService) { }
+  constructor(private http: AppHttpClient, public appNav: AppRouterNavigateService, private router: Router) { }
   searchKey: any;
   cloneAgendaList = [];
   ngOnInit() {
@@ -52,6 +53,9 @@ export class AgendaListComponent implements OnInit {
     // if (!this.searchKey) {
     //   this.agendaList = this.cloneAgendaList;
     // }
+  }
+  createAgenda() {
+    this.router.navigate(['/agenda/create']);
   }
 
 }

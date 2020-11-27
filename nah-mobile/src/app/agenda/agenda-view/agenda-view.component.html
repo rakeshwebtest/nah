@@ -43,13 +43,19 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-col size="12" class="old-agenda ion-justify-content-center ion-padding-b-0" *ngIf="showShowOldAgenda">
+    <!-- <ion-col size="12" class="old-agenda ion-justify-content-center ion-padding-b-0" *ngIf="showShowOldAgenda">
       <ion-badge color="danger">
         <a class="custom-link" [routerLink]="['/agenda/list']">All Agenda's</a>
       </ion-badge>
-    </ion-col>
+    </ion-col> -->
   </ion-card-content>
+
 </ion-card>
+<ion-col size="12" class="old-agenda ion-justify-content-center" *ngIf="showAgendaBtn">
+  <ion-badge color="danger">
+    <a class="custom-link" [routerLink]="['/agenda/list']">All Agenda's</a>
+  </ion-badge>
+</ion-col>
 
 <ion-row *ngIf="showCreateBtn">
   <ion-button (click)="createAgenda()">Create Agenda</ion-button>

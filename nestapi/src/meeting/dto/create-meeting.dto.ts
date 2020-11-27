@@ -49,9 +49,9 @@ export class CreateMeetingDto {
     cityId: string;
     @ApiProperty()
     @IsNotEmpty({ message: "Required meetingDate" })
-    @Validate(CustomDateCheck, {
-        message: "Please Choose Valid Date"
-    })
+    // @Validate(CustomDateCheck, {
+    //     message: "Please Choose Valid Date"
+    // })
     meetingDate: string;
     @ApiProperty()
     endDate: string;

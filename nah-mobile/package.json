@@ -14,7 +14,7 @@
     "android": "ionic cordova run android --device --livereload",
     "ios-live": "ionic cordova run ios --device --livereload",
     "android:build": "ionic cordova build android --verbose",
-    "android:release": "ionic cordova build --prod  android  --verbose -- --keystore=keys/android/nah.keystore --storePassword=nahnah --alias=key0 --password=nahnah"
+    "android:release": "ionic cordova build --prod  android --release --verbose -- --keystore=keys/android/nah.keystore --storePassword=nahnah --alias=key0 --password=nahnah"
   },
   "private": true,
   "dependencies": {
@@ -86,7 +86,7 @@
     "@angular/compiler-cli": "~8.1.2",
     "@angular/language-service": "~8.1.2",
     "@babel/compat-data": "7.8.0",
-    "@ionic/angular-toolkit": "^2.1.1",
+    "@ionic/angular-toolkit": "2.3.0",
     "@ionic/app-scripts": "^3.2.2",
     "@ionic/lab": "^3.2.9",
     "@types/jasmine": "~3.3.8",
@@ -117,7 +117,8 @@
   "cordova": {
     "platforms": [
       "ios",
-      "android"
+      "android",
+      "browser"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
