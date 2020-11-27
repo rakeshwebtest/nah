@@ -10,6 +10,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: AndroidSigning@3
+  inputs:
+    apkFiles: '**/*.apk'
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
