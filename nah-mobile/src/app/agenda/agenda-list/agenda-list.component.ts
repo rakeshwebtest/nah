@@ -1,50 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import { AppHttpClient } from 'src/app/utils';
-import { AppRouterNavigateService } from 'src/app/utils/app-router-navigate.service';
-import { NgControlStatus } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { AppHttpClient } from "src/app/utils";
+import { AppRouterNavigateService } from "src/app/utils/app-router-navigate.service";
+import { NgControlStatus } from "@angular/forms";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-agenda-list',
-  templateUrl: './agenda-list.component.html',
-  styleUrls: ['./agenda-list.component.scss'],
+  selector: "app-agenda-list",
+  templateUrl: "./agenda-list.component.html",
+  styleUrls: ["./agenda-list.component.scss"],
 })
 export class AgendaListComponent implements OnInit {
   agendaList = [];
-  constructor(private http: AppHttpClient, public appNav: AppRouterNavigateService, private router: Router) { }
+  constructor(
+    private http: AppHttpClient,
+    public appNav: AppRouterNavigateService,
+    private router: Router
+  ) {}
   searchKey: any;
   cloneAgendaList = [];
   ngOnInit() {
-    this.http.get('agenda').subscribe(res => {
+    this.http.get("agenda").subscribe((res) => {
       if (res.data) {
-        res.data.map(item=>{
-          item.topics.map(t=>{
-            t.name = 'Say No To '+ t.name;
+        res.data.map((item) => {
+          item.topics.map((t) => {
+            t.name = "Say No To " + t.name;
             return t;
           });
           return item;
-        })
+        });
         this.agendaList = res.data;
         this.cloneAgendaList = res.data;
       }
     });
   }
   topicDetails(topic) {
-    console.log('topic details -->', topic);
+    console.log("topic details -->", topic);
   }
   searchFilter(event) {
     this.searchKey = event.target.value;
     // this.getGroups();
-    const data = this.cloneAgendaList.filter(item => {
+    const data = this.cloneAgendaList.filter((item) => {
       let isItem = false;
-      item.topics.forEach(topic => {
-        const result = (topic.name.toLowerCase().indexOf(this.searchKey.toLowerCase()) > -1);
+      item.topics.forEach((topic) => {
+        const result =
+          topic.name.toLowerCase().indexOf(this.searchKey.toLowerCase()) > -1;
         if (result) {
           isItem = true;
         }
       });
-
-      const titleResult = (item.title.toLowerCase().indexOf(this.searchKey.toLowerCase()) > -1);
+      let titleResult;
+      if (item.title) {
+        titleResult =
+          item.title.toLowerCase().indexOf(this.searchKey.toLowerCase()) > -1;
+      }
       if (isItem || titleResult) {
         return item;
       }
@@ -55,7 +63,6 @@ export class AgendaListComponent implements OnInit {
     // }
   }
   createAgenda() {
-    this.router.navigate(['/agenda/create']);
+    this.router.navigate(["/agenda/create"]);
   }
-
 }
