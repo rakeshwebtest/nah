@@ -138,6 +138,9 @@ ion-select {
   top: 50%;
   display: block;
 }
+.group-create-modal .modal-wrapper.ios {
+  position: static;
+}
 .ellipsas {
   overflow: hidden;
   display: -webkit-box;

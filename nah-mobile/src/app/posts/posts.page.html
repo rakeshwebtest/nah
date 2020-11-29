@@ -14,10 +14,14 @@
     </super-tabs-toolbar>
     <super-tabs-container>
       <super-tab>
+        <ion-content>
         <app-post-list #allPost  [userId]="profileId" type="all" ></app-post-list>
+        </ion-content>
       </super-tab>
       <super-tab>
+        <ion-content>
         <app-post-list #myPost [userId]="profileId" type="my-posts"></app-post-list>
+        </ion-content>
       </super-tab>
     </super-tabs-container>
   </super-tabs>

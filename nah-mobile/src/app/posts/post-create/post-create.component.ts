@@ -36,7 +36,8 @@ export class PostCreateComponent implements OnInit {
       hooks: {
         onInit: (f) => {
           console.log('this.agendaS.agenda', this.agendaS.agenda);
-          f.templateOptions.options = (this.agendaS.agenda) ? this.agendaS.agenda.topics : [];
+          const data = this.agendaS.agenda.topics.map(t=>{ t.name = 'Say No To '+t.name; return t;});
+          f.templateOptions.options = (this.agendaS.agenda) ? data : [];
         }
       }
     },

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
+import { PostListComponent } from './post-list/post-list.component';
 
 @Component({
   selector: 'app-posts',
@@ -10,6 +11,10 @@ export class PostsPage implements OnInit {
   agendaTitle = 'Your Agenda';
   userInfo: any;
   profileId: any;
+  activeTabIndex = 0;
+  @ViewChild('allPost', null) allPost: PostListComponent;
+  @ViewChild('myPost', null) myPost: PostListComponent;
+
   constructor(private authService: AuthenticationService) { }
   ionViewDidLoad() {
     console.log('ionViewDidLoad');
@@ -18,7 +23,9 @@ export class PostsPage implements OnInit {
   //   console.log('ionViewDidEnter');
   // }
   ionViewWillEnter() {
-    console.log('ionViewWillEnter');
+    this.activeTabIndex = 0;
+    this.allPost.reload();
+    this.myPost.reload();
     // const params = this.activeRouter.snapshot.routeConfig.path;
     // this.offset = 0;
     // this.loadPosts();

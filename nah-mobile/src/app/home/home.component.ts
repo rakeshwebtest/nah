@@ -123,7 +123,7 @@ export class HomeComponent implements OnInit{
 
     try {
       const appleCredential: AppleSignInResponse = await this.signInWithApple.signin({
-        requestedScopes: [0,0]
+        requestedScopes: []
       });
       const credential = new firebase.auth.OAuthProvider('apple.com').credential(
         appleCredential.identityToken

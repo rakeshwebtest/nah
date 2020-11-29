@@ -204,7 +204,7 @@ export class PostService {
                 break;
             default:
                 msgS = 'Added to bookmark successfully';
-                msgF = "Removed post";
+                msgF = "Removed bookmark";
                 _entity = new PostBookmarksEntity();
                 _repo = this.postBookmarksRepository;
                 break;

@@ -55,7 +55,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.userInfo = this.authS.getUserInfo();
     console.log('this.userInfo', this.userInfo);
     this.list$ = this.postBehavior.asObservable().pipe(
-      scan((acc, curr) => {
+      scan((acc, curr:any) => {
         if (curr.opt && curr.opt.type === 'delete') {
           let index = acc.findIndex((elt) => elt.id === curr.opt.id);
           acc.splice(index, 1);
@@ -191,6 +191,7 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   reload() {
     this.offset = 0;
+    this.postBehavior.next({ opt: 'list', list: [] });
     this.loadPosts();
   }
   doRefresh(reload) {
