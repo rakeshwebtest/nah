@@ -170,8 +170,7 @@ export class MeetingCreateComponent implements OnInit {
           label: 'Start Time',
           placeholder: 'Choose Time',
           displayFormat: 'hh mm A',
-          pickerFormat: 'hh mm A',
-          minDate: this.getCurrentDateString(null),
+          pickerFormat: 'hh mm A'
         }
       },
       {

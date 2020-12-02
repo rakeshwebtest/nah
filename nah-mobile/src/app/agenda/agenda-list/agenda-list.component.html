@@ -30,7 +30,7 @@
       <ion-row>
         <ion-col class="say-no-list no-red-border">
           <p *ngFor="let topic of agenda.topics; let last = last" class="text-primary text-center ion-ellipsis" (click)="appNav.goToTopicDetails(topic)">
-            <ion-label>{{ topic.name | titlecase }} </ion-label>
+            <ion-label>{{ topic.aliasName | titlecase }} </ion-label>
           </p>
         </ion-col>
       </ion-row>

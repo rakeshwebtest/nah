@@ -44,7 +44,7 @@ export class GroupController {
         const sessionUser = req.sessionUser;
         const isGroup = await this.service.checkGroupName(group);
         if (isGroup) {
-            throw new HttpException({ message: 'Already group name created', success: false }, HttpStatus.BAD_REQUEST);
+            throw new HttpException({ message: 'Group name is already available', success: false }, HttpStatus.BAD_REQUEST);
         } else {
             const data: any = await this.service.updateGroup(group, sessionUser);
             data.followers = [];

@@ -152,9 +152,10 @@ export class MeetingService {
         _meeting.contactMobile = meeting.contactMobile;
         _meeting.isPublished = parseInt(meeting.isPublished);
         
-        console.log('fss',meeting.startTime);
-        const meetingDate =new Date(meeting.meetingDate);
+
+        const meetingDate = new Date(meeting.meetingDate);
         const meetingStartTime  = new Date(meeting.startTime);
+        meetingDate.setDate(meetingDate.getDate());
         meetingDate.setHours(meetingStartTime.getHours());
         meetingDate.setMinutes(meetingStartTime.getMinutes());
         meetingDate.setSeconds(meetingStartTime.getSeconds());

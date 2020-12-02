@@ -23,7 +23,7 @@ export class AgendaListComponent implements OnInit {
       if (res.data) {
         res.data.map((item) => {
           item.topics.map((t) => {
-            t.name = "Say No To " + t.name;
+            t.aliasName = "Say No To " + t.name;
             return t;
           });
           return item;
@@ -43,7 +43,7 @@ export class AgendaListComponent implements OnInit {
       let isItem = false;
       item.topics.forEach((topic) => {
         const result =
-          topic.name.toLowerCase().indexOf(this.searchKey.toLowerCase()) > -1;
+          topic.aliasName.toLowerCase().indexOf(this.searchKey.toLowerCase()) > -1;
         if (result) {
           isItem = true;
         }

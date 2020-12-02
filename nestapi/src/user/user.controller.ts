@@ -154,14 +154,14 @@ export class UsersController {
         const sessionUser = req.sessionUser;
         const unfollow: any = await this.service.unfollow(sessionUser.id, profileUser.userId);
         const data = await this.service.profileBlock(sessionUser.id, profileUser.userId);
-        return { message: 'Profile blocked successfully', success: true, data };
+        return { message: 'User blocked successfully', success: true, data };
     }
 
     @Post('profileUnblock')
     async profileUnblock(@Body() profileUser: ProfileBlockDto, @Req() req) {
         const sessionUser = req.sessionUser;
         const data: any = await this.service.profileUnblock(sessionUser.id, profileUser.userId);
-        return { message: 'Profile unblocked successfully', success: true, data };
+        return { message: 'User unblocked successfully', success: true, data };
     }
 
     @ApiBearerAuth()

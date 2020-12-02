@@ -70,7 +70,7 @@ export class GroupListComponent implements OnInit {
     if (this.type === "mygroups") {
       url += "&createdBy=true";
     } else {
-      url += "&notCreatedBy=true";
+      // url += "&notCreatedBy=true";
     }
     url += "&skip=" + this.groupList.length;
     url += "&take=" + this.take;
