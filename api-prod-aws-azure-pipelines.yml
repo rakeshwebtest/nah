@@ -1,0 +1,65 @@
+# Node.js with Angular
+# Build a Node.js project that uses Angular.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+  
+- script: |
+    cd nestapi
+    npm @nestjs/cli  
+    npm install
+    npm run build
+  displayName: 'npm install and api build'
+
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: 'nestapi/dist'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: 'nestapi/dist.zip'
+    replaceExistingArchive: true
+
+- script: |
+   cd nestapi &&  ls -lR
+  displayName: 'remove node_modules'
+
+- task: CopyFilesOverSSH@0
+  inputs:
+    sshEndpoint: 'NAH - AWS - Production Server'
+    sourceFolder: 'nestapi'
+    contents: '**/dist.zip'
+    targetFolder: '/var/www/thegoyay.com/api'
+    readyTimeout: '20000'
+    failOnEmptySource: true
+
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'NAH - AWS - Production Server'
+    runOptions: 'commands'
+    commands: 'unzip -o /var/www/thegoyay.com/api/dist.zip -d /var/www/thegoyay.com/api/'
+    readyTimeout: '20000'
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'NAH - AWS - Production Server'
+    runOptions: 'commands'
+    commands: 'cd /var/www/thegoyay.com/api && forever restart main.js'
+    readyTimeout: '20000'
+
+# - script: |
+#     npm install -g @angular/cli
+#     cd nah-mobile
+#     npm install
+#     ng build --prod
+#   displayName: 'npm install and build'
