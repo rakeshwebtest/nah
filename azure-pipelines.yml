@@ -32,7 +32,7 @@ steps:
     replaceExistingArchive: true
 
 - script: |
-   cd nestapi &&  ls
+   cd nestapi &&  ls -lR
   displayName: 'remove node_modules'
 
 - task: CopyFilesOverSSH@0
