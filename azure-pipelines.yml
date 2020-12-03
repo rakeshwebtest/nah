@@ -39,7 +39,7 @@ steps:
   inputs:
     sshEndpoint: 'NAH - AWS - Production Server'
     sourceFolder: '$(System.DefaultWorkingDirectory)/nestapi/files.zip'
-    contents: 
+    contents: '*'
     targetFolder: '/var/www/thegoyay.com/api'
     readyTimeout: '20000'
 
