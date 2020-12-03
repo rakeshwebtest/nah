@@ -21,23 +21,24 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and api build'
-- script: |
-    rm -r nestapi/node_modules
-  displayName: 'remove node_modules'
+
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: 'nestapi/dist'
+    rootFolderOrFile: '$(Build.BinariesDirectory)/nestapi/dist'
     includeRootFolder: true
-    archiveType: 'tar'
-    archiveFile: 'nestapi/dist.tar'
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/dist.zip'
     replaceExistingArchive: true
 
+- script: |
+    cd ls
+  displayName: 'remove node_modules'
 
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'NAH - AWS - Production Server'
-    sourceFolder: 'nestapi/dist.tar'
+    sourceFolder: '$(Build.ArtifactStagingDirectory)/dist.zip'
     contents: '**'
     targetFolder: '/var/www/thegoyay.com/api'
     readyTimeout: '20000'
