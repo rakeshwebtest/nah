@@ -25,10 +25,19 @@ steps:
     rm -r nestapi/node_modules
   displayName: 'remove node_modules'
 
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: 'nestapi/dist'
+    includeRootFolder: true
+    archiveType: 'tar'
+    archiveFile: 'nestapi/dist.zip'
+    replaceExistingArchive: true
+
+
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'NAH - AWS - Production Server'
-    sourceFolder: 'nestapi/dist'
+    sourceFolder: 'nestapi/dist.zip'
     contents: '**'
     targetFolder: '/var/www/thegoyay.com/api'
     readyTimeout: '20000'
