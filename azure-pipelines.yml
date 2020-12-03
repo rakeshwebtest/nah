@@ -38,8 +38,8 @@ steps:
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'NAH - AWS - Production Server'
-    sourceFolder: 'nestapi/files.zip'
-    contents: '**'
+    sourceFolder: 'nestapi'
+    contents: '**/files.zip'
     targetFolder: '/var/www/thegoyay.com/api'
     readyTimeout: '20000'
     failOnEmptySource: true
