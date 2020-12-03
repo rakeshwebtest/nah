@@ -25,10 +25,10 @@ steps:
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)/nestapi/dist'
+    rootFolderOrFile: 'nestapi/dist/*'
     includeRootFolder: true
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/dist.zip'
+    archiveFile: 'nestapi/dist.zip'
     replaceExistingArchive: true
 
 - script: |
