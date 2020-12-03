@@ -27,17 +27,17 @@ steps:
 
 - task: CopyFilesOverSSH@0
   inputs:
-    sshEndpoint: 'nah Degitalocean'
+    sshEndpoint: 'NAH - AWS - Production Server'
     sourceFolder: 'nestapi/dist'
     contents: '**'
-    targetFolder: 'api'
+    targetFolder: '/var/www/thegoyay.com/api'
     readyTimeout: '20000'
 
 - task: SSH@0
   inputs:
-    sshEndpoint: 'nah Degitalocean'
+    sshEndpoint: 'NAH - AWS - Production Server'
     runOptions: 'commands'
-    commands: 'forever restart /home/nah/api/main.js'
+    commands: 'cd /var/www/thegoyay.com/api && forever restart main.js'
     readyTimeout: '20000'
 
 # - script: |
