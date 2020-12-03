@@ -48,6 +48,7 @@
     "@ngx-gallery/core": "^5.0.0-beta.0",
     "@ngx-gallery/gallerize": "^5.0.0-beta.0",
     "@ngx-gallery/lightbox": "^5.0.0-beta.0",
+    "cordova-android": "9.0.0",
     "cordova-android-play-services-gradle-release": "4.0.0",
     "cordova-plugin-browsersync": "^1.1.0",
     "cordova-plugin-device": "^2.0.2",

@@ -1,8 +1,8 @@
 version: 2
 defaults: &defaults
-  working_directory: ~/ionicapp
+  working_directory: ~/repo
   docker:
-    - image: trkrakesh/nah-angular
+    - image: circleci/android:api-28-node
   environment:
     JVM_OPTS: -Xmx3200m
 
@@ -16,15 +16,31 @@ jobs:
             command: |
               echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
               echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
-
+      - run: 
+          name: "Install gradle"
+          command: |
+              wget https://services.gradle.org/distributions/gradle-5.4.1-bin.zip -P /tmp
+              sudo unzip -d /opt/gradle /tmp/gradle-*.zip
+              echo 'export GRADLE_HOME=/opt/gradle/gradle-5.4.1' >> $BASH_ENV
+              echo 'export PATH=$PATH:/opt/gradle/gradle-5.4.1/bin' >> $BASH_ENV
+              source $BASH_ENV
+      - run:
+            name: "move nah mobile folder"
+            command: |
+              cd nah-mobile
+      - run:
+            name: "Install ionic and cordova"
+            command: |
+              sudo npm install -g ionic cordova node-gyp
       - run:
             name: "Install npm packages"
             command: |
-              cd nah-mobile && npm install
+              cd nah-mobile && yarn install
       - run:
             name: "Install Cordova plugins and add android platform"
             command: |
-              cd nah-mobile && npm run android:release
+              cd nah-mobile && ionic cordova platform add android --save --debug --nofetch
+              ionic config set -g telemetry true
       - run:
             name: "Generate apk"
             command: |
