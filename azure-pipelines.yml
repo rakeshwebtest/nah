@@ -30,14 +30,14 @@ steps:
     rootFolderOrFile: 'nestapi/dist'
     includeRootFolder: true
     archiveType: 'tar'
-    archiveFile: 'nestapi/dist.zip'
+    archiveFile: 'nestapi/dist.tar'
     replaceExistingArchive: true
 
 
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'NAH - AWS - Production Server'
-    sourceFolder: 'nestapi/dist.zip'
+    sourceFolder: 'nestapi/dist.tar'
     contents: '**'
     targetFolder: '/var/www/thegoyay.com/api'
     readyTimeout: '20000'
