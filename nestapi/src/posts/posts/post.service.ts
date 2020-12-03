@@ -42,6 +42,7 @@ export class PostService {
             .leftJoin('p.topic', 'topic')
             .leftJoin('p.bookmark', 'bookmark')
             .leftJoin('p.photos', 'photos')
+            .leftJoin('p.videos', 'videos')
             .leftJoin('bookmark.user', 'bu')
             .leftJoinAndMapOne("p.bookmark", PostBookmarksEntity, "isBookmarkUser", "isBookmarkUser.user.id = " + sessionUser.id + " && isBookmarkUser.post.id = p.id")
             .leftJoinAndMapOne("p.like", PostLikeEntity, "isLikeUser", "isLikeUser.user.id = " + sessionUser.id + " && isLikeUser.post.id = p.id")
@@ -89,7 +90,7 @@ export class PostService {
         });
 
         // get single post details
-        db.select(["p", "u", "topic", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos'])
+        db.select(["p", "u", "topic", "isBookmarkUser", "isLikeUser", "isDislikeUser", 'photos','videos'])
             .orderBy({ "p.createdDate": "DESC" });
         db.take(take);
         db.skip(skip);
@@ -197,7 +198,7 @@ export class PostService {
                 break;
             case 'dislike':
                 msgS = 'Disliked';
-                msgF = "Removed disliked";
+                msgF = "Removed dislik";
                 await this.postLikeRepository.delete({ post: { id: data.postId }, user: { id: data.userId } }); // delete dislike if exit
                 _entity = new PostDislikeEntity();
                 _repo = this.postDislikeRepository;

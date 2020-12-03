@@ -84,6 +84,16 @@ export class PostsController {
         return { message: 'Deleted successfull', success: true, data };
     }
 
+     /**
+     *
+     * @param id
+     */
+    @Delete('comment/reply/:commentId')
+    async deleteReplayComment(@Param('commentId') id: number) {
+        const data = await this.postService.deleteComment(null,id);
+        return { message: 'Deleted successfull', success: true, data };
+    }
+
     @Delete(':id')
     async deletePost(@Param('id') id: any) {
       const data = await this.postService.deletePost(id);

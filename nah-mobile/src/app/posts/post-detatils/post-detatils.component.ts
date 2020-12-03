@@ -163,6 +163,7 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
         };
         this.http.post('posts/comment', payLoad).subscribe(res => {
           if (res.data) {
+            this.post.commentCount++;
             this.scrollToCommentBox('comment-box');
             const _comment = res.data;
             _comment.createdBy = userInfo;
@@ -206,7 +207,9 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
             }
 
             this.http.delete(_url).subscribe(res => {
-
+              if (!reply){
+                this.post.commentCount--;
+              }
             });
             items.splice(inx, 1);
 
