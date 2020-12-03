@@ -15,20 +15,20 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
   
-- script: |
-    cd nestapi
-    npm @nestjs/cli  
-    npm install
-    npm run build
-  displayName: 'npm install and api build'
+# - script: |
+#     cd nestapi
+#     npm @nestjs/cli  
+#     npm install
+#     npm run build
+#   displayName: 'npm install and api build'
 
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: 'nestapi/dist/*'
+    rootFolderOrFile: 'nestapi/files/*'
     includeRootFolder: true
     archiveType: 'zip'
-    archiveFile: 'nestapi/dist.zip'
+    archiveFile: 'nestapi/files.zip'
     replaceExistingArchive: true
 
 - script: |
@@ -38,7 +38,7 @@ steps:
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'NAH - AWS - Production Server'
-    sourceFolder: '$(Build.ArtifactStagingDirectory)/dist.zip'
+    sourceFolder: 'nestapi/files.zip'
     contents: '**'
     targetFolder: '/var/www/thegoyay.com/api'
     readyTimeout: '20000'
