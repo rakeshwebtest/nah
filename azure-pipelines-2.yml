@@ -83,6 +83,13 @@ steps:
 - script: |
     cd nah-mobile && mkdir www && cordova plugin search bar code && ls 
   displayName: 'create www dir'
+  
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker hub'
+    repository: 'trkrakesh/nah-angular'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
 
 
 # - task: Xcode@5
@@ -121,18 +128,18 @@ steps:
 
 
   
-- task: CordovaBuild@1
-  inputs:
-    platform: 'android'
-    configuration: '$(Configuration)'
-    cordovaVersion: '8.0.0'
-    antBuild: true
-    p12: '$(p12Certificate.secureFilePath)'
-    p12pwd: '$(key.p12pswd)'
-    provProfile: '$(adhocProvision.secureFilePath)'
-    cwd: 'nah-mobile'
-    outputPattern: 'bin'
-    targetEmulator: false
+# - task: CordovaBuild@1
+#   inputs:
+#     platform: 'android'
+#     configuration: '$(Configuration)'
+#     cordovaVersion: '8.0.0'
+#     antBuild: true
+#     p12: '$(p12Certificate.secureFilePath)'
+#     p12pwd: '$(key.p12pswd)'
+#     provProfile: '$(adhocProvision.secureFilePath)'
+#     cwd: 'nah-mobile'
+#     outputPattern: 'bin'
+#     targetEmulator: false
 
 
 
