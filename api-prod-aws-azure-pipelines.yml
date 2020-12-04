@@ -48,7 +48,7 @@ steps:
   inputs:
     sshEndpoint: 'NAH - AWS - Production Server'
     runOptions: 'commands'
-    commands: 'unzip -o /var/www/thegoyay.com/api/dist.zip  /var/www/thegoyay.com/api/'
+    commands: 'unzip -j /var/www/thegoyay.com/api/dist.zip -d /var/www/thegoyay.com/api/'
     readyTimeout: '20000'
 - task: SSH@0
   inputs:
