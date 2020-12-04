@@ -48,13 +48,13 @@ steps:
   inputs:
     sshEndpoint: 'NAH - AWS - Production Server'
     runOptions: 'commands'
-    commands: 'unzip -j /var/www/thegoyay.com/api/dist.zip -d /var/www/thegoyay.com/api/'
+    commands: 'unzip -o /var/www/thegoyay.com/api/dist.zip  /var/www/thegoyay.com/api/'
     readyTimeout: '20000'
 - task: SSH@0
   inputs:
     sshEndpoint: 'NAH - AWS - Production Server'
     runOptions: 'commands'
-    commands: 'cd /var/www/thegoyay.com/api && forever restart main.js'
+    commands: 'cd /var/www/thegoyay.com && forever restart api/main.js'
     readyTimeout: '20000'
 
 # - script: |
