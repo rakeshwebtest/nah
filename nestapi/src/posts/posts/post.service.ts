@@ -198,7 +198,7 @@ export class PostService {
                 break;
             case 'dislike':
                 msgS = 'Disliked';
-                msgF = "Removed dislik";
+                msgF = "Removed dislike";
                 await this.postLikeRepository.delete({ post: { id: data.postId }, user: { id: data.userId } }); // delete dislike if exit
                 _entity = new PostDislikeEntity();
                 _repo = this.postDislikeRepository;
