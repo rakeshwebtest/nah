@@ -197,6 +197,7 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
         {
           text: 'Yes',
           handler: () => {
+            this.replyMsg = {};
             const comment = items[inx];
             let _url = 'posts/comment/';
             if (reply) {
@@ -205,7 +206,6 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
             } else {
               _url += comment.id;
             }
-
             this.http.delete(_url).subscribe(res => {
               if (!reply){
                 this.post.commentCount--;

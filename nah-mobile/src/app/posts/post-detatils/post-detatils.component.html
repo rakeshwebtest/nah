@@ -8,7 +8,7 @@
       </ion-text>
     </ion-buttons>
     <ion-row class="profile-settings text-10" *ngIf="post">
-      <ion-icon style="cursor: pointer;" name="md-create" *ngIf="isOwner && post.isPublished == 0" (click)="editPost(post)" color="light"></ion-icon>
+      <ion-icon style="cursor: pointer;" name="md-create" *ngIf="isOwner" (click)="editPost(post)" color="light"></ion-icon>
       <ion-icon style="cursor: pointer;" name="md-trash" *ngIf="isOwner" (click)="deletePost(post)" color="light"></ion-icon>
     </ion-row>
   </ion-toolbar>

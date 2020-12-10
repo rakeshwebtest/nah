@@ -54,7 +54,7 @@ steps:
   inputs:
     sshEndpoint: 'NAH - AWS - Production Server'
     runOptions: 'commands'
-    commands: 'cd /var/www/thegoyay.com/api && forever restart main.js'
+    commands: 'cd /var/www/thegoyay.com && forever restart api/main.js'
     readyTimeout: '20000'
 
 # - script: |
