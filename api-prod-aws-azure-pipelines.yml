@@ -35,6 +35,13 @@ steps:
    cd nestapi &&  ls -lR
   displayName: 'remove node_modules'
 
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'NAH - AWS - Production Server'
+    runOptions: 'commands'
+    commands: 'rm -rf /var/www/thegoyay.com/api/*'
+    readyTimeout: '20000'
+
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'NAH - AWS - Production Server'
@@ -48,8 +55,9 @@ steps:
   inputs:
     sshEndpoint: 'NAH - AWS - Production Server'
     runOptions: 'commands'
-    commands: 'rm -rf /var/www/thegoyay.com/api/* && unzip -o /var/www/thegoyay.com/api/dist.zip -d /var/www/thegoyay.com/api/'
+    commands: 'unzip -o /var/www/thegoyay.com/api/dist.zip -d /var/www/thegoyay.com/api/'
     readyTimeout: '20000'
+
 - task: SSH@0
   inputs:
     sshEndpoint: 'NAH - AWS - Production Server'
