@@ -44,7 +44,7 @@ RUN apt-get install -y \
 RUN curl -sL https://deb.nodesource.com/setup_${NODEJS_VERSION}.x | bash -
 RUN apt-get update 
 RUN apt-get install -y nodejs 
-RUN npm install -g cordova ionic@${IONIC_VERSION} 
+RUN npm install -g --unsafe-perm cordova ionic@${IONIC_VERSION} 
 RUN cd /tmp 
 RUN curl -fSLk https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip -o sdk-tools-linux-${ANDROID_SDK_VERSION}.zip 
 RUN unzip sdk-tools-linux-${ANDROID_SDK_VERSION}.zip 

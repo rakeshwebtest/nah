@@ -2,7 +2,7 @@ version: 2
 defaults: &defaults
   working_directory: ~/ionicapp
   docker:
-    - image: trkrakesh/nah-angular
+    - image: beevelop/ionic
   environment:
     JVM_OPTS: -Xmx3200m
 
