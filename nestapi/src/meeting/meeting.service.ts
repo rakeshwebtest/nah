@@ -207,10 +207,10 @@ export class MeetingService {
         const isMember = await this.meetingMembersRepository.findOne(meetingMember);
         if (isMember) {
             await this.meetingMembersRepository.delete(isMember);
-            return { message: 'Successfully Un-join Meeting', isMember };
+            return { message: 'Successfully unjoined  meeting', isMember };
         } else {
             const data = await this.meetingMembersRepository.save(meetingMember);
-            return { message: 'Successfully Join Meeting', data };
+            return { message: 'Successfully joined meeting', data };
         }
     }
     async addComment(commentDto: CommentDto) {
@@ -317,7 +317,7 @@ export class MeetingService {
         report.createdBy.id = reportDto.userId;
         report.comment = reportDto.comment;
         const data = await this.meetingReportRepository.save(report);
-        return { message: 'Submited Successfully', data };
+        return { message: 'Submited successfully', data };
     }
     async deleteMeeting(meetingId) {
         const meeting = new MeetingEntity();

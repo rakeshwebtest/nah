@@ -11,6 +11,8 @@ import { AgendaService } from './agenda.service';
   styleUrls: ['./agenda.page.scss'],
 })
 export class AgendaPage implements OnInit {
+  showInitalMsg = false;
+  submitted = false;
   model: any = {
     isPublish: 0,
     topics: [
@@ -72,6 +74,10 @@ export class AgendaPage implements OnInit {
   constructor(private http: AppHttpClient, private router: Router, private activeRouter: ActivatedRoute, private agendaService: AgendaService) { }
 
   ngOnInit() {
+    this.submitted = false;
+    if(this.activeRouter.snapshot.queryParams.redirectUrl == 'post'){
+      this.showInitalMsg = true;
+    }
     if (this.activeRouter.snapshot.params.id) {
       this.getUserAgenda(this.activeRouter.snapshot.params.id);
     }
@@ -92,6 +98,7 @@ export class AgendaPage implements OnInit {
     } else {
       this.model.isPublish = 0;
     }
+    this.submitted = true;
     this.http.post('agenda', this.model).subscribe(res => {
       if (res.data) {
         this.isPublish = res.data.isPublish;
@@ -102,6 +109,8 @@ export class AgendaPage implements OnInit {
         }
         this.router.navigate(['/dashboard/posts']);
       }
+    },error=>{
+      this.submitted = false;
     })
   }
 

@@ -11,7 +11,7 @@ export class AgendaService {
     }
     async getAgendasByUser(id) {
 
-        return await this.agendaRepository.find({ where: [{ createdBy: id }], order: { createdDate: 'DESC' } });
+        return await this.agendaRepository.find({ where: [{ createdBy: id }], order: { updatedDate: 'DESC' } });
     }
 
     async getTopics1(query, sessionUser) {
@@ -58,7 +58,7 @@ export class AgendaService {
         // db.where('a.createdBy=:id && a.status=:status', { id: id, status:'published'});
         // //db.andWhere('a.status=:status', {  status:'published'});
         // const data = await db.getOne();
-        const data = await this.agendaRepository.findOne({ createdBy: id, isPublish: 1 }, { order: { createdDate: 'DESC' } });
+        const data = await this.agendaRepository.findOne({ createdBy: id, isPublish: 1 }, { order: { updatedDate: 'DESC' } });
         return this.mapAgenda(data);
     }
     async saveUpdate(req, sessionUser) {

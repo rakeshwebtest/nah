@@ -10,7 +10,7 @@ export abstract class BaseEntity {
     @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP" })
     createdDate: Date;
 
-    @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP" })
+    @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP", onUpdate: "CURRENT_TIMESTAMP"})
     updatedDate: Date;
 
     // @Column({ type: 'timestamp' })
@@ -30,9 +30,9 @@ export abstract class BaseEntity {
     //     this.createdDate = new Date();
     // }
 
-    @BeforeUpdate()
-    updateDateUpdate() {
-        this.updatedDate = new Date();
-    }
+    // @BeforeUpdate()
+    // updateDateUpdate() {
+    //     this.updatedDate = new Date();
+    // }
 
 }
