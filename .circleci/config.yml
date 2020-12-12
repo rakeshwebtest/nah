@@ -24,13 +24,11 @@ jobs:
       - run:
             name: "Install Cordova plugins and add android platform"
             command: |
-              cd nah-mobile && npm run android:release
+              cd nah-mobile && ionic cordova build --prod  android  --verbose --release
       - run:
             name: "Generate apk"
             command: |
-              cd nah-mobile && ionic cordova build --prod  android  --verbose -- --keystore=keys/android/nah.keystore --storePassword=nahnah --alias=key0 --password=nahnah
-              mkdir -p /tmp/apk
-              cp -r platforms/android/app/build/outputs/apk/ /tmp/apk
+              mkdir -p /tmp/apk && cd nah-mobile && cp -r platforms/android/app/build/outputs/apk/ /tmp/apk
       - run:
             name: "Keysotr build"
             command: |
