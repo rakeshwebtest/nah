@@ -285,7 +285,6 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
         {
           text: 'Instagram',
           icon: 'logo-instagram',
-          role: 'cancel',
           handler: () => {
             let images = post.photos.map(image => { return image.fullPath });
             if (images.length === 0) {
