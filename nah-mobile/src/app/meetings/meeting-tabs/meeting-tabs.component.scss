@@ -1,6 +1,26 @@
-.ios :host{
-    top:0px !important;
+.ios :host {
+    top: 0px !important;
 }
-.md :host{
-    top:0px !important;
+.md :host {
+    top: 0px !important;
+}
+
+:host {
+    --ion-color-primary-contrast: #f04141 !important;
+}
+super-tabs-toolbar {
+    background-color: #ffffff;
+    super-tab-button {
+        padding: 0 6px;
+        color: #999999;
+        &.active {
+            color: #f04141;
+            ion-icon {
+                color: #f04141; // change color of selected tab icon
+            }
+            span:not(.badge) {
+                color: #f04141; // change color of selected tab label (without modifying the badge color)
+            }
+        }
+    }
 }

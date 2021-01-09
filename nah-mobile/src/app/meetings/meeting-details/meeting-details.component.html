@@ -153,7 +153,7 @@
             <ion-list class="meeting-list meeting-list-d" *ngFor="let c of meeting.comments;let cInx=index;">
               <ion-grid class="meeting-item ion-no-padding">
                 <ion-row class="ion-nowrap ion-align-items-center">
-                  <ion-col size="auto" class="img-left ion-no-padding">
+                  <ion-col size="auto" class="img-left ion-no-padding" (click)="navProfile(c.createdBy)">
                     <ion-avatar class="avater">
                       <img [src]="c.createdBy.imageUrl" />
                     </ion-avatar>
@@ -183,7 +183,7 @@
                 </ion-row>
                 <ion-row class="reply-list meeting-item" *ngFor="let rc of c.replys;let inx=index;">
                   <label style="float: left;" class="meeting-date" timeago [date]="rc.createdDate"></label>
-                  <ion-chip class="custom-chip">
+                  <ion-chip class="custom-chip" (click)="navProfile(rc.createdBy)">
 
                     <ion-label class="meeting-sub-title" style="font-weight: bold;">{{rc.createdBy.displayName}}
                     </ion-label>
@@ -191,7 +191,7 @@
                       <img [src]="rc.createdBy.imageUrl">
                     </ion-avatar>
                   </ion-chip>
-                  <ion-col class="ion-text-right ion-padding-t-0"
+                  <ion-col size="12" class="ion-text-right ion-padding-t-0"
                     style="display: flex;align-items: center;justify-content: flex-end;">
 
                     <ion-label class="meeting-sub-title">{{rc.comment}}</ion-label>

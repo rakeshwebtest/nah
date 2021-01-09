@@ -1,4 +1,4 @@
-<ion-tabs class="">
+<!-- <ion-tabs class="">
   <ion-tab-bar slot="top">
     <ion-tab-button routerLinkActive="tab-selected" routerLink="/dashboard/community/group/all">
       <ion-label class="format-text">All Groups</ion-label>
@@ -7,5 +7,35 @@
       <ion-label class="format-text">My Groups</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
-</ion-tabs>
+</ion-tabs> -->
+
+
+<ion-content>
+  <super-tabs class="adjust-scroll">
+    <super-tabs-toolbar slot="top">
+      <super-tab-button>
+        <!-- <ion-icon name="home"></ion-icon> -->
+        <ion-label>All Group</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <!-- <ion-icon name="home"></ion-icon> -->
+        <ion-label>My Groups</ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+    <super-tabs-container>
+      <super-tab>
+        <ion-content>
+          <app-group-list type="all" ></app-group-list>
+        </ion-content>
+      </super-tab>
+      <super-tab>
+        <ion-content>
+          <app-group-list type="mygroups" ></app-group-list>
+        </ion-content>
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
+</ion-content>
+
+
 

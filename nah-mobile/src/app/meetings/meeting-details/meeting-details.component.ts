@@ -284,4 +284,7 @@ export class MeetingDetailsComponent implements OnInit {
   gotoGroupDetails(group) {
     this.router.navigate(['group/details/' + group.id + '/meetings']);
   }
+  navProfile(user) {
+    this.router.navigate(['/user-profile/' + user.id]);
+  }
 }

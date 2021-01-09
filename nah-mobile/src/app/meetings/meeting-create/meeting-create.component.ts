@@ -85,7 +85,7 @@ export class MeetingCreateComponent implements OnInit {
     wrappers: ['vertical'],
     className: 'col-12',
     templateOptions: {
-      type: "number",
+      type: "text",
       label: 'Mobile Number',
       placeholder: 'Enter Mobile Number',
       required: false,

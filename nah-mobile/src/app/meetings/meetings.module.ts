@@ -24,8 +24,10 @@ import { LightboxModule } from '@ngx-gallery/lightbox';
 import { GallerizeModule } from '@ngx-gallery/gallerize';
 import { MeetingTabsComponent } from './meeting-tabs/meeting-tabs.component';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { SuperTabsModule } from '@ionic-super-tabs/angular';
 @NgModule({
   imports: [
+    SuperTabsModule,
     CommonModule,
     FormsModule,
     IonicModule,

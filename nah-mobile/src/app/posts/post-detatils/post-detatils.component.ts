@@ -300,4 +300,7 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
     });
     await actionSheet.present();
   }
+  navProfile(user) {
+    this.router.navigate(['/user-profile/' + user.id]);
+  }
 }

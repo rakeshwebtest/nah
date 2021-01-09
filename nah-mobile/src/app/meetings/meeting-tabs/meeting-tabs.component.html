@@ -1,24 +1,55 @@
-<ion-tabs class="meeting-top-tabs">
+<!-- <ion-tabs class="meeting-top-tabs">
   <ion-tab-bar slot="top">
     <ion-tab-button routerLinkActive="tab-selected"   routerLink="/dashboard/community/meeting/all" >
-      <!-- <ion-avatar class="avatar ion-align-items-center">
-        <ion-icon class="ion-align-items-center custom-all-meetings"></ion-icon>
-      </ion-avatar> -->
+
       <ion-label class="format-text">All Meetings</ion-label>
     </ion-tab-button>
 
     <ion-tab-button routerLinkActive="tab-selected"   routerLink="/dashboard/community/meeting/my-meeting">
-      <!-- <ion-avatar class="avatar ion-align-items-center">
-        <ion-icon class="ion-align-items-center custom-created-by-me" ></ion-icon>
-      </ion-avatar> -->
+
       <ion-label class="format-text">My Meetings</ion-label>
     </ion-tab-button>
 
     <ion-tab-button routerLinkActive="tab-selected" routerLink="/dashboard/community/meeting/upcoming" >
-      <!-- <ion-avatar class="avatar ion-align-items-center">
-        <ion-icon class="ion-align-items-center custom-upcoming" ></ion-icon>
-      </ion-avatar> -->
+
       <ion-label class="format-text">Future Meetings</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
-</ion-tabs>
+</ion-tabs> -->
+
+
+<ion-content>
+  <super-tabs class="adjust-scroll ">
+    <super-tabs-toolbar slot="top">
+      <super-tab-button>
+        <!-- <ion-icon name="home"></ion-icon> -->
+        <ion-label>All Meetings</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <!-- <ion-icon name="home"></ion-icon> -->
+        <ion-label>My Meetings</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <!-- <ion-icon name="home"></ion-icon> -->
+        <ion-label>Future Meetings</ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+    <super-tabs-container>
+      <super-tab>
+        <ion-content>
+          <app-meeting-list  noMeetingMsg="Hmm, seems like they are no meetings" type="all"></app-meeting-list>
+        </ion-content>
+      </super-tab>
+      <super-tab>
+        <ion-content>
+          <app-meeting-list  noMeetingMsg="You don't have any meetings right at this moment" type="my-meeting"></app-meeting-list>
+        </ion-content>
+      </super-tab>
+      <super-tab>
+        <ion-content>
+          <app-meeting-list  noMeetingMsg="You don't have any scheduled meetings" type="upcoming"></app-meeting-list>
+        </ion-content>
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
+</ion-content>

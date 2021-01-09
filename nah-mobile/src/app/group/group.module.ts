@@ -14,7 +14,7 @@ import { MeetingListModule } from '../shared/meeting-list/meeting-list.module';
 import { GroupTabsComponent } from './group-tabs/group-tabs.component';
 import { GroupDetailsTabComponent } from './group-details-tab/group-details-tab.component';
 import { UserListModule } from '../shared/user-list/user-list.module';
-
+import { SuperTabsModule } from '@ionic-super-tabs/angular';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,7 +24,8 @@ import { UserListModule } from '../shared/user-list/user-list.module';
     GroupListModule,
     PeoplesModule,
     MeetingListModule,
-    UserListModule
+    UserListModule,
+    SuperTabsModule
   ],
   providers: [GroupService],
   declarations: [MyGroupComponent, GroupDetailsTabComponent, GroupDetailsComponent, GroupTabsComponent]
