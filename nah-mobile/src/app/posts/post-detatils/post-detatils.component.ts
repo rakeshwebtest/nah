@@ -1,158 +1,324 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start" class="white-color">
-      <ion-back-button defaultHref="dashboard"></ion-back-button>
-      <ion-img class="ion-padding-r-10 header-logo" src="assets/svg/nah_logo_white.svg"></ion-img>
-      <ion-text class="ion-vertical-align-content white-color ion-margin-t-5">
-        Post Details
-      </ion-text>
-    </ion-buttons>
-    <ion-row class="profile-settings text-10" *ngIf="post">
-      <ion-icon style="cursor: pointer;" name="md-create" *ngIf="isOwner" (click)="editPost(post)" color="light"></ion-icon>
-      <ion-icon style="cursor: pointer;" name="md-trash" *ngIf="isOwner" (click)="deletePost(post)" color="light"></ion-icon>
-    </ion-row>
-  </ion-toolbar>
-</ion-header>
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import { AppHttpClient } from 'src/app/utils';
+import { PostService } from '../post.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppAlertService } from 'src/app/utils/app-alert.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AlertController, IonContent, ActionSheetController } from '@ionic/angular';
+import { FcmProviderService } from 'src/app/utils/fcm-provider.service';
+import { Storage } from '@ionic/storage';
+import { AppRouterNavigateService } from 'src/app/utils/app-router-navigate.service';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+@Component({
+  selector: 'app-post-detatils',
+  templateUrl: './post-detatils.component.html',
+  styleUrls: ['./post-detatils.component.scss'],
+})
+export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild(IonContent, { static: false }) content: IonContent;
+  public postDetails = [];
+  public commentMsg: any;
+  post: any;
+  replyMsg: any = {};
+  userInfo: any = {};
+  loading = false;
+  isOwner: boolean;
+  defaultImg = "https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg";
+  constructor(
+    private postS: PostService, private activeRoute: ActivatedRoute, private http: AppHttpClient,
+    public appRouter: AppRouterNavigateService,
+    private router: Router,
+    private storage: Storage,
+    private alertS: AppAlertService, private alertCtrl: AlertController,
+    private authService: AuthenticationService, private fcm: FcmProviderService,
+    public actionSheetController: ActionSheetController,
+    private socialSharing: SocialSharing) { }
 
-<ion-content class="ion-no-padding information">
-  <ion-card >
-    <app-load-skeleton theme="theme2" limit="1" *ngIf="loading"></app-load-skeleton>
-    <ion-row class="post-widget">
-      <ion-card class="post-list" *ngIf="post">
-        <ion-card-header>
-          <ion-row>
-            <ion-col size="auto" class="col-avatar" (click)="navProfile(post.createdBy)">
-              <ion-avatar class="post-avatar"  >
-                <img [src]="post.createdBy.imageUrl" />
-              </ion-avatar>
-            </ion-col>
-            <ion-col class="col-avatar-right">
-              <ion-label>
-                <ion-text class="text-name">{{ post.createdBy.displayName }}</ion-text>
-                <ion-text class="post-stars">
-                  <ion-icon name="star" color="warning"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                  <ion-icon name="star"></ion-icon>
-                </ion-text>
-                <span class="date">{{ post.createdDate | date: "mediumDate" }}</span>
-              </ion-label>
-              <p>
-                <ion-text class="text-primary" (click)="appRouter.goToTopicDetails(post.topic)">Say No To {{ post.topic.name }}</ion-text>
-              </p>
-            </ion-col>
-          </ion-row>
-          <ion-card-title>
-            <ion-label>{{ post.title }}</ion-label>
-          </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-text class="post-description" color="dark">
-            <p>
-              {{ post.description }}
-            </p>
-          </ion-text>
-        </ion-card-content>
-  
-        <ion-text *ngIf="post.videos && post.videos.length > 0" class="video-title">Videos</ion-text>
-        <app-youtube-videos-list [videos]="post.videos" *ngIf="post.videos && post.videos.length > 0"> </app-youtube-videos-list>
-        <ion-text *ngIf="post.photos && post.photos.length > 0" class="video-title">Gallery</ion-text>
-        <app-post-image-view showAll="true" *ngIf="post.photos && post.photos.length > 0" [images]="post.photos"> </app-post-image-view>
-        <ion-footer>
-          <ion-text class="post-footer">
-            <span (click)="bookmarkLikeAndDislike(post, 'like')"> <ion-icon [ngClass]="{ active: post.like }" name="thumbs-up"></ion-icon> {{ post.likeCount }} </span>
-            <span (click)="bookmarkLikeAndDislike(post, 'dislike')"> <ion-icon [ngClass]="{ active: post.dislike }" name="thumbs-down"></ion-icon> {{ post.dislikeCount }} </span>
-            <span> <ion-icon name="chatbubbles"></ion-icon> {{ post.commentCount }} </span>
-            <span (click)="bookmarkLikeAndDislike(post, 'bookmark')"> <ion-icon name="star" [ngClass]="{ active: post.bookmark }"></ion-icon></span>
-            <span> <ion-icon name="share" (click)="shareSocialMedia(post)"></ion-icon></span>
-          </ion-text>
-        </ion-footer>
-      </ion-card>
-    </ion-row>
-    <ion-row id="comment-box" ></ion-row>
-    <ion-row *ngIf="post && post.comments.length > 0" class="ion-padding-l-5 ion-padding-r-5">
-      <h3 class="comments-title">COMMENTS({{ post.comments.length }})</h3>
-  
-      <ion-list class="meeting-list meeting-list-d" *ngFor="let c of post.comments; let cInx = index">
-        <ion-grid class="meeting-item ion-no-padding">
-          <ion-row class="ion-nowrap ion-align-items-center">
-            <ion-col size="auto" class="img-left ion-no-padding" (click)="navProfile(c.createdBy)">
-              <ion-avatar class="avater">
-                <img [src]="c.createdBy.imageUrl" />
-              </ion-avatar>
-            </ion-col>
-            <ion-col size="7" class="ion-no-padding">
-              <!-- <ion-label class="meeting-title" style="display: block;color: #000;">Let's gather our barriors
-              </ion-label> -->
-              <ion-label class="meeting-sub-title" style="font-weight: bold;">{{ c.createdBy.displayName }} </ion-label>
-            </ion-col>
-            <ion-col size="auto" class="ion-no-padding ion-text-right">
-              <label class="meeting-date" timeago [date]="c.updatedDate"></label>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col class="ion-no-padding mw-50" size="auto"> </ion-col>
-            <ion-col class="ion-no-padding d-flex" >
-              <ion-label class="meeting-sub-title">{{ c.comment }}</ion-label>
-              <ion-icon size="small" color="danger" *ngIf="userInfo.id === c.createdBy.id" name="trash" (click)="deleteComment(post.comments, cInx, false)" class="ion-padding-r-5" style="cursor: pointer;"></ion-icon>
-            </ion-col>
-          </ion-row>
-          <ion-row class="reply-list meeting-item" *ngFor="let rc of c.replys; let inx = index">
-            <label style="float: left;" class="meeting-date" timeago [date]="rc.createdDate"></label>
-            <ion-chip class="custom-chip" (click)="navProfile(rc.createdBy)">
-              <ion-label class="meeting-sub-title" style="font-weight: bold;">{{ rc.createdBy.displayName }} </ion-label>
-              <ion-avatar>
-                <img [src]="rc.createdBy.imageUrl" />
-              </ion-avatar>
-            </ion-chip>
-            <ion-col size="12" class="ion-text-right ion-padding-t-0" style="display: flex; align-items: center; justify-content: flex-end;">
-              <ion-label class="meeting-sub-title">{{ rc.comment }}</ion-label>
-              <ion-icon color="danger" size="small" name="trash" *ngIf="userInfo.id === rc.createdBy.id" (click)="deleteComment(c.replys, inx, true)" class="ion-padding-r-5" style="cursor: pointer;"> </ion-icon>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <!-- <ion-col>
-              <ion-icon size="small" color="danger" *ngIf="userInfo.id === c.createdBy.id" name="trash" (click)="deleteComment(post.comments, cInx, false)" class="ion-padding-r-5" style="cursor: pointer;"></ion-icon>
-            </ion-col> -->
-            <ion-col (click)="replyComment(c)" class="ion-text-right ion-padding-t-0 ion-padding-b-0" style="color: #f00;">
-              <ion-icon name="repeat"></ion-icon>
-              <label>Reply</label>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-list>
-    </ion-row>
+  ngOnInit() {
+    this.userInfo = this.authService.getUserInfo();
+    // this.fcm.fcmSubscribeToTopic('post-details').then(data => {
+    //   console.log('fuck detaiol', data);
+    // });
 
-  </ion-card>
-</ion-content>
-<ion-footer>
-  <ion-list class="meeting-list meeting-list-d">
-    <ion-grid class="meeting-item ion-no-padding">
-      <ion-row *ngIf="replyMsg.id">
-        <ion-chip>
-          <ion-text color="dark" style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
-           {{replyMsg.comment}}
-          </ion-text>
-          <ion-icon (click)="clearReply()" name="close-circle-outline"></ion-icon>
-        </ion-chip>
-      </ion-row>
-      <ion-row class="ion-nowrap ion-align-items-center">
-        <ion-col size="auto" class="img-left" (click)="navProfile(userInfo)">
-          <ion-avatar class="avater" style="margin: 0 auto;">
-            <img [src]="userInfo.imageUrl" />
-          </ion-avatar>
-        </ion-col>
-        <ion-col class="">
-          <ion-textarea class="border" style="margin: 0;" rows="1" maxlength="250" #commentMsgEle [(ngModel)]="commentMsg" placeholder="Enter Comments"> </ion-textarea>
-        </ion-col>
-        <ion-col size="auto" class="ion-text-center">
-          <!-- <ion-button size="small" color="danger" (click)="addComment(commentMsg)" [disabled]="!commentMsg">
-            Send
-          </ion-button> -->
-          <ion-icon size="large" color="danger" (click)="addComment(commentMsg)" name="send"> </ion-icon>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-list>
-</ion-footer>
+    this.postDetails = [
+      {
+        name: 'UZ 16LAB@anties',
+        avatarUrl: 'https://snusercontent.global.ssl.fastly.net/member-profile-full/17/409717_7651259.jpg',
+        createdDate: 'May 31, 2020',
+        imageUrl: 'https://static.planetminecraft.com/files/resource_media/screenshot/1506/nah8616087.jpg'
+      }
+    ];
+    const postId: any = this.activeRoute.snapshot.params.postId;
+    this.loading = true;
+    this.postS.getPostById(postId).subscribe(res => {
+      this.post = res.data;
+      if (this.post && this.post.createdBy.id === this.userInfo.id) {
+        this.isOwner = true;
+      }
+      this.loading = false;
+      if (this.activeRoute.snapshot.queryParams.comments) {
+        setTimeout(() => {
+          this.scrollToCommentBox();
+        }, 500);
+
+      }
+    });
+  }
+  ngAfterViewInit() {
+
+  }
+  bookmarkLikeAndDislike(post, type = 'bookmark') {
+    // if (post.createdBy.id === this.userInfo.id && type !== 'bookmark') {
+    //   return;
+    // }
+    const postBookmareService = this.postS.bookmarkLikeAndDislike({ postId: post.id, type: type });
+    if (type === 'bookmark' && post['bookmark']) {
+      this.alertS.presentConfirm('', 'Do you want to Remove bookmark from list?').then(res => {
+        if (res) {
+          if (post[type]) {
+            post[type] = null;
+            post[type + 'Count'] = post[type + 'Count'] - 1;
+          } else {
+            post[type] = {};
+            post[type + 'Count'] = post[type + 'Count'] + 1;
+          }
+          postBookmareService.subscribe(data => {
+          });
+        }
+      });
+    } else {
+      if (post[type]) {
+        post[type] = null;
+        post[type + 'Count'] = post[type + 'Count'] - 1;
+      } else {
+        post[type] = {};
+        post[type + 'Count'] = post[type + 'Count'] + 1;
+      }
+
+      if (type === 'like') {
+        if (post.dislike) {
+          post.dislikeCount = post.dislikeCount - 1;
+        }
+        post.dislike = null;
+
+      } else if (type === 'dislike') {
+        if (post.like) {
+          post.likeCount = post.likeCount - 1;
+        }
+        post.like = null;
+      }
+      postBookmareService.subscribe();
+
+    }
+  }
+  editPost(post) {
+    this.storage.set('postDetails', this.post).then(res => {
+      this.router.navigate(['/posts/create/' + post.id]);
+    });
+  }
+  deletePost(post) {
+    this.alertS.presentConfirm(null, 'Are you sure delete this post').then(res => {
+      if (res) {
+        console.log(res);
+        post.isDeleted = 1;
+        this.postS.createUpdatePost(post).subscribe(resData => {
+          this.router.navigate(['/dashboard/posts']);
+        }, error => {
+
+        });
+      }
+    });
+  }
+  navDetails() {
+
+  }
+  addComment(comment) {
+    const postId = this.post.id;
+    const userInfo: any = this.authService.getUserInfo();
+    let payLoad = {
+
+    }
+    if (comment) {
+      if (this.replyMsg.id) {
+        payLoad = {
+          postCommentId: this.replyMsg.id,
+          comment: comment,
+          userId: userInfo.id
+        };
+        this.http.post('posts/comment-reply', payLoad).subscribe(res => {
+          if (res.data) {
+            const _comment = res.data;
+            _comment.createdBy = userInfo;
+            this.replyMsg.replys.push(_comment);
+            this.commentMsg = null;
+          }
+          this.replyMsg = {};
+        });
+
+      } else {
+        payLoad = {
+          comment: comment,
+          postId: postId,
+          userId: userInfo.id
+        };
+        this.http.post('posts/comment', payLoad).subscribe(res => {
+          if (res.data) {
+            this.post.commentCount++;
+            this.scrollToCommentBox('comment-box');
+            const _comment = res.data;
+            _comment.createdBy = userInfo;
+            _comment.replys = [];
+            this.post.comments.unshift(_comment);
+
+            this.commentMsg = null;
+          }
+        });
+      }
+    }
+
+
+    // this.meeting.comments.push();
+
+  }
+  replyComment(c) {
+    this.replyMsg = c;
+  }
+  async deleteComment(items: any[], inx, reply) {
+    let alert = await this.alertCtrl.create({
+      message: 'Do you want to delete this Comment?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.replyMsg = {};
+            const comment = items[inx];
+            let _url = 'posts/comment/';
+            if (reply) {
+              _url += 'reply/' + comment.id;
+
+            } else {
+              _url += comment.id;
+            }
+            this.http.delete(_url).subscribe(res => {
+              if (!reply){
+                this.post.commentCount--;
+              }
+            });
+            items.splice(inx, 1);
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  scrollToCommentBox(elementId = 'comment-box') {
+    const y = document.getElementById(elementId).offsetTop;
+    this.content.scrollToPoint(0, y);
+  }
+  clearReply() {
+    this.replyMsg = {};
+  }
+  ngOnDestroy() {
+    // this.fcm.fcmUnsubscribeFromTopic('post-details').then(res => {
+    //   console.log('res leave', res);
+    // });
+  }
+  async shareSocialMedia(post) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Albums',
+      cssClass: 'my-custom-class share-icons',
+      buttons: [
+        {
+          text: 'Facebook',
+          role: 'destructive',
+          icon: 'logo-facebook',
+          handler: () => {
+            let images = post.photos.map(image => { return image.fullPath });
+            if (images.length === 0) {
+              images = null;
+            }
+            let postText = post.title;
+            const postUrl = 'http://sayno.mobi/';
+            if (post.description) {
+              postText = post.description;
+            }
+            this.socialSharing.shareViaFacebook(postText, images, postUrl).then((res) => {
+              console.log('facebook share success -->');
+
+            }).catch((e) => {
+              console.log('facebook share failure -->', e);
+            });
+          }
+        }, {
+          text: 'Twitter',
+          icon: 'logo-twitter',
+          handler: () => {
+            let images = post.photos.map(image => { return image.fullPath });
+            if (images.length === 0) {
+              images = null;
+            }
+            let postText = post.title;
+            const postUrl = 'http://sayno.mobi/';
+            if (post.description) {
+              postText = post.description;
+            }
+            this.socialSharing.shareViaTwitter(postText, images, postUrl).then((res) => {
+              console.log('twitter share success -->');
+            }).catch((e) => {
+              console.log('twitter share failure -->', e);
+            });
+          }
+        }, {
+          text: 'Whatsapp',
+          icon: 'logo-whatsapp',
+          handler: () => {
+            let images = post.photos.map(image => { return image.fullPath });
+            if (images.length === 0) {
+              images = null;
+            }
+            let postText = post.title;
+            const postUrl = 'http://sayno.mobi/';
+            if (post.description) {
+              postText = post.description;
+            }            
+            this.socialSharing.shareViaWhatsApp(postText, images, postUrl).then((res) => {
+              console.log('Whatsapp share success -->');
+            }).catch((e) => {
+              console.log('Whatsapp share failure -->', e);
+            });
+          }
+        },
+        {
+          text: 'Instagram',
+          icon: 'logo-instagram',
+          handler: () => {
+            let images = post.photos.map(image => { return image.fullPath });
+            if (images.length === 0) {
+              images = null;
+            }
+            let postText = post.title;
+            if (post.description) {
+              postText = post.description;
+            }            
+            this.socialSharing.shareViaInstagram(postText, images).then((res) => {
+              console.log('Instagram share success -->');
+            }).catch((e) => {
+              console.log('Instagram share failure -->', e);
+            });
+          }
+        }]
+    });
+    await actionSheet.present();
+  }
+  navProfile(user) {
+    this.router.navigate(['/user-profile/' + user.id]);
+  }
+}
