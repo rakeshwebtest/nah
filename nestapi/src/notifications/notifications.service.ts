@@ -86,10 +86,34 @@ export class NotificationsService {
                     }
                     const a = await this.notificationRepository.save(_entity);
                     break;
+                case 'group-follow':
+                    _entity.sender = { id: senderInfo.id };
+                    _entity.recipient = { id: reciverInfo.id };
+                    _entity.type = type;
+                    _entity.message = senderInfo.displayName + '  followed on your group';
+                    _entity.data = data;
+                    if (reciverInfo.fcmToken) {
+                        // send push notifications
+                        this.sendFCM(reciverInfo.fcmToken, 'Group', _entity.message, { data, type: 'group-follow' });
+                    }
+                    await this.notificationRepository.save(_entity);
+                    break;
+                case 'meeting-join':
+                    _entity.sender = { id: senderInfo.id };
+                    _entity.recipient = { id: reciverInfo.id };
+                    _entity.type = type;
+                    _entity.message = senderInfo.displayName + '  joined on your meeting';
+                    _entity.data = data;
+                    if (reciverInfo.fcmToken) {
+                        // send push notifications
+                        this.sendFCM(reciverInfo.fcmToken, 'Meeting', _entity.message, { data, type: 'meeting-join' });
+                    }
+                    await this.notificationRepository.save(_entity);
+                    break;
                 default:
                     break;
             }
-
+            console.log('notificati end');
         }
 
         //  const data = await admin.messaging().sendToTopic('post-details', payload);

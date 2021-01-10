@@ -7,13 +7,14 @@ import { CreateGroupDto } from './dto/create-group.dto';
 import { GroupFollowDto } from './dto/group-follow.dto';
 import { UserEntity } from 'src/user/user.entity';
 import { APP_CONFIG } from 'src/config';
-import { User } from 'src/user/user.decorator';
+import { NotificationsService } from 'src/notifications/notifications.service';
 @Injectable()
 export class GroupService {
 
     constructor(@InjectRepository(GroupEntity) private readonly groupRepository: Repository<GroupEntity>,
         @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
-        @InjectRepository(GroupFollowEntity) private readonly groupFollowRepository: Repository<GroupFollowEntity>
+        @InjectRepository(GroupFollowEntity) private readonly groupFollowRepository: Repository<GroupFollowEntity>,
+        private notificationService: NotificationsService
     ) { }
 
     async getGroups(query, sessionUser): Promise<any> {
@@ -134,6 +135,7 @@ export class GroupService {
     async follow(groupFollow: GroupFollowDto) {
 
         const user: UserEntity = await this.userRepository.findOne({ where: [{ id: groupFollow.userId }] });
+        const group: any = await this.getGroupById(groupFollow.groupId);
         const followMember = new GroupFollowEntity();
         followMember.group = new GroupEntity();
         followMember.group.id = groupFollow.groupId;
@@ -145,6 +147,7 @@ export class GroupService {
             return { message: 'Unfollowed successfully', success: true, isFollower };
         } else {
             const data = await this.groupFollowRepository.save(followMember);
+            this.notificationService.send(followMember.user.id, group.createdBy.id, 'group-follow', group);
             return { message: 'Followed successfully', success: true, data };
         }
     }
