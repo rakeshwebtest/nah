@@ -91,7 +91,9 @@ export class NotificationsService {
                     _entity.recipient = { id: reciverInfo.id };
                     _entity.type = type;
                     _entity.message = senderInfo.displayName + '  followed on your group';
+                    data.navigateUrl = '/group/details/'+data.id;
                     _entity.data = data;
+                   
                     if (reciverInfo.fcmToken) {
                         // send push notifications
                         this.sendFCM(reciverInfo.fcmToken, 'Group', _entity.message, { data, type: 'group-follow' });
@@ -103,6 +105,7 @@ export class NotificationsService {
                     _entity.recipient = { id: reciverInfo.id };
                     _entity.type = type;
                     _entity.message = senderInfo.displayName + '  joined on your meeting';
+                    data.navigateUrl = '/meeting/details/'+data.id;
                     _entity.data = data;
                     if (reciverInfo.fcmToken) {
                         // send push notifications
