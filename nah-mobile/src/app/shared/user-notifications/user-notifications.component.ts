@@ -48,7 +48,7 @@ export class UserNotificationsComponent implements OnInit, OnDestroy {
     console.log('activeRouter', this.activeRouter.snapshot.params);
 
     this.list$ = this.postBehavior.asObservable().pipe(
-      scan((acc, curr:any) => {
+      scan((acc, curr: any) => {
         if (curr.opt && curr.opt.type === 'delete') {
           let index = acc.findIndex((elt) => elt.id === curr.opt.id);
           acc.splice(index, 1);
@@ -92,9 +92,14 @@ export class UserNotificationsComponent implements OnInit, OnDestroy {
   navNotification(notification) {
     console.log('notification', notification);
     if (notification.data) {
-      if (notification.data.id) {
-        this.router.navigate(['/posts/details/' + notification.data.id]);
+      if (notification.data.navigateUrl) {
+        this.router.navigate([notification.data.navigateUrl]);
+      } else {
+        if (notification.data.id) {
+          this.router.navigate(['/posts/details/' + notification.data.id]);
+        }
       }
+
     }
   }
 
