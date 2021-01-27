@@ -59,13 +59,12 @@ export class PostCreateComponent implements OnInit {
       wrappers: ['vertical'],
       className: 'col-12 ion-padding-t-10',
       templateOptions: {
-        label: 'Description',
+        label: 'Main Content',
         placeholder: 'What\'s on your mind?',
         required: true,
-        rows: 5
+        rows: 10
       }
     },
- 
     {
       key: 'photos',
       type: 'lazy-upload',

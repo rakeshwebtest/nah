@@ -7,9 +7,12 @@
         Post Details
       </ion-text>
     </ion-buttons>
-    <ion-row class="profile-settings text-10" *ngIf="post">
+    <!-- <ion-row class="profile-settings text-10" *ngIf="post">
       <ion-icon style="cursor: pointer;" name="md-create" *ngIf="isOwner" (click)="editPost(post)" color="light"></ion-icon>
       <ion-icon style="cursor: pointer;" name="md-trash" *ngIf="isOwner" (click)="deletePost(post)" color="light"></ion-icon>
+    </ion-row> -->
+    <ion-row class="profile-settings text-10" *ngIf="post && post.isDeleted==0">
+      <ion-icon style="cursor: pointer;" name="md-more" color="light" (click)="actionMenu($event)"></ion-icon>
     </ion-row>
   </ion-toolbar>
 </ion-header>

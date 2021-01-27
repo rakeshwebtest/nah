@@ -17,6 +17,7 @@ import { TimeagoModule } from 'ngx-timeago';
 import { LoadSkeletonModule } from '../shared/load-skeleton/load-skeleton.module';
 import { AgendaViewModule } from '../agenda/agenda-view/agenda-view.module';
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
+import { PostDetailsActionsComponent } from './post-detatils/post-details-actions/post-details-actions.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -33,6 +34,7 @@ import { SuperTabsModule } from '@ionic-super-tabs/angular';
     SuperTabsModule
   ],
   providers: [InAppBrowser],
-  declarations: [PostsPage, PostDetatilsComponent, PostCreateComponent]
+  entryComponents: [PostDetailsActionsComponent],
+  declarations: [PostsPage, PostDetatilsComponent, PostCreateComponent, PostDetailsActionsComponent]
 })
 export class PostsPageModule { }

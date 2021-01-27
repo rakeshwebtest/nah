@@ -21,11 +21,11 @@ export class PostImageViewComponent implements OnInit {
   private backButtonSub: Subscription;
   constructor(public gallery: Gallery, public lightbox: Lightbox, private platform: Platform) {
 
-    // this.platform.backButton.subscribeWithPriority(10, () => {
-    //   if (this.lightbox) {
-    //     this.lightbox.close();
-    //   }
-    // });
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      if (this.lightbox) {
+        this.lightbox.close();
+      }
+    });
   }
 
   ionViewDidEnter() {

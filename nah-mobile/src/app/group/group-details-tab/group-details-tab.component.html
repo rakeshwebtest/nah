@@ -9,6 +9,14 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-card class="header-card">
+    <ion-col size="auto" class="ion-text-end" style="position: absolute;width: 100%;right: 10px;z-index: 99;" *ngIf="userInfo.id !== group.createdBy.id && group.isDeleted == 0">
+      <ion-button size="small" style="font-size: 12p;" color="medium" class="ion-no-margin" (click)="follow(group, $event)" *ngIf="group.isFollower">
+        Unfollow
+      </ion-button>
+      <ion-button size="small" style="font-size: 12p;"  class="ion-no-margin" (click)="follow(group, $event)" *ngIf="!group.isFollower">
+        Follow
+      </ion-button>
+    </ion-col>
     <ion-card-header class="ion-align-items-center ion-text-center">
       <ion-text class="circle">
         {{ group.name.charAt(0) }}
@@ -16,6 +24,7 @@
     </ion-card-header>
     <ion-card-content class="card-body ion-text-center">
       <h4 class="country white-color"><strong>Say No To</strong> {{ group.name }}</h4>
+   
     </ion-card-content>
   </ion-card>
 </ion-header>

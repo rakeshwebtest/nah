@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PostService } from '../post.service';
 import { scan } from 'rxjs/operators';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
-import { AlertController, ActionSheetController } from '@ionic/angular';
+import { AlertController, ActionSheetController, Platform } from '@ionic/angular';
 import { AppAlertService } from 'src/app/utils/app-alert.service';
 import {
   trigger,
@@ -43,11 +43,14 @@ export class PostListComponent implements OnInit, OnDestroy {
     public appRouter: AppRouterNavigateService,
     private activeRouter: ActivatedRoute, private authS: AuthenticationService,
     public postS: PostService, private alertCtrl: AlertController, private alertS: AppAlertService,
-    private socialSharing: SocialSharing) {
+    private socialSharing: SocialSharing, private platform: Platform) {
     this.msSubscription = this.postS.getChanges().subscribe(message => {
       if (message) {
         this.reload();
       }
+    });
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      console.log('Handler was called!');
     });
   }
   ngOnInit() {
@@ -298,7 +301,7 @@ export class PostListComponent implements OnInit, OnDestroy {
             const postUrl = 'http://sayno.mobi/';
             if (post.description) {
               postText = post.description;
-            }            
+            }
             this.socialSharing.shareViaWhatsApp(postText, images, postUrl).then((res) => {
               console.log('Whatsapp share success -->');
             }).catch((e) => {
@@ -317,7 +320,7 @@ export class PostListComponent implements OnInit, OnDestroy {
             let postText = post.title;
             if (post.description) {
               postText = post.description;
-            }            
+            }
             this.socialSharing.shareViaInstagram(postText, images).then((res) => {
               console.log('Instagram share success -->');
             }).catch((e) => {

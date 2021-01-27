@@ -4,11 +4,12 @@ import { PostService } from '../post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppAlertService } from 'src/app/utils/app-alert.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { AlertController, IonContent, ActionSheetController } from '@ionic/angular';
+import { AlertController, IonContent, ActionSheetController, PopoverController } from '@ionic/angular';
 import { FcmProviderService } from 'src/app/utils/fcm-provider.service';
 import { Storage } from '@ionic/storage';
 import { AppRouterNavigateService } from 'src/app/utils/app-router-navigate.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { PostDetailsActionsComponent } from './post-details-actions/post-details-actions.component';
 @Component({
   selector: 'app-post-detatils',
   templateUrl: './post-detatils.component.html',
@@ -27,6 +28,7 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private postS: PostService, private activeRoute: ActivatedRoute, private http: AppHttpClient,
     public appRouter: AppRouterNavigateService,
+    private popoverController: PopoverController,
     private router: Router,
     private storage: Storage,
     private alertS: AppAlertService, private alertCtrl: AlertController,
@@ -52,7 +54,9 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
     this.loading = true;
     this.postS.getPostById(postId).subscribe(res => {
       this.post = res.data;
+      this.post.isOwner = false;
       if (this.post && this.post.createdBy.id === this.userInfo.id) {
+        this.post.isOwner = true;
         this.isOwner = true;
       }
       this.loading = false;
@@ -128,6 +132,20 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
         });
       }
     });
+  }
+  async actionMenu(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PostDetailsActionsComponent,
+      componentProps: {
+        postId: this.post.id,
+        post: this.post,
+        userInfo: this.userInfo
+      },
+      event: ev,
+      animated: true,
+      showBackdrop: true
+    });
+    return await popover.present();
   }
   navDetails() {
 

@@ -22,8 +22,8 @@ export class PostService {
     return this.http.post('posts/bookmarkLikeAndDislike', payload);
   }
 
-  postReload() {
-    this.subject.next('reload');
+  postReload(cmd = 'reload') {
+    this.subject.next(cmd);
   }
   getChanges(): Observable<any> {
     return this.subject.asObservable();

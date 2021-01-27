@@ -83,6 +83,7 @@ export class BottomTabsComponent implements OnInit {
       cssClass: "group-create-modal",
     });
     modal.onDidDismiss().then((arg) => {
+      this.router.navigate(["/dashboard/community/group/all"]);
       this.ls.groupListReload();
     });
     return await modal.present();

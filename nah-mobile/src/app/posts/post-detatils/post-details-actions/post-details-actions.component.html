@@ -1,0 +1,15 @@
+<ion-list class="ion-no-margin ion-no-padding">
+  <ion-item color="danger" *ngIf="!post.isOwner" class="text-10" (click)="reportModal()">
+    <ion-icon name="flag" color="light"></ion-icon>
+    <ion-label>Report Post</ion-label>
+  </ion-item>
+  <!-- meeting.isPublished==0 &&  -->
+  <ion-item *ngIf="post.isOwner" color="danger" class="text-10" (click)="editPost()">
+    <ion-icon name="md-create" color="light" class="ion-padding-r-5"></ion-icon>
+    <ion-label>Edit Post</ion-label>
+  </ion-item>
+  <ion-item *ngIf="post.isOwner" color="danger" class="text-10" (click)="deletePost()">
+    <ion-icon name="md-trash" color="light"></ion-icon>
+    <ion-label>Remove</ion-label>
+  </ion-item>
+</ion-list>
