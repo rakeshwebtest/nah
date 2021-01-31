@@ -50,7 +50,7 @@ export class NotificationsService {
                     break;
                 case 'post-create':
                     // create a new post send to following members
-                    const query: any = { type: 'following', userId: senderId };
+                    const query: any = { type: 'followers', userId: senderId };
                     const followingMembers: any = await this.userService.getUsers(query);
                     const bulkNotifications = [];
                     for (const followingMember of followingMembers) {
@@ -76,7 +76,7 @@ export class NotificationsService {
                     break;
                 case 'group-create':
                     // create a new post send to following members
-                    const query2: any = { type: 'following', userId: senderId };
+                    const query2: any = { type: 'followers', userId: senderId };
                     const followingMembers2: any = await this.userService.getUsers(query2);
                     const bulkNotifications2 = [];
                     for (const followingMember of followingMembers2) {
@@ -103,7 +103,7 @@ export class NotificationsService {
                     break;
                 case 'meeting-create':
                     // create a new post send to following members
-                    const query3: any = { type: 'following', userId: senderId };
+                    const query3: any = { type: 'followers', userId: senderId };
                     const followingMembers3: any = await this.userService.getUsers(query3);
                     const groupFollowing: any = await this.getMembersByGroupId(data.group.id);
                     const bulkNotifications3 = [];
@@ -132,7 +132,7 @@ export class NotificationsService {
                     break;
                 case 'meeting-update':
                     // create a new post send to following members
-                    const query4: any = { type: 'following', userId: senderId };
+                    const query4: any = { type: 'followers', userId: senderId };
                     const followingMembers4: any = await this.userService.getUsers(query4);
                     const groupFollowing1: any = await this.getMembersByGroupId(data.group.id);
                     const bulkNotifications4 = [];
