@@ -191,10 +191,10 @@ export class MeetingService {
 
         const meetingDetails = await this.meetingRepository.save(_meeting);
         if (meeting.id && _meeting.isPublished === 1) {
-            this.notificationService.send(meetingDetails.createdBy.id, null, 'meeting-update', meetingDetails);
+            this.notificationService.send(meetingDetails.createdBy.id, null, 'meeting-update', _meeting);
         } else {
             if (_meeting.isPublished === 1) {
-                this.notificationService.send(meetingDetails.createdBy.id, null, 'meeting-create', meetingDetails);
+                this.notificationService.send(meetingDetails.createdBy.id, null, 'meeting-create', _meeting);
             }
         }
         return meetingDetails;
