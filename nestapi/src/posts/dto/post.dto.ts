@@ -94,3 +94,20 @@ export class BookmarkLikeAndDislikeParamDto {
     postId: number;
 
 }
+
+export class PostReportDto {
+    @ApiProperty()
+    @IsNotEmpty({ message: "Required User Id" })
+    comment: string;
+    @ApiProperty()
+    @IsNotEmpty({ message: "Required User Id" })
+    userId: number;
+    @ApiProperty()
+    @IsNotEmpty({ message: "Required Meeting Id" })
+    postId: number;
+
+    @ApiProperty()
+    @IsNotEmpty({ message: "Required Category Id" })
+    categoryId: number;
+
+}

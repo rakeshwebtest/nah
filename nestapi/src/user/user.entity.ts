@@ -13,6 +13,7 @@ import { MeetingPhotosEntity } from 'src/meeting/meeting-photos.entity';
 import { AgendaEntity } from 'src/posts/agenda.entity';
 import { NotificationEntity } from 'src/notifications/notification.entity';
 import { AgendaTopicsEntity } from 'src/posts/agenda-topics.entity';
+import { PostReportEntity } from 'src/posts/post-report.entity';
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
 
@@ -82,6 +83,9 @@ export class UserEntity extends BaseEntity {
 
     @OneToMany(type => MeetingReportEntity, mr => mr.createdBy, { onDelete: 'CASCADE' })
     reports: MeetingReportEntity[];
+
+    @OneToMany(type => PostReportEntity, mr => mr.createdBy, { onDelete: 'CASCADE' })
+    postReports: PostReportEntity[];
 
     @ManyToMany(type => UserEntity, user => user.following)
     @JoinTable()

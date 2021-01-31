@@ -115,7 +115,10 @@ export class GroupService {
         group.name = groupDto.name;
         group.createdBy = new UserEntity();
         group.createdBy.id = sessionUser.id;
-        return this.groupRepository.save(group);
+        const groupDetails = await this.groupRepository.save(group);
+        if (groupDetails.id)
+            this.notificationService.send(groupDetails.createdBy.id, null, 'group-create', groupDetails);
+        return groupDetails;
     }
     // async getGroupById(groupId: number): Promise<GroupEntity> {
     //     return await this.groupRepository.findOne({

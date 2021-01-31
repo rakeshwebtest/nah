@@ -71,7 +71,33 @@ export class NotificationsService {
                         .values(bulkNotifications)
                         .execute();
 
-                    console.log('done notification');
+                    break;
+                case 'group-create':
+                    // create a new post send to following members
+                    const query2: any = { type: 'following', userId: senderId };
+                    const followingMembers2: any = await this.userService.getUsers(query2);
+                    const bulkNotifications2 = [];
+                    for (const followingMember of followingMembers2) {
+                        data.navigateUrl = '/group/details/' + data.id;
+                        const notificationMsg = {
+                            sender: { id: senderInfo.id },
+                            recipient: { id: followingMember.id },
+                            type,
+                            message: senderInfo.displayName + ' created a new group',
+                            data
+                        };
+                        bulkNotifications2.push(notificationMsg);
+                        if (followingMember.fcmToken)
+                            this.sendFCM(followingMember.fcmToken, 'Post', notificationMsg.message, { data, type: 'group-create' });
+
+                    }
+                    await getConnection()
+                        .createQueryBuilder()
+                        .insert()
+                        .into(NotificationEntity)
+                        .values(bulkNotifications2)
+                        .execute();
+
                     break;
                 case 'post-comment':
                 case 'post-reply-comment':
@@ -91,9 +117,9 @@ export class NotificationsService {
                     _entity.recipient = { id: reciverInfo.id };
                     _entity.type = type;
                     _entity.message = senderInfo.displayName + '  followed on your group';
-                    data.navigateUrl = '/group/details/'+data.id;
+                    data.navigateUrl = '/group/details/' + data.id;
                     _entity.data = data;
-                   
+
                     if (reciverInfo.fcmToken) {
                         // send push notifications
                         this.sendFCM(reciverInfo.fcmToken, 'Group', _entity.message, { data, type: 'group-follow' });
@@ -105,7 +131,7 @@ export class NotificationsService {
                     _entity.recipient = { id: reciverInfo.id };
                     _entity.type = type;
                     _entity.message = senderInfo.displayName + '  joined on your meeting';
-                    data.navigateUrl = '/meeting/details/'+data.id;
+                    data.navigateUrl = '/meeting/details/' + data.id;
                     _entity.data = data;
                     if (reciverInfo.fcmToken) {
                         // send push notifications
@@ -116,7 +142,6 @@ export class NotificationsService {
                 default:
                     break;
             }
-            console.log('notificati end');
         }
 
         //  const data = await admin.messaging().sendToTopic('post-details', payload);

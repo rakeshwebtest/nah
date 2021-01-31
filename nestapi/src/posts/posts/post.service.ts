@@ -11,6 +11,9 @@ import { mapImageFullPath, youtubeUrl2EmbedUrl } from 'src/shared/utility';
 import { PostLikeEntity } from '../post-like.entity';
 import { PostDislikeEntity } from '../post-dislike.entity';
 import { NotificationsService } from 'src/notifications/notifications.service';
+import { PostReportDto } from '../dto/post.dto';
+import { PostReportEntity } from '../post-report.entity';
+import { ReportCateogryEntity } from 'src/report-category/report-category.entity';
 @Injectable()
 export class PostService {
     constructor(
@@ -20,7 +23,8 @@ export class PostService {
         @InjectRepository(PostCommentReplyEntity) private readonly postCommentReplyRepository: Repository<PostCommentReplyEntity>,
         @InjectRepository(PostBookmarksEntity) private readonly postBookmarksRepository: Repository<PostBookmarksEntity>,
         @InjectRepository(PostLikeEntity) private readonly postLikeRepository: Repository<PostLikeEntity>,
-        @InjectRepository(PostDislikeEntity) private readonly postDislikeRepository: Repository<PostDislikeEntity>
+        @InjectRepository(PostDislikeEntity) private readonly postDislikeRepository: Repository<PostDislikeEntity>,
+        @InjectRepository(PostReportEntity) private readonly postReportEntity: Repository<PostReportEntity>
     ) {
 
     }
@@ -273,6 +277,18 @@ export class PostService {
         const post = new PostEntity();
         post.isDeleted = 1;
         return await this.postRepository.update(id, post);
+    }
+    async addReport(reportDto: PostReportDto) {
+        const report = new PostReportEntity();
+        report.createdBy = new UserEntity();
+        report.post = new PostEntity();
+        report.category = new ReportCateogryEntity();
+        report.category.id = reportDto.categoryId;
+        report.post.id = reportDto.postId;
+        report.createdBy.id = reportDto.userId;
+        report.comment = reportDto.comment;
+        const data = await this.postReportEntity.save(report);
+        return { message: 'Submited successfully', data };
     }
 
 

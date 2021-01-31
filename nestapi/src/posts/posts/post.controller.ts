@@ -1,8 +1,8 @@
 
-import { Controller, Get, Post, Body, Query, Req, Request, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, Req, Request, Param, Delete, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { PostService } from './post.service';
-import { PostQueryDao, SavePostDto, bookmarkDto, BookmarkLikeAndDislikeParamDto } from '../dto/post.dto';
+import { PostQueryDao, SavePostDto, bookmarkDto, BookmarkLikeAndDislikeParamDto, PostReportDto } from '../dto/post.dto';
 import { diskStorage } from 'multer';
 import { mapImageFullPath } from 'src/shared/utility';
 
@@ -42,7 +42,7 @@ export class PostsController {
             } else {
                 msg = 'Updated successfully';
             }
-        } else if(!post.isPublished) {
+        } else if (!post.isPublished) {
             msg = 'Draft saved successfully';
         }
         const data = await this.postService.saveUpdatePost(post, sessionUser);
@@ -84,20 +84,32 @@ export class PostsController {
         return { message: 'Deleted successfully', success: true, data };
     }
 
-     /**
-     *
-     * @param id
-     */
+    /**
+    *
+    * @param id
+    */
     @Delete('comment/reply/:commentId')
     async deleteReplayComment(@Param('commentId') id: number) {
-        const data = await this.postService.deleteComment(null,id);
+        const data = await this.postService.deleteComment(null, id);
         return { message: 'Deleted successfully', success: true, data };
     }
 
     @Delete(':id')
     async deletePost(@Param('id') id: any) {
-      const data = await this.postService.deletePost(id);
-      return { message: 'Post deleted successfully', success: true, data };
+        const data = await this.postService.deletePost(id);
+        return { message: 'Post deleted successfully', success: true, data };
+    }
+
+    /**
+* 
+* @param report 
+* @param req 
+*/
+    @UsePipes(new ValidationPipe())
+    @Post('report')
+    async addReport(@Body() report: PostReportDto, @Request() req) {
+        const data = await this.postService.addReport(report);
+        return { message: 'Report Submit Successfully', success: true, data };
     }
 
 }

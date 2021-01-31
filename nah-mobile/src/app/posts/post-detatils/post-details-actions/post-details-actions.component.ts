@@ -37,7 +37,8 @@ export class PostDetailsActionsComponent implements OnInit {
       component: ReportComponent,
       componentProps: {
         postId: this.postId,
-        post: this.post
+        post: this.post,
+        type: 'post'
       },
       cssClass: 'group-create-modal2'
     });

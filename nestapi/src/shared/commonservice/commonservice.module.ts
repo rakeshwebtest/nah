@@ -22,9 +22,12 @@ import { PostCommentsEntity } from 'src/posts/post-comments.entity';
 import { PostDislikeEntity } from 'src/posts/post-dislike.entity';
 import { PostLikeEntity } from 'src/posts/post-like.entity';
 import { PostPhotosEntity } from 'src/posts/post-photos.entity';
+import { PostReportEntity } from 'src/posts/post-report.entity';
 import { PostVideosEntity } from 'src/posts/post-videos.entity';
 import { PostEntity } from 'src/posts/post.entity';
 import { PostService } from 'src/posts/posts/post.service';
+import { ReportCateogryEntity } from 'src/report-category/report-category.entity';
+import { ReportCategoryService } from 'src/report-category/report-category.service';
 import { UserEntity } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 @Module({
@@ -33,8 +36,8 @@ import { UserService } from 'src/user/user.service';
         AgendaEntity, UserEntity, PostEntity, PostPhotosEntity, PostVideosEntity, PostCommentsEntity,
         PostCommentReplyEntity, AgendaTopicsEntity, PostBookmarksEntity, PostLikeEntity, PostDislikeEntity,
         MeetingMembersEntity, MeetingReportEntity, MeetingReportCateogryEntity, MeetingCommentsEntity, MeetingCommentReplyEntity, MeetingPhotosEntity, MeetingVideosEntity
-    ])],
-    providers: [UserService, GroupService, PostService, NotificationsService, MeetingService],
-    exports: [UserService, GroupService, PostService, NotificationsService, MeetingService, TypeOrmModule]
+        , ReportCateogryEntity, PostReportEntity])],
+    providers: [UserService, GroupService, PostService, NotificationsService, MeetingService, ReportCategoryService],
+    exports: [UserService, GroupService, PostService, NotificationsService, MeetingService, ReportCategoryService, TypeOrmModule]
 })
 export class CommonserviceModule { }

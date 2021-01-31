@@ -49,9 +49,10 @@ export class PostListComponent implements OnInit, OnDestroy {
         this.reload();
       }
     });
-    this.platform.backButton.subscribeWithPriority(10, () => {
-      console.log('Handler was called!');
-    });
+    // this.platform.backButton.subscribeWithPriority(10, () => {
+    //   console.log('Handler was called!');
+    //   alert(1);
+    // });
   }
   ngOnInit() {
     console.log('activeRouter', this.activeRouter.snapshot.params);

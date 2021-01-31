@@ -10,6 +10,8 @@ import { assert } from 'console';
 import { PostBookmarksEntity } from './post-bookmarks.entity';
 import { PostLikeEntity } from './post-like.entity';
 import { PostDislikeEntity } from './post-dislike.entity';
+import { ReportCateogryEntity } from 'src/report-category/report-category.entity';
+import { PostReportEntity } from './post-report.entity';
 @Entity({ name: 'post' })
 export class PostEntity extends BaseEntity {
 
@@ -74,6 +76,9 @@ export class PostEntity extends BaseEntity {
 
     @RelationCount((post: PostEntity) => post.dislike)
     dislikeCount: number;
+
+    @OneToMany(type => PostReportEntity, mr => mr.post)
+    reports: PostReportEntity[];
 
     // members: UserEntity[];
     // @ManyToOne(type => UserEntity, user => user.groups)

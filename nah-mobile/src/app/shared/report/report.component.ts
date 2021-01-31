@@ -13,8 +13,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./report.component.scss'],
 })
 export class ReportComponent implements OnInit {
-  @Input() meetingId: any;
   constructor(private modalCtrl: ModalController, private http: AppHttpClient, private auth: AuthenticationService) { }
+  @Input() meetingId: any;
+  @Input() postId: any;
+  @Input() type = 'meeting';
   title = "Report a Concern";
   comment: any;
   form = new FormGroup({});
@@ -56,7 +58,7 @@ export class ReportComponent implements OnInit {
     }];
   ngOnInit() {
     this.model.categoryId = 1;
-    this.getCategory().subscribe(res=>{
+    this.getCategory().subscribe(res => {
       this.categoryLists = res || [];
     });
   }
@@ -69,14 +71,29 @@ export class ReportComponent implements OnInit {
     const user: any = this.auth.getUserInfo();
     this.model.userId = user.id;
     this.model.meetingId = this.meetingId;
-    this.http.post('meeting/report', this.model).subscribe(res => {
-      this.dismiss(res.data);
-    })
+    this.model.postId = this.postId;
+    if (this.type === 'post') {
+      this.http.post('posts/report', this.model).subscribe(res => {
+        this.dismiss(res.data);
+      });
+    } else {
+      this.http.post('meeting/report', this.model).subscribe(res => {
+        this.dismiss(res.data);
+      });
+    }
+
   }
   getCategory(): Observable<any[]> {
-    return this.http.get('meeting/report/category').pipe(map(res => {
-      return res.data
-    }));
+    if (this.type === 'post') {
+      return this.http.get('report-category/list').pipe(map(res => {
+        return res.data;
+      }));
+    } else {
+      return this.http.get('meeting/report/category').pipe(map(res => {
+        return res.data;
+      }));
+    }
+
   }
 
 }

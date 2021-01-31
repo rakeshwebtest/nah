@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GalleryItem, ImageItem, Gallery } from '@ngx-gallery/core';
+import { GalleryItem, ImageItem, Gallery, GalleryRef } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
 import { Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -18,27 +18,33 @@ export class PostImageViewComponent implements OnInit {
   galleryId: any;
   items: GalleryItem[];
   remainingImg = [];
+  lightboxRef: GalleryRef;
   private backButtonSub: Subscription;
   constructor(public gallery: Gallery, public lightbox: Lightbox, private platform: Platform) {
 
-    this.platform.backButton.subscribeWithPriority(10, () => {
-      if (this.lightbox) {
-        this.lightbox.close();
-      }
-    });
+    // this.platform.backButton.subscribeWithPriority(10, () => {
+    //   if (this.lightboxRef) {
+    //     this.lightboxRef.close();
+    //     alert(1);
+
+    //   }
+    //   alert(0);
+    // });
+
+
   }
 
   ionViewDidEnter() {
     this.backButtonSub = this.platform.backButton.subscribeWithPriority(
       10000,
       () => {
-        this.onBack();
+       // this.onBack();
         return;
       }
     );
   }
   ionViewWillLeave() {
-    this.backButtonSub.unsubscribe();
+    // this.backButtonSub.unsubscribe();
   }
 
   onBack() {
@@ -63,8 +69,12 @@ export class PostImageViewComponent implements OnInit {
     }
     this.items = this.images.map(item => new ImageItem({ src: item.previewUrl, thumb: item.fullPath }));
 
-    const lightboxRef = this.gallery.ref(this.galleryId);
-    lightboxRef.load(this.items);
+    this.lightboxRef = this.gallery.ref(this.galleryId);
+    this.lightboxRef.load(this.items);
+
+    // this.lightboxRef.thumbClick.subscribe(res=>{
+    //   alert(2);
+    // })
 
 
 
