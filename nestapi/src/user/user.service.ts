@@ -50,7 +50,7 @@ export class UserService implements OnModuleInit {
                 break;
             case 'meeting-members':
                 db.leftJoinAndSelect('u.meetingMember', 'meetingMember');
-                db.andWhere('meetingMember.meetings.id=:id', { id: query.meetingId });
+                db.andWhere('meetingMember.meeting.id=:id', { id: query.meetingId });
                 break;
             case 'group-followers':
                 console.log('group followers', query.groupId);
