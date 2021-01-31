@@ -5,7 +5,7 @@ import { UserService } from 'src/user/user.service';
 import { NotificationEntity } from './notification.entity';
 import { Repository, getRepository, getConnection } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { GroupService } from 'src/group/group.service';
+import { GroupFollowEntity } from 'src/group/group-follows.entity';
 // import * as admin from 'firebase-admin';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class NotificationsService {
     constructor(
         private readonly fcm: FcmService,
         @InjectRepository(NotificationEntity) private readonly notificationRepository: Repository<NotificationEntity>,
-        private readonly groupService: GroupService,
+        @InjectRepository(GroupFollowEntity) private readonly groupFollowRepository: Repository<GroupFollowEntity>,
         private readonly userService: UserService) {
     }
     async send(senderId?: any, reciverId?: any, type?: string, data?: any, body?: FcmSendDto) {
@@ -105,7 +105,7 @@ export class NotificationsService {
                     // create a new post send to following members
                     const query3: any = { type: 'following', userId: senderId };
                     const followingMembers3: any = await this.userService.getUsers(query3);
-                    const groupFollowing: any = await this.groupService.getGroupById(data.group.id);
+                    const groupFollowing: any = await this.getMembersByGroupId(data.group.id);
                     const bulkNotifications3 = [];
                     const allUser = [...followingMembers3, ...groupFollowing];
                     for (const followingMember of allUser) {
@@ -134,7 +134,7 @@ export class NotificationsService {
                     // create a new post send to following members
                     const query4: any = { type: 'following', userId: senderId };
                     const followingMembers4: any = await this.userService.getUsers(query4);
-                    const groupFollowing1: any = await this.groupService.getGroupById(data.group.id);
+                    const groupFollowing1: any = await this.getMembersByGroupId(data.group.id);
                     const bulkNotifications4 = [];
                     // const allUser = [...followingMembers3, ...groupFollowing];
                     for (const followingMember of groupFollowing1) {
@@ -277,5 +277,13 @@ export class NotificationsService {
         //     }
         // });
 
+    }
+
+    async getMembersByGroupId(groupId) {
+        return getRepository(GroupFollowEntity)
+            .createQueryBuilder('gf')
+            .leftJoinAndSelect("gf.user", 'user')
+            .where('gf.groupId = :groupId', { groupId })
+            .getMany();
     }
 }
