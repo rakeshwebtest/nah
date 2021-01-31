@@ -134,6 +134,7 @@ export class NotificationsService {
                     break;
                 case 'meeting-update':
                     // create a new post send to following members
+                    console.log('meetingId', data);
                     const query4: any = { type: 'followers', userId: senderId };
                     const followingMembers4: any = await this.userService.getUsers(query4);
                     const groupFollowQuer1: any = { type: 'meeting-members', meetingId: data.id };
