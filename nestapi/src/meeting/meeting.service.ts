@@ -189,7 +189,7 @@ export class MeetingService {
         if (meeting.id)
             _meeting.id = parseInt(meeting.id);
         const meetingDetails = await this.meetingRepository.save(_meeting);
-        if (meetingDetails.id)
+        if (meetingDetails.id &&  _meeting.isPublished === 1)
             this.notificationService.send(meetingDetails.createdBy.id, null, 'meeting-create', meetingDetails);
         return meetingDetails;
 

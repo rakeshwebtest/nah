@@ -5,6 +5,7 @@ import { UserService } from 'src/user/user.service';
 import { NotificationEntity } from './notification.entity';
 import { Repository, getRepository, getConnection } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { GroupService } from 'src/group/group.service';
 // import * as admin from 'firebase-admin';
 
 @Injectable()
@@ -12,6 +13,7 @@ export class NotificationsService {
     constructor(
         private readonly fcm: FcmService,
         @InjectRepository(NotificationEntity) private readonly notificationRepository: Repository<NotificationEntity>,
+        private readonly groupService: GroupService,
         private readonly userService: UserService) {
     }
     async send(senderId?: any, reciverId?: any, type?: string, data?: any, body?: FcmSendDto) {
@@ -103,8 +105,10 @@ export class NotificationsService {
                     // create a new post send to following members
                     const query3: any = { type: 'following', userId: senderId };
                     const followingMembers3: any = await this.userService.getUsers(query3);
+                    const groupFollowing: any = await this.groupService.getGroupById(data.group.id);
                     const bulkNotifications3 = [];
-                    for (const followingMember of followingMembers3) {
+                    const allUser = [...followingMembers3, ...groupFollowing];
+                    for (const followingMember of allUser) {
                         data.navigateUrl = '/meeting/details/' + data.id;
                         const notificationMsg = {
                             sender: { id: senderInfo.id },
