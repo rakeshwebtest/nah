@@ -105,11 +105,12 @@ export class NotificationsService {
                     // create a new post send to following members
                     const query3: any = { type: 'followers', userId: senderId };
                     const followingMembers3: any = await this.userService.getUsers(query3);
-                    const groupFollowing: any = await this.getMembersByGroupId(data.group.id);
+                    const groupFollowQuer:any = { type: 'group-followers', groupId: data.group.id };
+                    const groupFollowing: any = await this.userService.getUsers(groupFollowQuer);
                     const bulkNotifications3 = [];
                     const allUser = [...followingMembers3, ...groupFollowing];
-                    console.log('allUser', allUser);
-                    for (const followingMember of allUser) {
+                    // console.log('allUser', allUser);
+                    for (const followingMember of groupFollowing) {
                         data.navigateUrl = '/meeting/details/' + data.id;
                         const notificationMsg = {
                             sender: { id: senderInfo.id },
@@ -135,7 +136,8 @@ export class NotificationsService {
                     // create a new post send to following members
                     const query4: any = { type: 'followers', userId: senderId };
                     const followingMembers4: any = await this.userService.getUsers(query4);
-                    const groupFollowing1: any = await this.getMembersByGroupId(data.group.id);
+                    const groupFollowQuer1:any = { type: 'group-followers', groupId: data.group.id };
+                    const groupFollowing1: any = await this.userService.getUsers(groupFollowQuer1);
                     const bulkNotifications4 = [];
                     // const allUser = [...followingMembers3, ...groupFollowing];
                     for (const followingMember of groupFollowing1) {
@@ -278,13 +280,5 @@ export class NotificationsService {
         //     }
         // });
 
-    }
-
-    async getMembersByGroupId(groupId) {
-        return getRepository(GroupFollowEntity)
-            .createQueryBuilder('gf')
-            .leftJoinAndSelect("gf.user", 'user')
-            .where('gf.groupId = :groupId', { groupId })
-            .getMany();
     }
 }

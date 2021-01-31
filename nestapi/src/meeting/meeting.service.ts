@@ -197,8 +197,6 @@ export class MeetingService {
                 this.notificationService.send(meetingDetails.createdBy.id, null, 'meeting-create', meetingDetails);
             }
         }
-
-
         return meetingDetails;
 
         // return this.meetingRepository.save(_meeting);
