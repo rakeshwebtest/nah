@@ -130,6 +130,35 @@ export class NotificationsService {
                         .execute();
 
                     break;
+                case 'meeting-update':
+                    // create a new post send to following members
+                    const query4: any = { type: 'following', userId: senderId };
+                    const followingMembers4: any = await this.userService.getUsers(query4);
+                    const groupFollowing1: any = await this.groupService.getGroupById(data.group.id);
+                    const bulkNotifications4 = [];
+                    // const allUser = [...followingMembers3, ...groupFollowing];
+                    for (const followingMember of groupFollowing1) {
+                        data.navigateUrl = '/meeting/details/' + data.id;
+                        const notificationMsg = {
+                            sender: { id: senderInfo.id },
+                            recipient: { id: followingMember.id },
+                            type,
+                            message: senderInfo.displayName + ' meeting update',
+                            data
+                        };
+                        bulkNotifications3.push(notificationMsg);
+                        if (followingMember.fcmToken)
+                            this.sendFCM(followingMember.fcmToken, 'Meeting', notificationMsg.message, { data, type: 'meeting-create' });
+
+                    }
+                    await getConnection()
+                        .createQueryBuilder()
+                        .insert()
+                        .into(NotificationEntity)
+                        .values(bulkNotifications4)
+                        .execute();
+
+                    break;
                 case 'post-comment':
                 case 'post-reply-comment':
                     _entity.sender = { id: senderInfo.id };
