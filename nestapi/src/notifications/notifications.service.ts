@@ -108,6 +108,7 @@ export class NotificationsService {
                     const groupFollowing: any = await this.getMembersByGroupId(data.group.id);
                     const bulkNotifications3 = [];
                     const allUser = [...followingMembers3, ...groupFollowing];
+                    console.log('allUser', allUser);
                     for (const followingMember of allUser) {
                         data.navigateUrl = '/meeting/details/' + data.id;
                         const notificationMsg = {

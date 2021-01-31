@@ -193,7 +193,7 @@ export class MeetingService {
         if (meeting.id && _meeting.isPublished === 1) {
             this.notificationService.send(meetingDetails.createdBy.id, null, 'meeting-update', meetingDetails);
         }
-        if (!meeting.id && _meeting.isPublished === 1) {
+        if (!_meeting.id && _meeting.isPublished === 1) {
             this.notificationService.send(meetingDetails.createdBy.id, null, 'meeting-create', meetingDetails);
         }
 
