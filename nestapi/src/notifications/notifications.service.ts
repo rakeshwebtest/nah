@@ -88,7 +88,7 @@ export class NotificationsService {
                         };
                         bulkNotifications2.push(notificationMsg);
                         if (followingMember.fcmToken)
-                            this.sendFCM(followingMember.fcmToken, 'Post', notificationMsg.message, { data, type: 'group-create' });
+                            this.sendFCM(followingMember.fcmToken, 'Group', notificationMsg.message, { data, type: 'group-create' });
 
                     }
                     await getConnection()
@@ -96,6 +96,33 @@ export class NotificationsService {
                         .insert()
                         .into(NotificationEntity)
                         .values(bulkNotifications2)
+                        .execute();
+
+                    break;
+                case 'meeting-create':
+                    // create a new post send to following members
+                    const query3: any = { type: 'following', userId: senderId };
+                    const followingMembers3: any = await this.userService.getUsers(query3);
+                    const bulkNotifications3 = [];
+                    for (const followingMember of followingMembers3) {
+                        data.navigateUrl = '/meeting/details/' + data.id;
+                        const notificationMsg = {
+                            sender: { id: senderInfo.id },
+                            recipient: { id: followingMember.id },
+                            type,
+                            message: senderInfo.displayName + ' created a meeting',
+                            data
+                        };
+                        bulkNotifications3.push(notificationMsg);
+                        if (followingMember.fcmToken)
+                            this.sendFCM(followingMember.fcmToken, 'Meeting', notificationMsg.message, { data, type: 'meeting-create' });
+
+                    }
+                    await getConnection()
+                        .createQueryBuilder()
+                        .insert()
+                        .into(NotificationEntity)
+                        .values(bulkNotifications3)
                         .execute();
 
                     break;

@@ -188,8 +188,12 @@ export class MeetingService {
         _meeting.city.id = parseInt(meeting.cityId);
         if (meeting.id)
             _meeting.id = parseInt(meeting.id);
+        const meetingDetails = await this.meetingRepository.save(_meeting);
+        if (meetingDetails.id)
+            this.notificationService.send(meetingDetails.createdBy.id, null, 'meeting-create', meetingDetails);
+        return meetingDetails;
 
-        return this.meetingRepository.save(_meeting);
+        // return this.meetingRepository.save(_meeting);
 
         // return data;
 
