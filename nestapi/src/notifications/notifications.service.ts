@@ -105,7 +105,7 @@ export class NotificationsService {
                     // create a new post send to following members
                     const query3: any = { type: 'followers', userId: senderId };
                     const followingMembers3: any = await this.userService.getUsers(query3);
-                    const groupFollowQuer:any = { type: 'group-followers', groupId: data.group.id };
+                    const groupFollowQuer: any = { type: 'group-followers', groupId: data.group.id };
                     const groupFollowing: any = await this.userService.getUsers(groupFollowQuer);
                     const bulkNotifications3 = [];
                     const allUser = [...followingMembers3, ...groupFollowing];
@@ -136,7 +136,7 @@ export class NotificationsService {
                     // create a new post send to following members
                     const query4: any = { type: 'followers', userId: senderId };
                     const followingMembers4: any = await this.userService.getUsers(query4);
-                    const groupFollowQuer1:any = { type: 'group-followers', groupId: data.group.id };
+                    const groupFollowQuer1: any = { type: 'group-followers', groupId: data.group.id };
                     const groupFollowing1: any = await this.userService.getUsers(groupFollowQuer1);
                     const bulkNotifications4 = [];
                     // const allUser = [...followingMembers3, ...groupFollowing];
@@ -149,7 +149,7 @@ export class NotificationsService {
                             message: senderInfo.displayName + ' meeting update',
                             data
                         };
-                        bulkNotifications3.push(notificationMsg);
+                        bulkNotifications4.push(notificationMsg);
                         if (followingMember.fcmToken)
                             this.sendFCM(followingMember.fcmToken, 'Meeting', notificationMsg.message, { data, type: 'meeting-create' });
 
