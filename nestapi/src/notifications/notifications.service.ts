@@ -136,11 +136,11 @@ export class NotificationsService {
                     // create a new post send to following members
                     const query4: any = { type: 'followers', userId: senderId };
                     const followingMembers4: any = await this.userService.getUsers(query4);
-                    const groupFollowQuer1: any = { type: 'group-followers', groupId: data.group.id };
-                    const groupFollowing1: any = await this.userService.getUsers(groupFollowQuer1);
+                    const groupFollowQuer1: any = { type: 'meeting-members', meetingId: data.id };
+                    const meetingMemmbers: any = await this.userService.getUsers(groupFollowQuer1);
                     const bulkNotifications4 = [];
                     // const allUser = [...followingMembers3, ...groupFollowing];
-                    for (const followingMember of groupFollowing1) {
+                    for (const followingMember of meetingMemmbers) {
                         data.navigateUrl = '/meeting/details/' + data.id;
                         const notificationMsg = {
                             sender: { id: senderInfo.id },
