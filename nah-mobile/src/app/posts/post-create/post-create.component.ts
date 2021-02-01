@@ -32,12 +32,12 @@ export class PostCreateComponent implements OnInit {
         required: true,
         itemValueField: 'id',
         itemTextField: 'name',
+        options: []
       },
       hooks: {
         onInit: (f) => {
           console.log('this.agendaS.agenda', this.agendaS.agenda);
-          const data = this.agendaS.agenda.topics.map(t=>{ t.name = 'Say No To '+t.name; return t;});
-          f.templateOptions.options = (this.agendaS.agenda) ? data : [];
+
         }
       }
     },
@@ -143,6 +143,13 @@ export class PostCreateComponent implements OnInit {
           this.model = res;
           if (res.topic) {
             this.model.topicId = res.topic.id;
+            const data = this.agendaS.agenda.topics || [];
+            if (res.topic.id && data.findIndex(item=>item.id==res.topic.id) === -1) {
+              data.push(res.topic);
+            }
+            data.map(t => { t.name = 'Say No To ' + t.name; return t; });
+            this.fields[0].templateOptions.options = (this.agendaS.agenda) ? data : [];
+
           }
         }
       });
