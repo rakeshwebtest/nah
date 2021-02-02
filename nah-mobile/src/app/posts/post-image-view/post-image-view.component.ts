@@ -35,13 +35,13 @@ export class PostImageViewComponent implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.backButtonSub = this.platform.backButton.subscribeWithPriority(
-      10000,
-      () => {
-       // this.onBack();
-        return;
-      }
-    );
+    // this.backButtonSub = this.platform.backButton.subscribeWithPriority(
+    //   10000,
+    //   () => {
+    //    // this.onBack();
+    //     return;
+    //   }
+    // );
   }
   ionViewWillLeave() {
     // this.backButtonSub.unsubscribe();

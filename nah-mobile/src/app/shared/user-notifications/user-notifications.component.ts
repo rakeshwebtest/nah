@@ -16,7 +16,7 @@ export class UserNotificationsComponent implements OnInit, OnDestroy {
   @Input() userId: any;
 
   showAgendaView = false;
-  limit = 5;
+  limit = 25;
   offset = 0;
   loading = false;
 

@@ -147,7 +147,7 @@ export class NotificationsService {
                             sender: { id: senderInfo.id },
                             recipient: { id: followingMember.id },
                             type,
-                            message: senderInfo.displayName + ' meeting update',
+                            message: senderInfo.displayName + ' updated a meeting',
                             data
                         };
                         bulkNotifications4.push(notificationMsg);

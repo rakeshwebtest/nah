@@ -139,18 +139,16 @@ export class PostCreateComponent implements OnInit {
       this.headerTitle = 'Edit Post';
       this.storage.get('postDetails').then(res => {
         if (this.activatedRoute.snapshot.params.postId == res.id) {
-          console.log('this.model', res);
           this.model = res;
+          const data = this.agendaS.agenda.topics || [];
           if (res.topic) {
             this.model.topicId = res.topic.id;
-            const data = this.agendaS.agenda.topics || [];
             if (res.topic.id && data.findIndex(item=>item.id==res.topic.id) === -1) {
               data.push(res.topic);
             }
             data.map(t => { t.name = 'Say No To ' + t.name; return t; });
-            this.fields[0].templateOptions.options = (this.agendaS.agenda) ? data : [];
-
           }
+          this.fields[0].templateOptions.options = (this.agendaS.agenda) ? data : [];
         }
       });
     }
