@@ -37,7 +37,8 @@ export class PostCreateComponent implements OnInit {
       hooks: {
         onInit: (f) => {
           console.log('this.agendaS.agenda', this.agendaS.agenda);
-
+          const data = this.agendaS.agenda.topics.map(t => { t.name = 'Say No To ' + t.name; return t; });
+          f.templateOptions.options = (this.agendaS.agenda) ? data : [];
         }
       }
     },
@@ -140,15 +141,19 @@ export class PostCreateComponent implements OnInit {
       this.storage.get('postDetails').then(res => {
         if (this.activatedRoute.snapshot.params.postId == res.id) {
           this.model = res;
-          const data = this.agendaS.agenda.topics || [];
+          const data = this.agendaS.agenda.topics;
           if (res.topic) {
             this.model.topicId = res.topic.id;
-            if (res.topic.id && data.findIndex(item=>item.id==res.topic.id) === -1) {
-              data.push(res.topic);
+            if (res.topic.id && data.findIndex(item => item.id == res.topic.id) === -1) {
+              const topic = {
+                name: 'Say No To ' + res.topic.name,
+                id: res.topic.id
+              }
+              const opitions: any[] = <any[]>this.fields[0].templateOptions.options;
+              opitions.push(topic);
+              this.fields[0].templateOptions.options = opitions;
             }
-            data.map(t => { t.name = 'Say No To ' + t.name; return t; });
           }
-          this.fields[0].templateOptions.options = (this.agendaS.agenda) ? data : [];
         }
       });
     }
