@@ -5,7 +5,7 @@ WORKDIR /usr/src/app/nah-mobile
 
 COPY package*.json ./
 
-RUN npm install -g @angular/cli @angular-devkit/build-angular && npm install
+RUN npm install -g @ionic/cli && npm install
 
 EXPOSE 4200
 

@@ -59,3 +59,4 @@ RUN mkdir /ionicapp
 
 WORKDIR /ionicapp
 
+EXPOSE 3005 80 443 22 4200
