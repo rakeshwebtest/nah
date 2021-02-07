@@ -48,7 +48,7 @@
 </ion-grid>
 <ion-grid [ngSwitch]="gridType" class="post-image-privew" [gallerize]="galleryId" *ngIf="showAll">
   <ion-row *ngFor="let img of images">
-    <img [src]="img.previewUrl" width="100%" />
+    <img [src]="img.previewUrl" width="100%" height="100%" />
   </ion-row>
 </ion-grid>
 

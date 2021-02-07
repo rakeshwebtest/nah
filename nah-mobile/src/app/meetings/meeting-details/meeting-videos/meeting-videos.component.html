@@ -1,4 +1,4 @@
-<ion-row class="ion-align-items-end" *ngIf="!meeting.isSuspend">
+<ion-row class="ion-align-items-end" *ngIf="!meeting.isSuspend && (meeting.isCreatedBy || meeting.isMember)">
   <ion-col class="ion-justify-content-end" style="display: flex;">
     <ion-button class="" size="small" color="danger" (click)="addVideoBtn()" >
       Add Video
