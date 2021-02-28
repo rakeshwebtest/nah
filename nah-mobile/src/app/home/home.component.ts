@@ -123,22 +123,25 @@ export class HomeComponent implements OnInit{
 
     try {
       const appleCredential: AppleSignInResponse = await this.signInWithApple.signin({
-        requestedScopes: []
+        requestedScopes: [
+          ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,
+          ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail
+        ]
       });
       const credential = new firebase.auth.OAuthProvider('apple.com').credential(
         appleCredential.identityToken
       );
       const userCredential:firebase.auth.UserCredential = await this.fireAuth.signInWithCredential(credential);
-      console.log('firebase UserCredential', userCredential.user.email);
-      console.log('appleCredential', appleCredential);
+      // console.log('appleCredential', appleCredential);
       const data:any = appleCredential;
       if(data.fullName){
         data.displayName = data.fullName.givenName;
       }
       data.provider = 'ios';
       data.idToken = data.identityToken;
-      if(!userCredential.user.email){
-        alert('Email required');
+      if(!userCredential.user.email || userCredential.user.email == 'null' || userCredential.user.email == ' '){
+        // alert('Email required');
+        data.email = userCredential.user.uid+'@apple.com';
       }else{
         data.email = userCredential.user.email;
       }

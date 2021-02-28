@@ -4,7 +4,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class LoginUserDto {
   @ApiProperty()
   @IsNotEmpty()
-  @IsEmail()
+  //@IsEmail()
   readonly email: string;
   @ApiProperty({ enum: ["google", "login"], default: 'google' })
   readonly provider: string;
